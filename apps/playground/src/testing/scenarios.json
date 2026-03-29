@@ -57,7 +57,31 @@
     "id": "widgets",
     "label": "Widgets",
     "hash": "#testing-widgets",
-    "description": "Widget shell layer and future widget placement rules."
+    "description": "Widget shell layer, placement rules, and real reusable widget surfaces."
+  },
+  {
+    "id": "widget-data-table-basic",
+    "label": "Data Table Widget Basics",
+    "hash": "#testing-widgets-data-table-basic",
+    "description": "Reusable widget framing over the data-grid system package with controlled query and selection."
+  },
+  {
+    "id": "widget-data-table-states",
+    "label": "Data Table Widget States",
+    "hash": "#testing-widgets-data-table-states",
+    "description": "Widget-level loading, empty, no-results, and error framing above the data-grid system package."
+  },
+  {
+    "id": "widget-data-table-theming",
+    "label": "Data Table Widget Theming",
+    "hash": "#testing-widgets-data-table-theming",
+    "description": "ThemeName, ThemeType, and subtree theming proof for the data-table widget surface."
+  },
+  {
+    "id": "widget-data-table-composition",
+    "label": "Data Table Widget Composition",
+    "hash": "#testing-widgets-data-table-composition",
+    "description": "Widget composed inside page-template shells without duplicating the underlying data-grid engine."
   },
   {
     "id": "page-templates",

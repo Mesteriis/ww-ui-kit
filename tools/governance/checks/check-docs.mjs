@@ -12,7 +12,10 @@ const requiredArchitectureDocs = [
   'docs/architecture/testing-architecture.md',
   'docs/architecture/docs-as-contract.md',
   'docs/architecture/ai-agent-governance.md',
-  'docs/governance/ai-rules.md'
+  'docs/governance/ai-rules.md',
+  'docs/governance/ai-ruleset/README.md',
+  'docs/governance/ai-ruleset/index.md',
+  'docs/governance/ai-ruleset/_schema.md'
 ];
 
 for (const relativePath of requiredArchitectureDocs) {
@@ -40,4 +43,3 @@ for (const entry of PUBLIC_SURFACE_MANIFEST.filter((surface) => surface.requires
 }
 
 console.log('Docs coverage OK.');
-

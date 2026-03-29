@@ -26,7 +26,8 @@ export const WidgetsLayer: StoryObj = {
           <div class="ui-stack">
             <p style="margin: 0; color: var(--ui-text-secondary);">
               Widgets are black-box composition surfaces. They can assemble core components and optional systems,
-              but they do not own routing, backend integration, or app-level orchestration.
+              but they do not own routing, backend integration, or app-level orchestration. DataTableWidget
+              is the canonical proof that widget-layer business blocks sit above systems instead of replacing them.
             </p>
             <div class="ui-cluster">
               <UiBadge variant="brand">LoginWindow</UiBadge>

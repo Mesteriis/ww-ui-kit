@@ -38,6 +38,9 @@ const props = withDefaults(
     caption?: string;
     density?: DataGridDensity;
     stickyHeader?: boolean;
+    showToolbar?: boolean;
+    showBulkActions?: boolean;
+    showColumnVisibility?: boolean;
   }>(),
   {
     loading: false,
@@ -49,7 +52,10 @@ const props = withDefaults(
     noResultsText: 'No rows match the current search and filters.',
     errorText: 'This data grid surface is unavailable.',
     density: 'comfortable',
-    stickyHeader: false
+    stickyHeader: false,
+    showToolbar: true,
+    showBulkActions: true,
+    showColumnVisibility: true
   }
 );
 
@@ -80,12 +86,14 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
     </figcaption>
 
     <UiDataGridToolbar
+      v-if="props.showToolbar"
       :search="controller.query.normalizedQuery.value.search"
       :search-placeholder="controller.searchPlaceholder.value"
       :filter-definitions="controller.filterDefinitions.value"
       :filters="controller.query.normalizedQuery.value.filters"
       :hideable-columns="controller.columns.hideableColumns.value"
       :column-visibility="controller.query.normalizedQuery.value.columnVisibility"
+      :show-column-visibility="props.showColumnVisibility"
       :disabled="controller.isLoading.value"
       @update-search="controller.query.updateSearch"
       @update-filter="controller.query.updateFilter"
@@ -101,7 +109,7 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
     </UiDataGridToolbar>
 
     <UiDataGridBulkActions
-      v-if="controller.selectionEnabled.value && controller.derivedState.value.selectedCount > 0"
+      v-if="props.showBulkActions && controller.selectionEnabled.value && controller.derivedState.value.selectedCount > 0"
       :selected-count="controller.derivedState.value.selectedCount"
       @clear="controller.selection.clearSelection"
     >

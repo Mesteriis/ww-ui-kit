@@ -15,10 +15,12 @@ const props = withDefaults(
     filters: Record<string, DataGridFilterValue>;
     hideableColumns: readonly DataGridColumn[];
     columnVisibility: Record<string, boolean> | undefined;
+    showColumnVisibility?: boolean;
     disabled?: boolean;
   }>(),
   {
     searchPlaceholder: '',
+    showColumnVisibility: true,
     disabled: false
   }
 );
@@ -58,6 +60,7 @@ const onUpdateColumnVisibility = (columnId: string, visible: boolean) => {
     </div>
     <div class="ui-data-grid-toolbar__end">
       <UiDataGridColumnVisibility
+        v-if="props.showColumnVisibility"
         :columns="props.hideableColumns"
         :column-visibility="props.columnVisibility"
         :disabled="props.disabled"

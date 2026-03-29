@@ -1,0 +1,280 @@
+export const AI_RULE_APPLY_MODES = Object.freeze([
+  'always',
+  'by model decision',
+  'by file patterns',
+  'manually'
+]);
+
+export const AI_RULE_MANIFEST = Object.freeze([
+  {
+    id: 'ai-always-layer-placement',
+    title: 'Preserve canonical layer order and placement discipline',
+    relativePath: 'docs/governance/ai-ruleset/always/00-layer-placement.md',
+    apply: 'always',
+    layerTags: ['tokens', 'themes', 'primitives', 'core', 'system', 'widget', 'page-template', 'app'],
+    areaTags: ['architecture', 'placement'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/placement-rules.md']
+  },
+  {
+    id: 'ai-always-public-api-discipline',
+    title: 'Treat export maps and the public surface manifest as governed API',
+    relativePath: 'docs/governance/ai-ruleset/always/01-public-api-discipline.md',
+    apply: 'always',
+    areaTags: ['public-api', 'catalog'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/public-api-discipline.md']
+  },
+  {
+    id: 'ai-always-visual-runtime-contracts',
+    title: 'Keep visual tokens, theme axes, motion, overlays, and z-index inside sanctioned contracts',
+    relativePath: 'docs/governance/ai-ruleset/always/02-visual-runtime-contracts.md',
+    apply: 'always',
+    areaTags: ['themes', 'motion', 'overlay'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/golden-path.md']
+  },
+  {
+    id: 'ai-always-proof-sync',
+    title: 'Synchronize stories, docs, playground proofs, tests, ADRs, and changesets with public changes',
+    relativePath: 'docs/governance/ai-ruleset/always/03-proof-sync.md',
+    apply: 'always',
+    areaTags: ['storybook', 'docs', 'playground', 'testing', 'adr', 'changesets'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/docs-as-contract.md', 'docs/architecture/testing-architecture.md']
+  },
+  {
+    id: 'ai-always-reuse-boundaries',
+    title: 'Keep reusable packages free of route, backend, and product orchestration',
+    relativePath: 'docs/governance/ai-ruleset/always/04-reuse-boundaries.md',
+    apply: 'always',
+    layerTags: ['core', 'system', 'widget', 'page-template', 'third-party-adapter'],
+    areaTags: ['reuse', 'boundaries'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/placement-rules.md', 'docs/architecture/golden-path.md']
+  },
+  {
+    id: 'ai-model-architecture-sensitive-changes',
+    title: 'Apply architecture-sensitive change discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/00-architecture-sensitive-changes.md',
+    apply: 'by model decision',
+    areaTags: ['architecture', 'adr', 'governance'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-model-public-api-changes',
+    title: 'Apply public API and export-map change discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/01-public-api-changes.md',
+    apply: 'by model decision',
+    areaTags: ['public-api', 'exports', 'catalog'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-model-new-package-or-topology',
+    title: 'Apply package creation and topology change discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/02-new-package-or-topology.md',
+    apply: 'by model decision',
+    areaTags: ['packages', 'topology'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-model-testing-and-docs-contract',
+    title: 'Apply docs-as-contract and test contour discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/03-testing-and-docs-contract.md',
+    apply: 'by model decision',
+    areaTags: ['testing', 'docs', 'storybook', 'playground'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-model-release-and-stability',
+    title: 'Apply stability status and changeset discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/04-release-and-stability.md',
+    apply: 'by model decision',
+    areaTags: ['stability', 'release', 'changesets'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-model-new-layered-surface',
+    title: 'Apply system, widget, and page-template placement discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/05-new-layered-surface.md',
+    apply: 'by model decision',
+    layerTags: ['system', 'widget', 'page-template'],
+    areaTags: ['placement', 'systems', 'widgets', 'page-templates'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-tokens',
+    title: 'packages/tokens path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-tokens.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/tokens'],
+    areaTags: ['tokens'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-themes',
+    title: 'packages/themes path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-themes.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/themes'],
+    areaTags: ['themes'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-primitives',
+    title: 'packages/primitives path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-primitives.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/primitives'],
+    areaTags: ['primitives', 'motion', 'overlay'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-core',
+    title: 'packages/core path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-core.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/core'],
+    areaTags: ['core'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-data-grid',
+    title: 'packages/data-grid path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-data-grid.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/data-grid'],
+    areaTags: ['systems', 'data-grid'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-signal-graph',
+    title: 'packages/signal-graph path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-signal-graph.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/signal-graph'],
+    areaTags: ['systems', 'signal-graph'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-widgets',
+    title: 'packages/widgets path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-widgets.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/widgets'],
+    areaTags: ['widgets'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-page-templates',
+    title: 'packages/page-templates path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-page-templates.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/page-templates'],
+    areaTags: ['page-templates'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-packages-third-party',
+    title: 'packages/third-party path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/packages-third-party.md',
+    apply: 'by file patterns',
+    layerTags: ['third-party-adapter'],
+    areaTags: ['third-party'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-apps-docs',
+    title: 'apps/docs path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/apps-docs.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/docs'],
+    areaTags: ['storybook', 'docs-app'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-apps-playground',
+    title: 'apps/playground path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/apps-playground.md',
+    apply: 'by file patterns',
+    packageTags: ['@ww/playground'],
+    areaTags: ['playground'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-docs-decisions',
+    title: 'docs/decisions path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/docs-decisions.md',
+    apply: 'by file patterns',
+    areaTags: ['adr', 'decisions'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-docs-architecture',
+    title: 'docs/architecture path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/docs-architecture.md',
+    apply: 'by file patterns',
+    areaTags: ['architecture-docs'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-tools-governance',
+    title: 'tools/governance path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/tools-governance.md',
+    apply: 'by file patterns',
+    areaTags: ['governance', 'automation'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-scripts',
+    title: 'scripts path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/scripts.md',
+    apply: 'by file patterns',
+    areaTags: ['scripts', 'build'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-path-github-workflows',
+    title: '.github/workflows path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/github-workflows.md',
+    apply: 'by file patterns',
+    areaTags: ['github', 'workflows', 'ci'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-manual-release-maintainer',
+    title: 'Release maintainer workflow',
+    relativePath: 'docs/governance/ai-ruleset/manual/release-maintainer.md',
+    apply: 'manually',
+    areaTags: ['release', 'maintainer'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-manual-adr-migration',
+    title: 'ADR migration and historical normalization',
+    relativePath: 'docs/governance/ai-ruleset/manual/adr-migration.md',
+    apply: 'manually',
+    areaTags: ['adr', 'migration'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-manual-package-topology-audit',
+    title: 'Package topology audit and reshuffle',
+    relativePath: 'docs/governance/ai-ruleset/manual/package-topology-audit.md',
+    apply: 'manually',
+    areaTags: ['topology', 'audit'],
+    mirroredInSummary: false
+  },
+  {
+    id: 'ai-manual-rule-pack-maintenance',
+    title: 'AI rule pack maintenance',
+    relativePath: 'docs/governance/ai-ruleset/manual/rule-pack-maintenance.md',
+    apply: 'manually',
+    areaTags: ['ai-rules', 'maintenance'],
+    mirroredInSummary: false
+  }
+]);
+
+export const AI_RULE_MANIFEST_MAP = Object.freeze(
+  Object.fromEntries(AI_RULE_MANIFEST.map((entry) => [entry.id, entry]))
+);

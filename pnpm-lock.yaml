@@ -248,6 +248,9 @@ importers:
       '@ww/core':
         specifier: workspace:*
         version: link:../core
+      '@ww/data-grid':
+        specifier: workspace:*
+        version: link:../data-grid
       vue:
         specifier: ^3.5.0
         version: 3.5.31(typescript@5.9.3)

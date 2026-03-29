@@ -9,6 +9,10 @@ export const PLAYGROUND_SCENARIO_IDS = Object.freeze([
   'data-grid-selection',
   'data-grid-composition',
   'widgets',
+  'widget-data-table-basic',
+  'widget-data-table-states',
+  'widget-data-table-theming',
+  'widget-data-table-composition',
   'page-templates',
   'composition'
 ]);

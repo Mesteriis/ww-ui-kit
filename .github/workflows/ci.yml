@@ -59,7 +59,7 @@ jobs:
       - name: Check ADR governance
         run: pnpm check:adr
 
-      - name: Check AI rules sync
+      - name: Check AI rules pack
         run: pnpm check:ai-rules
 
       - name: Check architecture boundaries

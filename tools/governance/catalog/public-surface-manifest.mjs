@@ -291,6 +291,36 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     tags: ['widgets']
   }),
   surface({
+    packageName: '@ww/widgets',
+    exportName: 'DataTableWidget',
+    kind: 'widget-shell',
+    requiresStorybook: true,
+    requiredStoryVariants: ['overview', 'states', 'theming', 'composition'],
+    storyArtifacts: [
+      { variant: 'overview', file: 'apps/docs/src/stories/widgets/DataTableWidgetOverview.stories.ts' },
+      { variant: 'states', file: 'apps/docs/src/stories/widgets/DataTableWidgetStates.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/widgets/DataTableWidgetTheming.stories.ts' },
+      { variant: 'composition', file: 'apps/docs/src/stories/widgets/DataTableWidgetComposition.stories.ts' },
+      { variant: 'composition', file: 'apps/docs/src/stories/widgets/DataTableWidgetExtensibility.stories.ts' },
+      { variant: 'overview', file: 'apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts' }
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/widgets/README.md' },
+      { type: 'readme', file: 'packages/widgets/src/data/data-table-widget/README.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0010-widgets-and-page-templates-layer.md' }
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: [
+      'widget-data-table-basic',
+      'widget-data-table-states',
+      'widget-data-table-theming',
+      'widget-data-table-composition'
+    ],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['widgets', 'data-grid']
+  }),
+  surface({
     packageName: '@ww/page-templates',
     exportName: 'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
     kind: 'page-template-shell',

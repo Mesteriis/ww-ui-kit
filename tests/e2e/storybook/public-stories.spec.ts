@@ -34,6 +34,7 @@ test('renders canonical public story groups', async ({ page, request }) => {
     'Foundations/Charts/Apex Overview',
     'Foundations/Signal Graph/Overview',
     'Systems/Data Grid/Overview',
+    'Widgets/Data Table Widget/Overview',
     'Widgets/Shell',
     'Page Templates/Shell'
   ];
@@ -76,4 +77,16 @@ test('runs canonical data-grid interactions inside Storybook', async ({ page, re
   await page.getByRole('button', { name: /Clear 1/ }).click();
   await page.locator('summary').click();
   await page.getByRole('button', { name: 'Reset columns' }).click();
+});
+
+test('runs canonical data-table-widget interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Widgets/Data Table Widget/Overview');
+  await openStory(page, storyId);
+
+  await expect(page.locator('.data-table-widget .ui-data-grid-table')).toBeVisible();
+  await page.getByRole('searchbox').fill('Northwind');
+  await expect(page.getByText('Rows: 1', { exact: true }).first()).toBeVisible();
+  await page.locator('.data-table-widget tbody .ui-checkbox').first().click();
+  await expect(page.getByRole('button', { name: /Clear 1/ })).toBeVisible();
+  await expect(page.getByText('Refresh widget', { exact: true })).toBeVisible();
 });

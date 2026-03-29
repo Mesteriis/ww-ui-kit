@@ -11,6 +11,7 @@
 - [ ] playground proof scenarios updated when required
 - [ ] ADR updated when architecture-sensitive areas changed
 - [ ] changeset added when public package behavior changed
+- [ ] `pnpm build:ai-rules` run when the AI rules pack or mirrors changed
 
 ## Checks
 
@@ -25,6 +26,7 @@
 - [ ] `pnpm check:docs`
 - [ ] `pnpm check:playground-coverage`
 - [ ] `pnpm check:adr`
+- [ ] `pnpm build:ai-rules`
 - [ ] `pnpm check:ai-rules`
 - [ ] `pnpm check:architecture`
 

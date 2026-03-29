@@ -36,7 +36,9 @@ These layers start as scaffold packages with real shell components:
 - `UiWidgetShell`, `UiWidgetHeader`, `UiWidgetBody`, `UiWidgetFooter`
 - `UiPageTemplate`, `UiPageHeader`, `UiPageBody`, `UiPageSidebar`, `UiPageSection`, `UiPageToolbar`
 
-Reserved namespaces document where future `LoginWindow`, `DataTableWidget`, `AuthPageTemplate`, `WorkspacePageTemplate`, and similar entities should live.
+Reserved namespaces document where future `LoginWindow`, `AuthPageTemplate`, `WorkspacePageTemplate`, and similar entities should live. `DataTableWidget` is now a realized widget in this layer rather than a reserved placeholder.
+
+The first realized widget above the systems layer is `DataTableWidget`, which composes `@ww/data-grid` without reimplementing its engine logic.
 
 ## Consequences
 
@@ -44,6 +46,7 @@ Reserved namespaces document where future `LoginWindow`, `DataTableWidget`, `Aut
 - Apps keep ownership of route pages, backend integration, and domain orchestration.
 - Future systems packages can be composed by widgets without leaking vendor or engine concerns into apps.
 - Page templates stay distinct from route pages and remain reusable across multiple apps or product areas.
+- `DataTableWidget` proves the widgets layer with a real reusable business block above `@ww/data-grid`.
 
 ## Alternatives
 
@@ -60,6 +63,6 @@ Reserved namespaces document where future `LoginWindow`, `DataTableWidget`, `Aut
 ## Related artifacts
 
 - [`packages/widgets`](../../packages/widgets)
+- [`packages/widgets/src/data/data-table-widget`](../../packages/widgets/src/data/data-table-widget)
 - [`packages/page-templates`](../../packages/page-templates)
 - [`docs/architecture/placement-rules.md`](../architecture/placement-rules.md)
-

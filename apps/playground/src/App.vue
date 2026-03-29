@@ -51,6 +51,7 @@ import {
 } from '@ww/themes';
 import LayerScaffoldShowcase from './LayerScaffoldShowcase.vue';
 import DataGridShowcase from './DataGridShowcase.vue';
+import DataTableWidgetShowcase from './DataTableWidgetShowcase.vue';
 import SignalGraphShowcase from './SignalGraphShowcase.vue';
 import { PLAYGROUND_SCENARIOS } from './testing/scenarios';
 
@@ -468,6 +469,8 @@ const afterCollapse = (element: Element) => {
     </section>
 
     <DataGridShowcase />
+
+    <DataTableWidgetShowcase />
 
     <section
       id="testing-charts"

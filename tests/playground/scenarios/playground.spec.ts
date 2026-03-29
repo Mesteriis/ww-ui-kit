@@ -20,6 +20,10 @@ test('renders stable playground harness sections', async ({ page }) => {
     'data-grid-selection',
     'data-grid-composition',
     'widgets',
+    'widget-data-table-basic',
+    'widget-data-table-states',
+    'widget-data-table-theming',
+    'widget-data-table-composition',
     'page-templates',
     'composition'
   ]) {
@@ -77,4 +81,23 @@ test('runs controlled data-grid flows in the built playground', async ({ page })
 
   const compositionSection = page.locator('#testing-data-grid-composition');
   await expect(compositionSection.getByText('Accounts table widget shell', { exact: true })).toBeVisible();
+});
+
+test('runs data-table-widget flows in the built playground', async ({ page }) => {
+  await page.goto('/');
+
+  const basicSection = page.locator('#testing-widgets-data-table-basic');
+  const basicWidget = basicSection.getByRole('figure', { name: 'Accounts table widget' });
+  await basicWidget.getByPlaceholder('Search accounts').fill('Northwind');
+  await expect(basicSection.getByText('Rows: 1', { exact: true }).first()).toBeVisible();
+  await basicWidget.locator('tbody .ui-checkbox').first().click();
+  await expect(basicSection.getByRole('button', { name: /Clear 1/ })).toBeVisible();
+
+  const themingSection = page.locator('#testing-widgets-data-table-theming');
+  await expect(themingSection.getByText('ThemeName: belovodye', { exact: true })).toBeVisible();
+  await expect(themingSection.getByText('ThemeType: light', { exact: true })).toBeVisible();
+
+  const compositionSection = page.locator('#testing-widgets-data-table-composition');
+  await expect(compositionSection.getByText('Operations workspace', { exact: true })).toBeVisible();
+  await expect(compositionSection.getByText('Export later', { exact: true })).toBeVisible();
 });

@@ -29,7 +29,8 @@ This repository is not only a component library. It is a governed platform repo 
 - Changelog: [`CHANGELOG.md`](./CHANGELOG.md)
 - ADRs: [`docs/decisions`](./docs/decisions)
 - Architecture docs: [`docs/architecture`](./docs/architecture)
-- Canonical AI rules: [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
+- AI rules pack: [`docs/governance/ai-ruleset/README.md`](./docs/governance/ai-ruleset/README.md)
+- AI rules overview: [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
 
 ## Toolchain baseline
 
@@ -122,7 +123,7 @@ Then build up in this order:
 
 1. `@ww/core` for baseline controls
 2. optional systems only when needed
-3. `@ww/widgets` for reusable black-box surfaces
+3. `@ww/widgets` for reusable black-box surfaces such as `DataTableWidget`
 4. `@ww/page-templates` for reusable layout shells
 5. product routing, backend orchestration, and domain state in apps
 
@@ -184,6 +185,15 @@ Controlled dense admin/business table system package. Query, rows, totals, and s
 ```ts
 import '@ww/data-grid/styles.css';
 import { UiDataGrid } from '@ww/data-grid';
+```
+
+### `@ww/widgets`
+
+Reusable black-box composition layer above core and systems. `DataTableWidget` is the canonical table widget above `@ww/data-grid`.
+
+```ts
+import '@ww/widgets/styles.css';
+import { DataTableWidget } from '@ww/widgets';
 ```
 
 ## Themes
@@ -270,14 +280,26 @@ Use a new ADR or update an existing one when changing:
 
 ## AI rules
 
-Canonical AI rules live in [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md).
+Canonical machine-oriented AI rules live in [`docs/governance/ai-ruleset/README.md`](./docs/governance/ai-ruleset/README.md).
 
-Mirrors:
+Human overview:
+
+- [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
+
+Thin mirrors:
 
 - [`AGENTS.md`](./AGENTS.md)
 - [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
 
-`pnpm check:ai-rules` fails if those files drift.
+Apply modes:
+
+- `always`
+- `by model decision`
+- `by file patterns`
+- `manually`
+
+`pnpm build:ai-rules` refreshes the overview, mirrors, and generated rules index.
+`pnpm check:ai-rules` fails if the rule pack, generated views, or mirrors drift.
 
 ## Changesets discipline
 
@@ -306,6 +328,7 @@ pnpm check:stories
 pnpm check:docs
 pnpm check:playground-coverage
 pnpm check:adr
+pnpm build:ai-rules
 pnpm check:ai-rules
 pnpm check:architecture
 

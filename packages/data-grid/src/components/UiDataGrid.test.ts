@@ -141,6 +141,27 @@ describe('UiDataGrid package', () => {
     ).toBe(true);
   });
 
+  it('can hide toolbar, column visibility, and bulk actions without changing query ownership', () => {
+    const wrapper = mount(UiDataGrid, {
+      props: {
+        rows,
+        columns,
+        query: createQuery(),
+        totalRows: rows.length,
+        selectedRowIds: ['row-1'],
+        filterDefinitions: filters,
+        showToolbar: false,
+        showBulkActions: false,
+        showColumnVisibility: false
+      }
+    });
+
+    expect(wrapper.find('.ui-data-grid-toolbar').exists()).toBe(false);
+    expect(wrapper.find('.ui-data-grid-visibility').exists()).toBe(false);
+    expect(wrapper.find('.ui-data-grid-bulk-actions').exists()).toBe(false);
+    expect(wrapper.find('.ui-data-grid-table').exists()).toBe(true);
+  });
+
   it('applies aria-label when no caption is provided', () => {
     const wrapper = mount(UiDataGrid, {
       props: {
@@ -312,6 +333,20 @@ describe('UiDataGrid package', () => {
         }
       }).html()
     ).toBe('<!--v-if-->');
+
+    const toolbar = mount(UiDataGridToolbar, {
+      props: {
+        search: '',
+        searchPlaceholder: 'Search rows',
+        filterDefinitions: filters,
+        filters: {},
+        hideableColumns: columns,
+        columnVisibility: {},
+        showColumnVisibility: false
+      }
+    });
+
+    expect(toolbar.find('.ui-data-grid-visibility').exists()).toBe(false);
 
     const pagination = mount(UiDataGridPagination, {
       props: {

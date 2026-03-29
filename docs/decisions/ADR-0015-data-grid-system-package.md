@@ -44,7 +44,7 @@ Its contract is feature-first and controlled:
 - `third-party-adapter`
   because the public contract is feature-first rather than vendor-first
 
-Future `DataTableWidget` work belongs above this package and composes over it.
+`DataTableWidget` belongs above this package and composes over it.
 
 ## Consequences
 
@@ -62,7 +62,7 @@ Future `DataTableWidget` work belongs above this package and composes over it.
 ## Migration / Rollout
 
 - The package starts as an incubating system package.
-- Future table widgets should compose over `@ww/data-grid`.
+- Table widgets should compose over `@ww/data-grid`.
 - Domain-specific tables should live in apps or widgets above the system package, not inside `@ww/data-grid`.
 - v1 intentionally excludes virtualization, inline editing, grouping, route sync, and backend fetch orchestration.
 

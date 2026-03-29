@@ -14,6 +14,7 @@ ADR-0009 | accepted | Interactive Signal Graph UI | 2026-03-23 | Adds `@ww/signa
 ADR-0010 | accepted | Widgets And Page Templates Layer | 2026-03-24 | Adds reusable widget and page-template layers above systems.
 ADR-0011 | accepted | Platform Governance And Public API Discipline | 2026-03-29 | Introduces machine-checked layer, topology, and public surface governance.
 ADR-0012 | accepted | Testing System And Coverage Governance | 2026-03-29 | Splits tests into unit, e2e, and playground contours with coverage gates.
-ADR-0013 | accepted | AI Agent Rules And Repo Automation | 2026-03-29 | Establishes one canonical AI rules source with CI sync enforcement.
+ADR-0013 | superseded | AI Agent Rules And Repo Automation | 2026-03-29 | Established a single canonical AI rules source before the pattern-based rules pack replaced it.
 ADR-0014 | accepted | Third Party Topology | 2026-03-29 | Distinguishes vendor-backed adapters from feature-first system packages.
 ADR-0015 | accepted | Data Grid System Package | 2026-03-29 | Adds `@ww/data-grid` as a controlled, feature-first dense table system package.
+ADR-0016 | accepted | Pattern Based AI Rules Pack | 2026-03-29 | Replaces the monolithic AI rules document with a manifest-driven rules pack and thin generated mirrors.

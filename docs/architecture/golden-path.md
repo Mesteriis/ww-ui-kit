@@ -40,6 +40,7 @@ Use:
 ## 4. Composition
 
 - Use `UiWidgetShell` for reusable composed blocks.
+- Use `DataTableWidget` when you want reusable table-shell framing above `@ww/data-grid`.
 - Use `UiPageTemplate` and related shells for reusable page layout skeletons.
 - Keep route pages, backend orchestration, and product-specific state in apps.
 

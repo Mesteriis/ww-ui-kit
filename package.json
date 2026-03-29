@@ -12,6 +12,7 @@
   "scripts": {
     "dev:docs": "pnpm --filter @ww/tokens build && pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && pnpm --filter @ww/core build && pnpm --filter @ww/charts-apex build && pnpm --filter @ww/signal-graph build && pnpm --filter @ww/data-grid build && pnpm --filter @ww/widgets build && pnpm --filter @ww/page-templates build && pnpm --filter @ww/docs storybook",
     "dev:playground": "pnpm --filter @ww/playground dev",
+    "build:ai-rules": "node ./tools/governance/ai-rules/build-ai-rules-summary.mjs",
     "build": "pnpm --filter @ww/tokens build && pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && pnpm --filter @ww/core build && pnpm --filter @ww/charts-apex build && pnpm --filter @ww/signal-graph build && pnpm --filter @ww/data-grid build && pnpm --filter @ww/widgets build && pnpm --filter @ww/page-templates build && pnpm --filter @ww/playground build && pnpm --filter @ww/docs build",
     "build:pages": "pnpm build && node ./scripts/build-pages.mjs",
     "check:catalog": "node ./tools/governance/checks/check-catalog.mjs",

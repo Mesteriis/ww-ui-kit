@@ -18,7 +18,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', '@ww/core']
+      external: ['vue', '@ww/core', '@ww/data-grid']
     }
   }
 });

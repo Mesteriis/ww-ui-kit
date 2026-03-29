@@ -208,7 +208,7 @@ const scopedTheme = getThemeMeta('belovodye');
     >
       <UiPageTemplate title="Workspace shell" description="Page-template + widget + data-grid composition proof">
         <UiPageSection title="Accounts workspace" description="System package stays controlled while the composition layer remains route-agnostic.">
-          <UiWidgetShell title="Accounts table widget shell" description="Future DataTableWidget belongs above @ww/data-grid." surface="subtle">
+          <UiWidgetShell title="Accounts table widget shell" description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer." surface="subtle">
             <UiDataGrid
               :rows="compositionUiRows"
               :columns="dataGridUiColumns"

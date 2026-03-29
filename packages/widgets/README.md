@@ -16,7 +16,7 @@ Widgets are not:
 - graph engines, grid engines, or other systems packages
 - API clients or auth backends
 
-This scaffold release adds only shell-level infrastructure and reserved namespaces.
+`@ww/widgets` ships shell infrastructure and real reusable widget surfaces that compose systems packages without reimplementing them.
 
 ## Public API
 
@@ -24,9 +24,10 @@ This scaffold release adds only shell-level infrastructure and reserved namespac
 - `UiWidgetHeader`
 - `UiWidgetBody`
 - `UiWidgetFooter`
+- `DataTableWidget`
 - layer contracts and shell types
 
-Import the package styles explicitly:
+Import the package styles explicitly. The widget style entry includes the data-grid system styles it composes over:
 
 ```ts
 import '@ww/widgets/styles.css';
@@ -35,29 +36,44 @@ import '@ww/widgets/styles.css';
 ## Usage
 
 ```vue
-<UiWidgetShell
-  title="Traffic summary"
-  description="Reusable black-box widget shell"
-  surface="elevated"
+<DataTableWidget
+  title="Accounts"
+  description="Reusable widget framing above @ww/data-grid"
+  :rows="rows"
+  :columns="columns"
+  :query="query"
+  :total-rows="totalRows"
+  :selected-row-ids="selectedRowIds"
+  :filter-definitions="filterDefinitions"
+  @update:query="query = $event"
+  @update:selected-row-ids="selectedRowIds = $event"
 >
-  <template #actions>
-    <UiButton variant="secondary">Refresh</UiButton>
+  <template #header-actions>
+    <UiButton variant="secondary">Refresh widget</UiButton>
   </template>
-
-  <p>Widget body content.</p>
 
   <template #footer>
-    Last synced 2 minutes ago
+    Widget footer metadata stays outside backend orchestration.
   </template>
-</UiWidgetShell>
+</DataTableWidget>
 ```
 
-## Reserved namespaces
+`DataTableWidget` is:
+
+- a widget-layer black-box business/admin block
+- composed above `@ww/data-grid`
+- controlled by the consumer for rows, query, totals, and selection
+
+`DataTableWidget` is not:
+
+- the grid engine itself
+- a backend-aware users/orders/products table
+- a route page or page template
+
+## Remaining reserved namespaces
 
 - `auth/login-window`
   Future black-box auth surface. It may assemble fields, actions, and feedback, but it must not own backend auth flow or routing.
-- `data/data-table-widget`
-  Future composition wrapper over `@ww/data-grid`. It is not the grid engine itself.
 - `dashboard`
   Future dashboard-level black-box widgets.
 - `entity`
@@ -71,4 +87,5 @@ import '@ww/widgets/styles.css';
 - Widgets must not fetch data directly.
 - Widgets must not perform route navigation.
 - Widgets must not expose vendor-specific APIs from systems packages as their primary surface.
+- Table widgets must compose `@ww/data-grid`; they must not duplicate query, search, filter, sort, pagination, or selection logic.
 - Apps remain responsible for real route pages, backend integration, and domain logic.

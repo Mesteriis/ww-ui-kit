@@ -318,7 +318,7 @@ export const DataGridStoryHarness = defineComponent({
       >
         <template #default>
           <UiPageSection title="Account operations" description="System package embedded inside composition layers.">
-            <UiWidgetShell title="Accounts table" description="Future DataTableWidget composes over @ww/data-grid, not vice versa." surface="subtle">
+            <UiWidgetShell title="Accounts table" description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer above @ww/data-grid." surface="subtle">
               <UiDataGrid
                 :rows="uiRows"
                 :columns="uiColumns"

@@ -1,7 +1,7 @@
 ---
 id: ADR-0013
 title: AI Agent Rules And Repo Automation
-status: accepted
+status: superseded
 date: 2026-03-29
 owners:
   - platform
@@ -12,7 +12,8 @@ relatedPackages:
   - @ww/docs
   - @ww/playground
 supersedes: []
-supersededBy: []
+supersededBy:
+  - ADR-0016
 ---
 
 # ADR-0013 AI Agent Rules And Repo Automation
@@ -54,4 +55,3 @@ The ruleset focuses on operational requirements such as placement, public API di
 - [`docs/governance/ai-rules.md`](../governance/ai-rules.md)
 - [`AGENTS.md`](../../AGENTS.md)
 - [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
-

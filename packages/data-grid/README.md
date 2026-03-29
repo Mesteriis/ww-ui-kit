@@ -80,6 +80,12 @@ type DataGridQuery = {
 };
 ```
 
+Composition layers can narrow the surface without forking the grid engine:
+
+- `showToolbar`
+- `showBulkActions`
+- `showColumnVisibility`
+
 ## Theming
 
 `@ww/data-grid` uses the existing token and theme system. It respects:
@@ -96,9 +102,9 @@ type DataGridQuery = {
 
 ## Relation to widgets
 
-Future table widgets must compose over `@ww/data-grid`.
+`DataTableWidget` in `@ww/widgets` composes over `@ww/data-grid`.
 
-`data/data-table-widget` in `@ww/widgets` is a future black-box composition wrapper. The table engine and state orchestration live here in `@ww/data-grid`.
+The table engine, query model, selection model, and dense admin table orchestration remain canonical here in `@ww/data-grid`. Widgets add shell framing and reusable business-block defaults above this package.
 
 ## Explicit v1 out of scope
 

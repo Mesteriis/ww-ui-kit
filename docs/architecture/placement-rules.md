@@ -21,7 +21,7 @@ Use these rules before creating a new file or package.
 - it may assemble core and systems packages
 - it should stay reusable across multiple apps or routes
 - it must not own routing or backend orchestration
-- future table widgets compose over `@ww/data-grid`; they do not reimplement the grid engine
+- table widgets such as `DataTableWidget` compose over `@ww/data-grid`; they do not reimplement the grid engine
 
 ## Put it in `@ww/page-templates` when
 

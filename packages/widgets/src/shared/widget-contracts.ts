@@ -28,7 +28,6 @@ export const WIDGET_LAYER_RULES: WidgetLayerRule[] = [
 
 export const RESERVED_WIDGET_NAMESPACES = [
   'auth/login-window',
-  'data/data-table-widget',
   'dashboard',
   'entity',
   'feedback'

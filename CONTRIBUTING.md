@@ -26,6 +26,7 @@ pnpm dev:playground
   - `test:playground`
 - add or update an ADR when architecture-sensitive areas change
 - add a changeset when public package behavior or exports change
+- update the AI rules pack when repository-specific agent behavior changes
 
 ## What is forbidden
 
@@ -37,6 +38,7 @@ pnpm dev:playground
 - hardcoding raw easing curves outside tokens/themes
 - adding public exports without catalog/docs/tests updates
 - changing architecture-sensitive areas without ADR updates
+- editing generated AI rule mirrors by hand instead of updating the canonical rules pack
 
 ## Required checks
 
@@ -48,6 +50,7 @@ pnpm check:stories
 pnpm check:docs
 pnpm check:playground-coverage
 pnpm check:adr
+pnpm build:ai-rules
 pnpm check:ai-rules
 pnpm check:architecture
 pnpm lint
@@ -83,6 +86,27 @@ You need an ADR when changing:
 - AI rules or governance model
 - workflows that change repository operational behavior
 
+## AI rules pack
+
+Canonical source of truth:
+
+- [`docs/governance/ai-ruleset/README.md`](./docs/governance/ai-ruleset/README.md)
+
+Generated overview and thin mirrors:
+
+- [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
+- [`AGENTS.md`](./AGENTS.md)
+- [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
+
+Apply modes:
+
+- `always`
+- `by model decision`
+- `by file patterns`
+- `manually`
+
+Run `pnpm build:ai-rules` after editing the canonical rules pack. `pnpm check:ai-rules` validates frontmatter, manifest coverage, generated views, and mirror sync.
+
 ## PR hygiene
 
 - keep PRs coherent
@@ -91,4 +115,3 @@ You need an ADR when changing:
 - add `priority:*` only when it adds ordering value
 - keep release-note labels honest
 - do not create ad hoc release tags manually
-
