@@ -1,0 +1,28 @@
+.ui-field {
+  display: grid;
+  gap: var(--ui-field-gap);
+}
+
+.ui-field__label {
+  color: var(--ui-field-label-color);
+  font-size: var(--ui-field-label-size);
+  font-weight: var(--ui-field-label-weight);
+}
+
+.ui-field__control {
+  display: grid;
+}
+
+.ui-field__hint,
+.ui-field__error {
+  margin: 0;
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-field__hint {
+  color: var(--ui-field-hint-color);
+}
+
+.ui-field__error {
+  color: var(--ui-field-error-color);
+}

@@ -1,0 +1,29 @@
+{
+  "extends": "../../packages/tsconfig/vite-app.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "noEmit": false,
+    "paths": {
+      "@ww/charts-apex": ["../../packages/charts-apex/src/index.ts"],
+      "@ww/core": ["../../packages/core/src/index.ts"],
+      "@ww/page-templates": ["../../packages/page-templates/src/index.ts"],
+      "@ww/themes": ["../../packages/themes/src/index.ts"],
+      "@ww/tokens": ["../../packages/tokens/src/index.ts"],
+      "@ww/primitives": ["../../packages/primitives/src/index.ts"],
+      "@ww/signal-graph": ["../../packages/signal-graph/src/index.ts"],
+      "@ww/widgets": ["../../packages/widgets/src/index.ts"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    ".storybook/**/*.ts",
+    "../../packages/**/*.ts",
+    "../../packages/**/*.vue",
+    "../../vite.aliases.ts"
+  ],
+  "exclude": [
+    "../../packages/**/*.test.ts"
+  ]
+}

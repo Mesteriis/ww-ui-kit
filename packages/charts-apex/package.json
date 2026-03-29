@@ -1,0 +1,33 @@
+{
+  "name": "@ww/charts-apex",
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": [
+    "./src/styles/index.css"
+  ],
+  "files": [
+    "dist",
+    "src/styles",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles/index.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@ww/primitives": "workspace:*",
+    "@ww/themes": "workspace:*",
+    "apexcharts": "^5.3.5",
+    "vue3-apexcharts": "^1.8.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && vue-tsc -p tsconfig.json --noEmit"
+  }
+}

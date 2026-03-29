@@ -1,0 +1,21 @@
+{
+  "name": "@ww/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@ww/charts-apex": "workspace:*",
+    "@ww/core": "workspace:*",
+    "@ww/page-templates": "workspace:*",
+    "@ww/primitives": "workspace:*",
+    "@ww/signal-graph": "workspace:*",
+    "@ww/themes": "workspace:*",
+    "@ww/widgets": "workspace:*",
+    "vue": "^3.5.13"
+  },
+  "scripts": {
+    "storybook": "storybook dev -p 6006 --disable-telemetry",
+    "build": "storybook build --disable-telemetry",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
+  }
+}

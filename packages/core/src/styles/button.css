@@ -1,0 +1,314 @@
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  isolation: isolate;
+  gap: var(--ui-button-gap);
+  border: 1px solid transparent;
+  border-radius: var(--ui-button-radius);
+  overflow: hidden;
+  background: var(--ui-button-bg);
+  border-color: var(--ui-button-border);
+  color: var(--ui-button-fg);
+  font-size: var(--ui-text-font-size-body);
+  font-weight: var(--ui-button-font-weight);
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--ui-motion-transition-surface-lift-sm);
+}
+
+.ui-button::before,
+.ui-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.ui-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ui-button--block {
+  display: flex;
+  width: 100%;
+}
+
+.ui-button--sm {
+  min-height: var(--ui-button-height-sm);
+  padding-inline: var(--ui-button-padding-inline-sm);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-button--md {
+  min-height: var(--ui-button-height-md);
+  padding-inline: var(--ui-button-padding-inline-md);
+}
+
+.ui-button--lg {
+  min-height: var(--ui-button-height-lg);
+  padding-inline: var(--ui-button-padding-inline-lg);
+  font-size: var(--ui-text-font-size-lg);
+}
+
+.ui-button--icon {
+  padding-inline: 0;
+  inline-size: var(--ui-button-height-md);
+}
+
+.ui-button--icon.ui-button--sm {
+  inline-size: var(--ui-button-height-sm);
+}
+
+.ui-button--icon.ui-button--lg {
+  inline-size: var(--ui-button-height-lg);
+}
+
+.ui-button--appearance-solid {
+  --ui-button-bg: var(--ui-button-tone-solid-bg);
+  --ui-button-fg: var(--ui-button-tone-solid-fg);
+  --ui-button-border: var(--ui-button-tone-solid-border);
+  --ui-button-bg-hover: var(--ui-button-tone-solid-bg-hover);
+  --ui-button-bg-active: var(--ui-button-tone-solid-bg-active);
+}
+
+.ui-button--appearance-outline {
+  --ui-button-bg: var(--ui-button-tone-soft-bg);
+  --ui-button-fg: var(--ui-button-tone-soft-fg);
+  --ui-button-border: var(--ui-button-tone-soft-border);
+  --ui-button-bg-hover: var(--ui-button-tone-soft-bg-hover);
+  --ui-button-bg-active: var(--ui-button-tone-soft-bg-active);
+}
+
+.ui-button--appearance-ghost {
+  --ui-button-bg: transparent;
+  --ui-button-fg: var(--ui-button-tone-soft-fg);
+  --ui-button-border: transparent;
+  --ui-button-bg-hover: var(--ui-button-tone-soft-bg-hover);
+  --ui-button-bg-active: var(--ui-button-tone-soft-bg-active);
+}
+
+.ui-button--tone-neutral {
+  --ui-button-tone-solid-bg: var(--ui-button-neutral-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-neutral-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-neutral-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-neutral-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-neutral-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-neutral-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-neutral-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-neutral-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-neutral-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-neutral-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-neutral-accent-start);
+  --ui-button-effect-end: var(--ui-button-neutral-accent-end);
+}
+
+.ui-button--tone-brand {
+  --ui-button-tone-solid-bg: var(--ui-button-brand-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-brand-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-brand-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-brand-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-brand-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-brand-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-brand-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-brand-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-brand-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-brand-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-brand-accent-start);
+  --ui-button-effect-end: var(--ui-button-brand-accent-end);
+}
+
+.ui-button--tone-debug {
+  --ui-button-tone-solid-bg: var(--ui-button-debug-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-debug-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-debug-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-debug-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-debug-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-debug-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-debug-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-debug-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-debug-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-debug-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-debug-accent-start);
+  --ui-button-effect-end: var(--ui-button-debug-accent-end);
+}
+
+.ui-button--tone-info {
+  --ui-button-tone-solid-bg: var(--ui-button-info-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-info-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-info-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-info-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-info-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-info-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-info-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-info-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-info-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-info-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-info-accent-start);
+  --ui-button-effect-end: var(--ui-button-info-accent-end);
+}
+
+.ui-button--tone-success {
+  --ui-button-tone-solid-bg: var(--ui-button-success-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-success-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-success-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-success-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-success-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-success-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-success-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-success-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-success-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-success-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-success-accent-start);
+  --ui-button-effect-end: var(--ui-button-success-accent-end);
+}
+
+.ui-button--tone-warning {
+  --ui-button-tone-solid-bg: var(--ui-button-warning-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-warning-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-warning-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-warning-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-warning-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-warning-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-warning-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-warning-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-warning-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-warning-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-warning-accent-start);
+  --ui-button-effect-end: var(--ui-button-warning-accent-end);
+}
+
+.ui-button--tone-danger {
+  --ui-button-tone-solid-bg: var(--ui-button-danger-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-danger-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-danger-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-danger-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-danger-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-danger-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-danger-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-danger-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-danger-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-danger-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-danger-accent-start);
+  --ui-button-effect-end: var(--ui-button-danger-accent-end);
+}
+
+.ui-button--tone-critical {
+  --ui-button-tone-solid-bg: var(--ui-button-critical-solid-bg);
+  --ui-button-tone-solid-fg: var(--ui-button-critical-solid-fg);
+  --ui-button-tone-solid-border: var(--ui-button-critical-solid-border);
+  --ui-button-tone-solid-bg-hover: var(--ui-button-critical-solid-bg-hover);
+  --ui-button-tone-solid-bg-active: var(--ui-button-critical-solid-bg-active);
+  --ui-button-tone-soft-bg: var(--ui-button-critical-soft-bg);
+  --ui-button-tone-soft-fg: var(--ui-button-critical-soft-fg);
+  --ui-button-tone-soft-border: var(--ui-button-critical-soft-border);
+  --ui-button-tone-soft-bg-hover: var(--ui-button-critical-soft-bg-hover);
+  --ui-button-tone-soft-bg-active: var(--ui-button-critical-soft-bg-active);
+  --ui-button-effect-start: var(--ui-button-critical-accent-start);
+  --ui-button-effect-end: var(--ui-button-critical-accent-end);
+}
+
+.ui-button:hover:not(:disabled) {
+  background: var(--ui-button-bg-hover);
+}
+
+.ui-button:active:not(:disabled) {
+  background: var(--ui-button-bg-active);
+}
+
+.ui-button--appearance-solid:hover:not(:disabled),
+.ui-button--appearance-solid:active:not(:disabled) {
+  border-color: currentColor;
+  border-color: color-mix(in srgb, var(--ui-button-border) 72%, var(--ui-button-bg-active));
+}
+
+.ui-button--appearance-outline:hover:not(:disabled),
+.ui-button--appearance-outline:active:not(:disabled) {
+  border-color: var(--ui-button-tone-soft-border);
+}
+
+.ui-button--effect-border-flow {
+  border-color: transparent;
+}
+
+.ui-button--effect-border-flow::before {
+  inset: 0;
+  padding: var(--ui-button-effect-border-width);
+  background:
+    linear-gradient(
+      120deg,
+      var(--ui-button-effect-start),
+      var(--ui-button-effect-end),
+      var(--ui-button-effect-start)
+    );
+  background-size: 200% 100%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 1;
+  animation: ui-button-border-flow 2.4s linear infinite;
+}
+
+.ui-button--effect-border-flow:hover:not(:disabled) {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ui-button-effect-start) 48%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--ui-button-effect-end) 18%, transparent);
+}
+
+.ui-button--effect-color-shift::after {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 12%,
+      color-mix(in srgb, var(--ui-button-effect-start) 44%, transparent) 42%,
+      color-mix(in srgb, var(--ui-button-effect-end) 62%, transparent) 54%,
+      transparent 78%
+    );
+  background-size: 240% 100%;
+  opacity: 0.72;
+  animation: ui-button-color-shift 2.6s var(--ui-motion-easing-emphasized) infinite;
+}
+
+.ui-button:disabled,
+.ui-button.is-loading {
+  cursor: not-allowed;
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-button__content,
+.ui-button__icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ui-button__spinner {
+  inline-size: var(--ui-button-spinner-size-md);
+  block-size: var(--ui-button-spinner-size-md);
+  border: 2px solid color-mix(in srgb, currentColor 24%, transparent);
+  border-top-color: currentColor;
+  border-radius: 999px;
+  animation: ui-rotate var(--ui-motion-duration-slow) linear infinite;
+}
+
+.ui-button--sm .ui-button__spinner {
+  inline-size: var(--ui-button-spinner-size-sm);
+  block-size: var(--ui-button-spinner-size-sm);
+}
+
+.ui-button--lg .ui-button__spinner {
+  inline-size: var(--ui-button-spinner-size-lg);
+  block-size: var(--ui-button-spinner-size-lg);
+}

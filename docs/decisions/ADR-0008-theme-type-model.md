@@ -1,0 +1,36 @@
+# ADR-0008 Theme Type Model
+
+## Context
+
+The repository now contains multiple concrete themes such as `light`, `dark`, and `belovodye`. Docs, playground, browser `color-scheme`, and theme-aware overlays need a canonical way to understand both the concrete theme name and whether that theme belongs to the light or dark family.
+
+## Decision
+
+Theme metadata is centralized in `@ww/themes`.
+
+- `ThemeName` identifies a concrete theme.
+- `ThemeType` is limited to `light | dark`.
+- Every theme has exactly one canonical `ThemeType`.
+- `ThemeType` is metadata on a theme, not a free second axis that can be combined independently.
+- `setTheme(themeName, target?)` derives type from the registry and applies both `data-ui-theme` and `data-ui-theme-type`.
+- The same runtime also applies `color-scheme` from `ThemeType`.
+- Scoped theme and overlay portal behavior preserve both attributes together.
+
+## Consequences
+
+- Invalid combinations such as `data-ui-theme="belovodye"` with `data-ui-theme-type="dark"` are no longer part of the supported model.
+- Storybook and playground can show both the current theme name and type from one source of truth.
+- New themes must declare their `type` when added to the registry.
+- Browser-native UI behavior can align with the canonical theme family through `color-scheme`.
+
+## Alternatives
+
+- Treating `ThemeType` as a separate selector axis would allow invalid combinations and duplicate state.
+- Keeping type knowledge only in docs or app-level controls would drift from runtime behavior.
+- Relying only on `data-ui-theme` would make browser `color-scheme` and scoped overlay propagation less explicit.
+
+## Migration
+
+- Existing theme selection continues to use `ThemeName`.
+- Theme helpers and DOM targets now also receive `data-ui-theme-type`.
+- Subtree theming and theme-aware portal roots should use `setTheme()` or set both attributes together when authored in raw markup.

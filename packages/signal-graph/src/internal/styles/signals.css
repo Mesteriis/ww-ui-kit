@@ -1,0 +1,78 @@
+.ui-signal-graph__pulse {
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 18 160;
+  stroke-dashoffset: 180;
+  opacity: 0;
+  animation:
+    ui-signal-graph-pulse-travel var(--ui-signal-duration) var(--ui-motion-easing-standard) var(--ui-signal-delay) forwards;
+}
+
+.ui-signal-graph__pulse--sm {
+  stroke-width: 3;
+}
+
+.ui-signal-graph__pulse--lg {
+  stroke-width: 5;
+}
+
+.ui-signal-graph__pulse--neutral {
+  stroke: var(--ui-graph-pulse-neutral);
+}
+
+.ui-signal-graph__pulse--info {
+  stroke: var(--ui-graph-pulse-info);
+}
+
+.ui-signal-graph__pulse--success {
+  stroke: var(--ui-graph-pulse-success);
+}
+
+.ui-signal-graph__pulse--warning {
+  stroke: var(--ui-graph-pulse-warning);
+}
+
+.ui-signal-graph__pulse--danger {
+  stroke: var(--ui-graph-pulse-danger);
+}
+
+.ui-signal-graph__pulse--accent {
+  stroke: var(--ui-graph-pulse-accent);
+}
+
+.ui-signal-graph__pulse--reduced {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+  animation:
+    ui-signal-graph-pulse-reduced var(--ui-signal-duration) var(--ui-motion-easing-standard) var(--ui-signal-delay) forwards;
+}
+
+@keyframes ui-signal-graph-pulse-travel {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 180;
+  }
+
+  12% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ui-signal-graph-pulse-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

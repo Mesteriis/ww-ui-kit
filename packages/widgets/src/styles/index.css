@@ -1,0 +1,99 @@
+.ui-widget-shell {
+  display: grid;
+  gap: var(--ui-space-4);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-radius-xl);
+  background: var(--ui-surface-default);
+  color: var(--ui-text-primary);
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.ui-widget-shell--subtle {
+  background: color-mix(in srgb, var(--ui-surface-default) 76%, var(--ui-surface-sunken));
+}
+
+.ui-widget-shell--elevated {
+  background: var(--ui-surface-raised);
+  box-shadow: var(--ui-elevation-surface-raised);
+}
+
+.ui-widget-header,
+.ui-widget-footer {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--ui-space-4);
+  padding-inline: var(--ui-space-5);
+}
+
+.ui-widget-header {
+  padding-top: var(--ui-space-5);
+}
+
+.ui-widget-footer {
+  padding-bottom: var(--ui-space-5);
+  border-top: 1px solid color-mix(in srgb, var(--ui-border-subtle) 76%, transparent);
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-widget-body {
+  display: grid;
+  gap: var(--ui-space-4);
+}
+
+.ui-widget-body[data-ui-padded='true'] {
+  padding-inline: var(--ui-space-5);
+  padding-bottom: var(--ui-space-5);
+}
+
+.ui-widget-body[data-ui-padded='false'] {
+  padding-inline: 0;
+  padding-bottom: 0;
+}
+
+.ui-widget-shell__header-copy {
+  display: grid;
+  gap: var(--ui-space-2);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ui-widget-shell__header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  flex-wrap: wrap;
+}
+
+.ui-widget-shell__copy {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.ui-widget-shell__title {
+  margin: 0;
+  font-size: var(--ui-font-size-lg);
+  line-height: var(--ui-line-height-tight);
+}
+
+.ui-widget-shell__description {
+  margin: 0;
+  color: var(--ui-text-secondary);
+}
+
+.ui-widget-shell__state {
+  display: grid;
+  place-items: center;
+  gap: var(--ui-space-3);
+  min-height: 8rem;
+  text-align: center;
+}
+
+.ui-widget-shell__state--loading {
+  color: var(--ui-text-secondary);
+}
+
+.ui-widget-shell__state-text {
+  margin: 0;
+}

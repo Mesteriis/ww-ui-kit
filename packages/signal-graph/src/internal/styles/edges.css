@@ -1,0 +1,45 @@
+.ui-signal-graph__edge-group {
+  pointer-events: all;
+}
+
+.ui-signal-graph__edge-hitbox {
+  pointer-events: stroke;
+}
+
+.ui-signal-graph__edge-path,
+.ui-signal-graph__edge-glow,
+.ui-signal-graph__pulse {
+  vector-effect: non-scaling-stroke;
+}
+
+.ui-signal-graph__edge-glow {
+  stroke: color-mix(in srgb, var(--ui-graph-edge-glow) 24%, transparent);
+  stroke-width: 8;
+  opacity: 0.28;
+}
+
+.ui-signal-graph__edge-path {
+  stroke: var(--ui-graph-edge-idle);
+  stroke-width: 2;
+  transition:
+    stroke var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    opacity var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
+}
+
+.ui-signal-graph__edge-label {
+  fill: var(--ui-text-secondary);
+  font-size: var(--ui-font-size-xs);
+  font-weight: var(--ui-font-weight-medium);
+}
+
+.ui-signal-graph__edge-group[data-ui-depth='related'] .ui-signal-graph__edge-path {
+  stroke: var(--ui-graph-edge-related);
+}
+
+.ui-signal-graph__edge-group[data-ui-depth='active'] .ui-signal-graph__edge-path {
+  stroke: var(--ui-graph-edge-active);
+}
+
+.ui-signal-graph__edge-group[data-ui-signaled='true'] .ui-signal-graph__edge-glow {
+  opacity: 0.52;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@ww/widgets",
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": [
+    "./src/styles/index.css"
+  ],
+  "files": [
+    "dist",
+    "src/styles",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles/index.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@ww/core": "workspace:*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "pnpm --filter @ww/core build && vue-tsc -p tsconfig.json --noEmit"
+  }
+}

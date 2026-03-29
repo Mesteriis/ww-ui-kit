@@ -1,0 +1,16 @@
+{
+  "extends": "./packages/tsconfig/base.json",
+  "files": [],
+  "references": [
+    { "path": "./packages/tokens" },
+    { "path": "./packages/themes" },
+    { "path": "./packages/primitives" },
+    { "path": "./packages/core" },
+    { "path": "./packages/charts-apex" },
+    { "path": "./packages/signal-graph" },
+    { "path": "./packages/widgets" },
+    { "path": "./packages/page-templates" },
+    { "path": "./apps/playground" },
+    { "path": "./apps/docs" }
+  ]
+}

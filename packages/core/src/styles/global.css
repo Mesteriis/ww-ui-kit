@@ -1,0 +1,36 @@
+:root,
+[data-ui-theme-type='light'] {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--ui-text-font-family);
+  font-size: var(--ui-text-font-size-body);
+  line-height: var(--ui-text-line-height-body);
+  background: var(--ui-surface-canvas);
+  color: var(--ui-text-primary);
+}
+
+[data-ui-theme-type='dark'] {
+  color-scheme: dark;
+}
+
+[data-ui-theme='light']:not([data-ui-theme-type]),
+[data-ui-theme='belovodye']:not([data-ui-theme-type]) {
+  color-scheme: light;
+}
+
+[data-ui-theme='dark']:not([data-ui-theme-type]) {
+  color-scheme: dark;
+}
+
+.ui-stack {
+  display: grid;
+  gap: var(--ui-empty-state-gap);
+}
+
+.ui-cluster {
+  display: flex;
+  gap: var(--ui-field-gap);
+  flex-wrap: wrap;
+}

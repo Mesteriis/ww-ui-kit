@@ -1,0 +1,109 @@
+.ui-signal-graph {
+  --ui-signal-graph-grid-size: 1.75rem;
+  position: relative;
+  display: block;
+  min-height: 28rem;
+  border: 1px solid var(--ui-graph-node-border);
+  border-radius: var(--ui-radius-xl);
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--ui-graph-node-glow) 14%, transparent), transparent 36%),
+    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent), var(--ui-graph-canvas-bg));
+  color: var(--ui-graph-node-text);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ui-signal-graph__frame,
+.ui-signal-graph__canvas,
+.ui-signal-graph__shell {
+  min-height: 28rem;
+}
+
+.ui-signal-graph__canvas {
+  background: transparent;
+}
+
+.ui-signal-graph__shell {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--ui-graph-node-glass-bg) 52%, transparent), transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 88%, transparent), var(--ui-graph-canvas-bg));
+}
+
+.ui-signal-graph__shell::before {
+  content: '';
+  width: 9rem;
+  height: 9rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--ui-graph-node-border) 86%, transparent);
+  background: color-mix(in srgb, var(--ui-graph-node-glass-bg) 38%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ui-graph-focus-halo) 12%, transparent);
+}
+
+.ui-signal-graph__state {
+  display: grid;
+  gap: var(--ui-space-3);
+  place-content: center;
+  min-height: 28rem;
+  padding: var(--ui-space-8);
+  text-align: center;
+  background: color-mix(in srgb, var(--ui-graph-overlay-panel-surface) 88%, transparent);
+}
+
+.ui-signal-graph__state-title {
+  font-size: var(--ui-font-size-lg);
+  font-weight: var(--ui-font-weight-semibold);
+  color: var(--ui-graph-node-text);
+}
+
+.ui-signal-graph__state-text {
+  margin: 0;
+  color: var(--ui-text-secondary);
+}
+
+.ui-signal-graph__state--error {
+  background: color-mix(in srgb, var(--ui-surface-danger-soft) 56%, var(--ui-graph-overlay-panel-surface));
+}
+
+.ui-signal-graph__state--loading {
+  background: color-mix(in srgb, var(--ui-surface-brand-soft) 48%, var(--ui-graph-overlay-panel-surface));
+}
+
+.ui-signal-graph__loading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-space-3);
+  width: min(18rem, 100%);
+}
+
+.ui-signal-graph__loading-grid span {
+  display: block;
+  min-height: 5rem;
+  border-radius: var(--ui-radius-lg);
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--ui-graph-node-glass-bg) 70%, transparent) 8%,
+    color-mix(in srgb, var(--ui-graph-node-surface) 96%, transparent) 18%,
+    color-mix(in srgb, var(--ui-graph-node-glass-bg) 70%, transparent) 33%
+  );
+  background-size: 200% 100%;
+  animation: ui-signal-graph-loading 1.4s linear infinite;
+}
+
+@keyframes ui-signal-graph-loading {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-signal-graph__loading-grid span {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

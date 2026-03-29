@@ -1,0 +1,48 @@
+@import './reset.css';
+@import './global.css';
+@import './motion.css';
+@import './button.css';
+@import './field.css';
+@import './input.css';
+@import './selection.css';
+@import './display.css';
+@import './overlay.css';
+@import './tabs.css';
+@import './empty-state.css';
+
+@keyframes ui-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ui-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes ui-button-border-flow {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ui-button-color-shift {
+  from {
+    background-position: 180% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-button::before,
+  .ui-button::after,
+  .ui-spinner,
+  .ui-skeleton {
+    animation-duration: var(--ui-motion-duration-instant);
+  }
+}

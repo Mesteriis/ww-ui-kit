@@ -1,0 +1,124 @@
+.ui-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  pointer-events: none;
+}
+
+.ui-overlay--dialog {
+  place-items: center;
+  padding: var(--ui-dialog-viewport-padding);
+}
+
+.ui-overlay--drawer {
+  align-items: stretch;
+}
+
+.ui-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--ui-overlay-backdrop);
+  pointer-events: auto;
+}
+
+.ui-overlay__surface {
+  position: relative;
+  pointer-events: auto;
+  outline: none;
+}
+
+.ui-dialog,
+.ui-drawer {
+  display: grid;
+  gap: var(--ui-dialog-gap);
+  overflow: auto;
+  color: var(--ui-text-primary);
+  box-shadow: var(--ui-elevation-overlay);
+}
+
+.ui-dialog {
+  inline-size: min(100%, var(--ui-dialog-width));
+  max-block-size: calc(100vh - (var(--ui-dialog-viewport-padding) * 2));
+  padding: var(--ui-dialog-padding);
+  border: 1px solid var(--ui-dialog-border);
+  border-radius: var(--ui-dialog-radius);
+  background: var(--ui-dialog-bg);
+  box-shadow: var(--ui-dialog-shadow);
+}
+
+.ui-drawer {
+  inline-size: min(100vw, var(--ui-drawer-width));
+  block-size: 100vh;
+  max-block-size: 100vh;
+  padding: var(--ui-drawer-padding);
+  border: 1px solid var(--ui-drawer-border);
+  border-radius: 0;
+  background: var(--ui-drawer-bg);
+  box-shadow: var(--ui-drawer-shadow);
+}
+
+.ui-drawer--right {
+  margin-inline-start: auto;
+}
+
+.ui-drawer--left {
+  margin-inline-end: auto;
+}
+
+.ui-overlay__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--ui-field-gap);
+}
+
+.ui-overlay__title-group {
+  min-inline-size: 0;
+}
+
+.ui-overlay__title {
+  margin: 0;
+  color: var(--ui-dialog-title-color);
+  font-size: var(--ui-dialog-title-size);
+}
+
+.ui-overlay__description {
+  margin: 0;
+  color: var(--ui-text-secondary);
+}
+
+.ui-overlay__body {
+  display: grid;
+  gap: var(--ui-field-gap);
+}
+
+.ui-overlay__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ui-field-gap);
+}
+
+.ui-overlay__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ui-dialog-close-size);
+  block-size: var(--ui-dialog-close-size);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-dialog-close-radius);
+  background: transparent;
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-dialog-close-font-size);
+  cursor: pointer;
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-overlay__close:hover {
+  background: var(--ui-action-ghost-bg-hover);
+}
+
+.ui-overlay__close:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}

@@ -1,0 +1,194 @@
+.ui-apex-chart {
+  display: grid;
+  gap: var(--ui-space-4);
+  color: var(--ui-text-primary);
+}
+
+.ui-apex-chart__caption {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.ui-apex-chart__title {
+  font-size: var(--ui-font-size-lg);
+  line-height: var(--ui-line-height-tight);
+  color: var(--ui-text-primary);
+}
+
+.ui-apex-chart__description,
+.ui-apex-chart__state-text {
+  margin: 0;
+  color: var(--ui-text-secondary);
+}
+
+.ui-apex-chart__frame {
+  position: relative;
+  min-height: 18rem;
+  padding: var(--ui-space-4);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-radius-lg);
+  background: var(--ui-surface-default);
+  box-shadow: var(--ui-elevation-surface-soft);
+}
+
+.ui-apex-chart__vendor,
+.ui-apex-chart__shell {
+  min-height: 18rem;
+}
+
+.ui-apex-chart__shell {
+  border-radius: var(--ui-radius-md);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--ui-chart-state-surface-loading) 70%, transparent),
+      transparent
+    ),
+    var(--ui-chart-state-surface-loading);
+  background-size: 220% 100%;
+  animation: ui-apex-chart-sweep var(--ui-motion-duration-ambient-sm) linear infinite;
+}
+
+.ui-apex-chart__overlay {
+  position: absolute;
+  inset: var(--ui-space-4);
+  display: grid;
+  place-items: start stretch;
+  padding: var(--ui-space-4);
+  border-radius: var(--ui-radius-md);
+  background: color-mix(in srgb, var(--ui-chart-state-surface-loading) 72%, transparent);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ui-apex-chart__state {
+  display: grid;
+  gap: var(--ui-space-3);
+  place-content: center;
+  min-height: 18rem;
+  padding: var(--ui-space-6);
+  border-radius: var(--ui-radius-md);
+  text-align: center;
+}
+
+.ui-apex-chart__state--loading {
+  background: var(--ui-chart-state-surface-loading);
+}
+
+.ui-apex-chart__state--empty {
+  background: var(--ui-chart-state-surface-empty);
+}
+
+.ui-apex-chart__state--error {
+  background: var(--ui-chart-state-surface-error);
+}
+
+.ui-apex-chart__state-title {
+  color: var(--ui-text-primary);
+  font-size: var(--ui-font-size-lg);
+  line-height: var(--ui-line-height-tight);
+}
+
+.ui-apex-chart__loading-bar {
+  height: 0.875rem;
+  border-radius: var(--ui-radius-pill);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--ui-chart-tooltip-text) 16%, transparent),
+      transparent
+    ),
+    var(--ui-chart-state-surface-loading);
+  background-size: 220% 100%;
+  animation: ui-apex-chart-sweep var(--ui-motion-duration-ambient-sm) linear infinite;
+}
+
+.ui-apex-chart__loading-bar--short {
+  width: 58%;
+}
+
+.ui-apex-chart .apexcharts-canvas,
+.ui-apex-chart .apexcharts-svg,
+.ui-apex-chart .apexcharts-inner {
+  font-family: var(--ui-text-font-family);
+}
+
+.ui-apex-chart .apexcharts-text,
+.ui-apex-chart .apexcharts-xaxis-label,
+.ui-apex-chart .apexcharts-yaxis-label,
+.ui-apex-chart .apexcharts-datalabel,
+.ui-apex-chart .apexcharts-legend-text {
+  fill: var(--ui-chart-axis-label);
+}
+
+.ui-apex-chart .apexcharts-gridline,
+.ui-apex-chart .apexcharts-xaxis line,
+.ui-apex-chart .apexcharts-yaxis line,
+.ui-apex-chart .apexcharts-xaxis path,
+.ui-apex-chart .apexcharts-yaxis path {
+  stroke: var(--ui-chart-grid-line);
+}
+
+.ui-apex-chart .apexcharts-legend-text {
+  color: var(--ui-chart-legend-text) !important;
+}
+
+.ui-apex-chart .apexcharts-tooltip,
+.ui-apex-chart .apexcharts-xaxistooltip,
+.ui-apex-chart .apexcharts-yaxistooltip,
+.ui-apex-chart .apexcharts-menu {
+  border: 1px solid var(--ui-chart-tooltip-border) !important;
+  border-radius: var(--ui-radius-md) !important;
+  background: var(--ui-chart-tooltip-bg) !important;
+  color: var(--ui-chart-tooltip-text) !important;
+  box-shadow: var(--ui-elevation-surface-raised) !important;
+}
+
+.ui-apex-chart .apexcharts-tooltip-title,
+.ui-apex-chart .apexcharts-menu-item {
+  background: transparent !important;
+  color: var(--ui-chart-tooltip-text) !important;
+}
+
+.ui-apex-chart .apexcharts-menu-item:hover,
+.ui-apex-chart .apexcharts-menu-item:focus-visible {
+  background: color-mix(in srgb, var(--ui-chart-state-surface-loading) 72%, transparent) !important;
+}
+
+.ui-apex-chart .apexcharts-toolbar svg,
+.ui-apex-chart .apexcharts-toolbar text {
+  fill: var(--ui-chart-toolbar-color);
+  color: var(--ui-chart-toolbar-color);
+}
+
+.ui-apex-chart .apexcharts-toolbar svg:hover,
+.ui-apex-chart .apexcharts-toolbar svg:focus-visible {
+  filter: drop-shadow(var(--ui-motion-feedback-glow-soft));
+}
+
+.ui-apex-chart .apexcharts-toolbar button:focus-visible,
+.ui-apex-chart .apexcharts-menu-item:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+}
+
+@keyframes ui-apex-chart-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-apex-chart__shell,
+  .ui-apex-chart__loading-bar {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}

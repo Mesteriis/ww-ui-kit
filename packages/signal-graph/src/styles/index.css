@@ -1,0 +1,10 @@
+@import '@vue-flow/core/dist/style.css';
+@import '@vue-flow/core/dist/theme-default.css';
+@import '@vue-flow/controls/dist/style.css';
+@import '@vue-flow/minimap/dist/style.css';
+@import '../internal/styles/graph.css';
+@import '../internal/styles/nodes.css';
+@import '../internal/styles/edges.css';
+@import '../internal/styles/signals.css';
+@import '../internal/styles/depth.css';
+@import '../internal/styles/vendor-overrides.css';

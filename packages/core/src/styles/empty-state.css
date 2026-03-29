@@ -1,0 +1,40 @@
+.ui-empty-state {
+  display: grid;
+  justify-items: start;
+  gap: var(--ui-empty-state-gap);
+  padding: var(--ui-card-padding);
+  border: 1px dashed var(--ui-border-subtle);
+  border-radius: var(--ui-card-radius);
+  background: var(--ui-card-bg);
+}
+
+.ui-empty-state__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ui-empty-state-icon-size);
+  block-size: var(--ui-empty-state-icon-size);
+  border-radius: var(--ui-empty-state-icon-radius);
+  background: var(--ui-empty-state-icon-surface);
+}
+
+.ui-empty-state__content {
+  display: grid;
+  gap: var(--ui-field-gap);
+}
+
+.ui-empty-state__title {
+  margin: 0;
+  color: var(--ui-empty-state-title-color);
+  font-size: var(--ui-empty-state-title-size);
+}
+
+.ui-empty-state__description {
+  margin: 0;
+  color: var(--ui-empty-state-description-color);
+}
+
+.ui-empty-state__actions {
+  display: flex;
+  gap: var(--ui-field-gap);
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@ww/core",
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": [
+    "./src/styles/motion.css",
+    "./src/styles/reset.css",
+    "./src/styles/global.css",
+    "./src/styles/index.css"
+  ],
+  "files": [
+    "dist",
+    "src/styles"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles/index.css",
+    "./motion.css": "./src/styles/motion.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@ww/primitives": "workspace:*",
+    "@ww/themes": "workspace:*",
+    "@ww/tokens": "workspace:*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "pnpm --filter @ww/primitives build && vue-tsc -p tsconfig.json --noEmit"
+  }
+}

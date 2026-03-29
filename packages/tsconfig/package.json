@@ -1,0 +1,11 @@
+{
+  "name": "@ww/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base.json": "./base.json",
+    "./vue-library.json": "./vue-library.json",
+    "./vite-app.json": "./vite-app.json"
+  }
+}

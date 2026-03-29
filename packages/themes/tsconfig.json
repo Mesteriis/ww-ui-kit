@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "paths": {
+      "@ww/tokens": ["../tokens/src/index.ts"]
+    },
+    "rootDir": "src"
+  },
+  "references": [{ "path": "../tokens" }],
+  "include": ["src/**/*.ts"]
+}

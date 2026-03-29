@@ -1,0 +1,24 @@
+{
+  "extends": "../tsconfig/vue-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "paths": {
+      "@ww/primitives": ["../primitives/src/index.ts"],
+      "@ww/primitives/motion": ["../primitives/src/motion/index.ts"],
+      "@ww/primitives/overlay": ["../primitives/src/overlay/index.ts"],
+      "@ww/themes": ["../themes/src/index.ts"],
+      "@ww/tokens": ["../tokens/src/index.ts"]
+    },
+    "rootDir": "src"
+  },
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    { "path": "../tokens" },
+    { "path": "../themes" },
+    { "path": "../primitives" }
+  ],
+  "include": ["src/**/*.ts", "src/**/*.vue"]
+}

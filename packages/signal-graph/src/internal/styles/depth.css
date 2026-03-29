@@ -1,0 +1,59 @@
+.ui-signal-graph__node-host[data-ui-depth='background'],
+.ui-signal-graph__edge-group[data-ui-depth='background'] {
+  opacity: var(--ui-graph-depth-background-opacity);
+}
+
+.ui-signal-graph__node-host[data-ui-depth='background'] .ui-signal-graph__node-shell {
+  transform: scale(0.985);
+  filter: blur(var(--ui-graph-depth-background-blur));
+}
+
+.ui-signal-graph__node-host[data-ui-depth='related'] {
+  opacity: var(--ui-graph-depth-related-opacity);
+}
+
+.ui-signal-graph__node-host[data-ui-depth='active'] .ui-signal-graph__node-shell {
+  border-color: var(--ui-graph-node-active-ring);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ui-graph-focus-halo) 36%, transparent),
+    0 20px 44px -24px color-mix(in srgb, var(--ui-graph-node-glow) 42%, transparent);
+  transform: translateY(calc(var(--ui-motion-distance-2xs) * -1));
+}
+
+.ui-signal-graph__node-host[data-ui-depth='related'] .ui-signal-graph__node-shell {
+  border-color: var(--ui-graph-node-related-ring);
+}
+
+.ui-signal-graph__node-shell[data-ui-recent-signal='true'] {
+  animation: ui-signal-graph-node-reaction var(--ui-motion-duration-md) var(--ui-motion-easing-decelerate);
+}
+
+@keyframes ui-signal-graph-node-reaction {
+  0% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--ui-graph-signal-reaction-color) 0%, transparent),
+      0 18px 40px -28px color-mix(in srgb, var(--ui-graph-node-glow) 42%, transparent);
+  }
+
+  35% {
+    box-shadow:
+      0 0 0 0.4rem color-mix(in srgb, var(--ui-graph-signal-reaction-color) 28%, transparent),
+      0 18px 44px -24px color-mix(in srgb, var(--ui-graph-node-glow) 48%, transparent);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--ui-graph-signal-reaction-color) 0%, transparent),
+      0 18px 40px -28px color-mix(in srgb, var(--ui-graph-node-glow) 42%, transparent);
+  }
+}
+
+.ui-signal-graph[data-ui-depth-mode='off'] .ui-signal-graph__node-host,
+.ui-signal-graph[data-ui-depth-mode='off'] .ui-signal-graph__edge-group {
+  opacity: 1;
+}
+
+.ui-signal-graph[data-ui-depth-mode='off'] .ui-signal-graph__node-shell {
+  filter: none;
+  transform: none;
+}

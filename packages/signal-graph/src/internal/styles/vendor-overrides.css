@@ -1,0 +1,74 @@
+.ui-signal-graph .vue-flow__pane {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent), transparent 35%),
+    transparent;
+}
+
+.ui-signal-graph .vue-flow__background-pattern path,
+.ui-signal-graph .vue-flow__background-pattern circle {
+  stroke: var(--ui-graph-grid-major);
+  fill: var(--ui-graph-grid-minor);
+}
+
+.ui-signal-graph .vue-flow__controls {
+  overflow: hidden;
+  border: 1px solid var(--ui-graph-node-border);
+  border-radius: var(--ui-radius-lg);
+  background: color-mix(in srgb, var(--ui-graph-controls-surface) 92%, transparent);
+  box-shadow: var(--ui-shadow-md);
+}
+
+.ui-signal-graph .vue-flow__controls-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-bottom-color: color-mix(in srgb, var(--ui-graph-node-border) 72%, transparent);
+  background: transparent;
+  color: var(--ui-graph-controls-icon);
+}
+
+.ui-signal-graph .vue-flow__controls-button:hover {
+  background: color-mix(in srgb, var(--ui-graph-controls-surface) 70%, var(--ui-surface-default));
+}
+
+.ui-signal-graph .vue-flow__controls-button svg {
+  fill: currentColor;
+}
+
+.ui-signal-graph .vue-flow__minimap {
+  border: 1px solid var(--ui-graph-minimap-border);
+  border-radius: var(--ui-radius-lg);
+  background: color-mix(in srgb, var(--ui-graph-minimap-surface) 94%, transparent);
+  overflow: hidden;
+}
+
+.ui-signal-graph .vue-flow__minimap-mask {
+  fill: color-mix(in srgb, var(--ui-graph-canvas-bg) 28%, transparent);
+}
+
+.ui-signal-graph .vue-flow__minimap-node {
+  fill: var(--ui-graph-node-surface);
+  stroke: var(--ui-graph-node-border);
+}
+
+.ui-signal-graph .vue-flow__attribution {
+  display: none;
+}
+
+@supports not ((backdrop-filter: blur(12px))) {
+  .ui-signal-graph__node-shell--glass {
+    background: color-mix(in srgb, var(--ui-graph-node-glass-bg) 96%, var(--ui-graph-node-surface));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-signal-graph__node-shell,
+  .ui-signal-graph__edge-path,
+  .ui-signal-graph__edge-glow,
+  .ui-signal-graph__handle {
+    transition-duration: 0.01ms;
+  }
+
+  .ui-signal-graph__node-shell[data-ui-recent-signal='true'] {
+    animation-duration: 0.01ms;
+  }
+}

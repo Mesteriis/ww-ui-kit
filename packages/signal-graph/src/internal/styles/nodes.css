@@ -1,0 +1,72 @@
+.ui-signal-graph__node-host {
+  position: relative;
+}
+
+.ui-signal-graph__node-shell {
+  position: relative;
+  display: grid;
+  gap: var(--ui-space-3);
+  min-width: 14rem;
+  min-height: 6rem;
+  padding: var(--ui-space-3);
+  border: 1px solid var(--ui-graph-node-border);
+  border-radius: var(--ui-radius-xl);
+  background: var(--ui-graph-node-surface);
+  color: var(--ui-graph-node-text);
+  box-shadow: 0 18px 40px -28px color-mix(in srgb, var(--ui-graph-node-glow) 42%, transparent);
+  transition:
+    transform var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    opacity var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    box-shadow var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    border-color var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
+}
+
+.ui-signal-graph__node-shell--glass {
+  background: color-mix(in srgb, var(--ui-graph-node-glass-bg) 88%, transparent);
+  border-color: var(--ui-graph-node-glass-border);
+  backdrop-filter: blur(12px) saturate(1.08);
+}
+
+.ui-signal-graph__node-shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+  min-height: 1.5rem;
+  cursor: move;
+  user-select: none;
+}
+
+.ui-signal-graph__node-shell-title {
+  font-size: var(--ui-font-size-sm);
+  font-weight: var(--ui-font-weight-semibold);
+  color: var(--ui-graph-node-text);
+}
+
+.ui-signal-graph__node-shell-body {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.ui-signal-graph__node-missing {
+  display: grid;
+  gap: var(--ui-space-2);
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-font-size-sm);
+}
+
+.ui-signal-graph__handle {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--ui-graph-node-border);
+  background: var(--ui-graph-node-surface);
+  transition:
+    border-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    box-shadow var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
+}
+
+.ui-signal-graph__handle.connecting,
+.ui-signal-graph__handle.valid {
+  border-color: var(--ui-graph-node-active-ring);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--ui-graph-focus-halo) 32%, transparent);
+}
