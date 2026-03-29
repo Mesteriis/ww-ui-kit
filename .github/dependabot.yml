@@ -12,7 +12,8 @@ updates:
       include: scope
     labels:
       - dependencies
-      - npm
+      - kind: maintenance
+      - area: repo-tooling
 
   - package-ecosystem: github-actions
     directory: /
@@ -25,4 +26,6 @@ updates:
       include: scope
     labels:
       - dependencies
-      - github-actions
+      - kind: maintenance
+      - ci
+      - area: repo-tooling

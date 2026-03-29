@@ -1,3 +1,22 @@
+---
+id: ADR-0009
+title: Interactive Signal Graph UI
+status: accepted
+date: 2026-03-23
+owners:
+  - platform
+tags:
+  - systems
+  - signal-graph
+relatedPackages:
+  - @ww/signal-graph
+  - @ww/core
+  - @ww/primitives
+  - @ww/themes
+supersedes: []
+supersededBy: []
+---
+
 # ADR-0009 Interactive Signal Graph UI
 
 ## Context
@@ -6,7 +25,7 @@ The repository already has a strong foundation for tokens, themes, motion, overl
 
 ## Decision
 
-Interactive Signal Graph UI lives in a separate optional package: `@ww/signal-graph`.
+Interactive signal graph UI lives in a separate optional package: `@ww/signal-graph`.
 
 - Vue Flow is used as an internal engine, not as the public API.
 - The public surface is `UiSignalGraph` plus typed signal-graph model types.
@@ -30,8 +49,15 @@ Interactive Signal Graph UI lives in a separate optional package: `@ww/signal-gr
 - Building a generic editor framework now would overreach the first-version goal and create unnecessary abstraction cost.
 - Replacing Vue Flow with a custom canvas engine would delay delivery and bypass the existing DOM/component strengths of the repo.
 
-## Migration
+## Migration / Rollout
 
 - The package is additive and optional.
 - Apps that do not use graph UI do not need the package.
-- Consumer code should model nodes/edges/signals with `@ww/signal-graph` types instead of raw Vue Flow types.
+- Consumer code should model nodes, edges, and signals with `@ww/signal-graph` types instead of raw Vue Flow types.
+
+## Related artifacts
+
+- [`packages/signal-graph`](../../packages/signal-graph)
+- [`apps/docs/src/stories/foundations/signal-graph`](../../apps/docs/src/stories/foundations/signal-graph)
+- [`apps/playground/src/SignalGraphShowcase.vue`](../../apps/playground/src/SignalGraphShowcase.vue)
+

@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -39,11 +41,44 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Check governance catalog
+        run: pnpm check:catalog
+
+      - name: Check Storybook coverage contract
+        run: pnpm check:stories
+
+      - name: Check docs coverage contract
+        run: pnpm check:docs
+
+      - name: Check playground coverage contract
+        run: pnpm check:playground-coverage
+
+      - name: Check ADR governance
+        run: pnpm check:adr
+
+      - name: Check AI rules sync
+        run: pnpm check:ai-rules
+
+      - name: Check architecture boundaries
+        run: pnpm check:architecture
+
       - name: Lint
         run: pnpm lint
 
       - name: Typecheck
         run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test:unit
+
+      - name: End-to-end tests
+        run: pnpm test:e2e
+
+      - name: Playground tests
+        run: pnpm test:playground
 
       - name: Test with strict coverage
         run: pnpm test:coverage
@@ -51,9 +86,21 @@ jobs:
       - name: Build workspace
         run: pnpm build
 
+      - name: Build GitHub Pages artifact
+        run: pnpm build:pages
+
       - name: Upload coverage summary
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: coverage-summary
           path: coverage/global-100/coverage-summary.json
+
+      - name: Upload Playwright traces
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-traces
+          path: |
+            test-results
+            playwright-report

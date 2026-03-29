@@ -27,11 +27,15 @@ export const workspaceAliases: Alias[] = [
   },
   {
     find: /^@ww\/charts-apex\/styles\.css$/,
-    replacement: path.resolve(rootDir, 'packages/charts-apex/src/styles/index.css')
+    replacement: path.resolve(rootDir, 'packages/third-party/charts-apex/src/styles/index.css')
   },
   {
     find: /^@ww\/signal-graph\/styles\.css$/,
     replacement: path.resolve(rootDir, 'packages/signal-graph/src/styles/index.css')
+  },
+  {
+    find: /^@ww\/data-grid\/styles\.css$/,
+    replacement: path.resolve(rootDir, 'packages/data-grid/src/styles/index.css')
   },
   {
     find: /^@ww\/widgets\/styles\.css$/,
@@ -54,24 +58,20 @@ export const workspaceAliases: Alias[] = [
     replacement: path.resolve(rootDir, 'packages/primitives/src/index.ts')
   },
   {
-    find: /^@ww\/primitives\/motion$/,
-    replacement: path.resolve(rootDir, 'packages/primitives/src/motion/index.ts')
-  },
-  {
-    find: /^@ww\/primitives\/overlay$/,
-    replacement: path.resolve(rootDir, 'packages/primitives/src/overlay/index.ts')
-  },
-  {
     find: /^@ww\/core$/,
     replacement: path.resolve(rootDir, 'packages/core/src/index.ts')
   },
   {
     find: /^@ww\/charts-apex$/,
-    replacement: path.resolve(rootDir, 'packages/charts-apex/src/index.ts')
+    replacement: path.resolve(rootDir, 'packages/third-party/charts-apex/src/index.ts')
   },
   {
     find: /^@ww\/signal-graph$/,
     replacement: path.resolve(rootDir, 'packages/signal-graph/src/index.ts')
+  },
+  {
+    find: /^@ww\/data-grid$/,
+    replacement: path.resolve(rootDir, 'packages/data-grid/src/index.ts')
   },
   {
     find: /^@ww\/widgets$/,

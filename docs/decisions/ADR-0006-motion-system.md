@@ -1,3 +1,22 @@
+---
+id: ADR-0006
+title: Motion System
+status: accepted
+date: 2026-03-20
+owners:
+  - platform
+tags:
+  - motion
+  - primitives
+relatedPackages:
+  - @ww/tokens
+  - @ww/themes
+  - @ww/primitives
+  - @ww/core
+supersedes: []
+supersededBy: []
+---
+
 # ADR-0006 Motion System
 
 ## Context
@@ -30,6 +49,13 @@ Reduced motion is handled at two levels:
 - Keeping only CSS utilities would not cover preset resolution, presence management, or collapse runtime.
 - Keeping only runtime helpers would fragment the visual utility layer.
 
-## Migration
+## Migration / Rollout
 
 Existing component transitions move onto semantic motion tokens and shared preset/runtime helpers. Legacy per-component ad hoc transition values should be removed instead of extended.
+
+## Related artifacts
+
+- [`packages/primitives/src/motion`](../../packages/primitives/src/motion)
+- [`packages/core/src/styles/motion.css`](../../packages/core/src/styles/motion.css)
+- [`docs/architecture/testing-architecture.md`](../architecture/testing-architecture.md)
+

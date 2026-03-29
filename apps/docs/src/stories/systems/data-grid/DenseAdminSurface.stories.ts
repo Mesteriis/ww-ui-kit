@@ -1,0 +1,19 @@
+import type { Meta, StoryObj } from '@storybook/vue3';
+
+import { DataGridStoryHarness } from './data-grid-fixtures';
+
+const meta = {
+  title: 'Systems/Data Grid/Dense Admin Surface',
+  component: DataGridStoryHarness,
+  tags: ['autodocs']
+} satisfies Meta<typeof DataGridStoryHarness>;
+
+export default meta;
+
+export const Overview: StoryObj<typeof meta> = {
+  args: {
+    mode: 'dense',
+    density: 'compact',
+    stickyHeader: true
+  }
+};

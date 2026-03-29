@@ -37,7 +37,11 @@ const replayReducedSignal = () => {
 </script>
 
 <template>
-  <section class="playground__foundation-grid">
+  <section
+    id="testing-signal-graph"
+    class="playground__foundation-grid"
+    data-playground-scenario="signal-graph"
+  >
     <UiCard>
       <template #header>Signal graph overview</template>
       <div class="ui-stack">

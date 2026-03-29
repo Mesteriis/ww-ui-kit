@@ -10,7 +10,8 @@
   ],
   "files": [
     "dist",
-    "src/styles"
+    "src/styles",
+    "README.md"
   ],
   "exports": {
     ".": {

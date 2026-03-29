@@ -6,67 +6,327 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-111827.svg)](./LICENSE)
 [![Docs](https://img.shields.io/badge/docs-Storybook-ff4785)](https://mesteriis.github.io/ww-ui-kit/docs/)
 [![Playground](https://img.shields.io/badge/demo-Playground-2563eb)](https://mesteriis.github.io/ww-ui-kit/playground/)
+[![Changelog](https://img.shields.io/badge/history-CHANGELOG-0f766e)](./CHANGELOG.md)
 
-Production-grade Vue 3 + TypeScript foundation for Belovodye UiKit. The current scope covers tokens, themes, primitives, core components, motion foundation, overlay/layer foundation, optional feature adapters, widget shells, and page-template shells.
+Production-grade Vue 3 + TypeScript UI platform monorepo for Belovodye UiKit.
 
-Repository hygiene defaults are documented in [CONTRIBUTING.md](./CONTRIBUTING.md). Local editor files, caches, coverage output, and build artifacts are ignored by default, and line endings are normalized through [`.gitattributes`](./.gitattributes).
+This repository is not only a component library. It is a governed platform repo with:
 
-## Project links
+- strict layer boundaries
+- typed theme and motion systems
+- overlay/layer runtime contracts
+- optional systems packages
+- widgets and page-template composition layers
+- Storybook as public UI contract
+- playground as consumer-proof harness
+- ADR, catalog, and AI-rule governance enforced by CI
+
+## Links
 
 - OSS site: `https://mesteriis.github.io/ww-ui-kit/`
 - Storybook docs: `https://mesteriis.github.io/ww-ui-kit/docs/`
-- Playground: `https://mesteriis.github.io/ww-ui-kit/playground/`
-- GitHub repository: `https://github.com/Mesteriis/ww-ui-kit`
+- Playground harness: `https://mesteriis.github.io/ww-ui-kit/playground/`
+- Changelog: [`CHANGELOG.md`](./CHANGELOG.md)
+- ADRs: [`docs/decisions`](./docs/decisions)
+- Architecture docs: [`docs/architecture`](./docs/architecture)
+- Canonical AI rules: [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
 
-## Architecture
+## Toolchain baseline
 
-The repository is a pnpm workspace with strict layer boundaries:
+- Node.js `24.x`
+- pnpm `10.32.1+`
+- Vite `6`
+- Vitest `3`
+- Playwright for browser verification
 
-1. `@ww/tokens`
-   Defines typed base, semantic, component, motion, elevation, and layer contracts.
-2. `@ww/themes`
-   Maps theme-specific semantic and component values onto `light`, `dark`, and `belovodye`.
-3. `@ww/primitives`
-   Exposes low-level behavior, motion runtime, portal resolution, and overlay stack management.
-4. `@ww/core`
-   Exposes styled components that consume semantic/component variables and shared primitives.
-5. `systems`
-   Optional larger subsystems such as `@ww/charts-apex` and `@ww/signal-graph`.
-6. `@ww/widgets`
-   Black-box composition layer for reusable UI blocks above core and systems.
-7. `@ww/page-templates`
-   Layout shell layer for reusable page compositions. These are not route pages.
-8. `@ww/docs`
-   Storybook source of truth for states, motion catalog demos, and overlay behavior.
-9. `@ww/playground`
-   Real consumer app for end-to-end integration checks.
+## Architecture map
 
-Core CSS only consumes semantic and component variables. Raw palette values, easing curves, and z-index numbers do not belong in components.
+Canonical layer order:
 
-## Packages
+`tokens -> themes -> primitives -> core -> systems -> widgets -> page-templates -> apps`
+
+Package groups:
+
+- `packages/*`
+  foundation, feature-first systems, widgets, page templates, tooling
+- `packages/third-party/*`
+  vendor-backed adapters whose public API stays honest about the vendor
+- `apps/*`
+  docs and playground consumer apps
+
+Current package topology:
 
 - `@ww/tokens`
 - `@ww/themes`
 - `@ww/primitives`
 - `@ww/core`
-- `@ww/charts-apex`
+- `@ww/data-grid`
 - `@ww/signal-graph`
 - `@ww/widgets`
 - `@ww/page-templates`
+- `@ww/charts-apex` at [`packages/third-party/charts-apex`](./packages/third-party/charts-apex)
 - `@ww/eslint-config`
 - `@ww/tsconfig`
 - `@ww/docs`
 - `@ww/playground`
 
-## Repository automation
+Canonical source of truth:
 
-- GitHub Actions `CI` runs `pnpm lint`, `pnpm typecheck`, `pnpm test:coverage`, and `pnpm build`.
-- GitHub Actions `Release PR` integrates with Changesets, maintains the versioning PR on `main`, and creates canonical package tags after a version PR merge.
-- Publishing is still explicit and can be enabled later with registry secrets instead of assuming a publish token from day one.
-- GitHub Actions `GitHub Pages` publishes a single static site with:
-  - landing page at `/`
-  - Storybook docs at `/docs/`
-  - integration playground at `/playground/`
+- package classification: [`tools/governance/catalog/package-classification.mjs`](./tools/governance/catalog/package-classification.mjs)
+- layer rules: [`tools/governance/catalog/layer-rules.mjs`](./tools/governance/catalog/layer-rules.mjs)
+- public surface manifest: [`tools/governance/catalog/public-surface-manifest.mjs`](./tools/governance/catalog/public-surface-manifest.mjs)
+
+## Public vs internal
+
+Public API is defined by:
+
+1. package export maps
+2. the public surface manifest
+3. required docs, stories, playground coverage, and tests
+
+Internal-only surfaces are not part of the supported consumer contract even if they exist under `src/internal/*` or app code.
+
+Deep imports such as `@ww/package/src/**` are forbidden.
+
+## Stability model
+
+Every public surface is classified as one of:
+
+- `stable`
+- `incubating`
+- `experimental`
+- `internal`
+
+Current intent:
+
+- `@ww/tokens`, `@ww/themes`, `@ww/primitives`, `@ww/core` -> `stable`
+- `@ww/charts-apex`, `@ww/data-grid`, `@ww/widgets`, `@ww/page-templates` -> `incubating`
+- `@ww/signal-graph` -> `experimental`
+- docs, playground, and tooling packages -> `internal`
+
+See [`docs/architecture/stability-model.md`](./docs/architecture/stability-model.md).
+
+## Golden path for a new consumer app
+
+Use one obvious bootstrapping path:
+
+```ts
+import '@ww/themes/theme-light.css';
+import '@ww/core/styles.css';
+import { setTheme } from '@ww/themes';
+
+setTheme('light');
+```
+
+Then build up in this order:
+
+1. `@ww/core` for baseline controls
+2. optional systems only when needed
+3. `@ww/widgets` for reusable black-box surfaces
+4. `@ww/page-templates` for reusable layout shells
+5. product routing, backend orchestration, and domain state in apps
+
+Scoped theming:
+
+```html
+<section data-ui-theme="belovodye" data-ui-theme-type="light">
+  ...
+</section>
+```
+
+Overlays inherit subtree themes through the existing theme-aware portal system. Do not manually invent overlay mounting rules in app code.
+
+See [`docs/architecture/golden-path.md`](./docs/architecture/golden-path.md).
+
+## Placement rules
+
+Use this mental model:
+
+- baseline reusable component -> `@ww/core`
+- larger reusable subsystem -> systems package
+- reusable black-box composition -> `@ww/widgets`
+- reusable page or layout shell -> `@ww/page-templates`
+- real route page or backend-aware flow -> `apps/*`
+
+Examples:
+
+- `LoginWindow` -> `@ww/widgets`
+- `DataTableWidget` -> `@ww/widgets`
+- `UiDataGrid` -> `@ww/data-grid`
+- `AuthPageTemplate` -> `@ww/page-templates`
+- `DashboardPageTemplate` -> `@ww/page-templates`
+- actual admin route page -> `apps/*`
+
+## Optional packages
+
+### `@ww/charts-apex`
+
+Vendor-backed chart adapter. Honest about ApexCharts and intentionally kept out of `@ww/core`.
+
+```ts
+import '@ww/charts-apex/styles.css';
+import { UiApexChart } from '@ww/charts-apex';
+```
+
+### `@ww/signal-graph`
+
+Feature-first interactive graph UI package. Vue Flow stays internal and does not leak into product code.
+
+```ts
+import '@ww/signal-graph/styles.css';
+import { UiSignalGraph } from '@ww/signal-graph';
+```
+
+### `@ww/data-grid`
+
+Controlled dense admin/business table system package. Query, rows, totals, and selection stay owned by the consumer.
+
+```ts
+import '@ww/data-grid/styles.css';
+import { UiDataGrid } from '@ww/data-grid';
+```
+
+## Themes
+
+Available themes:
+
+- `light` -> `ThemeType: light`
+- `dark` -> `ThemeType: dark`
+- `belovodye` -> `ThemeType: light`
+
+Theme rules:
+
+- `ThemeName` is the concrete theme
+- `ThemeType` is derived metadata
+- type is not a second free axis
+- use `setTheme(themeName, target?)` instead of manually drifting attributes
+
+## Testing architecture
+
+There are exactly three primary test contours:
+
+1. `pnpm test:unit`
+2. `pnpm test:e2e`
+3. `pnpm test:playground`
+
+Root `pnpm test` runs all three.
+
+Coverage and proof discipline is enforced by:
+
+- `pnpm check:catalog`
+- `pnpm check:stories`
+- `pnpm check:docs`
+- `pnpm check:playground-coverage`
+- `pnpm check:adr`
+- `pnpm check:ai-rules`
+- `pnpm check:architecture`
+
+Storybook is the public UI contract.
+
+Playground is the real consumer-proof harness. It contains stable scenarios for:
+
+- themes
+- overlays
+- widgets
+- page templates
+- charts
+- data-grid
+- signal graph
+- layered composition
+
+## Docs as contract
+
+This repo treats docs as part of the engineering contract:
+
+- package README files explain boundaries
+- architecture docs explain placement and layer rules
+- Storybook proves public UI states
+- playground proves real multi-package composition
+- ADRs capture architecture-sensitive decisions
+
+See [`docs/architecture/docs-as-contract.md`](./docs/architecture/docs-as-contract.md).
+
+## ADR process
+
+ADRs live in [`docs/decisions`](./docs/decisions).
+
+Use a new ADR or update an existing one when changing:
+
+- layer rules
+- public surface rules
+- package topology
+- testing architecture
+- workflows or governance model
+- AI rules model
+
+`pnpm check:adr` validates:
+
+- naming
+- metadata
+- required sections
+- index consistency
+- supersedes links
+- architecture-sensitive change detection
+
+## AI rules
+
+Canonical AI rules live in [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md).
+
+Mirrors:
+
+- [`AGENTS.md`](./AGENTS.md)
+- [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
+
+`pnpm check:ai-rules` fails if those files drift.
+
+## Changesets discipline
+
+Add a changeset when:
+
+- public exports change
+- public behavior changes
+- publishable package contracts change
+- new public packages are introduced
+
+Do not add a changeset for:
+
+- docs-only changes
+- internal-only tooling changes
+- test-only changes without public impact
+
+## Commands
+
+```bash
+pnpm install
+pnpm dev:docs
+pnpm dev:playground
+
+pnpm check:catalog
+pnpm check:stories
+pnpm check:docs
+pnpm check:playground-coverage
+pnpm check:adr
+pnpm check:ai-rules
+pnpm check:architecture
+
+pnpm test:unit
+pnpm test:e2e
+pnpm test:playground
+pnpm test
+pnpm test:coverage
+
+pnpm lint
+pnpm typecheck
+pnpm build
+pnpm build:pages
+pnpm verify
+```
+
+## Release history
+
+- repository-level milestones and toolchain shifts: [`CHANGELOG.md`](./CHANGELOG.md)
+- package versioning and release PRs: Changesets
+- GitHub release note grouping: [`.github/release.yml`](./.github/release.yml)
 
 ## OSS baseline
 
@@ -74,389 +334,3 @@ Core CSS only consumes semantic and component variables. Raw palette values, eas
 - [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
 - [`SECURITY.md`](./SECURITY.md)
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md)
-- GitHub issue templates, PR template, CI, release automation, Dependabot, and Pages deployment
-
-## GitHub Pages
-
-The repository can publish one combined Pages artifact:
-
-- `/` -> OSS landing page
-- `/docs/` -> Storybook docs
-- `/playground/` -> Vite playground
-
-Build it locally with:
-
-```bash
-pnpm build:pages
-```
-
-This produces `site-dist/`, which is the exact artifact uploaded by the GitHub Pages workflow.
-- Dependabot tracks npm dependencies and GitHub Actions updates.
-- Issue and pull request templates keep repository hygiene consistent.
-
-## Available themes
-
-- `light`
-  Type: `light`. Neutral light baseline for general product surfaces.
-- `dark`
-  Type: `dark`. High-contrast dark baseline for low-light interfaces.
-- `belovodye`
-  Type: `light`. A cool premium light theme with white-stone surfaces, slate-blue text, restrained river-blue accents, and soft overlay depth.
-
-## Dependency graph
-
-```text
-@ww/tokens
-  -> @ww/themes
-  -> @ww/core
-
-vue
-  -> @ww/primitives
-  -> @ww/core
-
-@ww/primitives
-  -> @ww/core
-
-systems
-  = @ww/charts-apex, @ww/signal-graph, and future larger subsystems
-
-@ww/core + systems
-  -> @ww/widgets
-
-@ww/core + systems + optionally @ww/widgets
-  -> @ww/page-templates
-
-apps/*
-  -> @ww/core
-  -> systems
-  -> @ww/widgets
-  -> @ww/page-templates
-```
-
-Current scaffold keeps `@ww/page-templates` shell-only and independent from `@ww/widgets` at the package level until a real reusable template needs a hard dependency.
-
-## Motion system
-
-Motion is a first-class foundation layer:
-
-- token contracts live in `@ww/tokens`
-- theme-agnostic semantic motion/elevation values are emitted by `@ww/themes`
-- preset registry, runtime helpers, presence management, and collapse runtime live in `@ww/primitives`
-- shared transition CSS utilities live in `@ww/core/styles/motion.css`
-
-Public motion API from `@ww/primitives`:
-
-- `MOTION_PRESETS`
-- `MOTION_PRESET_NAMES`
-- `MOTION_TAXONOMY`
-- `prefersReducedMotion()`
-- `resolveMotionPreset()`
-- `resolveTransitionMotionPreset()`
-- `resolveCollapseMotionPreset()`
-- `applyTransitionMotionVariables()`
-- `clearTransitionMotionVariables()`
-- `createTransitionGroupMotionStyle()`
-- `useMotionPresence()`
-- `runCollapseMotion()`
-
-Example:
-
-```ts
-import {
-  applyTransitionMotionVariables,
-  clearTransitionMotionVariables,
-  resolveTransitionMotionPreset
-} from '@ww/primitives';
-
-const preset = resolveTransitionMotionPreset('modal-fade-scale');
-applyTransitionMotionVariables(element, preset, 'enter');
-clearTransitionMotionVariables(element);
-```
-
-Utility motion is available through `data-ui-motion`:
-
-- `lift-xs`, `lift-sm`
-- `ring-focus-soft`, `ring-focus-strong`
-- `underline-slide`
-- `loading-shimmer`, `loading-sweep`
-- `glow-accent`, `pulse-soft`, `shake-error-sm`
-
-Future components and hero sections should consume the preset registry and utility CSS instead of re-authoring ad hoc transitions.
-
-## Overlay and layer system
-
-Overlay behavior is centralized in `@ww/primitives`:
-
-- `readOverlayLayerScale()`
-- `resolveOverlayLayerSlots()`
-- `ensureOverlayPortalRoot()`
-- `registerOverlay()`
-- `useOverlaySurface()`
-
-The stack manager owns:
-
-- deterministic z-index allocation from `--ui-z-*`
-- nested overlay ordering
-- topmost-only `Escape` dismiss
-- topmost-only outside interaction dismiss
-- focus containment
-- centralized scroll lock
-
-### Theme-aware portal mounting
-
-Overlays do not always mount into `document.body`.
-
-- If the opener lives under a scoped `[data-ui-theme]` container, the portal root is created inside that subtree.
-- If there is no scoped theme container, a global body portal root is used.
-- `UiDialog` and `UiDrawer` also support an optional `portalTarget` prop for explicit mounting.
-
-This keeps overlay surfaces inheriting the correct CSS custom properties, `data-ui-theme`, `data-ui-theme-type`, and browser `color-scheme` behavior even when themes are applied to arbitrary subtree containers.
-
-## Using themes
-
-### ThemeName vs ThemeType
-
-- `ThemeName` is a concrete theme such as `light`, `dark`, or `belovodye`.
-- `ThemeType` is derived metadata and is only `light` or `dark`.
-- Each theme has exactly one canonical type.
-- Theme type is not a second free axis. `belovodye + dark` is not a valid state.
-- The canonical source of truth lives in `@ww/themes`.
-
-Public helpers:
-
-- `THEMES`
-- `THEME_NAMES`
-- `THEME_TYPES`
-- `getThemeMeta(themeName)`
-- `getThemeType(themeName)`
-- `getThemesByType(themeType)`
-- `isLightTheme(themeName)`
-- `isDarkTheme(themeName)`
-- `setTheme(themeName, target?)`
-
-Import the theme sheets you need:
-
-```ts
-import '@ww/themes/theme-light.css';
-import '@ww/themes/theme-dark.css';
-import '@ww/themes/theme-belovodye.css';
-```
-
-Apply a theme globally:
-
-```ts
-import { getThemeMeta, setTheme } from '@ww/themes';
-
-setTheme('belovodye');
-
-const theme = getThemeMeta('belovodye');
-console.log(theme.type); // "light"
-```
-
-Apply a theme to a subtree container:
-
-```html
-<section data-ui-theme="belovodye" data-ui-theme-type="light">
-  <!-- scoped theme -->
-</section>
-```
-
-Or with the helper:
-
-```ts
-import { setTheme } from '@ww/themes';
-
-setTheme('belovodye', containerElement);
-```
-
-Filter themes by family:
-
-```ts
-import { getThemesByType } from '@ww/themes';
-
-const lightThemes = getThemesByType('light');
-const darkThemes = getThemesByType('dark');
-```
-
-Scoped overlays keep inheriting the same theme because dialog and drawer portal roots resolve inside the nearest themed container unless an explicit `portalTarget` is supplied. The portal contract preserves both `data-ui-theme` and `data-ui-theme-type`, so browser `color-scheme` and scoped theme variables stay aligned.
-
-## Optional charts adapter
-
-`@ww/charts-apex` is an optional vendor-backed package. It is intentionally separate from `@ww/core`.
-
-- `@ww/core` stays free of chart-library dependencies
-- consumers use `UiApexChart` instead of raw Apex setup
-- no global `app.use()` registration is required
-- consumer code does not import vendor feature entries or vendor CSS directly
-
-Usage:
-
-```ts
-import '@ww/charts-apex/styles.css';
-import { UiApexChart } from '@ww/charts-apex';
-```
-
-```vue
-<UiApexChart
-  type="line"
-  :series="series"
-  :options="options"
-  title="Traffic"
-  description="Theme-aware Apex adapter"
-/>
-```
-
-The adapter reads the nearest themed container, derives chart defaults from the active theme and `ThemeType`, respects reduced motion, and exposes loading, empty, and error states without leaking vendor setup into apps.
-
-License note:
-
-`@ww/charts-apex` wraps ApexCharts. Consumers should verify that the ApexCharts license is suitable for their use case.
-
-## Optional signal graph package
-
-`@ww/signal-graph` is an optional feature package for interactive graph UI. It is intentionally separate from `@ww/core`.
-
-- Vue Flow is used as an internal engine, not as the public API
-- the public surface is a black-box `UiSignalGraph`
-- nodes are real Vue components supplied through `nodeDefinitions`
-- signals, focus/depth, viewport helpers, and subtree theming are handled inside the package
-
-Usage:
-
-```ts
-import '@ww/signal-graph/styles.css';
-import { UiSignalGraph } from '@ww/signal-graph';
-```
-
-```vue
-<UiSignalGraph
-  :nodes="nodes"
-  :edges="edges"
-  :node-definitions="nodeDefinitions"
-  :signals="signals"
-  depth-mode="full"
-  show-background
-  show-controls
-/>
-```
-
-Each node maps `node.type` to a renderer declared in `nodeDefinitions`:
-
-```ts
-import { createSignalGraphNodeDefinition } from '@ww/signal-graph';
-
-const nodeDefinitions = {
-  service: createSignalGraphNodeDefinition({
-    component: ServiceNode,
-    label: 'Service',
-    glass: true,
-  }),
-};
-```
-
-Signals can come from the controlled `signals` prop or from the exposed handle:
-
-```ts
-graphRef.value?.emitSignal({
-  id: 'sig-1',
-  edgeId: 'gateway-pipeline',
-  variant: 'success',
-  direction: 'forward',
-  intensity: 'md',
-});
-```
-
-The package reads the nearest themed container, respects `ThemeType`, works in scoped subtrees, keeps overlays opened from node content inside the correct theme scope, and softens pulse travel when reduced motion is active.
-
-## Widgets and page templates
-
-`@ww/widgets` and `@ww/page-templates` add the next reusable layers above the base foundation.
-
-- `@ww/widgets`
-  Use this layer for black-box UI blocks such as future `LoginWindow`, `DataTableWidget`, `DashboardSummaryWidget`, or `ActivityFeedWidget`.
-- `@ww/page-templates`
-  Use this layer for reusable page shells such as future `AuthPageTemplate`, `WorkspacePageTemplate`, or `DashboardPageTemplate`.
-- `apps/*`
-  Real route pages still live here. They own routing, domain orchestration, and backend integration.
-
-### Shell usage
-
-```ts
-import '@ww/widgets/styles.css';
-import '@ww/page-templates/styles.css';
-```
-
-```vue
-<UiPageTemplate
-  title="Workspace"
-  description="Reusable page shell"
-  has-sidebar
->
-  <template #toolbar>
-    <UiButton variant="secondary">Refresh</UiButton>
-  </template>
-
-  <UiPageSection title="Primary content">
-    <UiWidgetShell title="Summary widget">
-      Widget content goes here.
-    </UiWidgetShell>
-  </UiPageSection>
-
-  <template #sidebar>
-    Sidebar content
-  </template>
-</UiPageTemplate>
-```
-
-### Placement guide
-
-- `LoginWindow` -> `@ww/widgets`
-- `DataTableWidget` -> `@ww/widgets`
-- `AuthPageTemplate` -> `@ww/page-templates`
-- `DashboardPageTemplate` -> `@ww/page-templates`
-- actual route page -> `apps/*`
-
-## Commands
-
-- `pnpm install`
-- `pnpm dev:docs`
-- `pnpm dev:playground`
-- `pnpm build`
-- `pnpm lint`
-- `pnpm typecheck`
-- `pnpm test`
-- `pnpm changeset`
-- `make docs`
-- `make playground`
-
-## Layer rules
-
-- Tokens are the source of truth for names and contracts.
-- Themes only own theme-specific colors, surfaces, borders, and component mappings.
-- Motion and layer semantics remain theme-agnostic.
-- Primitives own behavior, runtime, and portal/layer management.
-- Core components use shared foundation defaults instead of local ad hoc overlay or transition logic.
-- Consumers must use package exports, not deep imports into source files.
-
-## Add a new component
-
-1. Add new semantic or component tokens only if the existing contracts are insufficient.
-2. Extend the theme maps when the component needs new theme-specific values.
-3. Add reusable low-level behavior to `@ww/primitives` only if it is genuinely foundational.
-4. Choose the right layer:
-   universal control -> `@ww/core`
-   subsystem or vendor-backed engine -> systems package
-   black-box composed block -> `@ww/widgets`
-   reusable page shell -> `@ww/page-templates`
-   real route page -> `apps/*`
-5. Use motion presets or utilities instead of local transition literals.
-6. Add Storybook stories and behavior tests.
-
-## Add a new theme
-
-1. Add the theme map in `packages/themes/src/theme-maps.ts`.
-2. Register the theme in the canonical `THEMES` metadata with its required `type`.
-3. Generate the CSS sheet with `createThemeSheet()`.
-4. Export the CSS file from `@ww/themes`.
-5. Apply it with `setTheme('theme-name', target)` or matching `data-ui-theme` and `data-ui-theme-type` attributes.
-6. Re-run docs and playground to verify scoped overlays and motion/elevation still inherit correctly.

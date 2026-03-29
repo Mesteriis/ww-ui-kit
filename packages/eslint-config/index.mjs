@@ -14,7 +14,7 @@ export function createConfig() {
         '**/storybook-static/**',
         '**/site-dist/**',
         '**/.idea/**',
-        'vitest.workspace.ts',
+        'vitest.config.ts',
         'vite.aliases.ts',
         '**/vite.config.ts',
         '**/vitest.config.ts'
@@ -59,11 +59,73 @@ export function createConfig() {
         'vue/one-component-per-file': 'off',
         'vue/require-default-prop': 'off',
         'vue/require-explicit-emits': 'error',
-        'vue/singleline-html-element-content-newline': 'off'
+        'vue/singleline-html-element-content-newline': 'off',
+        'no-restricted-imports': [
+          'error',
+          {
+            patterns: ['@ww/*/src/**'],
+            paths: [
+              {
+                name: '@ww/primitives/motion',
+                message: 'Import from @ww/primitives instead of non-exported motion subpaths.'
+              },
+              {
+                name: '@ww/primitives/overlay',
+                message: 'Import from @ww/primitives instead of non-exported overlay subpaths.'
+              }
+            ]
+          }
+        ]
       }
     },
     {
-      files: ['scripts/**/*.{js,mjs,cjs}'],
+      files: ['packages/core/src/**/*.{ts,vue}'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              { name: '@ww/charts-apex', message: '@ww/core must not import vendor-backed adapters.' },
+              { name: '@ww/signal-graph', message: '@ww/core must not import systems packages.' },
+              { name: '@ww/widgets', message: '@ww/core must not import widgets.' },
+              { name: '@ww/page-templates', message: '@ww/core must not import page templates.' },
+              { name: '@ww/docs', message: '@ww/core must not import apps.' },
+              { name: '@ww/playground', message: '@ww/core must not import apps.' }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      files: ['packages/widgets/src/**/*.{ts,vue}'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              { name: '@ww/docs', message: '@ww/widgets must not import apps.' },
+              { name: '@ww/playground', message: '@ww/widgets must not import apps.' }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      files: ['packages/page-templates/src/**/*.{ts,vue}'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              { name: '@ww/docs', message: '@ww/page-templates must not import apps.' },
+              { name: '@ww/playground', message: '@ww/page-templates must not import apps.' }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      files: ['scripts/**/*.{js,mjs,cjs}', 'tools/**/*.{js,mjs,cjs}'],
       languageOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -73,10 +135,19 @@ export function createConfig() {
       }
     },
     {
-      files: ['**/*.{stories,test,spec}.{ts,tsx}'],
+      files: [
+        '**/*.{stories,test,spec}.{ts,tsx}',
+        'tests/**/*.{ts,mts,cts}',
+        'tests/**/*.{js,mjs,cjs}',
+        'vitest.config.ts'
+      ],
       ...tseslint.configs.disableTypeChecked,
       languageOptions: {
         ...tseslint.configs.disableTypeChecked.languageOptions,
+        globals: {
+          ...globals.browser,
+          ...globals.node
+        },
         parserOptions: {
           ...tseslint.configs.disableTypeChecked.languageOptions?.parserOptions,
           parser: tseslint.parser,
@@ -87,7 +158,26 @@ export function createConfig() {
         ...tseslint.configs.disableTypeChecked.rules,
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off'
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        'no-undef': 'off'
+      }
+    },
+    {
+      files: ['tests/**/*.config.ts'],
+      ...tseslint.configs.disableTypeChecked,
+      languageOptions: {
+        ...tseslint.configs.disableTypeChecked.languageOptions,
+        globals: {
+          ...globals.node
+        },
+        parserOptions: {
+          ...tseslint.configs.disableTypeChecked.languageOptions?.parserOptions,
+          parser: tseslint.parser
+        }
+      },
+      rules: {
+        ...tseslint.configs.disableTypeChecked.rules,
+        'no-undef': 'off'
       }
     }
   );

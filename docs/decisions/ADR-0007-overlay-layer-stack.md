@@ -1,3 +1,21 @@
+---
+id: ADR-0007
+title: Overlay Layer Stack
+status: accepted
+date: 2026-03-21
+owners:
+  - platform
+tags:
+  - overlay
+  - layers
+relatedPackages:
+  - @ww/primitives
+  - @ww/core
+  - @ww/themes
+supersedes: []
+supersededBy: []
+---
+
 # ADR-0007 Overlay Layer Stack
 
 ## Context
@@ -12,7 +30,7 @@ Centralize overlays in a shared primitive layer:
 - overlay registrations go through a single stack manager
 - focus containment and topmost-only dismiss logic are enforced centrally
 - portal root resolution is theme-aware
-- `UiDialog` and `UiDrawer` consume `useOverlaySurface()` instead of local ad hoc escape, outside-click, and scroll-lock logic
+- `UiDialog` and `UiDrawer` consume shared overlay hooks instead of local ad hoc escape, outside-click, and scroll-lock logic
 
 Portal mounting rules:
 
@@ -32,6 +50,13 @@ Portal mounting rules:
 - A single global body-only portal would break scoped theme inheritance.
 - Multiple overlay managers would create conflicting escape and outside-click behavior.
 
-## Migration
+## Migration / Rollout
 
 Existing overlays should move to the shared stack and portal layer instead of extending legacy local helpers. New overlay-like components must use the centralized layer system.
+
+## Related artifacts
+
+- [`packages/primitives/src/overlay`](../../packages/primitives/src/overlay)
+- [`docs/architecture/layer-governance.md`](../architecture/layer-governance.md)
+- [`docs/architecture/golden-path.md`](../architecture/golden-path.md)
+

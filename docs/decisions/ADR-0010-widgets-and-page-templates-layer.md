@@ -1,4 +1,22 @@
-# ADR-0010 Widgets and Page Templates Layer
+---
+id: ADR-0010
+title: Widgets And Page Templates Layer
+status: accepted
+date: 2026-03-24
+owners:
+  - platform
+tags:
+  - widgets
+  - page-templates
+relatedPackages:
+  - @ww/widgets
+  - @ww/page-templates
+  - @ww/core
+supersedes: []
+supersededBy: []
+---
+
+# ADR-0010 Widgets And Page Templates Layer
 
 ## Context
 
@@ -33,8 +51,15 @@ Reserved namespaces document where future `LoginWindow`, `DataTableWidget`, `Aut
 - Putting reusable page shells directly into apps would duplicate layout logic and make cross-app reuse harder.
 - Creating fake runtime components for future widgets or pages would add noise without real value.
 
-## Migration
+## Migration / Rollout
 
 - The change is additive.
 - Existing packages keep their current roles.
 - Future composed blocks should be added to `@ww/widgets` or `@ww/page-templates` instead of `@ww/core` or `apps/*` when they are intended to be reusable across products or routes.
+
+## Related artifacts
+
+- [`packages/widgets`](../../packages/widgets)
+- [`packages/page-templates`](../../packages/page-templates)
+- [`docs/architecture/placement-rules.md`](../architecture/placement-rules.md)
+

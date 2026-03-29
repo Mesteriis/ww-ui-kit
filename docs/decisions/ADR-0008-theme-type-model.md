@@ -1,8 +1,26 @@
+---
+id: ADR-0008
+title: Theme Type Model
+status: accepted
+date: 2026-03-22
+owners:
+  - platform
+tags:
+  - themes
+  - theming
+relatedPackages:
+  - @ww/themes
+  - @ww/primitives
+  - @ww/core
+supersedes: []
+supersededBy: []
+---
+
 # ADR-0008 Theme Type Model
 
 ## Context
 
-The repository now contains multiple concrete themes such as `light`, `dark`, and `belovodye`. Docs, playground, browser `color-scheme`, and theme-aware overlays need a canonical way to understand both the concrete theme name and whether that theme belongs to the light or dark family.
+The repository contains multiple concrete themes such as `light`, `dark`, and `belovodye`. Docs, playground, browser `color-scheme`, and theme-aware overlays need a canonical way to understand both the concrete theme name and whether that theme belongs to the light or dark family.
 
 ## Decision
 
@@ -29,8 +47,15 @@ Theme metadata is centralized in `@ww/themes`.
 - Keeping type knowledge only in docs or app-level controls would drift from runtime behavior.
 - Relying only on `data-ui-theme` would make browser `color-scheme` and scoped overlay propagation less explicit.
 
-## Migration
+## Migration / Rollout
 
 - Existing theme selection continues to use `ThemeName`.
 - Theme helpers and DOM targets now also receive `data-ui-theme-type`.
 - Subtree theming and theme-aware portal roots should use `setTheme()` or set both attributes together when authored in raw markup.
+
+## Related artifacts
+
+- [`packages/themes/src/theme-maps.ts`](../../packages/themes/src/theme-maps.ts)
+- [`docs/architecture/golden-path.md`](../architecture/golden-path.md)
+- [`docs/governance/ai-rules.md`](../governance/ai-rules.md)
+

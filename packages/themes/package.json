@@ -11,7 +11,8 @@
     "dist",
     "src/theme-light.css",
     "src/theme-dark.css",
-    "src/theme-belovodye.css"
+    "src/theme-belovodye.css",
+    "README.md"
   ],
   "exports": {
     ".": {

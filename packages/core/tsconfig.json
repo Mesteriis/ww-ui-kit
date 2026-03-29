@@ -7,8 +7,6 @@
     "outDir": "dist",
     "paths": {
       "@ww/primitives": ["../primitives/src/index.ts"],
-      "@ww/primitives/motion": ["../primitives/src/motion/index.ts"],
-      "@ww/primitives/overlay": ["../primitives/src/overlay/index.ts"],
       "@ww/themes": ["../themes/src/index.ts"],
       "@ww/tokens": ["../tokens/src/index.ts"]
     },

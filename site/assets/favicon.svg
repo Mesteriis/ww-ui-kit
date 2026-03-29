@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>Belovodye UiKit</title>
+  <defs>
+    <linearGradient id="bg" x1="18" y1="10" x2="108" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fbfd" />
+      <stop offset="1" stop-color="#d8f4ff" />
+    </linearGradient>
+    <linearGradient id="river" x1="22" y1="34" x2="106" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#46c1ff" />
+      <stop offset="1" stop-color="#12638f" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bg)" />
+  <path
+    d="M31 44c7 0 12 4 16 9 5-12 16-19 29-19 17 0 29 10 29 27 0 16-13 31-40 43l-3 1-4-1C40 98 23 84 23 63c0-11 8-19 18-19Z"
+    fill="url(#river)"
+    opacity="0.94"
+  />
+  <path
+    d="M45 61c8 0 14 5 18 12 4-7 10-12 18-12 9 0 16 7 16 16 0 14-12 23-34 33-23-10-36-20-36-33 0-9 8-16 18-16Z"
+    fill="#ffffff"
+    opacity="0.86"
+  />
+</svg>

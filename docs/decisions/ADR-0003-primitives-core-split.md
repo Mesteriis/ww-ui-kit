@@ -1,3 +1,20 @@
+---
+id: ADR-0003
+title: Primitives Core Split
+status: accepted
+date: 2026-03-18
+owners:
+  - platform
+tags:
+  - primitives
+  - core
+relatedPackages:
+  - @ww/primitives
+  - @ww/core
+supersedes: []
+supersededBy: []
+---
+
 # ADR-0003 Primitives Core Split
 
 ## Context
@@ -19,6 +36,13 @@ Keep behavior-only building blocks in `@ww/primitives` and build styled user-fac
 - Embedding every behavior directly in each component would duplicate logic.
 - A single combined layer would make dependency direction harder to enforce.
 
-## Migration
+## Migration / Rollout
 
 When a core component contains reusable low-level behavior, extract it into primitives only if another component can consume the same contract without product-specific assumptions.
+
+## Related artifacts
+
+- [`packages/primitives`](../../packages/primitives)
+- [`packages/core`](../../packages/core)
+- [`docs/architecture/layer-governance.md`](../architecture/layer-governance.md)
+

@@ -21,7 +21,7 @@ export const Overview: StoryObj = {
         },
         {
           name: 'Systems',
-          package: '@ww/charts-apex · @ww/signal-graph',
+          package: '@ww/charts-apex · @ww/data-grid · @ww/signal-graph',
           description: 'Larger subsystems and optional adapters.'
         },
         {
@@ -44,6 +44,7 @@ export const Overview: StoryObj = {
       const examples = [
         ['LoginWindow', '@ww/widgets'],
         ['DataTableWidget', '@ww/widgets'],
+        ['UiDataGrid', '@ww/data-grid'],
         ['AuthPageTemplate', '@ww/page-templates'],
         ['DashboardPageTemplate', '@ww/page-templates'],
         ['Actual route page', 'apps/*']

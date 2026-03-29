@@ -2,24 +2,54 @@
 
 ## Local setup
 
-1. Install dependencies:
+Toolchain baseline:
+
+- Node.js `24.x`
+- pnpm `10.32.1+`
 
 ```bash
 pnpm install
-```
-
-2. Use the main dev entrypoints:
-
-```bash
 pnpm dev:docs
 pnpm dev:playground
 ```
 
+## What to do
+
+- choose the correct layer before adding code
+- update the public surface manifest when adding or changing public API
+- add or update Storybook coverage for public UI surfaces
+- add or update docs coverage for public packages and architecture rules
+- add or update playground proof scenarios when composition behavior changes
+- add or update tests in the correct contour:
+  - `test:unit`
+  - `test:e2e`
+  - `test:playground`
+- add or update an ADR when architecture-sensitive areas change
+- add a changeset when public package behavior or exports change
+
+## What is forbidden
+
+- deep importing `@ww/*/src/**`
+- putting systems, widgets, page templates, or apps inside `@ww/core`
+- putting routing or backend orchestration inside widgets or page templates
+- leaking vendor APIs through `@ww/core`
+- hardcoding raw palette values outside tokens/themes
+- hardcoding raw easing curves outside tokens/themes
+- adding public exports without catalog/docs/tests updates
+- changing architecture-sensitive areas without ADR updates
+
 ## Required checks
 
-Before pushing a branch, run:
+Run before pushing:
 
 ```bash
+pnpm check:catalog
+pnpm check:stories
+pnpm check:docs
+pnpm check:playground-coverage
+pnpm check:adr
+pnpm check:ai-rules
+pnpm check:architecture
 pnpm lint
 pnpm typecheck
 pnpm test
@@ -28,41 +58,37 @@ pnpm build
 pnpm build:pages
 ```
 
-`pnpm test:coverage` is strict and fails unless the monorepo stays at `100/100/100/100`.
+`pnpm test:coverage` is strict and must stay at `100/100/100/100`.
 
-## GitHub automation
+## Release and changesets
 
-- `CI` runs on `push` to `main`, on pull requests, and on manual dispatch.
-- `Release PR` runs on `main`, keeps the Changesets release pull request up to date, and creates canonical package tags after a version PR merge.
-- Publishing is intentionally not automated yet; the workflow is safe by default and does not assume `NPM_TOKEN`.
-- `GitHub Pages` publishes a landing page at the site root, Storybook under `/docs/`, and the integration playground under `/playground/`.
-- Dependabot tracks both npm dependencies and GitHub Actions.
-- Issue templates distinguish bug reports from feature requests.
+Add a changeset when:
 
-## Layer rules
+- a publishable package gains or changes public exports
+- public runtime behavior changes
+- theme, motion, overlay, or styling contracts change
 
-- `@ww/core` contains only base reusable components.
-- Optional systems such as charts and signal graph stay outside `core`.
-- `@ww/widgets` is for black-box composed UI blocks.
-- `@ww/page-templates` is for reusable page shells, not route pages.
-- `apps/*` is where route-level and product-level logic belongs.
+Do not add a changeset for docs-only or internal-only repo hygiene.
 
-## Theme and style rules
+## ADR discipline
 
-- Use semantic and component CSS variables.
-- Do not hardcode palette values inside component packages.
-- Keep `ThemeName` and `ThemeType` consistent through `@ww/themes`.
-- Preserve subtree theming and theme-aware overlay behavior.
+Use [`docs/decisions/_template.md`](./docs/decisions/_template.md) for new ADRs.
 
-## Testing rules
+You need an ADR when changing:
 
-- Add behavior tests, not snapshot-only coverage padding.
-- Cover focus, motion, z-index, overlay, and theme interactions when touching those areas.
-- Keep reduced-motion and SSR-safe paths tested when they exist.
+- package topology
+- layer rules
+- public API governance
+- testing architecture
+- AI rules or governance model
+- workflows that change repository operational behavior
 
-## Git hygiene
+## PR hygiene
 
-- Keep generated artifacts out of commits.
-- Do not commit local IDE files, caches, logs, or coverage output.
-- Prefer small, coherent commits with clear scope.
-- Do not create ad hoc release tags manually; package tags are derived from Changesets version commits.
+- keep PRs coherent
+- label with one `kind:*`
+- add one or more `area:*`
+- add `priority:*` only when it adds ordering value
+- keep release-note labels honest
+- do not create ad hoc release tags manually
+

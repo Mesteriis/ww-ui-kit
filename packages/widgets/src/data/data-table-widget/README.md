@@ -2,7 +2,7 @@
 
 Future home for a `DataTableWidget` composition surface.
 
-The widget belongs above a future table or data-grid system package. It is expected to assemble:
+The widget belongs above `@ww/data-grid`. It is expected to assemble:
 
 - title and action affordances
 - filters or quick controls

@@ -57,7 +57,7 @@ import '@ww/widgets/styles.css';
 - `auth/login-window`
   Future black-box auth surface. It may assemble fields, actions, and feedback, but it must not own backend auth flow or routing.
 - `data/data-table-widget`
-  Future composition wrapper over a data-grid/system package. It is not the grid engine itself.
+  Future composition wrapper over `@ww/data-grid`. It is not the grid engine itself.
 - `dashboard`
   Future dashboard-level black-box widgets.
 - `entity`

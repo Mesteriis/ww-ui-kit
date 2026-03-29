@@ -50,7 +50,9 @@ import {
   type ThemeType
 } from '@ww/themes';
 import LayerScaffoldShowcase from './LayerScaffoldShowcase.vue';
+import DataGridShowcase from './DataGridShowcase.vue';
 import SignalGraphShowcase from './SignalGraphShowcase.vue';
+import { PLAYGROUND_SCENARIOS } from './testing/scenarios';
 
 const theme = ref<ThemeName>('belovodye');
 const themeFilter = ref<ThemeType | 'all'>('all');
@@ -218,7 +220,7 @@ const afterCollapse = (element: Element) => {
 </script>
 
 <template>
-  <main class="playground">
+  <main class="playground" data-playground-app="ww-ui-kit">
     <header class="playground__hero">
       <div>
         <p class="playground__eyebrow">Belovodye UiKit foundation</p>
@@ -266,7 +268,23 @@ const afterCollapse = (element: Element) => {
       </div>
     </header>
 
-    <section class="playground__grid">
+    <nav class="playground__scenario-nav" aria-label="Playground test harness sections">
+      <a
+        v-for="scenario in PLAYGROUND_SCENARIOS"
+        :key="scenario.id"
+        class="playground__scenario-link"
+        :href="scenario.hash"
+      >
+        <strong>{{ scenario.label }}</strong>
+        <span>{{ scenario.description }}</span>
+      </a>
+    </nav>
+
+    <section
+      id="testing-themes"
+      class="playground__grid"
+      data-playground-scenario="themes"
+    >
       <UiCard>
         <template #header>Inputs</template>
         <div class="ui-stack">
@@ -343,7 +361,11 @@ const afterCollapse = (element: Element) => {
       </UiCard>
     </section>
 
-    <section class="playground__foundation-grid">
+    <section
+      id="testing-overlays"
+      class="playground__foundation-grid"
+      data-playground-scenario="overlays"
+    >
       <UiCard>
         <template #header>Motion preset lab</template>
         <div class="ui-stack">
@@ -445,7 +467,13 @@ const afterCollapse = (element: Element) => {
       </UiCard>
     </section>
 
-    <section class="playground__foundation-grid">
+    <DataGridShowcase />
+
+    <section
+      id="testing-charts"
+      class="playground__foundation-grid"
+      data-playground-scenario="charts"
+    >
       <UiCard>
         <template #header>Charts overview</template>
         <div class="playground__chart-grid">

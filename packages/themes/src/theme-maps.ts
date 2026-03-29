@@ -51,8 +51,61 @@ type ButtonToneValues = {
 
 type ChartTokenName = Extract<ComponentTokenName, `chart-${string}`>;
 type ChartTokenValues = Record<ChartTokenName, string>;
+type DataGridTokenName = Extract<ComponentTokenName, `data-grid-${string}`>;
+type DataGridTokenValues = Record<DataGridTokenName, string>;
 type GraphTokenName = Extract<ComponentTokenName, `graph-${string}`>;
 type GraphTokenValues = Record<GraphTokenName, string>;
+
+const lightDataGridTokens: DataGridTokenValues = {
+  'data-grid-surface': 'var(--ui-surface-default)',
+  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 78%, var(--ui-surface-default))',
+  'data-grid-toolbar-surface': 'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-surface-brand-soft))',
+  'data-grid-row-border': 'var(--ui-border-subtle)',
+  'data-grid-row-hover': 'color-mix(in srgb, var(--ui-surface-brand-soft) 58%, var(--ui-surface-default))',
+  'data-grid-row-selected': 'color-mix(in srgb, var(--ui-surface-brand-soft) 82%, var(--ui-surface-default))',
+  'data-grid-row-selected-border': 'var(--ui-border-focus)',
+  'data-grid-bulk-actions-surface': 'color-mix(in srgb, var(--ui-surface-brand-soft) 78%, var(--ui-surface-default))',
+  'data-grid-empty-surface': 'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-surface-brand-soft))',
+  'data-grid-no-results-surface': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-warning-soft))',
+  'data-grid-error-surface': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))',
+  'data-grid-sort-indicator': 'var(--ui-action-primary-bg)',
+  'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+};
+
+const darkDataGridTokens: DataGridTokenValues = {
+  'data-grid-surface': 'color-mix(in srgb, var(--ui-surface-default) 96%, transparent)',
+  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 84%, var(--ui-surface-default))',
+  'data-grid-toolbar-surface': 'rgba(99, 102, 241, 0.12)',
+  'data-grid-row-border': 'var(--ui-border-subtle)',
+  'data-grid-row-hover': 'rgba(148, 163, 184, 0.08)',
+  'data-grid-row-selected': 'rgba(129, 140, 248, 0.18)',
+  'data-grid-row-selected-border': 'var(--ui-brand-300)',
+  'data-grid-bulk-actions-surface': 'rgba(129, 140, 248, 0.18)',
+  'data-grid-empty-surface': 'rgba(148, 163, 184, 0.12)',
+  'data-grid-no-results-surface': 'rgba(245, 158, 11, 0.12)',
+  'data-grid-error-surface': 'rgba(239, 68, 68, 0.14)',
+  'data-grid-sort-indicator': 'var(--ui-brand-300)',
+  'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+};
+
+const belovodyeDataGridTokens: DataGridTokenValues = {
+  'data-grid-surface': 'color-mix(in srgb, var(--ui-surface-default) 98%, var(--ui-brand-50))',
+  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 82%, var(--ui-surface-default))',
+  'data-grid-toolbar-surface': 'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-brand-50))',
+  'data-grid-row-border': 'var(--ui-border-subtle)',
+  'data-grid-row-hover': 'color-mix(in srgb, var(--ui-brand-50) 72%, var(--ui-surface-default))',
+  'data-grid-row-selected': 'color-mix(in srgb, var(--ui-brand-100) 62%, var(--ui-surface-default))',
+  'data-grid-row-selected-border': 'var(--ui-border-focus)',
+  'data-grid-bulk-actions-surface': 'color-mix(in srgb, var(--ui-brand-50) 82%, var(--ui-surface-default))',
+  'data-grid-empty-surface': 'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-brand-50))',
+  'data-grid-no-results-surface': 'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-warning-50))',
+  'data-grid-error-surface': 'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-danger-50))',
+  'data-grid-sort-indicator': 'var(--ui-brand-600)',
+  'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+};
 
 const createButtonToneTokens = (tones: Record<ButtonThemeTone, ButtonToneValues>) =>
   Object.fromEntries(
@@ -772,6 +825,7 @@ export const lightTheme: ThemeContract = {
   'divider-color': 'var(--ui-border-subtle)',
   'spinner-track': 'var(--ui-border-subtle)',
   'spinner-indicator': 'var(--ui-action-primary-bg)',
+  ...lightDataGridTokens,
   ...lightChartTokens,
   ...lightGraphTokens,
   'skeleton-radius': 'var(--ui-radius-md)',
@@ -846,6 +900,7 @@ export const darkTheme: ThemeContract = {
   'badge-danger-fg': 'var(--ui-danger-200)',
   'card-border': 'var(--ui-border-subtle)',
   'card-shadow': 'var(--ui-shadow-md)',
+  ...darkDataGridTokens,
   ...darkChartTokens,
   ...darkGraphTokens,
   'skeleton-surface': 'rgba(148, 163, 184, 0.14)',
@@ -989,6 +1044,7 @@ export const belovodyeTheme: ThemeContract = {
   'card-bg': 'var(--ui-surface-default)',
   'card-border': 'var(--ui-border-subtle)',
   'card-shadow': 'var(--ui-shadow-sm)',
+  ...belovodyeDataGridTokens,
   ...belovodyeChartTokens,
   ...belovodyeGraphTokens,
   'spinner-track': 'var(--ui-neutral-200)',

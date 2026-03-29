@@ -1,0 +1,28 @@
+changelog:
+  exclude:
+    labels:
+      - skip-release-notes
+      - status: duplicate
+      - status: invalid
+      - status: wontfix
+  categories:
+    - title: Breaking Changes
+      labels:
+        - breaking
+    - title: Features
+      labels:
+        - kind: feature
+    - title: Fixes
+      labels:
+        - kind: bug
+    - title: Documentation
+      labels:
+        - kind: docs
+    - title: Maintenance
+      labels:
+        - kind: maintenance
+        - dependencies
+        - ci
+    - title: Other Changes
+      labels:
+        - "*"

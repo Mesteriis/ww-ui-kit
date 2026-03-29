@@ -1,0 +1,119 @@
+export const PACKAGE_CLASSIFICATION = Object.freeze([
+  {
+    packageName: '@ww/tokens',
+    physicalPath: 'packages/tokens',
+    packageLayer: 'tokens',
+    stability: 'stable',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/tokens/README.md'
+  },
+  {
+    packageName: '@ww/themes',
+    physicalPath: 'packages/themes',
+    packageLayer: 'themes',
+    stability: 'stable',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/themes/README.md'
+  },
+  {
+    packageName: '@ww/primitives',
+    physicalPath: 'packages/primitives',
+    packageLayer: 'primitives',
+    stability: 'stable',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/primitives/README.md'
+  },
+  {
+    packageName: '@ww/core',
+    physicalPath: 'packages/core',
+    packageLayer: 'core',
+    stability: 'stable',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/core/README.md'
+  },
+  {
+    packageName: '@ww/charts-apex',
+    physicalPath: 'packages/third-party/charts-apex',
+    packageLayer: 'third-party-adapter',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: true,
+    readmePath: 'packages/third-party/charts-apex/README.md'
+  },
+  {
+    packageName: '@ww/signal-graph',
+    physicalPath: 'packages/signal-graph',
+    packageLayer: 'system',
+    stability: 'experimental',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/signal-graph/README.md'
+  },
+  {
+    packageName: '@ww/data-grid',
+    physicalPath: 'packages/data-grid',
+    packageLayer: 'system',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/data-grid/README.md'
+  },
+  {
+    packageName: '@ww/widgets',
+    physicalPath: 'packages/widgets',
+    packageLayer: 'widget',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/widgets/README.md'
+  },
+  {
+    packageName: '@ww/page-templates',
+    physicalPath: 'packages/page-templates',
+    packageLayer: 'page-template',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/page-templates/README.md'
+  },
+  {
+    packageName: '@ww/eslint-config',
+    physicalPath: 'packages/eslint-config',
+    packageLayer: 'tooling',
+    stability: 'internal',
+    public: false,
+    vendorBacked: false
+  },
+  {
+    packageName: '@ww/tsconfig',
+    physicalPath: 'packages/tsconfig',
+    packageLayer: 'tooling',
+    stability: 'internal',
+    public: false,
+    vendorBacked: false
+  },
+  {
+    packageName: '@ww/docs',
+    physicalPath: 'apps/docs',
+    packageLayer: 'app',
+    stability: 'internal',
+    public: false,
+    vendorBacked: false
+  },
+  {
+    packageName: '@ww/playground',
+    physicalPath: 'apps/playground',
+    packageLayer: 'app',
+    stability: 'internal',
+    public: false,
+    vendorBacked: false
+  }
+]);
+
+export const PACKAGE_CLASSIFICATION_MAP = Object.freeze(
+  Object.fromEntries(PACKAGE_CLASSIFICATION.map((entry) => [entry.packageName, entry]))
+);

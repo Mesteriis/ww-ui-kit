@@ -1,0 +1,277 @@
+.ui-data-grid {
+  display: grid;
+  gap: var(--ui-space-4);
+  padding: var(--ui-space-4);
+  border: 1px solid var(--ui-data-grid-row-border);
+  border-radius: var(--ui-radius-xl);
+  background: var(--ui-data-grid-surface);
+  box-shadow: var(--ui-shadow-xs);
+}
+
+.ui-data-grid__caption {
+  margin: 0;
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-data-grid-toolbar,
+.ui-data-grid-bulk-actions,
+.ui-data-grid-pagination {
+  display: flex;
+  gap: var(--ui-space-3);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ui-space-3);
+  border: 1px solid var(--ui-data-grid-row-border);
+  border-radius: var(--ui-radius-lg);
+  background: var(--ui-data-grid-toolbar-surface);
+}
+
+.ui-data-grid-toolbar__start,
+.ui-data-grid-toolbar__end,
+.ui-data-grid-bulk-actions__meta,
+.ui-data-grid-pagination__controls {
+  display: flex;
+  gap: var(--ui-space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ui-data-grid-search,
+.ui-data-grid-filters__field {
+  display: grid;
+  gap: var(--ui-space-2);
+  min-inline-size: 12rem;
+}
+
+.ui-data-grid-search__label,
+.ui-data-grid-filters__label,
+.ui-data-grid-pagination__summary,
+.ui-data-grid-pagination__page {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-data-grid-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+
+.ui-data-grid-filters__control--multi {
+  min-block-size: calc(var(--ui-input-min-height) * 1.4);
+}
+
+.ui-data-grid-visibility {
+  position: relative;
+}
+
+.ui-data-grid-visibility__summary {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--ui-button-height-sm);
+  padding-inline: var(--ui-space-3);
+  border: 1px solid var(--ui-data-grid-row-border);
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-data-grid-column-visibility-surface);
+  color: var(--ui-text-primary);
+  cursor: pointer;
+  list-style: none;
+  transition: var(--ui-motion-transition-color-fast);
+}
+
+.ui-data-grid-visibility__summary:hover {
+  background: var(--ui-data-grid-row-hover);
+}
+
+.ui-data-grid-visibility__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ui-data-grid-visibility__panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--ui-space-2));
+  inset-inline-end: 0;
+  z-index: var(--ui-z-layer-dropdown);
+  display: grid;
+  gap: var(--ui-space-3);
+  min-inline-size: 14rem;
+  padding: var(--ui-space-4);
+  border: 1px solid var(--ui-data-grid-column-visibility-border);
+  border-radius: var(--ui-radius-lg);
+  background: var(--ui-data-grid-column-visibility-surface);
+  box-shadow: var(--ui-shadow-md);
+}
+
+.ui-data-grid-visibility__list {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.ui-data-grid-visibility__reset {
+  justify-self: start;
+  border: 0;
+  background: transparent;
+  color: var(--ui-action-primary-bg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.ui-data-grid-bulk-actions {
+  background: var(--ui-data-grid-bulk-actions-surface);
+}
+
+.ui-data-grid__state {
+  padding: var(--ui-space-6);
+  border: 1px solid var(--ui-data-grid-row-border);
+  border-radius: var(--ui-radius-lg);
+}
+
+.ui-data-grid__state--empty {
+  background: var(--ui-data-grid-empty-surface);
+}
+
+.ui-data-grid__state--no-results {
+  background: var(--ui-data-grid-no-results-surface);
+}
+
+.ui-data-grid__state--error {
+  background: var(--ui-data-grid-error-surface);
+}
+
+.ui-data-grid__state--loading {
+  background: var(--ui-data-grid-empty-surface);
+}
+
+.ui-data-grid__loading,
+.ui-data-grid__progress {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+  color: var(--ui-text-secondary);
+}
+
+.ui-data-grid-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--ui-data-grid-row-border);
+  border-radius: var(--ui-radius-lg);
+  background: var(--ui-data-grid-surface);
+}
+
+.ui-data-grid-table {
+  inline-size: 100%;
+  min-inline-size: 48rem;
+  border-collapse: collapse;
+}
+
+.ui-data-grid-table__head {
+  background: var(--ui-data-grid-header-surface);
+}
+
+.ui-data-grid-table__head.is-sticky th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+}
+
+.ui-data-grid-table th,
+.ui-data-grid-table td {
+  padding-block: var(--ui-space-3);
+  padding-inline: var(--ui-space-4);
+  border-block-end: 1px solid var(--ui-data-grid-row-border);
+  color: var(--ui-text-primary);
+  font-size: var(--ui-text-font-size-sm);
+  text-align: start;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.ui-data-grid-table th {
+  color: var(--ui-text-secondary);
+  font-weight: var(--ui-font-weight-medium);
+}
+
+.ui-data-grid-table th[data-align='center'],
+.ui-data-grid-table td[data-align='center'] {
+  text-align: center;
+}
+
+.ui-data-grid-table th[data-align='end'],
+.ui-data-grid-table td[data-align='end'] {
+  text-align: end;
+}
+
+.ui-data-grid-table tbody tr {
+  transition: var(--ui-motion-transition-color-fast);
+}
+
+.ui-data-grid-table tbody tr:hover {
+  background: var(--ui-data-grid-row-hover);
+}
+
+.ui-data-grid-table tbody tr[data-selected='true'] {
+  background: var(--ui-data-grid-row-selected);
+  box-shadow: inset 2px 0 0 var(--ui-data-grid-row-selected-border);
+}
+
+.ui-data-grid-table__selection-column {
+  inline-size: 3.25rem;
+}
+
+.ui-data-grid-table__actions-column {
+  inline-size: 1%;
+}
+
+.ui-data-grid-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ui-data-grid-table__sort:focus-visible,
+.ui-data-grid-visibility__summary:focus-visible,
+.ui-data-grid-visibility__reset:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 4px var(--ui-focus-ring);
+}
+
+.ui-data-grid-table__sort-indicator {
+  color: var(--ui-data-grid-sort-indicator);
+}
+
+.ui-data-grid-table__sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.ui-data-grid[data-ui-density='compact'] .ui-data-grid-table th,
+.ui-data-grid[data-ui-density='compact'] .ui-data-grid-table td {
+  padding-block: var(--ui-space-2);
+  padding-inline: var(--ui-space-3);
+}
+
+@media (max-width: 960px) {
+  .ui-data-grid-toolbar,
+  .ui-data-grid-bulk-actions,
+  .ui-data-grid-pagination {
+    align-items: stretch;
+  }
+
+  .ui-data-grid-toolbar__start,
+  .ui-data-grid-toolbar__end,
+  .ui-data-grid-pagination__controls {
+    inline-size: 100%;
+  }
+}

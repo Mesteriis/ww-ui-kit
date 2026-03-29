@@ -1,7 +1,8 @@
 name: Bug report
 description: Report a reproducible defect in the monorepo, package APIs, or docs/playground behavior.
 labels:
-  - bug
+  - kind: bug
+  - status: needs-triage
 body:
   - type: textarea
     id: summary
@@ -54,6 +55,12 @@ body:
         - repo tooling
     validations:
       required: true
+
+  - type: textarea
+    id: contract_impact
+    attributes:
+      label: Contract impact
+      description: Note whether the bug affects public API, Storybook/docs contract, playground proof flows, theming, overlays, or governance checks.
 
   - type: textarea
     id: environment

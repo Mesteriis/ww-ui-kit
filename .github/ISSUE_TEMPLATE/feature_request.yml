@@ -1,7 +1,8 @@
 name: Feature request
 description: Propose a reusable UI capability, package improvement, or repository workflow enhancement.
 labels:
-  - enhancement
+  - kind: feature
+  - status: needs-triage
 body:
   - type: textarea
     id: problem
@@ -42,6 +43,12 @@ body:
     attributes:
       label: Non-goals
       description: Clarify what should explicitly stay out of scope.
+
+  - type: textarea
+    id: governance
+    attributes:
+      label: Governance impact
+      description: Explain whether this change would need Storybook coverage, docs coverage, playground proof, an ADR, or a changeset.
 
   - type: textarea
     id: references

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "themes",
+    "label": "Themes",
+    "hash": "#testing-themes",
+    "description": "Root theme, ThemeType, scoped subtree theming, and base core surfaces."
+  },
+  {
+    "id": "overlays",
+    "label": "Overlays",
+    "hash": "#testing-overlays",
+    "description": "Motion, layer slots, dialogs, drawers, and focus restore."
+  },
+  {
+    "id": "charts",
+    "label": "Charts",
+    "hash": "#testing-charts",
+    "description": "Vendor-backed chart adapter inside the shared theme and motion model."
+  },
+  {
+    "id": "signal-graph",
+    "label": "Signal Graph",
+    "hash": "#testing-signal-graph",
+    "description": "Feature-first graph runtime with signals, focus/depth, and overlays."
+  },
+  {
+    "id": "data-grid-basic",
+    "label": "Data Grid Basics",
+    "hash": "#testing-data-grid-basic",
+    "description": "Controlled query model, dense admin surface, search, filters, sorting, and pagination."
+  },
+  {
+    "id": "data-grid-states",
+    "label": "Data Grid States",
+    "hash": "#testing-data-grid-states",
+    "description": "Loading, empty, no-results, and error surfaces for the system package."
+  },
+  {
+    "id": "data-grid-theming",
+    "label": "Data Grid Theming",
+    "hash": "#testing-data-grid-theming",
+    "description": "ThemeName, ThemeType, and subtree theming proof for data-grid surfaces."
+  },
+  {
+    "id": "data-grid-selection",
+    "label": "Data Grid Selection",
+    "hash": "#testing-data-grid-selection",
+    "description": "Controlled selection, bulk actions, and column/query orchestration."
+  },
+  {
+    "id": "data-grid-composition",
+    "label": "Data Grid Composition",
+    "hash": "#testing-data-grid-composition",
+    "description": "System package composed inside widget and page-template shells."
+  },
+  {
+    "id": "widgets",
+    "label": "Widgets",
+    "hash": "#testing-widgets",
+    "description": "Widget shell layer and future widget placement rules."
+  },
+  {
+    "id": "page-templates",
+    "label": "Page Templates",
+    "hash": "#testing-page-templates",
+    "description": "Page-shell layer and reusable layout skeletons above widgets."
+  },
+  {
+    "id": "composition",
+    "label": "Composition",
+    "hash": "#testing-composition",
+    "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core."
+  }
+]
