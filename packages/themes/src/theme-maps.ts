@@ -1,4 +1,9 @@
-import type { BaseTokenName, ComponentTokenName, ThemeSemanticTokenName, ThemeTokenMap } from '@ww/tokens';
+import type {
+  BaseTokenName,
+  ComponentTokenName,
+  ThemeSemanticTokenName,
+  ThemeTokenMap,
+} from '@ww/tokens';
 import { baseTokenValues, foundationSemanticTokenValues } from '@ww/tokens';
 
 export const THEME_TYPES = ['light', 'dark'] as const;
@@ -15,10 +20,19 @@ interface ThemeDefinitionInput {
 
 export const baseThemeTokens = Object.freeze({
   ...baseTokenValues,
-  ...foundationSemanticTokenValues
+  ...foundationSemanticTokenValues,
 });
 
-const buttonToneNames = ['neutral', 'brand', 'debug', 'info', 'success', 'warning', 'danger', 'critical'] as const;
+const buttonToneNames = [
+  'neutral',
+  'brand',
+  'debug',
+  'info',
+  'success',
+  'warning',
+  'danger',
+  'critical',
+] as const;
 
 type ButtonThemeTone = (typeof buttonToneNames)[number];
 type ButtonToneTokenName =
@@ -58,24 +72,33 @@ type GraphTokenValues = Record<GraphTokenName, string>;
 
 const lightDataGridTokens: DataGridTokenValues = {
   'data-grid-surface': 'var(--ui-surface-default)',
-  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 78%, var(--ui-surface-default))',
-  'data-grid-toolbar-surface': 'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-surface-brand-soft))',
+  'data-grid-header-surface':
+    'color-mix(in srgb, var(--ui-surface-sunken) 78%, var(--ui-surface-default))',
+  'data-grid-toolbar-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-surface-brand-soft))',
   'data-grid-row-border': 'var(--ui-border-subtle)',
-  'data-grid-row-hover': 'color-mix(in srgb, var(--ui-surface-brand-soft) 58%, var(--ui-surface-default))',
-  'data-grid-row-selected': 'color-mix(in srgb, var(--ui-surface-brand-soft) 82%, var(--ui-surface-default))',
+  'data-grid-row-hover':
+    'color-mix(in srgb, var(--ui-surface-brand-soft) 58%, var(--ui-surface-default))',
+  'data-grid-row-selected':
+    'color-mix(in srgb, var(--ui-surface-brand-soft) 82%, var(--ui-surface-default))',
   'data-grid-row-selected-border': 'var(--ui-border-focus)',
-  'data-grid-bulk-actions-surface': 'color-mix(in srgb, var(--ui-surface-brand-soft) 78%, var(--ui-surface-default))',
-  'data-grid-empty-surface': 'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-surface-brand-soft))',
-  'data-grid-no-results-surface': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-warning-soft))',
-  'data-grid-error-surface': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))',
+  'data-grid-bulk-actions-surface':
+    'color-mix(in srgb, var(--ui-surface-brand-soft) 78%, var(--ui-surface-default))',
+  'data-grid-empty-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-surface-brand-soft))',
+  'data-grid-no-results-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-warning-soft))',
+  'data-grid-error-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))',
   'data-grid-sort-indicator': 'var(--ui-action-primary-bg)',
   'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
-  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)',
 };
 
 const darkDataGridTokens: DataGridTokenValues = {
   'data-grid-surface': 'color-mix(in srgb, var(--ui-surface-default) 96%, transparent)',
-  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 84%, var(--ui-surface-default))',
+  'data-grid-header-surface':
+    'color-mix(in srgb, var(--ui-surface-sunken) 84%, var(--ui-surface-default))',
   'data-grid-toolbar-surface': 'rgba(99, 102, 241, 0.12)',
   'data-grid-row-border': 'var(--ui-border-subtle)',
   'data-grid-row-hover': 'rgba(148, 163, 184, 0.08)',
@@ -87,24 +110,31 @@ const darkDataGridTokens: DataGridTokenValues = {
   'data-grid-error-surface': 'rgba(239, 68, 68, 0.14)',
   'data-grid-sort-indicator': 'var(--ui-brand-300)',
   'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
-  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)',
 };
 
 const belovodyeDataGridTokens: DataGridTokenValues = {
   'data-grid-surface': 'color-mix(in srgb, var(--ui-surface-default) 98%, var(--ui-brand-50))',
-  'data-grid-header-surface': 'color-mix(in srgb, var(--ui-surface-sunken) 82%, var(--ui-surface-default))',
-  'data-grid-toolbar-surface': 'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-brand-50))',
+  'data-grid-header-surface':
+    'color-mix(in srgb, var(--ui-surface-sunken) 82%, var(--ui-surface-default))',
+  'data-grid-toolbar-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-brand-50))',
   'data-grid-row-border': 'var(--ui-border-subtle)',
   'data-grid-row-hover': 'color-mix(in srgb, var(--ui-brand-50) 72%, var(--ui-surface-default))',
-  'data-grid-row-selected': 'color-mix(in srgb, var(--ui-brand-100) 62%, var(--ui-surface-default))',
+  'data-grid-row-selected':
+    'color-mix(in srgb, var(--ui-brand-100) 62%, var(--ui-surface-default))',
   'data-grid-row-selected-border': 'var(--ui-border-focus)',
-  'data-grid-bulk-actions-surface': 'color-mix(in srgb, var(--ui-brand-50) 82%, var(--ui-surface-default))',
-  'data-grid-empty-surface': 'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-brand-50))',
-  'data-grid-no-results-surface': 'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-warning-50))',
-  'data-grid-error-surface': 'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-danger-50))',
+  'data-grid-bulk-actions-surface':
+    'color-mix(in srgb, var(--ui-brand-50) 82%, var(--ui-surface-default))',
+  'data-grid-empty-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 94%, var(--ui-brand-50))',
+  'data-grid-no-results-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-warning-50))',
+  'data-grid-error-surface':
+    'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-danger-50))',
   'data-grid-sort-indicator': 'var(--ui-brand-600)',
   'data-grid-column-visibility-surface': 'var(--ui-surface-overlay)',
-  'data-grid-column-visibility-border': 'var(--ui-border-strong)'
+  'data-grid-column-visibility-border': 'var(--ui-border-strong)',
 };
 
 const createButtonToneTokens = (tones: Record<ButtonThemeTone, ButtonToneValues>) =>
@@ -121,7 +151,7 @@ const createButtonToneTokens = (tones: Record<ButtonThemeTone, ButtonToneValues>
       [`button-${tone}-soft-bg-hover`, tones[tone].softBgHover],
       [`button-${tone}-soft-bg-active`, tones[tone].softBgActive],
       [`button-${tone}-accent-start`, tones[tone].accentStart],
-      [`button-${tone}-accent-end`, tones[tone].accentEnd]
+      [`button-${tone}-accent-end`, tones[tone].accentEnd],
     ])
   ) as Record<ButtonToneTokenName, string>;
 
@@ -148,9 +178,12 @@ const lightChartTokens: ChartTokenValues = {
   'chart-marker-stroke': 'var(--ui-surface-default)',
   'chart-no-data-text': 'var(--ui-text-muted)',
   'chart-toolbar-color': 'var(--ui-text-secondary)',
-  'chart-state-surface-loading': 'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-surface-brand-soft))',
-  'chart-state-surface-empty': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-brand-soft))',
-  'chart-state-surface-error': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))'
+  'chart-state-surface-loading':
+    'color-mix(in srgb, var(--ui-surface-default) 90%, var(--ui-surface-brand-soft))',
+  'chart-state-surface-empty':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-brand-soft))',
+  'chart-state-surface-error':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))',
 };
 
 const darkChartTokens: ChartTokenValues = {
@@ -178,7 +211,7 @@ const darkChartTokens: ChartTokenValues = {
   'chart-toolbar-color': 'var(--ui-text-secondary)',
   'chart-state-surface-loading': 'rgba(99, 102, 241, 0.16)',
   'chart-state-surface-empty': 'rgba(148, 163, 184, 0.14)',
-  'chart-state-surface-error': 'rgba(239, 68, 68, 0.16)'
+  'chart-state-surface-error': 'rgba(239, 68, 68, 0.16)',
 };
 
 const belovodyeChartTokens: ChartTokenValues = {
@@ -204,13 +237,17 @@ const belovodyeChartTokens: ChartTokenValues = {
   'chart-marker-stroke': 'var(--ui-surface-default)',
   'chart-no-data-text': 'var(--ui-text-muted)',
   'chart-toolbar-color': 'var(--ui-text-secondary)',
-  'chart-state-surface-loading': 'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-surface-brand-soft))',
-  'chart-state-surface-empty': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-brand-soft))',
-  'chart-state-surface-error': 'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))'
+  'chart-state-surface-loading':
+    'color-mix(in srgb, var(--ui-surface-default) 92%, var(--ui-surface-brand-soft))',
+  'chart-state-surface-empty':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-brand-soft))',
+  'chart-state-surface-error':
+    'color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-danger-soft))',
 };
 
 const lightGraphTokens: GraphTokenValues = {
-  'graph-canvas-bg': 'color-mix(in srgb, var(--ui-surface-canvas) 94%, var(--ui-surface-brand-soft))',
+  'graph-canvas-bg':
+    'color-mix(in srgb, var(--ui-surface-canvas) 94%, var(--ui-surface-brand-soft))',
   'graph-grid-minor': 'color-mix(in srgb, var(--ui-border-subtle) 42%, transparent)',
   'graph-grid-major': 'color-mix(in srgb, var(--ui-border-strong) 56%, transparent)',
   'graph-node-surface': 'color-mix(in srgb, var(--ui-surface-default) 96%, transparent)',
@@ -240,7 +277,7 @@ const lightGraphTokens: GraphTokenValues = {
   'graph-minimap-surface': 'var(--ui-surface-overlay)',
   'graph-minimap-border': 'var(--ui-border-subtle)',
   'graph-overlay-panel-surface': 'var(--ui-surface-overlay)',
-  'graph-signal-reaction-color': 'var(--ui-action-primary-bg)'
+  'graph-signal-reaction-color': 'var(--ui-action-primary-bg)',
 };
 
 const darkGraphTokens: GraphTokenValues = {
@@ -274,7 +311,7 @@ const darkGraphTokens: GraphTokenValues = {
   'graph-minimap-surface': 'var(--ui-surface-overlay)',
   'graph-minimap-border': 'var(--ui-border-strong)',
   'graph-overlay-panel-surface': 'var(--ui-surface-overlay)',
-  'graph-signal-reaction-color': 'var(--ui-brand-300)'
+  'graph-signal-reaction-color': 'var(--ui-brand-300)',
 };
 
 const belovodyeGraphTokens: GraphTokenValues = {
@@ -308,7 +345,7 @@ const belovodyeGraphTokens: GraphTokenValues = {
   'graph-minimap-surface': 'var(--ui-surface-overlay)',
   'graph-minimap-border': 'var(--ui-border-subtle)',
   'graph-overlay-panel-surface': 'var(--ui-surface-overlay)',
-  'graph-signal-reaction-color': 'var(--ui-brand-500)'
+  'graph-signal-reaction-color': 'var(--ui-brand-500)',
 };
 
 const lightButtonToneTokens = createButtonToneTokens({
@@ -324,7 +361,7 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-neutral-50)',
     softBgActive: 'var(--ui-neutral-100)',
     accentStart: 'var(--ui-neutral-300)',
-    accentEnd: 'var(--ui-neutral-700)'
+    accentEnd: 'var(--ui-neutral-700)',
   },
   brand: {
     solidBg: 'var(--ui-brand-600)',
@@ -338,7 +375,7 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-300)',
-    accentEnd: 'var(--ui-brand-700)'
+    accentEnd: 'var(--ui-brand-700)',
   },
   debug: {
     solidBg: 'var(--ui-brand-700)',
@@ -352,35 +389,35 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-500)',
-    accentEnd: 'var(--ui-brand-900)'
+    accentEnd: 'var(--ui-brand-900)',
   },
   info: {
-    solidBg: 'var(--ui-brand-500)',
+    solidBg: 'var(--ui-brand-600)',
     solidFg: 'var(--ui-neutral-0)',
-    solidBorder: 'var(--ui-brand-500)',
-    solidBgHover: 'var(--ui-brand-600)',
-    solidBgActive: 'var(--ui-brand-700)',
+    solidBorder: 'var(--ui-brand-600)',
+    solidBgHover: 'var(--ui-brand-700)',
+    solidBgActive: 'var(--ui-brand-800)',
     softBg: 'var(--ui-brand-50)',
     softFg: 'var(--ui-brand-700)',
     softBorder: 'var(--ui-brand-200)',
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-200)',
-    accentEnd: 'var(--ui-brand-600)'
+    accentEnd: 'var(--ui-brand-600)',
   },
   success: {
-    solidBg: 'var(--ui-success-600)',
+    solidBg: 'var(--ui-success-700)',
     solidFg: 'var(--ui-neutral-0)',
-    solidBorder: 'var(--ui-success-600)',
-    solidBgHover: 'var(--ui-success-700)',
-    solidBgActive: 'var(--ui-success-800)',
+    solidBorder: 'var(--ui-success-700)',
+    solidBgHover: 'var(--ui-success-800)',
+    solidBgActive: 'var(--ui-success-900)',
     softBg: 'var(--ui-success-50)',
     softFg: 'var(--ui-success-700)',
     softBorder: 'var(--ui-success-200)',
     softBgHover: 'var(--ui-success-100)',
     softBgActive: 'var(--ui-success-200)',
     accentStart: 'var(--ui-success-300)',
-    accentEnd: 'var(--ui-success-700)'
+    accentEnd: 'var(--ui-success-700)',
   },
   warning: {
     solidBg: 'var(--ui-warning-500)',
@@ -394,7 +431,7 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-warning-100)',
     softBgActive: 'var(--ui-warning-200)',
     accentStart: 'var(--ui-warning-300)',
-    accentEnd: 'var(--ui-warning-700)'
+    accentEnd: 'var(--ui-warning-700)',
   },
   danger: {
     solidBg: 'var(--ui-danger-600)',
@@ -408,7 +445,7 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-danger-100)',
     softBgActive: 'var(--ui-danger-200)',
     accentStart: 'var(--ui-danger-300)',
-    accentEnd: 'var(--ui-danger-700)'
+    accentEnd: 'var(--ui-danger-700)',
   },
   critical: {
     solidBg: 'color-mix(in srgb, var(--ui-danger-900) 88%, var(--ui-neutral-950))',
@@ -422,8 +459,8 @@ const lightButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-danger-100)',
     softBgActive: 'var(--ui-danger-200)',
     accentStart: 'var(--ui-danger-500)',
-    accentEnd: 'var(--ui-warning-500)'
-  }
+    accentEnd: 'var(--ui-warning-500)',
+  },
 });
 
 const darkButtonToneTokens = createButtonToneTokens({
@@ -439,7 +476,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(148, 163, 184, 0.16)',
     softBgActive: 'rgba(148, 163, 184, 0.24)',
     accentStart: 'var(--ui-neutral-300)',
-    accentEnd: 'var(--ui-neutral-50)'
+    accentEnd: 'var(--ui-neutral-50)',
   },
   brand: {
     solidBg: 'var(--ui-brand-400)',
@@ -453,7 +490,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(99, 102, 241, 0.24)',
     softBgActive: 'rgba(99, 102, 241, 0.32)',
     accentStart: 'var(--ui-brand-300)',
-    accentEnd: 'var(--ui-brand-100)'
+    accentEnd: 'var(--ui-brand-100)',
   },
   debug: {
     solidBg: 'var(--ui-brand-500)',
@@ -467,7 +504,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(79, 70, 229, 0.3)',
     softBgActive: 'rgba(79, 70, 229, 0.38)',
     accentStart: 'var(--ui-brand-400)',
-    accentEnd: 'var(--ui-brand-100)'
+    accentEnd: 'var(--ui-brand-100)',
   },
   info: {
     solidBg: 'var(--ui-brand-300)',
@@ -481,7 +518,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(129, 140, 248, 0.22)',
     softBgActive: 'rgba(129, 140, 248, 0.3)',
     accentStart: 'var(--ui-brand-200)',
-    accentEnd: 'var(--ui-brand-50)'
+    accentEnd: 'var(--ui-brand-50)',
   },
   success: {
     solidBg: 'var(--ui-success-400)',
@@ -495,7 +532,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(16, 185, 129, 0.24)',
     softBgActive: 'rgba(16, 185, 129, 0.32)',
     accentStart: 'var(--ui-success-300)',
-    accentEnd: 'var(--ui-success-100)'
+    accentEnd: 'var(--ui-success-100)',
   },
   warning: {
     solidBg: 'var(--ui-warning-300)',
@@ -509,7 +546,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(245, 158, 11, 0.26)',
     softBgActive: 'rgba(245, 158, 11, 0.34)',
     accentStart: 'var(--ui-warning-300)',
-    accentEnd: 'var(--ui-warning-100)'
+    accentEnd: 'var(--ui-warning-100)',
   },
   danger: {
     solidBg: 'var(--ui-danger-400)',
@@ -523,7 +560,7 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(239, 68, 68, 0.26)',
     softBgActive: 'rgba(239, 68, 68, 0.34)',
     accentStart: 'var(--ui-danger-300)',
-    accentEnd: 'var(--ui-danger-100)'
+    accentEnd: 'var(--ui-danger-100)',
   },
   critical: {
     solidBg: 'var(--ui-danger-200)',
@@ -537,8 +574,8 @@ const darkButtonToneTokens = createButtonToneTokens({
     softBgHover: 'rgba(248, 113, 113, 0.26)',
     softBgActive: 'rgba(248, 113, 113, 0.34)',
     accentStart: 'var(--ui-danger-300)',
-    accentEnd: 'var(--ui-warning-200)'
-  }
+    accentEnd: 'var(--ui-warning-200)',
+  },
 });
 
 const belovodyeButtonToneTokens = createButtonToneTokens({
@@ -554,21 +591,21 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-neutral-50)',
     softBgActive: 'var(--ui-neutral-100)',
     accentStart: 'var(--ui-neutral-300)',
-    accentEnd: 'var(--ui-neutral-700)'
+    accentEnd: 'var(--ui-neutral-700)',
   },
   brand: {
-    solidBg: 'var(--ui-brand-600)',
+    solidBg: 'var(--ui-brand-700)',
     solidFg: 'var(--ui-neutral-0)',
-    solidBorder: 'var(--ui-brand-600)',
-    solidBgHover: 'var(--ui-brand-700)',
-    solidBgActive: 'var(--ui-brand-800)',
+    solidBorder: 'var(--ui-brand-700)',
+    solidBgHover: 'var(--ui-brand-800)',
+    solidBgActive: 'var(--ui-brand-900)',
     softBg: 'var(--ui-brand-50)',
     softFg: 'var(--ui-brand-800)',
     softBorder: 'var(--ui-brand-200)',
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-300)',
-    accentEnd: 'var(--ui-brand-700)'
+    accentEnd: 'var(--ui-brand-700)',
   },
   debug: {
     solidBg: 'var(--ui-brand-700)',
@@ -582,21 +619,21 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-500)',
-    accentEnd: 'var(--ui-brand-900)'
+    accentEnd: 'var(--ui-brand-900)',
   },
   info: {
-    solidBg: 'var(--ui-brand-500)',
+    solidBg: 'var(--ui-brand-700)',
     solidFg: 'var(--ui-neutral-0)',
-    solidBorder: 'var(--ui-brand-500)',
-    solidBgHover: 'var(--ui-brand-600)',
-    solidBgActive: 'var(--ui-brand-700)',
+    solidBorder: 'var(--ui-brand-700)',
+    solidBgHover: 'var(--ui-brand-800)',
+    solidBgActive: 'var(--ui-brand-900)',
     softBg: 'var(--ui-brand-50)',
     softFg: 'var(--ui-brand-800)',
     softBorder: 'var(--ui-brand-200)',
     softBgHover: 'var(--ui-brand-100)',
     softBgActive: 'var(--ui-brand-200)',
     accentStart: 'var(--ui-brand-200)',
-    accentEnd: 'var(--ui-brand-600)'
+    accentEnd: 'var(--ui-brand-600)',
   },
   success: {
     solidBg: 'var(--ui-success-600)',
@@ -610,7 +647,7 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-success-100)',
     softBgActive: 'var(--ui-success-200)',
     accentStart: 'var(--ui-success-300)',
-    accentEnd: 'var(--ui-success-700)'
+    accentEnd: 'var(--ui-success-700)',
   },
   warning: {
     solidBg: 'var(--ui-warning-700)',
@@ -624,7 +661,7 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-warning-100)',
     softBgActive: 'var(--ui-warning-200)',
     accentStart: 'var(--ui-warning-300)',
-    accentEnd: 'var(--ui-warning-700)'
+    accentEnd: 'var(--ui-warning-700)',
   },
   danger: {
     solidBg: 'var(--ui-danger-600)',
@@ -638,7 +675,7 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-danger-100)',
     softBgActive: 'var(--ui-danger-200)',
     accentStart: 'var(--ui-danger-300)',
-    accentEnd: 'var(--ui-danger-700)'
+    accentEnd: 'var(--ui-danger-700)',
   },
   critical: {
     solidBg: 'color-mix(in srgb, var(--ui-danger-900) 78%, var(--ui-neutral-950))',
@@ -652,8 +689,8 @@ const belovodyeButtonToneTokens = createButtonToneTokens({
     softBgHover: 'var(--ui-danger-100)',
     softBgActive: 'var(--ui-danger-200)',
     accentStart: 'var(--ui-danger-500)',
-    accentEnd: 'var(--ui-warning-500)'
-  }
+    accentEnd: 'var(--ui-warning-500)',
+  },
 });
 
 export const lightTheme: ThemeContract = {
@@ -837,7 +874,7 @@ export const lightTheme: ThemeContract = {
   'empty-state-title-size': 'var(--ui-font-size-xl)',
   'empty-state-title-color': 'var(--ui-text-primary)',
   'empty-state-description-color': 'var(--ui-text-secondary)',
-  'empty-state-icon-surface': 'var(--ui-surface-brand-soft)'
+  'empty-state-icon-surface': 'var(--ui-surface-brand-soft)',
 };
 
 export const darkTheme: ThemeContract = {
@@ -905,7 +942,7 @@ export const darkTheme: ThemeContract = {
   ...darkGraphTokens,
   'skeleton-surface': 'rgba(148, 163, 184, 0.14)',
   'skeleton-shimmer': 'rgba(255, 255, 255, 0.08)',
-  'empty-state-icon-surface': 'rgba(99, 102, 241, 0.16)'
+  'empty-state-icon-surface': 'rgba(99, 102, 241, 0.16)',
 };
 
 const belovodyeBaseOverrides: Partial<Record<BaseTokenName, string>> = {
@@ -965,7 +1002,7 @@ const belovodyeBaseOverrides: Partial<Record<BaseTokenName, string>> = {
   'shadow-sm': '0 6px 16px rgba(20, 66, 96, 0.08)',
   'shadow-md': '0 16px 36px rgba(20, 66, 96, 0.12)',
   'shadow-lg': '0 24px 52px rgba(20, 66, 96, 0.14)',
-  'shadow-xl': '0 36px 72px rgba(14, 43, 61, 0.18)'
+  'shadow-xl': '0 36px 72px rgba(14, 43, 61, 0.18)',
 };
 
 export const belovodyeTheme: ThemeContract = {
@@ -1051,25 +1088,25 @@ export const belovodyeTheme: ThemeContract = {
   'spinner-indicator': 'var(--ui-brand-600)',
   'skeleton-surface': 'color-mix(in srgb, var(--ui-neutral-100) 88%, var(--ui-brand-50))',
   'skeleton-shimmer': 'color-mix(in srgb, var(--ui-neutral-0) 82%, var(--ui-brand-100))',
-  'empty-state-icon-surface': 'color-mix(in srgb, var(--ui-brand-50) 78%, var(--ui-neutral-0))'
+  'empty-state-icon-surface': 'color-mix(in srgb, var(--ui-brand-50) 78%, var(--ui-neutral-0))',
 };
 
 const themeDefinitions = Object.freeze({
   light: {
     label: 'Light',
     type: 'light',
-    tokens: lightTheme
+    tokens: lightTheme,
   },
   dark: {
     label: 'Dark',
     type: 'dark',
-    tokens: darkTheme
+    tokens: darkTheme,
   },
   belovodye: {
     label: 'Belovodye',
     type: 'light',
-    tokens: belovodyeTheme
-  }
+    tokens: belovodyeTheme,
+  },
 } satisfies Record<string, ThemeDefinitionInput>);
 
 export type ThemeName = keyof typeof themeDefinitions;
@@ -1087,30 +1124,39 @@ export interface ThemeDefinition extends ThemeMeta {
 export const THEME_NAMES = Object.freeze(Object.keys(themeDefinitions) as ThemeName[]);
 
 export const THEMES = Object.freeze(
-  THEME_NAMES.reduce<Record<ThemeName, ThemeDefinition>>((accumulator, themeName) => {
-    const definition = themeDefinitions[themeName];
-    accumulator[themeName] = Object.freeze({
-      name: themeName,
-      label: definition.label,
-      type: definition.type,
-      tokens: definition.tokens
-    });
-    return accumulator;
-  }, {} as Record<ThemeName, ThemeDefinition>)
+  THEME_NAMES.reduce<Record<ThemeName, ThemeDefinition>>(
+    (accumulator, themeName) => {
+      const definition = themeDefinitions[themeName];
+      accumulator[themeName] = Object.freeze({
+        name: themeName,
+        label: definition.label,
+        type: definition.type,
+        tokens: definition.tokens,
+      });
+      return accumulator;
+    },
+    {} as Record<ThemeName, ThemeDefinition>
+  )
 );
 
 export const THEME_LABELS = Object.freeze(
-  THEME_NAMES.reduce<Record<ThemeName, string>>((accumulator, themeName) => {
-    accumulator[themeName] = THEMES[themeName].label;
-    return accumulator;
-  }, {} as Record<ThemeName, string>)
+  THEME_NAMES.reduce<Record<ThemeName, string>>(
+    (accumulator, themeName) => {
+      accumulator[themeName] = THEMES[themeName].label;
+      return accumulator;
+    },
+    {} as Record<ThemeName, string>
+  )
 );
 
 export const themeRegistry = Object.freeze(
-  THEME_NAMES.reduce<Record<ThemeName, ThemeContract>>((accumulator, themeName) => {
-    accumulator[themeName] = THEMES[themeName].tokens;
-    return accumulator;
-  }, {} as Record<ThemeName, ThemeContract>)
+  THEME_NAMES.reduce<Record<ThemeName, ThemeContract>>(
+    (accumulator, themeName) => {
+      accumulator[themeName] = THEMES[themeName].tokens;
+      return accumulator;
+    },
+    {} as Record<ThemeName, ThemeContract>
+  )
 );
 
 export function getThemeMeta(themeName: ThemeName): ThemeMeta {
@@ -1118,7 +1164,7 @@ export function getThemeMeta(themeName: ThemeName): ThemeMeta {
   return {
     name: theme.name,
     label: theme.label,
-    type: theme.type
+    type: theme.type,
   };
 }
 

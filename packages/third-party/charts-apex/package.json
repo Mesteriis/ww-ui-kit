@@ -2,6 +2,15 @@
   "name": "@ww/charts-apex",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/third-party/charts-apex"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/third-party/charts-apex#readme",
   "sideEffects": [
     "./src/styles/index.css"
   ],
@@ -28,6 +37,6 @@
   },
   "scripts": {
     "build": "vite build",
-    "typecheck": "pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && vue-tsc -p tsconfig.json --noEmit"
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
   }
 }

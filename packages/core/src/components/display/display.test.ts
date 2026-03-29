@@ -11,23 +11,23 @@ describe('display components', () => {
   it('renders badge, card, divider, spinner, and skeleton', () => {
     const badge = mount(UiBadge, {
       props: { variant: 'brand' },
-      slots: { default: 'Brand' }
+      slots: { default: 'Brand' },
     });
     const card = mount(UiCard, {
       slots: {
         default: 'Body',
         footer: 'Footer',
-        header: 'Header'
-      }
+        header: 'Header',
+      },
     });
     const divider = mount(UiDivider, {
-      props: { orientation: 'vertical' }
+      props: { orientation: 'vertical' },
     });
     const spinner = mount(UiSpinner, {
-      props: { size: 'lg' }
+      props: { size: 'lg' },
     });
     const skeleton = mount(UiSkeleton, {
-      props: { shape: 'circle', width: '4rem' }
+      props: { shape: 'circle', width: '4rem' },
     });
 
     expect(badge.classes()).toContain('ui-badge--brand');
@@ -39,26 +39,26 @@ describe('display components', () => {
 
   it('applies display defaults and inline sizing contracts', () => {
     const badge = mount(UiBadge, {
-      slots: { default: 'Neutral' }
+      slots: { default: 'Neutral' },
     });
     const bareCard = mount(UiCard, {
       slots: {
-        default: 'Body only'
-      }
+        default: 'Body only',
+      },
     });
     const divider = mount(UiDivider);
     const spinner = mount(UiSpinner, {
       props: {
         size: 'sm',
-        label: 'Loading data'
-      }
+        label: 'Loading data',
+      },
     });
     const skeleton = mount(UiSkeleton, {
       props: {
         width: '12rem',
         height: '2rem',
-        shape: 'rect'
-      }
+        shape: 'rect',
+      },
     });
 
     expect(badge.classes()).toContain('ui-badge--neutral');

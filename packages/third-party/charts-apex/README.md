@@ -32,14 +32,14 @@ import { UiApexChart, type UiApexChartOptions, type UiApexChartSeries } from '@w
 const series: UiApexChartSeries = [
   {
     name: 'Revenue',
-    data: [14, 18, 21, 24]
-  }
+    data: [14, 18, 21, 24],
+  },
 ];
 
 const options: UiApexChartOptions = {
   xaxis: {
-    categories: ['Q1', 'Q2', 'Q3', 'Q4']
-  }
+    categories: ['Q1', 'Q2', 'Q3', 'Q4'],
+  },
 };
 </script>
 

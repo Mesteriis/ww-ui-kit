@@ -18,6 +18,7 @@ const props = withDefaults(
     modelValue?: string;
     id?: string;
     name?: string;
+    ariaLabel?: string;
     options: UiSelectSimpleOption[];
     placeholder?: string;
     disabled?: boolean;
@@ -27,7 +28,7 @@ const props = withDefaults(
   {
     modelValue: '',
     disabled: false,
-    invalid: false
+    invalid: false,
   }
 );
 
@@ -39,7 +40,9 @@ const field = useFieldContext();
 const fallbackId = useId('select');
 const selectId = computed(() => props.id ?? field?.inputId.value ?? fallbackId.value);
 const isInvalid = computed(() => props.invalid || field?.invalid.value || false);
-const describedBy = computed(() => mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value));
+const describedBy = computed(() =>
+  mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
+);
 
 const onChange = (event: Event) => {
   if (event.target instanceof HTMLSelectElement) {
@@ -57,6 +60,7 @@ const onChange = (event: Event) => {
       :name="props.name"
       :value="props.modelValue"
       :disabled="props.disabled"
+      :aria-label="props.ariaLabel"
       :aria-invalid="isInvalid || undefined"
       :aria-describedby="describedBy"
       data-ui-motion="ring-focus-soft"

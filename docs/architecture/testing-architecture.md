@@ -16,6 +16,7 @@ Unit tests cover:
 - component contracts in jsdom
 - package smoke tests
 - governance catalog meta tests
+- component-lab session state, copy serializers, and schema-driven preview logic
 
 Framework: Vitest.
 
@@ -35,12 +36,23 @@ They prove:
 
 Framework: Playwright.
 
+Playwright policy:
+
+- local runs use `retries=0`
+- CI uses retries and `trace: on-first-retry`
+- traces are captured for retry diagnostics instead of every passing run
+- curated browser-level axe checks run on load-bearing flows
+
 ## Playground tests
 
 Playground tests run against built playground output.
 
 They prove real composition:
 
+- `/testing/*` stays stable as the browser-tested harness
+- `/lab/*` loads the maintainer workbench without replacing the harness
+- component tab switching and inspector controls update preview state
+- copy-config and downstream usage panels work in the built app
 - theme switching
 - ThemeType behavior
 - subtree theming
@@ -51,6 +63,21 @@ They prove real composition:
 
 Framework: Playwright.
 
+Playground browser checks also include curated axe coverage for stable harness flows.
+
 ## Coverage governance
 
-Docs, stories, and playground scenarios are checked against the public surface manifest. Coverage is not based on prose promises.
+Docs, stories, and playground scenarios are checked against the public surface manifest. Visual maintainer workbench coverage is checked through the adjacent playground lab manifest.
+
+Required governance checks:
+
+- `check:stories`
+- `check:docs`
+- `check:playground-coverage`
+- `check:playground-lab`
+
+Formatting and operational checks remain part of the repository gate:
+
+- `format:check`
+- `lint`
+- `typecheck`

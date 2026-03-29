@@ -3,7 +3,13 @@ import { computed } from 'vue';
 
 import { PrimitiveVisuallyHidden } from '@ww/primitives';
 
-import type { UiButtonAppearance, UiButtonEffect, UiButtonSize, UiButtonTone, UiButtonVariant } from './button.types';
+import type {
+  UiButtonAppearance,
+  UiButtonEffect,
+  UiButtonSize,
+  UiButtonTone,
+  UiButtonVariant,
+} from './button.types';
 import { resolveButtonStyle } from './button.types';
 
 defineOptions({ name: 'UiButton' });
@@ -27,7 +33,7 @@ const props = withDefaults(
     type: 'button',
     disabled: false,
     loading: false,
-    block: false
+    block: false,
   }
 );
 
@@ -36,7 +42,7 @@ const resolvedStyle = computed(() =>
   resolveButtonStyle({
     variant: props.variant,
     tone: props.tone,
-    appearance: props.appearance
+    appearance: props.appearance,
   })
 );
 </script>
@@ -51,8 +57,8 @@ const resolvedStyle = computed(() =>
       `ui-button--${props.size}`,
       {
         'ui-button--block': props.block,
-        'is-loading': props.loading
-      }
+        'is-loading': props.loading,
+      },
     ]"
     :type="props.type"
     :disabled="isDisabled"

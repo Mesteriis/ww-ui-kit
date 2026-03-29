@@ -4,6 +4,7 @@ title: docs/decisions path rules
 apply: by file patterns
 patterns: docs/decisions/**/*
 ---
+
 Use this rule when editing ADRs or ADR metadata.
 
 ## Do

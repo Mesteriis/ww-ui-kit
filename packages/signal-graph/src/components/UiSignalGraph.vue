@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, provide, ref, toRef } from 'vue';
-import {
-  VueFlow,
-  useVueFlow,
-  type EdgeMouseEvent,
-  type NodeMouseEvent,
-} from '@vue-flow/core';
+import { VueFlow, useVueFlow, type EdgeMouseEvent, type NodeMouseEvent } from '@vue-flow/core';
 import { Background } from '@vue-flow/background';
 import { Controls } from '@vue-flow/controls';
 import { MiniMap } from '@vue-flow/minimap';
@@ -45,7 +40,7 @@ const props = withDefaults(defineProps<UiSignalGraphProps>(), {
   empty: false,
   emptyText: 'No graph nodes to display.',
   errorText: 'Unable to render graph.',
-  ariaLabel: 'Interactive signal graph'
+  ariaLabel: 'Interactive signal graph',
 });
 
 const emit = defineEmits<{
@@ -70,22 +65,16 @@ const { nodeMap, edgeMap, flowNodes, flowEdges, nodeTypes, edgeTypes } = useSign
   nodeDefinitions: toRef(props, 'nodeDefinitions'),
   interactionMode: computed(() => props.interactionMode),
 });
-const {
-  anchorNodeId,
-  clearFocus,
-  focusNode,
-  focusState,
-  selectNode,
-  setHoveredNodeId,
-} = useSignalGraphFocus({
-  nodes: toRef(props, 'nodes'),
-  edges: toRef(props, 'edges'),
-  depthMode: computed(() => props.depthMode),
-  focusedNodeId: toRef(props, 'focusedNodeId'),
-  relationDepth: computed(() => props.options?.relationDepth),
-  onFocusChange: (value) => emit('update:focusedNodeId', value),
-  onFocusStateChange: (value) => emit('focusChange', value),
-});
+const { anchorNodeId, clearFocus, focusNode, focusState, selectNode, setHoveredNodeId } =
+  useSignalGraphFocus({
+    nodes: toRef(props, 'nodes'),
+    edges: toRef(props, 'edges'),
+    depthMode: computed(() => props.depthMode),
+    focusedNodeId: toRef(props, 'focusedNodeId'),
+    relationDepth: computed(() => props.options?.relationDepth),
+    onFocusChange: (value) => emit('update:focusedNodeId', value),
+    onFocusStateChange: (value) => emit('focusChange', value),
+  });
 const { clearSignals, emitSignal, reactingNodeIds, runtimeSignalsByEdge } = useSignalGraphSignals({
   signals: toRef(props, 'signals'),
   edgeMap,
@@ -194,14 +183,24 @@ onMounted(() => {
     :aria-label="props.ariaLabel"
     :aria-busy="props.loading ? 'true' : undefined"
   >
-    <div v-if="showError" class="ui-signal-graph__state ui-signal-graph__state--error" role="status" aria-live="polite">
+    <div
+      v-if="showError"
+      class="ui-signal-graph__state ui-signal-graph__state--error"
+      role="status"
+      aria-live="polite"
+    >
       <slot name="error" :message="resolvedErrorText">
         <strong class="ui-signal-graph__state-title">Graph error</strong>
         <p class="ui-signal-graph__state-text">{{ resolvedErrorText }}</p>
       </slot>
     </div>
 
-    <div v-else-if="props.loading" class="ui-signal-graph__state ui-signal-graph__state--loading" role="status" aria-live="polite">
+    <div
+      v-else-if="props.loading"
+      class="ui-signal-graph__state ui-signal-graph__state--loading"
+      role="status"
+      aria-live="polite"
+    >
       <slot name="loading">
         <div class="ui-signal-graph__loading-grid">
           <span />
@@ -211,7 +210,12 @@ onMounted(() => {
       </slot>
     </div>
 
-    <div v-else-if="showEmpty" class="ui-signal-graph__state ui-signal-graph__state--empty" role="status" aria-live="polite">
+    <div
+      v-else-if="showEmpty"
+      class="ui-signal-graph__state ui-signal-graph__state--empty"
+      role="status"
+      aria-live="polite"
+    >
       <slot name="empty" :message="props.emptyText">
         <strong class="ui-signal-graph__state-title">Empty graph</strong>
         <p class="ui-signal-graph__state-text">{{ props.emptyText }}</p>

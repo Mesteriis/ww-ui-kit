@@ -6,7 +6,7 @@ import { readOverlayLayerScale, resolveOverlayLayerSlots } from '@ww/primitives'
 
 const meta = {
   title: 'Foundations/Overlay Layers',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -30,7 +30,7 @@ export const LayerScaleAndNestedStack: StoryObj = {
         floatingLayer,
         scale,
         secondModal,
-        toastLayer
+        toastLayer,
       };
     },
     template: `
@@ -149,6 +149,6 @@ export const LayerScaleAndNestedStack: StoryObj = {
           </UiDrawer>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

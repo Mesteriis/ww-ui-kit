@@ -16,7 +16,7 @@ vi.mock('vue3-apexcharts', () => {
       series: { type: Array, required: true },
       options: { type: Object, required: true },
       width: { type: [Number, String], default: undefined },
-      height: { type: [Number, String], default: undefined }
+      height: { type: [Number, String], default: undefined },
     },
     render() {
       if ((this.options as { chart?: { id?: string } } | undefined)?.chart?.id === 'throw-render') {
@@ -31,20 +31,20 @@ vi.mock('vue3-apexcharts', () => {
         series: this.series,
         options: this.options,
         width: this.width,
-        height: this.height
+        height: this.height,
       };
 
       return h('div', {
         'data-testid': 'mock-apex-chart',
         'data-type': String(this.type),
         'data-width': String(this.width ?? ''),
-        'data-height': String(this.height ?? '')
+        'data-height': String(this.height ?? ''),
       });
-    }
+    },
   });
 
   return {
-    default: MockApexChart
+    default: MockApexChart,
   };
 });
 
@@ -56,7 +56,7 @@ function createMatchMediaMock(matches: boolean) {
     removeEventListener: vi.fn(),
     addListener: vi.fn(),
     removeListener: vi.fn(),
-    dispatchEvent: vi.fn()
+    dispatchEvent: vi.fn(),
   }));
 }
 
@@ -81,12 +81,12 @@ describe('UiApexChart', () => {
 
     const options = {
       chart: {
-        type: 'line' as const
+        type: 'line' as const,
       },
       colors: ['#123456'],
       xaxis: {
-        categories: ['Jan', 'Feb']
-      }
+        categories: ['Jan', 'Feb'],
+      },
     };
     const optionsSnapshot = structuredClone(options);
 
@@ -97,15 +97,15 @@ describe('UiApexChart', () => {
         series: [
           {
             name: 'Revenue',
-            data: [10, 18]
-          }
+            data: [10, 18],
+          },
         ],
         options,
         width: '100%',
         height: 280,
         title: 'Revenue',
-        description: 'Quarterly revenue'
-      }
+        description: 'Quarterly revenue',
+      },
     });
 
     await flushAsyncWork();
@@ -128,7 +128,7 @@ describe('UiApexChart', () => {
       defineComponent({
         components: { UiApexChart },
         data: () => ({
-          chartLoading: false
+          chartLoading: false,
         }),
         template: `
           <section id="scope" data-ui-theme="dark" data-ui-theme-type="dark">
@@ -138,25 +138,32 @@ describe('UiApexChart', () => {
               :series="[{ name: 'Traffic', data: [12, 18, 9] }]"
             />
           </section>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
     await flushAsyncWork();
 
-    expect((lastVendorProps?.options as { tooltip?: { theme?: string } }).tooltip?.theme).toBe('dark');
+    expect((lastVendorProps?.options as { tooltip?: { theme?: string } }).tooltip?.theme).toBe(
+      'dark'
+    );
     expect((lastVendorProps?.options as { theme?: { mode?: string } }).theme?.mode).toBe('dark');
-    expect((lastVendorProps?.options as { chart?: { animations?: { enabled?: boolean } } }).chart?.animations?.enabled).toBe(false);
+    expect(
+      (lastVendorProps?.options as { chart?: { animations?: { enabled?: boolean } } }).chart
+        ?.animations?.enabled
+    ).toBe(false);
 
     const scope = themedWrapper.get('#scope').element as HTMLElement;
     scope.setAttribute('data-ui-theme', 'belovodye');
     scope.setAttribute('data-ui-theme-type', 'light');
     await flushAsyncWork();
 
-    expect((lastVendorProps?.options as { tooltip?: { theme?: string } }).tooltip?.theme).toBe('light');
+    expect((lastVendorProps?.options as { tooltip?: { theme?: string } }).tooltip?.theme).toBe(
+      'light'
+    );
 
     themedWrapper.unmount();
 
@@ -165,8 +172,8 @@ describe('UiApexChart', () => {
         loading: true,
         type: 'line',
         series: [],
-        empty: true
-      }
+        empty: true,
+      },
     });
     expect(loadingWrapper.find('.ui-apex-chart__state--loading').exists()).toBe(true);
     expect(loadingWrapper.find('.ui-apex-chart__loading-bar--short').exists()).toBe(true);
@@ -177,8 +184,8 @@ describe('UiApexChart', () => {
         type: 'donut',
         series: [],
         empty: true,
-        emptyText: 'Nothing to display yet'
-      }
+        emptyText: 'Nothing to display yet',
+      },
     });
     await flushAsyncWork();
     expect(emptyWrapper.text()).toContain('Nothing to display yet');
@@ -188,8 +195,8 @@ describe('UiApexChart', () => {
       attachTo: document.body,
       props: {
         type: 'donut',
-        series: [0, 0, 0]
-      }
+        series: [0, 0, 0],
+      },
     });
     await flushAsyncWork();
     expect(zeroSeriesWrapper.find('[data-testid="mock-apex-chart"]').exists()).toBe(true);
@@ -199,8 +206,8 @@ describe('UiApexChart', () => {
       props: {
         type: 'line',
         series: [{ name: 'Traffic', data: [1, 2] }],
-        error: 'Vendor mount failed'
-      }
+        error: 'Vendor mount failed',
+      },
     });
     await flushAsyncWork();
     expect(errorWrapper.text()).toContain('Vendor mount failed');
@@ -214,10 +221,10 @@ describe('UiApexChart', () => {
         series: [
           {
             name: 'Traffic',
-            data: [4, 7, 9]
-          }
+            data: [4, 7, 9],
+          },
         ],
-        title: 'SSR safe chart'
+        title: 'SSR safe chart',
       })
     );
 
@@ -232,11 +239,11 @@ describe('UiApexChart', () => {
         ariaLabel: 'Capacity chart',
         type: 'line',
         series: [],
-        loading: true
+        loading: true,
       },
       slots: {
-        loading: () => h('div', { class: 'custom-loading' }, 'Loading slot')
-      }
+        loading: () => h('div', { class: 'custom-loading' }, 'Loading slot'),
+      },
     });
 
     await nextTick();
@@ -250,11 +257,11 @@ describe('UiApexChart', () => {
         description: 'Description only',
         type: 'line',
         series: [],
-        empty: true
+        empty: true,
       },
       slots: {
-        empty: '<div class="custom-empty">Empty slot</div>'
-      }
+        empty: '<div class="custom-empty">Empty slot</div>',
+      },
     });
     await flushAsyncWork();
     expect(emptyWrapper.find('.custom-empty').exists()).toBe(true);
@@ -269,10 +276,10 @@ describe('UiApexChart', () => {
         series: [{ name: 'Capacity', data: [1, 2, 3] }],
         options: {
           chart: {
-            id: 'throw-render'
-          }
-        }
-      }
+            id: 'throw-render',
+          },
+        },
+      },
     });
     await flushAsyncWork();
     expect(runtimeErrorWrapper.text()).toContain('Vendor render failed');
@@ -285,10 +292,10 @@ describe('UiApexChart', () => {
         series: [{ name: 'Capacity', data: [1, 2, 3] }],
         options: {
           chart: {
-            id: 'throw-string'
-          }
-        }
-      }
+            id: 'throw-string',
+          },
+        },
+      },
     });
     await flushAsyncWork();
     expect(runtimeStringErrorWrapper.text()).toContain('String render failure');
@@ -298,15 +305,14 @@ describe('UiApexChart', () => {
       props: {
         type: 'line',
         series: [{ name: 'Errors', data: [1] }],
-        error: new Error('Explicit error')
+        error: new Error('Explicit error'),
       },
       slots: {
-        error: '<div class="custom-error">Error slot</div>'
-      }
+        error: '<div class="custom-error">Error slot</div>',
+      },
     });
     await flushAsyncWork();
     expect(errorWrapper.find('.custom-error').exists()).toBe(true);
     errorWrapper.unmount();
-
   });
 });

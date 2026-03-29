@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<UiApexChartProps>(), {
   loading: false,
   emptyText: 'No data available.',
   errorText: 'Unable to render chart.',
-  noDataText: 'No data available.'
+  noDataText: 'No data available.',
 });
 
 const hostRef = ref<HTMLElement | null>(null);
@@ -29,18 +29,13 @@ const resolvedExternalError = computed(() =>
     ? props.error
     : undefined
 );
-const {
-  resolvedEmptyText,
-  resolvedErrorText,
-  showEmpty,
-  showError
-} = useApexEmptyState({
+const { resolvedEmptyText, resolvedErrorText, showEmpty, showError } = useApexEmptyState({
   series: toRef(props, 'series'),
   empty: toRef(props, 'empty'),
   error: computed(() => resolvedExternalError.value ?? vendorError.value ?? runtimeError.value),
   emptyText: toRef(props, 'emptyText'),
   errorText: toRef(props, 'errorText'),
-  noDataText: toRef(props, 'noDataText')
+  noDataText: toRef(props, 'noDataText'),
 });
 
 const chartId = computed(() => props.options?.chart?.id ?? generatedChartId.value);
@@ -49,7 +44,7 @@ const { resolvedOptions, themeScope } = useApexThemeOptions({
   chartId,
   type: toRef(props, 'type'),
   options: toRef(props, 'options'),
-  noDataText: toRef(props, 'noDataText')
+  noDataText: toRef(props, 'noDataText'),
 });
 
 const hasCaption = computed(() => Boolean(props.title || props.description));
@@ -75,7 +70,7 @@ onErrorCaptured((error) => {
     :class="{
       'ui-apex-chart--loading': loading,
       'ui-apex-chart--empty': showEmpty,
-      'ui-apex-chart--error': showError
+      'ui-apex-chart--error': showError,
     }"
     :aria-busy="loading ? 'true' : undefined"
     :aria-labelledby="hasCaption ? captionId : undefined"

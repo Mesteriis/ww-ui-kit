@@ -4,7 +4,7 @@ import {
   ensureOverlayPortalRoot,
   findNearestThemeContainer,
   OVERLAY_PORTAL_ID,
-  OVERLAY_PORTAL_ROOT_ATTRIBUTE
+  OVERLAY_PORTAL_ROOT_ATTRIBUTE,
 } from './portal';
 
 const THEME_ATTRIBUTE = 'data-ui-theme';
@@ -14,7 +14,6 @@ describe('overlay portal', () => {
   afterEach(() => {
     document.documentElement.removeAttribute(THEME_ATTRIBUTE);
     document.documentElement.removeAttribute(THEME_TYPE_ATTRIBUTE);
-    document.documentElement.style.removeProperty('color-scheme');
     document.body.innerHTML = '';
   });
 
@@ -22,7 +21,6 @@ describe('overlay portal', () => {
     const container = document.createElement('section');
     container.setAttribute(THEME_ATTRIBUTE, 'belovodye');
     container.setAttribute(THEME_TYPE_ATTRIBUTE, 'light');
-    container.style.colorScheme = 'light';
     const source = document.createElement('button');
     container.append(source);
     document.body.append(container);
@@ -38,7 +36,6 @@ describe('overlay portal', () => {
   it('mounts global portal roots under body and inherits root theme metadata', () => {
     document.documentElement.setAttribute(THEME_ATTRIBUTE, 'dark');
     document.documentElement.setAttribute(THEME_TYPE_ATTRIBUTE, 'dark');
-    document.documentElement.style.colorScheme = 'dark';
 
     const source = document.createElement('button');
     document.body.append(source);
@@ -55,7 +52,6 @@ describe('overlay portal', () => {
     const scopedContainer = document.createElement('section');
     scopedContainer.setAttribute(THEME_ATTRIBUTE, 'belovodye');
     scopedContainer.setAttribute(THEME_TYPE_ATTRIBUTE, 'light');
-    scopedContainer.style.colorScheme = 'light';
 
     const source = document.createElement('button');
     scopedContainer.append(source);
@@ -69,7 +65,7 @@ describe('overlay portal', () => {
     expect(portalRoot?.parentElement).toBe(explicitTarget);
     expect(portalRoot?.getAttribute(THEME_ATTRIBUTE)).toBe('belovodye');
     expect(portalRoot?.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('light');
-    expect(portalRoot?.style.colorScheme).toBe('light');
+    expect(portalRoot?.style.colorScheme).toBe('');
   });
 
   it('reuses existing portal roots and supports body/html/string targets', () => {
@@ -142,12 +138,14 @@ describe('overlay portal', () => {
   });
 
   it('returns null without document access and ignores invalid selector targets', () => {
-    expect(ensureOverlayPortalRoot({ target: '#missing-target' })).toBe(document.getElementById(OVERLAY_PORTAL_ID));
+    expect(ensureOverlayPortalRoot({ target: '#missing-target' })).toBe(
+      document.getElementById(OVERLAY_PORTAL_ID)
+    );
 
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     expect(findNearestThemeContainer(null)).toBeNull();
@@ -155,7 +153,7 @@ describe('overlay portal', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 
@@ -163,7 +161,6 @@ describe('overlay portal', () => {
     const explicitTarget = document.createElement('div');
     explicitTarget.setAttribute('data-ui-theme', 'dark');
     explicitTarget.setAttribute('data-ui-theme-type', 'dark');
-    explicitTarget.style.colorScheme = 'dark';
     document.body.append(explicitTarget);
 
     const source = document.createElement('button');
@@ -197,7 +194,6 @@ describe('overlay portal', () => {
   it('copies only the theme type when a scoped source omits the theme name', () => {
     const scopedContainer = document.createElement('section');
     scopedContainer.setAttribute(THEME_TYPE_ATTRIBUTE, 'dark');
-    scopedContainer.style.colorScheme = 'dark';
     document.body.append(scopedContainer);
 
     const source = document.createElement('button');
@@ -210,14 +206,13 @@ describe('overlay portal', () => {
 
     expect(portalRoot?.getAttribute(THEME_ATTRIBUTE)).toBeNull();
     expect(portalRoot?.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('dark');
-    expect(portalRoot?.style.colorScheme).toBe('dark');
+    expect(portalRoot?.style.colorScheme).toBe('');
   });
 
   it('removes copied theme metadata on detached explicit targets without a valid theme source', () => {
     const detachedTarget = document.createElement('div');
     detachedTarget.setAttribute(THEME_ATTRIBUTE, 'dark');
     detachedTarget.setAttribute(THEME_TYPE_ATTRIBUTE, 'dark');
-    detachedTarget.style.colorScheme = 'dark';
 
     const portalRoot = ensureOverlayPortalRoot({ target: detachedTarget });
 

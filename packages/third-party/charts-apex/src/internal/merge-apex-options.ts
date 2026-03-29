@@ -48,9 +48,7 @@ function mergeValues(target: MergeableValue, source: MergeableValue): MergeableV
   return result;
 }
 
-export function mergeApexOptions<T extends object>(
-  ...sources: Array<T | undefined>
-): T {
+export function mergeApexOptions<T extends object>(...sources: Array<T | undefined>): T {
   return sources.reduce<T>((result, source) => {
     if (!source) {
       return result;

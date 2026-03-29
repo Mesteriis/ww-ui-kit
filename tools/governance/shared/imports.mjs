@@ -4,10 +4,12 @@ const IMPORT_PATTERN =
   /(?:import|export)\s+(?:type\s+)?(?:[^'"`]*?\sfrom\s+)?['"]([^'"`]+)['"]|import\(\s*['"]([^'"`]+)['"]\s*\)/g;
 
 export function listSourceFiles() {
-  return walkFiles('.', (relativePath) =>
-    /^(apps\/[^/]+\/src|packages\/[^/]+\/src|packages\/third-party\/[^/]+\/src)\/.*\.(ts|vue|css)$/.test(
-      relativePath
-    ) && !/\.test\.ts$/.test(relativePath)
+  return walkFiles(
+    '.',
+    (relativePath) =>
+      /^(apps\/[^/]+\/src|packages\/[^/]+\/src|packages\/third-party\/[^/]+\/src)\/.*\.(ts|vue|css)$/.test(
+        relativePath
+      ) && !/\.test\.ts$/.test(relativePath)
   );
 }
 
@@ -28,4 +30,3 @@ export function collectImports(relativePath) {
 export function collectFilesWithText(pattern) {
   return listSourceFiles().filter((relativePath) => pattern.test(readText(relativePath)));
 }
-

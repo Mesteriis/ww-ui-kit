@@ -3,6 +3,7 @@ id: ai-manual-package-topology-audit
 title: Package topology audit and reshuffle
 apply: manually
 ---
+
 Use this rule only for deliberate repository topology audits.
 
 ## Do

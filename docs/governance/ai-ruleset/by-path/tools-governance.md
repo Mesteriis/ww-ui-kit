@@ -4,6 +4,7 @@ title: tools/governance path rules
 apply: by file patterns
 patterns: tools/governance/**/*
 ---
+
 Use this rule when editing governance automation.
 
 ## Do
@@ -11,12 +12,14 @@ Use this rule when editing governance automation.
 - Keep one source of truth for each catalog or check.
 - Reuse the existing governance stack instead of creating a parallel automation path.
 - Keep checks deterministic and repository-specific.
+- Keep playground lab manifest, usage-map generation, and coverage checks synchronized.
 
 ## Do not
 
 - Do not create duplicate manifests or duplicate validators for the same contract.
 - Do not add governance scripts without wiring them into docs and package scripts when they are part of the operational path.
 - Do not let tooling names drift away from the actual files they validate.
+- Do not leave lab-eligible visual surfaces without manifest coverage or usage data.
 
 ## Update together with
 

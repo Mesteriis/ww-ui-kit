@@ -9,7 +9,7 @@ describe('useSignalGraphViewport', () => {
         nodeId === 'node-a'
           ? {
               computedPosition: { x: 24, y: 40, z: 0 },
-              dimensions: { width: 200, height: 100 }
+              dimensions: { width: 200, height: 100 },
             }
           : undefined
       ),
@@ -18,7 +18,7 @@ describe('useSignalGraphViewport', () => {
       setCenter: vi.fn(() => Promise.resolve(true)),
       setViewport: vi.fn(() => Promise.resolve(true)),
       zoomIn: vi.fn(() => Promise.resolve(true)),
-      zoomOut: vi.fn(() => Promise.resolve(true))
+      zoomOut: vi.fn(() => Promise.resolve(true)),
     };
     const focusNode = vi.fn();
     const clearFocus = vi.fn();
@@ -30,7 +30,7 @@ describe('useSignalGraphViewport', () => {
       defaultZoom: 1.4,
       focusNode,
       clearFocus,
-      emitSignal
+      emitSignal,
     });
 
     expect(await viewport.fitView()).toBe(true);
@@ -43,7 +43,13 @@ describe('useSignalGraphViewport', () => {
 
     viewport.focusNode('node-a');
     viewport.clearFocus();
-    viewport.emitSignal({ id: 'signal', edgeId: 'edge-a-b', variant: 'info', direction: 'forward', intensity: 'sm' });
+    viewport.emitSignal({
+      id: 'signal',
+      edgeId: 'edge-a-b',
+      variant: 'info',
+      direction: 'forward',
+      intensity: 'sm',
+    });
     expect(focusNode).toHaveBeenCalledWith('node-a');
     expect(clearFocus).toHaveBeenCalled();
     expect(emitSignal).toHaveBeenCalled();

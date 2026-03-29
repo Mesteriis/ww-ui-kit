@@ -8,7 +8,7 @@ export const PACKAGE_LAYERS = [
   'page-template',
   'app',
   'tooling',
-  'third-party-adapter'
+  'third-party-adapter',
 ];
 
 export const LAYER_ORDER = Object.freeze([
@@ -19,7 +19,7 @@ export const LAYER_ORDER = Object.freeze([
   'system',
   'widget',
   'page-template',
-  'app'
+  'app',
 ]);
 
 export const ALLOWED_LAYER_IMPORTS = Object.freeze({
@@ -37,7 +37,7 @@ export const ALLOWED_LAYER_IMPORTS = Object.freeze({
     'core',
     'system',
     'third-party-adapter',
-    'widget'
+    'widget',
   ],
   app: [
     'tokens',
@@ -47,9 +47,9 @@ export const ALLOWED_LAYER_IMPORTS = Object.freeze({
     'system',
     'third-party-adapter',
     'widget',
-    'page-template'
+    'page-template',
   ],
-  tooling: PACKAGE_LAYERS
+  tooling: PACKAGE_LAYERS,
 });
 
 export const FORBIDDEN_PATTERNS = Object.freeze([
@@ -61,7 +61,7 @@ export const FORBIDDEN_PATTERNS = Object.freeze([
   'raw palette values outside tokens/themes',
   'raw easing curves outside tokens/themes',
   'raw z-index hacks outside sanctioned local-layer contexts',
-  'public exports added without catalog/docs/tests coverage updates'
+  'public exports added without catalog/docs/tests coverage updates',
 ]);
 
 export const ARCHITECTURE_SENSITIVE_PATH_PATTERNS = Object.freeze([
@@ -83,6 +83,5 @@ export const ARCHITECTURE_SENSITIVE_PATH_PATTERNS = Object.freeze([
   /^\.github\/copilot-instructions\.md$/,
   /^AGENTS\.md$/,
   /^README\.md$/,
-  /^CONTRIBUTING\.md$/
+  /^CONTRIBUTING\.md$/,
 ]);
-

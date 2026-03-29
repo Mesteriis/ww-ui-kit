@@ -24,7 +24,7 @@ const props = withDefaults(
     rows: 4,
     disabled: false,
     readonly: false,
-    invalid: false
+    invalid: false,
   }
 );
 
@@ -36,7 +36,9 @@ const field = useFieldContext();
 const fallbackId = useId('textarea');
 const textareaId = computed(() => props.id ?? field?.inputId.value ?? fallbackId.value);
 const isInvalid = computed(() => props.invalid || field?.invalid.value || false);
-const describedBy = computed(() => mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value));
+const describedBy = computed(() =>
+  mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
+);
 
 const onInput = (event: Event) => {
   if (event.target instanceof HTMLTextAreaElement) {

@@ -29,7 +29,7 @@ export function createSignalNodeReactions() {
       setTimeout(() => {
         reactionTimers.delete(nodeId);
         clearNodeReaction(nodeId);
-      }, durationMs),
+      }, durationMs)
     );
   };
 

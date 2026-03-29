@@ -2,7 +2,7 @@ import type {
   ApexAxisChartSeries,
   ApexChart,
   ApexNonAxisChartSeries,
-  ApexOptions
+  ApexOptions,
 } from 'apexcharts';
 
 export type UiApexChartType = NonNullable<ApexChart['type']>;

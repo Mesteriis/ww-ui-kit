@@ -20,82 +20,76 @@
   .ui-motion-move {
     transition-property: transform;
     transition-duration: var(--ui-motion-move-duration, var(--ui-motion-duration-sm));
-    transition-timing-function: var(
-      --ui-motion-move-easing,
-      var(--ui-motion-easing-standard)
-    );
+    transition-timing-function: var(--ui-motion-move-easing, var(--ui-motion-easing-standard));
   }
 
   :where([data-ui-motion]) {
     transition: var(--ui-motion-utility-transition, var(--ui-motion-transition-color-fast));
   }
 
-  :where([data-ui-motion~="lift-xs"]) {
+  :where([data-ui-motion~='lift-xs']) {
     --ui-motion-utility-transition: var(--ui-motion-transition-surface-lift-xs);
   }
 
-  :where([data-ui-motion~="lift-sm"]) {
+  :where([data-ui-motion~='lift-sm']) {
     --ui-motion-utility-transition: var(--ui-motion-transition-surface-lift-sm);
   }
 
-  :where([data-ui-motion~="ring-focus-soft"]) {
+  :where([data-ui-motion~='ring-focus-soft']) {
     --ui-motion-utility-transition: var(--ui-motion-transition-focus-ring);
   }
 
-  :where([data-ui-motion~="ring-focus-strong"]) {
+  :where([data-ui-motion~='ring-focus-strong']) {
     --ui-motion-utility-transition: var(--ui-motion-transition-focus-ring);
   }
 
-  :where([data-ui-motion~="caret-rotate-90"]),
-  :where([data-ui-motion~="caret-rotate-180"]) {
+  :where([data-ui-motion~='caret-rotate-90']),
+  :where([data-ui-motion~='caret-rotate-180']) {
     --ui-motion-utility-transition: var(--ui-motion-transition-transform-fast);
   }
 
-  :where([data-ui-motion~="lift-xs"]:hover:not(:disabled):not([aria-disabled="true"])) {
+  :where([data-ui-motion~='lift-xs']:hover:not(:disabled):not([aria-disabled='true'])) {
     transform: translateY(calc(var(--ui-motion-distance-2xs) * -1));
   }
 
-  :where([data-ui-motion~="lift-sm"]:hover:not(:disabled):not([aria-disabled="true"])) {
+  :where([data-ui-motion~='lift-sm']:hover:not(:disabled):not([aria-disabled='true'])) {
     transform: translateY(calc(var(--ui-motion-distance-xs) * -1));
   }
 
-  :where([data-ui-motion~="settle-down"]:active:not(:disabled):not([aria-disabled="true"])) {
+  :where([data-ui-motion~='settle-down']:active:not(:disabled):not([aria-disabled='true'])) {
     transform: translateY(var(--ui-motion-distance-2xs));
   }
 
-  :where([data-ui-motion~="ring-focus-soft"]:focus-visible) {
+  :where([data-ui-motion~='ring-focus-soft']:focus-visible) {
     box-shadow: var(--ui-motion-focus-ring-shadow, var(--ui-motion-focus-ring-shadow-soft));
     outline: none;
   }
 
-  :where([data-ui-motion~="ring-focus-strong"]:focus-visible) {
-    box-shadow: var(
-      --ui-motion-focus-ring-shadow,
-      var(--ui-motion-focus-ring-shadow-strong)
-    );
+  :where([data-ui-motion~='ring-focus-strong']:focus-visible) {
+    box-shadow: var(--ui-motion-focus-ring-shadow, var(--ui-motion-focus-ring-shadow-strong));
     outline: none;
   }
 
-  :where([data-ui-motion~="caret-rotate-90"].open),
-  :where([data-ui-motion~="caret-rotate-90"].is-open),
-  :where([data-ui-motion~="caret-rotate-90"][data-ui-state="open"]),
-  :where([data-ui-motion~="caret-rotate-90"][aria-expanded="true"]) {
+  :where([data-ui-motion~='caret-rotate-90'].open),
+  :where([data-ui-motion~='caret-rotate-90'].is-open),
+  :where([data-ui-motion~='caret-rotate-90'][data-ui-state='open']),
+  :where([data-ui-motion~='caret-rotate-90'][aria-expanded='true']) {
     transform: rotate(90deg);
   }
 
-  :where([data-ui-motion~="caret-rotate-180"].open),
-  :where([data-ui-motion~="caret-rotate-180"].is-open),
-  :where([data-ui-motion~="caret-rotate-180"][data-ui-state="open"]),
-  :where([data-ui-motion~="caret-rotate-180"][aria-expanded="true"]) {
+  :where([data-ui-motion~='caret-rotate-180'].open),
+  :where([data-ui-motion~='caret-rotate-180'].is-open),
+  :where([data-ui-motion~='caret-rotate-180'][data-ui-state='open']),
+  :where([data-ui-motion~='caret-rotate-180'][aria-expanded='true']) {
     transform: rotate(180deg);
   }
 
-  :where([data-ui-motion~="underline-slide"]) {
+  :where([data-ui-motion~='underline-slide']) {
     position: relative;
   }
 
-  :where([data-ui-motion~="underline-slide"])::after {
-    content: "";
+  :where([data-ui-motion~='underline-slide'])::after {
+    content: '';
     position: absolute;
     inset-inline: 0;
     inset-block-end: -1px;
@@ -106,28 +100,28 @@
     transition: transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
   }
 
-  :where([data-ui-motion~="underline-slide"]:hover)::after,
-  :where([data-ui-motion~="underline-slide"]:focus-visible)::after,
-  :where([data-ui-motion~="underline-slide"].active)::after,
-  :where([data-ui-motion~="underline-slide"].is-active)::after {
+  :where([data-ui-motion~='underline-slide']:hover)::after,
+  :where([data-ui-motion~='underline-slide']:focus-visible)::after,
+  :where([data-ui-motion~='underline-slide'].active)::after,
+  :where([data-ui-motion~='underline-slide'].is-active)::after {
     transform: scaleX(1);
   }
 
-  :where([data-ui-motion~="loading-shimmer"]),
-  :where([data-ui-motion~="loading-sweep"]),
-  :where([data-ui-motion~="highlight-sweep"]),
-  :where([data-ui-motion~="info-sweep"]),
-  :where([data-ui-motion~="progress-indeterminate"]) {
+  :where([data-ui-motion~='loading-shimmer']),
+  :where([data-ui-motion~='loading-sweep']),
+  :where([data-ui-motion~='highlight-sweep']),
+  :where([data-ui-motion~='info-sweep']),
+  :where([data-ui-motion~='progress-indeterminate']) {
     position: relative;
     overflow: hidden;
   }
 
-  :where([data-ui-motion~="loading-shimmer"])::after,
-  :where([data-ui-motion~="loading-sweep"])::after,
-  :where([data-ui-motion~="highlight-sweep"])::after,
-  :where([data-ui-motion~="info-sweep"])::after,
-  :where([data-ui-motion~="progress-indeterminate"])::after {
-    content: "";
+  :where([data-ui-motion~='loading-shimmer'])::after,
+  :where([data-ui-motion~='loading-sweep'])::after,
+  :where([data-ui-motion~='highlight-sweep'])::after,
+  :where([data-ui-motion~='info-sweep'])::after,
+  :where([data-ui-motion~='progress-indeterminate'])::after {
+    content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -141,8 +135,8 @@
     animation: ui-motion-sweep var(--ui-motion-duration-xl) var(--ui-motion-easing-linear) infinite;
   }
 
-  :where([data-ui-motion~="loading-ellipsis"])::after {
-    content: "...";
+  :where([data-ui-motion~='loading-ellipsis'])::after {
+    content: '...';
     display: inline-block;
     inline-size: 1.6em;
     overflow: hidden;
@@ -150,114 +144,99 @@
     animation: ui-motion-ellipsis var(--ui-motion-duration-md) steps(4) infinite;
   }
 
-  :where([data-ui-motion~="caret-blink-soft"]) {
+  :where([data-ui-motion~='caret-blink-soft']) {
     animation: ui-motion-caret-blink var(--ui-motion-duration-md) step-end infinite;
   }
 
-  :where([data-ui-motion~="pulse-soft"]) {
+  :where([data-ui-motion~='pulse-soft']) {
     animation: ui-motion-pulse var(--ui-motion-duration-xl) var(--ui-motion-easing-standard) 2;
   }
 
-  :where([data-ui-motion~="pulse-strong"]) {
-    animation: ui-motion-pulse-strong var(--ui-motion-duration-lg) var(--ui-motion-easing-standard) 2;
+  :where([data-ui-motion~='pulse-strong']) {
+    animation: ui-motion-pulse-strong var(--ui-motion-duration-lg) var(--ui-motion-easing-standard)
+      2;
   }
 
-  :where([data-ui-motion~="breathe-soft"]),
-  :where([data-ui-motion~="pending-breathe"]) {
+  :where([data-ui-motion~='breathe-soft']),
+  :where([data-ui-motion~='pending-breathe']) {
     animation: ui-motion-breathe var(--ui-motion-duration-xl) var(--ui-motion-easing-standard)
       infinite;
   }
 
-  :where([data-ui-motion~="glow-soft"]),
-  :where([data-ui-motion~="glow-accent"]),
-  :where([data-ui-motion~="success-glow"]),
-  :where([data-ui-motion~="warning-pulse"]) {
-    animation: ui-motion-glow var(--ui-motion-duration-lg) var(--ui-motion-easing-standard)
-      2;
+  :where([data-ui-motion~='glow-soft']),
+  :where([data-ui-motion~='glow-accent']),
+  :where([data-ui-motion~='success-glow']),
+  :where([data-ui-motion~='warning-pulse']) {
+    animation: ui-motion-glow var(--ui-motion-duration-lg) var(--ui-motion-easing-standard) 2;
   }
 
-  :where([data-ui-motion~="nudge-up"]),
-  :where([data-ui-motion~="warning-bump"]) {
-    animation: ui-motion-nudge-up var(--ui-motion-duration-xs) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='nudge-up']),
+  :where([data-ui-motion~='warning-bump']) {
+    animation: ui-motion-nudge-up var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="nudge-down"]) {
-    animation: ui-motion-nudge-down var(--ui-motion-duration-xs) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='nudge-down']) {
+    animation: ui-motion-nudge-down var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="nudge-left"]),
-  :where([data-ui-motion~="retry-nudge"]) {
-    animation: ui-motion-nudge-left var(--ui-motion-duration-xs) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='nudge-left']),
+  :where([data-ui-motion~='retry-nudge']) {
+    animation: ui-motion-nudge-left var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="nudge-right"]) {
-    animation: ui-motion-nudge-right var(--ui-motion-duration-xs) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='nudge-right']) {
+    animation: ui-motion-nudge-right var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="wiggle-soft"]) {
-    animation: ui-motion-wiggle var(--ui-motion-duration-sm) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='wiggle-soft']) {
+    animation: ui-motion-wiggle var(--ui-motion-duration-sm) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="bob-soft"]) {
-    animation: ui-motion-bob var(--ui-motion-duration-lg) var(--ui-motion-easing-standard)
-      infinite;
+  :where([data-ui-motion~='bob-soft']) {
+    animation: ui-motion-bob var(--ui-motion-duration-lg) var(--ui-motion-easing-standard) infinite;
   }
 
-  :where([data-ui-motion~="shake-error-xs"]) {
-    animation: ui-motion-shake-xs var(--ui-motion-duration-xs) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='shake-error-xs']) {
+    animation: ui-motion-shake-xs var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="shake-error-sm"]) {
-    animation: ui-motion-shake-sm var(--ui-motion-duration-sm) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='shake-error-sm']) {
+    animation: ui-motion-shake-sm var(--ui-motion-duration-sm) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="shake-error-md"]) {
-    animation: ui-motion-shake-md var(--ui-motion-duration-md) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='shake-error-md']) {
+    animation: ui-motion-shake-md var(--ui-motion-duration-md) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="invalid-ring"]) {
+  :where([data-ui-motion~='invalid-ring']) {
     box-shadow: var(--ui-motion-focus-ring-shadow-invalid);
   }
 
-  :where([data-ui-motion~="invalid-flash"]) {
+  :where([data-ui-motion~='invalid-flash']) {
     animation: ui-motion-flash var(--ui-motion-duration-xs) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="success-pop"]),
-  :where([data-ui-motion~="success-check-bounce"]),
-  :where([data-ui-motion~="saved-badge-pop"]) {
+  :where([data-ui-motion~='success-pop']),
+  :where([data-ui-motion~='success-check-bounce']),
+  :where([data-ui-motion~='saved-badge-pop']) {
     animation: ui-motion-pop var(--ui-motion-duration-sm) var(--ui-motion-easing-spring-soft) 1;
   }
 
-  :where([data-ui-motion~="info-fade"]) {
-    animation: ui-motion-fade-in var(--ui-motion-duration-sm) var(--ui-motion-easing-standard)
-      1;
+  :where([data-ui-motion~='info-fade']) {
+    animation: ui-motion-fade-in var(--ui-motion-duration-sm) var(--ui-motion-easing-standard) 1;
   }
 
-  :where([data-ui-motion~="pending-pulse"]) {
+  :where([data-ui-motion~='pending-pulse']) {
     animation: ui-motion-pulse var(--ui-motion-duration-lg) var(--ui-motion-easing-standard)
       infinite;
   }
 
-  :where([data-ui-motion~="shimmer-soft"])::after {
+  :where([data-ui-motion~='shimmer-soft'])::after {
     opacity: 0.65;
   }
 
-  :where([data-ui-motion~="progress-indeterminate"])::after {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      currentColor,
-      transparent
-    );
+  :where([data-ui-motion~='progress-indeterminate'])::after {
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
     opacity: 0.55;
   }
 
@@ -515,13 +494,13 @@
       transition-duration: var(--ui-motion-duration-instant) !important;
     }
 
-    :where([data-ui-motion~="underline-slide"])::after,
-    :where([data-ui-motion~="loading-shimmer"])::after,
-    :where([data-ui-motion~="loading-sweep"])::after,
-    :where([data-ui-motion~="highlight-sweep"])::after,
-    :where([data-ui-motion~="info-sweep"])::after,
-    :where([data-ui-motion~="progress-indeterminate"])::after,
-    :where([data-ui-motion~="loading-ellipsis"])::after {
+    :where([data-ui-motion~='underline-slide'])::after,
+    :where([data-ui-motion~='loading-shimmer'])::after,
+    :where([data-ui-motion~='loading-sweep'])::after,
+    :where([data-ui-motion~='highlight-sweep'])::after,
+    :where([data-ui-motion~='info-sweep'])::after,
+    :where([data-ui-motion~='progress-indeterminate'])::after,
+    :where([data-ui-motion~='loading-ellipsis'])::after {
       animation: none !important;
       transform: none !important;
     }

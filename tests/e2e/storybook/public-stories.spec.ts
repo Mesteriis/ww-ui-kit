@@ -1,5 +1,6 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
 
+import { expectNoAxeViolations } from '../../shared/a11y';
 import { failOnConsoleErrors } from '../../shared/browser';
 
 async function getStoryId(request: APIRequestContext, title: string) {
@@ -9,8 +10,9 @@ async function getStoryId(request: APIRequestContext, title: string) {
   };
 
   const entry =
-    Object.values(index.entries).find((candidate) => candidate.title === title && candidate.type === 'story') ??
-    Object.values(index.entries).find((candidate) => candidate.title === title);
+    Object.values(index.entries).find(
+      (candidate) => candidate.title === title && candidate.type === 'story'
+    ) ?? Object.values(index.entries).find((candidate) => candidate.title === title);
   if (!entry) {
     throw new Error(`Storybook title "${title}" was not found in index.json.`);
   }
@@ -19,7 +21,9 @@ async function getStoryId(request: APIRequestContext, title: string) {
 }
 
 async function openStory(page: Page, storyId: string, globals?: string) {
-  const query = globals ? `?id=${storyId}&viewMode=story&globals=${globals}` : `?id=${storyId}&viewMode=story`;
+  const query = globals
+    ? `?id=${storyId}&viewMode=story&globals=${globals}`
+    : `?id=${storyId}&viewMode=story`;
   await page.goto(`/iframe.html${query}`);
 }
 
@@ -36,7 +40,7 @@ test('renders canonical public story groups', async ({ page, request }) => {
     'Systems/Data Grid/Overview',
     'Widgets/Data Table Widget/Overview',
     'Widgets/Shell',
-    'Page Templates/Shell'
+    'Page Templates/Shell',
   ];
 
   for (const title of storyTitles) {
@@ -65,6 +69,42 @@ test('opens overlays inside Storybook stories', async ({ page, request }) => {
   await expect(page.getByRole('heading', { name: 'Nested dialog' })).toBeVisible();
 });
 
+test('keeps curated Storybook surfaces free of browser-level accessibility violations', async ({
+  page,
+  request,
+}) => {
+  const cases: Array<{
+    title: string;
+    globals?: string;
+    setup?: (page: Page) => Promise<void>;
+  }> = [
+    { title: 'Core/Buttons' },
+    { title: 'Core/Buttons', globals: 'theme:belovodye' },
+    { title: 'Core/Fields' },
+    { title: 'Core/Tabs' },
+    {
+      title: 'Core/Overlay',
+      setup: async (activePage) => {
+        await activePage.getByRole('button', { name: 'Open dialog' }).click();
+        await expect(activePage.getByRole('dialog')).toBeVisible();
+      },
+    },
+    { title: 'Systems/Data Grid/Overview' },
+  ];
+
+  for (const story of cases) {
+    const storyId = await getStoryId(request, story.title);
+    await openStory(page, storyId, story.globals);
+    if (story.setup) {
+      await story.setup(page);
+    }
+    await expectNoAxeViolations(page, {
+      include: '#storybook-root',
+      disabledRules: ['landmark-one-main', 'page-has-heading-one', 'region'],
+    });
+  }
+});
+
 test('runs canonical data-grid interactions inside Storybook', async ({ page, request }) => {
   const storyId = await getStoryId(request, 'Systems/Data Grid/Overview');
   await openStory(page, storyId);
@@ -79,7 +119,10 @@ test('runs canonical data-grid interactions inside Storybook', async ({ page, re
   await page.getByRole('button', { name: 'Reset columns' }).click();
 });
 
-test('runs canonical data-table-widget interactions inside Storybook', async ({ page, request }) => {
+test('runs canonical data-table-widget interactions inside Storybook', async ({
+  page,
+  request,
+}) => {
   const storyId = await getStoryId(request, 'Widgets/Data Table Widget/Overview');
   await openStory(page, storyId);
 

@@ -15,7 +15,7 @@ const props = withDefaults(
     portalTarget?: string | HTMLElement | null;
   }>(),
   {
-    closeOnOverlayClick: true
+    closeOnOverlayClick: true,
   }
 );
 
@@ -42,18 +42,22 @@ const {
   panelRef,
   portalTarget,
   titleId,
-  descriptionId
+  descriptionId,
 } = useOverlay(props, close, {
   prefix: 'dialog',
   surfacePreset: 'modal-fade-scale',
-  backdropPreset: 'backdrop-soften'
+  backdropPreset: 'backdrop-soften',
 });
 </script>
 
 <template>
   <span ref="anchorRef" hidden data-ui-overlay-anchor="dialog" />
   <PrimitivePortal :to="portalTarget">
-    <div v-if="isActive" class="ui-overlay ui-overlay--dialog" :data-ui-state="props.open ? 'open' : 'closed'">
+    <div
+      v-if="isActive"
+      class="ui-overlay ui-overlay--dialog"
+      :data-ui-state="props.open ? 'open' : 'closed'"
+    >
       <Transition
         appear
         name="ui-motion"

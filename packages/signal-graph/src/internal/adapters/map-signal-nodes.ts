@@ -13,7 +13,7 @@ export interface SignalGraphVendorNodeData {
 function resolveNodeDraggable(
   node: SignalGraphNode,
   definition: SignalGraphNodeDefinition | undefined,
-  interactionMode: SignalGraphInteractionMode,
+  interactionMode: SignalGraphInteractionMode
 ): boolean {
   if (interactionMode === 'readonly') {
     return false;
@@ -24,7 +24,7 @@ function resolveNodeDraggable(
 
 function resolveNodeFocusable(
   node: SignalGraphNode,
-  definition: SignalGraphNodeDefinition | undefined,
+  definition: SignalGraphNodeDefinition | undefined
 ): boolean {
   return node.focusable ?? definition?.focusable ?? true;
 }
@@ -32,7 +32,7 @@ function resolveNodeFocusable(
 export function mapSignalNodes(
   nodes: readonly SignalGraphNode[],
   nodeDefinitions: Record<string, SignalGraphNodeDefinition>,
-  interactionMode: SignalGraphInteractionMode,
+  interactionMode: SignalGraphInteractionMode
 ): Node<SignalGraphVendorNodeData>[] {
   return nodes.map((node) => {
     const definition = nodeDefinitions[node.type];

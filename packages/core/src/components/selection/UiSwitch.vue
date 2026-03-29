@@ -14,7 +14,7 @@ const props = withDefaults(
   }>(),
   {
     modelValue: false,
-    disabled: false
+    disabled: false,
   }
 );
 
@@ -23,7 +23,9 @@ const emit = defineEmits<{
 }>();
 
 const field = useFieldContext();
-const describedBy = computed(() => mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value));
+const describedBy = computed(() =>
+  mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
+);
 
 const toggle = () => {
   if (!props.disabled) {

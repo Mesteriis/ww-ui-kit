@@ -10,7 +10,7 @@ import {
   clearTransitionMotionVariables,
   resolveTransitionMotionPreset,
   runCollapseMotion,
-  afterCollapseMotion
+  afterCollapseMotion,
 } from '@ww/primitives';
 import type { MotionPresetName } from '@ww/primitives';
 
@@ -24,7 +24,7 @@ const durationTokens = [
   '--ui-motion-duration-xl',
   '--ui-motion-duration-ambient-sm',
   '--ui-motion-duration-ambient-md',
-  '--ui-motion-duration-ambient-lg'
+  '--ui-motion-duration-ambient-lg',
 ] as const;
 const defaultSpeedMultiplier = 3;
 
@@ -60,14 +60,16 @@ const createMotionScopeStyle = (speedMultiplier: number): Record<string, string>
 
       return [
         tokenName,
-        currentValue ? `calc(${formatMilliseconds(currentValue)} * ${speedMultiplier})` : currentValue
+        currentValue
+          ? `calc(${formatMilliseconds(currentValue)} * ${speedMultiplier})`
+          : currentValue,
       ];
     })
   );
 
 const meta = {
   title: 'Foundations/Motion Overview',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -79,10 +81,14 @@ export const UtilitiesAndTokens: StoryObj = {
       const speedMultiplier = ref(defaultSpeedMultiplier);
       const utilityRows = [
         { label: 'Lift + focus ring', motion: 'lift-xs ring-focus-soft', tone: 'brand' as const },
-        { label: 'Underline slide', motion: 'underline-slide ring-focus-soft', tone: 'warning' as const },
+        {
+          label: 'Underline slide',
+          motion: 'underline-slide ring-focus-soft',
+          tone: 'warning' as const,
+        },
         { label: 'Glow accent', motion: 'glow-accent', tone: 'warning' as const },
         { label: 'Loading shimmer', motion: 'loading-shimmer', tone: 'success' as const },
-        { label: 'Shake error', motion: 'shake-error-sm', tone: 'danger' as const }
+        { label: 'Shake error', motion: 'shake-error-sm', tone: 'danger' as const },
       ];
       const motionScopeStyle = computed(() => createMotionScopeStyle(speedMultiplier.value));
 
@@ -188,8 +194,8 @@ export const UtilitiesAndTokens: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };
 
 export const PresetLabAndCollapse: StoryObj = {
@@ -206,7 +212,9 @@ export const PresetLabAndCollapse: StoryObj = {
         createMotionScopeStyle(speedMultiplier.value)
       );
 
-      const currentPreset = computed(() => resolveTransitionMotionPreset(presetName.value, 'fade-in'));
+      const currentPreset = computed(() =>
+        resolveTransitionMotionPreset(presetName.value, 'fade-in')
+      );
       const presetSummary = computed(() =>
         JSON.stringify(
           {
@@ -222,7 +230,7 @@ export const PresetLabAndCollapse: StoryObj = {
             tier: currentPreset.value.tier,
             reducedPreset: currentPreset.value.reducedPreset ?? null,
             enter: currentPreset.value.enter,
-            leave: currentPreset.value.leave
+            leave: currentPreset.value.leave,
           },
           null,
           2
@@ -244,13 +252,11 @@ export const PresetLabAndCollapse: StoryObj = {
           return;
         }
 
-        applyTransitionMotionVariables(
-          element,
-          currentPreset.value,
-          phase
-        );
+        applyTransitionMotionVariables(element, currentPreset.value, phase);
 
-        const durationValue = formatMilliseconds(readDurationValue(currentPreset.value.durationToken));
+        const durationValue = formatMilliseconds(
+          readDurationValue(currentPreset.value.durationToken)
+        );
         element.style.setProperty(
           '--ui-motion-duration',
           `calc(${durationValue} * ${speedMultiplier.value})`
@@ -329,7 +335,7 @@ export const PresetLabAndCollapse: StoryObj = {
         replay,
         speedMultiplier,
         taxonomyEntries,
-        toggleCollapse
+        toggleCollapse,
       };
     },
     template: `
@@ -478,6 +484,6 @@ export const PresetLabAndCollapse: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

@@ -5,29 +5,33 @@ const cloneSort = (sort: readonly DataGridSort[] | undefined): DataGridSort[] =>
     .filter((entry) => entry.id && (entry.direction === 'asc' || entry.direction === 'desc'))
     .map((entry) => ({
       id: entry.id,
-      direction: entry.direction
+      direction: entry.direction,
     }));
 
-const cloneFilters = (filters: Record<string, DataGridFilterValue> | undefined): Record<string, DataGridFilterValue> =>
+const cloneFilters = (
+  filters: Record<string, DataGridFilterValue> | undefined
+): Record<string, DataGridFilterValue> =>
   Object.fromEntries(
     Object.entries(filters ?? {}).map(([key, value]) => [
       key,
-      Array.isArray(value) ? Array.from(value as readonly string[]) : value
+      Array.isArray(value) ? Array.from(value as readonly string[]) : value,
     ])
   );
 
 const cloneColumnVisibility = (columnVisibility: Record<string, boolean> | undefined) =>
   columnVisibility ? { ...columnVisibility } : undefined;
 
-export function normalizeDataGridQuery(query: Partial<DataGridQuery> | DataGridQuery): DataGridQuery {
+export function normalizeDataGridQuery(
+  query: Partial<DataGridQuery> | DataGridQuery
+): DataGridQuery {
   const normalized: DataGridQuery = {
     search: String(query.search ?? ''),
     filters: cloneFilters(query.filters),
     sort: cloneSort(query.sort),
     pagination: {
       page: Math.max(1, Math.trunc(query.pagination?.page ?? 1)),
-      pageSize: Math.max(1, Math.trunc(query.pagination?.pageSize ?? 10))
-    }
+      pageSize: Math.max(1, Math.trunc(query.pagination?.pageSize ?? 10)),
+    },
   };
 
   const columnVisibility = cloneColumnVisibility(query.columnVisibility);

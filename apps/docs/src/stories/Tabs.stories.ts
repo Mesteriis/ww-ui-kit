@@ -5,7 +5,7 @@ import { UiTabsList, UiTabsPanel, UiTabsRoot, UiTabsTrigger } from '@ww/core';
 
 const meta = {
   title: 'Core/Tabs',
-  component: UiTabsRoot
+  component: UiTabsRoot,
 } satisfies Meta<typeof UiTabsRoot>;
 
 export default meta;
@@ -34,6 +34,6 @@ export const CompoundTabs: StoryObj<typeof UiTabsRoot> = {
           Stories document interactive and visual states together.
         </UiTabsPanel>
       </UiTabsRoot>
-    `
-  })
+    `,
+  }),
 };

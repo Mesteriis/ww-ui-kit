@@ -63,7 +63,7 @@ export function useSignalGraphFocus({
       source: resolvedSource.value,
       depthMode: depthMode.value,
       relationDepth: relationDepth.value,
-    }),
+    })
   );
 
   const focusNode = (nodeId: string, source: SignalGraphFocusSource = 'programmatic') => {
@@ -90,7 +90,7 @@ export function useSignalGraphFocus({
     (value) => {
       onFocusStateChange?.(value);
     },
-    { immediate: true },
+    { immediate: true }
   );
 
   return {

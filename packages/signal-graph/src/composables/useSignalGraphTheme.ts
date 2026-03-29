@@ -1,7 +1,13 @@
 import { onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue';
 
 import { findNearestThemeContainer } from '@ww/primitives';
-import { THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE, getThemeType, type ThemeName, type ThemeType } from '@ww/themes';
+import {
+  THEME_ATTRIBUTE,
+  THEME_TYPE_ATTRIBUTE,
+  getThemeType,
+  type ThemeName,
+  type ThemeType,
+} from '@ww/themes';
 
 import type { SignalGraphThemeState } from '../types';
 

@@ -5,6 +5,6 @@ export const radiusScale = {
     'radius-md': '0.5rem',
     'radius-lg': '0.75rem',
     'radius-xl': '1rem',
-    'radius-pill': '999px'
-  }
+    'radius-pill': '999px',
+  },
 } as const;

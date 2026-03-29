@@ -4,6 +4,7 @@ title: .github/workflows path rules
 apply: by file patterns
 patterns: .github/workflows/**/*
 ---
+
 Use this rule when editing CI, release, Pages, or security workflows.
 
 ## Do
@@ -11,6 +12,8 @@ Use this rule when editing CI, release, Pages, or security workflows.
 - Keep workflow behavior aligned with documented commands and governance gates.
 - Treat workflow changes as architecture-sensitive when they alter how the repository operates.
 - Keep Actions versions, Node policy, and invoked scripts aligned with the repo toolchain.
+- Keep CI job splits readable, parallel where it clearly helps, and aggregated behind understandable required checks.
+- Install Playwright browsers only in jobs that actually run browser tests.
 
 ## Do not
 
@@ -22,4 +25,5 @@ Use this rule when editing CI, release, Pages, or security workflows.
 
 - `README.md`
 - `CONTRIBUTING.md`
+- `TROUBLESHOOTING.md`
 - `docs/decisions/**/*` when workflow behavior is architecture-sensitive

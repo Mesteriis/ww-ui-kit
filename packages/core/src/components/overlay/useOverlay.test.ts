@@ -3,16 +3,29 @@ import { mount } from '@vue/test-utils';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const primitivesMocks = vi.hoisted(() => ({
+  leaveCount: 0,
   applyTransitionMotionVariables: vi.fn(),
   clearTransitionMotionVariables: vi.fn(),
   resolveTransitionMotionPreset: vi.fn((preset: string) => ({ preset })),
   restoreFocus: vi.fn(),
   focusOverlay: vi.fn(async () => true),
-  handleAfterEnter: vi.fn(),
-  handleBeforeEnter: vi.fn(),
-  handleAfterLeave: vi.fn(),
-  handleBeforeLeave: vi.fn(),
-  isLeaving: { value: false }
+  handleAfterEnter: vi.fn(() => {
+    primitivesMocks.leaveCount = 0;
+    primitivesMocks.isLeaving.value = false;
+  }),
+  handleBeforeEnter: vi.fn(() => {
+    primitivesMocks.leaveCount = 0;
+    primitivesMocks.isLeaving.value = false;
+  }),
+  handleAfterLeave: vi.fn(() => {
+    primitivesMocks.leaveCount = Math.max(0, primitivesMocks.leaveCount - 1);
+    primitivesMocks.isLeaving.value = primitivesMocks.leaveCount > 0;
+  }),
+  handleBeforeLeave: vi.fn(() => {
+    primitivesMocks.leaveCount += 1;
+    primitivesMocks.isLeaving.value = true;
+  }),
+  isLeaving: { value: false },
 }));
 
 vi.mock('@ww/primitives', () => ({
@@ -26,7 +39,7 @@ vi.mock('@ww/primitives', () => ({
     handleBeforeEnter: primitivesMocks.handleBeforeEnter,
     handleAfterEnter: primitivesMocks.handleAfterEnter,
     handleBeforeLeave: primitivesMocks.handleBeforeLeave,
-    handleAfterLeave: primitivesMocks.handleAfterLeave
+    handleAfterLeave: primitivesMocks.handleAfterLeave,
   }),
   useOverlaySurface: () => ({
     backdropStyle: computed(() => ({ zIndex: '4000' })),
@@ -34,8 +47,8 @@ vi.mock('@ww/primitives', () => ({
     focusOverlay: primitivesMocks.focusOverlay,
     isTopMost: computed(() => true),
     portalTarget: computed(() => null),
-    restoreFocus: primitivesMocks.restoreFocus
-  })
+    restoreFocus: primitivesMocks.restoreFocus,
+  }),
 }));
 
 import { useOverlay } from './useOverlay';
@@ -43,6 +56,7 @@ import { useOverlay } from './useOverlay';
 describe('useOverlay', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    primitivesMocks.leaveCount = 0;
     primitivesMocks.isLeaving.value = false;
   });
 
@@ -59,26 +73,26 @@ describe('useOverlay', () => {
           open: { type: Boolean, required: true },
           title: { type: String, required: false },
           description: { type: String, required: false },
-          ariaLabel: { type: String, required: false }
+          ariaLabel: { type: String, required: false },
         },
         setup(props, { expose }) {
           const overlay = useOverlay(props, close, {
             prefix: 'dialog',
             surfacePreset: 'modal-fade-scale',
-            backdropPreset: 'backdrop-soften'
+            backdropPreset: 'backdrop-soften',
           });
 
           expose({ overlay });
           return { overlay };
         },
-        template: '<div />'
+        template: '<div />',
       }),
       {
         props: {
           open: true,
           title: 'Dialog title',
-          description: 'Dialog description'
-        }
+          description: 'Dialog description',
+        },
       }
     );
 
@@ -105,8 +119,14 @@ describe('useOverlay', () => {
     expect(primitivesMocks.handleBeforeLeave).toHaveBeenCalled();
     expect(primitivesMocks.handleAfterEnter).toHaveBeenCalled();
     expect(primitivesMocks.handleAfterLeave).toHaveBeenCalled();
-    expect(primitivesMocks.resolveTransitionMotionPreset).toHaveBeenCalledWith('backdrop-soften', 'fade-in');
-    expect(primitivesMocks.resolveTransitionMotionPreset).toHaveBeenCalledWith('modal-fade-scale', 'fade-in');
+    expect(primitivesMocks.resolveTransitionMotionPreset).toHaveBeenCalledWith(
+      'backdrop-soften',
+      'fade-in'
+    );
+    expect(primitivesMocks.resolveTransitionMotionPreset).toHaveBeenCalledWith(
+      'modal-fade-scale',
+      'fade-in'
+    );
     expect(primitivesMocks.applyTransitionMotionVariables).toHaveBeenCalled();
     expect(primitivesMocks.clearTransitionMotionVariables).toHaveBeenCalled();
     expect(primitivesMocks.restoreFocus).toHaveBeenCalled();
@@ -114,7 +134,7 @@ describe('useOverlay', () => {
     wrapper.unmount();
   });
 
-  it('falls back to aria-label flow and delays restore while leave transitions remain active', async () => {
+  it('falls back to aria-label flow and avoids double restoreFocus calls across close and leave completion', async () => {
     const close = vi.fn();
 
     const wrapper = mount(
@@ -124,24 +144,24 @@ describe('useOverlay', () => {
           title: { type: String, required: false },
           description: { type: String, required: false },
           ariaLabel: { type: String, required: false },
-          portalTarget: { type: String, required: false }
+          portalTarget: { type: String, required: false },
         },
         setup(props, { expose }) {
           const overlay = useOverlay(props, close, {
             prefix: 'drawer',
-            surfacePreset: () => 'drawer-slide-left'
+            surfacePreset: () => 'drawer-slide-left',
           });
 
           expose({ overlay });
           return { overlay };
         },
-        template: '<div />'
+        template: '<div />',
       }),
       {
         props: {
           open: true,
-          ariaLabel: 'Drawer label'
-        }
+          ariaLabel: 'Drawer label',
+        },
       }
     );
 
@@ -153,13 +173,19 @@ describe('useOverlay', () => {
     expect(vm.overlay.describedBy.value).toBeUndefined();
 
     const element = document.createElement('div');
-    primitivesMocks.isLeaving.value = true;
-    vm.overlay.handleSurfaceAfterLeave(element);
-    expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
+    vm.overlay.handleBackdropBeforeLeave(element);
+    vm.overlay.handleSurfaceBeforeLeave(element);
 
     await wrapper.setProps({ open: false });
     await nextTick();
+    await Promise.resolve();
 
+    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+
+    vm.overlay.handleSurfaceAfterLeave(element);
+    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+
+    vm.overlay.handleBackdropAfterLeave(element);
     expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
 
     wrapper.unmount();
@@ -174,24 +200,24 @@ describe('useOverlay', () => {
           open: { type: Boolean, required: true },
           title: { type: String, required: false },
           description: { type: String, required: false },
-          ariaLabel: { type: String, required: false }
+          ariaLabel: { type: String, required: false },
         },
         setup(props, { expose }) {
           const overlay = useOverlay(props, close, {
             prefix: 'dialog',
-            surfacePreset: 'modal-fade-scale'
+            surfacePreset: 'modal-fade-scale',
           });
 
           expose({ overlay });
           return { overlay };
         },
-        template: '<div />'
+        template: '<div />',
       }),
       {
         props: {
           open: true,
-          ariaLabel: 'Label only'
-        }
+          ariaLabel: 'Label only',
+        },
       }
     );
 
@@ -210,6 +236,39 @@ describe('useOverlay', () => {
     expect(primitivesMocks.handleBeforeLeave).toHaveBeenCalledTimes(1);
     expect(primitivesMocks.handleAfterLeave).toHaveBeenCalledTimes(1);
     expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+  });
+
+  it('does not request focus restoration on the initial closed render branch', async () => {
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: false,
+        },
+      }
+    );
+
+    await nextTick();
+    await Promise.resolve();
+
+    expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
 
     wrapper.unmount();
   });

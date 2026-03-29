@@ -4,6 +4,7 @@ title: Apply system, widget, and page-template placement discipline
 apply: by model decision
 instructions: use when adding a new system package, widget, page template, or composition surface above an existing system.
 ---
+
 Use this rule when a reusable surface could land in more than one layer.
 
 ## Do

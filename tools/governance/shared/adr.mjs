@@ -7,11 +7,13 @@ export const ADR_REQUIRED_SECTIONS = [
   'Consequences',
   'Alternatives',
   'Migration / Rollout',
-  'Related artifacts'
+  'Related artifacts',
 ];
 
 export function listAdrFiles() {
-  return walkFiles('docs/decisions', (relativePath) => /^docs\/decisions\/ADR-\d{4}-.+\.md$/.test(relativePath));
+  return walkFiles('docs/decisions', (relativePath) =>
+    /^docs\/decisions\/ADR-\d{4}-.+\.md$/.test(relativePath)
+  );
 }
 
 export function parseFrontmatter(markdown) {
@@ -58,7 +60,7 @@ export function parseFrontmatter(markdown) {
 
   return {
     attributes,
-    body: markdown.slice(match[0].length)
+    body: markdown.slice(match[0].length),
   };
 }
 
@@ -76,7 +78,7 @@ export function parseAdrFile(relativePath) {
     attributes,
     headings,
     markdown,
-    body
+    body,
   };
 }
 

@@ -58,4 +58,3 @@ Existing component transitions move onto semantic motion tokens and shared prese
 - [`packages/primitives/src/motion`](../../packages/primitives/src/motion)
 - [`packages/core/src/styles/motion.css`](../../packages/core/src/styles/motion.css)
 - [`docs/architecture/testing-architecture.md`](../architecture/testing-architecture.md)
-

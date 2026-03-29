@@ -12,7 +12,7 @@ import {
   dataGridColumns,
   dataGridFilterDefinitions,
   dataGridRows,
-  dataGridUiColumns
+  dataGridUiColumns,
 } from '../systems/data-grid/data-grid-fixtures';
 
 export const DataTableWidgetStoryHarness = defineComponent({
@@ -23,41 +23,47 @@ export const DataTableWidgetStoryHarness = defineComponent({
     UiButton,
     UiCard,
     UiPageSection,
-    UiPageTemplate
+    UiPageTemplate,
   },
   props: {
     mode: {
       type: String as PropType<'default' | 'loading' | 'empty' | 'no-results' | 'error'>,
-      default: 'default'
+      default: 'default',
     },
     subtreeTheme: {
       type: String as PropType<ThemeName | undefined>,
-      default: undefined
+      default: undefined,
     },
     composed: {
       type: Boolean,
-      default: false
+      default: false,
     },
     customSlots: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props) {
     const query = ref<DataGridQuery>(
       createBaseQuery(
         props.mode === 'no-results'
           ? {
-              search: 'No matches'
+              search: 'No matches',
             }
           : {}
       )
     );
     const selectedRowIds = ref<readonly string[]>(props.customSlots ? ['acc-001'] : []);
-    const effectiveRows = computed(() => (props.mode === 'empty' || props.mode === 'loading' ? [] : dataGridRows));
-    const result = computed(() => applyDataGridQuery(effectiveRows.value, dataGridColumns, query.value));
+    const effectiveRows = computed(() =>
+      props.mode === 'empty' || props.mode === 'loading' ? [] : dataGridRows
+    );
+    const result = computed(() =>
+      applyDataGridQuery(effectiveRows.value, dataGridColumns, query.value)
+    );
     const uiRows = computed(() => result.value.pageRows as readonly Record<string, unknown>[]);
-    const themeMeta = computed(() => (props.subtreeTheme ? getThemeMeta(props.subtreeTheme) : null));
+    const themeMeta = computed(() =>
+      props.subtreeTheme ? getThemeMeta(props.subtreeTheme) : null
+    );
 
     return {
       dataGridFilterDefinitions,
@@ -66,7 +72,7 @@ export const DataTableWidgetStoryHarness = defineComponent({
       result,
       selectedRowIds,
       themeMeta,
-      uiRows
+      uiRows,
     };
   },
   template: `
@@ -158,5 +164,5 @@ export const DataTableWidgetStoryHarness = defineComponent({
         </template>
       </DataTableWidget>
     </section>
-  `
+  `,
 });

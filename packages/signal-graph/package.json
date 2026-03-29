@@ -2,6 +2,15 @@
   "name": "@ww/signal-graph",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/signal-graph"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/signal-graph#readme",
   "sideEffects": [
     "./src/styles/index.css"
   ],
@@ -31,6 +40,6 @@
   },
   "scripts": {
     "build": "vite build",
-    "typecheck": "pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && vue-tsc -p tsconfig.json --noEmit"
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
   }
 }

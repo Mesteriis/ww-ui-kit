@@ -20,6 +20,6 @@ export type {
   DataGridRowIdAccessor,
   DataGridSelectionState,
   DataGridSort,
-  DataGridSortDirection
+  DataGridSortDirection,
 } from './model/types';
 export { normalizeDataGridQuery } from './model/query';

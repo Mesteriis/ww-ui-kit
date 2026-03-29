@@ -7,7 +7,7 @@ import { areaOptions, areaSeries } from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/Responsive',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -18,7 +18,7 @@ export const Responsive: StoryObj<typeof UiApexChart> = {
     setup() {
       return {
         areaOptions,
-        areaSeries
+        areaSeries,
       };
     },
     template: `
@@ -45,6 +45,6 @@ export const Responsive: StoryObj<typeof UiApexChart> = {
           />
         </div>
       </UiCard>
-    `
-  })
+    `,
+  }),
 };

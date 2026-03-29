@@ -11,7 +11,7 @@ describe('useApexEmptyState', () => {
       error: ref(undefined),
       emptyText: ref(''),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(axisState.showError.value).toBe(false);
@@ -25,7 +25,7 @@ describe('useApexEmptyState', () => {
       error: ref(undefined),
       emptyText: ref('Empty'),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(seriesWithZeroes.showEmpty.value).toBe(false);
@@ -39,7 +39,7 @@ describe('useApexEmptyState', () => {
       error: ref('Vendor failed'),
       emptyText: ref('Nothing yet'),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(explicitState.showError.value).toBe(true);
@@ -52,7 +52,7 @@ describe('useApexEmptyState', () => {
       error: ref(true),
       emptyText: ref('Nothing yet'),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(booleanErrorState.showError.value).toBe(true);
@@ -65,7 +65,7 @@ describe('useApexEmptyState', () => {
       error: ref(new Error('Real error')),
       emptyText: ref('Nothing yet'),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(errorObjectState.resolvedErrorText.value).toBe('Real error');
@@ -78,7 +78,7 @@ describe('useApexEmptyState', () => {
       error: ref(false),
       emptyText: ref(''),
       errorText: ref('Fallback error'),
-      noDataText: ref('No chart data')
+      noDataText: ref('No chart data'),
     });
 
     expect(state.showEmpty.value).toBe(true);

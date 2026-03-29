@@ -23,7 +23,7 @@ const pulseStyle = computed(() => ({
     :class="[
       `ui-signal-graph__pulse--${signal.variant}`,
       `ui-signal-graph__pulse--${signal.intensity}`,
-      { 'ui-signal-graph__pulse--reduced': reducedMotion }
+      { 'ui-signal-graph__pulse--reduced': reducedMotion },
     ]"
     :style="pulseStyle"
     :d="path"

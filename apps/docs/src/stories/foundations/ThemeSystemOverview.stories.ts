@@ -6,7 +6,7 @@ import { THEME_NAMES, getThemeMeta, getThemesByType, type ThemeName } from '@ww/
 
 const meta = {
   title: 'Foundations/Theme System Overview',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -30,7 +30,7 @@ export const Overview: StoryObj = {
         dialogOpen,
         drawerOpen,
         lightThemes,
-        subtreeTheme
+        subtreeTheme,
       };
     },
     template: `
@@ -115,6 +115,6 @@ export const Overview: StoryObj = {
           </section>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

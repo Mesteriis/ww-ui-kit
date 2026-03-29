@@ -13,7 +13,7 @@ import {
   dataGridColumns,
   dataGridFilterDefinitions,
   dataGridRows,
-  dataGridUiColumns
+  dataGridUiColumns,
 } from './data-grid/data-grid-demo';
 
 const basicQuery = ref<DataGridQuery>(createBaseQuery());
@@ -22,9 +22,15 @@ const themingQuery = ref<DataGridQuery>(createBaseQuery());
 const compositionQuery = ref<DataGridQuery>(createBaseQuery());
 const compositionSelection = ref<readonly string[]>([]);
 
-const basicResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, basicQuery.value));
-const themingResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, themingQuery.value));
-const compositionResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, compositionQuery.value));
+const basicResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, basicQuery.value)
+);
+const themingResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, themingQuery.value)
+);
+const compositionResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, compositionQuery.value)
+);
 const scopedTheme = getThemeMeta('belovodye');
 </script>
 
@@ -59,7 +65,9 @@ const scopedTheme = getThemeMeta('belovodye');
             <UiBadge>Rows: {{ basicResult.totalRows }}</UiBadge>
           </template>
           <template #bulk-actions="{ selectedCount, clearSelection }">
-            <UiButton size="sm" variant="secondary" @click="clearSelection">Clear {{ selectedCount }}</UiButton>
+            <UiButton size="sm" variant="secondary" @click="clearSelection"
+              >Clear {{ selectedCount }}</UiButton
+            >
           </template>
           <template #footer>
             Widget footer metadata stays shell-level and route-agnostic.
@@ -152,8 +160,14 @@ const scopedTheme = getThemeMeta('belovodye');
       class="playground__foundation-grid"
       data-playground-scenario="widget-data-table-composition"
     >
-      <UiPageTemplate title="Operations workspace" description="Widget + page-template composition proof">
-        <UiPageSection title="Accounts block" description="Apps can consume a widget instead of hand-wrapping the grid every time.">
+      <UiPageTemplate
+        title="Operations workspace"
+        description="Widget + page-template composition proof"
+      >
+        <UiPageSection
+          title="Accounts block"
+          description="Apps can consume a widget instead of hand-wrapping the grid every time."
+        >
           <DataTableWidget
             title="Accounts"
             description="Composed inside a reusable page shell."

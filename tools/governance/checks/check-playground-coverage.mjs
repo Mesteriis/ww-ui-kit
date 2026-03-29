@@ -4,11 +4,15 @@ import { PLAYGROUND_SCENARIOS } from '../../../apps/playground/src/testing/scena
 import { readText, walkFiles } from '../shared/workspace.mjs';
 
 const scenarioMap = new Map(PLAYGROUND_SCENARIOS.map((scenario) => [scenario.id, scenario]));
-const playgroundSource = walkFiles('apps/playground/src', (relativePath) => /\.vue$/.test(relativePath))
+const playgroundSource = walkFiles('apps/playground/src', (relativePath) =>
+  /\.vue$/.test(relativePath)
+)
   .map((relativePath) => readText(relativePath))
   .join('\n');
 
-for (const entry of PUBLIC_SURFACE_MANIFEST.filter((surface) => surface.requiresPlaygroundScenario)) {
+for (const entry of PUBLIC_SURFACE_MANIFEST.filter(
+  (surface) => surface.requiresPlaygroundScenario
+)) {
   const requiredScenarios = getRequiredPlaygroundScenarios(entry);
   for (const scenarioId of requiredScenarios) {
     if (!scenarioMap.has(scenarioId)) {

@@ -2,6 +2,15 @@
   "name": "@ww/data-grid",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/data-grid"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/data-grid#readme",
   "sideEffects": [
     "./src/styles/index.css"
   ],
@@ -26,6 +35,6 @@
   },
   "scripts": {
     "build": "vite build",
-    "typecheck": "pnpm --filter @ww/primitives build && pnpm --filter @ww/core build && vue-tsc -p tsconfig.json --noEmit"
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
   }
 }

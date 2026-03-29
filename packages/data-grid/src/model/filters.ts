@@ -37,8 +37,8 @@ export function setDataGridFilter(
     filters: nextFilters,
     pagination: {
       ...normalized.pagination,
-      page: 1
-    }
+      page: 1,
+    },
   };
 }
 
@@ -49,7 +49,7 @@ export function clearDataGridFilters(query: DataGridQuery): DataGridQuery {
     filters: {},
     pagination: {
       ...normalized.pagination,
-      page: 1
-    }
+      page: 1,
+    },
   };
 }

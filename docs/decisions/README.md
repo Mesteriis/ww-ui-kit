@@ -13,4 +13,3 @@ Automation:
 
 - `pnpm check:adr` validates naming, metadata, sections, index entries, and reference integrity
 - `pnpm verify` runs ADR checks together with the rest of the governance gates
-

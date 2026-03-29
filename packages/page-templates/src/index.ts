@@ -7,6 +7,10 @@ export { default as UiPageToolbar } from './shells/UiPageToolbar.vue';
 export {
   PAGE_TEMPLATE_LAYER_RULES,
   RESERVED_PAGE_TEMPLATE_NAMESPACES,
-  type PageTemplateLayerRule
+  type PageTemplateLayerRule,
 } from './shared/page-template-contracts';
-export { PAGE_TEMPLATE_WIDTHS, type PageTemplateProps, type PageTemplateWidth } from './shared/types';
+export {
+  PAGE_TEMPLATE_WIDTHS,
+  type PageTemplateProps,
+  type PageTemplateWidth,
+} from './shared/types';

@@ -10,20 +10,20 @@ describe('useScrollLock', () => {
       props: {
         active: {
           type: Boolean,
-          required: true
-        }
+          required: true,
+        },
       },
       setup(props) {
         useScrollLock(computed(() => props.active));
         return {};
       },
-      template: '<div />'
+      template: '<div />',
     });
 
     const wrapper = mount(Harness, {
       props: {
-        active: true
-      }
+        active: true,
+      },
     });
 
     expect(document.body.style.overflow).toBe('hidden');
@@ -48,14 +48,14 @@ describe('useScrollLock', () => {
       props: {
         active: {
           type: Boolean,
-          required: true
-        }
+          required: true,
+        },
       },
       setup(props) {
         useScrollLock(computed(() => props.active));
         return {};
       },
-      template: '<div />'
+      template: '<div />',
     });
 
     const first = mount(Harness, { props: { active: false } });
@@ -79,7 +79,7 @@ describe('useScrollLock', () => {
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     expect(() => {
@@ -91,7 +91,7 @@ describe('useScrollLock', () => {
     scope.stop();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 
@@ -109,14 +109,14 @@ describe('useScrollLock', () => {
       props: {
         active: {
           type: Boolean,
-          required: true
-        }
+          required: true,
+        },
       },
       setup(props) {
         useScrollLock(computed(() => props.active));
         return {};
       },
-      template: '<div />'
+      template: '<div />',
     });
 
     const wrapper = mount(Harness, { props: { active: true } });

@@ -4,6 +4,7 @@ title: packages/page-templates path rules
 apply: by file patterns
 patterns: packages/page-templates/**/*
 ---
+
 Use this rule when editing reusable page or layout shells.
 
 ## Do

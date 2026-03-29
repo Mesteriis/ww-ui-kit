@@ -5,17 +5,17 @@ export default defineConfig({
   plugins: [
     dts({
       entryRoot: 'src',
-      tsconfigPath: './tsconfig.json'
-    })
+      tsconfigPath: './tsconfig.json',
+    }),
   ],
   build: {
     lib: {
       entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'index'
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ['@ww/tokens']
-    }
-  }
+      external: ['@ww/tokens'],
+    },
+  },
 });

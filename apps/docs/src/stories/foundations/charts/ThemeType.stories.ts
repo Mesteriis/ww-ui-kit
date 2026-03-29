@@ -8,7 +8,7 @@ import { donutOptions, donutSeries, lineOptions, lineSeries } from './chart-fixt
 
 const meta = {
   title: 'Foundations/Charts/ThemeType',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -26,7 +26,7 @@ export const ThemeType: StoryObj<typeof UiApexChart> = {
         donutSeries,
         lightTheme,
         lineOptions,
-        lineSeries
+        lineSeries,
       };
     },
     template: `
@@ -61,6 +61,6 @@ export const ThemeType: StoryObj<typeof UiApexChart> = {
           />
         </section>
       </div>
-    `
-  })
+    `,
+  }),
 };

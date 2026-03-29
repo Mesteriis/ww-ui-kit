@@ -4,6 +4,7 @@ title: Keep visual tokens, theme axes, motion, overlays, and z-index inside sanc
 apply: always
 summary: Keep palette, easing, z-index, ThemeName, ThemeType, motion, overlays, and subtree theming inside sanctioned contracts.
 ---
+
 Visual and runtime contracts are foundational, not local hacks.
 
 ## Do

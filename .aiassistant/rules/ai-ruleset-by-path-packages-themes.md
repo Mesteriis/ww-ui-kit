@@ -4,12 +4,14 @@ title: packages/themes path rules
 apply: by file patterns
 patterns: packages/themes/**/*
 ---
+
 Use this rule when editing theme runtime or concrete theme mappings.
 
 ## Do
 
 - Keep `ThemeName` and derived `ThemeType` as the source of truth here.
-- Keep subtree theme and color-scheme behavior aligned with the current theme system.
+- Keep subtree theme and `color-scheme` behavior aligned with the current theme system.
+- Keep `color-scheme` owned by the shared `data-ui-theme-type` CSS contract instead of duplicating inline runtime styles.
 - Map semantic tokens here instead of inventing theme conditionals inside components.
 
 ## Do not
@@ -20,5 +22,6 @@ Use this rule when editing theme runtime or concrete theme mappings.
 
 ## Update together with
 
-- `packages/tokens/**/*`
+- `packages/themes/README.md`
+- `packages/tokens/README.md`
 - `docs/architecture/golden-path.md`

@@ -19,7 +19,7 @@ const props = withDefaults(
   }>(),
   {
     side: 'right',
-    closeOnOverlayClick: true
+    closeOnOverlayClick: true,
   }
 );
 
@@ -28,7 +28,9 @@ const emit = defineEmits<{
 }>();
 
 const close = () => emit('update:open', false);
-const surfacePreset = computed(() => (props.side === 'left' ? 'drawer-slide-right' : 'drawer-slide-left'));
+const surfacePreset = computed(() =>
+  props.side === 'left' ? 'drawer-slide-right' : 'drawer-slide-left'
+);
 const {
   anchorRef,
   backdropStyle,
@@ -47,18 +49,22 @@ const {
   panelRef,
   portalTarget,
   titleId,
-  descriptionId
+  descriptionId,
 } = useOverlay(props, close, {
   prefix: 'drawer',
   surfacePreset: () => surfacePreset.value,
-  backdropPreset: 'backdrop-soften'
+  backdropPreset: 'backdrop-soften',
 });
 </script>
 
 <template>
   <span ref="anchorRef" hidden data-ui-overlay-anchor="drawer" />
   <PrimitivePortal :to="portalTarget">
-    <div v-if="isActive" class="ui-overlay ui-overlay--drawer" :data-ui-state="props.open ? 'open' : 'closed'">
+    <div
+      v-if="isActive"
+      class="ui-overlay ui-overlay--drawer"
+      :data-ui-state="props.open ? 'open' : 'closed'"
+    >
       <Transition
         appear
         name="ui-motion"

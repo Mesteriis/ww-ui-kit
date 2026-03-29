@@ -28,10 +28,10 @@ describe('tabs', () => {
             <UiTabsPanel value="second">Two</UiTabsPanel>
             <UiTabsPanel value="third">Three</UiTabsPanel>
           </UiTabsRoot>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -76,7 +76,7 @@ describe('tabs', () => {
             <UiTabsPanel value="alpha">Alpha panel</UiTabsPanel>
             <UiTabsPanel value="beta">Beta panel</UiTabsPanel>
           </UiTabsRoot>
-        `
+        `,
       })
     );
 
@@ -87,7 +87,11 @@ describe('tabs', () => {
     }
 
     expect(beta.attributes('tabindex')).toBe('-1');
-    expect(wrapper.findAll('[role="tabpanel"]').some((panel) => panel.attributes('style')?.includes('display: none'))).toBe(true);
+    expect(
+      wrapper
+        .findAll('[role="tabpanel"]')
+        .some((panel) => panel.attributes('style')?.includes('display: none'))
+    ).toBe(true);
 
     await beta.trigger('click');
     await nextTick();
@@ -123,10 +127,10 @@ describe('tabs', () => {
             <UiTabsPanel value="disabled">Disabled panel</UiTabsPanel>
             <UiTabsPanel value="secondary">Secondary panel</UiTabsPanel>
           </UiTabsRoot>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -154,38 +158,37 @@ describe('tabs', () => {
       props: {
         defaultValue: {
           type: String,
-          default: undefined
+          default: undefined,
         },
         modelValue: {
           type: String,
-          default: undefined
+          default: undefined,
         },
         orientation: {
           type: String as () => 'horizontal' | 'vertical',
-          default: 'horizontal'
-        }
+          default: 'horizontal',
+        },
       },
       emits: ['update:modelValue'],
       setup(props, { emit, expose }) {
-        const context = createTabsContext(
-          props,
-          (event, value) => emit(event, value)
-        );
+        const context = createTabsContext(props, (event, value) => emit(event, value));
 
         expose({ context });
         return () => h('div');
-      }
+      },
     });
 
     const contextWrapper = mount(ContextHarness, {
       props: {
-        orientation: 'horizontal'
-      }
+        orientation: 'horizontal',
+      },
     });
 
-    const context = (contextWrapper.vm as typeof contextWrapper.vm & {
-      context: ReturnType<typeof createTabsContext>;
-    }).context;
+    const context = (
+      contextWrapper.vm as typeof contextWrapper.vm & {
+        context: ReturnType<typeof createTabsContext>;
+      }
+    ).context;
 
     expect(context.currentValue.value).toBe('');
 
@@ -193,10 +196,18 @@ describe('tabs', () => {
     const enabledButton = document.createElement('button');
     document.body.append(disabledButton, enabledButton);
 
-    const unregisterDisabled = context.registerTrigger('disabled-first', () => disabledButton, () => true);
+    const unregisterDisabled = context.registerTrigger(
+      'disabled-first',
+      () => disabledButton,
+      () => true
+    );
     expect(context.currentValue.value).toBe('');
 
-    const unregisterEnabled = context.registerTrigger('enabled-second', () => enabledButton, () => false);
+    const unregisterEnabled = context.registerTrigger(
+      'enabled-second',
+      () => enabledButton,
+      () => false
+    );
     expect(context.currentValue.value).toBe('enabled-second');
     expect(context.currentTabStop.value).toBe('enabled-second');
 
@@ -230,10 +241,10 @@ describe('tabs', () => {
             <UiTabsPanel value="first">One</UiTabsPanel>
             <UiTabsPanel value="second">Two</UiTabsPanel>
           </UiTabsRoot>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 

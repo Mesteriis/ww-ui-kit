@@ -12,9 +12,6 @@
     "rootDir": "src"
   },
   "exclude": ["src/**/*.test.ts"],
-  "references": [
-    { "path": "../primitives" },
-    { "path": "../core" }
-  ],
+  "references": [{ "path": "../primitives" }, { "path": "../core" }],
   "include": ["src/**/*.ts", "src/**/*.vue"]
 }

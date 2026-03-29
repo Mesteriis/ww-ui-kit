@@ -6,7 +6,7 @@ import { getThemeMeta } from '@ww/themes';
 
 const meta = {
   title: 'Foundations/Theme Scoped Overlay',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -83,6 +83,6 @@ export const ScopedThemeAndExplicitTarget: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

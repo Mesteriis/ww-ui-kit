@@ -6,7 +6,7 @@ import {
   normalizeDataGridQuery,
   type DataGridColumn,
   type DataGridFilterDefinition,
-  type DataGridQuery
+  type DataGridQuery,
 } from '@ww/data-grid';
 
 import { DataTableWidget } from '../../index';
@@ -20,12 +20,23 @@ interface DemoRow extends Record<string, unknown> {
 
 const rows: readonly DemoRow[] = Object.freeze([
   { id: 'row-001', name: 'Northwind', status: 'Healthy' },
-  { id: 'row-002', name: 'Aster', status: 'Risk' }
+  { id: 'row-002', name: 'Aster', status: 'Risk' },
 ]);
 
 const columns: readonly DataGridColumn<DemoRow>[] = Object.freeze([
-  createDataGridColumn<DemoRow>({ id: 'name', header: 'Name', accessorKey: 'name', sortable: true, hideable: false }),
-  createDataGridColumn<DemoRow>({ id: 'status', header: 'Status', accessorKey: 'status', sortable: true })
+  createDataGridColumn<DemoRow>({
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+    sortable: true,
+    hideable: false,
+  }),
+  createDataGridColumn<DemoRow>({
+    id: 'status',
+    header: 'Status',
+    accessorKey: 'status',
+    sortable: true,
+  }),
 ]);
 
 const filterDefinitions: readonly DataGridFilterDefinition[] = Object.freeze([
@@ -35,9 +46,9 @@ const filterDefinitions: readonly DataGridFilterDefinition[] = Object.freeze([
     type: 'select',
     options: [
       { label: 'Healthy', value: 'Healthy' },
-      { label: 'Risk', value: 'Risk' }
-    ]
-  }
+      { label: 'Risk', value: 'Risk' },
+    ],
+  },
 ]);
 
 const createQuery = (overrides: Partial<DataGridQuery> = {}) =>
@@ -47,10 +58,10 @@ const createQuery = (overrides: Partial<DataGridQuery> = {}) =>
     sort: [],
     pagination: {
       page: 1,
-      pageSize: 10
+      pageSize: 10,
     },
     columnVisibility: {},
-    ...overrides
+    ...overrides,
   });
 
 describe('DataTableWidget', () => {
@@ -67,15 +78,15 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: rows.length,
-        selectedRowIds: ['row-001']
+        selectedRowIds: ['row-001'],
       },
       slots: {
         'header-actions': '<button type="button">Refresh</button>',
         'toolbar-start': '<span>Toolbar start</span>',
         'toolbar-end': '<span>Toolbar end</span>',
         'bulk-actions': '<span>Custom bulk actions</span>',
-        footer: '<span>Footer meta</span>'
-      }
+        footer: '<span>Footer meta</span>',
+      },
     });
 
     expect(wrapper.find('.ui-widget-header').exists()).toBe(true);
@@ -89,6 +100,30 @@ describe('DataTableWidget', () => {
     expect(wrapper.text()).toContain('Footer meta');
   });
 
+  it('keeps header and footer composition available through slots when chrome toggles stay enabled', () => {
+    const wrapper = mount(DataTableWidget, {
+      props: {
+        rows,
+        columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
+        query: createQuery(),
+        totalRows: rows.length,
+        rowId: 'id',
+        density: 'compact',
+        showStatusBar: false,
+      },
+      slots: {
+        'header-actions': '<button type="button">Inspect widget</button>',
+        status: ({ pageCount }: { pageCount: number }) => h('span', `Pages ${pageCount}`),
+      },
+    });
+
+    expect(wrapper.find('.ui-widget-header').exists()).toBe(true);
+    expect(wrapper.text()).toContain('Inspect widget');
+    expect(wrapper.find('.ui-data-grid').attributes('data-ui-density')).toBe('compact');
+    expect(wrapper.text()).toContain('Pages 1');
+    expect(wrapper.findComponent({ name: 'DataTableWidgetStatus' }).exists()).toBe(false);
+  });
+
   it('hides header and toolbar when the widget-level composition flags are disabled', () => {
     const wrapper = mount(DataTableWidget, {
       props: {
@@ -98,8 +133,8 @@ describe('DataTableWidget', () => {
         query: createQuery(),
         totalRows: rows.length,
         showHeader: false,
-        showToolbar: false
-      }
+        showToolbar: false,
+      },
     });
 
     expect(wrapper.find('.ui-widget-header').exists()).toBe(false);
@@ -114,8 +149,8 @@ describe('DataTableWidget', () => {
         query: createQuery(),
         totalRows: rows.length,
         showStatusBar: false,
-        showColumnVisibility: false
-      }
+        showColumnVisibility: false,
+      },
     });
 
     expect(wrapper.find('.ui-data-grid-visibility').exists()).toBe(false);
@@ -123,17 +158,38 @@ describe('DataTableWidget', () => {
     expect(wrapper.get('figure').attributes('aria-label')).toBe('Data table widget');
   });
 
+  it('keeps footer slots visible when status chrome is disabled', () => {
+    const wrapper = mount(DataTableWidget, {
+      props: {
+        rows,
+        columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
+        query: createQuery(),
+        totalRows: rows.length,
+        showStatusBar: false,
+      },
+      slots: {
+        footer: '<span>Footer only</span>',
+      },
+    });
+
+    expect(wrapper.find('.ui-widget-footer').exists()).toBe(true);
+    expect(wrapper.text()).toContain('Footer only');
+    expect(wrapper.findComponent({ name: 'DataTableWidgetStatus' }).exists()).toBe(false);
+  });
+
   it('passes query, selection, and row click events through without mutating inputs', async () => {
     const frozenRows = Object.freeze([...rows]) as readonly Record<string, unknown>[];
-    const frozenColumns = Object.freeze(columns) as readonly DataGridColumn<Record<string, unknown>>[];
+    const frozenColumns = Object.freeze(columns) as readonly DataGridColumn<
+      Record<string, unknown>
+    >[];
     const wrapper = mount(DataTableWidget, {
       props: {
         rows: frozenRows,
         columns: frozenColumns,
         query: createQuery(),
         totalRows: rows.length,
-        selectedRowIds: []
-      }
+        selectedRowIds: [],
+      },
     });
 
     await wrapper.get('input[type="search"]').setValue('North');
@@ -142,7 +198,10 @@ describe('DataTableWidget', () => {
 
     expect(wrapper.emitted('update:query')?.at(0)?.[0]).toMatchObject({ search: 'North' });
     expect(wrapper.emitted('update:selectedRowIds')?.at(0)?.[0]).toEqual(['row-001']);
-    expect(wrapper.emitted('rowClick')?.at(0)?.[0]).toMatchObject({ id: 'row-001', name: 'Northwind' });
+    expect(wrapper.emitted('rowClick')?.at(0)?.[0]).toMatchObject({
+      id: 'row-001',
+      name: 'Northwind',
+    });
     expect(frozenRows[0]).toMatchObject({ id: 'row-001', name: 'Northwind' });
   });
 
@@ -153,8 +212,8 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: rows.length,
-        selectedRowIds: ['row-001']
-      }
+        selectedRowIds: ['row-001'],
+      },
     });
     const hidden = mount(DataTableWidget, {
       props: {
@@ -163,8 +222,8 @@ describe('DataTableWidget', () => {
         query: createQuery(),
         totalRows: rows.length,
         selectedRowIds: ['row-001'],
-        showBulkActions: false
-      }
+        showBulkActions: false,
+      },
     });
 
     expect(visible.find('.ui-data-grid-bulk-actions').exists()).toBe(true);
@@ -179,12 +238,12 @@ describe('DataTableWidget', () => {
         query: createQuery({
           search: 'North',
           filters: {
-            status: 'Healthy'
-          }
+            status: 'Healthy',
+          },
         }),
         totalRows: 8,
-        selectedRowIds: ['row-001']
-      }
+        selectedRowIds: ['row-001'],
+      },
     });
 
     expect(wrapper.text()).toContain('Rows: 8');
@@ -200,16 +259,16 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: 0,
-        loading: true
-      }
+        loading: true,
+      },
     });
     const empty = mount(DataTableWidget, {
       props: {
         rows: [],
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
-        totalRows: 0
-      }
+        totalRows: 0,
+      },
     });
     const error = mount(DataTableWidget, {
       props: {
@@ -217,8 +276,8 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: 0,
-        error: 'Controlled error'
-      }
+        error: 'Controlled error',
+      },
     });
     const customLoading = mount(DataTableWidget, {
       props: {
@@ -226,22 +285,22 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: 0,
-        loading: true
+        loading: true,
       },
       slots: {
-        loading: '<div>Custom loading</div>'
-      }
+        loading: '<div>Custom loading</div>',
+      },
     });
     const customEmpty = mount(DataTableWidget, {
       props: {
         rows: [],
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
-        totalRows: 0
+        totalRows: 0,
       },
       slots: {
-        empty: '<div>Custom empty</div>'
-      }
+        empty: '<div>Custom empty</div>',
+      },
     });
     const customError = mount(DataTableWidget, {
       props: {
@@ -249,23 +308,24 @@ describe('DataTableWidget', () => {
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery(),
         totalRows: 0,
-        error: 'Controlled error'
+        error: 'Controlled error',
       },
       slots: {
-        error: '<div>Custom error slot</div>'
-      }
+        error: '<div>Custom error slot</div>',
+      },
     });
     const footerAndStatus = mount(DataTableWidget, {
       props: {
         rows,
         columns: columns as readonly DataGridColumn<Record<string, unknown>>[],
         query: createQuery({ pagination: { page: 2, pageSize: 1 } }),
-        totalRows: 4
+        totalRows: 4,
       },
       slots: {
-        status: (slotProps: Record<string, unknown>) => h('div', `Status ${String(slotProps.totalRows)}`),
-        footer: '<span>Widget footer</span>'
-      }
+        status: (slotProps: Record<string, unknown>) =>
+          h('div', `Status ${String(slotProps.totalRows)}`),
+        footer: '<span>Widget footer</span>',
+      },
     });
 
     expect(loading.text()).toContain('Loading table data.');
@@ -285,12 +345,12 @@ describe('DataTableWidget', () => {
         setup() {
           return {
             columns,
-            filterDefinitions
+            filterDefinitions,
           };
         },
         data() {
           return {
-            query: createQuery()
+            query: createQuery(),
           };
         },
         template: `
@@ -304,7 +364,7 @@ describe('DataTableWidget', () => {
               :filter-definitions="filterDefinitions"
             />
           </section>
-        `
+        `,
       })
     );
 
@@ -320,11 +380,11 @@ describe('DataTableWidget', () => {
           search: 'North',
           filters: { status: 'Healthy' },
           sort: [{ id: 'name', direction: 'asc' }],
-          pagination: { page: 2, pageSize: 5 }
-        })
+          pagination: { page: 2, pageSize: 5 },
+        }),
       },
       totalRows: { value: 12 },
-      selectedRowIds: { value: ['row-001', 'row-002'] }
+      selectedRowIds: { value: ['row-001', 'row-002'] },
     });
 
     expect(state.selectedCount.value).toBe(2);
@@ -338,7 +398,7 @@ describe('DataTableWidget', () => {
       activeFilterCount: 1,
       page: 2,
       pageCount: 3,
-      pageSize: 5
+      pageSize: 5,
     });
   });
 });

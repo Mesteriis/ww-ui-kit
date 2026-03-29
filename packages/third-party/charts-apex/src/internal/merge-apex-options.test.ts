@@ -11,28 +11,28 @@ describe('mergeApexOptions', () => {
         toolbar: {
           tools: {
             download: true,
-            zoom: true
-          }
-        }
+            zoom: true,
+          },
+        },
       },
       colors: ['#111111', '#222222'],
       xaxis: {
-        categories: ['Jan', 'Feb']
-      }
+        categories: ['Jan', 'Feb'],
+      },
     };
 
     const overrides: ApexOptions = {
       chart: {
         toolbar: {
-          show: true
-        }
+          show: true,
+        },
       },
       colors: ['#333333'],
       xaxis: {
         labels: {
-          rotate: 0
-        }
-      }
+          rotate: 0,
+        },
+      },
     };
 
     const baseSnapshot = structuredClone(base);
@@ -46,17 +46,17 @@ describe('mergeApexOptions', () => {
           show: true,
           tools: {
             download: true,
-            zoom: true
-          }
-        }
+            zoom: true,
+          },
+        },
       },
       colors: ['#333333'],
       xaxis: {
         categories: ['Jan', 'Feb'],
         labels: {
-          rotate: 0
-        }
-      }
+          rotate: 0,
+        },
+      },
     });
     expect(base).toEqual(baseSnapshot);
     expect(overrides).toEqual(overrideSnapshot);
@@ -66,27 +66,27 @@ describe('mergeApexOptions', () => {
     const merged = mergeApexOptions(
       {
         tooltip: {
-          enabled: true
+          enabled: true,
         },
-        chart: null
+        chart: null,
       } as unknown as ApexOptions,
       undefined,
       {
         chart: {
-          id: 'chart-id'
+          id: 'chart-id',
         },
-        colors: ['#123456']
+        colors: ['#123456'],
       }
     );
 
     expect(merged).toEqual({
       chart: {
-        id: 'chart-id'
+        id: 'chart-id',
       },
       colors: ['#123456'],
       tooltip: {
-        enabled: true
-      }
+        enabled: true,
+      },
     });
   });
 
@@ -95,14 +95,14 @@ describe('mergeApexOptions', () => {
     const merged = mergeApexOptions(
       {
         chart: {
-          id: 'existing'
+          id: 'existing',
         },
-        custom: createdAt
+        custom: createdAt,
       } as unknown as ApexOptions,
       {
         chart: {
-          id: 'next'
-        }
+          id: 'next',
+        },
       }
     ) as ApexOptions & { custom?: Date };
 
@@ -115,19 +115,19 @@ describe('mergeApexOptions', () => {
       {
         chart: {
           toolbar: {
-            show: true
-          }
-        }
+            show: true,
+          },
+        },
       },
       {
         chart: {
-          toolbar: undefined
-        }
+          toolbar: undefined,
+        },
       }
     );
 
     expect(merged.chart?.toolbar).toEqual({
-      show: true
+      show: true,
     });
   });
 });

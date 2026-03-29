@@ -5,5 +5,5 @@ export type {
   UiApexChartProps,
   UiApexChartSeries,
   UiApexChartSize,
-  UiApexChartType
+  UiApexChartType,
 } from './types';

@@ -18,13 +18,13 @@ import {
   UiTabsPanel,
   UiTabsRoot,
   UiTabsTrigger,
-  UiTextarea
+  UiTextarea,
 } from '@ww/core';
 import { getThemeMeta } from '@ww/themes';
 
 const meta = {
   title: 'Foundations/Belovodye Theme',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -48,11 +48,13 @@ export const SystemShowcase: StoryObj = {
       UiTabsPanel,
       UiTabsRoot,
       UiTabsTrigger,
-      UiTextarea
+      UiTextarea,
     },
     setup() {
       const inputValue = ref('Belovodye analytics workspace');
-      const textareaValue = ref('Cold light surfaces, calm contrast, and restrained river-blue accents.');
+      const textareaValue = ref(
+        'Cold light surfaces, calm contrast, and restrained river-blue accents.'
+      );
       const selectValue = ref('dashboard');
       const checkboxValue = ref(true);
       const switchValue = ref(true);
@@ -64,7 +66,7 @@ export const SystemShowcase: StoryObj = {
       const options = [
         { label: 'Dashboard', value: 'dashboard' },
         { label: 'Landing section', value: 'landing' },
-        { label: 'Ops console', value: 'ops' }
+        { label: 'Ops console', value: 'ops' },
       ];
 
       return {
@@ -77,7 +79,7 @@ export const SystemShowcase: StoryObj = {
         selectValue,
         switchValue,
         tabValue,
-        textareaValue
+        textareaValue,
       };
     },
     template: `
@@ -205,6 +207,6 @@ export const SystemShowcase: StoryObj = {
           </div>
         </UiDrawer>
       </section>
-    `
-  })
+    `,
+  }),
 };

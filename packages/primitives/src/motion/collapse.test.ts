@@ -1,15 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { afterCollapseMotion, beforeCollapseMotion, runCollapseMotion } from './collapse';
+import {
+  __collapseTestUtils,
+  afterCollapseMotion,
+  beforeCollapseMotion,
+  runCollapseMotion,
+} from './collapse';
 
-function dispatchTransitionEnd(
-  element: HTMLElement,
-  propertyName: string
-) {
+function dispatchTransitionEnd(element: HTMLElement, propertyName: string) {
   const event = new Event('transitionend');
   Object.defineProperty(event, 'propertyName', {
     configurable: true,
-    value: propertyName
+    value: propertyName,
   });
   element.dispatchEvent(event);
 }
@@ -21,7 +23,7 @@ describe('collapse motion', () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: false })
+      value: vi.fn().mockReturnValue({ matches: false }),
     });
     Object.defineProperty(window, 'requestAnimationFrame', {
       configurable: true,
@@ -29,7 +31,7 @@ describe('collapse motion', () => {
       value: (callback: FrameRequestCallback) => {
         callback(0);
         return 1;
-      }
+      },
     });
     document.documentElement.style.setProperty('--ui-motion-duration-sm', '16ms');
   });
@@ -43,7 +45,7 @@ describe('collapse motion', () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: true })
+      value: vi.fn().mockReturnValue({ matches: true }),
     });
 
     const element = document.createElement('div');
@@ -56,11 +58,108 @@ describe('collapse motion', () => {
     expect(element.style.height).toBe('');
   });
 
+  it('covers collapse timing helpers for empty, millisecond, second, and computed transition lists', () => {
+    expect(__collapseTestUtils.parseTimeMs('')).toBe(0);
+    expect(__collapseTestUtils.parseTimeMs('24ms')).toBe(24);
+    expect(__collapseTestUtils.parseTimeMs('0.16s')).toBe(160);
+    expect(__collapseTestUtils.parseTimeMs('bads')).toBe(0);
+    expect(__collapseTestUtils.parseTimeMs('24')).toBe(24);
+    expect(__collapseTestUtils.readTransitionListMs(', 16ms, , 0.2s')).toEqual([16, 200]);
+    expect(__collapseTestUtils.readTransitionListMs('-16ms, 0.2s')).toEqual([200]);
+
+    const originalGetComputedStyle = window.getComputedStyle;
+    window.getComputedStyle = vi.fn(() => ({
+      transitionDelay: '',
+      transitionDuration: '',
+    })) as typeof window.getComputedStyle;
+
+    const element = document.createElement('div');
+    expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(24);
+
+    window.getComputedStyle = vi.fn(() => ({
+      transitionDelay: '8ms',
+      transitionDuration: '16ms, 0.2s',
+    })) as typeof window.getComputedStyle;
+
+    expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(208);
+
+    window.getComputedStyle = vi.fn(() => ({
+      transitionDelay: '8ms, 12ms',
+      transitionDuration: '16ms',
+    })) as typeof window.getComputedStyle;
+
+    expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(28);
+
+    window.getComputedStyle = vi.fn(() => ({
+      transitionDelay: '8ms',
+      transitionDuration: '',
+    })) as typeof window.getComputedStyle;
+
+    expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(32);
+
+    window.getComputedStyle = vi.fn(() => ({
+      transitionDelay: '',
+      transitionDuration: '16ms',
+    })) as typeof window.getComputedStyle;
+
+    expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(24);
+
+    window.getComputedStyle = originalGetComputedStyle;
+  });
+
+  it('covers direct transition-end fallback scheduling for helper-level cleanup branches', () => {
+    const element = document.createElement('div');
+    const done = vi.fn();
+    const scheduleFallback = __collapseTestUtils.waitForTransitionEnd(element, done);
+
+    scheduleFallback(24);
+    dispatchTransitionEnd(element, 'opacity');
+    expect(done).not.toHaveBeenCalled();
+
+    dispatchTransitionEnd(element, 'height');
+    dispatchTransitionEnd(element, 'height');
+    vi.runAllTimers();
+
+    expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it('covers transition-end cleanup before a timeout fallback is armed', () => {
+    const element = document.createElement('div');
+    const done = vi.fn();
+    __collapseTestUtils.waitForTransitionEnd(element, done);
+
+    dispatchTransitionEnd(element, 'height');
+    vi.runAllTimers();
+
+    expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it('covers the defensive finished guard when timeout completion races with transitionend', () => {
+    const element = document.createElement('div');
+    const done = vi.fn();
+    let timeoutCallback: (() => void) | undefined;
+    const originalSetTimeout = window.setTimeout;
+
+    window.setTimeout = vi.fn((callback: TimerHandler) => {
+      timeoutCallback = callback as () => void;
+      return 1;
+    }) as typeof window.setTimeout;
+
+    const scheduleFallback = __collapseTestUtils.waitForTransitionEnd(element, done);
+    scheduleFallback(24);
+    dispatchTransitionEnd(element, 'height');
+    timeoutCallback?.();
+
+    expect(done).toHaveBeenCalledTimes(1);
+
+    window.setTimeout = originalSetTimeout;
+  });
+
   it('prepares leave-phase styles before animating out', () => {
     const element = document.createElement('div');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 96
+      value: 96,
     });
 
     beforeCollapseMotion(element, { phase: 'leave', preset: 'collapse-y-soft' });
@@ -74,7 +173,7 @@ describe('collapse motion', () => {
     const element = document.createElement('div');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 120
+      value: 120,
     });
 
     beforeCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' });
@@ -96,11 +195,11 @@ describe('collapse motion', () => {
     const element = document.createElement('div');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 120
+      value: 120,
     });
     Object.defineProperty(element, 'offsetHeight', {
       configurable: true,
-      get: () => 120
+      get: () => 120,
     });
 
     const done = vi.fn();
@@ -120,7 +219,7 @@ describe('collapse motion', () => {
     element.style.setProperty('--ui-motion-duration-sm', '48ms');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 80
+      value: 80,
     });
 
     const done = vi.fn();
@@ -129,7 +228,7 @@ describe('collapse motion', () => {
     vi.advanceTimersByTime(47);
     expect(done).not.toHaveBeenCalled();
 
-    vi.advanceTimersByTime(81);
+    vi.advanceTimersByTime(1);
     expect(done).toHaveBeenCalledTimes(1);
   });
 
@@ -138,13 +237,34 @@ describe('collapse motion', () => {
     element.style.setProperty('--ui-motion-duration-sm', '24');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 80
+      value: 80,
     });
 
     const done = vi.fn();
     runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
 
-    vi.advanceTimersByTime(104);
+    vi.advanceTimersByTime(23);
+    expect(done).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it('parses second-based duration overrides without truncating them to milliseconds', () => {
+    const element = document.createElement('div');
+    element.style.setProperty('--ui-motion-duration-sm', '0.16s');
+    Object.defineProperty(element, 'scrollHeight', {
+      configurable: true,
+      value: 80,
+    });
+
+    const done = vi.fn();
+    runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
+
+    vi.advanceTimersByTime(159);
+    expect(done).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
     expect(done).toHaveBeenCalledTimes(1);
   });
 
@@ -153,22 +273,22 @@ describe('collapse motion', () => {
     const element = originalDocument.createElement('div');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 42
+      value: 42,
     });
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     const done = vi.fn();
     runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
-    vi.advanceTimersByTime(81);
+    vi.runAllTimers();
 
     expect(done).toHaveBeenCalledTimes(1);
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 
@@ -177,12 +297,12 @@ describe('collapse motion', () => {
     element.style.setProperty('--ui-motion-duration-sm', 'fast');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 24
+      value: 24,
     });
 
     const done = vi.fn();
     runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
-    vi.advanceTimersByTime(81);
+    vi.runAllTimers();
 
     expect(done).toHaveBeenCalledTimes(1);
   });
@@ -191,13 +311,13 @@ describe('collapse motion', () => {
     const element = document.createElement('div');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 56
+      value: 56,
     });
 
     const done = vi.fn();
     runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
     dispatchTransitionEnd(element, 'height');
-    vi.advanceTimersByTime(96);
+    vi.runAllTimers();
 
     expect(done).toHaveBeenCalledTimes(1);
   });
@@ -207,13 +327,50 @@ describe('collapse motion', () => {
     element.style.setProperty('--ui-motion-duration-sm', '0ms');
     Object.defineProperty(element, 'scrollHeight', {
       configurable: true,
-      value: 56
+      value: 56,
     });
 
     const done = vi.fn();
     runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
-    vi.advanceTimersByTime(81);
+    vi.runAllTimers();
 
     expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it('falls back to direct transition application when requestAnimationFrame and computed transition lists are unavailable', () => {
+    const originalGetComputedStyle = window.getComputedStyle;
+    Object.defineProperty(window, 'requestAnimationFrame', {
+      configurable: true,
+      writable: true,
+      value: undefined,
+    });
+    window.getComputedStyle = vi.fn((target: Element) => ({
+      getPropertyValue: (tokenName: string) => {
+        if (tokenName !== '--ui-motion-duration-sm') {
+          return '';
+        }
+
+        return target === document.documentElement ? '24ms' : '';
+      },
+      transitionDelay: '',
+      transitionDuration: '',
+    })) as typeof window.getComputedStyle;
+
+    const element = document.createElement('div');
+    Object.defineProperty(element, 'scrollHeight', {
+      configurable: true,
+      value: 32,
+    });
+
+    const done = vi.fn();
+    runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
+
+    vi.advanceTimersByTime(23);
+    expect(done).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    expect(done).toHaveBeenCalledTimes(1);
+
+    window.getComputedStyle = originalGetComputedStyle;
   });
 });

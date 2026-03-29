@@ -12,6 +12,7 @@ const props = withDefaults(
     modelValue?: boolean;
     id?: string;
     name?: string;
+    ariaLabel?: string;
     disabled?: boolean;
     invalid?: boolean;
     ariaDescribedby?: string;
@@ -19,7 +20,7 @@ const props = withDefaults(
   {
     modelValue: false,
     disabled: false,
-    invalid: false
+    invalid: false,
   }
 );
 
@@ -31,7 +32,9 @@ const field = useFieldContext();
 const fallbackId = useId('checkbox');
 const checkboxId = computed(() => props.id ?? field?.inputId.value ?? fallbackId.value);
 const isInvalid = computed(() => props.invalid || field?.invalid.value || false);
-const describedBy = computed(() => mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value));
+const describedBy = computed(() =>
+  mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
+);
 
 const onChange = (event: Event) => {
   if (event.target instanceof HTMLInputElement) {
@@ -49,6 +52,7 @@ const onChange = (event: Event) => {
       :name="props.name"
       :checked="props.modelValue"
       :disabled="props.disabled"
+      :aria-label="props.ariaLabel"
       :aria-invalid="isInvalid || undefined"
       :aria-describedby="describedBy"
       @change="onChange"

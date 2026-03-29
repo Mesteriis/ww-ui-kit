@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import vue from 'eslint-plugin-vue';
@@ -17,13 +18,13 @@ export function createConfig() {
         'vitest.config.ts',
         'vite.aliases.ts',
         '**/vite.config.ts',
-        '**/vitest.config.ts'
-      ]
+        '**/vitest.config.ts',
+      ],
     },
     js.configs.recommended,
     ...tseslint.configs.recommendedTypeChecked.map((config) => ({
       ...config,
-      files: typedFiles
+      files: typedFiles,
     })),
     ...vue.configs['flat/recommended'],
     {
@@ -33,13 +34,13 @@ export function createConfig() {
         sourceType: 'module',
         globals: {
           ...globals.browser,
-          ...globals.node
+          ...globals.node,
         },
         parserOptions: {
           parser: tseslint.parser,
           projectService: true,
-          extraFileExtensions: ['.vue']
-        }
+          extraFileExtensions: ['.vue'],
+        },
       },
       rules: {
         '@typescript-eslint/consistent-type-imports': 'error',
@@ -49,8 +50,8 @@ export function createConfig() {
           'error',
           {
             argsIgnorePattern: '^_',
-            varsIgnorePattern: '^_'
-          }
+            varsIgnorePattern: '^_',
+          },
         ],
         'vue/attribute-hyphenation': 'off',
         'vue/html-self-closing': 'off',
@@ -67,16 +68,16 @@ export function createConfig() {
             paths: [
               {
                 name: '@ww/primitives/motion',
-                message: 'Import from @ww/primitives instead of non-exported motion subpaths.'
+                message: 'Import from @ww/primitives instead of non-exported motion subpaths.',
               },
               {
                 name: '@ww/primitives/overlay',
-                message: 'Import from @ww/primitives instead of non-exported overlay subpaths.'
-              }
-            ]
-          }
-        ]
-      }
+                message: 'Import from @ww/primitives instead of non-exported overlay subpaths.',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       files: ['packages/core/src/**/*.{ts,vue}'],
@@ -85,16 +86,19 @@ export function createConfig() {
           'error',
           {
             paths: [
-              { name: '@ww/charts-apex', message: '@ww/core must not import vendor-backed adapters.' },
+              {
+                name: '@ww/charts-apex',
+                message: '@ww/core must not import vendor-backed adapters.',
+              },
               { name: '@ww/signal-graph', message: '@ww/core must not import systems packages.' },
               { name: '@ww/widgets', message: '@ww/core must not import widgets.' },
               { name: '@ww/page-templates', message: '@ww/core must not import page templates.' },
               { name: '@ww/docs', message: '@ww/core must not import apps.' },
-              { name: '@ww/playground', message: '@ww/core must not import apps.' }
-            ]
-          }
-        ]
-      }
+              { name: '@ww/playground', message: '@ww/core must not import apps.' },
+            ],
+          },
+        ],
+      },
     },
     {
       files: ['packages/widgets/src/**/*.{ts,vue}'],
@@ -104,11 +108,11 @@ export function createConfig() {
           {
             paths: [
               { name: '@ww/docs', message: '@ww/widgets must not import apps.' },
-              { name: '@ww/playground', message: '@ww/widgets must not import apps.' }
-            ]
-          }
-        ]
-      }
+              { name: '@ww/playground', message: '@ww/widgets must not import apps.' },
+            ],
+          },
+        ],
+      },
     },
     {
       files: ['packages/page-templates/src/**/*.{ts,vue}'],
@@ -118,11 +122,11 @@ export function createConfig() {
           {
             paths: [
               { name: '@ww/docs', message: '@ww/page-templates must not import apps.' },
-              { name: '@ww/playground', message: '@ww/page-templates must not import apps.' }
-            ]
-          }
-        ]
-      }
+              { name: '@ww/playground', message: '@ww/page-templates must not import apps.' },
+            ],
+          },
+        ],
+      },
     },
     {
       files: ['scripts/**/*.{js,mjs,cjs}', 'tools/**/*.{js,mjs,cjs}'],
@@ -130,37 +134,37 @@ export function createConfig() {
         ecmaVersion: 'latest',
         sourceType: 'module',
         globals: {
-          ...globals.node
-        }
-      }
+          ...globals.node,
+        },
+      },
     },
     {
       files: [
         '**/*.{stories,test,spec}.{ts,tsx}',
         'tests/**/*.{ts,mts,cts}',
         'tests/**/*.{js,mjs,cjs}',
-        'vitest.config.ts'
+        'vitest.config.ts',
       ],
       ...tseslint.configs.disableTypeChecked,
       languageOptions: {
         ...tseslint.configs.disableTypeChecked.languageOptions,
         globals: {
           ...globals.browser,
-          ...globals.node
+          ...globals.node,
         },
         parserOptions: {
           ...tseslint.configs.disableTypeChecked.languageOptions?.parserOptions,
           parser: tseslint.parser,
-          extraFileExtensions: ['.vue']
-        }
+          extraFileExtensions: ['.vue'],
+        },
       },
       rules: {
         ...tseslint.configs.disableTypeChecked.rules,
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
-        'no-undef': 'off'
-      }
+        'no-undef': 'off',
+      },
     },
     {
       files: ['tests/**/*.config.ts'],
@@ -168,17 +172,18 @@ export function createConfig() {
       languageOptions: {
         ...tseslint.configs.disableTypeChecked.languageOptions,
         globals: {
-          ...globals.node
+          ...globals.node,
         },
         parserOptions: {
           ...tseslint.configs.disableTypeChecked.languageOptions?.parserOptions,
-          parser: tseslint.parser
-        }
+          parser: tseslint.parser,
+        },
       },
       rules: {
         ...tseslint.configs.disableTypeChecked.rules,
-        'no-undef': 'off'
-      }
-    }
+        'no-undef': 'off',
+      },
+    },
+    eslintConfigPrettier
   );
 }

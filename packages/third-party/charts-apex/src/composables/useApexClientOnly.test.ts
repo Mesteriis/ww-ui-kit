@@ -27,8 +27,8 @@ describe('useApexClientOnly', () => {
         name: 'MockApexVendor',
         render() {
           return h('div', 'vendor');
-        }
-      })
+        },
+      }),
     }));
 
     const useApexClientOnly = await importUseApexClientOnly();
@@ -38,7 +38,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const first = mount(Harness);
@@ -78,7 +78,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);
@@ -108,7 +108,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);
@@ -130,7 +130,7 @@ describe('useApexClientOnly', () => {
     vi.doMock('vue3-apexcharts', () => ({
       get default() {
         throw new Error('vendor exploded');
-      }
+      },
     }));
 
     const useApexClientOnly = await importUseApexClientOnly();
@@ -140,7 +140,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);
@@ -158,7 +158,7 @@ describe('useApexClientOnly', () => {
     vi.doMock('vue3-apexcharts', () => ({
       get default() {
         throw 'vendor exploded';
-      }
+      },
     }));
 
     const useApexClientOnly = await importUseApexClientOnly();
@@ -168,7 +168,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);
@@ -184,9 +184,11 @@ describe('useApexClientOnly', () => {
 
   it('reuses an in-flight vendor import promise across concurrent mounts', async () => {
     let resolveVendor!: (value: { default: ReturnType<typeof defineComponent> }) => void;
-    const pendingVendorModule = new Promise<{ default: ReturnType<typeof defineComponent> }>((resolve) => {
-      resolveVendor = resolve;
-    });
+    const pendingVendorModule = new Promise<{ default: ReturnType<typeof defineComponent> }>(
+      (resolve) => {
+        resolveVendor = resolve;
+      }
+    );
 
     vi.doMock('vue3-apexcharts', () => pendingVendorModule);
 
@@ -197,7 +199,7 @@ describe('useApexClientOnly', () => {
         const state = useApexClientOnly();
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const first = mount(Harness);
@@ -208,8 +210,8 @@ describe('useApexClientOnly', () => {
         name: 'ConcurrentVendor',
         render() {
           return h('div', 'vendor');
-        }
-      })
+        },
+      }),
     });
 
     await flushAsyncWork();

@@ -4,7 +4,7 @@ import {
   centerSignalGraphNode,
   fitSignalGraphView,
   parseFitViewPadding,
-  resetSignalGraphViewport
+  resetSignalGraphViewport,
 } from './viewport-controller';
 
 describe('signal graph viewport controller', () => {
@@ -20,7 +20,7 @@ describe('signal graph viewport controller', () => {
         nodeId === 'node-a'
           ? {
               computedPosition: { x: 40, y: 60, z: 0 },
-              dimensions: { width: 180, height: 120 }
+              dimensions: { width: 180, height: 120 },
             }
           : undefined
       ),
@@ -29,7 +29,7 @@ describe('signal graph viewport controller', () => {
       setCenter: vi.fn(() => Promise.resolve(true)),
       setViewport: vi.fn(() => Promise.resolve(true)),
       zoomIn: vi.fn(),
-      zoomOut: vi.fn()
+      zoomOut: vi.fn(),
     };
 
     await fitSignalGraphView(store, undefined);

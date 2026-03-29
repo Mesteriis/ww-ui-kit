@@ -24,9 +24,9 @@ describe('useApexThemeOptions fallback branch', () => {
           container: null,
           themeName: 'light',
           themeType: 'light',
-          revision: 0
-        })
-      })
+          revision: 0,
+        }),
+      }),
     }));
 
     const { useApexThemeOptions } = await import('./useApexThemeOptions');
@@ -43,11 +43,11 @@ describe('useApexThemeOptions fallback branch', () => {
           chartId,
           type,
           options,
-          noDataText
+          noDataText,
         });
         expose(state);
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);

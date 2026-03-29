@@ -6,7 +6,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'stable',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/tokens/README.md'
+    readmePath: 'packages/tokens/README.md',
   },
   {
     packageName: '@ww/themes',
@@ -15,7 +15,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'stable',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/themes/README.md'
+    readmePath: 'packages/themes/README.md',
   },
   {
     packageName: '@ww/primitives',
@@ -24,7 +24,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'stable',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/primitives/README.md'
+    readmePath: 'packages/primitives/README.md',
   },
   {
     packageName: '@ww/core',
@@ -33,7 +33,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'stable',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/core/README.md'
+    readmePath: 'packages/core/README.md',
   },
   {
     packageName: '@ww/charts-apex',
@@ -42,7 +42,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'incubating',
     public: true,
     vendorBacked: true,
-    readmePath: 'packages/third-party/charts-apex/README.md'
+    readmePath: 'packages/third-party/charts-apex/README.md',
   },
   {
     packageName: '@ww/signal-graph',
@@ -51,7 +51,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'experimental',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/signal-graph/README.md'
+    readmePath: 'packages/signal-graph/README.md',
   },
   {
     packageName: '@ww/data-grid',
@@ -60,7 +60,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'incubating',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/data-grid/README.md'
+    readmePath: 'packages/data-grid/README.md',
   },
   {
     packageName: '@ww/widgets',
@@ -69,7 +69,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'incubating',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/widgets/README.md'
+    readmePath: 'packages/widgets/README.md',
   },
   {
     packageName: '@ww/page-templates',
@@ -78,7 +78,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     stability: 'incubating',
     public: true,
     vendorBacked: false,
-    readmePath: 'packages/page-templates/README.md'
+    readmePath: 'packages/page-templates/README.md',
   },
   {
     packageName: '@ww/eslint-config',
@@ -86,7 +86,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     packageLayer: 'tooling',
     stability: 'internal',
     public: false,
-    vendorBacked: false
+    vendorBacked: false,
   },
   {
     packageName: '@ww/tsconfig',
@@ -94,7 +94,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     packageLayer: 'tooling',
     stability: 'internal',
     public: false,
-    vendorBacked: false
+    vendorBacked: false,
   },
   {
     packageName: '@ww/docs',
@@ -102,7 +102,7 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     packageLayer: 'app',
     stability: 'internal',
     public: false,
-    vendorBacked: false
+    vendorBacked: false,
   },
   {
     packageName: '@ww/playground',
@@ -110,8 +110,8 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     packageLayer: 'app',
     stability: 'internal',
     public: false,
-    vendorBacked: false
-  }
+    vendorBacked: false,
+  },
 ]);
 
 export const PACKAGE_CLASSIFICATION_MAP = Object.freeze(

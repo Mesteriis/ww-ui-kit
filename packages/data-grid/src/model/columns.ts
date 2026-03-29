@@ -1,5 +1,10 @@
 import { normalizeDataGridQuery } from './query';
-import type { DataGridCellContext, DataGridCellValue, DataGridColumn, DataGridQuery } from './types';
+import type {
+  DataGridCellContext,
+  DataGridCellValue,
+  DataGridColumn,
+  DataGridQuery,
+} from './types';
 
 export function createDataGridColumn<TRow>(column: DataGridColumn<TRow>): DataGridColumn<TRow> {
   return column;
@@ -17,7 +22,9 @@ export function getDataGridColumnValue<TRow>(row: TRow, column: DataGridColumn<T
   return undefined;
 }
 
-export function renderDataGridCellValue<TRow>(context: DataGridCellContext<TRow>): DataGridCellValue {
+export function renderDataGridCellValue<TRow>(
+  context: DataGridCellContext<TRow>
+): DataGridCellValue {
   if (context.column.cell) {
     return context.column.cell(context);
   }
@@ -54,7 +61,10 @@ export function renderDataGridCellValue<TRow>(context: DataGridCellContext<TRow>
   }
 }
 
-export function isDataGridColumnVisible<TRow>(column: DataGridColumn<TRow>, query: DataGridQuery): boolean {
+export function isDataGridColumnVisible<TRow>(
+  column: DataGridColumn<TRow>,
+  query: DataGridQuery
+): boolean {
   if (!column.hideable) {
     return true;
   }
@@ -69,7 +79,9 @@ export function getVisibleDataGridColumns<TRow>(
   return columns.filter((column) => isDataGridColumnVisible(column, query));
 }
 
-export function getHideableDataGridColumns<TRow>(columns: readonly DataGridColumn<TRow>[]): DataGridColumn<TRow>[] {
+export function getHideableDataGridColumns<TRow>(
+  columns: readonly DataGridColumn<TRow>[]
+): DataGridColumn<TRow>[] {
   return columns.filter((column) => column.hideable !== false);
 }
 
@@ -84,11 +96,14 @@ export function setDataGridColumnVisibility(
 
   return {
     ...normalized,
-    columnVisibility
+    columnVisibility,
   };
 }
 
-export function toggleDataGridColumnVisibility(query: DataGridQuery, columnId: string): DataGridQuery {
+export function toggleDataGridColumnVisibility(
+  query: DataGridQuery,
+  columnId: string
+): DataGridQuery {
   const normalized = normalizeDataGridQuery(query);
   const isVisible = normalized.columnVisibility?.[columnId] !== false;
   return setDataGridColumnVisibility(normalized, columnId, !isVisible);
@@ -98,6 +113,6 @@ export function resetDataGridColumnVisibility(query: DataGridQuery): DataGridQue
   const normalized = normalizeDataGridQuery(query);
   return {
     ...normalized,
-    columnVisibility: {}
+    columnVisibility: {},
   };
 }

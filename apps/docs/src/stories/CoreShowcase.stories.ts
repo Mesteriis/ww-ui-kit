@@ -21,12 +21,12 @@ import {
   UiTabsPanel,
   UiTabsRoot,
   UiTabsTrigger,
-  UiTextarea
+  UiTextarea,
 } from '@ww/core';
 
 const meta = {
   title: 'Core/System Showcase',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -53,7 +53,7 @@ export const AllCoreComponents: StoryObj = {
       UiTabsPanel,
       UiTabsRoot,
       UiTabsTrigger,
-      UiTextarea
+      UiTextarea,
     },
     setup() {
       const inputValue = ref('Belovodye UiKit');
@@ -68,7 +68,7 @@ export const AllCoreComponents: StoryObj = {
       const options = [
         { label: 'Tokens', value: 'tokens' },
         { label: 'Themes', value: 'themes' },
-        { label: 'Core', value: 'core' }
+        { label: 'Core', value: 'core' },
       ];
 
       return {
@@ -80,7 +80,7 @@ export const AllCoreComponents: StoryObj = {
         selectValue,
         switchValue,
         tabsValue,
-        textareaValue
+        textareaValue,
       };
     },
     template: `
@@ -200,6 +200,6 @@ export const AllCoreComponents: StoryObj = {
           </template>
         </UiDrawer>
       </div>
-    `
-  })
+    `,
+  }),
 };

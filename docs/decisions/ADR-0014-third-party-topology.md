@@ -53,4 +53,3 @@ Current application:
 - [`docs/architecture/package-topology.md`](../architecture/package-topology.md)
 - [`tools/governance/checks/check-package-topology.mjs`](../../tools/governance/checks/check-package-topology.mjs)
 - [`packages/third-party/charts-apex`](../../packages/third-party/charts-apex)
-

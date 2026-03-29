@@ -10,6 +10,6 @@ export const spacingScale = {
     'space-8': '2rem',
     'space-10': '2.5rem',
     'space-12': '3rem',
-    'space-16': '4rem'
-  }
+    'space-16': '4rem',
+  },
 } as const;

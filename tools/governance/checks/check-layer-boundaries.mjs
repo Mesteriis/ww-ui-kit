@@ -1,14 +1,22 @@
 import { ALLOWED_LAYER_IMPORTS } from '../catalog/layer-rules.mjs';
-import { PACKAGE_CLASSIFICATION, PACKAGE_CLASSIFICATION_MAP } from '../catalog/package-classification.mjs';
+import {
+  PACKAGE_CLASSIFICATION,
+  PACKAGE_CLASSIFICATION_MAP,
+} from '../catalog/package-classification.mjs';
 import { collectImports, listSourceFiles } from '../shared/imports.mjs';
 import { readText } from '../shared/workspace.mjs';
 
 function getPackageFromFile(relativePath) {
-  return PACKAGE_CLASSIFICATION.find((entry) => relativePath.startsWith(`${entry.physicalPath}/`)) ?? null;
+  return (
+    PACKAGE_CLASSIFICATION.find((entry) => relativePath.startsWith(`${entry.physicalPath}/`)) ??
+    null
+  );
 }
 
 function getWorkspaceImport(specifier) {
-  const workspacePackageName = Object.keys(PACKAGE_CLASSIFICATION_MAP).find((packageName) => specifier === packageName);
+  const workspacePackageName = Object.keys(PACKAGE_CLASSIFICATION_MAP).find(
+    (packageName) => specifier === packageName
+  );
   return workspacePackageName ? PACKAGE_CLASSIFICATION_MAP[workspacePackageName] : null;
 }
 
@@ -18,7 +26,7 @@ const allowedVendorImports = new Map([
   ['@vue-flow/core', '@ww/signal-graph'],
   ['@vue-flow/background', '@ww/signal-graph'],
   ['@vue-flow/minimap', '@ww/signal-graph'],
-  ['@vue-flow/controls', '@ww/signal-graph']
+  ['@vue-flow/controls', '@ww/signal-graph'],
 ]);
 
 for (const relativePath of listSourceFiles()) {
@@ -73,11 +81,15 @@ for (const relativePath of listSourceFiles()) {
       );
     }
 
-    if (isPaletteRestrictedLayer && /--ui-(neutral|brand|success|warning|danger)-\d{2,3}/.test(source)) {
-      throw new Error(`${relativePath}: raw palette variables are forbidden outside tokens/themes.`);
+    if (
+      isPaletteRestrictedLayer &&
+      /--ui-(neutral|brand|success|warning|danger)-\d{2,3}/.test(source)
+    ) {
+      throw new Error(
+        `${relativePath}: raw palette variables are forbidden outside tokens/themes.`
+      );
     }
   }
 }
 
 console.log('Layer boundaries OK.');
-

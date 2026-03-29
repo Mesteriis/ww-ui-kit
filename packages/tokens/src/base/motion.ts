@@ -42,6 +42,6 @@ export const motionTokens = {
     'motion-stagger-xs': '24ms',
     'motion-stagger-sm': '32ms',
     'motion-stagger-md': '40ms',
-    'motion-stagger-lg': '56ms'
-  }
+    'motion-stagger-lg': '56ms',
+  },
 } as const;

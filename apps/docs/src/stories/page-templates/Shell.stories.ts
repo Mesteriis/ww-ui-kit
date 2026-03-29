@@ -1,15 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import { UiBadge, UiButton } from '@ww/core';
-import {
-  UiPageSection,
-  UiPageTemplate
-} from '@ww/page-templates';
+import { UiPageSection, UiPageTemplate } from '@ww/page-templates';
 import { UiWidgetShell } from '@ww/widgets';
 
 const meta = {
   title: 'Page Templates/Shell',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiPageTemplate>;
 
 export default meta;
@@ -21,7 +18,7 @@ export const Overview: StoryObj<typeof UiPageTemplate> = {
       UiButton,
       UiPageSection,
       UiPageTemplate,
-      UiWidgetShell
+      UiWidgetShell,
     },
     template: `
       <UiPageTemplate
@@ -53,6 +50,6 @@ export const Overview: StoryObj<typeof UiPageTemplate> = {
           Page templates stop at reusable shell structure. Real route pages stay in apps.
         </template>
       </UiPageTemplate>
-    `
-  })
+    `,
+  }),
 };

@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { UiBadge, UiButton } from '@ww/core';
-import {
-  UiPageSection,
-  UiPageTemplate
-} from '@ww/page-templates';
-import {
-  RESERVED_WIDGET_NAMESPACES,
-  UiWidgetShell
-} from '@ww/widgets';
+import { UiPageSection, UiPageTemplate } from '@ww/page-templates';
+import { RESERVED_WIDGET_NAMESPACES, UiWidgetShell } from '@ww/widgets';
 </script>
 
 <template>
-  <section id="testing-composition" class="playground__layer-stack" data-playground-scenario="composition">
+  <section
+    id="testing-composition"
+    class="playground__layer-stack"
+    data-playground-scenario="composition"
+  >
     <section id="testing-widgets" data-playground-scenario="widgets">
       <UiPageTemplate
         title="Widget shell showcase"
@@ -44,8 +42,9 @@ import {
                 <UiButton variant="secondary">Need help</UiButton>
               </template>
 
-              <p style="margin: 0;">
-                The widget layer is where black-box composed surfaces start. App-level auth orchestration still stays in apps.
+              <p style="margin: 0">
+                The widget layer is where black-box composed surfaces start. App-level auth
+                orchestration still stays in apps.
               </p>
 
               <template #footer>
@@ -63,8 +62,9 @@ import {
                 <UiBadge>Signal graph</UiBadge>
                 <UiBadge>Core controls</UiBadge>
               </div>
-              <p style="margin: 0;">
-                Widgets can consume systems, but should not become backend-aware orchestration containers.
+              <p style="margin: 0">
+                Widgets can consume systems, but should not become backend-aware orchestration
+                containers.
               </p>
             </UiWidgetShell>
           </div>
@@ -109,7 +109,7 @@ import {
             title="Workspace activity widget"
             description="Templates can host widgets, but apps still own routing, product-specific data loading, and backend concerns."
           >
-            <p style="margin: 0;">
+            <p style="margin: 0">
               This is the intended composition path for future reusable admin and dashboard shells.
             </p>
           </UiWidgetShell>
@@ -124,8 +124,9 @@ import {
             description="Composed settings widgets can stay reusable and still sit inside a canonical template."
             surface="subtle"
           >
-            <p style="margin: 0;">
-              Route pages stay in apps. Page templates remain layout shells, not route implementations.
+            <p style="margin: 0">
+              Route pages stay in apps. Page templates remain layout shells, not route
+              implementations.
             </p>
           </UiWidgetShell>
         </UiPageSection>

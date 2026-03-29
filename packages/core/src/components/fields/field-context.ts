@@ -37,6 +37,6 @@ export function createFieldState(
     errorId,
     hintId,
     inputId,
-    invalid
+    invalid,
   };
 }

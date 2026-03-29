@@ -9,11 +9,11 @@ describe('buttons', () => {
     const wrapper = mount(UiButton, {
       props: {
         loading: true,
-        variant: 'danger'
+        variant: 'danger',
       },
       slots: {
-        default: 'Delete'
-      }
+        default: 'Delete',
+      },
     });
 
     expect(wrapper.attributes('aria-busy')).toBe('true');
@@ -26,11 +26,11 @@ describe('buttons', () => {
   it('renders icon button with accessible label', () => {
     const wrapper = mount(UiIconButton, {
       props: {
-        ariaLabel: 'Open menu'
+        ariaLabel: 'Open menu',
       },
       slots: {
-        default: '☰'
-      }
+        default: '☰',
+      },
     });
 
     expect(wrapper.attributes('aria-label')).toBe('Open menu');
@@ -42,11 +42,11 @@ describe('buttons', () => {
       props: {
         tone: 'warning',
         appearance: 'outline',
-        effect: 'border-flow'
+        effect: 'border-flow',
       },
       slots: {
-        default: 'Inspect logs'
-      }
+        default: 'Inspect logs',
+      },
     });
 
     expect(wrapper.classes()).toContain('ui-button--tone-warning');
@@ -59,8 +59,8 @@ describe('buttons', () => {
     const wrapper = mount(UiIconButton, {
       props: {
         ariaLabel: 'Refresh',
-        loading: true
-      }
+        loading: true,
+      },
     });
 
     expect(wrapper.attributes('aria-busy')).toBe('true');
@@ -73,13 +73,13 @@ describe('buttons', () => {
         block: true,
         tone: 'brand',
         appearance: 'ghost',
-        type: 'submit'
+        type: 'submit',
       },
       slots: {
         default: 'Save',
         leftIcon: '<span>←</span>',
-        rightIcon: '<span>→</span>'
-      }
+        rightIcon: '<span>→</span>',
+      },
     });
 
     expect(wrapper.attributes('type')).toBe('submit');

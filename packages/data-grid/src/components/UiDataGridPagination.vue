@@ -15,7 +15,7 @@ const props = withDefaults(
     disabled?: boolean;
   }>(),
   {
-    disabled: false
+    disabled: false,
   }
 );
 
@@ -34,7 +34,13 @@ const emit = defineEmits<{
     <div class="ui-data-grid-pagination__controls">
       <UiSelectSimple
         :model-value="String(props.pageSize)"
-        :options="props.pageSizeOptions.map((option) => ({ label: `${option} / page`, value: String(option) }))"
+        aria-label="Rows per page"
+        :options="
+          props.pageSizeOptions.map((option) => ({
+            label: `${option} / page`,
+            value: String(option),
+          }))
+        "
         :disabled="props.disabled"
         @update:model-value="emit('pageSizeChange', Number($event))"
       />
@@ -48,7 +54,9 @@ const emit = defineEmits<{
         Previous
       </UiButton>
 
-      <span class="ui-data-grid-pagination__page">Page {{ props.page }} / {{ props.pageCount }}</span>
+      <span class="ui-data-grid-pagination__page"
+        >Page {{ props.page }} / {{ props.pageCount }}</span
+      >
 
       <UiButton
         variant="secondary"

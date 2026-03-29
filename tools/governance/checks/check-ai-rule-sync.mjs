@@ -4,20 +4,22 @@ import {
   readGeneratedFile,
   renderAgentsMirror,
   renderAiRuleOverview,
-  renderCopilotInstructions
+  renderCopilotInstructions,
 } from '../ai-rules/shared.mjs';
 
 export function checkAiRuleSync() {
   const generatedFiles = [
     [AI_RULE_OVERVIEW_PATH, renderAiRuleOverview().trimEnd()],
     ['AGENTS.md', renderAgentsMirror().trimEnd()],
-    ['.github/copilot-instructions.md', renderCopilotInstructions().trimEnd()]
+    ['.github/copilot-instructions.md', renderCopilotInstructions().trimEnd()],
   ];
 
   for (const [relativePath, expected] of generatedFiles) {
     const actual = readGeneratedFile(relativePath);
     if (actual !== expected) {
-      throw new Error(`${relativePath} is out of sync with the canonical AI rules pack. Run "pnpm build:ai-rules".`);
+      throw new Error(
+        `${relativePath} is out of sync with the canonical AI rules pack. Run "pnpm build:ai-rules".`
+      );
     }
   }
 

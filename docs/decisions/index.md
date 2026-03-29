@@ -1,20 +1,22 @@
 # ADR Index
 
-ID | status | title | date | summary
---- | --- | --- | --- | ---
-ADR-0001 | accepted | Monorepo | 2026-03-18 | Establishes the pnpm workspace monorepo.
-ADR-0002 | accepted | Token Theme Split | 2026-03-18 | Separates token contracts from theme values.
-ADR-0003 | accepted | Primitives Core Split | 2026-03-18 | Separates low-level behavior from styled components.
-ADR-0004 | accepted | Storybook Source Of Truth | 2026-03-18 | Makes Storybook the canonical state documentation layer.
-ADR-0005 | accepted | Versioning And Release | 2026-03-19 | Uses SemVer and Changesets for release discipline.
-ADR-0006 | accepted | Motion System | 2026-03-20 | Keeps motion tokens, runtime, and CSS utilities in foundation.
-ADR-0007 | accepted | Overlay Layer Stack | 2026-03-21 | Centralizes layer slots, portal rules, and dismiss behavior.
-ADR-0008 | accepted | Theme Type Model | 2026-03-22 | Separates ThemeName from derived ThemeType metadata.
-ADR-0009 | accepted | Interactive Signal Graph UI | 2026-03-23 | Adds `@ww/signal-graph` as a feature-first optional system package.
-ADR-0010 | accepted | Widgets And Page Templates Layer | 2026-03-24 | Adds reusable widget and page-template layers above systems.
-ADR-0011 | accepted | Platform Governance And Public API Discipline | 2026-03-29 | Introduces machine-checked layer, topology, and public surface governance.
-ADR-0012 | accepted | Testing System And Coverage Governance | 2026-03-29 | Splits tests into unit, e2e, and playground contours with coverage gates.
-ADR-0013 | superseded | AI Agent Rules And Repo Automation | 2026-03-29 | Established a single canonical AI rules source before the pattern-based rules pack replaced it.
-ADR-0014 | accepted | Third Party Topology | 2026-03-29 | Distinguishes vendor-backed adapters from feature-first system packages.
-ADR-0015 | accepted | Data Grid System Package | 2026-03-29 | Adds `@ww/data-grid` as a controlled, feature-first dense table system package.
-ADR-0016 | accepted | Pattern Based AI Rules Pack | 2026-03-29 | Replaces the monolithic AI rules document with a manifest-driven rules pack and thin generated mirrors.
+| ID       | status     | title                                             | date       | summary                                                                                                                       |
+| -------- | ---------- | ------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| ADR-0001 | accepted   | Monorepo                                          | 2026-03-18 | Establishes the pnpm workspace monorepo.                                                                                      |
+| ADR-0002 | accepted   | Token Theme Split                                 | 2026-03-18 | Separates token contracts from theme values.                                                                                  |
+| ADR-0003 | accepted   | Primitives Core Split                             | 2026-03-18 | Separates low-level behavior from styled components.                                                                          |
+| ADR-0004 | accepted   | Storybook Source Of Truth                         | 2026-03-18 | Makes Storybook the canonical state documentation layer.                                                                      |
+| ADR-0005 | accepted   | Versioning And Release                            | 2026-03-19 | Uses SemVer and Changesets for release discipline.                                                                            |
+| ADR-0006 | accepted   | Motion System                                     | 2026-03-20 | Keeps motion tokens, runtime, and CSS utilities in foundation.                                                                |
+| ADR-0007 | accepted   | Overlay Layer Stack                               | 2026-03-21 | Centralizes layer slots, portal rules, and dismiss behavior.                                                                  |
+| ADR-0008 | accepted   | Theme Type Model                                  | 2026-03-22 | Separates ThemeName from derived ThemeType metadata.                                                                          |
+| ADR-0009 | accepted   | Interactive Signal Graph UI                       | 2026-03-23 | Adds `@ww/signal-graph` as a feature-first optional system package.                                                           |
+| ADR-0010 | accepted   | Widgets And Page Templates Layer                  | 2026-03-24 | Adds reusable widget and page-template layers above systems.                                                                  |
+| ADR-0011 | accepted   | Platform Governance And Public API Discipline     | 2026-03-29 | Introduces machine-checked layer, topology, and public surface governance.                                                    |
+| ADR-0012 | accepted   | Testing System And Coverage Governance            | 2026-03-29 | Splits tests into unit, e2e, and playground contours with coverage gates.                                                     |
+| ADR-0013 | superseded | AI Agent Rules And Repo Automation                | 2026-03-29 | Established a single canonical AI rules source before the pattern-based rules pack replaced it.                               |
+| ADR-0014 | accepted   | Third Party Topology                              | 2026-03-29 | Distinguishes vendor-backed adapters from feature-first system packages.                                                      |
+| ADR-0015 | accepted   | Data Grid System Package                          | 2026-03-29 | Adds `@ww/data-grid` as a controlled, feature-first dense table system package.                                               |
+| ADR-0016 | accepted   | Pattern Based AI Rules Pack                       | 2026-03-29 | Replaces the monolithic AI rules document with a manifest-driven rules pack and thin generated mirrors.                       |
+| ADR-0017 | accepted   | Playground Component Lab And Maintainer Workbench | 2026-03-29 | Splits playground into stable testing harness routes and a schema-driven maintainer component lab.                            |
+| ADR-0018 | accepted   | Workspace Tooling And Browser Diagnostics         | 2026-03-29 | Replaces manual workspace chains, adds retry-aware browser diagnostics, and formalizes formatting and Node baseline guidance. |

@@ -7,7 +7,7 @@ import { DataGridStoryHarness } from './data-grid-fixtures';
 const meta = {
   title: 'Systems/Data Grid/Theming',
   component: DataGridStoryHarness,
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;
@@ -30,6 +30,6 @@ export const Overview: StoryObj<typeof meta> = {
           <DataGridStoryHarness subtree-theme="belovodye" />
         </section>
       </div>
-    `
-  })
+    `,
+  }),
 };

@@ -24,10 +24,14 @@ const seriesPaletteFallback = [
   'var(--ui-chart-series-5, currentColor)',
   'var(--ui-chart-series-6, currentColor)',
   'var(--ui-chart-series-7, currentColor)',
-  'var(--ui-chart-series-8, currentColor)'
+  'var(--ui-chart-series-8, currentColor)',
 ] as const;
 
-function readCssVariable(styles: CSSStyleDeclaration | null, name: string, fallback: string): string {
+function readCssVariable(
+  styles: CSSStyleDeclaration | null,
+  name: string,
+  fallback: string
+): string {
   const value = styles?.getPropertyValue(name).trim();
   return value || fallback;
 }
@@ -46,8 +50,16 @@ function createThemeDrivenOptions(
     readCssVariable(styles, `--ui-chart-series-${index + 1}`, fallback)
   );
   const primarySeriesColor = seriesPalette[0]!;
-  const background = readCssVariable(styles, '--ui-surface-default', 'var(--ui-surface-default, Canvas)');
-  const textSecondary = readCssVariable(styles, '--ui-text-secondary', 'var(--ui-text-secondary, CanvasText)');
+  const background = readCssVariable(
+    styles,
+    '--ui-surface-default',
+    'var(--ui-surface-default, Canvas)'
+  );
+  const textSecondary = readCssVariable(
+    styles,
+    '--ui-text-secondary',
+    'var(--ui-text-secondary, CanvasText)'
+  );
   const fontFamily = readCssVariable(styles, '--ui-text-font-family', 'inherit');
   const gridLine = readCssVariable(
     styles,
@@ -81,125 +93,129 @@ function createThemeDrivenOptions(
         enabled: true,
         fill: {
           color: selectionFill,
-          opacity: 1
+          opacity: 1,
         },
         stroke: {
           color: selectionBorder,
-          width: 1
-        }
+          width: 1,
+        },
       },
       toolbar: {
-        show: true
-      }
+        show: true,
+      },
     },
     colors: seriesPalette,
     theme: {
-      mode: themeType
+      mode: themeType,
     },
     grid: {
       borderColor: gridLine,
-      strokeDashArray: 4
+      strokeDashArray: 4,
     },
     xaxis: {
       axisBorder: {
         show: true,
-        color: axisBorder
+        color: axisBorder,
       },
       axisTicks: {
         show: true,
-        color: axisTick
+        color: axisTick,
       },
       labels: {
         style: {
           colors: axisLabel,
-          fontFamily
-        }
+          fontFamily,
+        },
       },
       crosshairs: {
         stroke: {
-          color: crosshair
-        }
-      }
+          color: crosshair,
+        },
+      },
     },
     yaxis: {
       labels: {
         style: {
           colors: axisLabel,
-          fontFamily
-        }
-      }
+          fontFamily,
+        },
+      },
     },
     legend: {
       labels: {
-        colors: legendText
-      }
+        colors: legendText,
+      },
     },
     stroke: {
       width:
-        chartType === 'bar' || chartType === 'heatmap' || chartType === 'treemap' || chartType === 'donut' || chartType === 'pie'
+        chartType === 'bar' ||
+        chartType === 'heatmap' ||
+        chartType === 'treemap' ||
+        chartType === 'donut' ||
+        chartType === 'pie'
           ? 0
           : chartType === 'radialBar'
             ? 2
             : 3,
-      curve: chartType === 'line' || chartType === 'area' ? 'smooth' : 'straight'
+      curve: chartType === 'line' || chartType === 'area' ? 'smooth' : 'straight',
     },
     fill: {
-      opacity: chartType === 'area' ? 0.18 : 1
+      opacity: chartType === 'area' ? 0.18 : 1,
     },
     markers: {
       size: chartType === 'line' || chartType === 'area' ? 4 : 0,
       strokeColors: markerStroke,
-      strokeWidth: 2
+      strokeWidth: 2,
     },
     plotOptions: {
       bar: {
         borderRadius: 6,
-        columnWidth: '58%'
+        columnWidth: '58%',
       },
       radialBar: {
         hollow: {
-          size: '54%'
+          size: '54%',
         },
         track: {
-          background: gridLine
-        }
-      }
+          background: gridLine,
+        },
+      },
     },
     tooltip: {
       enabled: true,
       theme: themeType,
       style: {
-        fontFamily
+        fontFamily,
       },
       fillSeriesColor: false,
       marker: {
-        show: true
-      }
+        show: true,
+      },
     },
     noData: {
       text: noDataText,
       style: {
         color: noDataColor,
-        fontFamily
-      }
+        fontFamily,
+      },
     },
     responsive: [
       {
         breakpoint: 640,
         options: {
           legend: {
-            position: 'bottom'
-          }
-        }
-      }
+            position: 'bottom',
+          },
+        },
+      },
     ],
     states: {
       active: {
         filter: {
-          type: 'none'
-        }
-      }
-    }
+          type: 'none',
+        },
+      },
+    },
   };
 }
 
@@ -208,7 +224,7 @@ export function useApexThemeOptions({
   chartId,
   type,
   options,
-  noDataText
+  noDataText,
 }: UseApexThemeOptionsParams) {
   const { themeScope } = useApexThemeSync(hostRef);
 
@@ -226,7 +242,7 @@ export function useApexThemeOptions({
               type.value,
               noDataText.value
             ),
-            userOptions: options.value
+            userOptions: options.value,
           }
         : {
             chartId: chartId.value,
@@ -238,13 +254,13 @@ export function useApexThemeOptions({
               themeScope.value.themeType,
               type.value,
               noDataText.value
-            )
+            ),
           }
     )
   );
 
   return {
     resolvedOptions,
-    themeScope
+    themeScope,
   };
 }

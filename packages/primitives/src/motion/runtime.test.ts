@@ -8,7 +8,7 @@ import {
   prefersReducedMotion,
   resolveCollapseMotionPreset,
   resolveMotionPreset,
-  resolveTransitionMotionPreset
+  resolveTransitionMotionPreset,
 } from './runtime';
 
 describe('motion runtime', () => {
@@ -17,7 +17,7 @@ describe('motion runtime', () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: false })
+      value: vi.fn().mockReturnValue({ matches: false }),
     });
   });
 
@@ -46,7 +46,7 @@ describe('motion runtime', () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: undefined
+      value: undefined,
     });
 
     expect(prefersReducedMotion()).toBe(false);
@@ -56,7 +56,7 @@ describe('motion runtime', () => {
     const originalWindow = globalThis.window;
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     const runtimeModule = await import('./runtime');
@@ -65,7 +65,7 @@ describe('motion runtime', () => {
 
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
-      value: originalWindow
+      value: originalWindow,
     });
   });
 
@@ -73,7 +73,7 @@ describe('motion runtime', () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: true })
+      value: vi.fn().mockReturnValue({ matches: true }),
     });
 
     const preset = resolveTransitionMotionPreset('backdrop-soften');
@@ -175,15 +175,15 @@ describe('motion runtime', () => {
           antiUseCases: ['none'],
           reducedMotion: 'softened',
           enter: { opacity: '0', transform: 'translateY(4px)' },
-          leave: { opacity: '0', transform: 'translateY(-4px)' }
-        }
-      }
+          leave: { opacity: '0', transform: 'translateY(-4px)' },
+        },
+      },
     }));
 
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: true })
+      value: vi.fn().mockReturnValue({ matches: true }),
     });
 
     const runtimeModule = await import('./runtime');
@@ -204,15 +204,15 @@ describe('motion runtime', () => {
         'collapse-y-soft': MOTION_PRESETS['collapse-y-soft'],
         'reduced-collapse': {
           ...MOTION_PRESETS['fade-in'],
-          reducedPreset: 'collapse-y-soft'
-        }
-      }
+          reducedPreset: 'collapse-y-soft',
+        },
+      },
     }));
 
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: true })
+      value: vi.fn().mockReturnValue({ matches: true }),
     });
 
     const runtimeModule = await import('./runtime');
@@ -233,15 +233,15 @@ describe('motion runtime', () => {
         'fade-out': MOTION_PRESETS['fade-out'],
         recursive: {
           ...MOTION_PRESETS['fade-in'],
-          reducedPreset: 'fade-out'
-        }
-      }
+          reducedPreset: 'fade-out',
+        },
+      },
     }));
 
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
-      value: vi.fn().mockReturnValue({ matches: true })
+      value: vi.fn().mockReturnValue({ matches: true }),
     });
 
     const runtimeModule = await import('./runtime');
@@ -249,6 +249,118 @@ describe('motion runtime', () => {
 
     expect(preset.durationToken).toBe('--ui-motion-duration-instant');
     expect(preset.properties).toBe('opacity');
+
+    vi.doUnmock('./presets');
+    vi.resetModules();
+  });
+
+  it('falls back to the none preset when reduced transition presets recurse in a cycle', async () => {
+    vi.resetModules();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    vi.doMock('./presets', () => ({
+      MOTION_PRESETS: {
+        'fade-in': MOTION_PRESETS['fade-in'],
+        'cycle-a': {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: 'cycle-b',
+        },
+        'cycle-b': {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: 'cycle-a',
+        },
+      },
+    }));
+
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockReturnValue({ matches: true }),
+    });
+
+    const runtimeModule = await import('./runtime');
+    const preset = runtimeModule.resolveTransitionMotionPreset('cycle-a', 'fade-in');
+
+    expect(preset.durationToken).toBe('--ui-motion-duration-instant');
+    expect(preset.enter.transform).toBe('none');
+    expect(warn).toHaveBeenCalledWith(
+      '[ui-motion] Reduced motion preset chain for "cycle-b" is recursive or too deep. Falling back to "none".'
+    );
+
+    vi.doUnmock('./presets');
+    vi.resetModules();
+  });
+
+  it('warns only once when a recursive reduced-motion preset chain is resolved repeatedly', async () => {
+    vi.resetModules();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    vi.doMock('./presets', () => ({
+      MOTION_PRESETS: {
+        'fade-in': MOTION_PRESETS['fade-in'],
+        'cycle-a': {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: 'cycle-b',
+        },
+        'cycle-b': {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: 'cycle-a',
+        },
+      },
+    }));
+
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockReturnValue({ matches: true }),
+    });
+
+    const runtimeModule = await import('./runtime');
+    runtimeModule.resolveTransitionMotionPreset('cycle-a', 'fade-in');
+    runtimeModule.resolveTransitionMotionPreset('cycle-a', 'fade-in');
+
+    expect(warn).toHaveBeenCalledTimes(1);
+
+    vi.doUnmock('./presets');
+    vi.resetModules();
+  });
+
+  it('falls back to the none preset when reduced transition preset chains exceed the guard depth', async () => {
+    vi.resetModules();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const deepChainPresets = Object.fromEntries(
+      Array.from({ length: 10 }, (_, index) => [
+        `depth-${index}`,
+        {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: `depth-${index + 1}`,
+        },
+      ])
+    );
+
+    vi.doMock('./presets', () => ({
+      MOTION_PRESETS: {
+        'fade-in': MOTION_PRESETS['fade-in'],
+        ...deepChainPresets,
+        'depth-10': {
+          ...MOTION_PRESETS['fade-in'],
+          reducedPreset: undefined,
+        },
+      },
+    }));
+
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockReturnValue({ matches: true }),
+    });
+
+    const runtimeModule = await import('./runtime');
+    const preset = runtimeModule.resolveTransitionMotionPreset('depth-0', 'fade-in');
+
+    expect(preset.durationToken).toBe('--ui-motion-duration-instant');
+    expect(preset.properties).toBe('opacity');
+    expect(warn).toHaveBeenCalledWith(
+      '[ui-motion] Reduced motion preset chain for "depth-9" is recursive or too deep. Falling back to "none".'
+    );
 
     vi.doUnmock('./presets');
     vi.resetModules();

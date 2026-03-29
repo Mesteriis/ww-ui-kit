@@ -6,7 +6,7 @@ const props = withDefaults(
     variant?: 'neutral' | 'brand' | 'success' | 'warning' | 'danger';
   }>(),
   {
-    variant: 'neutral'
+    variant: 'neutral',
   }
 );
 </script>

@@ -15,7 +15,7 @@ export const baseTokenGroups = {
   ...shadowScale,
   ...typographyScale,
   ...motionTokens,
-  ...zIndexTokens
+  ...zIndexTokens,
 } as const;
 
 const flattenedBaseTokens = Object.values(baseTokenGroups).reduce<Record<string, string>>(
@@ -36,5 +36,5 @@ export {
   shadowScale,
   spacingScale,
   typographyScale,
-  zIndexTokens
+  zIndexTokens,
 };

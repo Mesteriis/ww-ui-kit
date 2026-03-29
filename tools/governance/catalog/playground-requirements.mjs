@@ -14,7 +14,7 @@ export const PLAYGROUND_SCENARIO_IDS = Object.freeze([
   'widget-data-table-theming',
   'widget-data-table-composition',
   'page-templates',
-  'composition'
+  'composition',
 ]);
 
 export function getRequiredPlaygroundScenarios(entry) {

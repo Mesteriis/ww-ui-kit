@@ -5,7 +5,7 @@ import {
   THEME_TYPES,
   getThemeType,
   type ThemeName,
-  type ThemeType
+  type ThemeType,
 } from '@ww/themes';
 
 const themeNameSet = new Set<string>(THEME_NAMES);
@@ -53,6 +53,6 @@ export function resolveApexThemeScope(source?: HTMLElement | null): ResolvedApex
   return {
     container,
     themeName,
-    themeType
+    themeType,
   };
 }

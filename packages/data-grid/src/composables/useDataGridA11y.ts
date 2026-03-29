@@ -18,6 +18,6 @@ export function useDataGridA11y(options: DataGridA11yOptions) {
     caption,
     captionId,
     gridId,
-    labelledBy: computed(() => (caption.value ? captionId.value : undefined))
+    labelledBy: computed(() => (caption.value ? captionId.value : undefined)),
   };
 }

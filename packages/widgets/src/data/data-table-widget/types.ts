@@ -5,7 +5,7 @@ import type {
   DataGridQuery,
   DataGridRowId,
   DataGridRowIdAccessor,
-  DataGridSelectionState
+  DataGridSelectionState,
 } from '@ww/data-grid';
 
 import type { WidgetErrorState, WidgetSurface } from '../../shared/types';
@@ -21,7 +21,9 @@ export interface DataTableWidgetStatusSummary {
   pageSize: number;
 }
 
-export interface DataTableWidgetProps<TRow extends Record<string, unknown> = Record<string, unknown>> {
+export interface DataTableWidgetProps<
+  TRow extends Record<string, unknown> = Record<string, unknown>,
+> {
   title?: string;
   description?: string;
   rows: readonly TRow[];

@@ -2,7 +2,10 @@ import { watchEffect } from 'vue';
 import type { MaybeRefOrGetter } from 'vue';
 import { toValue } from 'vue';
 
-export function useEscapeKey(handler: (event: KeyboardEvent) => void, active: MaybeRefOrGetter<boolean> = true) {
+export function useEscapeKey(
+  handler: (event: KeyboardEvent) => void,
+  active: MaybeRefOrGetter<boolean> = true
+) {
   watchEffect((onCleanup) => {
     if (!toValue(active) || typeof document === 'undefined') {
       return;

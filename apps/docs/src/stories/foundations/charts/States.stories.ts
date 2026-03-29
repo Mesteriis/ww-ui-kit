@@ -7,7 +7,7 @@ import { lineOptions, lineSeries } from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/States',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -18,7 +18,7 @@ export const States: StoryObj<typeof UiApexChart> = {
     setup() {
       return {
         lineOptions,
-        lineSeries
+        lineSeries,
       };
     },
     template: `
@@ -55,6 +55,6 @@ export const States: StoryObj<typeof UiApexChart> = {
           />
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

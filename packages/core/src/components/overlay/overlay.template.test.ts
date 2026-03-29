@@ -21,8 +21,8 @@ vi.mock('./useOverlay', () => ({
     panelRef: ref<HTMLElement | null>(null),
     portalTarget: ref<HTMLElement | null>(null),
     titleId: 'overlay-title',
-    descriptionId: 'overlay-description'
-  }))
+    descriptionId: 'overlay-description',
+  })),
 }));
 
 import UiDialog from './UiDialog.vue';
@@ -34,13 +34,13 @@ describe('overlay template branches', () => {
       attachTo: document.body,
       props: {
         open: false,
-        ariaLabel: 'Dialog aria label'
+        ariaLabel: 'Dialog aria label',
       },
       global: {
         stubs: {
-          transition: false
-        }
-      }
+          transition: false,
+        },
+      },
     });
 
     expect(closedWrapper.find('.ui-overlay').attributes('data-ui-state')).toBe('closed');
@@ -51,17 +51,17 @@ describe('overlay template branches', () => {
       props: {
         open: true,
         description: 'Dialog description',
-        ariaLabel: 'Dialog aria label'
+        ariaLabel: 'Dialog aria label',
       },
       slots: {
         header: '<div class="dialog-header-slot">Dialog header slot</div>',
-        default: '<div>Body</div>'
+        default: '<div>Body</div>',
       },
       global: {
         stubs: {
-          transition: false
-        }
-      }
+          transition: false,
+        },
+      },
     });
 
     expect(wrapper.find('.dialog-header-slot').exists()).toBe(true);
@@ -78,13 +78,13 @@ describe('overlay template branches', () => {
       attachTo: document.body,
       props: {
         open: false,
-        ariaLabel: 'Drawer aria label'
+        ariaLabel: 'Drawer aria label',
       },
       global: {
         stubs: {
-          transition: false
-        }
-      }
+          transition: false,
+        },
+      },
     });
 
     expect(closedWrapper.find('.ui-overlay').attributes('data-ui-state')).toBe('closed');
@@ -96,17 +96,17 @@ describe('overlay template branches', () => {
         open: true,
         side: 'right',
         description: 'Drawer description',
-        ariaLabel: 'Drawer aria label'
+        ariaLabel: 'Drawer aria label',
       },
       slots: {
         title: '<span class="drawer-title-slot">Drawer title slot</span>',
-        default: '<div>Drawer body</div>'
+        default: '<div>Drawer body</div>',
       },
       global: {
         stubs: {
-          transition: false
-        }
-      }
+          transition: false,
+        },
+      },
     });
 
     expect(wrapper.find('.ui-overlay').attributes('data-ui-state')).toBe('open');

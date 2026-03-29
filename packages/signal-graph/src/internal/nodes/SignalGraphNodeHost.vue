@@ -12,9 +12,11 @@ const props = defineProps<NodeProps<SignalGraphVendorNodeData>>();
 const runtime = inject(signalGraphRuntimeKey, null);
 
 const node = computed(() => runtime?.nodeMap.value.get(props.id) ?? null);
-const definition = computed(() => (node.value ? runtime?.nodeDefinitions.value[node.value.type] : undefined));
+const definition = computed(() =>
+  node.value ? runtime?.nodeDefinitions.value[node.value.type] : undefined
+);
 const depthState = computed(() =>
-  node.value && runtime ? resolveNodeDepthState(node.value.id, runtime.focusState.value) : 'active',
+  node.value && runtime ? resolveNodeDepthState(node.value.id, runtime.focusState.value) : 'active'
 );
 const hasRecentSignal = computed(() => runtime?.reactingNodeIds.value.has(props.id) ?? false);
 const isActive = computed(() => depthState.value === 'active');

@@ -60,4 +60,3 @@ Interactive signal graph UI lives in a separate optional package: `@ww/signal-gr
 - [`packages/signal-graph`](../../packages/signal-graph)
 - [`apps/docs/src/stories/foundations/signal-graph`](../../apps/docs/src/stories/foundations/signal-graph)
 - [`apps/playground/src/SignalGraphShowcase.vue`](../../apps/playground/src/SignalGraphShowcase.vue)
-

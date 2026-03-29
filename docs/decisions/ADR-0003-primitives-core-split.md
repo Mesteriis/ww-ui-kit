@@ -45,4 +45,3 @@ When a core component contains reusable low-level behavior, extract it into prim
 - [`packages/primitives`](../../packages/primitives)
 - [`packages/core`](../../packages/core)
 - [`docs/architecture/layer-governance.md`](../architecture/layer-governance.md)
-

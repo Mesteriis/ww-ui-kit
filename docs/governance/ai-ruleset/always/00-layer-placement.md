@@ -4,6 +4,7 @@ title: Preserve canonical layer order and placement discipline
 apply: always
 summary: Preserve the canonical layer order and choose placement from governance sources before adding code.
 ---
+
 Placement is governed, not ad hoc.
 
 ## Do

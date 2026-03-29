@@ -11,12 +11,12 @@ import {
   donutOptions,
   donutSeries,
   lineOptions,
-  lineSeries
+  lineSeries,
 } from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/Apex Overview',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -33,7 +33,7 @@ export const Overview: StoryObj<typeof UiApexChart> = {
         donutOptions,
         donutSeries,
         lineOptions,
-        lineSeries
+        lineSeries,
       };
     },
     template: `
@@ -82,6 +82,6 @@ export const Overview: StoryObj<typeof UiApexChart> = {
           />
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

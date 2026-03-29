@@ -52,10 +52,10 @@ export function createSignalGraphFocusState({
 
   const resolvedDepth = depthMode === 'full' ? Math.max(1, relationDepth ?? 2) : 1;
   const relatedNodeIds = Array.from(
-    collectRelatedNodeIds(buildRelationGraph(nodes, edges), anchorNodeId, resolvedDepth),
+    collectRelatedNodeIds(buildRelationGraph(nodes, edges), anchorNodeId, resolvedDepth)
   );
   const backgroundNodeIds = nodeIds.filter(
-    (nodeId) => nodeId !== anchorNodeId && !relatedNodeIds.includes(nodeId),
+    (nodeId) => nodeId !== anchorNodeId && !relatedNodeIds.includes(nodeId)
   );
 
   return {

@@ -17,4 +17,3 @@ It does not own:
 - motion runtime behavior
 
 Use `@ww/tokens` when a new reusable contract must become part of the design-system foundation. Do not place product semantics or theme-specific values here.
-

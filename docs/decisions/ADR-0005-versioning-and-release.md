@@ -46,4 +46,3 @@ Add `.changeset` entries for future public API, styling contract, or behavior ch
 - [`.changeset`](../../.changeset)
 - [`.github/workflows/release.yml`](../../.github/workflows/release.yml)
 - [`CHANGELOG.md`](../../CHANGELOG.md)
-

@@ -38,4 +38,3 @@ How existing code and process move onto the decision.
 ## Related artifacts
 
 - linked docs, packages, workflows, or scripts
-

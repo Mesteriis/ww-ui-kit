@@ -1,9 +1,4 @@
-import {
-  computed,
-  ref,
-  toValue,
-  type MaybeRefOrGetter,
-} from "vue";
+import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue';
 
 export function useMotionPresence(open: MaybeRefOrGetter<boolean>) {
   const leavingTransitions = ref(0);

@@ -6,7 +6,7 @@ export type {
   UiButtonResolvedTone,
   UiButtonSize,
   UiButtonTone,
-  UiButtonVariant
+  UiButtonVariant,
 } from './components/buttons/button.types';
 export { default as UiBadge } from './components/display/UiBadge.vue';
 export { default as UiCard } from './components/display/UiCard.vue';

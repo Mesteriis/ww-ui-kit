@@ -7,16 +7,14 @@ import {
   type ComputedRef,
   type Ref,
   type ShallowRef,
-} from "vue";
+} from 'vue';
+import { isProgrammaticallyFocusableElement } from '../dom/focus';
 import {
   registerOverlay,
   type OverlayDismissReason,
   type OverlayRegistration,
 } from './overlay-stack';
-import {
-  ensureOverlayPortalRoot,
-  type OverlayPortalTarget,
-} from './portal';
+import { ensureOverlayPortalRoot, type OverlayPortalTarget } from './portal';
 import {
   ensureOverlayInteractionTracking,
   getLastOverlayInteractionTarget,
@@ -87,9 +85,7 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
     return registration.value?.focusContent() || false;
   }
 
-  function isValidFocusTarget(
-    element: HTMLElement | null | undefined,
-  ): element is HTMLElement {
+  function isValidFocusTarget(element: HTMLElement | null | undefined): element is HTMLElement {
     if (
       !element ||
       !element.isConnected ||
@@ -102,52 +98,11 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
     return true;
   }
 
-  function isProgrammaticallyFocusableElement(element: HTMLElement): boolean {
-    if ("disabled" in element && Boolean(element.disabled)) {
-      return false;
-    }
-
-    const tabIndex = element.getAttribute("tabindex");
-    if (tabIndex !== null) {
-      return Number(tabIndex) >= -1;
-    }
-
-    const tagName = element.tagName.toLowerCase();
-    if (
-      tagName === "button" ||
-      tagName === "select" ||
-      tagName === "textarea" ||
-      tagName === "summary"
-    ) {
-      return true;
-    }
-
-    if (tagName === "a" && Boolean(element.getAttribute("href"))) {
-      return true;
-    }
-
-    if (tagName === "input") {
-      return (element as HTMLInputElement).type !== "hidden";
-    }
-
-    const contentEditable = element.getAttribute("contenteditable");
-    return contentEditable === "" || contentEditable === "true";
-  }
-
-  function resolveFocusableTarget(
-    element: HTMLElement | null | undefined,
-  ): HTMLElement | null {
+  function resolveFocusableTarget(element: HTMLElement | null | undefined): HTMLElement | null {
     let candidate = element;
 
-    while (
-      candidate &&
-      candidate !== document.body &&
-      candidate !== document.documentElement
-    ) {
-      if (
-        isValidFocusTarget(candidate) &&
-        isProgrammaticallyFocusableElement(candidate)
-      ) {
+    while (candidate && candidate !== document.body && candidate !== document.documentElement) {
+      if (isValidFocusTarget(candidate) && isProgrammaticallyFocusableElement(candidate)) {
         return candidate;
       }
       candidate = candidate.parentElement;
@@ -165,23 +120,15 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
   function resolveOpeningFocusTarget(): HTMLElement | null {
     const interactionTarget = getLastOverlayInteractionTarget();
     const focusableInteractionTarget = resolveFocusableTarget(interactionTarget);
-    if (
-      focusableInteractionTarget &&
-      !isElementInsideSurface(focusableInteractionTarget)
-    ) {
+    if (focusableInteractionTarget && !isElementInsideSurface(focusableInteractionTarget)) {
       return focusableInteractionTarget;
     }
 
     const activeElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const focusableActiveElement = resolveFocusableTarget(activeElement);
 
-    if (
-      focusableActiveElement &&
-      !isElementInsideSurface(focusableActiveElement)
-    ) {
+    if (focusableActiveElement && !isElementInsideSurface(focusableActiveElement)) {
       return focusableActiveElement;
     }
 
@@ -226,7 +173,7 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
   watch(
     options.open,
     (isOpen, wasOpen) => {
-      if (typeof document === "undefined") return;
+      if (typeof document === 'undefined') return;
 
       if (!isOpen) {
         if (wasOpen) {
@@ -240,8 +187,8 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
     },
     {
       immediate: true,
-      flush: "sync",
-    },
+      flush: 'sync',
+    }
   );
 
   watch(
@@ -254,15 +201,15 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
       resolvedPortalTarget.value = resolvePortalTarget();
     },
     {
-      flush: "post",
+      flush: 'post',
       immediate: true,
-    },
+    }
   );
 
   watch(
     options.open,
     async (isOpen) => {
-      if (typeof document === "undefined") return;
+      if (typeof document === 'undefined') return;
       if (!isOpen) return;
 
       unregisterOverlay();
@@ -282,9 +229,9 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
       await focusOverlay();
     },
     {
-      flush: "post",
+      flush: 'post',
       immediate: true,
-    },
+    }
   );
 
   onBeforeUnmount(() => {
@@ -296,7 +243,7 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
       ? {
           zIndex: String(registration.value.layers.content),
         }
-      : undefined,
+      : undefined
   );
 
   const backdropStyle = computed(() =>
@@ -304,7 +251,7 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
       ? {
           zIndex: String(registration.value.layers.backdrop),
         }
-      : undefined,
+      : undefined
   );
 
   const isTopMost = computed(() => registration.value?.isTopMost() || false);

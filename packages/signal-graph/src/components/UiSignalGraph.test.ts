@@ -19,7 +19,8 @@ const flowStore = {
   getViewport: vi.fn(() => ({ x: 0, y: 0, zoom: 1 })),
   setCenter: vi.fn(() => Promise.resolve(true)),
   findNode: vi.fn((nodeId: string) => {
-    const nodes = (lastVueFlowProps?.nodes as Array<{ id: string; width?: number; height?: number }>) ?? [];
+    const nodes =
+      (lastVueFlowProps?.nodes as Array<{ id: string; width?: number; height?: number }>) ?? [];
     const node = nodes.find((entry) => entry.id === nodeId);
 
     if (!node) {
@@ -56,7 +57,13 @@ vi.mock('@vue-flow/core', async () => {
       zoomOnScroll: { type: Boolean, default: true },
       preventScrolling: { type: Boolean, default: true },
     },
-    emits: ['node-click', 'node-double-click', 'node-mouse-enter', 'node-mouse-leave', 'edge-click'],
+    emits: [
+      'node-click',
+      'node-double-click',
+      'node-mouse-enter',
+      'node-mouse-leave',
+      'edge-click',
+    ],
     setup(props, { emit, slots }) {
       return () => {
         lastVueFlowProps = {
@@ -69,77 +76,88 @@ vi.mock('@vue-flow/core', async () => {
           nodesDraggable: props.nodesDraggable,
         };
 
-        return vue.h('div', {
-          'data-testid': 'mock-vue-flow',
-          'data-elements-selectable': String(props.elementsSelectable),
-          'data-nodes-draggable': String(props.nodesDraggable),
-        }, [
-          ...(props.nodes as Array<Record<string, unknown>>).map((node) => {
-            const NodeComponent = (props.nodeTypes as Record<string, unknown>)[String(node.type)];
+        return vue.h(
+          'div',
+          {
+            'data-testid': 'mock-vue-flow',
+            'data-elements-selectable': String(props.elementsSelectable),
+            'data-nodes-draggable': String(props.nodesDraggable),
+          },
+          [
+            ...(props.nodes as Array<Record<string, unknown>>).map((node) => {
+              const NodeComponent = (props.nodeTypes as Record<string, unknown>)[String(node.type)];
 
-            return vue.h('div', {
-              key: String(node.id),
-              'data-node-id': String(node.id),
-              onClick: () => emit('node-click', { node }),
-              onDblclick: () => emit('node-double-click', { node }),
-              onMouseenter: () => emit('node-mouse-enter', { node }),
-              onMouseleave: () => emit('node-mouse-leave', { node }),
-            }, [
-              NodeComponent
-                ? vue.h(NodeComponent as never, {
-                    connectable: false,
-                    data: node.data,
-                    dimensions: { height: Number(node.height ?? 120), width: Number(node.width ?? 220) },
-                    dragging: false,
-                    events: {},
-                    id: String(node.id),
-                    label: node.label,
-                    parentNodeId: node.parentNode,
-                    position: node.position,
-                    resizing: false,
-                    selected: false,
-                    sourcePosition: 'right',
-                    targetPosition: 'left',
-                    type: node.type,
-                    zIndex: Number(node.zIndex ?? 0),
-                  })
-                : null,
-            ]);
-          }),
-          ...(props.edges as Array<Record<string, unknown>>).map((edge) => {
-            const EdgeComponent = (props.edgeTypes as Record<string, unknown>)[String(edge.type)];
+              return vue.h(
+                'div',
+                {
+                  key: String(node.id),
+                  'data-node-id': String(node.id),
+                  onClick: () => emit('node-click', { node }),
+                  onDblclick: () => emit('node-double-click', { node }),
+                  onMouseenter: () => emit('node-mouse-enter', { node }),
+                  onMouseleave: () => emit('node-mouse-leave', { node }),
+                },
+                [
+                  NodeComponent
+                    ? vue.h(NodeComponent as never, {
+                        connectable: false,
+                        data: node.data,
+                        dimensions: {
+                          height: Number(node.height ?? 120),
+                          width: Number(node.width ?? 220),
+                        },
+                        dragging: false,
+                        events: {},
+                        id: String(node.id),
+                        label: node.label,
+                        parentNodeId: node.parentNode,
+                        position: node.position,
+                        resizing: false,
+                        selected: false,
+                        sourcePosition: 'right',
+                        targetPosition: 'left',
+                        type: node.type,
+                        zIndex: Number(node.zIndex ?? 0),
+                      })
+                    : null,
+                ]
+              );
+            }),
+            ...(props.edges as Array<Record<string, unknown>>).map((edge) => {
+              const EdgeComponent = (props.edgeTypes as Record<string, unknown>)[String(edge.type)];
 
-            return vue.h('svg', { key: String(edge.id), 'data-edge-id': String(edge.id) }, [
-              EdgeComponent
-                ? vue.h(EdgeComponent as never, {
-                    data: edge.data,
-                    events: {},
-                    id: String(edge.id),
-                    interactionWidth: 24,
-                    label: edge.label,
-                    markerEnd: '',
-                    markerStart: '',
-                    selected: false,
-                    source: edge.source,
-                    sourceHandleId: undefined,
-                    sourceNode: { id: edge.source },
-                    sourcePosition: 'right',
-                    sourceX: 0,
-                    sourceY: 0,
-                    style: {},
-                    target: edge.target,
-                    targetHandleId: undefined,
-                    targetNode: { id: edge.target },
-                    targetPosition: 'left',
-                    targetX: 160,
-                    targetY: 0,
-                    type: edge.type,
-                  })
-                : null,
-            ]);
-          }),
-          slots.default?.(),
-        ]);
+              return vue.h('svg', { key: String(edge.id), 'data-edge-id': String(edge.id) }, [
+                EdgeComponent
+                  ? vue.h(EdgeComponent as never, {
+                      data: edge.data,
+                      events: {},
+                      id: String(edge.id),
+                      interactionWidth: 24,
+                      label: edge.label,
+                      markerEnd: '',
+                      markerStart: '',
+                      selected: false,
+                      source: edge.source,
+                      sourceHandleId: undefined,
+                      sourceNode: { id: edge.source },
+                      sourcePosition: 'right',
+                      sourceX: 0,
+                      sourceY: 0,
+                      style: {},
+                      target: edge.target,
+                      targetHandleId: undefined,
+                      targetNode: { id: edge.target },
+                      targetPosition: 'left',
+                      targetX: 160,
+                      targetY: 0,
+                      type: edge.type,
+                    })
+                  : null,
+              ]);
+            }),
+            slots.default?.(),
+          ]
+        );
       };
     },
   });
@@ -220,14 +238,23 @@ const OverviewNode = defineComponent({
   },
   render() {
     return h('div', { class: 'overview-node' }, [
-      h('span', { 'data-testid': `depth-${String((this.node as { id: string }).id)}` }, this.depthState),
-      h('button', {
-        class: 'nodrag',
-        type: 'button',
-        onClick: () => (this.graph as { focusNode: (nodeId: string) => void }).focusNode(
-          String((this.node as { id: string }).id),
-        ),
-      }, 'Focus'),
+      h(
+        'span',
+        { 'data-testid': `depth-${String((this.node as { id: string }).id)}` },
+        this.depthState
+      ),
+      h(
+        'button',
+        {
+          class: 'nodrag',
+          type: 'button',
+          onClick: () =>
+            (this.graph as { focusNode: (nodeId: string) => void }).focusNode(
+              String((this.node as { id: string }).id)
+            ),
+        },
+        'Focus'
+      ),
     ]);
   },
 });
@@ -269,9 +296,7 @@ const baseNodes = [
   { id: 'b', type: 'overview', position: { x: 260, y: 40 }, data: { title: 'B' }, label: 'Target' },
 ];
 
-const baseEdges = [
-  { id: 'edge-a-b', source: 'a', target: 'b', label: 'signal' },
-];
+const baseEdges = [{ id: 'edge-a-b', source: 'a', target: 'b', label: 'signal' }];
 
 describe('UiSignalGraph', () => {
   afterEach(() => {
@@ -311,7 +336,9 @@ describe('UiSignalGraph', () => {
 
     await nextTick();
 
-    expect(wrapper.get('[data-testid="mock-vue-flow"]').attributes('data-nodes-draggable')).toBe('true');
+    expect(wrapper.get('[data-testid="mock-vue-flow"]').attributes('data-nodes-draggable')).toBe(
+      'true'
+    );
     expect(wrapper.find('[data-testid="mock-background"]').exists()).toBe(true);
     expect(wrapper.find('[data-testid="mock-controls"]').exists()).toBe(true);
     expect(wrapper.find('[data-testid="mock-minimap"]').exists()).toBe(true);
@@ -326,9 +353,9 @@ describe('UiSignalGraph', () => {
         edges: baseEdges,
         nodeDefinitions,
         options: {
-          motionMode: 'reduced'
-        }
-      }
+          motionMode: 'reduced',
+        },
+      },
     });
 
     await nextTick();
@@ -358,7 +385,9 @@ describe('UiSignalGraph', () => {
     });
     await nextTick();
 
-    expect(wrapper.get('[data-testid="mock-vue-flow"]').attributes('data-nodes-draggable')).toBe('false');
+    expect(wrapper.get('[data-testid="mock-vue-flow"]').attributes('data-nodes-draggable')).toBe(
+      'false'
+    );
 
     await wrapper.get('[data-node-id="a"]').trigger('click');
     await nextTick();
@@ -454,7 +483,7 @@ describe('UiSignalGraph', () => {
             transition: false,
           },
         },
-      },
+      }
     );
 
     await nextTick();
@@ -477,7 +506,7 @@ describe('UiSignalGraph', () => {
         nodeDefinitions,
       },
       slots: {
-        loading: '<div class="custom-loading">Loading graph shell</div>'
+        loading: '<div class="custom-loading">Loading graph shell</div>',
       },
     });
 
@@ -492,7 +521,7 @@ describe('UiSignalGraph', () => {
         empty: true,
       },
       slots: {
-        empty: '<div class="custom-empty">Empty graph shell</div>'
+        empty: '<div class="custom-empty">Empty graph shell</div>',
       },
     });
     expect(emptyWrapper.find('.custom-empty').exists()).toBe(true);
@@ -506,7 +535,7 @@ describe('UiSignalGraph', () => {
         nodeDefinitions,
       },
       slots: {
-        error: '<div class="custom-error">Error graph shell</div>'
+        error: '<div class="custom-error">Error graph shell</div>',
       },
     });
     expect(errorWrapper.find('.custom-error').exists()).toBe(true);
@@ -596,11 +625,13 @@ describe('UiSignalGraph', () => {
   });
 
   it('renders a safe shell during server rendering', async () => {
-    const html = await renderToString(h(UiSignalGraph, {
-      nodes: baseNodes,
-      edges: baseEdges,
-      nodeDefinitions,
-    }));
+    const html = await renderToString(
+      h(UiSignalGraph, {
+        nodes: baseNodes,
+        edges: baseEdges,
+        nodeDefinitions,
+      })
+    );
 
     expect(html).toContain('ui-signal-graph');
     expect(html).not.toContain('mock-vue-flow');

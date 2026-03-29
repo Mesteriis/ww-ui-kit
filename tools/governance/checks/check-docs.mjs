@@ -15,7 +15,7 @@ const requiredArchitectureDocs = [
   'docs/governance/ai-rules.md',
   'docs/governance/ai-ruleset/README.md',
   'docs/governance/ai-ruleset/index.md',
-  'docs/governance/ai-ruleset/_schema.md'
+  'docs/governance/ai-ruleset/_schema.md',
 ];
 
 for (const relativePath of requiredArchitectureDocs) {
@@ -27,7 +27,9 @@ for (const relativePath of requiredArchitectureDocs) {
 for (const entry of PUBLIC_SURFACE_MANIFEST.filter((surface) => surface.requiresDocs)) {
   const artifacts = getRequiredDocsArtifacts(entry);
   if (artifacts.length === 0) {
-    throw new Error(`Public surface "${entry.exportName}" requires docs but declares no artifacts.`);
+    throw new Error(
+      `Public surface "${entry.exportName}" requires docs but declares no artifacts.`
+    );
   }
 
   for (const artifact of artifacts) {

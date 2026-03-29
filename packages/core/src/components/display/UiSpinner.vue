@@ -8,11 +8,16 @@ const props = withDefaults(
   }>(),
   {
     size: 'md',
-    label: 'Loading'
+    label: 'Loading',
   }
 );
 </script>
 
 <template>
-  <span class="ui-spinner" :class="`ui-spinner--${props.size}`" role="status" :aria-label="props.label" />
+  <span
+    class="ui-spinner"
+    :class="`ui-spinner--${props.size}`"
+    role="status"
+    :aria-label="props.label"
+  />
 </template>

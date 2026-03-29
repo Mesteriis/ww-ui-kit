@@ -13,6 +13,6 @@ export const typographyScale = {
     'font-weight-regular': '400',
     'font-weight-medium': '500',
     'font-weight-semibold': '600',
-    'font-weight-bold': '700'
-  }
+    'font-weight-bold': '700',
+  },
 } as const;

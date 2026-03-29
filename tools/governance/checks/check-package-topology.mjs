@@ -20,7 +20,9 @@ for (const packageEntry of PACKAGE_CLASSIFICATION) {
 
   const isUnderThirdParty = packageEntry.physicalPath.startsWith('packages/third-party/');
   if (packageEntry.packageLayer === 'third-party-adapter' && !isUnderThirdParty) {
-    throw new Error(`Third-party adapter "${packageEntry.packageName}" must live under packages/third-party/.`);
+    throw new Error(
+      `Third-party adapter "${packageEntry.packageName}" must live under packages/third-party/.`
+    );
   }
 
   if (packageEntry.packageLayer !== 'third-party-adapter' && isUnderThirdParty) {
@@ -31,4 +33,3 @@ for (const packageEntry of PACKAGE_CLASSIFICATION) {
 }
 
 console.log('Package topology OK.');
-

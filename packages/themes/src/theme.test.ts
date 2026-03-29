@@ -12,14 +12,13 @@ import {
   getThemesByType,
   isDarkTheme,
   isLightTheme,
-  themeRegistry
+  themeRegistry,
 } from './theme-maps';
 
 describe('themes', () => {
   afterEach(() => {
     document.documentElement.removeAttribute(THEME_ATTRIBUTE);
     document.documentElement.removeAttribute(THEME_TYPE_ATTRIBUTE);
-    document.documentElement.style.removeProperty('color-scheme');
     document.body.innerHTML = '';
   });
 
@@ -29,7 +28,7 @@ describe('themes', () => {
     expect(THEMES.belovodye).toMatchObject({
       name: 'belovodye',
       label: 'Belovodye',
-      type: 'light'
+      type: 'light',
     });
     expect(themeRegistry.belovodye).toBe(belovodyeTheme);
   });
@@ -38,7 +37,7 @@ describe('themes', () => {
     expect(getThemeMeta('dark')).toEqual({
       name: 'dark',
       label: 'Dark',
-      type: 'dark'
+      type: 'dark',
     });
     expect(getThemeType('belovodye')).toBe('light');
     expect(getThemesByType('light').map(({ name }) => name)).toEqual(
@@ -51,16 +50,16 @@ describe('themes', () => {
     expect(isDarkTheme('belovodye')).toBe(false);
   });
 
-  it('sets theme name, type, and color-scheme on the document element by default', () => {
+  it('sets theme name and type on the document element by default without inline color-scheme drift', () => {
     const target = setTheme('belovodye');
 
     expect(target).toBe(document.documentElement);
     expect(document.documentElement.getAttribute(THEME_ATTRIBUTE)).toBe('belovodye');
     expect(document.documentElement.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('light');
-    expect(document.documentElement.style.colorScheme).toBe('light');
+    expect(document.documentElement.style.colorScheme).toBe('');
   });
 
-  it('sets theme name, type, and color-scheme on an explicit subtree container', () => {
+  it('sets theme name and type on an explicit subtree container without inline color-scheme drift', () => {
     const container = document.createElement('section');
     document.body.append(container);
 
@@ -69,7 +68,7 @@ describe('themes', () => {
     expect(target).toBe(container);
     expect(container.getAttribute(THEME_ATTRIBUTE)).toBe('dark');
     expect(container.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('dark');
-    expect(container.style.colorScheme).toBe('dark');
+    expect(container.style.colorScheme).toBe('');
     expect(document.documentElement.hasAttribute(THEME_ATTRIBUTE)).toBe(false);
   });
 
@@ -79,15 +78,17 @@ describe('themes', () => {
 
     expect(lightSheet).toContain(':root,');
     expect(lightSheet).toContain('[data-ui-theme="light"]');
+    expect(lightSheet).toContain('--ui-button-info-solid-bg: var(--ui-brand-600);');
+    expect(lightSheet).toContain('--ui-button-success-solid-bg: var(--ui-success-700);');
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     expect(setTheme('light')).toBeNull();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 
@@ -97,5 +98,10 @@ describe('themes', () => {
     expect(sheet).toContain('[data-ui-theme="belovodye"]');
     expect(sheet).toContain('--ui-overlay-backdrop');
     expect(sheet).toContain('--ui-brand-500: #169fe8;');
+    expect(sheet).toContain('--ui-button-brand-solid-bg: var(--ui-brand-700);');
+    expect(sheet).toContain('--ui-button-info-solid-bg: var(--ui-brand-700);');
+    expect(sheet).toContain(
+      '--ui-z-layer-dropdown: calc(var(--ui-z-overlay-base) + var(--ui-z-overlay-slot-floating));'
+    );
   });
 });

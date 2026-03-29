@@ -5,7 +5,7 @@ import { UiButton, UiDialog, UiDrawer } from '@ww/core';
 
 const meta = {
   title: 'Core/Overlay',
-  component: UiDialog
+  component: UiDialog,
 } satisfies Meta<typeof UiDialog>;
 
 export default meta;
@@ -36,6 +36,6 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
           </template>
         </UiDrawer>
       </div>
-    `
-  })
+    `,
+  }),
 };

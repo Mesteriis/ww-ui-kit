@@ -138,8 +138,8 @@
   --ui-z-overlay-slot-tooltip: 6;
   --ui-z-overlay-slot-toast: 8;
   --ui-z-layer-header: 100;
-  --ui-z-layer-dropdown: 4004;
-  --ui-z-layer-overlay: 4002;
+  --ui-z-layer-dropdown: calc(var(--ui-z-overlay-base) + var(--ui-z-overlay-slot-floating));
+  --ui-z-layer-overlay: calc(var(--ui-z-overlay-base) + var(--ui-z-overlay-slot-surface));
   --ui-motion-focus-ring-duration: var(--ui-motion-duration-xs);
   --ui-motion-focus-ring-easing: var(--ui-motion-easing-standard);
   --ui-motion-focus-ring-shadow-soft: 0 0 0 4px var(--ui-focus-ring);

@@ -45,4 +45,3 @@ Move canonical examples from ad hoc docs into stories when components evolve. St
 - [`apps/docs`](../../apps/docs)
 - [`tools/governance/checks/check-stories.mjs`](../../tools/governance/checks/check-stories.mjs)
 - [`docs/architecture/docs-as-contract.md`](../architecture/docs-as-contract.md)
-

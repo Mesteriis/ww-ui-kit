@@ -12,7 +12,7 @@ describe('signal graph runtime context helpers', () => {
         relationDepth: 1,
         activeNodeIds: [],
         relatedNodeIds: [],
-        backgroundNodeIds: []
+        backgroundNodeIds: [],
       })
     ).toBe('active');
 
@@ -24,7 +24,7 @@ describe('signal graph runtime context helpers', () => {
         relationDepth: 1,
         activeNodeIds: ['b'],
         relatedNodeIds: [],
-        backgroundNodeIds: []
+        backgroundNodeIds: [],
       })
     ).toBe('active');
 
@@ -36,7 +36,7 @@ describe('signal graph runtime context helpers', () => {
         relationDepth: 1,
         activeNodeIds: ['b'],
         relatedNodeIds: ['a'],
-        backgroundNodeIds: ['c']
+        backgroundNodeIds: ['c'],
       })
     ).toBe('active');
 
@@ -48,7 +48,7 @@ describe('signal graph runtime context helpers', () => {
         relationDepth: 1,
         activeNodeIds: ['b'],
         relatedNodeIds: ['a'],
-        backgroundNodeIds: ['c']
+        backgroundNodeIds: ['c'],
       })
     ).toBe('related');
 
@@ -60,7 +60,7 @@ describe('signal graph runtime context helpers', () => {
         relationDepth: 1,
         activeNodeIds: ['b'],
         relatedNodeIds: ['a'],
-        backgroundNodeIds: ['c']
+        backgroundNodeIds: ['c'],
       })
     ).toBe('background');
   });
@@ -73,12 +73,18 @@ describe('signal graph runtime context helpers', () => {
       relationDepth: 1,
       activeNodeIds: ['b'],
       relatedNodeIds: ['a'],
-      backgroundNodeIds: ['c']
+      backgroundNodeIds: ['c'],
     };
 
-    expect(resolveEdgeDepthState({ id: 'ab', source: 'b', target: 'c' }, focusState)).toBe('active');
-    expect(resolveEdgeDepthState({ id: 'ac', source: 'a', target: 'c' }, focusState)).toBe('related');
-    expect(resolveEdgeDepthState({ id: 'cd', source: 'c', target: 'd' }, focusState)).toBe('background');
+    expect(resolveEdgeDepthState({ id: 'ab', source: 'b', target: 'c' }, focusState)).toBe(
+      'active'
+    );
+    expect(resolveEdgeDepthState({ id: 'ac', source: 'a', target: 'c' }, focusState)).toBe(
+      'related'
+    );
+    expect(resolveEdgeDepthState({ id: 'cd', source: 'c', target: 'd' }, focusState)).toBe(
+      'background'
+    );
     expect(
       resolveEdgeDepthState(
         { id: 'off', source: 'c', target: 'd' },

@@ -4,7 +4,7 @@ withDefaults(
     padded?: boolean;
   }>(),
   {
-    padded: true
+    padded: true,
   }
 );
 

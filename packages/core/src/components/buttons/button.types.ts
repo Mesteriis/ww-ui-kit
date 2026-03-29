@@ -34,7 +34,7 @@ const legacyVariantMap: Record<UiButtonVariant, ButtonRecipe> = {
   primary: { tone: 'brand', appearance: 'solid' },
   secondary: { tone: 'neutral', appearance: 'outline' },
   ghost: { tone: 'neutral', appearance: 'ghost' },
-  danger: { tone: 'danger', appearance: 'solid' }
+  danger: { tone: 'danger', appearance: 'solid' },
 };
 
 const toneAliasMap: Record<UiButtonTone, UiButtonResolvedTone> = {
@@ -49,7 +49,7 @@ const toneAliasMap: Record<UiButtonTone, UiButtonResolvedTone> = {
   danger: 'danger',
   error: 'danger',
   critical: 'critical',
-  fatal: 'critical'
+  fatal: 'critical',
 };
 
 export function resolveButtonStyle(options: {
@@ -61,6 +61,6 @@ export function resolveButtonStyle(options: {
 
   return {
     tone: options.tone ? toneAliasMap[options.tone] : legacyRecipe.tone,
-    appearance: options.appearance ?? (options.tone ? 'solid' : legacyRecipe.appearance)
+    appearance: options.appearance ?? (options.tone ? 'solid' : legacyRecipe.appearance),
   };
 }

@@ -10,7 +10,7 @@ import {
   UiDataGridPagination,
   UiDataGridSearch,
   UiDataGridTable,
-  UiDataGridToolbar
+  UiDataGridToolbar,
 } from '../index';
 import { createDataGridColumn } from '../model/columns';
 import { normalizeDataGridQuery } from '../model/query';
@@ -25,20 +25,31 @@ interface DemoRow extends Record<string, unknown> {
 
 const rows: readonly DemoRow[] = Object.freeze([
   { id: 'row-1', name: 'Ada', status: 'Healthy', active: true },
-  { id: 'row-2', name: 'Bea', status: 'Risk', active: false }
+  { id: 'row-2', name: 'Bea', status: 'Risk', active: false },
 ]);
 
 const columns: readonly DataGridColumn<DemoRow>[] = Object.freeze([
-  createDataGridColumn<DemoRow>({ id: 'name', header: 'Name', accessorKey: 'name', sortable: true, hideable: false }),
-  createDataGridColumn<DemoRow>({ id: 'status', header: 'Status', accessorKey: 'status', sortable: true }),
+  createDataGridColumn<DemoRow>({
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+    sortable: true,
+    hideable: false,
+  }),
+  createDataGridColumn<DemoRow>({
+    id: 'status',
+    header: 'Status',
+    accessorKey: 'status',
+    sortable: true,
+  }),
   createDataGridColumn<DemoRow>({
     id: 'active',
     header: 'Active',
     accessorKey: 'active',
     sortable: true,
     align: 'center',
-    cell: ({ value }) => (value ? 'Active' : 'Paused')
-  })
+    cell: ({ value }) => (value ? 'Active' : 'Paused'),
+  }),
 ]);
 
 const filters: readonly DataGridFilterDefinition[] = Object.freeze([
@@ -48,15 +59,15 @@ const filters: readonly DataGridFilterDefinition[] = Object.freeze([
     type: 'select',
     options: [
       { label: 'Healthy', value: 'Healthy' },
-      { label: 'Risk', value: 'Risk' }
-    ]
+      { label: 'Risk', value: 'Risk' },
+    ],
   },
   {
     id: 'active',
     label: 'Active',
     type: 'boolean',
     trueLabel: 'Active',
-    falseLabel: 'Paused'
+    falseLabel: 'Paused',
   },
   {
     id: 'tags',
@@ -64,15 +75,15 @@ const filters: readonly DataGridFilterDefinition[] = Object.freeze([
     type: 'multi-select',
     options: [
       { label: 'Core', value: 'core' },
-      { label: 'Ops', value: 'ops' }
-    ]
+      { label: 'Ops', value: 'ops' },
+    ],
   },
   {
     id: 'query',
     label: 'Query',
     type: 'text',
-    placeholder: 'Type to filter'
-  }
+    placeholder: 'Type to filter',
+  },
 ]);
 
 const createQuery = (overrides: Partial<DataGridQuery> = {}) =>
@@ -82,10 +93,10 @@ const createQuery = (overrides: Partial<DataGridQuery> = {}) =>
     sort: [],
     pagination: {
       page: 1,
-      pageSize: 10
+      pageSize: 10,
     },
     columnVisibility: {},
-    ...overrides
+    ...overrides,
   });
 
 describe('UiDataGrid package', () => {
@@ -110,14 +121,14 @@ describe('UiDataGrid package', () => {
         selectedRowIds: ['row-1'],
         filterDefinitions: filters,
         caption: 'Account operations',
-        ariaLabel: 'Accounts grid'
+        ariaLabel: 'Accounts grid',
       },
       slots: {
         'toolbar-start': '<span>Toolbar start</span>',
         'toolbar-end': '<span>Toolbar end</span>',
         'bulk-actions': '<span>Bulk actions slot</span>',
-        rowActions: () => h('button', { type: 'button' }, 'Inspect')
-      }
+        rowActions: () => h('button', { type: 'button' }, 'Inspect'),
+      },
     });
 
     expect(wrapper.find('figcaption').text()).toContain('Account operations');
@@ -131,13 +142,19 @@ describe('UiDataGrid package', () => {
     expect(wrapper.emitted('update:query')?.at(0)?.[0]).toMatchObject({ search: 'Ada' });
 
     await wrapper.get('select.ui-select__control').setValue('Healthy');
-    expect(wrapper.emitted('update:query')?.some(([value]) => (value as DataGridQuery).filters.status === 'Healthy')).toBe(true);
+    expect(
+      wrapper
+        .emitted('update:query')
+        ?.some(([value]) => (value as DataGridQuery).filters.status === 'Healthy')
+    ).toBe(true);
 
     await wrapper.get('summary').trigger('click');
     const visibilityCheckboxes = wrapper.findAll('.ui-data-grid-visibility .ui-checkbox__input');
     await visibilityCheckboxes[0].setValue(false);
     expect(
-      wrapper.emitted('update:query')?.some(([value]) => (value as DataGridQuery).columnVisibility?.status === false)
+      wrapper
+        .emitted('update:query')
+        ?.some(([value]) => (value as DataGridQuery).columnVisibility?.status === false)
     ).toBe(true);
   });
 
@@ -152,8 +169,8 @@ describe('UiDataGrid package', () => {
         filterDefinitions: filters,
         showToolbar: false,
         showBulkActions: false,
-        showColumnVisibility: false
-      }
+        showColumnVisibility: false,
+      },
     });
 
     expect(wrapper.find('.ui-data-grid-toolbar').exists()).toBe(false);
@@ -169,8 +186,8 @@ describe('UiDataGrid package', () => {
         columns,
         query: createQuery(),
         totalRows: rows.length,
-        ariaLabel: 'Accounts grid'
-      }
+        ariaLabel: 'Accounts grid',
+      },
     });
 
     expect(wrapper.get('figure').attributes('aria-label')).toBe('Accounts grid');
@@ -184,8 +201,8 @@ describe('UiDataGrid package', () => {
         columns,
         query: createQuery(),
         totalRows: 0,
-        loading: true
-      }
+        loading: true,
+      },
     });
     const refreshing = mount(UiDataGrid, {
       props: {
@@ -193,24 +210,24 @@ describe('UiDataGrid package', () => {
         columns,
         query: createQuery(),
         totalRows: rows.length,
-        loading: true
-      }
+        loading: true,
+      },
     });
     const empty = mount(UiDataGrid, {
       props: {
         rows: [],
         columns,
         query: createQuery(),
-        totalRows: 0
-      }
+        totalRows: 0,
+      },
     });
     const noResults = mount(UiDataGrid, {
       props: {
         rows: [],
         columns,
         query: createQuery({ search: 'missing' }),
-        totalRows: 0
-      }
+        totalRows: 0,
+      },
     });
     const error = mount(UiDataGrid, {
       props: {
@@ -219,8 +236,8 @@ describe('UiDataGrid package', () => {
         query: createQuery(),
         totalRows: 0,
         error: true,
-        errorText: 'Grid unavailable'
-      }
+        errorText: 'Grid unavailable',
+      },
     });
 
     expect(loading.text()).toContain('Loading rows');
@@ -239,12 +256,12 @@ describe('UiDataGrid package', () => {
         selectionEnabled: true,
         selectedRowIds: ['row-1'],
         allPageRowsSelected: false,
-        stickyHeader: true
+        stickyHeader: true,
       },
       slots: {
         cell: ({ column, value }) => h('strong', `${String(column.id)}=${String(value)}`),
-        rowActions: ({ rowId }) => h('button', { type: 'button' }, `Action ${String(rowId)}`)
-      }
+        rowActions: ({ rowId }) => h('button', { type: 'button' }, `Action ${String(rowId)}`),
+      },
     });
 
     expect(wrapper.find('thead').classes()).toContain('is-sticky');
@@ -256,6 +273,8 @@ describe('UiDataGrid package', () => {
     expect(wrapper.emitted('sort')?.[0]).toEqual(['name']);
 
     const rowCheckboxes = wrapper.findAll('.ui-checkbox__input');
+    expect(rowCheckboxes[1].attributes('aria-label')).toBe('Select row Ada');
+    expect(rowCheckboxes[2].attributes('aria-label')).toBe('Select row Bea');
     await rowCheckboxes[0].setValue(true);
     await rowCheckboxes[1].setValue(false);
     expect(wrapper.emitted('toggleAllRows')?.[0]).toEqual([true]);
@@ -271,8 +290,8 @@ describe('UiDataGrid package', () => {
         query: createQuery({ sort: [{ id: 'name', direction: 'desc' }] }),
         selectionEnabled: false,
         selectedRowIds: [],
-        allPageRowsSelected: false
-      }
+        allPageRowsSelected: false,
+      },
     });
 
     expect(descending.get('th[aria-sort="descending"]').text()).toContain('↓');
@@ -282,8 +301,8 @@ describe('UiDataGrid package', () => {
     const search = mount(UiDataGridSearch, {
       props: {
         modelValue: '',
-        placeholder: 'Search rows'
-      }
+        placeholder: 'Search rows',
+      },
     });
     await search.get('input[type="search"]').setValue('Ada');
     expect(search.emitted('update:modelValue')?.[0]).toEqual(['Ada']);
@@ -292,32 +311,100 @@ describe('UiDataGrid package', () => {
       props: {
         definitions: filters,
         filters: {
-          tags: ['ops']
-        }
-      }
+          tags: ['ops'],
+        },
+      },
     });
 
     const inputs = filtersWrapper.findAll('input.ui-data-grid-filters__control');
     await inputs[0].setValue('hello');
     expect(filtersWrapper.emitted('updateFilter')?.[0]).toEqual(['query', 'hello']);
+    const filtersSetupState = filtersWrapper.vm.$.setupState as {
+      onMultiSelect: (definitionId: string, event: Event) => void;
+      onSelect: (definition: DataGridFilterDefinition, value: string) => void;
+      onTextInput: (definitionId: string, event: Event) => void;
+      toSelectOptions: (
+        definition: DataGridFilterDefinition
+      ) => Array<{ label: string; value: string }>;
+      toSelectValue: (value: unknown) => string;
+    };
+    expect(
+      filtersSetupState.toSelectOptions({
+        id: 'notes',
+        label: 'Notes',
+        type: 'text',
+      })
+    ).toEqual([]);
+    expect(
+      filtersSetupState.toSelectOptions({
+        id: 'active-default',
+        label: 'Active',
+        type: 'boolean',
+      })
+    ).toEqual([
+      { label: 'Yes', value: 'true' },
+      { label: 'No', value: 'false' },
+    ]);
+    expect(filtersSetupState.toSelectValue(true)).toBe('true');
+    expect(filtersSetupState.toSelectValue(false)).toBe('false');
+    expect(filtersSetupState.toSelectValue(['ops'])).toBe('');
     await filtersWrapper.find('select.ui-select__control').setValue('Healthy');
-    expect(filtersWrapper.emitted('updateFilter')?.some((event) => event[0] === 'status' && event[1] === 'Healthy')).toBe(true);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'status' && event[1] === 'Healthy')
+    ).toBe(true);
     await filtersWrapper.findAll('select.ui-select__control')[1].setValue('true');
-    expect(filtersWrapper.emitted('updateFilter')?.some((event) => event[0] === 'active' && event[1] === true)).toBe(true);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'active' && event[1] === true)
+    ).toBe(true);
     const multiSelect = filtersWrapper.find('select[multiple]');
     const multiElement = multiSelect.element as HTMLSelectElement;
     multiElement.options[0].selected = true;
     multiElement.options[1].selected = true;
     await multiSelect.trigger('change');
     expect(filtersWrapper.emitted('updateFilter')?.some((event) => event[0] === 'tags')).toBe(true);
+    const emittedCountBeforeInvalidMulti = filtersWrapper.emitted('updateFilter')?.length ?? 0;
+    filtersSetupState.onMultiSelect('tags', {
+      target: document.createElement('div'),
+    } as unknown as Event);
+    expect(filtersWrapper.emitted('updateFilter')).toHaveLength(emittedCountBeforeInvalidMulti);
+    filtersSetupState.onTextInput('query', {
+      target: document.createElement('div'),
+    } as unknown as Event);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'query' && event[1] === undefined)
+    ).toBe(true);
+    filtersSetupState.onSelect(filters[1], '');
+    filtersSetupState.onSelect(filters[1], 'false');
+    filtersSetupState.onSelect(filters[0], '');
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'active' && event[1] === undefined)
+    ).toBe(true);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'active' && event[1] === false)
+    ).toBe(true);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'status' && event[1] === undefined)
+    ).toBe(true);
 
     const visibility = mount(UiDataGridColumnVisibility, {
       props: {
         columns,
         columnVisibility: {
-          status: false
-        }
-      }
+          status: false,
+        },
+      },
     });
     await visibility.get('summary').trigger('click');
     await visibility.findAll('.ui-checkbox__input')[1].setValue(true);
@@ -329,8 +416,8 @@ describe('UiDataGrid package', () => {
       mount(UiDataGridColumnVisibility, {
         props: {
           columns: [],
-          columnVisibility: {}
-        }
+          columnVisibility: {},
+        },
       }).html()
     ).toBe('<!--v-if-->');
 
@@ -342,11 +429,25 @@ describe('UiDataGrid package', () => {
         filters: {},
         hideableColumns: columns,
         columnVisibility: {},
-        showColumnVisibility: false
-      }
+        showColumnVisibility: false,
+      },
     });
 
     expect(toolbar.find('.ui-data-grid-visibility').exists()).toBe(false);
+
+    const toolbarWithVisibility = mount(UiDataGridToolbar, {
+      props: {
+        search: '',
+        searchPlaceholder: 'Search rows',
+        filterDefinitions: filters,
+        filters: {},
+        hideableColumns: columns,
+        columnVisibility: {},
+      },
+    });
+    await toolbarWithVisibility.get('summary').trigger('click');
+    await toolbarWithVisibility.get('.ui-data-grid-visibility__reset').trigger('click');
+    expect(toolbarWithVisibility.emitted('resetColumnVisibility')).toHaveLength(1);
 
     const pagination = mount(UiDataGridPagination, {
       props: {
@@ -356,9 +457,12 @@ describe('UiDataGrid package', () => {
         pageSizeOptions: [10, 25],
         totalRows: 42,
         summaryStart: 11,
-        summaryEnd: 20
-      }
+        summaryEnd: 20,
+      },
     });
+    expect(pagination.get('select.ui-select__control').attributes('aria-label')).toBe(
+      'Rows per page'
+    );
     await pagination.findAll('select.ui-select__control')[0].setValue('25');
     await pagination.findAll('button')[0].trigger('click');
     await pagination.findAll('button')[1].trigger('click');
@@ -369,11 +473,11 @@ describe('UiDataGrid package', () => {
 
     const bulk = mount(UiDataGridBulkActions, {
       props: {
-        selectedCount: 3
+        selectedCount: 3,
       },
       slots: {
-        default: 'Bulk slot'
-      }
+        default: 'Bulk slot',
+      },
     });
     await bulk.get('button').trigger('click');
     expect(bulk.text()).toContain('3 selected');
@@ -384,10 +488,155 @@ describe('UiDataGrid package', () => {
       mount(UiDataGridFilters, {
         props: {
           definitions: [],
-          filters: {}
-        }
+          filters: {},
+        },
       }).html()
     ).toBe('<!--v-if-->');
+    const prefilledTextFilter = mount(UiDataGridFilters, {
+      props: {
+        definitions: [
+          {
+            id: 'query',
+            label: 'Query',
+            type: 'text',
+          },
+        ],
+        filters: {
+          query: 'ready',
+        },
+      },
+    });
+    expect(
+      (prefilledTextFilter.get('input.ui-data-grid-filters__control').element as HTMLInputElement)
+        .value
+    ).toBe('ready');
+    const prefilledSelectFilter = mount(UiDataGridFilters, {
+      props: {
+        definitions: filters,
+        filters: {
+          status: 'Healthy',
+        },
+      },
+    });
+    expect(
+      (prefilledSelectFilter.find('select.ui-select__control').element as HTMLSelectElement).value
+    ).toBe('Healthy');
+    const placeholderSelectFilter = mount(UiDataGridFilters, {
+      props: {
+        definitions: [
+          {
+            id: 'status',
+            label: 'Status',
+            type: 'select',
+            placeholder: 'Choose status',
+            options: [{ label: 'Healthy', value: 'Healthy' }],
+          },
+        ],
+        filters: {},
+      },
+    });
+    expect(placeholderSelectFilter.get('option[value=""]').text()).toBe('Choose status');
+  });
+
+  it('covers row selection label fallbacks for empty columns and non-primitive primary cells', () => {
+    const withoutColumns = mount(UiDataGridTable, {
+      props: {
+        rows: [{ id: 'row-1' }],
+        columns: [],
+        query: createQuery(),
+        selectionEnabled: true,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+    });
+    const blankPrimaryValue = mount(UiDataGridTable, {
+      props: {
+        rows: [{ id: 'row-9', name: '   ' }],
+        columns: [createDataGridColumn({ id: 'name', header: 'Name', accessorKey: 'name' })],
+        query: createQuery(),
+        selectionEnabled: true,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+    });
+    const objectPrimaryValue = mount(UiDataGridTable, {
+      props: {
+        rows: [{ id: 'row-2', name: { nested: true } }],
+        columns: [createDataGridColumn({ id: 'name', header: 'Name', accessorKey: 'name' })],
+        query: createQuery(),
+        selectionEnabled: true,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+    });
+    const booleanPrimaryValue = mount(UiDataGridTable, {
+      props: {
+        rows: [{ id: 'row-3', active: true }],
+        columns: [
+          createDataGridColumn({
+            id: 'active',
+            header: 'Active',
+            accessorKey: 'active',
+          }),
+        ],
+        query: createQuery(),
+        selectionEnabled: true,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+    });
+    const widthAware = mount(UiDataGridTable, {
+      props: {
+        rows: [{ id: 'row-4', name: 'Widthy' }],
+        columns: [
+          createDataGridColumn({
+            id: 'name',
+            header: 'Name',
+            accessorKey: 'name',
+            width: '16rem',
+          }),
+        ],
+        query: createQuery(),
+        selectionEnabled: false,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+    });
+
+    expect(withoutColumns.find('tbody .ui-checkbox__input').attributes('aria-label')).toBe(
+      'Select row 1'
+    );
+    expect(blankPrimaryValue.find('tbody .ui-checkbox__input').attributes('aria-label')).toBe(
+      'Select row row-9'
+    );
+    expect(objectPrimaryValue.find('tbody .ui-checkbox__input').attributes('aria-label')).toBe(
+      'Select row row-2'
+    );
+    expect(booleanPrimaryValue.find('tbody .ui-checkbox__input').attributes('aria-label')).toBe(
+      'Select row true'
+    );
+    expect(widthAware.get('th').attributes('style')).toContain('width: 16rem;');
+  });
+
+  it('prevents row clicks when selection or row-action cells handle the event', async () => {
+    const wrapper = mount(UiDataGridTable, {
+      props: {
+        rows,
+        columns,
+        query: createQuery(),
+        selectionEnabled: true,
+        selectedRowIds: [],
+        allPageRowsSelected: false,
+      },
+      slots: {
+        rowActions: ({ rowId }) => h('button', { type: 'button' }, `Action ${String(rowId)}`),
+      },
+    });
+
+    await wrapper.find('tbody .ui-checkbox').trigger('click');
+    await wrapper.find('tbody .ui-data-grid-table__actions-column').trigger('click');
+
+    expect(wrapper.emitted('rowClick')).toBeUndefined();
   });
 
   it('supports subtree theming and row click contracts through the public component', async () => {
@@ -397,13 +646,13 @@ describe('UiDataGrid package', () => {
         setup() {
           return {
             columns,
-            filters
+            filters,
           };
         },
         data() {
           return {
             query: createQuery(),
-            selected: ['row-1'] as readonly string[]
+            selected: ['row-1'] as readonly string[],
           };
         },
         template: `
@@ -421,7 +670,7 @@ describe('UiDataGrid package', () => {
               @update:selected-row-ids="selected = $event"
             />
           </section>
-        `
+        `,
       })
     );
 
@@ -436,22 +685,22 @@ describe('UiDataGrid package', () => {
         columns,
         query: createQuery(),
         totalRows: 0,
-        loading: true
+        loading: true,
       },
       slots: {
-        loading: '<div>Custom loading</div>'
-      }
+        loading: '<div>Custom loading</div>',
+      },
     });
     const empty = mount(UiDataGrid, {
       props: {
         rows: [],
         columns,
         query: createQuery(),
-        totalRows: 0
+        totalRows: 0,
       },
       slots: {
-        empty: '<div>Custom empty</div>'
-      }
+        empty: '<div>Custom empty</div>',
+      },
     });
     const error = mount(UiDataGrid, {
       props: {
@@ -459,11 +708,11 @@ describe('UiDataGrid package', () => {
         columns,
         query: createQuery(),
         totalRows: 0,
-        error: 'Custom error'
+        error: 'Custom error',
       },
       slots: {
-        error: '<div>Custom error slot</div>'
-      }
+        error: '<div>Custom error slot</div>',
+      },
     });
 
     expect(loading.text()).toContain('Custom loading');

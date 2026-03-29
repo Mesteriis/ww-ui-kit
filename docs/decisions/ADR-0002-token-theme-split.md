@@ -45,4 +45,3 @@ If existing component styles referenced raw palette values, replace them with se
 - [`packages/tokens`](../../packages/tokens)
 - [`packages/themes`](../../packages/themes)
 - [`docs/architecture/public-api-discipline.md`](../architecture/public-api-discipline.md)
-

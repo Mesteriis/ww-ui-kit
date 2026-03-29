@@ -19,17 +19,21 @@ const pathState = computed(() =>
     targetY: props.targetY,
     sourcePosition: props.sourcePosition,
     targetPosition: props.targetPosition,
-  }),
+  })
 );
 const edgePath = computed(() => pathState.value[0]);
 const labelX = computed(() => pathState.value[1]);
 const labelY = computed(() => pathState.value[2]);
 const originalEdge = computed(() => runtime?.edgeMap.value.get(props.id) ?? null);
 const depthState = computed(() =>
-  originalEdge.value && runtime ? resolveEdgeDepthState(originalEdge.value, runtime.focusState.value) : 'active',
+  originalEdge.value && runtime
+    ? resolveEdgeDepthState(originalEdge.value, runtime.focusState.value)
+    : 'active'
 );
 const runtimeSignals = computed(() => runtime?.runtimeSignalsByEdge.value.get(props.id) ?? []);
-const activeVariant = computed(() => runtimeSignals.value[runtimeSignals.value.length - 1]?.variant ?? null);
+const activeVariant = computed(
+  () => runtimeSignals.value[runtimeSignals.value.length - 1]?.variant ?? null
+);
 const isReducedMotion = computed(() => runtime?.reducedMotion.value === true);
 </script>
 
@@ -40,9 +44,26 @@ const isReducedMotion = computed(() => runtime?.reducedMotion.value === true);
     :data-ui-signaled="runtimeSignals.length > 0 ? 'true' : undefined"
     :data-ui-variant="activeVariant ?? undefined"
   >
-    <path class="ui-signal-graph__edge-hitbox" :d="edgePath" fill="none" :stroke-width="interactionWidth ?? 24" />
-    <path class="ui-signal-graph__edge-glow" :d="edgePath" fill="none" :marker-start="markerStart" :marker-end="markerEnd" />
-    <path class="ui-signal-graph__edge-path" :d="edgePath" fill="none" :marker-start="markerStart" :marker-end="markerEnd" />
+    <path
+      class="ui-signal-graph__edge-hitbox"
+      :d="edgePath"
+      fill="none"
+      :stroke-width="interactionWidth ?? 24"
+    />
+    <path
+      class="ui-signal-graph__edge-glow"
+      :d="edgePath"
+      fill="none"
+      :marker-start="markerStart"
+      :marker-end="markerEnd"
+    />
+    <path
+      class="ui-signal-graph__edge-path"
+      :d="edgePath"
+      fill="none"
+      :marker-start="markerStart"
+      :marker-end="markerEnd"
+    />
 
     <SignalGraphPulseLayer
       v-for="signal in runtimeSignals"

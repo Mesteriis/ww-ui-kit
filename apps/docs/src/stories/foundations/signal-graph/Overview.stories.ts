@@ -2,7 +2,12 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 
 import { UiSignalGraph } from '@ww/signal-graph';
 
-import { createSignal, overviewEdges, overviewNodes, signalGraphNodeDefinitions } from './signal-graph-fixtures';
+import {
+  createSignal,
+  overviewEdges,
+  overviewNodes,
+  signalGraphNodeDefinitions,
+} from './signal-graph-fixtures';
 
 const meta = {
   title: 'Foundations/Signal Graph/Overview',

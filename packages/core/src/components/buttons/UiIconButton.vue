@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import type { UiButtonAppearance, UiButtonEffect, UiButtonSize, UiButtonTone, UiButtonVariant } from './button.types';
+import type {
+  UiButtonAppearance,
+  UiButtonEffect,
+  UiButtonSize,
+  UiButtonTone,
+  UiButtonVariant,
+} from './button.types';
 import { resolveButtonStyle } from './button.types';
 
 defineOptions({ name: 'UiIconButton' });
@@ -24,7 +30,7 @@ const props = withDefaults(
     size: 'md',
     type: 'button',
     disabled: false,
-    loading: false
+    loading: false,
   }
 );
 
@@ -33,10 +39,12 @@ const resolvedStyle = computed(() =>
   resolveButtonStyle({
     variant: props.variant,
     tone: props.tone,
-    appearance: props.appearance
+    appearance: props.appearance,
   })
 );
-const accessibleLabel = computed(() => (props.loading ? `${props.ariaLabel}, loading` : props.ariaLabel));
+const accessibleLabel = computed(() =>
+  props.loading ? `${props.ariaLabel}, loading` : props.ariaLabel
+);
 </script>
 
 <template>
@@ -47,7 +55,7 @@ const accessibleLabel = computed(() => (props.loading ? `${props.ariaLabel}, loa
       `ui-button--appearance-${resolvedStyle.appearance}`,
       `ui-button--effect-${props.effect}`,
       `ui-button--${props.size}`,
-      { 'is-loading': props.loading }
+      { 'is-loading': props.loading },
     ]"
     :type="props.type"
     :disabled="isDisabled"

@@ -8,12 +8,12 @@ describe('UiEmptyState', () => {
     const wrapper = mount(UiEmptyState, {
       props: {
         description: 'Description',
-        title: 'Empty'
+        title: 'Empty',
       },
       slots: {
         actions: 'Actions',
-        icon: '◇'
-      }
+        icon: '◇',
+      },
     });
 
     expect(wrapper.text()).toContain('Empty');
@@ -24,8 +24,8 @@ describe('UiEmptyState', () => {
   it('omits optional regions when description and slots are absent', () => {
     const wrapper = mount(UiEmptyState, {
       props: {
-        title: 'Nothing here'
-      }
+        title: 'Nothing here',
+      },
     });
 
     expect(wrapper.find('.ui-empty-state__description').exists()).toBe(false);

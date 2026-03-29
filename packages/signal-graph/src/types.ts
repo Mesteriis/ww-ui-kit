@@ -6,7 +6,13 @@ export type SignalGraphInteractionMode = 'readonly' | 'interactive';
 export type SignalGraphDepthMode = 'off' | 'lite' | 'full';
 export type SignalGraphDepthState = 'active' | 'related' | 'background';
 export type SignalGraphFocusSource = 'none' | 'hover' | 'selection' | 'programmatic' | 'controlled';
-export type SignalGraphSignalVariant = 'neutral' | 'info' | 'success' | 'warning' | 'danger' | 'accent';
+export type SignalGraphSignalVariant =
+  | 'neutral'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'accent';
 export type SignalGraphSignalDirection = 'forward' | 'reverse';
 export type SignalGraphSignalIntensity = 'sm' | 'md' | 'lg';
 export type SignalGraphEdgeDirection = 'forward' | 'reverse' | 'bidirectional';
@@ -20,7 +26,7 @@ export interface SignalGraphPoint {
 
 export interface SignalGraphNode<
   TData extends Record<string, unknown> = Record<string, unknown>,
-  TMeta extends Record<string, unknown> = Record<string, unknown>
+  TMeta extends Record<string, unknown> = Record<string, unknown>,
 > {
   id: string;
   type: string;
@@ -40,7 +46,7 @@ export interface SignalGraphNode<
 
 export interface SignalGraphEdge<
   TData extends Record<string, unknown> = Record<string, unknown>,
-  TMeta extends Record<string, unknown> = Record<string, unknown>
+  TMeta extends Record<string, unknown> = Record<string, unknown>,
 > {
   id: string;
   source: string;
@@ -55,7 +61,7 @@ export interface SignalGraphEdge<
 
 export interface SignalGraphSignal<
   TPayload extends Record<string, unknown> = Record<string, unknown>,
-  TMeta extends Record<string, unknown> = Record<string, unknown>
+  TMeta extends Record<string, unknown> = Record<string, unknown>,
 > {
   id: string;
   edgeId: string;
@@ -99,7 +105,7 @@ export interface SignalGraphFocusState {
 
 export interface SignalGraphNodeRendererProps<
   TData extends Record<string, unknown> = Record<string, unknown>,
-  TMeta extends Record<string, unknown> = Record<string, unknown>
+  TMeta extends Record<string, unknown> = Record<string, unknown>,
 > {
   node: SignalGraphNode<TData, TMeta>;
   data: TData;

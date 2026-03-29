@@ -1,6 +1,16 @@
 import { ARCHITECTURE_SENSITIVE_PATH_PATTERNS } from '../catalog/layer-rules.mjs';
-import { ADR_REQUIRED_SECTIONS, ADR_STATUSES, listAdrFiles, parseAdrFile, readAdrIndex } from '../shared/adr.mjs';
+import {
+  ADR_REQUIRED_SECTIONS,
+  ADR_STATUSES,
+  listAdrFiles,
+  parseAdrFile,
+  readAdrIndex,
+} from '../shared/adr.mjs';
 import { execSync } from 'node:child_process';
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 function getChangedFiles() {
   try {
@@ -49,7 +59,12 @@ for (const adr of parsedAdrs) {
     }
   }
 
-  if (!adrIndex.includes(`${attributes.id} | ${attributes.status} | ${attributes.title}`)) {
+  const indexRowPattern = new RegExp(
+    `^\\|?\\s*${escapeRegExp(attributes.id)}\\s*\\|\\s*${escapeRegExp(attributes.status)}\\s*\\|\\s*${escapeRegExp(attributes.title)}\\s*\\|`,
+    'm'
+  );
+
+  if (!indexRowPattern.test(adrIndex)) {
     throw new Error(
       `${relativePath} is missing from docs/decisions/index.md or has mismatched summary row.`
     );
@@ -69,7 +84,9 @@ const changedFiles = getChangedFiles();
 const architectureSensitiveChange = changedFiles.some((relativePath) =>
   ARCHITECTURE_SENSITIVE_PATH_PATTERNS.some((pattern) => pattern.test(relativePath))
 );
-const touchedAdr = changedFiles.some((relativePath) => /^docs\/decisions\/ADR-\d{4}-.+\.md$/.test(relativePath));
+const touchedAdr = changedFiles.some((relativePath) =>
+  /^docs\/decisions\/ADR-\d{4}-.+\.md$/.test(relativePath)
+);
 
 if (architectureSensitiveChange && !touchedAdr) {
   throw new Error(
@@ -78,4 +95,3 @@ if (architectureSensitiveChange && !touchedAdr) {
 }
 
 console.log(`ADR governance OK: ${parsedAdrs.length} ADRs validated.`);
-

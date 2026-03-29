@@ -11,7 +11,8 @@ export default defineConfig({
       'packages/widgets/vitest.config.ts',
       'packages/page-templates/vitest.config.ts',
       'packages/core/vitest.config.ts',
-      'tests/meta/vitest.config.ts'
-    ]
-  }
+      'apps/playground/vitest.config.ts',
+      'tests/meta/vitest.config.ts',
+    ],
+  },
 });

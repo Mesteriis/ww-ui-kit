@@ -4,7 +4,7 @@ import { UiBadge, UiCard } from '@ww/core';
 
 const meta = {
   title: 'Architecture/Layering',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -17,28 +17,28 @@ export const Overview: StoryObj = {
         {
           name: 'Core',
           package: '@ww/core',
-          description: 'Baseline components and visual contracts.'
+          description: 'Baseline components and visual contracts.',
         },
         {
           name: 'Systems',
           package: '@ww/charts-apex · @ww/data-grid · @ww/signal-graph',
-          description: 'Larger subsystems and optional adapters.'
+          description: 'Larger subsystems and optional adapters.',
         },
         {
           name: 'Widgets',
           package: '@ww/widgets',
-          description: 'Black-box composed UI blocks above core and systems.'
+          description: 'Black-box composed UI blocks above core and systems.',
         },
         {
           name: 'Page templates',
           package: '@ww/page-templates',
-          description: 'Reusable page shells and slot-driven layouts.'
+          description: 'Reusable page shells and slot-driven layouts.',
         },
         {
           name: 'Apps',
           package: 'apps/*',
-          description: 'Real route pages, domain logic, and backend orchestration.'
-        }
+          description: 'Real route pages, domain logic, and backend orchestration.',
+        },
       ];
 
       const examples = [
@@ -47,12 +47,12 @@ export const Overview: StoryObj = {
         ['UiDataGrid', '@ww/data-grid'],
         ['AuthPageTemplate', '@ww/page-templates'],
         ['DashboardPageTemplate', '@ww/page-templates'],
-        ['Actual route page', 'apps/*']
+        ['Actual route page', 'apps/*'],
       ];
 
       return {
         examples,
-        layers
+        layers,
       };
     },
     template: `
@@ -103,6 +103,6 @@ export const Overview: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

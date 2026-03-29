@@ -8,17 +8,17 @@ export default defineConfig({
   testDir: path.join(rootDir, 'tests/playground/scenarios'),
   timeout: 45_000,
   fullyParallel: true,
+  retries: process.env.CI ? 2 : 0,
   use: {
     baseURL: 'http://127.0.0.1:6200',
     browserName: 'chromium',
     headless: true,
-    trace: 'retain-on-failure'
+    trace: 'on-first-retry',
   },
   webServer: {
-    command: 'python3 -m http.server 6200 -d apps/playground/dist',
+    command: 'node tests/playground/serve-playground.mjs',
     cwd: rootDir,
-    url: 'http://127.0.0.1:6200',
-    reuseExistingServer: !process.env.CI
-  }
+    url: 'http://127.0.0.1:6200/playground/',
+    reuseExistingServer: !process.env.CI,
+  },
 });
-

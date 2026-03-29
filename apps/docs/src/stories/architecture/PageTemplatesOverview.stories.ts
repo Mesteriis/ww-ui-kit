@@ -1,14 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import { UiBadge, UiCard } from '@ww/core';
-import {
-  PAGE_TEMPLATE_LAYER_RULES,
-  RESERVED_PAGE_TEMPLATE_NAMESPACES
-} from '@ww/page-templates';
+import { PAGE_TEMPLATE_LAYER_RULES, RESERVED_PAGE_TEMPLATE_NAMESPACES } from '@ww/page-templates';
 
 const meta = {
   title: 'Architecture/Page Templates/Overview',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -19,7 +16,7 @@ export const PageTemplatesLayer: StoryObj = {
     setup() {
       return {
         namespaces: RESERVED_PAGE_TEMPLATE_NAMESPACES,
-        rules: PAGE_TEMPLATE_LAYER_RULES
+        rules: PAGE_TEMPLATE_LAYER_RULES,
       };
     },
     template: `
@@ -65,6 +62,6 @@ export const PageTemplatesLayer: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

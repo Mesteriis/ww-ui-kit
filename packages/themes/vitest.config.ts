@@ -6,13 +6,13 @@ import { workspaceAliases, workspaceRoot } from '../../vite.aliases';
 export default defineConfig({
   plugins: [tsconfigPaths()],
   resolve: {
-    alias: workspaceAliases
+    alias: workspaceAliases,
   },
   test: {
     name: 'themes',
     root: workspaceRoot,
     environment: 'jsdom',
     include: ['packages/themes/src/**/*.test.ts'],
-    globals: true
-  }
+    globals: true,
+  },
 });

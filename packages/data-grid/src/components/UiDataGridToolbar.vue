@@ -21,7 +21,7 @@ const props = withDefaults(
   {
     searchPlaceholder: '',
     showColumnVisibility: true,
-    disabled: false
+    disabled: false,
   }
 );
 

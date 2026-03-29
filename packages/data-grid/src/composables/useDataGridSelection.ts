@@ -5,7 +5,7 @@ import {
   isDataGridRowSelected,
   normalizeDataGridSelection,
   setDataGridPageSelection,
-  toggleDataGridRowSelection
+  toggleDataGridRowSelection,
 } from '../model/selection';
 import { resolveDataGridRowId } from '../internal/utils/row-id';
 import type { DataGridRowId, DataGridRowIdAccessor, DataGridSelectionState } from '../model/types';
@@ -18,12 +18,18 @@ interface DataGridSelectionOptions<TRow extends Record<string, unknown>> {
   onChange: (nextSelection: DataGridSelectionState) => void;
 }
 
-export function useDataGridSelection<TRow extends Record<string, unknown>>(options: DataGridSelectionOptions<TRow>) {
+export function useDataGridSelection<TRow extends Record<string, unknown>>(
+  options: DataGridSelectionOptions<TRow>
+) {
   const pageRowIds = computed(() =>
-    toValue(options.rows).map((row, rowIndex) => resolveDataGridRowId(row, rowIndex, toValue(options.rowId), 'data-grid'))
+    toValue(options.rows).map((row, rowIndex) =>
+      resolveDataGridRowId(row, rowIndex, toValue(options.rowId), 'data-grid')
+    )
   );
   const selection = computed(() =>
-    normalizeDataGridSelection(toValue(options.selectionEnabled) ? toValue(options.selectedRowIds) : [])
+    normalizeDataGridSelection(
+      toValue(options.selectionEnabled) ? toValue(options.selectedRowIds) : []
+    )
   );
 
   return {
@@ -53,6 +59,6 @@ export function useDataGridSelection<TRow extends Record<string, unknown>>(optio
       }
 
       options.onChange(clearDataGridSelection());
-    }
+    },
   };
 }

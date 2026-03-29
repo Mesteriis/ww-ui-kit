@@ -41,15 +41,15 @@ describe('overlay layers', () => {
 
     expect(resolveOverlayLayerSlots(-1, 'floating')).toEqual({
       backdrop: 4504,
-      content: 4504
+      content: 4504,
     });
     expect(resolveOverlayLayerSlots(1, 'tooltip')).toEqual({
       backdrop: 4516,
-      content: 4516
+      content: 4516,
     });
     expect(resolveOverlayLayerSlots(2, 'toast')).toEqual({
       backdrop: 4528,
-      content: 4528
+      content: 4528,
     });
   });
 
@@ -60,11 +60,11 @@ describe('overlay layers', () => {
 
     expect(readOverlayLayerScale(customRoot)).toMatchObject({
       base: 4000,
-      floating: 4
+      floating: 4,
     });
     expect(resolveOverlayLayerSlots(0, 'floating', customRoot)).toEqual({
       backdrop: 4004,
-      content: 4004
+      content: 4004,
     });
 
     const originalDocument = globalThis.document;
@@ -72,7 +72,7 @@ describe('overlay layers', () => {
     globalThis.document = undefined;
     expect(readOverlayLayerScale()).toMatchObject({
       base: 4000,
-      step: 20
+      step: 20,
     });
     // @ts-expect-error restore test-only override
     globalThis.document = originalDocument;

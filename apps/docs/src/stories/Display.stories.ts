@@ -4,7 +4,7 @@ import { UiBadge, UiCard, UiDivider, UiSkeleton, UiSpinner } from '@ww/core';
 
 const meta = {
   title: 'Core/Display',
-  component: UiCard
+  component: UiCard,
 } satisfies Meta<typeof UiCard>;
 
 export default meta;
@@ -34,6 +34,6 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
           <UiSkeleton width="4rem" height="4rem" shape="circle" />
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

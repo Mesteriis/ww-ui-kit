@@ -18,11 +18,11 @@ describe('PrimitiveFocusTrap', () => {
           <button id="first" type="button">First</button>
           <button id="last" type="button">Last</button>
         </PrimitiveFocusTrap>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     await nextTick();
@@ -56,11 +56,11 @@ describe('PrimitiveFocusTrap', () => {
         <PrimitiveFocusTrap :active="active">
           <div id="empty">No focusable content</div>
         </PrimitiveFocusTrap>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     expect(document.activeElement).not.toBe(wrapper.element);
@@ -77,11 +77,15 @@ describe('PrimitiveFocusTrap', () => {
     await nextTick();
     expect(document.activeElement).toBe(container);
 
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })
+    );
     await nextTick();
     expect(document.activeElement).toBe(container);
 
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }));
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })
+    );
     await nextTick();
     expect(document.activeElement).toBe(container);
 
@@ -97,24 +101,26 @@ describe('PrimitiveFocusTrap', () => {
           <button id="first" type="button">First</button>
           <button id="last" type="button">Last</button>
         </PrimitiveFocusTrap>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     await nextTick();
 
     const first = wrapper.get('#first').element as HTMLButtonElement;
     first.focus();
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true }));
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true })
+    );
     await nextTick();
     expect((document.activeElement as HTMLElement | null)?.id).toBe('last');
 
     const insideFocus = new FocusEvent('focusin', { bubbles: true });
     Object.defineProperty(insideFocus, 'target', {
-      value: wrapper.get('#last').element
+      value: wrapper.get('#last').element,
     });
     document.dispatchEvent(insideFocus);
     await nextTick();
@@ -127,7 +133,7 @@ describe('PrimitiveFocusTrap', () => {
     const originalActiveElement = Object.getOwnPropertyDescriptor(document, 'activeElement');
     Object.defineProperty(document, 'activeElement', {
       configurable: true,
-      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
     });
 
     const Harness = defineComponent({
@@ -136,11 +142,11 @@ describe('PrimitiveFocusTrap', () => {
         <PrimitiveFocusTrap>
           <button id="only" type="button">Only</button>
         </PrimitiveFocusTrap>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     if (originalActiveElement) {
@@ -160,11 +166,11 @@ describe('PrimitiveFocusTrap', () => {
         <PrimitiveFocusTrap>
           <button id="only" type="button">Only</button>
         </PrimitiveFocusTrap>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     wrapper.unmount();

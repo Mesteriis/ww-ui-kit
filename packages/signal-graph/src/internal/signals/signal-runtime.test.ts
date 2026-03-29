@@ -15,10 +15,7 @@ describe('createSignalGraphSignalRuntime', () => {
     const runtime = createSignalGraphSignalRuntime({
       signals: ref(undefined),
       edgeMap: computed(
-        () =>
-          new Map([
-            ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
-          ]),
+        () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
       ),
       reducedMotion: ref(false),
       defaultDurationMs: ref(600),
@@ -28,8 +25,20 @@ describe('createSignalGraphSignalRuntime', () => {
     });
 
     runtime.emitSignal([
-      { id: 'signal-1', edgeId: 'edge-a-b', variant: 'info', direction: 'forward', intensity: 'sm' },
-      { id: 'signal-2', edgeId: 'edge-a-b', variant: 'success', direction: 'forward', intensity: 'md' },
+      {
+        id: 'signal-1',
+        edgeId: 'edge-a-b',
+        variant: 'info',
+        direction: 'forward',
+        intensity: 'sm',
+      },
+      {
+        id: 'signal-2',
+        edgeId: 'edge-a-b',
+        variant: 'success',
+        direction: 'forward',
+        intensity: 'md',
+      },
     ]);
 
     expect(runtime.runtimeSignals.value).toHaveLength(2);
@@ -48,10 +57,7 @@ describe('createSignalGraphSignalRuntime', () => {
     const reducedRuntime = createSignalGraphSignalRuntime({
       signals: ref(undefined),
       edgeMap: computed(
-        () =>
-          new Map([
-            ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
-          ]),
+        () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
       ),
       reducedMotion: ref(true),
       defaultDurationMs: ref(900),
@@ -75,7 +81,13 @@ describe('createSignalGraphSignalRuntime', () => {
     vi.useFakeTimers();
 
     const incomingSignals = ref([
-      { id: 'signal-1', edgeId: 'edge-a-b', variant: 'info', direction: 'forward', intensity: 'sm' as const },
+      {
+        id: 'signal-1',
+        edgeId: 'edge-a-b',
+        variant: 'info',
+        direction: 'forward',
+        intensity: 'sm' as const,
+      },
     ]);
 
     const runtime = createSignalGraphSignalRuntime({
@@ -85,7 +97,7 @@ describe('createSignalGraphSignalRuntime', () => {
           new Map([
             ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
             ['edge-missing-target', { id: 'edge-missing-target', source: 'b', target: 'c' }],
-          ]),
+          ])
       ),
       reducedMotion: ref(false),
       defaultDurationMs: ref(400),
@@ -96,8 +108,20 @@ describe('createSignalGraphSignalRuntime', () => {
     expect(runtime.runtimeSignals.value).toHaveLength(1);
 
     incomingSignals.value = [
-      { id: 'signal-1', edgeId: 'edge-a-b', variant: 'info', direction: 'forward', intensity: 'sm' },
-      { id: 'signal-2', edgeId: 'edge-missing-target', variant: 'danger', direction: 'reverse', intensity: 'lg' },
+      {
+        id: 'signal-1',
+        edgeId: 'edge-a-b',
+        variant: 'info',
+        direction: 'forward',
+        intensity: 'sm',
+      },
+      {
+        id: 'signal-2',
+        edgeId: 'edge-missing-target',
+        variant: 'danger',
+        direction: 'reverse',
+        intensity: 'lg',
+      },
     ];
     await nextTick();
 
@@ -117,10 +141,7 @@ describe('createSignalGraphSignalRuntime', () => {
     const runtime = createSignalGraphSignalRuntime({
       signals: ref(undefined),
       edgeMap: computed(
-        () =>
-          new Map([
-            ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
-          ]),
+        () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
       ),
       reducedMotion: ref(false),
       defaultDurationMs: ref(400),
@@ -155,14 +176,14 @@ describe('createSignalGraphSignalRuntime', () => {
 
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     runtime.clearSignals();
     expect(runtime.runtimeSignals.value).toEqual([]);
 
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
-      value: originalWindow
+      value: originalWindow,
     });
   });
 
@@ -205,10 +226,7 @@ describe('createSignalGraphSignalRuntime', () => {
     const runtime = createSignalGraphSignalRuntime({
       signals: ref(undefined),
       edgeMap: computed(
-        () =>
-          new Map([
-            ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
-          ]),
+        () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
       ),
       reducedMotion: ref(true),
       defaultDurationMs: ref(500),
@@ -242,10 +260,7 @@ describe('createSignalGraphSignalRuntime', () => {
     const runtime = createSignalGraphSignalRuntime({
       signals: ref(undefined),
       edgeMap: computed(
-        () =>
-          new Map([
-            ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }],
-          ]),
+        () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
       ),
       reducedMotion: ref(false),
       defaultDurationMs: ref(500),

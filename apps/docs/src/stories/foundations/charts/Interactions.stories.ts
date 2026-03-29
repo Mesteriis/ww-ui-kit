@@ -8,7 +8,7 @@ import { lineSeries, monthCategories } from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/Interactions',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -26,31 +26,31 @@ export const Interactions: StoryObj<typeof UiApexChart> = {
               const seriesIndex = config?.seriesIndex ?? -1;
               const dataPointIndex = config?.dataPointIndex ?? -1;
               lastSelection.value = `series ${seriesIndex}, point ${dataPointIndex}`;
-            }
-          }
+            },
+          },
         },
         xaxis: {
-          categories: monthCategories
-        }
+          categories: monthCategories,
+        },
       };
 
       const groupedBase: UiApexChartOptions = {
         chart: {
           group: 'traffic-sync',
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         xaxis: {
-          categories: monthCategories
-        }
+          categories: monthCategories,
+        },
       };
 
       return {
         groupedBase,
         interactionOptions,
         lastSelection,
-        lineSeries
+        lineSeries,
       };
     },
     template: `
@@ -89,6 +89,6 @@ export const Interactions: StoryObj<typeof UiApexChart> = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

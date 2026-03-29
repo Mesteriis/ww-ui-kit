@@ -26,15 +26,15 @@ describe('overlay components', () => {
               <button id="inside" type="button">Inside</button>
             </UiDialog>
           </div>
-        `
+        `,
       }),
       {
         attachTo: document.body,
         global: {
           stubs: {
-            transition: false
-          }
-        }
+            transition: false,
+          },
+        },
       }
     );
 
@@ -93,15 +93,15 @@ describe('overlay components', () => {
               </UiDialog>
             </UiDrawer>
           </div>
-        `
+        `,
       }),
       {
         attachTo: document.body,
         global: {
           stubs: {
-            transition: false
-          }
-        }
+            transition: false,
+          },
+        },
       }
     );
 
@@ -159,15 +159,15 @@ describe('overlay components', () => {
               Scoped drawer
             </UiDrawer>
           </section>
-        `
+        `,
       }),
       {
         attachTo: document.body,
         global: {
           stubs: {
-            transition: false
-          }
-        }
+            transition: false,
+          },
+        },
       }
     );
 
@@ -224,15 +224,15 @@ describe('overlay components', () => {
               Drawer body
             </UiDrawer>
           </div>
-        `
+        `,
       }),
       {
         attachTo: document.body,
         global: {
           stubs: {
-            transition: false
-          }
-        }
+            transition: false,
+          },
+        },
       }
     );
 
@@ -269,21 +269,23 @@ describe('overlay components', () => {
               Drawer body
             </UiDrawer>
           </div>
-        `
+        `,
       }),
       {
         attachTo: document.body,
         global: {
           stubs: {
-            transition: false
-          }
-        }
+            transition: false,
+          },
+        },
       }
     );
 
     await nextTick();
 
-    const closeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.ui-overlay__close'));
+    const closeButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.ui-overlay__close')
+    );
     expect(document.querySelector('.ui-dialog')?.getAttribute('aria-label')).toBe('Bare dialog');
     expect(document.querySelector('.ui-drawer')?.getAttribute('aria-label')).toBe('Bare drawer');
     expect(document.querySelector('.ui-dialog .ui-overlay__footer')).toBeNull();

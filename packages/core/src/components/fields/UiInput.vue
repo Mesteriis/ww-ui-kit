@@ -25,7 +25,7 @@ const props = withDefaults(
     type: 'text',
     disabled: false,
     readonly: false,
-    invalid: false
+    invalid: false,
   }
 );
 
@@ -37,7 +37,9 @@ const field = useFieldContext();
 const fallbackId = useId('input');
 const inputId = computed(() => props.id ?? field?.inputId.value ?? fallbackId.value);
 const isInvalid = computed(() => props.invalid || field?.invalid.value || false);
-const describedBy = computed(() => mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value));
+const describedBy = computed(() =>
+  mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
+);
 
 const onInput = (event: Event) => {
   if (event.target instanceof HTMLInputElement) {

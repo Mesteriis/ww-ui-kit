@@ -5,7 +5,7 @@ import { UiWidgetShell } from '@ww/widgets';
 
 const meta = {
   title: 'Widgets/Shell',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiWidgetShell>;
 
 export default meta;
@@ -15,7 +15,7 @@ export const Overview: StoryObj<typeof UiWidgetShell> = {
     components: {
       UiBadge,
       UiButton,
-      UiWidgetShell
+      UiWidgetShell,
     },
     template: `
       <div class="ui-stack">
@@ -51,6 +51,6 @@ export const Overview: StoryObj<typeof UiWidgetShell> = {
           <UiWidgetShell title="Error widget" error="Apps remain responsible for retry logic." />
         </div>
       </div>
-    `
-  })
+    `,
+  }),
 };

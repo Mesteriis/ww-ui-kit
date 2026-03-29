@@ -3,7 +3,7 @@ import { UiButton, UiIconButton } from '@ww/core';
 
 const meta = {
   title: 'Core/Buttons',
-  component: UiButton
+  component: UiButton,
 } satisfies Meta<typeof UiButton>;
 
 export default meta;
@@ -29,8 +29,8 @@ export const Variants: StoryObj<typeof UiButton> = {
           <UiButton tone="critical">Critical</UiButton>
         </div>
       </div>
-    `
-  })
+    `,
+  }),
 };
 
 export const AppearancesAndEffects: StoryObj<typeof UiButton> = {
@@ -51,8 +51,8 @@ export const AppearancesAndEffects: StoryObj<typeof UiButton> = {
           </UiButton>
         </div>
       </div>
-    `
-  })
+    `,
+  }),
 };
 
 export const LoadingAndSizes: StoryObj<typeof UiButton> = {
@@ -71,6 +71,6 @@ export const LoadingAndSizes: StoryObj<typeof UiButton> = {
           <UiIconButton ariaLabel="Refresh" tone="debug" effect="color-shift" loading />
         </div>
       </div>
-    `
-  })
+    `,
+  }),
 };

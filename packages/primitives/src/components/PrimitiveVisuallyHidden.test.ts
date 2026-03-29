@@ -7,8 +7,8 @@ describe('PrimitiveVisuallyHidden', () => {
   it('renders hidden helper content with the canonical utility class', () => {
     const wrapper = mount(PrimitiveVisuallyHidden, {
       slots: {
-        default: 'Hidden label'
-      }
+        default: 'Hidden label',
+      },
     });
 
     expect(wrapper.classes()).toContain('primitive-visually-hidden');

@@ -16,21 +16,24 @@ describe('useEscapeKey', () => {
       props: {
         active: {
           type: Boolean,
-          required: true
-        }
+          required: true,
+        },
       },
       setup(props) {
-        useEscapeKey(handler, computed(() => props.active));
+        useEscapeKey(
+          handler,
+          computed(() => props.active)
+        );
         return {};
       },
-      template: '<div />'
+      template: '<div />',
     });
 
     const wrapper = mount(Harness, {
       attachTo: document.body,
       props: {
-        active: true
-      }
+        active: true,
+      },
     });
 
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
@@ -56,7 +59,7 @@ describe('useEscapeKey', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     expect(() => {
@@ -69,7 +72,7 @@ describe('useEscapeKey', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 

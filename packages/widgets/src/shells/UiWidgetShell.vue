@@ -23,7 +23,7 @@ const props = withDefaults(
     loading: false,
     error: false,
     surface: 'default',
-    padded: true
+    padded: true,
   }
 );
 

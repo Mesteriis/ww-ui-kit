@@ -11,7 +11,7 @@ const props = withDefaults(
   }>(),
   {
     placeholder: '',
-    disabled: false
+    disabled: false,
   }
 );
 

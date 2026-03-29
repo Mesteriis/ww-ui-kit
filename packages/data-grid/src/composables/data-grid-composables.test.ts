@@ -17,12 +17,23 @@ interface DemoRow extends Record<string, unknown> {
 
 const rows: readonly DemoRow[] = Object.freeze([
   { id: 'row-1', name: 'Ada', status: 'Healthy' },
-  { id: 'row-2', name: 'Bea', status: 'Watch' }
+  { id: 'row-2', name: 'Bea', status: 'Watch' },
 ]);
 
 const columns: readonly DataGridColumn<DemoRow>[] = Object.freeze([
-  createDataGridColumn<DemoRow>({ id: 'name', header: 'Name', accessorKey: 'name', sortable: true, hideable: false }),
-  createDataGridColumn<DemoRow>({ id: 'status', header: 'Status', accessorKey: 'status', sortable: true })
+  createDataGridColumn<DemoRow>({
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+    sortable: true,
+    hideable: false,
+  }),
+  createDataGridColumn<DemoRow>({
+    id: 'status',
+    header: 'Status',
+    accessorKey: 'status',
+    sortable: true,
+  }),
 ]);
 
 const filters: readonly DataGridFilterDefinition[] = Object.freeze([
@@ -30,8 +41,8 @@ const filters: readonly DataGridFilterDefinition[] = Object.freeze([
     id: 'status',
     label: 'Status',
     type: 'select',
-    options: [{ label: 'Healthy', value: 'Healthy' }]
-  }
+    options: [{ label: 'Healthy', value: 'Healthy' }],
+  },
 ]);
 
 const createQuery = (): DataGridQuery => ({
@@ -40,9 +51,9 @@ const createQuery = (): DataGridQuery => ({
   sort: [],
   pagination: {
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
-  columnVisibility: {}
+  columnVisibility: {},
 });
 
 describe('data-grid composables', () => {
@@ -54,7 +65,7 @@ describe('data-grid composables', () => {
       onChange: (nextQuery) => {
         changes.push(nextQuery);
         currentQuery.value = nextQuery;
-      }
+      },
     });
 
     query.updateSearch('Ada');
@@ -83,7 +94,7 @@ describe('data-grid composables', () => {
       selectionEnabled: computed(() => true),
       onChange: (nextSelection) => {
         selectionState.value = nextSelection;
-      }
+      },
     });
 
     selection.toggleRow('row-2');
@@ -103,7 +114,7 @@ describe('data-grid composables', () => {
       rowId: computed(() => undefined),
       selectedRowIds: computed(() => ['row-1']),
       selectionEnabled: computed(() => false),
-      onChange: disabledOnChange
+      onChange: disabledOnChange,
     });
 
     disabled.toggleRow('row-2');
@@ -114,18 +125,27 @@ describe('data-grid composables', () => {
 
   it('normalizes columns and accessibility metadata', () => {
     const normalizedColumns = useDataGridColumns({
-      columns: computed(() => columns)
+      columns: computed(() => columns),
     });
     const a11y = useDataGridA11y({
       ariaLabel: computed(() => 'Accounts grid'),
-      caption: computed(() => 'Account operations')
+      caption: computed(() => 'Account operations'),
     });
 
-    expect(normalizedColumns.normalizedColumns.value[1]).toMatchObject({ hideable: true, align: 'start' });
+    expect(normalizedColumns.normalizedColumns.value[1]).toMatchObject({
+      hideable: true,
+      align: 'start',
+    });
     expect(normalizedColumns.hideableColumns.value).toHaveLength(1);
     expect(a11y.ariaLabel.value).toBe('Accounts grid');
     expect(a11y.caption.value).toBe('Account operations');
     expect(a11y.labelledBy.value).toBe(a11y.captionId.value);
+
+    const unlabelledA11y = useDataGridA11y({
+      ariaLabel: computed(() => undefined),
+      caption: computed(() => undefined),
+    });
+    expect(unlabelledA11y.labelledBy.value).toBeUndefined();
   });
 
   it('builds a controller for the public grid contract', () => {
@@ -146,7 +166,7 @@ describe('data-grid composables', () => {
       ariaLabel: 'Accounts grid',
       caption: 'Account operations',
       density: 'compact',
-      stickyHeader: true
+      stickyHeader: true,
     };
     const events: Array<{ event: string; value: unknown }> = [];
     const controller = useDataGridController(props, (event, value) => {
@@ -170,5 +190,47 @@ describe('data-grid composables', () => {
     controller.selection.toggleRow('row-2');
 
     expect(events.map((entry) => entry.event)).toEqual(['update:query', 'update:selectedRowIds']);
+  });
+
+  it('covers controller defaults, non-selectable grids, and boolean error states', () => {
+    const props: DataGridControllerProps<DemoRow> = {
+      rows,
+      columns,
+      query: createQuery(),
+      totalRows: 0,
+      error: true,
+    };
+    const events: Array<{ event: string; value: unknown }> = [];
+    const controller = useDataGridController(props, (event, value) => {
+      events.push({ event, value });
+    });
+
+    expect(controller.selectionEnabled.value).toBe(false);
+    expect(controller.pageSizeOptions.value).toEqual([10, 20, 50]);
+    expect(controller.density.value).toBe('comfortable');
+    expect(controller.stickyHeader.value).toBe(false);
+    expect(controller.isError.value).toBe(true);
+    expect(controller.isLoading.value).toBe(false);
+    expect(controller.errorMessage.value).toBe('This data grid surface is unavailable.');
+    expect(controller.emptyText.value).toBe('No rows available yet.');
+    expect(controller.noResultsText.value).toBe('No rows match the current search and filters.');
+    expect(controller.filterDefinitions.value).toEqual([]);
+    expect(controller.searchPlaceholder.value).toBe('Search rows');
+    expect(controller.selection.selection.value).toEqual([]);
+
+    controller.selection.toggleRow('row-1');
+    controller.selection.toggleAllPageRows(true);
+    controller.selection.clearSelection();
+
+    expect(events).toEqual([]);
+
+    const customError = useDataGridController(
+      {
+        ...props,
+        errorText: 'Custom data grid failure.',
+      },
+      () => undefined
+    );
+    expect(customError.errorMessage.value).toBe('Custom data grid failure.');
   });
 });

@@ -8,17 +8,17 @@ export default defineConfig({
     dts({
       exclude: ['src/**/*.test.ts'],
       entryRoot: 'src',
-      tsconfigPath: './tsconfig.json'
-    })
+      tsconfigPath: './tsconfig.json',
+    }),
   ],
   build: {
     lib: {
       entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'index'
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ['vue', 'apexcharts', 'vue3-apexcharts', '@ww/themes', '@ww/primitives']
-    }
-  }
+      external: ['vue', 'apexcharts', 'vue3-apexcharts', '@ww/themes', '@ww/primitives'],
+    },
+  },
 });

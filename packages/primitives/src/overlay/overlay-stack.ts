@@ -1,17 +1,11 @@
 import {
   focusFirstElement,
+  isProgrammaticallyFocusableElement,
   trapFocusWithin,
 } from '../dom/focus';
-import {
-  resolveOverlayLayerSlots,
-  type OverlayLayerKind,
-  type OverlayLayerSlots,
-} from './layers';
+import { resolveOverlayLayerSlots, type OverlayLayerKind, type OverlayLayerSlots } from './layers';
 
-export type OverlayDismissReason =
-  | "escape-key"
-  | "pointer-outside"
-  | "focus-outside";
+export type OverlayDismissReason = 'escape-key' | 'pointer-outside' | 'focus-outside';
 
 export interface OverlayRegistrationOptions {
   kind: OverlayLayerKind;
@@ -60,18 +54,18 @@ class OverlayStackManager {
 
   private scrollLock: ScrollLockState = {
     active: false,
-    overflow: "",
-    paddingRight: "",
+    overflow: '',
+    paddingRight: '',
   };
 
   register(options: OverlayRegistrationOptions): OverlayRegistration {
     const stackIndex = this.getNextStackIndex();
     const entry: OverlayEntry = {
-      id: this.nextId += 1,
+      id: (this.nextId += 1),
       layers: resolveOverlayLayerSlots(
         stackIndex,
         options.kind,
-        options.getLayerRoot?.() ?? options.getContentElement(),
+        options.getLayerRoot?.() ?? options.getContentElement()
       ),
       options,
       stackIndex,
@@ -85,9 +79,7 @@ class OverlayStackManager {
       layers: entry.layers,
       stackIndex: entry.stackIndex,
       unregister: () => {
-        this.entries = this.entries.filter(
-          (candidate) => candidate.id !== entry.id,
-        );
+        this.entries = this.entries.filter((candidate) => candidate.id !== entry.id);
         this.syncScrollLock();
         this.teardownListenersIfIdle();
       },
@@ -103,31 +95,28 @@ class OverlayStackManager {
   }
 
   private getNextStackIndex(): number {
-    return this.entries.reduce(
-      (maxValue, entry) => Math.max(maxValue, entry.stackIndex),
-      -1,
-    ) + 1;
+    return this.entries.reduce((maxValue, entry) => Math.max(maxValue, entry.stackIndex), -1) + 1;
   }
 
   private ensureListeners(): void {
-    if (this.listenersAttached || typeof document === "undefined") return;
+    if (this.listenersAttached || typeof document === 'undefined') return;
 
-    document.addEventListener("keydown", this.handleKeydown, true);
-    document.addEventListener("pointerdown", this.handlePointerDown, true);
-    document.addEventListener("click", this.handleClick, true);
-    document.addEventListener("focusin", this.handleFocusIn, true);
+    document.addEventListener('keydown', this.handleKeydown, true);
+    document.addEventListener('pointerdown', this.handlePointerDown, true);
+    document.addEventListener('click', this.handleClick, true);
+    document.addEventListener('focusin', this.handleFocusIn, true);
     this.listenersAttached = true;
   }
 
   private teardownListenersIfIdle(): void {
-    if (!this.listenersAttached || this.entries.length > 0 || typeof document === "undefined") {
+    if (!this.listenersAttached || this.entries.length > 0 || typeof document === 'undefined') {
       return;
     }
 
-    document.removeEventListener("keydown", this.handleKeydown, true);
-    document.removeEventListener("pointerdown", this.handlePointerDown, true);
-    document.removeEventListener("click", this.handleClick, true);
-    document.removeEventListener("focusin", this.handleFocusIn, true);
+    document.removeEventListener('keydown', this.handleKeydown, true);
+    document.removeEventListener('pointerdown', this.handlePointerDown, true);
+    document.removeEventListener('click', this.handleClick, true);
+    document.removeEventListener('focusin', this.handleFocusIn, true);
     this.listenersAttached = false;
     this.suppressedClickTarget = null;
     this.suppressedFocusTarget = null;
@@ -141,17 +130,17 @@ class OverlayStackManager {
 
     if (
       topEntry.options.containFocus &&
-      event.key === "Tab" &&
+      event.key === 'Tab' &&
       this.trapFocusForEntry(event, topEntry)
     ) {
       return;
     }
 
-    if (event.key !== "Escape") return;
+    if (event.key !== 'Escape') return;
     if (!topEntry.options.dismissOnEscape) return;
 
     event.preventDefault();
-    topEntry.options.onDismiss("escape-key");
+    topEntry.options.onDismiss('escape-key');
   };
 
   private readonly handlePointerDown = (event: PointerEvent): void => {
@@ -175,13 +164,9 @@ class OverlayStackManager {
 
     const nextEntry = this.entries[this.entries.length - 2];
     const focusTarget = this.resolveFocusableTarget(target);
-    topEntry.options.onDismiss("pointer-outside");
+    topEntry.options.onDismiss('pointer-outside');
     this.suppressedFocusTarget =
-      nextEntry &&
-      focusTarget &&
-      this.containsTarget(nextEntry, focusTarget)
-        ? focusTarget
-        : null;
+      nextEntry && focusTarget && this.containsTarget(nextEntry, focusTarget) ? focusTarget : null;
 
     if (!this.suppressedFocusTarget) return;
 
@@ -233,12 +218,9 @@ class OverlayStackManager {
     const nextEntry = this.entries[this.entries.length - 2];
 
     if (topEntry.options.dismissOnFocusOutside) {
-      topEntry.options.onDismiss("focus-outside");
+      topEntry.options.onDismiss('focus-outside');
 
-      if (
-        nextEntry?.options.containFocus &&
-        !this.containsTarget(nextEntry, target)
-      ) {
+      if (nextEntry?.options.containFocus && !this.containsTarget(nextEntry, target)) {
         queueMicrotask(() => {
           const currentTopEntry = this.entries[this.entries.length - 1];
           if (!currentTopEntry || currentTopEntry.id !== nextEntry.id) return;
@@ -263,8 +245,8 @@ class OverlayStackManager {
   };
 
   private containsTarget(entry: OverlayEntry, target: Node): boolean {
-    return this.getBoundaryElements(entry).some((element) =>
-      element === target || element.contains(target),
+    return this.getBoundaryElements(entry).some(
+      (element) => element === target || element.contains(target)
     );
   }
 
@@ -272,41 +254,9 @@ class OverlayStackManager {
     const contentElement = entry.options.getContentElement();
     const extraElements = entry.options.getBoundaryElements?.() || [];
 
-    return [contentElement, ...extraElements].filter(
-      (element): element is HTMLElement => Boolean(element),
+    return [contentElement, ...extraElements].filter((element): element is HTMLElement =>
+      Boolean(element)
     );
-  }
-
-  private isProgrammaticallyFocusableElement(element: HTMLElement): boolean {
-    if ("disabled" in element && Boolean(element.disabled)) {
-      return false;
-    }
-
-    const tabIndex = element.getAttribute("tabindex");
-    if (tabIndex !== null) {
-      return Number(tabIndex) >= -1;
-    }
-
-    const tagName = element.tagName.toLowerCase();
-    if (
-      tagName === "button" ||
-      tagName === "select" ||
-      tagName === "textarea" ||
-      tagName === "summary"
-    ) {
-      return true;
-    }
-
-    if (tagName === "a" && Boolean(element.getAttribute("href"))) {
-      return true;
-    }
-
-    if (tagName === "input") {
-      return (element as HTMLInputElement).type !== "hidden";
-    }
-
-    const contentEditable = element.getAttribute("contenteditable");
-    return contentEditable === "" || contentEditable === "true";
   }
 
   private resolveFocusableTarget(target: Node | null): HTMLElement | null {
@@ -317,12 +267,8 @@ class OverlayStackManager {
           ? target.parentElement
           : null;
 
-    while (
-      candidate &&
-      candidate !== document.body &&
-      candidate !== document.documentElement
-    ) {
-      if (this.isProgrammaticallyFocusableElement(candidate)) {
+    while (candidate && candidate !== document.body && candidate !== document.documentElement) {
+      if (isProgrammaticallyFocusableElement(candidate)) {
         return candidate;
       }
       candidate = candidate.parentElement;
@@ -339,17 +285,14 @@ class OverlayStackManager {
     return true;
   }
 
-  private trapFocusForEntry(
-    event: KeyboardEvent,
-    entry: OverlayEntry,
-  ): boolean {
+  private trapFocusForEntry(event: KeyboardEvent, entry: OverlayEntry): boolean {
     const contentElement = entry.options.getContentElement();
     if (!contentElement) return false;
     return trapFocusWithin(event, contentElement);
   }
 
   private syncScrollLock(): void {
-    if (typeof document === "undefined") return;
+    if (typeof document === 'undefined') return;
 
     const shouldLock = this.entries.some((entry) => entry.options.lockScroll);
     if (shouldLock && !this.scrollLock.active) {
@@ -360,12 +303,9 @@ class OverlayStackManager {
         paddingRight: body.style.paddingRight,
       };
 
-      const scrollbarWidth = Math.max(
-        0,
-        window.innerWidth - document.documentElement.clientWidth,
-      );
+      const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
 
-      body.style.overflow = "hidden";
+      body.style.overflow = 'hidden';
       if (scrollbarWidth > 0) {
         body.style.paddingRight = `${scrollbarWidth}px`;
       }
@@ -382,9 +322,7 @@ class OverlayStackManager {
 
 const overlayStackManager = new OverlayStackManager();
 
-export function registerOverlay(
-  options: OverlayRegistrationOptions,
-): OverlayRegistration {
+export function registerOverlay(options: OverlayRegistrationOptions): OverlayRegistration {
   return overlayStackManager.register(options);
 }
 

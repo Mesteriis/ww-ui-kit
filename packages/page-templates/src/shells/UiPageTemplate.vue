@@ -20,7 +20,7 @@ const props = withDefaults(
   {
     width: 'content',
     hasSidebar: false,
-    padded: true
+    padded: true,
   }
 );
 
@@ -40,11 +40,7 @@ const hasSidebar = computed(() => Boolean(props.hasSidebar || slots.sidebar));
 </script>
 
 <template>
-  <section
-    class="ui-page-template"
-    :data-ui-width="props.width"
-    :data-ui-has-sidebar="hasSidebar"
-  >
+  <section class="ui-page-template" :data-ui-width="props.width" :data-ui-has-sidebar="hasSidebar">
     <div v-if="$slots.topbar" class="ui-page-template__topbar">
       <slot name="topbar" />
     </div>

@@ -13,10 +13,6 @@
     "rootDir": "src"
   },
   "exclude": ["src/**/*.test.ts"],
-  "references": [
-    { "path": "../tokens" },
-    { "path": "../themes" },
-    { "path": "../primitives" }
-  ],
+  "references": [{ "path": "../tokens" }, { "path": "../themes" }, { "path": "../primitives" }],
   "include": ["src/**/*.ts", "src/**/*.vue"]
 }

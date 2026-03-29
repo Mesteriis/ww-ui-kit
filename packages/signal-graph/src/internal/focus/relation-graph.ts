@@ -6,7 +6,7 @@ export interface SignalGraphRelationGraph {
 
 export function buildRelationGraph(
   nodes: readonly SignalGraphNode[],
-  edges: readonly SignalGraphEdge[],
+  edges: readonly SignalGraphEdge[]
 ): SignalGraphRelationGraph {
   const adjacency = new Map<string, Set<string>>();
 
@@ -35,7 +35,7 @@ export function buildRelationGraph(
 export function collectRelatedNodeIds(
   graph: SignalGraphRelationGraph,
   anchorNodeId: string,
-  depth: number,
+  depth: number
 ): Set<string> {
   const relatedNodeIds = new Set<string>();
   const queue: Array<{ depth: number; nodeId: string }> = [{ depth: 0, nodeId: anchorNodeId }];

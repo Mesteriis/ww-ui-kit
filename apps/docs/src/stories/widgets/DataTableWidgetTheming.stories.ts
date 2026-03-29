@@ -7,7 +7,7 @@ import { DataTableWidgetStoryHarness } from './data-table-widget-fixtures';
 const meta = {
   title: 'Widgets/Data Table Widget/Theming',
   component: DataTableWidgetStoryHarness,
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof DataTableWidgetStoryHarness>;
 
 export default meta;
@@ -30,6 +30,6 @@ export const Overview: StoryObj<typeof meta> = {
           <DataTableWidgetStoryHarness subtree-theme="belovodye" />
         </section>
       </div>
-    `
-  })
+    `,
+  }),
 };

@@ -10,7 +10,7 @@ const props = withDefaults(
     orientation?: 'horizontal' | 'vertical';
   }>(),
   {
-    orientation: 'horizontal'
+    orientation: 'horizontal',
   }
 );
 
@@ -18,10 +18,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: string];
 }>();
 
-createTabsContext(
-  props,
-  (event, value) => emit(event, value)
-);
+createTabsContext(props, (event, value) => emit(event, value));
 </script>
 
 <template>

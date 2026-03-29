@@ -6,12 +6,12 @@ import { useSignalGraphFocus } from './useSignalGraphFocus';
 const nodes = [
   { id: 'a', type: 'service', position: { x: 0, y: 0 }, data: {} },
   { id: 'b', type: 'service', position: { x: 200, y: 0 }, data: {} },
-  { id: 'c', type: 'service', position: { x: 400, y: 0 }, data: {} }
+  { id: 'c', type: 'service', position: { x: 400, y: 0 }, data: {} },
 ];
 
 const edges = [
   { id: 'ab', source: 'a', target: 'b' },
-  { id: 'bc', source: 'b', target: 'c' }
+  { id: 'bc', source: 'b', target: 'c' },
 ];
 
 describe('useSignalGraphFocus', () => {
@@ -33,7 +33,7 @@ describe('useSignalGraphFocus', () => {
         focusedNodeId: ref(undefined),
         relationDepth: ref(1),
         onFocusChange,
-        onFocusStateChange
+        onFocusStateChange,
       })
     );
 
@@ -76,7 +76,7 @@ describe('useSignalGraphFocus', () => {
         edges: ref(edges),
         depthMode: ref('off'),
         focusedNodeId: controlledFocusedNodeId,
-        relationDepth: computed(() => undefined)
+        relationDepth: computed(() => undefined),
       })
     );
 
@@ -103,11 +103,12 @@ describe('useSignalGraphFocus', () => {
     vi.doMock('@ww/primitives', () => ({
       useControllable: () => ({
         currentValue: ref('a'),
-        setValue: vi.fn()
-      })
+        setValue: vi.fn(),
+      }),
     }));
 
-    const { useSignalGraphFocus: importUseSignalGraphFocus } = await import('./useSignalGraphFocus');
+    const { useSignalGraphFocus: importUseSignalGraphFocus } =
+      await import('./useSignalGraphFocus');
     const scope = effectScope();
     const focus = scope.run(() =>
       importUseSignalGraphFocus({
@@ -115,7 +116,7 @@ describe('useSignalGraphFocus', () => {
         edges: ref(edges),
         depthMode: ref('full'),
         focusedNodeId: ref(undefined),
-        relationDepth: ref(1)
+        relationDepth: ref(1),
       })
     );
 

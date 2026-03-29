@@ -1,0 +1,12 @@
+dist
+coverage
+storybook-static
+site-dist
+playwright-report
+test-results
+pnpm-lock.yaml
+apps/playground/src/lab/generated/
+docs/governance/ai-rules.md
+docs/governance/ai-ruleset/index.md
+AGENTS.md
+.github/copilot-instructions.md

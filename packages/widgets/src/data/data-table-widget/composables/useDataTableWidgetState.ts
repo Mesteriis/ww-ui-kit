@@ -1,6 +1,10 @@
 import { computed, type ComputedRef } from 'vue';
 
-import { normalizeDataGridQuery, type DataGridQuery, type DataGridSelectionState } from '@ww/data-grid';
+import {
+  normalizeDataGridQuery,
+  type DataGridQuery,
+  type DataGridSelectionState,
+} from '@ww/data-grid';
 
 export function useDataTableWidgetState(options: {
   query: ComputedRef<DataGridQuery>;
@@ -26,7 +30,7 @@ export function useDataTableWidgetState(options: {
     hasActiveQuery: hasActiveQuery.value,
     page: normalizedQuery.value.pagination.page,
     pageCount: pageCount.value,
-    pageSize: normalizedQuery.value.pagination.pageSize
+    pageSize: normalizedQuery.value.pagination.pageSize,
   }));
 
   return {
@@ -36,6 +40,6 @@ export function useDataTableWidgetState(options: {
     hasSearch,
     hasActiveQuery,
     pageCount,
-    statusSummary
+    statusSummary,
   };
 }

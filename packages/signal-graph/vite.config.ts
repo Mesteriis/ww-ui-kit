@@ -8,14 +8,14 @@ export default defineConfig({
     dts({
       exclude: ['src/**/*.test.ts'],
       entryRoot: 'src',
-      tsconfigPath: './tsconfig.json'
-    })
+      tsconfigPath: './tsconfig.json',
+    }),
   ],
   build: {
     lib: {
       entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'index'
+      fileName: 'index',
     },
     rollupOptions: {
       external: [
@@ -26,8 +26,8 @@ export default defineConfig({
         '@vue-flow/minimap',
         '@ww/core',
         '@ww/primitives',
-        '@ww/themes'
-      ]
-    }
-  }
+        '@ww/themes',
+      ],
+    },
+  },
 });

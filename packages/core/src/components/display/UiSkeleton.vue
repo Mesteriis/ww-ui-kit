@@ -10,16 +10,21 @@ const props = withDefaults(
     shape?: 'rect' | 'rounded' | 'circle';
   }>(),
   {
-    shape: 'rounded'
+    shape: 'rounded',
   }
 );
 
 const style = computed(() => ({
   '--ui-skeleton-width': props.width ?? '100%',
-  '--ui-skeleton-height': props.height ?? '1rem'
+  '--ui-skeleton-height': props.height ?? '1rem',
 }));
 </script>
 
 <template>
-  <span class="ui-skeleton" :class="`ui-skeleton--${props.shape}`" :style="style" aria-hidden="true" />
+  <span
+    class="ui-skeleton"
+    :class="`ui-skeleton--${props.shape}`"
+    :style="style"
+    aria-hidden="true"
+  />
 </template>

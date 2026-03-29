@@ -1,14 +1,6 @@
 import { defineComponent, ref } from 'vue';
 
-import {
-  UiBadge,
-  UiButton,
-  UiDialog,
-  UiDrawer,
-  UiField,
-  UiInput,
-  UiSwitch,
-} from '@ww/core';
+import { UiBadge, UiButton, UiDialog, UiDrawer, UiField, UiInput, UiSwitch } from '@ww/core';
 import { createSignalGraphNodeDefinition } from '@ww/signal-graph';
 
 const RuntimeNode = defineComponent({
@@ -185,7 +177,11 @@ export const signalGraphFocusEdges = [
   { id: 'focus-background', source: 'focus', target: 'background', label: 'deep' },
 ];
 
-export function createSignal(edgeId: string, variant: 'info' | 'success' | 'warning' | 'danger' | 'accent', suffix: string) {
+export function createSignal(
+  edgeId: string,
+  variant: 'info' | 'success' | 'warning' | 'danger' | 'accent',
+  suffix: string
+) {
   return {
     id: `${edgeId}-${variant}-${suffix}`,
     edgeId,

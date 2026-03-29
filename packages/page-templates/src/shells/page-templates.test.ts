@@ -7,7 +7,7 @@ import {
   UiPageSection,
   UiPageSidebar,
   UiPageTemplate,
-  UiPageToolbar
+  UiPageToolbar,
 } from '../index';
 
 describe('page-templates package', () => {
@@ -25,14 +25,14 @@ describe('page-templates package', () => {
       props: {
         title: 'Workspace',
         description: 'Template shell',
-        hasSidebar: true
+        hasSidebar: true,
       },
       slots: {
         toolbar: '<button type="button">Refresh</button>',
         default: '<div>Main content</div>',
         sidebar: '<div>Sidebar content</div>',
-        footer: '<span>Footer meta</span>'
-      }
+        footer: '<span>Footer meta</span>',
+      },
     });
 
     expect(wrapper.text()).toContain('Workspace');
@@ -55,7 +55,7 @@ describe('page-templates package', () => {
               </UiPageSection>
             </UiPageTemplate>
           </section>
-        `
+        `,
       })
     );
 
@@ -69,12 +69,12 @@ describe('page-templates package', () => {
     const wrapper = mount(UiPageTemplate, {
       props: {
         width: 'narrow',
-        padded: false
+        padded: false,
       },
       slots: {
         topbar: '<span>Topbar</span>',
-        default: '<div>Main only</div>'
-      }
+        default: '<div>Main only</div>',
+      },
     });
 
     expect(wrapper.attributes('data-ui-width')).toBe('narrow');
@@ -89,7 +89,7 @@ describe('page-templates package', () => {
           UiPageBody,
           UiPageSidebar,
           UiPageSection,
-          UiPageToolbar
+          UiPageToolbar,
         },
         template: `
           <div>
@@ -101,7 +101,7 @@ describe('page-templates package', () => {
               Section body
             </UiPageSection>
           </div>
-        `
+        `,
       })
     );
 
@@ -117,8 +117,8 @@ describe('page-templates package', () => {
     const template = mount(UiPageTemplate, {
       slots: {
         header: '<div class="custom-header">Custom page header</div>',
-        default: '<div>Only body</div>'
-      }
+        default: '<div>Only body</div>',
+      },
     });
 
     expect(template.find('.custom-header').exists()).toBe(true);
@@ -126,8 +126,8 @@ describe('page-templates package', () => {
 
     const section = mount(UiPageSection, {
       slots: {
-        default: 'Body only'
-      }
+        default: 'Body only',
+      },
     });
 
     expect(section.find('.ui-page-section__header').exists()).toBe(false);
@@ -138,19 +138,19 @@ describe('page-templates package', () => {
     const template = mount(UiPageTemplate, {
       slots: {
         default: '<div>Main</div>',
-        sidebar: '<div>Sidebar</div>'
-      }
+        sidebar: '<div>Sidebar</div>',
+      },
     });
 
     expect(template.attributes('data-ui-has-sidebar')).toBe('true');
 
     const section = mount(UiPageSection, {
       props: {
-        description: 'Description only'
+        description: 'Description only',
       },
       slots: {
-        default: 'Body'
-      }
+        default: 'Body',
+      },
     });
 
     expect(section.find('.ui-page-section__header').exists()).toBe(true);
@@ -161,14 +161,16 @@ describe('page-templates package', () => {
   it('renders a description-only page header without a title', () => {
     const wrapper = mount(UiPageTemplate, {
       props: {
-        description: 'Description-only page'
+        description: 'Description-only page',
       },
       slots: {
-        default: '<div>Main content</div>'
-      }
+        default: '<div>Main content</div>',
+      },
     });
 
     expect(wrapper.find('.ui-page-template__title').exists()).toBe(false);
-    expect(wrapper.find('.ui-page-template__description').text()).toContain('Description-only page');
+    expect(wrapper.find('.ui-page-template__description').text()).toContain(
+      'Description-only page'
+    );
   });
 });

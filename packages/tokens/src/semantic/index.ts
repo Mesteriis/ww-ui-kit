@@ -46,7 +46,7 @@ export const themeSemanticTokenNames = [
   'state-disabled-opacity',
   'state-loading-opacity',
   'overlay-backdrop',
-  'overlay-backdrop-strong'
+  'overlay-backdrop-strong',
 ] as const;
 
 export const foundationSemanticTokenNames = [
@@ -75,12 +75,12 @@ export const foundationSemanticTokenNames = [
   'elevation-surface-raised',
   'elevation-overlay',
   'glow-accent-soft',
-  'glow-accent-ambient'
+  'glow-accent-ambient',
 ] as const;
 
 export const semanticTokenNames = [
   ...themeSemanticTokenNames,
-  ...foundationSemanticTokenNames
+  ...foundationSemanticTokenNames,
 ] as const;
 
 export type ThemeSemanticTokenName = (typeof themeSemanticTokenNames)[number];
@@ -127,10 +127,8 @@ export const foundationSemanticTokenValues: ThemeTokenMap<FoundationSemanticToke
   'elevation-surface-soft': 'var(--ui-shadow-sm)',
   'elevation-surface-raised': 'var(--ui-shadow-md)',
   'elevation-overlay': 'var(--ui-shadow-xl)',
-  'glow-accent-soft':
-    '0 0 0 1px color-mix(in srgb, var(--ui-border-focus) 28%, transparent)',
-  'glow-accent-ambient':
-    '0 18px 48px color-mix(in srgb, var(--ui-border-focus) 20%, transparent)'
+  'glow-accent-soft': '0 0 0 1px color-mix(in srgb, var(--ui-border-focus) 28%, transparent)',
+  'glow-accent-ambient': '0 18px 48px color-mix(in srgb, var(--ui-border-focus) 20%, transparent)',
 } as const;
 
 export const semanticTokenVars = createCssVariableMap(semanticTokenNames);

@@ -1,7 +1,10 @@
 import { normalizeDataGridQuery } from './query';
 import type { DataGridQuery, DataGridSortDirection } from './types';
 
-export function getDataGridSortDirection(query: DataGridQuery, columnId: string): DataGridSortDirection | null {
+export function getDataGridSortDirection(
+  query: DataGridQuery,
+  columnId: string
+): DataGridSortDirection | null {
   return query.sort.find((entry) => entry.id === columnId)?.direction ?? null;
 }
 
@@ -21,7 +24,7 @@ export function toggleDataGridSort(query: DataGridQuery, columnId: string): Data
     sort: nextSort,
     pagination: {
       ...normalized.pagination,
-      page: 1
-    }
+      page: 1,
+    },
   };
 }

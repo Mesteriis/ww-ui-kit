@@ -11,8 +11,8 @@ export function setDataGridPage(query: DataGridQuery, page: number): DataGridQue
     ...normalized,
     pagination: {
       ...normalized.pagination,
-      page: Math.max(1, Math.trunc(page))
-    }
+      page: Math.max(1, Math.trunc(page)),
+    },
   };
 }
 
@@ -22,8 +22,8 @@ export function setDataGridPageSize(query: DataGridQuery, pageSize: number): Dat
     ...normalized,
     pagination: {
       page: 1,
-      pageSize: Math.max(1, Math.trunc(pageSize))
-    }
+      pageSize: Math.max(1, Math.trunc(pageSize)),
+    },
   };
 }
 

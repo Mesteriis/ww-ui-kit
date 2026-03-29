@@ -4,6 +4,7 @@ title: Apply stability status and changeset discipline
 apply: by model decision
 instructions: use when changing public package maturity, adding new public packages, or making changes that should alter release notes or changeset behavior.
 ---
+
 Use this rule when release discipline or maturity labeling matters.
 
 ## Do

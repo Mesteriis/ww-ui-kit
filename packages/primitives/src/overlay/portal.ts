@@ -36,7 +36,7 @@ function resolveElementTarget(target: string | HTMLElement | null | undefined): 
 
 export function findNearestThemeContainer(
   source?: HTMLElement | null,
-  fallbackToRoot = true,
+  fallbackToRoot = true
 ): HTMLElement | null {
   if (typeof document === 'undefined') {
     return null;
@@ -55,20 +55,25 @@ export function findNearestThemeContainer(
   return fallbackToRoot ? document.documentElement : null;
 }
 
-function syncThemeScopeAttributes(host: HTMLElement, portalRoot: HTMLElement, source?: HTMLElement | null): void {
+function syncThemeScopeAttributes(
+  host: HTMLElement,
+  portalRoot: HTMLElement,
+  source?: HTMLElement | null
+): void {
   const themedSource =
     findNearestThemeContainer(source, false) ??
     findNearestThemeContainer(host, false) ??
     document.documentElement;
   const inheritsThemeFromAncestor = Boolean(
     themedSource &&
-      (themedSource === document.documentElement || themedSource === host || themedSource.contains(host))
+    (themedSource === document.documentElement ||
+      themedSource === host ||
+      themedSource.contains(host))
   );
 
   if (inheritsThemeFromAncestor) {
     portalRoot.removeAttribute(THEME_ATTRIBUTE);
     portalRoot.removeAttribute(THEME_TYPE_ATTRIBUTE);
-    portalRoot.style.removeProperty('color-scheme');
     return;
   }
 
@@ -83,10 +88,8 @@ function syncThemeScopeAttributes(host: HTMLElement, portalRoot: HTMLElement, so
 
   if (themeType) {
     portalRoot.setAttribute(THEME_TYPE_ATTRIBUTE, themeType);
-    portalRoot.style.colorScheme = themeType;
   } else {
     portalRoot.removeAttribute(THEME_TYPE_ATTRIBUTE);
-    portalRoot.style.removeProperty('color-scheme');
   }
 }
 
@@ -108,11 +111,11 @@ function ensurePortalRootForHost(host: HTMLElement, source?: HTMLElement | null)
   const existingRoot =
     host === document.body
       ? document.getElementById(OVERLAY_PORTAL_ID)
-      : Array.from(host.children).find(
+      : (Array.from(host.children).find(
           (child) =>
             child instanceof HTMLElement &&
-            child.getAttribute(OVERLAY_PORTAL_ROOT_ATTRIBUTE) === 'true',
-        ) ?? null;
+            child.getAttribute(OVERLAY_PORTAL_ROOT_ATTRIBUTE) === 'true'
+        ) ?? null);
 
   if (existingRoot instanceof HTMLElement) {
     portalRoots.set(host, existingRoot);
@@ -150,9 +153,7 @@ export function ensureOverlayPortalRoot(options?: {
 
   const themeContainer = findNearestThemeContainer(options?.source ?? null);
   const host =
-    !themeContainer || themeContainer === document.documentElement
-      ? document.body
-      : themeContainer;
+    !themeContainer || themeContainer === document.documentElement ? document.body : themeContainer;
 
   return ensurePortalRootForHost(host, options?.source ?? null);
 }

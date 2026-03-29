@@ -31,6 +31,8 @@ Use exactly three primary test contours:
 
 Root `pnpm test` runs all three. Coverage checks for stories, docs, and playground scenarios are enforced separately through governance scripts.
 
+Later maintainer workbench additions to playground must preserve these contours and keep the testing harness routes stable instead of replacing them.
+
 ## Consequences
 
 - Fast logic tests remain separate from real browser proofs.
@@ -54,4 +56,3 @@ Root `pnpm test` runs all three. Coverage checks for stories, docs, and playgrou
 - [`docs/architecture/testing-architecture.md`](../architecture/testing-architecture.md)
 - [`tests/e2e`](../../tests/e2e)
 - [`tests/playground`](../../tests/playground)
-

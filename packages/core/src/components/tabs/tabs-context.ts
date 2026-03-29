@@ -10,7 +10,11 @@ export interface TabsContext {
   getTriggerId: (value: string) => string;
   onListKeydown: (event: KeyboardEvent) => Promise<void>;
   orientation: ComputedRef<'horizontal' | 'vertical'>;
-  registerTrigger: (value: string, element: () => HTMLElement | null, disabled: () => boolean) => () => void;
+  registerTrigger: (
+    value: string,
+    element: () => HTMLElement | null,
+    disabled: () => boolean
+  ) => () => void;
   select: (value: string) => void;
   setCurrentTabStop: (value: string) => void;
 }
@@ -28,12 +32,12 @@ export function createTabsContext(
   const baseId = useId('tabs');
   const roving = useRovingFocus({
     loop: true,
-    orientation: computed(() => props.orientation)
+    orientation: computed(() => props.orientation),
   });
   const value = useControllable({
     defaultValue: props.defaultValue ?? '',
     onChange: (nextValue) => emit('update:modelValue', nextValue),
-    value: computed(() => props.modelValue)
+    value: computed(() => props.modelValue),
   });
 
   const select = (nextValue: string) => {
@@ -41,11 +45,15 @@ export function createTabsContext(
     roving.setCurrentId(nextValue);
   };
 
-  const registerTrigger = (nextValue: string, element: () => HTMLElement | null, disabled: () => boolean) => {
+  const registerTrigger = (
+    nextValue: string,
+    element: () => HTMLElement | null,
+    disabled: () => boolean
+  ) => {
     const unregister = roving.registerItem({
       disabled,
       element,
-      id: nextValue
+      id: nextValue,
     });
 
     if (!value.currentValue.value && !disabled()) {
@@ -84,7 +92,7 @@ export function createTabsContext(
     orientation: computed(() => props.orientation),
     registerTrigger,
     select,
-    setCurrentTabStop: (nextValue) => roving.setCurrentId(nextValue)
+    setCurrentTabStop: (nextValue) => roving.setCurrentId(nextValue),
   };
 
   provide(tabsContextKey, context);

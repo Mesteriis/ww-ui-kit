@@ -4,12 +4,14 @@ title: scripts path rules
 apply: by file patterns
 patterns: scripts/**/*
 ---
+
 Use this rule when editing repository utility scripts outside governance tooling.
 
 ## Do
 
 - Keep scripts repository-scoped and reproducible.
 - Document scripts that are part of the golden path or CI pipeline.
+- Prefer workspace-aware recursive orchestration and filters over hand-maintained package chains when script behavior depends on workspace topology.
 - Keep outputs compatible with the Pages/docs/playground build flow when relevant.
 
 ## Do not

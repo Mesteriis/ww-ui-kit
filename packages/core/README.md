@@ -17,4 +17,3 @@ It does not own:
 - route pages or backend orchestration
 
 `@ww/core` may depend on `@ww/primitives`, `@ww/themes`, and `@ww/tokens`. It must not import systems, widgets, page templates, or apps.
-

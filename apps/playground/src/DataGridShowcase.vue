@@ -15,7 +15,7 @@ import {
   dataGridRows,
   dataGridUiColumns,
   denseAdminUiColumns,
-  denseAdminColumns
+  denseAdminColumns,
 } from './data-grid/data-grid-demo';
 
 const query = ref<DataGridQuery>(createBaseQuery());
@@ -27,20 +27,42 @@ const compositionQuery = ref<DataGridQuery>(createBaseQuery());
 const compositionSelection = ref<readonly string[]>([]);
 
 const basicResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, query.value));
-const selectionResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, selectionQuery.value));
-const themingResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, themingQuery.value));
-const compositionResult = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, compositionQuery.value));
-const denseResult = computed(() => applyDataGridQuery(dataGridRows, denseAdminColumns, createBaseQuery({
-  pagination: {
-    page: 1,
-    pageSize: 6
-  }
-})));
-const basicUiRows = computed(() => basicResult.value.pageRows as readonly Record<string, unknown>[]);
-const denseUiRows = computed(() => denseResult.value.pageRows as readonly Record<string, unknown>[]);
-const themingUiRows = computed(() => themingResult.value.pageRows as readonly Record<string, unknown>[]);
-const selectionUiRows = computed(() => selectionResult.value.pageRows as readonly Record<string, unknown>[]);
-const compositionUiRows = computed(() => compositionResult.value.pageRows as readonly Record<string, unknown>[]);
+const selectionResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, selectionQuery.value)
+);
+const themingResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, themingQuery.value)
+);
+const compositionResult = computed(() =>
+  applyDataGridQuery(dataGridRows, dataGridColumns, compositionQuery.value)
+);
+const denseResult = computed(() =>
+  applyDataGridQuery(
+    dataGridRows,
+    denseAdminColumns,
+    createBaseQuery({
+      pagination: {
+        page: 1,
+        pageSize: 6,
+      },
+    })
+  )
+);
+const basicUiRows = computed(
+  () => basicResult.value.pageRows as readonly Record<string, unknown>[]
+);
+const denseUiRows = computed(
+  () => denseResult.value.pageRows as readonly Record<string, unknown>[]
+);
+const themingUiRows = computed(
+  () => themingResult.value.pageRows as readonly Record<string, unknown>[]
+);
+const selectionUiRows = computed(
+  () => selectionResult.value.pageRows as readonly Record<string, unknown>[]
+);
+const compositionUiRows = computed(
+  () => compositionResult.value.pageRows as readonly Record<string, unknown>[]
+);
 const scopedTheme = getThemeMeta('belovodye');
 </script>
 
@@ -70,7 +92,9 @@ const scopedTheme = getThemeMeta('belovodye');
             <UiBadge>Rows: {{ basicResult.totalRows }}</UiBadge>
           </template>
           <template #bulk-actions="{ selectedCount, clearSelection }">
-            <UiButton size="sm" variant="secondary" @click="clearSelection">Clear {{ selectedCount }}</UiButton>
+            <UiButton size="sm" variant="secondary" @click="clearSelection"
+              >Clear {{ selectedCount }}</UiButton
+            >
           </template>
         </UiDataGrid>
       </UiCard>
@@ -195,7 +219,9 @@ const scopedTheme = getThemeMeta('belovodye');
           <template #bulk-actions="{ selectedCount, clearSelection, selectedRowIds }">
             <UiBadge>{{ selectedCount }} selected</UiBadge>
             <UiBadge>Ids: {{ selectedRowIds.join(', ') }}</UiBadge>
-            <UiButton size="sm" variant="secondary" @click="clearSelection">Reset selection</UiButton>
+            <UiButton size="sm" variant="secondary" @click="clearSelection"
+              >Reset selection</UiButton
+            >
           </template>
         </UiDataGrid>
       </UiCard>
@@ -206,9 +232,19 @@ const scopedTheme = getThemeMeta('belovodye');
       class="playground__foundation-grid"
       data-playground-scenario="data-grid-composition"
     >
-      <UiPageTemplate title="Workspace shell" description="Page-template + widget + data-grid composition proof">
-        <UiPageSection title="Accounts workspace" description="System package stays controlled while the composition layer remains route-agnostic.">
-          <UiWidgetShell title="Accounts table widget shell" description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer." surface="subtle">
+      <UiPageTemplate
+        title="Workspace shell"
+        description="Page-template + widget + data-grid composition proof"
+      >
+        <UiPageSection
+          title="Accounts workspace"
+          description="System package stays controlled while the composition layer remains route-agnostic."
+        >
+          <UiWidgetShell
+            title="Accounts table widget shell"
+            description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer."
+            surface="subtle"
+          >
             <UiDataGrid
               :rows="compositionUiRows"
               :columns="dataGridUiColumns"

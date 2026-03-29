@@ -32,7 +32,7 @@ export function normalizeApexOptions({
   noDataText,
   reducedMotion,
   themeOptions,
-  userOptions
+  userOptions,
 }: NormalizeApexOptionsParams): ApexOptions {
   if (userOptions?.chart?.type && userOptions.chart.type !== type) {
     warnTypeConflict(type, String(userOptions.chart.type));
@@ -44,24 +44,24 @@ export function normalizeApexOptions({
         speed: 1,
         animateGradually: {
           enabled: false,
-          delay: 0
+          delay: 0,
         },
         dynamicAnimation: {
           enabled: false,
-          speed: 1
-        }
+          speed: 1,
+        },
       }
     : {
         enabled: true,
         speed: 200,
         animateGradually: {
           enabled: true,
-          delay: 32
+          delay: 32,
         },
         dynamicAnimation: {
           enabled: true,
-          speed: 160
-        }
+          speed: 160,
+        },
       };
 
   const internalDefaults: ApexOptions = {
@@ -71,19 +71,19 @@ export function normalizeApexOptions({
       background: 'transparent',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
-      animations: defaultAnimations
+      animations: defaultAnimations,
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     legend: {
       show: true,
       position: 'top',
-      horizontalAlign: 'left'
+      horizontalAlign: 'left',
     },
     noData: {
-      text: noDataText
-    }
+      text: noDataText,
+    },
   };
 
   const merged = mergeApexOptions<ApexOptions>(internalDefaults, themeOptions, userOptions);
@@ -93,7 +93,7 @@ export function normalizeApexOptions({
     id: userOptions?.chart?.id ?? chartId,
     type,
     redrawOnParentResize: true,
-    redrawOnWindowResize: true
+    redrawOnWindowResize: true,
   };
 
   if (reducedMotion) {
@@ -104,13 +104,13 @@ export function normalizeApexOptions({
       animateGradually: {
         ...mergedChart.animations?.animateGradually,
         enabled: false,
-        delay: 0
+        delay: 0,
       },
       dynamicAnimation: {
         ...mergedChart.animations?.dynamicAnimation,
         enabled: false,
-        speed: 1
-      }
+        speed: 1,
+      },
     };
   } else {
     // Internal defaults always seed chart animations, so the merged chart keeps a concrete animation object.
@@ -123,12 +123,12 @@ export function normalizeApexOptions({
   const normalizedNoData: NonNullable<ApexOptions['noData']> = {
     ...mergedNoData,
     // Internal defaults always seed noData.text, so merged no-data config remains concrete.
-    text: mergedNoData.text as string
+    text: mergedNoData.text as string,
   };
 
   return {
     ...merged,
     chart: normalizedChart,
-    noData: normalizedNoData
+    noData: normalizedNoData,
   };
 }

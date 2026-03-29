@@ -4,6 +4,7 @@ title: Apply package creation and topology change discipline
 apply: by model decision
 instructions: use when adding, removing, moving, or reclassifying workspace packages or changing package folder topology.
 ---
+
 Use this rule when the physical or logical package map changes.
 
 ## Do

@@ -4,7 +4,7 @@ import { UiBadge, UiCard } from '@ww/core';
 
 const meta = {
   title: 'Architecture/Widgets/Data Table Widget',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -39,6 +39,6 @@ export const Overview: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

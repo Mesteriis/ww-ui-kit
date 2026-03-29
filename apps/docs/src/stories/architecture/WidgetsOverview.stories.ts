@@ -5,7 +5,7 @@ import { RESERVED_WIDGET_NAMESPACES, WIDGET_LAYER_RULES } from '@ww/widgets';
 
 const meta = {
   title: 'Architecture/Widgets/Overview',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta;
 
 export default meta;
@@ -16,7 +16,7 @@ export const WidgetsLayer: StoryObj = {
     setup() {
       return {
         namespaces: RESERVED_WIDGET_NAMESPACES,
-        rules: WIDGET_LAYER_RULES
+        rules: WIDGET_LAYER_RULES,
       };
     },
     template: `
@@ -64,6 +64,6 @@ export const WidgetsLayer: StoryObj = {
           </div>
         </UiCard>
       </div>
-    `
-  })
+    `,
+  }),
 };

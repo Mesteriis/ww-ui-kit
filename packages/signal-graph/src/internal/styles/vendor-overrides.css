@@ -1,6 +1,10 @@
 .ui-signal-graph .vue-flow__pane {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent), transparent 35%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent),
+      transparent 35%
+    ),
     transparent;
 }
 

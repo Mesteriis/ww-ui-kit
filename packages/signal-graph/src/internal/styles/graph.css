@@ -6,8 +6,16 @@
   border: 1px solid var(--ui-graph-node-border);
   border-radius: var(--ui-radius-xl);
   background:
-    radial-gradient(circle at top left, color-mix(in srgb, var(--ui-graph-node-glow) 14%, transparent), transparent 36%),
-    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent), var(--ui-graph-canvas-bg));
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--ui-graph-node-glow) 14%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ui-graph-canvas-bg) 92%, transparent),
+      var(--ui-graph-canvas-bg)
+    );
   color: var(--ui-graph-node-text);
   overflow: hidden;
   isolation: isolate;
@@ -27,8 +35,16 @@
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--ui-graph-node-glass-bg) 52%, transparent), transparent 28%),
-    linear-gradient(180deg, color-mix(in srgb, var(--ui-graph-canvas-bg) 88%, transparent), var(--ui-graph-canvas-bg));
+    radial-gradient(
+      circle at 20% 20%,
+      color-mix(in srgb, var(--ui-graph-node-glass-bg) 52%, transparent),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ui-graph-canvas-bg) 88%, transparent),
+      var(--ui-graph-canvas-bg)
+    );
 }
 
 .ui-signal-graph__shell::before {
@@ -63,11 +79,19 @@
 }
 
 .ui-signal-graph__state--error {
-  background: color-mix(in srgb, var(--ui-surface-danger-soft) 56%, var(--ui-graph-overlay-panel-surface));
+  background: color-mix(
+    in srgb,
+    var(--ui-surface-danger-soft) 56%,
+    var(--ui-graph-overlay-panel-surface)
+  );
 }
 
 .ui-signal-graph__state--loading {
-  background: color-mix(in srgb, var(--ui-surface-brand-soft) 48%, var(--ui-graph-overlay-panel-surface));
+  background: color-mix(
+    in srgb,
+    var(--ui-surface-brand-soft) 48%,
+    var(--ui-graph-overlay-panel-surface)
+  );
 }
 
 .ui-signal-graph__loading-grid {

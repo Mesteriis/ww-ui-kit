@@ -2,6 +2,15 @@
   "name": "@ww/themes",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/themes"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/themes#readme",
   "sideEffects": [
     "./src/theme-light.css",
     "./src/theme-dark.css",
@@ -28,6 +37,6 @@
   },
   "scripts": {
     "build": "vite build && node ./scripts/generate-theme-css.mjs",
-    "typecheck": "pnpm --filter @ww/tokens build && tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   }
 }

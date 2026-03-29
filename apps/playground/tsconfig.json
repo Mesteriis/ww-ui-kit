@@ -17,14 +17,15 @@
     }
   },
   "include": [
+    "src/**/*.mjs",
     "src/**/*.ts",
     "src/**/*.vue",
     "vite.config.ts",
+    "../../tools/**/*.d.ts",
+    "../../tools/**/*.mjs",
     "../../packages/**/*.ts",
     "../../packages/**/*.vue",
     "../../vite.aliases.ts"
   ],
-  "exclude": [
-    "../../packages/**/*.test.ts"
-  ]
+  "exclude": ["../../packages/**/*.test.ts"]
 }

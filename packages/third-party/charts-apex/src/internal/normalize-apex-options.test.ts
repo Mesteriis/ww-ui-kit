@@ -8,9 +8,9 @@ describe('normalizeApexOptions', () => {
     const userOptions = {
       chart: {
         type: 'line' as const,
-        id: 'custom-id'
+        id: 'custom-id',
       },
-      colors: ['#123456']
+      colors: ['#123456'],
     };
 
     const normalized = normalizeApexOptions({
@@ -20,10 +20,10 @@ describe('normalizeApexOptions', () => {
       reducedMotion: false,
       themeOptions: {
         tooltip: {
-          theme: 'light'
-        }
+          theme: 'light',
+        },
       },
-      userOptions
+      userOptions,
     });
 
     expect(normalized.chart?.id).toBe('custom-id');
@@ -43,10 +43,10 @@ describe('normalizeApexOptions', () => {
       userOptions: {
         chart: {
           animations: {
-            enabled: true
-          }
-        }
-      }
+            enabled: true,
+          },
+        },
+      },
     });
 
     expect(normalized.chart?.animations?.enabled).toBe(false);
@@ -65,18 +65,18 @@ describe('normalizeApexOptions', () => {
       themeOptions: {
         chart: {
           animations: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         noData: {
-          align: 'center'
-        }
+          align: 'center',
+        },
       },
       userOptions: {
         chart: {
-          type: 'line'
-        }
-      }
+          type: 'line',
+        },
+      },
     });
 
     expect(normalized.chart?.id).toBe('generated-id');
@@ -99,9 +99,9 @@ describe('normalizeApexOptions', () => {
       themeOptions: {},
       userOptions: {
         chart: {
-          type: 'line'
-        }
-      }
+          type: 'line',
+        },
+      },
     });
 
     normalizeApexOptions({
@@ -112,9 +112,9 @@ describe('normalizeApexOptions', () => {
       themeOptions: {},
       userOptions: {
         chart: {
-          type: 'line'
-        }
-      }
+          type: 'line',
+        },
+      },
     });
 
     expect(warnSpy).toHaveBeenCalledTimes(1);
@@ -123,7 +123,7 @@ describe('normalizeApexOptions', () => {
     const originalConsole = globalThis.console;
     Object.defineProperty(globalThis, 'console', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     const normalized = normalizeApexOptions({
@@ -134,16 +134,16 @@ describe('normalizeApexOptions', () => {
       themeOptions: {},
       userOptions: {
         chart: {
-          type: 'line'
-        }
-      }
+          type: 'line',
+        },
+      },
     });
 
     expect(normalized.chart?.type).toBe('bar');
 
     Object.defineProperty(globalThis, 'console', {
       configurable: true,
-      value: originalConsole
+      value: originalConsole,
     });
   });
 
@@ -153,7 +153,7 @@ describe('normalizeApexOptions', () => {
       type: 'donut',
       noDataText: 'No slices',
       reducedMotion: false,
-      themeOptions: {}
+      themeOptions: {},
     });
 
     expect(normalized.chart?.id).toBe('no-user-options');

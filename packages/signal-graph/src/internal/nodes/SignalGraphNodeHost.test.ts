@@ -9,16 +9,16 @@ vi.mock('@vue-flow/core', async () => {
     Handle: vue.defineComponent({
       name: 'MockSignalHandle',
       props: {
-        type: { type: String, default: 'source' }
+        type: { type: String, default: 'source' },
       },
       render() {
         return h('span', { 'data-testid': `handle-${this.type}` });
-      }
+      },
     }),
     Position: {
       Left: 'left',
-      Right: 'right'
-    }
+      Right: 'right',
+    },
   };
 });
 
@@ -35,19 +35,23 @@ const Renderer = defineComponent({
     hasRecentSignal: { type: Boolean, required: true },
     isActive: { type: Boolean, required: true },
     isRelated: { type: Boolean, required: true },
-    node: { type: Object, required: true }
+    node: { type: Object, required: true },
   },
   render() {
     return h('div', { class: 'renderer-output' }, [
       h('span', { 'data-testid': 'renderer-node-id' }, String((this.node as { id: string }).id)),
       h('span', { 'data-testid': 'renderer-depth' }, String(this.depthState)),
-      h('span', { 'data-testid': 'renderer-theme' }, String((this.graph as { theme: { themeName: string } }).theme.themeName)),
+      h(
+        'span',
+        { 'data-testid': 'renderer-theme' },
+        String((this.graph as { theme: { themeName: string } }).theme.themeName)
+      ),
       h('span', { 'data-testid': 'renderer-signal' }, String(this.hasRecentSignal)),
       h('span', { 'data-testid': 'renderer-related' }, String(this.isRelated)),
       h('span', { 'data-testid': 'renderer-active' }, String(this.isActive)),
       h('span', { 'data-testid': 'renderer-data' }, String((this.data as { title: string }).title)),
     ]);
-  }
+  },
 });
 
 describe('SignalGraphNodeHost', () => {
@@ -68,21 +72,33 @@ describe('SignalGraphNodeHost', () => {
         selected: false,
         sourcePosition: 'right',
         targetPosition: 'left',
-        zIndex: 0
+        zIndex: 0,
       },
       global: {
         provide: {
           [signalGraphRuntimeKey as symbol]: {
-            nodeMap: computed(() => new Map([
-              ['node-a', { id: 'node-a', type: 'service', position: { x: 0, y: 0 }, data: { title: 'Node A' }, label: 'Service A' }]
-            ])),
+            nodeMap: computed(
+              () =>
+                new Map([
+                  [
+                    'node-a',
+                    {
+                      id: 'node-a',
+                      type: 'service',
+                      position: { x: 0, y: 0 },
+                      data: { title: 'Node A' },
+                      label: 'Service A',
+                    },
+                  ],
+                ])
+            ),
             edgeMap: computed(() => new Map()),
             nodeDefinitions: computed(() => ({
               service: createSignalGraphNodeDefinition({
                 component: Renderer,
                 label: 'Definition label',
-                glass: true
-              })
+                glass: true,
+              }),
             })),
             focusState: computed(() => ({
               anchorNodeId: 'node-a',
@@ -91,7 +107,7 @@ describe('SignalGraphNodeHost', () => {
               relationDepth: 1,
               activeNodeIds: ['node-a'],
               relatedNodeIds: ['node-b'],
-              backgroundNodeIds: []
+              backgroundNodeIds: [],
             })),
             depthMode: ref('full'),
             interactionMode: ref('readonly'),
@@ -102,17 +118,17 @@ describe('SignalGraphNodeHost', () => {
               container: null,
               revision: 1,
               themeName: 'belovodye',
-              themeType: 'light'
+              themeType: 'light',
             }),
             graphApi: {
               centerNode: vi.fn(),
               clearFocus: vi.fn(),
               emitSignal: vi.fn(),
-              focusNode: vi.fn()
-            }
-          }
-        }
-      }
+              focusNode: vi.fn(),
+            },
+          },
+        },
+      },
     });
 
     expect(wrapper.get('[data-testid="handle-target"]').exists()).toBe(true);
@@ -144,8 +160,8 @@ describe('SignalGraphNodeHost', () => {
         selected: false,
         sourcePosition: 'right',
         targetPosition: 'left',
-        zIndex: 0
-      }
+        zIndex: 0,
+      },
     });
 
     expect(wrapper.attributes('data-ui-depth')).toBe('active');
@@ -170,20 +186,31 @@ describe('SignalGraphNodeHost', () => {
         selected: false,
         sourcePosition: 'right',
         targetPosition: 'left',
-        zIndex: 0
+        zIndex: 0,
       },
       global: {
         provide: {
           [signalGraphRuntimeKey as symbol]: {
-            nodeMap: computed(() => new Map([
-              ['node-b', { id: 'node-b', type: 'service', position: { x: 0, y: 0 }, data: { title: 'Node B' } }]
-            ])),
+            nodeMap: computed(
+              () =>
+                new Map([
+                  [
+                    'node-b',
+                    {
+                      id: 'node-b',
+                      type: 'service',
+                      position: { x: 0, y: 0 },
+                      data: { title: 'Node B' },
+                    },
+                  ],
+                ])
+            ),
             edgeMap: computed(() => new Map()),
             nodeDefinitions: computed(() => ({
               service: createSignalGraphNodeDefinition({
                 component: Renderer,
-                label: 'Definition fallback'
-              })
+                label: 'Definition fallback',
+              }),
             })),
             focusState: computed(() => ({
               anchorNodeId: null,
@@ -192,7 +219,7 @@ describe('SignalGraphNodeHost', () => {
               relationDepth: 0,
               activeNodeIds: [],
               relatedNodeIds: [],
-              backgroundNodeIds: []
+              backgroundNodeIds: [],
             })),
             depthMode: ref('off'),
             interactionMode: ref('interactive'),
@@ -203,17 +230,17 @@ describe('SignalGraphNodeHost', () => {
               container: null,
               revision: 0,
               themeName: 'light',
-              themeType: 'light'
+              themeType: 'light',
             }),
             graphApi: {
               centerNode: vi.fn(),
               clearFocus: vi.fn(),
               emitSignal: vi.fn(),
-              focusNode: vi.fn()
-            }
-          }
-        }
-      }
+              focusNode: vi.fn(),
+            },
+          },
+        },
+      },
     });
 
     expect(wrapper.text()).toContain('Definition fallback');
@@ -238,20 +265,31 @@ describe('SignalGraphNodeHost', () => {
         selected: false,
         sourcePosition: 'right',
         targetPosition: 'left',
-        zIndex: 0
+        zIndex: 0,
       },
       global: {
         provide: {
           [signalGraphRuntimeKey as symbol]: {
-            nodeMap: computed(() => new Map([
-              ['node-c', { id: 'node-c', type: 'service', position: { x: 0, y: 0 }, data: { title: 'Node C' } }]
-            ])),
+            nodeMap: computed(
+              () =>
+                new Map([
+                  [
+                    'node-c',
+                    {
+                      id: 'node-c',
+                      type: 'service',
+                      position: { x: 0, y: 0 },
+                      data: { title: 'Node C' },
+                    },
+                  ],
+                ])
+            ),
             edgeMap: computed(() => new Map()),
             nodeDefinitions: computed(() => ({
               service: createSignalGraphNodeDefinition({
                 component: Renderer,
-                label: 'Definition fallback'
-              })
+                label: 'Definition fallback',
+              }),
             })),
             focusState: computed(() => ({
               anchorNodeId: null,
@@ -260,7 +298,7 @@ describe('SignalGraphNodeHost', () => {
               relationDepth: 0,
               activeNodeIds: [],
               relatedNodeIds: [],
-              backgroundNodeIds: []
+              backgroundNodeIds: [],
             })),
             depthMode: ref('off'),
             interactionMode: ref(undefined),
@@ -268,10 +306,10 @@ describe('SignalGraphNodeHost', () => {
             reactingNodeIds: ref(new Set()),
             reducedMotion: ref(undefined),
             themeState: ref(undefined),
-            graphApi: undefined
-          }
-        }
-      }
+            graphApi: undefined,
+          },
+        },
+      },
     });
 
     expect(wrapper.get('[data-testid="renderer-theme"]').text()).toBe('light');

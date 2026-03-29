@@ -4,8 +4,8 @@
   stroke-dasharray: 18 160;
   stroke-dashoffset: 180;
   opacity: 0;
-  animation:
-    ui-signal-graph-pulse-travel var(--ui-signal-duration) var(--ui-motion-easing-standard) var(--ui-signal-delay) forwards;
+  animation: ui-signal-graph-pulse-travel var(--ui-signal-duration) var(--ui-motion-easing-standard)
+    var(--ui-signal-delay) forwards;
 }
 
 .ui-signal-graph__pulse--sm {
@@ -43,8 +43,8 @@
 .ui-signal-graph__pulse--reduced {
   stroke-dasharray: none;
   stroke-dashoffset: 0;
-  animation:
-    ui-signal-graph-pulse-reduced var(--ui-signal-duration) var(--ui-motion-easing-standard) var(--ui-signal-delay) forwards;
+  animation: ui-signal-graph-pulse-reduced var(--ui-signal-duration)
+    var(--ui-motion-easing-standard) var(--ui-signal-delay) forwards;
 }
 
 @keyframes ui-signal-graph-pulse-travel {

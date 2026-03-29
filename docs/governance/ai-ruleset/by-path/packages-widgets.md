@@ -4,6 +4,7 @@ title: packages/widgets path rules
 apply: by file patterns
 patterns: packages/widgets/**/*
 ---
+
 Use this rule when editing reusable black-box composition surfaces.
 
 ## Do

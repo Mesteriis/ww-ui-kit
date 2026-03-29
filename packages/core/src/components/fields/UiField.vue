@@ -19,7 +19,7 @@ const fieldState = createFieldState(props, fallbackId.value);
 provideFieldContext({
   describedBy: fieldState.describedBy,
   inputId: fieldState.inputId,
-  invalid: fieldState.invalid
+  invalid: fieldState.invalid,
 });
 </script>
 

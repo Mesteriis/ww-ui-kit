@@ -239,13 +239,12 @@
 .ui-button--effect-border-flow::before {
   inset: 0;
   padding: var(--ui-button-effect-border-width);
-  background:
-    linear-gradient(
-      120deg,
-      var(--ui-button-effect-start),
-      var(--ui-button-effect-end),
-      var(--ui-button-effect-start)
-    );
+  background: linear-gradient(
+    120deg,
+    var(--ui-button-effect-start),
+    var(--ui-button-effect-end),
+    var(--ui-button-effect-start)
+  );
   background-size: 200% 100%;
   -webkit-mask:
     linear-gradient(white 0 0) content-box,
@@ -263,14 +262,13 @@
 }
 
 .ui-button--effect-color-shift::after {
-  background:
-    linear-gradient(
-      115deg,
-      transparent 12%,
-      color-mix(in srgb, var(--ui-button-effect-start) 44%, transparent) 42%,
-      color-mix(in srgb, var(--ui-button-effect-end) 62%, transparent) 54%,
-      transparent 78%
-    );
+  background: linear-gradient(
+    115deg,
+    transparent 12%,
+    color-mix(in srgb, var(--ui-button-effect-start) 44%, transparent) 42%,
+    color-mix(in srgb, var(--ui-button-effect-end) 62%, transparent) 54%,
+    transparent 78%
+  );
   background-size: 240% 100%;
   opacity: 0.72;
   animation: ui-button-color-shift 2.6s var(--ui-motion-easing-emphasized) infinite;

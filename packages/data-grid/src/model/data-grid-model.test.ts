@@ -4,7 +4,7 @@ import {
   createDataGridColumn,
   normalizeDataGridQuery,
   type DataGridColumn,
-  type DataGridQuery
+  type DataGridQuery,
 } from '../index';
 import {
   getDataGridColumnValue,
@@ -14,31 +14,32 @@ import {
   renderDataGridCellValue,
   resetDataGridColumnVisibility,
   setDataGridColumnVisibility,
-  toggleDataGridColumnVisibility
+  toggleDataGridColumnVisibility,
 } from './columns';
 import { setDataGridFilter, clearDataGridFilters } from './filters';
 import { createDerivedDataGridState } from '../internal/state/derived-grid-state';
 import { normalizeDataGridColumns } from '../internal/normalize/normalize-columns';
+import { normalizeInternalDataGridQuery } from '../internal/normalize/normalize-query';
 import { __resetDataGridRowIdWarnings, resolveDataGridRowId } from '../internal/utils/row-id';
 import {
   clearDataGridSelection,
   isDataGridRowSelected,
   normalizeDataGridSelection,
   setDataGridPageSelection,
-  toggleDataGridRowSelection
+  toggleDataGridRowSelection,
 } from './selection';
 import {
   getDataGridPaginationSummary,
   getDataGridPageCount,
   setDataGridPage,
-  setDataGridPageSize
+  setDataGridPageSize,
 } from './pagination';
 import { getDataGridSortDirection, toggleDataGridSort } from './sorting';
 import {
   getActiveDataGridFilterCount,
   hasActiveDataGridFilters,
   hasActiveDataGridQuery,
-  hasActiveDataGridSearch
+  hasActiveDataGridSearch,
 } from './query';
 
 interface DemoRow extends Record<string, unknown> {
@@ -50,21 +51,32 @@ interface DemoRow extends Record<string, unknown> {
 }
 
 const columns: readonly DataGridColumn<DemoRow>[] = Object.freeze([
-  createDataGridColumn<DemoRow>({ id: 'name', header: 'Name', accessorKey: 'name', sortable: true, hideable: false }),
-  createDataGridColumn<DemoRow>({ id: 'team', header: 'Team', accessorKey: 'team', sortable: true }),
+  createDataGridColumn<DemoRow>({
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+    sortable: true,
+    hideable: false,
+  }),
+  createDataGridColumn<DemoRow>({
+    id: 'team',
+    header: 'Team',
+    accessorKey: 'team',
+    sortable: true,
+  }),
   createDataGridColumn<DemoRow>({
     id: 'score',
     header: 'Score',
     accessor: (row) => row.score,
     sortable: true,
     align: 'end',
-    cell: ({ value }) => Number(value)
-  })
+    cell: ({ value }) => Number(value),
+  }),
 ]);
 
 const rows: readonly DemoRow[] = Object.freeze([
   { id: 'a', name: 'Ada', team: 'North', active: true, score: 12 },
-  { id: 'b', name: 'Bea', team: 'South', active: false, score: 4 }
+  { id: 'b', name: 'Bea', team: 'South', active: false, score: 4 },
 ]);
 
 describe('data-grid model', () => {
@@ -73,16 +85,20 @@ describe('data-grid model', () => {
       search: ' Ada ',
       filters: {
         team: 'North',
-        tags: ['core']
+        tags: ['core'],
       },
-      sort: [{ id: 'name', direction: 'asc' }],
+      sort: [
+        { id: 'name', direction: 'asc' },
+        { id: '', direction: 'desc' } as unknown as DataGridQuery['sort'][number],
+        { id: 'team', direction: 'noop' } as unknown as DataGridQuery['sort'][number],
+      ],
       pagination: {
-        page: 0,
-        pageSize: 0
+        page: 0.2,
+        pageSize: 0.4,
       },
       columnVisibility: {
-        team: false
-      }
+        team: false,
+      },
     };
 
     const normalized = normalizeDataGridQuery(query);
@@ -91,21 +107,56 @@ describe('data-grid model', () => {
       search: ' Ada ',
       filters: {
         team: 'North',
-        tags: ['core']
+        tags: ['core'],
       },
       sort: [{ id: 'name', direction: 'asc' }],
       pagination: {
         page: 1,
-        pageSize: 1
+        pageSize: 1,
       },
       columnVisibility: {
-        team: false
-      }
+        team: false,
+      },
     });
     expect(normalized.filters).not.toBe(query.filters);
     expect(normalized.sort).not.toBe(query.sort);
     expect(normalized.columnVisibility).not.toBe(query.columnVisibility);
     expect(normalizeDataGridQuery(query)).toEqual(normalized);
+    expect(
+      normalizeDataGridQuery({
+        search: 42 as unknown as string,
+        filters: {
+          enabled: true,
+          tags: ['ops'],
+        },
+        sort: [{ id: 'team', direction: 'desc' }],
+        pagination: {
+          page: 2.9,
+          pageSize: 12.2,
+        },
+      })
+    ).toEqual({
+      search: '42',
+      filters: {
+        enabled: true,
+        tags: ['ops'],
+      },
+      sort: [{ id: 'team', direction: 'desc' }],
+      pagination: {
+        page: 2,
+        pageSize: 12,
+      },
+    });
+    expect(normalizeDataGridQuery({})).toEqual({
+      search: '',
+      filters: {},
+      sort: [],
+      pagination: {
+        page: 1,
+        pageSize: 10,
+      },
+    });
+    expect(normalizeInternalDataGridQuery(query)).toEqual(normalized);
   });
 
   it('tracks active query state and filter counts', () => {
@@ -113,13 +164,13 @@ describe('data-grid model', () => {
       search: '',
       filters: {},
       sort: [],
-      pagination: { page: 1, pageSize: 10 }
+      pagination: { page: 1, pageSize: 10 },
     });
     const active = normalizeDataGridQuery({
       search: 'Ada',
       filters: { team: 'North' },
       sort: [{ id: 'name', direction: 'desc' }],
-      pagination: { page: 1, pageSize: 10 }
+      pagination: { page: 1, pageSize: 10 },
     });
 
     expect(hasActiveDataGridSearch(empty)).toBe(false);
@@ -138,7 +189,7 @@ describe('data-grid model', () => {
       search: '',
       filters: {},
       sort: [],
-      pagination: { page: 2, pageSize: 10 }
+      pagination: { page: 2, pageSize: 10 },
     });
 
     const textFilter = setDataGridFilter(base, 'team', 'North');
@@ -163,7 +214,7 @@ describe('data-grid model', () => {
       search: '',
       filters: {},
       sort: [],
-      pagination: { page: 3, pageSize: 10 }
+      pagination: { page: 3, pageSize: 10 },
     });
 
     const asc = toggleDataGridSort(base, 'name');
@@ -182,7 +233,7 @@ describe('data-grid model', () => {
       search: '',
       filters: {},
       sort: [],
-      pagination: { page: 1, pageSize: 10 }
+      pagination: { page: 1, pageSize: 10 },
     });
 
     expect(getDataGridPageCount(0, 10)).toBe(1);
@@ -190,12 +241,19 @@ describe('data-grid model', () => {
     expect(setDataGridPage(base, 4).pagination.page).toBe(4);
     expect(setDataGridPage(base, 0).pagination.page).toBe(1);
     expect(setDataGridPageSize(base, 25).pagination).toEqual({ page: 1, pageSize: 25 });
-    expect(getDataGridPaginationSummary({ page: 1, pageSize: 10 }, 0)).toEqual({ start: 0, end: 0 });
-    expect(getDataGridPaginationSummary({ page: 2, pageSize: 10 }, 42)).toEqual({ start: 11, end: 20 });
+    expect(getDataGridPaginationSummary({ page: 1, pageSize: 10 }, 0)).toEqual({
+      start: 0,
+      end: 0,
+    });
+    expect(getDataGridPaginationSummary({ page: 2, pageSize: 10 }, 42)).toEqual({
+      start: 11,
+      end: 20,
+    });
   });
 
   it('normalizes selection and page selection flows', () => {
     const normalized = normalizeDataGridSelection(['a', 'b']);
+    expect(normalizeDataGridSelection(undefined)).toEqual([]);
     expect(normalized).toEqual(['a', 'b']);
     expect(isDataGridRowSelected(normalized, 'a')).toBe(true);
     expect(toggleDataGridRowSelection(normalized, 'c')).toEqual(['a', 'b', 'c']);
@@ -212,16 +270,37 @@ describe('data-grid model', () => {
       filters: {},
       sort: [],
       pagination: { page: 1, pageSize: 10 },
-      columnVisibility: { team: false }
+      columnVisibility: { team: false },
     });
 
     expect(normalized[1]).toMatchObject({ sortable: true, hideable: true, align: 'start' });
     expect(isDataGridColumnVisible(normalized[0], baseQuery)).toBe(true);
     expect(isDataGridColumnVisible(normalized[1], baseQuery)).toBe(false);
     expect(getHideableDataGridColumns(normalized)).toHaveLength(2);
-    expect(getVisibleDataGridColumns(normalized, baseQuery).map((column) => column.id)).toEqual(['name', 'score']);
-    expect(setDataGridColumnVisibility(baseQuery, 'team', true).columnVisibility).toEqual({ team: true });
-    expect(toggleDataGridColumnVisibility(baseQuery, 'team').columnVisibility).toEqual({ team: true });
+    expect(getVisibleDataGridColumns(normalized, baseQuery).map((column) => column.id)).toEqual([
+      'name',
+      'score',
+    ]);
+    expect(setDataGridColumnVisibility(baseQuery, 'team', true).columnVisibility).toEqual({
+      team: true,
+    });
+    expect(
+      setDataGridColumnVisibility(
+        normalizeDataGridQuery({
+          search: '',
+          filters: {},
+          sort: [],
+          pagination: { page: 1, pageSize: 10 },
+        }),
+        'team',
+        false
+      ).columnVisibility
+    ).toEqual({
+      team: false,
+    });
+    expect(toggleDataGridColumnVisibility(baseQuery, 'team').columnVisibility).toEqual({
+      team: true,
+    });
     expect(resetDataGridColumnVisibility(baseQuery).columnVisibility).toEqual({});
   });
 
@@ -241,7 +320,7 @@ describe('data-grid model', () => {
         rowIndex: 0,
         column: scoreColumn,
         value: 12,
-        selected: false
+        selected: false,
       })
     ).toBe(12);
     expect(
@@ -251,7 +330,7 @@ describe('data-grid model', () => {
         rowIndex: 0,
         column: { id: 'active', header: 'Active' },
         value: true,
-        selected: false
+        selected: false,
       })
     ).toBe('Yes');
     expect(
@@ -259,9 +338,19 @@ describe('data-grid model', () => {
         row,
         rowId: 'a',
         rowIndex: 0,
+        column: { id: 'inactive', header: 'Inactive' },
+        value: false,
+        selected: false,
+      })
+    ).toBe('No');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
         column: { id: 'created', header: 'Created' },
         value: new Date('2026-01-01T00:00:00.000Z'),
-        selected: false
+        selected: false,
       })
     ).toBe('2026-01-01T00:00:00.000Z');
     expect(
@@ -271,7 +360,7 @@ describe('data-grid model', () => {
         rowIndex: 0,
         column: { id: 'blank', header: 'Blank' },
         value: '',
-        selected: false
+        selected: false,
       })
     ).toBe('—');
     expect(
@@ -281,9 +370,71 @@ describe('data-grid model', () => {
         rowIndex: 0,
         column: { id: 'text', header: 'Text' },
         value: 'Value',
-        selected: false
+        selected: false,
       })
     ).toBe('Value');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'bigint', header: 'BigInt' },
+        value: 42n,
+        selected: false,
+      })
+    ).toBe('42');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'symbol', header: 'Symbol' },
+        value: Symbol('focus'),
+        selected: false,
+      })
+    ).toBe('Symbol(focus)');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'anonymous-symbol', header: 'Anonymous symbol' },
+        value: Symbol(),
+        selected: false,
+      })
+    ).toBe('Symbol()');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'object', header: 'Object' },
+        value: { name: 'Ada' },
+        selected: false,
+      })
+    ).toBe('{"name":"Ada"}');
+    const circular: Record<string, unknown> = {};
+    circular.self = circular;
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'circular', header: 'Circular' },
+        value: circular,
+        selected: false,
+      })
+    ).toBe('[object Object]');
+    expect(
+      renderDataGridCellValue({
+        row,
+        rowId: 'a',
+        rowIndex: 0,
+        column: { id: 'function', header: 'Function' },
+        value: () => 'noop',
+        selected: false,
+      })
+    ).toBe('[object Function]');
   });
 
   it('derives visible grid state for empty, no-results, and selected pages', () => {
@@ -293,7 +444,7 @@ describe('data-grid model', () => {
       filters: {},
       sort: [],
       pagination: { page: 1, pageSize: 10 },
-      columnVisibility: { team: false }
+      columnVisibility: { team: false },
     });
     const emptyState = createDerivedDataGridState({
       rows: [],
@@ -302,19 +453,19 @@ describe('data-grid model', () => {
       totalRows: 0,
       selectionEnabled: false,
       selectedRowIds: undefined,
-      pageRowIds: []
+      pageRowIds: [],
     });
     const noResultsState = createDerivedDataGridState({
       rows: [],
       columns: normalizedColumns,
       query: normalizeDataGridQuery({
         ...baseQuery,
-        search: 'Ada'
+        search: 'Ada',
       }),
       totalRows: 0,
       selectionEnabled: true,
       selectedRowIds: ['a'],
-      pageRowIds: ['a', 'b']
+      pageRowIds: ['a', 'b'],
     });
     const selectedState = createDerivedDataGridState({
       rows,
@@ -323,7 +474,7 @@ describe('data-grid model', () => {
       totalRows: rows.length,
       selectionEnabled: true,
       selectedRowIds: ['a'],
-      pageRowIds: ['a', 'b']
+      pageRowIds: ['a', 'b'],
     });
 
     expect(emptyState.isEmpty).toBe(true);
@@ -345,19 +496,51 @@ describe('data-grid model', () => {
     expect(resolveDataGridRowId(rows[0], 0, (row) => `fn-${row.name}`)).toBe('fn-Ada');
     expect(resolveDataGridRowId(rows[0], 0, 'name')).toBe('Ada');
     expect(resolveDataGridRowId(rows[0], 0, undefined)).toBe('a');
-    expect(resolveDataGridRowId({ id: 42, name: 'Id', team: 'Core', active: true, score: 1 }, 0, undefined)).toBe('42');
-    expect(resolveDataGridRowId({ name: 'Fallback', team: 'Core', active: true, score: 1 }, 3, undefined, 'scope-a')).toBe('3');
-    expect(resolveDataGridRowId({ name: 'Fallback', team: 'Core', active: true, score: 1 }, 4, undefined, 'scope-a')).toBe('4');
+    expect(
+      resolveDataGridRowId(
+        { id: 42, name: 'Id', team: 'Core', active: true, score: 1 },
+        0,
+        undefined
+      )
+    ).toBe('42');
+    expect(
+      resolveDataGridRowId(
+        { name: 'Fallback', team: 'Core', active: true, score: 1 },
+        3,
+        undefined,
+        'scope-a'
+      )
+    ).toBe('3');
+    expect(
+      resolveDataGridRowId(
+        { name: 'Fallback', team: 'Core', active: true, score: 1 },
+        4,
+        undefined,
+        'scope-a'
+      )
+    ).toBe('4');
     expect(warn).toHaveBeenCalledTimes(1);
 
     __resetDataGridRowIdWarnings();
-    resolveDataGridRowId({ name: 'Fallback', team: 'Core', active: true, score: 1 }, 5, undefined, 'scope-a');
+    resolveDataGridRowId(
+      { name: 'Fallback', team: 'Core', active: true, score: 1 },
+      5,
+      undefined,
+      'scope-a'
+    );
     expect(warn).toHaveBeenCalledTimes(2);
 
     const originalConsole = globalThis.console;
     // @ts-expect-error coverage branch for non-browser-like runtimes
     globalThis.console = undefined;
-    expect(resolveDataGridRowId({ name: 'NoConsole', team: 'Core', active: true, score: 1 }, 6, undefined, 'scope-b')).toBe('6');
+    expect(
+      resolveDataGridRowId(
+        { name: 'NoConsole', team: 'Core', active: true, score: 1 },
+        6,
+        undefined,
+        'scope-b'
+      )
+    ).toBe('6');
     globalThis.console = originalConsole;
   });
 });

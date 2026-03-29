@@ -59,4 +59,3 @@ Introduce a machine-checked governance layer.
 - [`tools/governance/catalog`](../../tools/governance/catalog)
 - [`tools/governance/checks`](../../tools/governance/checks)
 - [`docs/architecture/public-api-discipline.md`](../architecture/public-api-discipline.md)
-

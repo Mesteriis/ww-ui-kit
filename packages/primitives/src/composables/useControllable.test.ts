@@ -8,20 +8,20 @@ const Harness = defineComponent({
   props: {
     value: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   emits: ['change'],
   setup(props, { emit }) {
     const state = useControllable({
       defaultValue: 'initial',
       onChange: (value) => emit('change', value),
-      value: computed(() => props.value)
+      value: computed(() => props.value),
     });
 
     return { state };
   },
-  template: `<button @click="state.setValue('next')">{{ state.currentValue }}</button>`
+  template: `<button @click="state.setValue('next')">{{ state.currentValue }}</button>`,
 });
 
 describe('useControllable', () => {
@@ -39,8 +39,8 @@ describe('useControllable', () => {
   it('keeps external state when controlled', async () => {
     const wrapper = mount(Harness, {
       props: {
-        value: 'controlled'
-      }
+        value: 'controlled',
+      },
     });
 
     await wrapper.trigger('click');

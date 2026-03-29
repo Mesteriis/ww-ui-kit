@@ -3,6 +3,7 @@ id: ai-manual-adr-migration
 title: ADR migration and historical normalization
 apply: manually
 ---
+
 Use this rule only for explicit ADR cleanup or migration work.
 
 ## Do

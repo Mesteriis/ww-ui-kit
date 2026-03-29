@@ -4,6 +4,7 @@ title: packages/third-party path rules
 apply: by file patterns
 patterns: packages/third-party/**/*
 ---
+
 Use this rule when editing vendor-backed adapters.
 
 ## Do

@@ -11,7 +11,7 @@ import type {
   DataGridFilterDefinition,
   DataGridQuery,
   DataGridRowId,
-  DataGridRowIdAccessor
+  DataGridRowIdAccessor,
 } from '../model/types';
 
 export interface DataGridControllerProps<TRow extends Record<string, unknown>> {
@@ -45,20 +45,22 @@ export function useDataGridController<TRow extends Record<string, unknown>>(
   emit: DataGridControllerEmit
 ) {
   const selectionEnabled = computed(() => props.selectedRowIds !== undefined);
-  const pageSizeOptions = computed(() => props.pageSizeOptions?.length ? [...props.pageSizeOptions] : [10, 20, 50]);
+  const pageSizeOptions = computed(() =>
+    props.pageSizeOptions?.length ? [...props.pageSizeOptions] : [10, 20, 50]
+  );
 
   const a11y = useDataGridA11y({
     ariaLabel: computed(() => props.ariaLabel),
-    caption: computed(() => props.caption)
+    caption: computed(() => props.caption),
   });
 
   const query = useDataGridQuery({
     query: computed(() => props.query),
-    onChange: (nextQuery) => emit('update:query', nextQuery)
+    onChange: (nextQuery) => emit('update:query', nextQuery),
   });
 
   const columns = useDataGridColumns({
-    columns: computed(() => props.columns)
+    columns: computed(() => props.columns),
   });
 
   const selection = useDataGridSelection({
@@ -66,7 +68,7 @@ export function useDataGridController<TRow extends Record<string, unknown>>(
     rowId: computed(() => props.rowId),
     selectedRowIds: computed(() => props.selectedRowIds),
     selectionEnabled,
-    onChange: (nextSelection) => emit('update:selectedRowIds', nextSelection)
+    onChange: (nextSelection) => emit('update:selectedRowIds', nextSelection),
   });
 
   const derivedState = computed(() =>
@@ -77,7 +79,7 @@ export function useDataGridController<TRow extends Record<string, unknown>>(
       totalRows: props.totalRows,
       selectionEnabled: selectionEnabled.value,
       selectedRowIds: props.selectedRowIds,
-      pageRowIds: selection.pageRowIds.value
+      pageRowIds: selection.pageRowIds.value,
     })
   );
 
@@ -94,11 +96,15 @@ export function useDataGridController<TRow extends Record<string, unknown>>(
     isError: computed(() => Boolean(props.error)),
     isLoading: computed(() => Boolean(props.loading)),
     errorMessage: computed(() =>
-      typeof props.error === 'string' ? props.error : (props.errorText ?? 'This data grid surface is unavailable.')
+      typeof props.error === 'string'
+        ? props.error
+        : (props.errorText ?? 'This data grid surface is unavailable.')
     ),
     emptyText: computed(() => props.emptyText ?? 'No rows available yet.'),
-    noResultsText: computed(() => props.noResultsText ?? 'No rows match the current search and filters.'),
+    noResultsText: computed(
+      () => props.noResultsText ?? 'No rows match the current search and filters.'
+    ),
     filterDefinitions: computed(() => props.filterDefinitions ?? []),
-    searchPlaceholder: computed(() => props.searchPlaceholder ?? 'Search rows')
+    searchPlaceholder: computed(() => props.searchPlaceholder ?? 'Search rows'),
   };
 }

@@ -10,4 +10,6 @@ export interface PlaygroundScenario {
 const typedScenarios: readonly PlaygroundScenario[] = runtimeScenarios;
 
 export const PLAYGROUND_SCENARIOS = Object.freeze(typedScenarios);
-export const PLAYGROUND_SCENARIO_IDS = Object.freeze(PLAYGROUND_SCENARIOS.map((scenario) => scenario.id));
+export const PLAYGROUND_SCENARIO_IDS = Object.freeze(
+  PLAYGROUND_SCENARIOS.map((scenario) => scenario.id)
+);

@@ -30,7 +30,7 @@ describe('useApexThemeOptions', () => {
           chartId,
           type,
           options,
-          noDataText
+          noDataText,
         });
         const setType = (nextType: 'line' | 'radialBar') => {
           type.value = nextType;
@@ -38,9 +38,9 @@ describe('useApexThemeOptions', () => {
         expose({ hostRef, options, setType, ...state });
         return () =>
           h('section', { 'data-ui-theme': 'dark', 'data-ui-theme-type': 'dark' }, [
-            h('div', { ref: hostRef })
+            h('div', { ref: hostRef }),
           ]);
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -87,9 +87,9 @@ describe('useApexThemeOptions', () => {
         const options = ref({
           chart: {
             id: 'custom-id',
-            type: 'line' as const
+            type: 'line' as const,
           },
-          colors: ['#123456']
+          colors: ['#123456'],
         });
         const noDataText = ref('No data');
         const state = useApexThemeOptions({
@@ -97,14 +97,14 @@ describe('useApexThemeOptions', () => {
           chartId,
           type,
           options,
-          noDataText
+          noDataText,
         });
         expose({ options, ...state });
         return () =>
           h('section', { 'data-ui-theme': 'belovodye', 'data-ui-theme-type': 'light' }, [
-            h('div', { ref: hostRef })
+            h('div', { ref: hostRef }),
           ]);
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -144,14 +144,14 @@ describe('useApexThemeOptions', () => {
           chartId,
           type,
           options,
-          noDataText
+          noDataText,
         });
         const setNoDataText = (value: string) => {
           noDataText.value = value;
         };
         expose({ setNoDataText, ...state });
         return () => h('div');
-      }
+      },
     });
 
     const wrapper = mount(Harness);

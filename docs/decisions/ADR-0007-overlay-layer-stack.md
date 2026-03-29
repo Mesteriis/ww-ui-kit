@@ -59,4 +59,3 @@ Existing overlays should move to the shared stack and portal layer instead of ex
 - [`packages/primitives/src/overlay`](../../packages/primitives/src/overlay)
 - [`docs/architecture/layer-governance.md`](../architecture/layer-governance.md)
 - [`docs/architecture/golden-path.md`](../architecture/golden-path.md)
-

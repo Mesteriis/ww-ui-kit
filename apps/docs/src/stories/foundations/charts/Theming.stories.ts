@@ -4,11 +4,18 @@ import { UiCard } from '@ww/core';
 import { UiApexChart } from '@ww/charts-apex';
 import { getThemeMeta } from '@ww/themes';
 
-import { barOptions, barSeries, lineOptions, lineSeries, radialBarOptions, radialBarSeries } from './chart-fixtures';
+import {
+  barOptions,
+  barSeries,
+  lineOptions,
+  lineSeries,
+  radialBarOptions,
+  radialBarSeries,
+} from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/Theming',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;
@@ -28,7 +35,7 @@ export const Theming: StoryObj<typeof UiApexChart> = {
         lineOptions,
         lineSeries,
         radialBarOptions,
-        radialBarSeries
+        radialBarSeries,
       };
     },
     template: `
@@ -76,6 +83,6 @@ export const Theming: StoryObj<typeof UiApexChart> = {
           </section>
         </div>
       </div>
-    `
-  })
+    `,
+  }),
 };

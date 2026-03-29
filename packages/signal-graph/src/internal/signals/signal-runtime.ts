@@ -61,7 +61,7 @@ export function createSignalGraphSignalRuntime({
     if (entry.targetNodeId) {
       triggerNodeReaction(
         entry.targetNodeId,
-        reducedMotion.value ? 140 : nodeReactionDurationMs.value,
+        reducedMotion.value ? 140 : nodeReactionDurationMs.value
       );
     }
 
@@ -94,7 +94,7 @@ export function createSignalGraphSignalRuntime({
         entry.id,
         setTimeout(() => {
           completeSignal(entry);
-        }, entry.delayMs + entry.durationMs),
+        }, entry.delayMs + entry.durationMs)
       );
     }
   };
@@ -122,7 +122,7 @@ export function createSignalGraphSignalRuntime({
 
       queueSignals(value);
     },
-    { deep: true, immediate: true },
+    { deep: true, immediate: true }
   );
 
   if (getCurrentInstance()) {

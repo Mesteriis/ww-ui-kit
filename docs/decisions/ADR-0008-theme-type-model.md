@@ -31,7 +31,7 @@ Theme metadata is centralized in `@ww/themes`.
 - Every theme has exactly one canonical `ThemeType`.
 - `ThemeType` is metadata on a theme, not a free second axis that can be combined independently.
 - `setTheme(themeName, target?)` derives type from the registry and applies both `data-ui-theme` and `data-ui-theme-type`.
-- The same runtime also applies `color-scheme` from `ThemeType`.
+- Browser `color-scheme` is owned by CSS selectors keyed off `data-ui-theme-type`, not duplicated through inline runtime styles.
 - Scoped theme and overlay portal behavior preserve both attributes together.
 
 ## Consequences
@@ -39,7 +39,7 @@ Theme metadata is centralized in `@ww/themes`.
 - Invalid combinations such as `data-ui-theme="belovodye"` with `data-ui-theme-type="dark"` are no longer part of the supported model.
 - Storybook and playground can show both the current theme name and type from one source of truth.
 - New themes must declare their `type` when added to the registry.
-- Browser-native UI behavior can align with the canonical theme family through `color-scheme`.
+- Browser-native UI behavior can align with the canonical theme family through the shared `data-ui-theme-type` selectors.
 
 ## Alternatives
 
@@ -58,4 +58,3 @@ Theme metadata is centralized in `@ww/themes`.
 - [`packages/themes/src/theme-maps.ts`](../../packages/themes/src/theme-maps.ts)
 - [`docs/architecture/golden-path.md`](../architecture/golden-path.md)
 - [`docs/governance/ai-rules.md`](../governance/ai-rules.md)
-

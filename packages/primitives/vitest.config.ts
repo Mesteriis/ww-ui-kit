@@ -7,13 +7,13 @@ import { workspaceAliases, workspaceRoot } from '../../vite.aliases';
 export default defineConfig({
   plugins: [vue(), tsconfigPaths()],
   resolve: {
-    alias: workspaceAliases
+    alias: workspaceAliases,
   },
   test: {
     name: 'primitives',
     root: workspaceRoot,
     environment: 'jsdom',
     include: ['packages/primitives/src/**/*.test.ts'],
-    globals: true
-  }
+    globals: true,
+  },
 });

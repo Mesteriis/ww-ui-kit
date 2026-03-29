@@ -29,11 +29,11 @@ describe('useSignalGraphTheme', () => {
             {
               id: 'scope',
               'data-ui-theme': 'belovodye',
-              'data-ui-theme-type': 'light'
+              'data-ui-theme-type': 'light',
             },
             [h('div', { id: 'host', ref: hostRef })]
           );
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -79,11 +79,11 @@ describe('useSignalGraphTheme', () => {
             {
               id: 'scope',
               'data-ui-theme': '',
-              'data-ui-theme-type': 'invalid'
+              'data-ui-theme-type': 'invalid',
             },
             [h('div', { ref: hostRef })]
           );
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -121,11 +121,11 @@ describe('useSignalGraphTheme', () => {
             {
               id: 'scope',
               'data-ui-theme': 'light',
-              'data-ui-theme-type': 'light'
+              'data-ui-theme-type': 'light',
             },
             [h('div', { ref: hostRef })]
           );
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -170,7 +170,7 @@ describe('useSignalGraphTheme', () => {
     const originalObserver = globalThis.MutationObserver;
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
-      value: MockMutationObserver
+      value: MockMutationObserver,
     });
 
     const Harness = defineComponent({
@@ -184,11 +184,11 @@ describe('useSignalGraphTheme', () => {
             {
               id: 'scope',
               'data-ui-theme': 'light',
-              'data-ui-theme-type': 'light'
+              'data-ui-theme-type': 'light',
             },
             [h('div', { ref: hostRef })]
           );
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -204,7 +204,7 @@ describe('useSignalGraphTheme', () => {
     wrapper.unmount();
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
-      value: originalObserver
+      value: originalObserver,
     });
   });
 });

@@ -7,13 +7,13 @@ import { workspaceAliases, workspaceRoot } from '../../vite.aliases';
 export default defineConfig({
   plugins: [vue(), tsconfigPaths()],
   resolve: {
-    alias: workspaceAliases
+    alias: workspaceAliases,
   },
   test: {
     name: 'data-grid',
     root: workspaceRoot,
     environment: 'jsdom',
     include: ['packages/data-grid/src/**/*.test.ts'],
-    globals: true
-  }
+    globals: true,
+  },
 });

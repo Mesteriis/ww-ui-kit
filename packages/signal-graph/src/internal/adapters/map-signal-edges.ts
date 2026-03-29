@@ -28,7 +28,9 @@ function resolveEdgeMarkerStart(direction: SignalGraphEdge['direction']) {
   };
 }
 
-export function mapSignalEdges(edges: readonly SignalGraphEdge[]): Edge<SignalGraphVendorEdgeData>[] {
+export function mapSignalEdges(
+  edges: readonly SignalGraphEdge[]
+): Edge<SignalGraphVendorEdgeData>[] {
   return edges.map((edge) => {
     const mappedEdge: Edge<SignalGraphVendorEdgeData> = {
       id: edge.id,

@@ -10,7 +10,7 @@ const props = withDefaults(
   }>(),
   {
     to: 'body',
-    disabled: false
+    disabled: false,
   }
 );
 

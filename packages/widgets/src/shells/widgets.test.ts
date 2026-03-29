@@ -1,12 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { defineComponent } from 'vue';
 
-import {
-  UiWidgetBody,
-  UiWidgetFooter,
-  UiWidgetHeader,
-  UiWidgetShell
-} from '../index';
+import { UiWidgetBody, UiWidgetFooter, UiWidgetHeader, UiWidgetShell } from '../index';
 
 describe('widgets package', () => {
   it('exports the public shell components', () => {
@@ -20,13 +15,13 @@ describe('widgets package', () => {
     const wrapper = mount(UiWidgetShell, {
       props: {
         title: 'Summary widget',
-        description: 'Reusable shell'
+        description: 'Reusable shell',
       },
       slots: {
         actions: '<button type="button">Refresh</button>',
         default: '<p>Body content</p>',
-        footer: '<span>Footer meta</span>'
-      }
+        footer: '<span>Footer meta</span>',
+      },
     });
 
     expect(wrapper.text()).toContain('Summary widget');
@@ -48,7 +43,7 @@ describe('widgets package', () => {
               </template>
             </UiWidgetShell>
           </section>
-        `
+        `,
       })
     );
 
@@ -61,30 +56,32 @@ describe('widgets package', () => {
     const loading = mount(UiWidgetShell, {
       props: {
         loading: true,
-        title: 'Loading widget'
-      }
+        title: 'Loading widget',
+      },
     });
     const error = mount(UiWidgetShell, {
       props: {
         title: 'Broken widget',
-        error: 'Backend integration belongs in the app layer.'
-      }
+        error: 'Backend integration belongs in the app layer.',
+      },
     });
     const emptyFallback = mount(UiWidgetShell, {
       props: {
-        title: 'Scaffold widget'
-      }
+        title: 'Scaffold widget',
+      },
     });
-    const helpers = mount(defineComponent({
-      components: { UiWidgetHeader, UiWidgetBody, UiWidgetFooter },
-      template: `
+    const helpers = mount(
+      defineComponent({
+        components: { UiWidgetHeader, UiWidgetBody, UiWidgetFooter },
+        template: `
         <div>
           <UiWidgetHeader>Header</UiWidgetHeader>
           <UiWidgetBody :padded="false">Body</UiWidgetBody>
           <UiWidgetFooter>Footer</UiWidgetFooter>
         </div>
-      `
-    }));
+      `,
+      })
+    );
 
     expect(loading.text()).toContain('Loading widget content.');
     expect(error.text()).toContain('Widget unavailable');
@@ -100,8 +97,8 @@ describe('widgets package', () => {
       slots: {
         header: '<div class="custom-header">Custom header</div>',
         actions: '<button type="button">Action</button>',
-        empty: '<span class="empty-slot">Nothing here</span>'
-      }
+        empty: '<span class="empty-slot">Nothing here</span>',
+      },
     });
 
     expect(customHeader.find('.custom-header').exists()).toBe(true);
@@ -110,8 +107,8 @@ describe('widgets package', () => {
 
     const booleanError = mount(UiWidgetShell, {
       props: {
-        error: true
-      }
+        error: true,
+      },
     });
 
     expect(booleanError.text()).toContain('This widget surface is unavailable.');
@@ -120,8 +117,8 @@ describe('widgets package', () => {
   it('renders description-only header copy and default empty fallback without actions', () => {
     const wrapper = mount(UiWidgetShell, {
       props: {
-        description: 'Description only'
-      }
+        description: 'Description only',
+      },
     });
 
     expect(wrapper.find('.ui-widget-shell__title').exists()).toBe(false);

@@ -28,6 +28,6 @@ export function useControllable<TValue>(options: UseControllableOptions<TValue>)
   return {
     currentValue,
     isControlled,
-    setValue
+    setValue,
   };
 }

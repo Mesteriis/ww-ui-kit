@@ -1,10 +1,15 @@
 import type { DataGridRowId, DataGridSelectionState } from './types';
 
-export function normalizeDataGridSelection(selection: readonly DataGridRowId[] | undefined): DataGridSelectionState {
+export function normalizeDataGridSelection(
+  selection: readonly DataGridRowId[] | undefined
+): DataGridSelectionState {
   return Object.freeze([...(selection ?? [])]);
 }
 
-export function isDataGridRowSelected(selection: DataGridSelectionState, rowId: DataGridRowId): boolean {
+export function isDataGridRowSelected(
+  selection: DataGridSelectionState,
+  rowId: DataGridRowId
+): boolean {
   return selection.includes(rowId);
 }
 

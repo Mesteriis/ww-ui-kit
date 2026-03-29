@@ -5,7 +5,7 @@ import { UiCheckbox, UiSwitch } from '@ww/core';
 
 const meta = {
   title: 'Core/Selection',
-  component: UiCheckbox
+  component: UiCheckbox,
 } satisfies Meta<typeof UiCheckbox>;
 
 export default meta;
@@ -23,6 +23,6 @@ export const BooleanControls: StoryObj<typeof UiCheckbox> = {
         <UiCheckbox v-model="checked">Enable semantic layer</UiCheckbox>
         <UiSwitch v-model="enabled" ariaLabel="Enable runtime theming">Enable runtime theming</UiSwitch>
       </div>
-    `
-  })
+    `,
+  }),
 };

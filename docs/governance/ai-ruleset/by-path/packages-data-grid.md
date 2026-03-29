@@ -4,6 +4,7 @@ title: packages/data-grid path rules
 apply: by file patterns
 patterns: packages/data-grid/**/*
 ---
+
 Use this rule when editing the dense admin table system package.
 
 ## Do

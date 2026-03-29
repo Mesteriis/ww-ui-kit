@@ -49,6 +49,6 @@ export function useApexClientOnly() {
   return {
     apexComponent,
     clientReady,
-    vendorError
+    vendorError,
   };
 }

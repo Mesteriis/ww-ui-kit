@@ -5,7 +5,7 @@ import { DataTableWidgetStoryHarness } from './data-table-widget-fixtures';
 const meta = {
   title: 'Widgets/Data Table Widget/States',
   component: DataTableWidgetStoryHarness,
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof DataTableWidgetStoryHarness>;
 
 export default meta;
@@ -20,6 +20,6 @@ export const Overview: StoryObj<typeof meta> = {
         <DataTableWidgetStoryHarness mode="no-results" />
         <DataTableWidgetStoryHarness mode="error" />
       </div>
-    `
-  })
+    `,
+  }),
 };

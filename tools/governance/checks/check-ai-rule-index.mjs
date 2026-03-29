@@ -1,4 +1,9 @@
-import { renderRuleIndex, AI_RULESET_INDEX_PATH, isDirectExecution, readGeneratedFile } from '../ai-rules/shared.mjs';
+import {
+  renderRuleIndex,
+  AI_RULESET_INDEX_PATH,
+  isDirectExecution,
+  readGeneratedFile,
+} from '../ai-rules/shared.mjs';
 
 export function checkAiRuleIndex() {
   const expected = renderRuleIndex().trimEnd();

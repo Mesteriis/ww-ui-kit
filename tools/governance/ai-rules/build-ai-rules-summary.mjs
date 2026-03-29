@@ -5,7 +5,7 @@ import {
   renderAiRuleOverview,
   renderCopilotInstructions,
   renderRuleIndex,
-  writeGeneratedFile
+  writeGeneratedFile,
 } from './shared.mjs';
 
 writeGeneratedFile(AI_RULE_OVERVIEW_PATH, renderAiRuleOverview());

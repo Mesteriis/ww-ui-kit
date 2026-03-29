@@ -4,6 +4,7 @@ title: docs/architecture path rules
 apply: by file patterns
 patterns: docs/architecture/**/*
 ---
+
 Use this rule when editing architecture and governance docs.
 
 ## Do

@@ -54,7 +54,7 @@ export function useApexEmptyState({
   error,
   emptyText,
   errorText,
-  noDataText
+  noDataText,
 }: UseApexEmptyStateParams) {
   const resolvedError = computed(() => resolveError(error.value));
   const showError = computed(() => Boolean(resolvedError.value));
@@ -76,6 +76,6 @@ export function useApexEmptyState({
     resolvedError,
     resolvedErrorText,
     showEmpty,
-    showError
+    showError,
   };
 }

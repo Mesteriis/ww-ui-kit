@@ -4,7 +4,6 @@ export default defineConfig({
   test: {
     name: 'meta',
     environment: 'node',
-    include: ['tests/meta/**/*.test.ts']
-  }
+    include: ['tests/meta/**/*.test.ts'],
+  },
 });
-

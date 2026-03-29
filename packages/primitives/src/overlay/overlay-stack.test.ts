@@ -36,12 +36,12 @@ describe('overlay stack', () => {
     const first = registerOverlay({
       kind: 'modal',
       getContentElement: () => firstSurface.element,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     expect(first.stackIndex).toBe(0);
@@ -62,13 +62,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       dismissOnEscape: true,
-      onDismiss: firstDismiss
+      onDismiss: firstDismiss,
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnEscape: true,
-      onDismiss: secondDismiss
+      onDismiss: secondDismiss,
     });
 
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
@@ -88,10 +88,14 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => surface.element,
       dismissOnEscape: false,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
-    const prevented = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+    const prevented = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
+    });
     prevented.preventDefault();
     document.dispatchEvent(prevented);
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
@@ -113,13 +117,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: firstDismiss
+      onDismiss: firstDismiss,
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: secondDismiss
+      onDismiss: secondDismiss,
     });
 
     outside.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -139,7 +143,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => surface.element,
       dismissOnPointerOutside: true,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     surface.first.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -157,7 +161,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => surface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     surface.second.focus();
@@ -171,11 +175,11 @@ describe('overlay stack', () => {
   it('reference-counts scroll lock across nested overlays', () => {
     Object.defineProperty(window, 'innerWidth', {
       configurable: true,
-      value: 1200
+      value: 1200,
     });
     Object.defineProperty(document.documentElement, 'clientWidth', {
       configurable: true,
-      value: 1180
+      value: 1180,
     });
 
     const firstSurface = createSurface();
@@ -185,13 +189,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       lockScroll: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       lockScroll: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     expect(document.body.style.overflow).toBe('hidden');
@@ -213,13 +217,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: secondDismiss
+      onDismiss: secondDismiss,
     });
 
     firstSurface.first.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -245,7 +249,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => lowerSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     const top = registerOverlay({
@@ -255,7 +259,7 @@ describe('overlay stack', () => {
       onDismiss: () => {
         top.unregister();
         lower.unregister();
-      }
+      },
     });
 
     outside.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
@@ -279,7 +283,7 @@ describe('overlay stack', () => {
       getContentElement: () => surface,
       getBoundaryElements: () => [boundary],
       dismissOnPointerOutside: true,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     boundary.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -318,7 +322,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => lowerSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     const top = registerOverlay({
@@ -327,7 +331,7 @@ describe('overlay stack', () => {
       dismissOnFocusOutside: true,
       onDismiss: () => {
         top.unregister();
-      }
+      },
     });
 
     if (!capturedFocusIn) {
@@ -349,7 +353,7 @@ describe('overlay stack', () => {
     const registration = registerOverlay({
       kind: 'modal',
       getContentElement: () => null,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     expect(registration.focusContent()).toBe(false);
@@ -363,7 +367,7 @@ describe('overlay stack', () => {
     const outside = document.createElement('button');
     document.body.append(outside);
     const second = {
-      value: undefined as ReturnType<typeof registerOverlay> | undefined
+      value: undefined as ReturnType<typeof registerOverlay> | undefined,
     };
     const secondDismiss = vi.fn(() => {
       second.value?.unregister();
@@ -373,13 +377,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     second.value = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnFocusOutside: true,
-      onDismiss: secondDismiss
+      onDismiss: secondDismiss,
     });
 
     outside.focus();
@@ -410,7 +414,7 @@ describe('overlay stack', () => {
       getContentElement: () => surface.element,
       containFocus: true,
       dismissOnEscape: true,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
@@ -430,7 +434,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => surface.element,
       dismissOnPointerOutside: false,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     const suppressedClick = new MouseEvent('click', { bubbles: true, cancelable: true });
@@ -459,7 +463,7 @@ describe('overlay stack', () => {
       getContentElement: () => surface.element,
       dismissOnFocusOutside: false,
       containFocus: false,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     outside.focus();
@@ -482,7 +486,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => surface.element,
       dismissOnFocusOutside: true,
-      onDismiss: dismiss
+      onDismiss: dismiss,
     });
 
     outside.focus();
@@ -498,11 +502,11 @@ describe('overlay stack', () => {
   it('handles zero-width scrollbars and contenteditable outside targets', async () => {
     Object.defineProperty(window, 'innerWidth', {
       configurable: true,
-      value: 1200
+      value: 1200,
     });
     Object.defineProperty(document.documentElement, 'clientWidth', {
       configurable: true,
-      value: 1200
+      value: 1200,
     });
 
     const firstSurface = createSurface();
@@ -512,7 +516,7 @@ describe('overlay stack', () => {
     firstSurface.element.append(editable);
 
     const second = {
-      value: undefined as ReturnType<typeof registerOverlay> | undefined
+      value: undefined as ReturnType<typeof registerOverlay> | undefined,
     };
 
     const first = registerOverlay({
@@ -520,13 +524,13 @@ describe('overlay stack', () => {
       getContentElement: () => firstSurface.element,
       containFocus: true,
       lockScroll: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     second.value = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: () => second.value?.unregister()
+      onDismiss: () => second.value?.unregister(),
     });
 
     editable.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -543,24 +547,30 @@ describe('overlay stack', () => {
   it('covers guard branches for captured listeners and documentless scroll-sync cleanup', () => {
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     const surface = createSurface();
     const registration = registerOverlay({
       kind: 'modal',
       getContentElement: () => surface.element,
       dismissOnEscape: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     registration.unregister();
 
-    const keydownListener = listeners.get('keydown') as ((event: KeyboardEvent) => void) | undefined;
-    const pointerListener = listeners.get('pointerdown') as ((event: PointerEvent) => void) | undefined;
+    const keydownListener = listeners.get('keydown') as
+      | ((event: KeyboardEvent) => void)
+      | undefined;
+    const pointerListener = listeners.get('pointerdown') as
+      | ((event: PointerEvent) => void)
+      | undefined;
     const clickListener = listeners.get('click') as ((event: MouseEvent) => void) | undefined;
     const focusInListener = listeners.get('focusin') as ((event: FocusEvent) => void) | undefined;
 
@@ -572,12 +582,12 @@ describe('overlay stack', () => {
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     expect(() => resetOverlayStackForTesting()).not.toThrow();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
 
     addEventListenerSpy.mockRestore();
@@ -601,13 +611,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     anchor.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
@@ -643,12 +653,14 @@ describe('overlay stack', () => {
   it('covers focus-outside scheduling for dismissing and containing overlays', async () => {
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     const firstSurface = createSurface();
     const secondSurface = createSurface();
@@ -656,14 +668,14 @@ describe('overlay stack', () => {
     document.body.append(outside);
 
     const second = {
-      value: undefined as ReturnType<typeof registerOverlay> | undefined
+      value: undefined as ReturnType<typeof registerOverlay> | undefined,
     };
 
     const first = registerOverlay({
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     second.value = registerOverlay({
       kind: 'modal',
@@ -671,7 +683,7 @@ describe('overlay stack', () => {
       dismissOnFocusOutside: true,
       onDismiss: () => {
         second.value?.unregister();
-      }
+      },
     });
 
     const focusInListener = listeners.get('focusin') as ((event: FocusEvent) => void) | undefined;
@@ -685,7 +697,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     focusInListener?.({ target: outside } as FocusEvent);
@@ -702,12 +714,14 @@ describe('overlay stack', () => {
   it('covers disconnected restore guards and null content focus-trap branches', async () => {
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     const firstSurface = createSurface();
     const secondSurface = createSurface();
@@ -715,23 +729,27 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
-    const pointerdownListener = listeners.get('pointerdown') as ((event: PointerEvent) => void) | undefined;
+    const pointerdownListener = listeners.get('pointerdown') as
+      | ((event: PointerEvent) => void)
+      | undefined;
     const clickListener = listeners.get('click') as ((event: MouseEvent) => void) | undefined;
-    const keydownListener = listeners.get('keydown') as ((event: KeyboardEvent) => void) | undefined;
+    const keydownListener = listeners.get('keydown') as
+      | ((event: KeyboardEvent) => void)
+      | undefined;
 
     pointerdownListener?.({
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
-      target: firstSurface.first
+      target: firstSurface.first,
     } as unknown as PointerEvent);
     firstSurface.first.remove();
     vi.runAllTimers();
@@ -742,13 +760,13 @@ describe('overlay stack', () => {
     pointerdownListener?.({
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
-      target: replacementTarget
+      target: replacementTarget,
     } as unknown as PointerEvent);
     replacementTarget.remove();
     clickListener?.({
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
-      target: replacementTarget
+      target: replacementTarget,
     } as unknown as MouseEvent);
     await Promise.resolve();
 
@@ -756,13 +774,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => null,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     keydownListener?.({
       defaultPrevented: false,
       key: 'Tab',
-      preventDefault: vi.fn()
+      preventDefault: vi.fn(),
     } as unknown as KeyboardEvent);
 
     emptyRegistration.unregister();
@@ -774,12 +792,14 @@ describe('overlay stack', () => {
   it('covers direct focus-listener microtask branches for dismissing and containing overlays', async () => {
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     const firstSurface = createSurface();
     const secondSurface = createSurface();
@@ -787,14 +807,14 @@ describe('overlay stack', () => {
     document.body.append(outside);
 
     const second = {
-      value: undefined as ReturnType<typeof registerOverlay> | undefined
+      value: undefined as ReturnType<typeof registerOverlay> | undefined,
     };
 
     const first = registerOverlay({
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     second.value = registerOverlay({
       kind: 'modal',
@@ -802,7 +822,7 @@ describe('overlay stack', () => {
       dismissOnFocusOutside: true,
       onDismiss: () => {
         second.value?.unregister();
-      }
+      },
     });
 
     const focusinListener = listeners.get('focusin') as ((event: FocusEvent) => void) | undefined;
@@ -815,7 +835,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     focusinListener?.({ target: outside } as FocusEvent);
@@ -838,13 +858,13 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnFocusOutside: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     second.unregister();
@@ -860,7 +880,7 @@ describe('overlay stack', () => {
       onDismiss: () => {
         outside.remove();
         firstSurface.element.append(outside);
-      }
+      },
     });
 
     outside.focus();
@@ -873,7 +893,7 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
     outside.focus();
@@ -887,12 +907,14 @@ describe('overlay stack', () => {
   it('covers resolveFocusableTarget branches for non-HTMLElement nodes and null parents', async () => {
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     const firstSurface = createSurface();
     const secondSurface = createSurface();
@@ -907,25 +929,43 @@ describe('overlay stack', () => {
       kind: 'modal',
       getContentElement: () => firstSurface.element,
       containFocus: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
     const second = registerOverlay({
       kind: 'modal',
       getContentElement: () => secondSurface.element,
       dismissOnPointerOutside: true,
-      onDismiss: vi.fn()
+      onDismiss: vi.fn(),
     });
 
-    const pointerdownListener = listeners.get('pointerdown') as ((event: PointerEvent) => void) | undefined;
+    const pointerdownListener = listeners.get('pointerdown') as
+      | ((event: PointerEvent) => void)
+      | undefined;
     const clickListener = listeners.get('click') as ((event: MouseEvent) => void) | undefined;
 
-    pointerdownListener?.({ preventDefault() {}, stopPropagation() {}, target: icon } as unknown as PointerEvent);
-    clickListener?.({ preventDefault() {}, stopPropagation() {}, target: anchor } as unknown as MouseEvent);
+    pointerdownListener?.({
+      preventDefault() {},
+      stopPropagation() {},
+      target: icon,
+    } as unknown as PointerEvent);
+    clickListener?.({
+      preventDefault() {},
+      stopPropagation() {},
+      target: anchor,
+    } as unknown as MouseEvent);
     await Promise.resolve();
     expect(document.activeElement).toBe(anchor);
 
-    pointerdownListener?.({ preventDefault() {}, stopPropagation() {}, target: document.createTextNode('outside') } as unknown as PointerEvent);
-    clickListener?.({ preventDefault() {}, stopPropagation() {}, target: document.createElement('div') } as unknown as MouseEvent);
+    pointerdownListener?.({
+      preventDefault() {},
+      stopPropagation() {},
+      target: document.createTextNode('outside'),
+    } as unknown as PointerEvent);
+    clickListener?.({
+      preventDefault() {},
+      stopPropagation() {},
+      target: document.createElement('div'),
+    } as unknown as MouseEvent);
 
     first.unregister();
     second.unregister();

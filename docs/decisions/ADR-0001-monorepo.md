@@ -46,4 +46,3 @@ This was the initial repository shape. Future packages must join the same worksp
 
 - [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml)
 - [`docs/architecture/layer-governance.md`](../architecture/layer-governance.md)
-

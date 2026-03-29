@@ -10,7 +10,7 @@ import type {
   DataGridQuery,
   DataGridRowId,
   DataGridRowIdAccessor,
-  DataGridSelectionState
+  DataGridSelectionState,
 } from '../model/types';
 
 defineOptions({ name: 'UiDataGridTable' });
@@ -38,6 +38,32 @@ const hasRowActions = computed(() => Boolean(slots.rowActions));
 
 const getRowId = (row: Record<string, unknown>, rowIndex: number) =>
   resolveDataGridRowId(row, rowIndex, props.rowId, 'UiDataGridTable');
+
+const formatSelectionValue = (value: unknown) => {
+  if (typeof value === 'string') {
+    return value.trim() || undefined;
+  }
+
+  if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint') {
+    return String(value);
+  }
+
+  return undefined;
+};
+
+const getRowSelectionLabel = (row: Record<string, unknown>, rowIndex: number) => {
+  const primaryColumn = props.columns[0];
+  if (!primaryColumn) {
+    return `Select row ${rowIndex + 1}`;
+  }
+
+  const primaryValue = formatSelectionValue(getDataGridColumnValue(row, primaryColumn));
+  if (primaryValue) {
+    return `Select row ${primaryValue}`;
+  }
+
+  return `Select row ${String(getRowId(row, rowIndex))}`;
+};
 
 const renderSortLabel = (columnId: string) => {
   const direction = getDataGridSortDirection(props.query, columnId);
@@ -100,7 +126,9 @@ const renderAriaSort = (columnId: string) => {
             </button>
             <span v-else>{{ column.header }}</span>
           </th>
-          <th v-if="hasRowActions" scope="col" class="ui-data-grid-table__actions-column">Actions</th>
+          <th v-if="hasRowActions" scope="col" class="ui-data-grid-table__actions-column">
+            Actions
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -112,16 +140,13 @@ const renderAriaSort = (columnId: string) => {
         >
           <td v-if="selectionEnabled" class="ui-data-grid-table__selection-column">
             <UiCheckbox
+              :aria-label="getRowSelectionLabel(row, rowIndex)"
               :model-value="selectedRowIds.includes(getRowId(row, rowIndex))"
               @click.stop
               @update:model-value="emit('toggleRow', getRowId(row, rowIndex))"
             />
           </td>
-          <td
-            v-for="column in columns"
-            :key="column.id"
-            :data-align="column.align ?? 'start'"
-          >
+          <td v-for="column in columns" :key="column.id" :data-align="column.align ?? 'start'">
             <slot
               name="cell"
               :column="column"
@@ -138,13 +163,18 @@ const renderAriaSort = (columnId: string) => {
                   rowIndex,
                   column,
                   value: getDataGridColumnValue(row, column),
-                  selected: selectedRowIds.includes(getRowId(row, rowIndex))
+                  selected: selectedRowIds.includes(getRowId(row, rowIndex)),
                 })
               }}
             </slot>
           </td>
           <td v-if="hasRowActions" class="ui-data-grid-table__actions-column" @click.stop>
-            <slot name="rowActions" :row="row" :row-id="getRowId(row, rowIndex)" :row-index="rowIndex" />
+            <slot
+              name="rowActions"
+              :row="row"
+              :row-id="getRowId(row, rowIndex)"
+              :row-index="rowIndex"
+            />
           </td>
         </tr>
       </tbody>

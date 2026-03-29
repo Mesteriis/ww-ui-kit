@@ -25,7 +25,8 @@
 }
 
 .ui-signal-graph__node-shell[data-ui-recent-signal='true'] {
-  animation: ui-signal-graph-node-reaction var(--ui-motion-duration-md) var(--ui-motion-easing-decelerate);
+  animation: ui-signal-graph-node-reaction var(--ui-motion-duration-md)
+    var(--ui-motion-easing-decelerate);
 }
 
 @keyframes ui-signal-graph-node-reaction {

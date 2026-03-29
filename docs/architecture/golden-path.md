@@ -23,12 +23,11 @@ Use:
 
 - Choose a concrete `ThemeName`.
 - `ThemeType` is derived automatically.
+- Core styles own `color-scheme` through `data-ui-theme-type`; `setTheme()` only needs to keep the theme attributes in sync.
 - Use subtree theming when only part of a surface needs a different theme:
 
 ```html
-<section data-ui-theme="belovodye" data-ui-theme-type="light">
-  ...
-</section>
+<section data-ui-theme="belovodye" data-ui-theme-type="light">...</section>
 ```
 
 ## 3. Overlays
@@ -55,6 +54,7 @@ Use:
 Any new public surface must update:
 
 - the public surface manifest
+- the playground lab manifest when the surface is visual and lab-eligible
 - Storybook coverage
 - docs coverage
 - playground coverage

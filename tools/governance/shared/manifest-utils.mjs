@@ -13,7 +13,7 @@ export function createSurface(entry) {
     requiredTestLayers: ['unit'],
     playgroundScenarios: [],
     tags: [],
-    ...entry
+    ...entry,
   });
 }
 
@@ -31,4 +31,3 @@ export function validateSurfaceShape(entry) {
     );
   }
 }
-

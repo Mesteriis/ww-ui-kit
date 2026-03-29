@@ -2,7 +2,10 @@ import { onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue';
 
 import { THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE } from '@ww/themes';
 
-import { resolveApexThemeScope, type ResolvedApexThemeScope } from '../internal/detect-nearest-themed-container';
+import {
+  resolveApexThemeScope,
+  type ResolvedApexThemeScope,
+} from '../internal/detect-nearest-themed-container';
 
 export interface ApexThemeScopeState extends ResolvedApexThemeScope {
   revision: number;
@@ -11,7 +14,7 @@ export interface ApexThemeScopeState extends ResolvedApexThemeScope {
 export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
   const themeScope = ref<ApexThemeScopeState>({
     ...resolveApexThemeScope(),
-    revision: 0
+    revision: 0,
   });
 
   let observer: MutationObserver | null = null;
@@ -37,7 +40,7 @@ export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
 
     themeScope.value = {
       ...nextScope,
-      revision: didChange ? previousScope.revision + 1 : previousScope.revision
+      revision: didChange ? previousScope.revision + 1 : previousScope.revision,
     };
 
     disconnectObserver();
@@ -60,7 +63,7 @@ export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
     for (const target of targets) {
       observer.observe(target, {
         attributes: true,
-        attributeFilter: [THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE, 'style']
+        attributeFilter: [THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE, 'style'],
       });
     }
   };
@@ -103,6 +106,6 @@ export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
 
   return {
     refreshThemeScope,
-    themeScope
+    themeScope,
   };
 }

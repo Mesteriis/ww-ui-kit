@@ -2,6 +2,15 @@
   "name": "@ww/core",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/core#readme",
   "sideEffects": [
     "./src/styles/motion.css",
     "./src/styles/reset.css",
@@ -31,6 +40,6 @@
   },
   "scripts": {
     "build": "vite build",
-    "typecheck": "pnpm --filter @ww/primitives build && vue-tsc -p tsconfig.json --noEmit"
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
   }
 }

@@ -18,8 +18,6 @@ const emit = defineEmits<{
       <UiBadge variant="brand">{{ selectedCount }} selected</UiBadge>
       <slot :selected-count="selectedCount" />
     </div>
-    <UiButton variant="secondary" size="sm" @click="emit('clear')">
-      Clear selection
-    </UiButton>
+    <UiButton variant="secondary" size="sm" @click="emit('clear')"> Clear selection </UiButton>
   </div>
 </template>

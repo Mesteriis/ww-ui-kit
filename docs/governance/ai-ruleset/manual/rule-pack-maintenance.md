@@ -3,6 +3,7 @@ id: ai-manual-rule-pack-maintenance
 title: AI rule pack maintenance
 apply: manually
 ---
+
 Use this rule only when evolving the AI rules pack itself.
 
 ## Do

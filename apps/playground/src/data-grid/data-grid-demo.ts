@@ -3,7 +3,7 @@ import {
   normalizeDataGridQuery,
   type DataGridColumn,
   type DataGridFilterDefinition,
-  type DataGridQuery
+  type DataGridQuery,
 } from '@ww/data-grid';
 
 export interface DataGridDemoRow extends Record<string, unknown> {
@@ -19,27 +19,185 @@ export interface DataGridDemoRow extends Record<string, unknown> {
 }
 
 export const dataGridRows: readonly DataGridDemoRow[] = Object.freeze([
-  { id: 'row-001', account: 'Northwind', owner: 'Anya', region: 'North', status: 'Healthy', plan: 'Scale', spend: 18200, active: true, seats: 124 },
-  { id: 'row-002', account: 'Aster Labs', owner: 'Mika', region: 'East', status: 'Watch', plan: 'Growth', spend: 9400, active: true, seats: 48 },
-  { id: 'row-003', account: 'Cinder Works', owner: 'Leif', region: 'West', status: 'Risk', plan: 'Core', spend: 3200, active: false, seats: 12 },
-  { id: 'row-004', account: 'Blue Slate', owner: 'Nika', region: 'South', status: 'Healthy', plan: 'Growth', spend: 12100, active: true, seats: 72 },
-  { id: 'row-005', account: 'Helio Freight', owner: 'Iris', region: 'East', status: 'Watch', plan: 'Scale', spend: 15400, active: true, seats: 96 },
-  { id: 'row-006', account: 'Marrow Studio', owner: 'Theo', region: 'North', status: 'Healthy', plan: 'Core', spend: 4700, active: false, seats: 19 },
-  { id: 'row-007', account: 'Riverframe', owner: 'Sana', region: 'West', status: 'Risk', plan: 'Growth', spend: 8800, active: true, seats: 41 },
-  { id: 'row-008', account: 'Pine Crest', owner: 'Elin', region: 'South', status: 'Healthy', plan: 'Scale', spend: 20100, active: true, seats: 138 },
-  { id: 'row-009', account: 'Orbit Forge', owner: 'Mara', region: 'North', status: 'Watch', plan: 'Growth', spend: 11300, active: true, seats: 56 },
-  { id: 'row-010', account: 'Stellar Mint', owner: 'Yuri', region: 'East', status: 'Healthy', plan: 'Scale', spend: 22100, active: true, seats: 152 },
-  { id: 'row-011', account: 'Tundra Ops', owner: 'Rian', region: 'West', status: 'Risk', plan: 'Core', spend: 2800, active: false, seats: 9 },
-  { id: 'row-012', account: 'Vela Source', owner: 'Nora', region: 'South', status: 'Healthy', plan: 'Growth', spend: 9900, active: true, seats: 44 }
+  {
+    id: 'row-001',
+    account: 'Northwind',
+    owner: 'Anya',
+    region: 'North',
+    status: 'Healthy',
+    plan: 'Scale',
+    spend: 18200,
+    active: true,
+    seats: 124,
+  },
+  {
+    id: 'row-002',
+    account: 'Aster Labs',
+    owner: 'Mika',
+    region: 'East',
+    status: 'Watch',
+    plan: 'Growth',
+    spend: 9400,
+    active: true,
+    seats: 48,
+  },
+  {
+    id: 'row-003',
+    account: 'Cinder Works',
+    owner: 'Leif',
+    region: 'West',
+    status: 'Risk',
+    plan: 'Core',
+    spend: 3200,
+    active: false,
+    seats: 12,
+  },
+  {
+    id: 'row-004',
+    account: 'Blue Slate',
+    owner: 'Nika',
+    region: 'South',
+    status: 'Healthy',
+    plan: 'Growth',
+    spend: 12100,
+    active: true,
+    seats: 72,
+  },
+  {
+    id: 'row-005',
+    account: 'Helio Freight',
+    owner: 'Iris',
+    region: 'East',
+    status: 'Watch',
+    plan: 'Scale',
+    spend: 15400,
+    active: true,
+    seats: 96,
+  },
+  {
+    id: 'row-006',
+    account: 'Marrow Studio',
+    owner: 'Theo',
+    region: 'North',
+    status: 'Healthy',
+    plan: 'Core',
+    spend: 4700,
+    active: false,
+    seats: 19,
+  },
+  {
+    id: 'row-007',
+    account: 'Riverframe',
+    owner: 'Sana',
+    region: 'West',
+    status: 'Risk',
+    plan: 'Growth',
+    spend: 8800,
+    active: true,
+    seats: 41,
+  },
+  {
+    id: 'row-008',
+    account: 'Pine Crest',
+    owner: 'Elin',
+    region: 'South',
+    status: 'Healthy',
+    plan: 'Scale',
+    spend: 20100,
+    active: true,
+    seats: 138,
+  },
+  {
+    id: 'row-009',
+    account: 'Orbit Forge',
+    owner: 'Mara',
+    region: 'North',
+    status: 'Watch',
+    plan: 'Growth',
+    spend: 11300,
+    active: true,
+    seats: 56,
+  },
+  {
+    id: 'row-010',
+    account: 'Stellar Mint',
+    owner: 'Yuri',
+    region: 'East',
+    status: 'Healthy',
+    plan: 'Scale',
+    spend: 22100,
+    active: true,
+    seats: 152,
+  },
+  {
+    id: 'row-011',
+    account: 'Tundra Ops',
+    owner: 'Rian',
+    region: 'West',
+    status: 'Risk',
+    plan: 'Core',
+    spend: 2800,
+    active: false,
+    seats: 9,
+  },
+  {
+    id: 'row-012',
+    account: 'Vela Source',
+    owner: 'Nora',
+    region: 'South',
+    status: 'Healthy',
+    plan: 'Growth',
+    spend: 9900,
+    active: true,
+    seats: 44,
+  },
 ]);
 
 export const dataGridColumns: readonly DataGridColumn<DataGridDemoRow>[] = Object.freeze([
-  createDataGridColumn<DataGridDemoRow>({ id: 'account', header: 'Account', accessorKey: 'account', sortable: true, hideable: false, width: '16rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'owner', header: 'Owner', accessorKey: 'owner', sortable: true, width: '10rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'region', header: 'Region', accessorKey: 'region', sortable: true, width: '8rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'status', header: 'Status', accessorKey: 'status', sortable: true, width: '8rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'plan', header: 'Plan', accessorKey: 'plan', sortable: true, width: '8rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'seats', header: 'Seats', accessorKey: 'seats', sortable: true, align: 'end', width: '7rem' }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'account',
+    header: 'Account',
+    accessorKey: 'account',
+    sortable: true,
+    hideable: false,
+    width: '16rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'owner',
+    header: 'Owner',
+    accessorKey: 'owner',
+    sortable: true,
+    width: '10rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'region',
+    header: 'Region',
+    accessorKey: 'region',
+    sortable: true,
+    width: '8rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'status',
+    header: 'Status',
+    accessorKey: 'status',
+    sortable: true,
+    width: '8rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'plan',
+    header: 'Plan',
+    accessorKey: 'plan',
+    sortable: true,
+    width: '8rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'seats',
+    header: 'Seats',
+    accessorKey: 'seats',
+    sortable: true,
+    align: 'end',
+    width: '7rem',
+  }),
   createDataGridColumn<DataGridDemoRow>({
     id: 'spend',
     header: 'Annual spend',
@@ -47,7 +205,7 @@ export const dataGridColumns: readonly DataGridColumn<DataGridDemoRow>[] = Objec
     sortable: true,
     align: 'end',
     width: '9rem',
-    cell: ({ value }) => `$${Number(value).toLocaleString()}`
+    cell: ({ value }) => `$${Number(value).toLocaleString()}`,
   }),
   createDataGridColumn<DataGridDemoRow>({
     id: 'active',
@@ -56,20 +214,40 @@ export const dataGridColumns: readonly DataGridColumn<DataGridDemoRow>[] = Objec
     sortable: true,
     align: 'center',
     width: '7rem',
-    cell: ({ value }) => (value ? 'Active' : 'Paused')
-  })
+    cell: ({ value }) => (value ? 'Active' : 'Paused'),
+  }),
 ]);
 
 export const denseAdminColumns: readonly DataGridColumn<DataGridDemoRow>[] = Object.freeze([
   ...dataGridColumns,
-  createDataGridColumn<DataGridDemoRow>({ id: 'renewal', header: 'Renewal', accessor: (row) => `${row.region} / ${row.plan}`, width: '11rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'segment', header: 'Segment', accessor: (row) => (row.spend > 15000 ? 'Strategic' : 'Scaled'), width: '9rem' }),
-  createDataGridColumn<DataGridDemoRow>({ id: 'health', header: 'Health score', accessor: (row) => (row.status === 'Healthy' ? 92 : row.status === 'Watch' ? 71 : 46), align: 'end', width: '8rem' })
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'renewal',
+    header: 'Renewal',
+    accessor: (row) => `${row.region} / ${row.plan}`,
+    width: '11rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'segment',
+    header: 'Segment',
+    accessor: (row) => (row.spend > 15000 ? 'Strategic' : 'Scaled'),
+    width: '9rem',
+  }),
+  createDataGridColumn<DataGridDemoRow>({
+    id: 'health',
+    header: 'Health score',
+    accessor: (row) => (row.status === 'Healthy' ? 92 : row.status === 'Watch' ? 71 : 46),
+    align: 'end',
+    width: '8rem',
+  }),
 ]);
 
 export const dataGridUiRows = dataGridRows as readonly Record<string, unknown>[];
-export const dataGridUiColumns = dataGridColumns as unknown as readonly DataGridColumn<Record<string, unknown>>[];
-export const denseAdminUiColumns = denseAdminColumns as unknown as readonly DataGridColumn<Record<string, unknown>>[];
+export const dataGridUiColumns = dataGridColumns as unknown as readonly DataGridColumn<
+  Record<string, unknown>
+>[];
+export const denseAdminUiColumns = denseAdminColumns as unknown as readonly DataGridColumn<
+  Record<string, unknown>
+>[];
 
 export const dataGridFilterDefinitions: readonly DataGridFilterDefinition[] = Object.freeze([
   {
@@ -80,8 +258,8 @@ export const dataGridFilterDefinitions: readonly DataGridFilterDefinition[] = Ob
     options: [
       { label: 'Healthy', value: 'Healthy' },
       { label: 'Watch', value: 'Watch' },
-      { label: 'Risk', value: 'Risk' }
-    ]
+      { label: 'Risk', value: 'Risk' },
+    ],
   },
   {
     id: 'region',
@@ -91,16 +269,16 @@ export const dataGridFilterDefinitions: readonly DataGridFilterDefinition[] = Ob
       { label: 'North', value: 'North' },
       { label: 'South', value: 'South' },
       { label: 'East', value: 'East' },
-      { label: 'West', value: 'West' }
-    ]
+      { label: 'West', value: 'West' },
+    ],
   },
   {
     id: 'active',
     label: 'Active',
     type: 'boolean',
     trueLabel: 'Active',
-    falseLabel: 'Paused'
-  }
+    falseLabel: 'Paused',
+  },
 ]);
 
 export const createBaseQuery = (overrides: Partial<DataGridQuery> = {}): DataGridQuery =>
@@ -110,10 +288,10 @@ export const createBaseQuery = (overrides: Partial<DataGridQuery> = {}): DataGri
     sort: [],
     pagination: {
       page: 1,
-      pageSize: 5
+      pageSize: 5,
     },
     columnVisibility: {},
-    ...overrides
+    ...overrides,
   });
 
 const toComparableText = (value: unknown): string => {
@@ -149,7 +327,9 @@ const compareValues = (left: unknown, right: unknown) => {
     return left - right;
   }
 
-  return toComparableText(left).localeCompare(toComparableText(right), undefined, { sensitivity: 'base' });
+  return toComparableText(left).localeCompare(toComparableText(right), undefined, {
+    sensitivity: 'base',
+  });
 };
 
 const getColumnValue = (row: DataGridDemoRow, column: DataGridColumn<DataGridDemoRow>) => {
@@ -176,7 +356,9 @@ export function applyDataGridQuery(
 
   if (search) {
     nextRows = nextRows.filter((row) =>
-      [row.account, row.owner, row.region, row.plan].some((value) => value.toLowerCase().includes(search))
+      [row.account, row.owner, row.region, row.plan].some((value) =>
+        value.toLowerCase().includes(search)
+      )
     );
   }
 
@@ -201,7 +383,10 @@ export function applyDataGridQuery(
     if (sortColumn) {
       nextRows.sort((leftRow, rightRow) => {
         const direction = primarySort.direction === 'asc' ? 1 : -1;
-        return compareValues(getColumnValue(leftRow, sortColumn), getColumnValue(rightRow, sortColumn)) * direction;
+        return (
+          compareValues(getColumnValue(leftRow, sortColumn), getColumnValue(rightRow, sortColumn)) *
+          direction
+        );
       });
     }
   }
@@ -212,6 +397,6 @@ export function applyDataGridQuery(
   return {
     normalizedQuery: normalized,
     totalRows,
-    pageRows: nextRows.slice(startIndex, startIndex + normalized.pagination.pageSize)
+    pageRows: nextRows.slice(startIndex, startIndex + normalized.pagination.pageSize),
   };
 }

@@ -16,7 +16,7 @@ const themeToolbarItems = THEME_NAMES.map((themeName) => {
   const theme = getThemeMeta(themeName);
   return {
     title: `${theme.label} · ${theme.type}`,
-    value: theme.name
+    value: theme.name,
   };
 });
 
@@ -30,7 +30,7 @@ const preview: Preview = {
         components: { story },
         setup() {
           return {
-            currentTheme
+            currentTheme,
           };
         },
         template: `
@@ -59,9 +59,9 @@ const preview: Preview = {
               <story />
             </div>
           </div>
-        `
+        `,
       };
-    }
+    },
   ],
   globalTypes: {
     theme: {
@@ -69,18 +69,18 @@ const preview: Preview = {
       description: 'Preview theme',
       toolbar: {
         dynamicTitle: true,
-        items: themeToolbarItems
-      }
-    }
+        items: themeToolbarItems,
+      },
+    },
   },
   parameters: {
     a11y: {
-      test: 'todo'
+      test: 'todo',
     },
     controls: {
-      expanded: true
-    }
-  }
+      expanded: true,
+    },
+  },
 };
 
 export default preview;

@@ -39,7 +39,7 @@ describe('useOverlaySurface', () => {
             containFocus: true,
             lockScroll: true,
             initialFocus: () => preferredRef.value,
-            onDismiss
+            onDismiss,
           });
 
           expose({
@@ -48,7 +48,7 @@ describe('useOverlaySurface', () => {
             },
             sourceRef,
             preferredRef,
-            surface
+            surface,
           });
           return { contentRef, preferredRef, sourceRef, surface };
         },
@@ -59,10 +59,10 @@ describe('useOverlaySurface', () => {
               <button ref="preferredRef" id="inside" type="button">Inside</button>
             </div>
           </section>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -110,16 +110,16 @@ describe('useOverlaySurface', () => {
             kind: 'modal',
             contentRef,
             sourceRef,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({ surface });
           return { contentRef, surface };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -151,16 +151,16 @@ describe('useOverlaySurface', () => {
             kind: 'modal',
             contentRef,
             restoreFocusTarget: () => fallbackButton,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({ surface });
           return { contentRef, surface };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -194,7 +194,7 @@ describe('useOverlaySurface', () => {
             open,
             kind: 'modal',
             contentRef,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({
@@ -204,14 +204,14 @@ describe('useOverlaySurface', () => {
             closeOverlay: () => {
               open.value = false;
             },
-            surface
+            surface,
           });
           return { contentRef, surface };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -257,21 +257,21 @@ describe('useOverlaySurface', () => {
             open,
             kind: 'modal',
             contentRef,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({
             closeOverlay: () => {
               open.value = false;
             },
-            surface
+            surface,
           });
           return { contentRef, surface };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -314,21 +314,21 @@ describe('useOverlaySurface', () => {
             contentRef,
             portalTarget,
             restoreFocusTarget: () => fallbackLink,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({
             openOverlay: () => {
               open.value = true;
             },
-            surface
+            surface,
           });
           return { contentRef, surface };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -381,7 +381,7 @@ describe('useOverlaySurface', () => {
             kind: 'modal',
             contentRef,
             restoreFocusTarget: () => restoreTarget.value,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({
@@ -394,7 +394,7 @@ describe('useOverlaySurface', () => {
             setRestoreTarget: (nextTarget: HTMLElement | null) => {
               restoreTarget.value = nextTarget;
             },
-            surface
+            surface,
           });
           return { contentRef, surface };
         },
@@ -402,10 +402,10 @@ describe('useOverlaySurface', () => {
           <div ref="contentRef" tabindex="-1">
             <button id="inside" type="button">Inside</button>
           </div>
-        `
+        `,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -450,13 +450,13 @@ describe('useOverlaySurface', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     vm.openOverlay();
     await nextTick();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
     expect(vm.surface.portalTarget.value).toBeNull();
 
@@ -488,21 +488,21 @@ describe('useOverlaySurface', () => {
             kind: 'modal',
             contentRef,
             restoreFocusTarget: () => restoreTarget.value,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({
             setRestoreTarget: (nextTarget: HTMLElement | null) => {
               restoreTarget.value = nextTarget;
             },
-            surface
+            surface,
           });
           return { contentRef };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 
@@ -553,7 +553,7 @@ describe('useOverlaySurface', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     const state = scope.run(() =>
@@ -561,7 +561,7 @@ describe('useOverlaySurface', () => {
         open: ref(true),
         kind: 'modal',
         contentRef: ref(null),
-        onDismiss: vi.fn()
+        onDismiss: vi.fn(),
       })
     );
 
@@ -569,13 +569,13 @@ describe('useOverlaySurface', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
 
     const originalActiveElement = Object.getOwnPropertyDescriptor(document, 'activeElement');
     Object.defineProperty(document, 'activeElement', {
       configurable: true,
-      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
     });
 
     const anchor = document.createElement('a');
@@ -594,16 +594,16 @@ describe('useOverlaySurface', () => {
             kind: 'modal',
             contentRef,
             restoreFocusTarget: () => anchor,
-            onDismiss: vi.fn()
+            onDismiss: vi.fn(),
           });
 
           expose({ surface });
           return { contentRef };
         },
-        template: `<div ref="contentRef" tabindex="-1">Content</div>`
+        template: `<div ref="contentRef" tabindex="-1">Content</div>`,
       }),
       {
-        attachTo: document.body
+        attachTo: document.body,
       }
     );
 

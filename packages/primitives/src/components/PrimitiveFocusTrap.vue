@@ -8,7 +8,7 @@ const props = withDefaults(
     active?: boolean;
   }>(),
   {
-    active: true
+    active: true,
   }
 );
 
@@ -20,7 +20,7 @@ const focusableSelector = [
   'textarea:not([disabled])',
   'input:not([disabled])',
   'select:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])'
+  '[tabindex]:not([tabindex="-1"])',
 ].join(', ');
 
 const getFocusableElements = () =>

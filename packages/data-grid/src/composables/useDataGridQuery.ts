@@ -27,8 +27,8 @@ export function useDataGridQuery(options: DataGridQueryOptions) {
         search,
         pagination: {
           ...query.pagination,
-          page: 1
-        }
+          page: 1,
+        },
       }));
     },
     updateFilter(filterId: string, value: DataGridFilterValue | undefined) {
@@ -48,6 +48,6 @@ export function useDataGridQuery(options: DataGridQueryOptions) {
     },
     resetColumnVisibility() {
       updateQuery((query) => resetDataGridColumnVisibility(query));
-    }
+    },
   };
 }

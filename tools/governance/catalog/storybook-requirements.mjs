@@ -8,7 +8,7 @@ export const STORY_VARIANTS_BY_KIND = Object.freeze({
   'page-template-shell': ['overview', 'composition', 'theming'],
   'package-surface': ['overview'],
   primitive: ['overview'],
-  'helper-api': []
+  'helper-api': [],
 });
 
 export function getRequiredStoryVariants(entry) {
@@ -18,4 +18,3 @@ export function getRequiredStoryVariants(entry) {
 
   return STORY_VARIANTS_BY_KIND[entry.kind] ?? [];
 }
-

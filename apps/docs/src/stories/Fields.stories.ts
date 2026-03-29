@@ -5,7 +5,7 @@ import { UiField, UiInput, UiSelectSimple, UiTextarea } from '@ww/core';
 
 const meta = {
   title: 'Core/Fields',
-  component: UiField
+  component: UiField,
 } satisfies Meta<typeof UiField>;
 
 export default meta;
@@ -24,9 +24,9 @@ export const Inputs: StoryObj<typeof UiField> = {
         options: [
           { label: 'Tokens', value: 'tokens' },
           { label: 'Themes', value: 'themes' },
-          { label: 'Core', value: 'core' }
+          { label: 'Core', value: 'core' },
         ],
-        selected
+        selected,
       };
     },
     template: `
@@ -41,6 +41,6 @@ export const Inputs: StoryObj<typeof UiField> = {
           <UiSelectSimple v-model="selected" :options="options" />
         </UiField>
       </div>
-    `
-  })
+    `,
+  }),
 };

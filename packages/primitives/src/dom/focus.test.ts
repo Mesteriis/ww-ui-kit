@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { focusFirstElement, getFocusableElements, trapFocusWithin } from './focus';
+import {
+  focusFirstElement,
+  getFocusableElements,
+  isProgrammaticallyFocusableElement,
+  trapFocusWithin,
+} from './focus';
 
 const createButton = (id: string) => {
   const button = document.createElement('button');
@@ -55,6 +60,23 @@ describe('focus helpers', () => {
     container.remove();
   });
 
+  it('recognizes programmatically focusable elements without duplicating overlay heuristics', () => {
+    const summary = document.createElement('summary');
+    const contentEditable = document.createElement('div');
+    contentEditable.setAttribute('contenteditable', 'true');
+    const emptyAnchor = document.createElement('a');
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    const negativeTabIndex = document.createElement('div');
+    negativeTabIndex.tabIndex = -1;
+
+    expect(isProgrammaticallyFocusableElement(summary)).toBe(true);
+    expect(isProgrammaticallyFocusableElement(contentEditable)).toBe(true);
+    expect(isProgrammaticallyFocusableElement(emptyAnchor)).toBe(false);
+    expect(isProgrammaticallyFocusableElement(hiddenInput)).toBe(false);
+    expect(isProgrammaticallyFocusableElement(negativeTabIndex)).toBe(true);
+  });
+
   it('focuses the first available element and reports when none exist', () => {
     const emptyContainer = document.createElement('div');
     expect(focusFirstElement(emptyContainer)).toBe(false);
@@ -84,7 +106,11 @@ describe('focus helpers', () => {
     expect(trapFocusWithin(ignored, container)).toBe(false);
 
     first.focus();
-    const shiftWrap = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, cancelable: true });
+    const shiftWrap = new KeyboardEvent('keydown', {
+      key: 'Tab',
+      shiftKey: true,
+      cancelable: true,
+    });
     expect(trapFocusWithin(shiftWrap, container)).toBe(true);
     expect(shiftWrap.defaultPrevented).toBe(true);
     expect(document.activeElement).toBe(last);
@@ -101,14 +127,22 @@ describe('focus helpers', () => {
     expect(passThrough.defaultPrevented).toBe(false);
 
     middle.focus();
-    const shiftPassThrough = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, cancelable: true });
+    const shiftPassThrough = new KeyboardEvent('keydown', {
+      key: 'Tab',
+      shiftKey: true,
+      cancelable: true,
+    });
     expect(trapFocusWithin(shiftPassThrough, container)).toBe(false);
     expect(shiftPassThrough.defaultPrevented).toBe(false);
 
     const outside = createButton('outside');
     document.body.append(outside);
     outside.focus();
-    const outsideShift = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, cancelable: true });
+    const outsideShift = new KeyboardEvent('keydown', {
+      key: 'Tab',
+      shiftKey: true,
+      cancelable: true,
+    });
     expect(trapFocusWithin(outsideShift, container)).toBe(true);
     expect(document.activeElement).toBe(last);
 

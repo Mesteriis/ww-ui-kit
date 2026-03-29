@@ -19,7 +19,7 @@ export function parseFitViewPadding(value: number | `${number}%` | undefined): n
 
 export function fitSignalGraphView(
   store: SignalGraphViewportStore,
-  padding: number | `${number}%` | undefined,
+  padding: number | `${number}%` | undefined
 ) {
   return store.fitView({
     padding: parseFitViewPadding(padding),
@@ -28,7 +28,7 @@ export function fitSignalGraphView(
 
 export async function centerSignalGraphNode(
   store: SignalGraphViewportStore,
-  nodeId: string,
+  nodeId: string
 ): Promise<boolean> {
   const node = store.findNode(nodeId);
   if (!node) {
@@ -47,7 +47,7 @@ export async function centerSignalGraphNode(
 
 export async function resetSignalGraphViewport(
   store: SignalGraphViewportStore,
-  defaultZoom: number | undefined,
+  defaultZoom: number | undefined
 ): Promise<boolean> {
   return store.setViewport(
     {
@@ -57,6 +57,6 @@ export async function resetSignalGraphViewport(
     },
     {
       duration: 180,
-    },
+    }
   );
 }

@@ -8,7 +8,7 @@ import {
   useMotionPresence,
   useOverlaySurface,
   type MotionPresetName,
-  type OverlayPortalTarget
+  type OverlayPortalTarget,
 } from '@ww/primitives';
 
 interface OverlayProps {
@@ -26,27 +26,24 @@ interface UseOverlayOptions {
   backdropPreset?: MotionPresetName | (() => MotionPresetName);
 }
 
-function resolvePresetName(
-  preset: MotionPresetName | (() => MotionPresetName)
-) {
+function resolvePresetName(preset: MotionPresetName | (() => MotionPresetName)) {
   return typeof preset === 'function' ? preset() : preset;
 }
 
-export function useOverlay(
-  props: OverlayProps,
-  close: () => void,
-  options: UseOverlayOptions
-) {
+export function useOverlay(props: OverlayProps, close: () => void, options: UseOverlayOptions) {
   const slots = useSlots();
   const anchorRef = ref<HTMLElement | null>(null);
   const panelRef = ref<HTMLElement | null>(null);
   const titleId = useId(`${options.prefix}-title`);
   const descriptionId = useId(`${options.prefix}-description`);
-  const hasTitle = computed(() => Boolean(props.title) || Boolean(slots.title) || Boolean(slots.header));
+  const hasTitle = computed(
+    () => Boolean(props.title) || Boolean(slots.title) || Boolean(slots.header)
+  );
   const labelledBy = computed(() => (hasTitle.value ? titleId.value : undefined));
   const describedBy = computed(() => (props.description ? descriptionId.value : undefined));
 
   const presence = useMotionPresence(() => props.open);
+  let focusRestoreRequested = false;
 
   const overlaySurface = useOverlaySurface({
     open: presence.isActive,
@@ -59,15 +56,27 @@ export function useOverlay(
     dismissOnFocusOutside: false,
     containFocus: true,
     lockScroll: true,
-    onDismiss: close
+    onDismiss: close,
   });
+
+  const requestFocusRestore = () => {
+    if (focusRestoreRequested) {
+      return;
+    }
+
+    focusRestoreRequested = true;
+    overlaySurface.restoreFocus();
+  };
 
   watch(
     () => props.open,
-    (isOpen, wasOpen) => {
-      if (!isOpen && wasOpen) {
-        void nextTick().then(() => overlaySurface.restoreFocus());
+    (isOpen) => {
+      if (isOpen) {
+        focusRestoreRequested = false;
+        return;
       }
+
+      void nextTick().then(requestFocusRestore);
     }
   );
 
@@ -96,7 +105,7 @@ export function useOverlay(
   const finalizeLeave = () => {
     presence.handleAfterLeave();
     if (!presence.isLeaving.value) {
-      overlaySurface.restoreFocus();
+      requestFocusRestore();
     }
   };
 
@@ -142,6 +151,6 @@ export function useOverlay(
     panelRef,
     portalTarget: overlaySurface.portalTarget,
     titleId,
-    descriptionId
+    descriptionId,
   };
 }

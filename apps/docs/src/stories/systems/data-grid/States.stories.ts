@@ -5,7 +5,7 @@ import { DataGridStoryHarness } from './data-grid-fixtures';
 const meta = {
   title: 'Systems/Data Grid/States',
   component: DataGridStoryHarness,
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;
@@ -20,6 +20,6 @@ export const Overview: StoryObj<typeof meta> = {
         <DataGridStoryHarness mode="no-results" />
         <DataGridStoryHarness mode="error" />
       </div>
-    `
-  })
+    `,
+  }),
 };

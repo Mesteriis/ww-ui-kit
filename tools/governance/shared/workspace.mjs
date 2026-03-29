@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const ROOT_DIR = path.dirname(fileURLToPath(new URL('../../../package.json', import.meta.url)));
+export const ROOT_DIR = path.dirname(
+  fileURLToPath(new URL('../../../package.json', import.meta.url))
+);
 
 export const POSIX_SEPARATOR = '/';
 const IGNORED_DIRECTORY_NAMES = new Set([
@@ -14,7 +16,7 @@ const IGNORED_DIRECTORY_NAMES = new Set([
   'dist',
   'site-dist',
   'storybook-static',
-  'node_modules'
+  'node_modules',
 ]);
 
 export function toPosixPath(filePath) {
@@ -87,7 +89,7 @@ export function listWorkspacePackages() {
     return {
       packageName: packageJson.name,
       physicalPath: path.posix.dirname(packageJsonPath),
-      private: Boolean(packageJson.private)
+      private: Boolean(packageJson.private),
     };
   });
 }

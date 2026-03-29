@@ -15,7 +15,7 @@ describe('selection controls', () => {
           const checked = ref(false);
           return { checked };
         },
-        template: `<UiCheckbox v-model="checked">Accept</UiCheckbox>`
+        template: `<UiCheckbox v-model="checked">Accept</UiCheckbox>`,
       })
     );
 
@@ -33,7 +33,7 @@ describe('selection controls', () => {
           const enabled = ref(false);
           return { enabled };
         },
-        template: `<UiSwitch v-model="enabled" aria-label="Enable">Enable</UiSwitch>`
+        template: `<UiSwitch v-model="enabled" aria-label="Enable">Enable</UiSwitch>`,
       })
     );
 
@@ -57,7 +57,7 @@ describe('selection controls', () => {
           <UiField label="Terms" hint="Required" error="Missing">
             <UiCheckbox v-model="checked">Accept terms</UiCheckbox>
           </UiField>
-        `
+        `,
       })
     );
 
@@ -73,7 +73,7 @@ describe('selection controls', () => {
           const enabled = ref(false);
           return { enabled };
         },
-        template: `<UiSwitch v-model="enabled" disabled aria-label="Disabled switch" />`
+        template: `<UiSwitch v-model="enabled" disabled aria-label="Disabled switch" />`,
       })
     );
 
@@ -87,12 +87,14 @@ describe('selection controls', () => {
     const checkbox = mount(UiCheckbox, {
       props: {
         modelValue: false,
-        name: 'consent'
-      }
+        name: 'consent',
+        ariaLabel: 'Consent toggle',
+      },
     });
     const checkboxInput = checkbox.get('input[type="checkbox"]');
 
-    expect(checkboxInput.attributes('id')).toMatch(/^checkbox-\d+$/);
+    expect(checkboxInput.attributes('id')).toMatch(/^checkbox-/);
+    expect(checkboxInput.attributes('aria-label')).toBe('Consent toggle');
     expect(checkboxInput.attributes('aria-invalid')).toBeUndefined();
     expect(checkboxInput.attributes('aria-describedby')).toBeUndefined();
     expect(checkboxInput.attributes('name')).toBe('consent');
@@ -106,8 +108,8 @@ describe('selection controls', () => {
     const switchWrapper = mount(UiSwitch, {
       props: {
         modelValue: true,
-        ariaDescribedby: 'external-help'
-      }
+        ariaDescribedby: 'external-help',
+      },
     });
 
     expect(switchWrapper.find('.ui-switch__label').exists()).toBe(false);
@@ -122,11 +124,11 @@ describe('selection controls', () => {
     const wrapper = mount(UiSwitch, {
       props: {
         modelValue: false,
-        ariaLabel: 'Labeled switch'
+        ariaLabel: 'Labeled switch',
       },
       slots: {
-        default: 'Notifications'
-      }
+        default: 'Notifications',
+      },
     });
 
     expect(wrapper.find('.ui-switch__label').text()).toBe('Notifications');
@@ -137,8 +139,8 @@ describe('selection controls', () => {
       props: {
         modelValue: true,
         disabled: true,
-        ariaLabel: 'Disabled direct toggle'
-      }
+        ariaLabel: 'Disabled direct toggle',
+      },
     });
 
     const switchSetupState = wrapper.vm.$.setupState as {

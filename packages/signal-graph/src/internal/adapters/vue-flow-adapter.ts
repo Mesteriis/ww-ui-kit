@@ -9,7 +9,7 @@ export const SIGNAL_GRAPH_EDGE_TYPE = 'signal-graph-edge';
 
 export function createSignalGraphNodeTypes(
   nodes: readonly SignalGraphNode[],
-  nodeDefinitions: Record<string, SignalGraphNodeDefinition>,
+  nodeDefinitions: Record<string, SignalGraphNodeDefinition>
 ): NodeTypesObject {
   const uniqueTypes = new Set<string>();
 
@@ -22,7 +22,7 @@ export function createSignalGraphNodeTypes(
   }
 
   return Object.fromEntries(
-    Array.from(uniqueTypes).map((type) => [type, markRaw(SignalGraphNodeHost)]),
+    Array.from(uniqueTypes).map((type) => [type, markRaw(SignalGraphNodeHost)])
   ) as NodeTypesObject;
 }
 

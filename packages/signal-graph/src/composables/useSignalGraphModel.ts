@@ -2,7 +2,10 @@ import { computed, type Ref } from 'vue';
 
 import { mapSignalEdges } from '../internal/adapters/map-signal-edges';
 import { mapSignalNodes } from '../internal/adapters/map-signal-nodes';
-import { createSignalGraphNodeTypes, signalGraphEdgeTypes } from '../internal/adapters/vue-flow-adapter';
+import {
+  createSignalGraphNodeTypes,
+  signalGraphEdgeTypes,
+} from '../internal/adapters/vue-flow-adapter';
 import type {
   SignalGraphEdge,
   SignalGraphInteractionMode,
@@ -26,7 +29,7 @@ export function useSignalGraphModel({
   const nodeMap = computed(() => new Map(nodes.value.map((node) => [node.id, node])));
   const edgeMap = computed(() => new Map(edges.value.map((edge) => [edge.id, edge])));
   const flowNodes = computed(() =>
-    mapSignalNodes(nodes.value, nodeDefinitions.value, interactionMode.value),
+    mapSignalNodes(nodes.value, nodeDefinitions.value, interactionMode.value)
   );
   const flowEdges = computed(() => mapSignalEdges(edges.value));
   const nodeTypes = computed(() => createSignalGraphNodeTypes(nodes.value, nodeDefinitions.value));

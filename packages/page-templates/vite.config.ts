@@ -8,17 +8,17 @@ export default defineConfig({
     dts({
       exclude: ['src/**/*.test.ts'],
       entryRoot: 'src',
-      tsconfigPath: './tsconfig.json'
-    })
+      tsconfigPath: './tsconfig.json',
+    }),
   ],
   build: {
     lib: {
       entry: 'src/index.ts',
       formats: ['es'],
-      fileName: 'index'
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ['vue', '@ww/core']
-    }
-  }
+      external: ['vue', '@ww/core'],
+    },
+  },
 });

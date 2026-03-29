@@ -28,7 +28,10 @@ export function useOutsideClick(
   options: UseOutsideClickOptions = {}
 ) {
   watchEffect((onCleanup) => {
-    if (typeof document === 'undefined' || options.active !== undefined && !toValue(options.active)) {
+    if (
+      typeof document === 'undefined' ||
+      (options.active !== undefined && !toValue(options.active))
+    ) {
       return;
     }
 
@@ -38,7 +41,9 @@ export function useOutsideClick(
         return;
       }
 
-      const shouldIgnore = options.ignore?.some((ignoredTarget) => containsTarget(toValue(ignoredTarget), event)) ?? false;
+      const shouldIgnore =
+        options.ignore?.some((ignoredTarget) => containsTarget(toValue(ignoredTarget), event)) ??
+        false;
       if (!shouldIgnore) {
         handler(event);
       }

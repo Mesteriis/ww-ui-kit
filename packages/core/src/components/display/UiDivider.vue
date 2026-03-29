@@ -6,7 +6,7 @@ const props = withDefaults(
     orientation?: 'horizontal' | 'vertical';
   }>(),
   {
-    orientation: 'horizontal'
+    orientation: 'horizontal',
   }
 );
 </script>

@@ -30,4 +30,3 @@ Required sections:
 - `Related artifacts`
 
 Use [`_template.md`](./_template.md) for new ADRs.
-

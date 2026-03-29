@@ -1,6 +1,15 @@
 import { createCssVariableMap } from '../contracts';
 
-const buttonToneNames = ['neutral', 'brand', 'debug', 'info', 'success', 'warning', 'danger', 'critical'] as const;
+const buttonToneNames = [
+  'neutral',
+  'brand',
+  'debug',
+  'info',
+  'success',
+  'warning',
+  'danger',
+  'critical',
+] as const;
 const buttonToneTokenSuffixes = [
   'solid-bg',
   'solid-fg',
@@ -13,7 +22,7 @@ const buttonToneTokenSuffixes = [
   'soft-bg-hover',
   'soft-bg-active',
   'accent-start',
-  'accent-end'
+  'accent-end',
 ] as const;
 
 type ButtonToneName = (typeof buttonToneNames)[number];
@@ -226,7 +235,7 @@ export const componentTokenNames = [
   'empty-state-title-size',
   'empty-state-title-color',
   'empty-state-description-color',
-  'empty-state-icon-surface'
+  'empty-state-icon-surface',
 ] as const;
 
 export type ComponentTokenName = (typeof componentTokenNames)[number];

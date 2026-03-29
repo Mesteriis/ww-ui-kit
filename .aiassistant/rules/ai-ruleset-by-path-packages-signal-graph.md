@@ -4,6 +4,7 @@ title: packages/signal-graph path rules
 apply: by file patterns
 patterns: packages/signal-graph/**/*
 ---
+
 Use this rule when editing the signal-graph system package.
 
 ## Do

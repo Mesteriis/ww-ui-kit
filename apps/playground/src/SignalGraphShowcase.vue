@@ -73,7 +73,13 @@ const replayReducedSignal = () => {
 
     <UiCard>
       <template #header>Focus, depth, and reduced motion</template>
-      <div style="display: grid; gap: var(--ui-space-6); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));">
+      <div
+        style="
+          display: grid;
+          gap: var(--ui-space-6);
+          grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        "
+      >
         <UiSignalGraph
           aria-label="Depth full graph"
           :nodes="signalGraphFocusNodes"

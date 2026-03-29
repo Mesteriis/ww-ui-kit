@@ -4,6 +4,7 @@ title: Keep reusable packages free of route, backend, and product orchestration
 apply: always
 summary: Keep reusable packages free of route, backend, and product orchestration; keep vendor-backed adapters out of core.
 ---
+
 Reusable layers stay reusable only when orchestration stays above them.
 
 ## Do

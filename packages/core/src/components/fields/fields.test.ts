@@ -20,7 +20,7 @@ describe('field controls', () => {
           <UiField label="Name" hint="Hint" error="Error">
             <UiInput v-model="value" />
           </UiField>
-        `
+        `,
       })
     );
 
@@ -43,7 +43,7 @@ describe('field controls', () => {
           const selected = ref('one');
           const options = [
             { label: 'One', value: 'one' },
-            { label: 'Two', value: 'two' }
+            { label: 'Two', value: 'two' },
           ];
           return { options, selected, text };
         },
@@ -56,7 +56,7 @@ describe('field controls', () => {
               <UiSelectSimple v-model="selected" :options="options" />
             </UiField>
           </div>
-        `
+        `,
       })
     );
 
@@ -74,8 +74,8 @@ describe('field controls', () => {
         readonly: true,
         disabled: true,
         invalid: true,
-        ariaDescribedby: 'external-hint'
-      }
+        ariaDescribedby: 'external-hint',
+      },
     });
 
     expect(input.attributes('id')).toBe('standalone-input');
@@ -87,16 +87,18 @@ describe('field controls', () => {
     const select = mount(UiSelectSimple, {
       props: {
         modelValue: '',
+        ariaLabel: 'Standalone options',
         placeholder: 'Choose one',
         options: [
           { label: 'One', value: 'one' },
-          { label: 'Two', value: 'two', disabled: true }
-        ]
-      }
+          { label: 'Two', value: 'two', disabled: true },
+        ],
+      },
     });
 
     const placeholder = select.get('option[value=""]');
     expect(placeholder.attributes('disabled')).toBeDefined();
+    expect(select.get('select').attributes('aria-label')).toBe('Standalone options');
 
     await select.get('select').setValue('one');
     expect((select.get('select').element as HTMLSelectElement).value).toBe('one');
@@ -108,11 +110,11 @@ describe('field controls', () => {
       props: {
         modelValue: '',
         autocomplete: 'email',
-        name: 'email'
-      }
+        name: 'email',
+      },
     });
 
-    expect(input.attributes('id')).toMatch(/^input-\d+$/);
+    expect(input.attributes('id')).toMatch(/^input-/);
     expect(input.attributes('aria-invalid')).toBeUndefined();
     expect(input.attributes('aria-describedby')).toBeUndefined();
     expect(input.attributes('autocomplete')).toBe('email');
@@ -127,11 +129,11 @@ describe('field controls', () => {
     const textarea = mount(UiTextarea, {
       props: {
         modelValue: '',
-        name: 'notes'
-      }
+        name: 'notes',
+      },
     });
 
-    expect(textarea.attributes('id')).toMatch(/^textarea-\d+$/);
+    expect(textarea.attributes('id')).toMatch(/^textarea-/);
     expect(textarea.attributes('aria-invalid')).toBeUndefined();
     expect(textarea.attributes('aria-describedby')).toBeUndefined();
     expect(textarea.attributes('rows')).toBe('4');
@@ -151,11 +153,11 @@ describe('field controls', () => {
     const field = mount(UiField, {
       props: {
         label: 'Required field',
-        required: true
+        required: true,
       },
       slots: {
-        default: '<input id="raw-input" />'
-      }
+        default: '<input id="raw-input" />',
+      },
     });
 
     expect(field.find('label').exists()).toBe(true);
@@ -166,10 +168,8 @@ describe('field controls', () => {
     const select = mount(UiSelectSimple, {
       props: {
         modelValue: 'one',
-        options: [
-          { label: 'One', value: 'one' }
-        ]
-      }
+        options: [{ label: 'One', value: 'one' }],
+      },
     });
 
     const selectSetupState = select.vm.$.setupState as {

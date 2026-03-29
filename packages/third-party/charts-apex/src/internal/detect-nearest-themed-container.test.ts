@@ -1,6 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { detectNearestThemedContainer, resolveApexThemeScope } from './detect-nearest-themed-container';
+import {
+  detectNearestThemedContainer,
+  resolveApexThemeScope,
+} from './detect-nearest-themed-container';
 
 describe('detectNearestThemedContainer', () => {
   afterEach(() => {
@@ -21,7 +24,7 @@ describe('detectNearestThemedContainer', () => {
     expect(resolveApexThemeScope(host)).toEqual({
       container: scope,
       themeName: 'belovodye',
-      themeType: 'light'
+      themeType: 'light',
     });
   });
 
@@ -34,7 +37,7 @@ describe('detectNearestThemedContainer', () => {
     expect(resolveApexThemeScope(host)).toEqual({
       container: document.documentElement,
       themeName: 'dark',
-      themeType: 'dark'
+      themeType: 'dark',
     });
   });
 
@@ -49,7 +52,7 @@ describe('detectNearestThemedContainer', () => {
     expect(resolveApexThemeScope(host)).toEqual({
       container: scope,
       themeName: 'light',
-      themeType: 'light'
+      themeType: 'light',
     });
 
     const originalDocument = globalThis.document;

@@ -21,16 +21,16 @@ describe('useRovingFocus', () => {
     const unregisterDisabled = roving.registerItem({
       disabled: () => true,
       element: () => third,
-      id: 'third'
+      id: 'third',
     });
     const unregisterFirst = roving.registerItem({
       element: () => first,
-      id: 'first'
+      id: 'first',
     });
     const unregisterSecond = roving.registerItem({
       disabled: () => false,
       element: () => second,
-      id: 'second'
+      id: 'second',
     });
 
     expect(roving.currentId.value).toBe('first');
@@ -66,18 +66,18 @@ describe('useRovingFocus', () => {
   it('supports non-looping moves and keyboard handling for horizontal and vertical orientations', async () => {
     const vertical = useRovingFocus({
       loop: false,
-      orientation: 'vertical'
+      orientation: 'vertical',
     });
     const alpha = createButton('alpha');
     const beta = createButton('beta');
 
     vertical.registerItem({
       element: () => alpha,
-      id: 'alpha'
+      id: 'alpha',
     });
     vertical.registerItem({
       element: () => beta,
-      id: 'beta'
+      id: 'beta',
     });
 
     await vertical.move('prev');
@@ -106,15 +106,15 @@ describe('useRovingFocus', () => {
 
     const horizontal = useRovingFocus({
       loop: true,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
     });
     horizontal.registerItem({
       element: () => alpha,
-      id: 'alpha'
+      id: 'alpha',
     });
     horizontal.registerItem({
       element: () => beta,
-      id: 'beta'
+      id: 'beta',
     });
 
     const leftEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft', cancelable: true });
@@ -127,18 +127,18 @@ describe('useRovingFocus', () => {
 
     const empty = useRovingFocus({
       loop: false,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
     });
     expect(await empty.move('first')).toBeNull();
 
     const defaultOrientation = useRovingFocus();
     defaultOrientation.registerItem({
       element: () => alpha,
-      id: 'alpha'
+      id: 'alpha',
     });
     defaultOrientation.registerItem({
       element: () => beta,
-      id: 'beta'
+      id: 'beta',
     });
     const rightEvent = new KeyboardEvent('keydown', { key: 'ArrowRight', cancelable: true });
     expect(await defaultOrientation.onKeydown(rightEvent)).toBe(true);

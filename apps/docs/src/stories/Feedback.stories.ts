@@ -4,7 +4,7 @@ import { UiButton, UiEmptyState } from '@ww/core';
 
 const meta = {
   title: 'Core/Feedback',
-  component: UiEmptyState
+  component: UiEmptyState,
 } satisfies Meta<typeof UiEmptyState>;
 
 export default meta;
@@ -23,6 +23,6 @@ export const EmptyState: StoryObj<typeof UiEmptyState> = {
           <UiButton>Review package graph</UiButton>
         </template>
       </UiEmptyState>
-    `
-  })
+    `,
+  }),
 };

@@ -5,7 +5,7 @@ import {
   UiDataGrid,
   type DataGridQuery,
   type DataGridRowId,
-  type DataGridSelectionState
+  type DataGridSelectionState,
 } from '@ww/data-grid';
 import { UiEmptyState, UiSpinner } from '@ww/core';
 
@@ -13,7 +13,7 @@ import { useDataTableWidgetState } from '../composables/useDataTableWidgetState'
 import type {
   DataTableWidgetBulkActionsSlotProps,
   DataTableWidgetProps,
-  DataTableWidgetStatusSummary
+  DataTableWidgetStatusSummary,
 } from '../types';
 import UiWidgetShell from '../../../shells/UiWidgetShell.vue';
 
@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<DataTableWidgetProps>(), {
   showStatusBar: true,
   showColumnVisibility: true,
   showBulkActions: true,
-  stickyHeader: false
+  stickyHeader: false,
 });
 
 const emit = defineEmits<{
@@ -62,7 +62,7 @@ const slots = useSlots();
 const widgetState = useDataTableWidgetState({
   query: computed(() => props.query),
   totalRows: computed(() => props.totalRows),
-  selectedRowIds: computed(() => props.selectedRowIds)
+  selectedRowIds: computed(() => props.selectedRowIds),
 });
 
 const shouldShowHeader = computed(
@@ -72,17 +72,17 @@ const shouldShowFooter = computed(
   () => props.showStatusBar || Boolean(slots.status) || Boolean(slots.footer)
 );
 const resolvedCaption = computed(() => props.caption ?? props.title);
-const resolvedAriaLabel = computed(() =>
-  props.ariaLabel ?? (resolvedCaption.value ? undefined : 'Data table widget')
+const resolvedAriaLabel = computed(
+  () => props.ariaLabel ?? (resolvedCaption.value ? undefined : 'Data table widget')
 );
 const optionalGridProps = computed(() => ({
-  ...(props.selectedRowIds ? { selectedRowIds: props.selectedRowIds } : {}),
-  ...(props.rowId ? { rowId: props.rowId } : {}),
-  ...(props.filterDefinitions ? { filterDefinitions: props.filterDefinitions } : {}),
-  ...(props.pageSizeOptions ? { pageSizeOptions: props.pageSizeOptions } : {}),
-  ...(resolvedCaption.value ? { caption: resolvedCaption.value } : {}),
-  ...(resolvedAriaLabel.value ? { ariaLabel: resolvedAriaLabel.value } : {}),
-  ...(props.density ? { density: props.density } : {})
+  filterDefinitions: props.filterDefinitions,
+  pageSizeOptions: props.pageSizeOptions,
+  ...(props.selectedRowIds !== undefined ? { selectedRowIds: props.selectedRowIds } : {}),
+  ...(props.rowId !== undefined ? { rowId: props.rowId } : {}),
+  ...(resolvedCaption.value !== undefined ? { caption: resolvedCaption.value } : {}),
+  ...(resolvedAriaLabel.value !== undefined ? { ariaLabel: resolvedAriaLabel.value } : {}),
+  ...(props.density !== undefined ? { density: props.density } : {}),
 }));
 
 const onUpdateQuery = (value: DataGridQuery) => {
@@ -99,15 +99,13 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
 </script>
 
 <template>
-  <UiWidgetShell
-    class="data-table-widget"
-    :surface="props.surface"
-    :padded="props.padded"
-  >
+  <UiWidgetShell class="data-table-widget" :surface="props.surface" :padded="props.padded">
     <template v-if="shouldShowHeader" #header>
       <div class="data-table-widget__header-copy">
         <h3 v-if="props.title" class="data-table-widget__title">{{ props.title }}</h3>
-        <p v-if="props.description" class="data-table-widget__description">{{ props.description }}</p>
+        <p v-if="props.description" class="data-table-widget__description">
+          {{ props.description }}
+        </p>
       </div>
     </template>
 
@@ -174,7 +172,10 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
     <template v-if="shouldShowFooter" #footer>
       <div class="data-table-widget__footer">
         <slot name="status" v-bind="widgetState.statusSummary.value">
-          <DataTableWidgetStatus v-if="props.showStatusBar" v-bind="widgetState.statusSummary.value" />
+          <DataTableWidgetStatus
+            v-if="props.showStatusBar"
+            v-bind="widgetState.statusSummary.value"
+          />
         </slot>
         <div v-if="$slots.footer" class="data-table-widget__footer-extra">
           <slot name="footer" />

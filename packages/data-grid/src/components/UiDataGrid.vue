@@ -2,7 +2,10 @@
 import { computed } from 'vue';
 import { UiEmptyState, UiSpinner } from '@ww/core';
 
-import { useDataGridController, type DataGridControllerProps } from '../composables/useDataGridController';
+import {
+  useDataGridController,
+  type DataGridControllerProps,
+} from '../composables/useDataGridController';
 import UiDataGridBulkActions from './UiDataGridBulkActions.vue';
 import UiDataGridPagination from './UiDataGridPagination.vue';
 import UiDataGridTable from './UiDataGridTable.vue';
@@ -13,7 +16,7 @@ import type {
   DataGridFilterDefinition,
   DataGridQuery,
   DataGridRowId,
-  DataGridRowIdAccessor
+  DataGridRowIdAccessor,
 } from '../model/types';
 
 defineOptions({ name: 'UiDataGrid' });
@@ -55,7 +58,7 @@ const props = withDefaults(
     stickyHeader: false,
     showToolbar: true,
     showBulkActions: true,
-    showColumnVisibility: true
+    showColumnVisibility: true,
   }
 );
 
@@ -65,7 +68,10 @@ const emit = defineEmits<{
   rowClick: [row: Record<string, unknown>, rowId: DataGridRowId];
 }>();
 
-const controller = useDataGridController(props as DataGridControllerProps<Record<string, unknown>>, emit);
+const controller = useDataGridController(
+  props as DataGridControllerProps<Record<string, unknown>>,
+  emit
+);
 const tableRowIdBinding = computed(() => (props.rowId ? { rowId: props.rowId } : {}));
 
 const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
@@ -81,7 +87,11 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
     :aria-labelledby="controller.a11y.labelledBy.value"
     :aria-label="controller.a11y.labelledBy.value ? undefined : controller.a11y.ariaLabel.value"
   >
-    <figcaption v-if="controller.a11y.caption.value" :id="controller.a11y.captionId.value" class="ui-data-grid__caption">
+    <figcaption
+      v-if="controller.a11y.caption.value"
+      :id="controller.a11y.captionId.value"
+      class="ui-data-grid__caption"
+    >
       {{ controller.a11y.caption.value }}
     </figcaption>
 
@@ -109,7 +119,11 @@ const onRowClick = (row: Record<string, unknown>, rowId: DataGridRowId) => {
     </UiDataGridToolbar>
 
     <UiDataGridBulkActions
-      v-if="props.showBulkActions && controller.selectionEnabled.value && controller.derivedState.value.selectedCount > 0"
+      v-if="
+        props.showBulkActions &&
+        controller.selectionEnabled.value &&
+        controller.derivedState.value.selectedCount > 0
+      "
       :selected-count="controller.derivedState.value.selectedCount"
       @clear="controller.selection.clearSelection"
     >

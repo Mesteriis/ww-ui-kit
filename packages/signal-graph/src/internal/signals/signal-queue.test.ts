@@ -7,9 +7,7 @@ describe('normalizeSignalQueueEntries', () => {
     vi.spyOn(Date, 'now').mockReturnValue(1700000000000);
 
     const entries = normalizeSignalQueueEntries({
-      edgeMap: new Map([
-        ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]
-      ]),
+      edgeMap: new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]]),
       existingSignals: [
         {
           id: 'existing',
@@ -21,16 +19,36 @@ describe('normalizeSignalQueueEntries', () => {
           startedAt: 1,
           delayMs: 0,
           targetNodeId: 'b',
-          signal: { id: 'existing', edgeId: 'edge-a-b', variant: 'info', direction: 'forward', intensity: 'sm' }
-        }
+          signal: {
+            id: 'existing',
+            edgeId: 'edge-a-b',
+            variant: 'info',
+            direction: 'forward',
+            intensity: 'sm',
+          },
+        },
       ],
       incomingSignals: [
-        { id: 'signal-1', edgeId: 'edge-a-b', variant: 'success', direction: 'forward', intensity: 'md' },
-        { id: 'signal-2', edgeId: 'edge-missing', variant: 'warning', direction: 'reverse', intensity: 'lg', durationMs: 900, startedAt: 5 }
+        {
+          id: 'signal-1',
+          edgeId: 'edge-a-b',
+          variant: 'success',
+          direction: 'forward',
+          intensity: 'md',
+        },
+        {
+          id: 'signal-2',
+          edgeId: 'edge-missing',
+          variant: 'warning',
+          direction: 'reverse',
+          intensity: 'lg',
+          durationMs: 900,
+          startedAt: 5,
+        },
       ],
       defaultDurationMs: 500,
       staggerMs: 80,
-      reducedMotion: false
+      reducedMotion: false,
     });
 
     expect(entries[0]).toMatchObject({
@@ -38,14 +56,14 @@ describe('normalizeSignalQueueEntries', () => {
       durationMs: 500,
       delayMs: 80,
       targetNodeId: 'b',
-      startedAt: 1700000000000
+      startedAt: 1700000000000,
     });
     expect(entries[1]).toMatchObject({
       id: 'signal-2',
       durationMs: 900,
       delayMs: 0,
       targetNodeId: null,
-      startedAt: 5
+      startedAt: 5,
     });
   });
 
@@ -54,11 +72,18 @@ describe('normalizeSignalQueueEntries', () => {
       edgeMap: new Map(),
       existingSignals: [],
       incomingSignals: [
-        { id: 'signal-1', edgeId: 'edge', variant: 'neutral', direction: 'forward', intensity: 'sm', durationMs: 900 }
+        {
+          id: 'signal-1',
+          edgeId: 'edge',
+          variant: 'neutral',
+          direction: 'forward',
+          intensity: 'sm',
+          durationMs: 900,
+        },
       ],
       defaultDurationMs: 600,
       staggerMs: 120,
-      reducedMotion: true
+      reducedMotion: true,
     });
 
     expect(entries[0]?.durationMs).toBe(180);

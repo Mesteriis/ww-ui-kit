@@ -11,7 +11,7 @@ export const colorPalette = {
     'neutral-700': '#334155',
     'neutral-800': '#1e293b',
     'neutral-900': '#0f172a',
-    'neutral-950': '#020617'
+    'neutral-950': '#020617',
   },
   brand: {
     'brand-50': '#eef2ff',
@@ -23,7 +23,7 @@ export const colorPalette = {
     'brand-600': '#4f46e5',
     'brand-700': '#4338ca',
     'brand-800': '#3730a3',
-    'brand-900': '#312e81'
+    'brand-900': '#312e81',
   },
   success: {
     'success-50': '#ecfdf5',
@@ -35,7 +35,7 @@ export const colorPalette = {
     'success-600': '#059669',
     'success-700': '#047857',
     'success-800': '#065f46',
-    'success-900': '#064e3b'
+    'success-900': '#064e3b',
   },
   warning: {
     'warning-50': '#fffbeb',
@@ -47,7 +47,7 @@ export const colorPalette = {
     'warning-600': '#d97706',
     'warning-700': '#b45309',
     'warning-800': '#92400e',
-    'warning-900': '#78350f'
+    'warning-900': '#78350f',
   },
   danger: {
     'danger-50': '#fef2f2',
@@ -59,6 +59,6 @@ export const colorPalette = {
     'danger-600': '#dc2626',
     'danger-700': '#b91c1c',
     'danger-800': '#991b1b',
-    'danger-900': '#7f1d1d'
-  }
+    'danger-900': '#7f1d1d',
+  },
 } as const;

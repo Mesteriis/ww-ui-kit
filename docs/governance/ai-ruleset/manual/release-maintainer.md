@@ -3,6 +3,7 @@ id: ai-manual-release-maintainer
 title: Release maintainer workflow
 apply: manually
 ---
+
 Use this rule only for release maintainer tasks.
 
 ## Do

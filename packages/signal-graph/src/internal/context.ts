@@ -9,7 +9,7 @@ import type {
   SignalGraphNode,
   SignalGraphNodeDefinition,
   SignalGraphSignal,
-  SignalGraphThemeState
+  SignalGraphThemeState,
 } from '../types';
 
 export interface RuntimeSignalEntry {
@@ -39,9 +39,14 @@ export interface SignalGraphRuntimeContext {
   graphApi: Pick<SignalGraphHandle, 'centerNode' | 'clearFocus' | 'emitSignal' | 'focusNode'>;
 }
 
-export const signalGraphRuntimeKey = Symbol('signal-graph-runtime') as InjectionKey<SignalGraphRuntimeContext>;
+export const signalGraphRuntimeKey = Symbol(
+  'signal-graph-runtime'
+) as InjectionKey<SignalGraphRuntimeContext>;
 
-export function resolveNodeDepthState(nodeId: string, focusState: SignalGraphFocusState): SignalGraphDepthState {
+export function resolveNodeDepthState(
+  nodeId: string,
+  focusState: SignalGraphFocusState
+): SignalGraphDepthState {
   if (!focusState.anchorNodeId) {
     return 'active';
   }
@@ -61,7 +66,10 @@ export function resolveNodeDepthState(nodeId: string, focusState: SignalGraphFoc
   return 'background';
 }
 
-export function resolveEdgeDepthState(edge: SignalGraphEdge, focusState: SignalGraphFocusState): SignalGraphDepthState {
+export function resolveEdgeDepthState(
+  edge: SignalGraphEdge,
+  focusState: SignalGraphFocusState
+): SignalGraphDepthState {
   if (!focusState.anchorNodeId) {
     return 'active';
   }

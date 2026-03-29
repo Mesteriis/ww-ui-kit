@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@vue-flow/core', async () => {
   return {
-    getBezierPath: vi.fn(() => ['M0,0 C40,0 120,0 160,0', 80, 0])
+    getBezierPath: vi.fn(() => ['M0,0 C40,0 120,0 160,0', 80, 0]),
   };
 });
 
@@ -36,14 +36,14 @@ describe('SignalGraphEdge', () => {
         targetNode: { id: 'b' },
         targetPosition: 'left',
         targetX: 160,
-        targetY: 0
+        targetY: 0,
       },
       global: {
         provide: {
           [signalGraphRuntimeKey as symbol]: {
-            edgeMap: computed(() => new Map([
-              ['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]
-            ])),
+            edgeMap: computed(
+              () => new Map([['edge-a-b', { id: 'edge-a-b', source: 'a', target: 'b' }]])
+            ),
             nodeMap: computed(() => new Map()),
             nodeDefinitions: computed(() => ({})),
             focusState: computed(() => ({
@@ -53,47 +53,63 @@ describe('SignalGraphEdge', () => {
               relationDepth: 1,
               activeNodeIds: ['a'],
               relatedNodeIds: ['b'],
-              backgroundNodeIds: []
+              backgroundNodeIds: [],
             })),
             depthMode: ref('full'),
             interactionMode: ref('interactive'),
-            runtimeSignalsByEdge: computed(() => new Map([
-              ['edge-a-b', [{
-                id: 'signal-1',
-                edgeId: 'edge-a-b',
-                variant: 'success',
-                direction: 'forward',
-                intensity: 'md',
-                durationMs: 500,
-                startedAt: 1,
-                delayMs: 40,
-                targetNodeId: 'b',
-                signal: { id: 'signal-1', edgeId: 'edge-a-b', variant: 'success', direction: 'forward', intensity: 'md' }
-              }]]
-            ])),
+            runtimeSignalsByEdge: computed(
+              () =>
+                new Map([
+                  [
+                    'edge-a-b',
+                    [
+                      {
+                        id: 'signal-1',
+                        edgeId: 'edge-a-b',
+                        variant: 'success',
+                        direction: 'forward',
+                        intensity: 'md',
+                        durationMs: 500,
+                        startedAt: 1,
+                        delayMs: 40,
+                        targetNodeId: 'b',
+                        signal: {
+                          id: 'signal-1',
+                          edgeId: 'edge-a-b',
+                          variant: 'success',
+                          direction: 'forward',
+                          intensity: 'md',
+                        },
+                      },
+                    ],
+                  ],
+                ])
+            ),
             reactingNodeIds: ref(new Set()),
             reducedMotion: ref(true),
             themeState: ref({
               container: null,
               revision: 0,
               themeName: 'light',
-              themeType: 'light'
+              themeType: 'light',
             }),
             graphApi: {
               centerNode: vi.fn(),
               clearFocus: vi.fn(),
               emitSignal: vi.fn(),
-              focusNode: vi.fn()
-            }
-          }
-        }
-      }
+              focusNode: vi.fn(),
+            },
+          },
+        },
+      },
     });
 
     expect(wrapper.attributes('data-ui-depth')).toBe('active');
     expect(wrapper.attributes('data-ui-signaled')).toBe('true');
     expect(wrapper.attributes('data-ui-variant')).toBe('success');
-    expect(wrapper.find('.ui-signal-graph__pulse').classes()).toContain('ui-signal-graph__pulse--reduced');
+    expect(wrapper.find('.ui-signal-graph__pulse').classes()).toContain(
+      'ui-signal-graph__pulse--reduced'
+    );
     expect(wrapper.find('.ui-signal-graph__edge-label').text()).toBe('Edge label');
   });
 
@@ -121,8 +137,8 @@ describe('SignalGraphEdge', () => {
         targetNode: { id: 'b' },
         targetPosition: 'left',
         targetX: 160,
-        targetY: 0
-      }
+        targetY: 0,
+      },
     });
 
     expect(wrapper.attributes('data-ui-depth')).toBe('active');
@@ -155,12 +171,14 @@ describe('SignalGraphEdge', () => {
         targetNode: { id: 'b' },
         targetPosition: 'left',
         targetX: 160,
-        targetY: 0
+        targetY: 0,
       },
       global: {
         provide: {
           [signalGraphRuntimeKey as symbol]: {
-            edgeMap: computed(() => new Map([['edge-live', { id: 'edge-live', source: 'a', target: 'b' }]])),
+            edgeMap: computed(
+              () => new Map([['edge-live', { id: 'edge-live', source: 'a', target: 'b' }]])
+            ),
             nodeMap: computed(() => new Map()),
             nodeDefinitions: computed(() => ({})),
             focusState: computed(() => ({
@@ -170,43 +188,59 @@ describe('SignalGraphEdge', () => {
               relationDepth: 0,
               activeNodeIds: [],
               relatedNodeIds: [],
-              backgroundNodeIds: []
+              backgroundNodeIds: [],
             })),
             depthMode: ref('off'),
             interactionMode: ref('interactive'),
-            runtimeSignalsByEdge: computed(() => new Map([
-              ['edge-live', [{
-                id: 'signal-live',
-                edgeId: 'edge-live',
-                variant: 'accent',
-                direction: 'forward',
-                intensity: 'sm',
-                durationMs: 180,
-                startedAt: 1,
-                delayMs: 0,
-                targetNodeId: 'b',
-                signal: { id: 'signal-live', edgeId: 'edge-live', variant: 'accent', direction: 'forward', intensity: 'sm' }
-              }]]
-            ])),
+            runtimeSignalsByEdge: computed(
+              () =>
+                new Map([
+                  [
+                    'edge-live',
+                    [
+                      {
+                        id: 'signal-live',
+                        edgeId: 'edge-live',
+                        variant: 'accent',
+                        direction: 'forward',
+                        intensity: 'sm',
+                        durationMs: 180,
+                        startedAt: 1,
+                        delayMs: 0,
+                        targetNodeId: 'b',
+                        signal: {
+                          id: 'signal-live',
+                          edgeId: 'edge-live',
+                          variant: 'accent',
+                          direction: 'forward',
+                          intensity: 'sm',
+                        },
+                      },
+                    ],
+                  ],
+                ])
+            ),
             reactingNodeIds: ref(new Set()),
             reducedMotion: ref(false),
             themeState: ref({
               container: null,
               revision: 0,
               themeName: 'dark',
-              themeType: 'dark'
+              themeType: 'dark',
             }),
             graphApi: {
               centerNode: vi.fn(),
               clearFocus: vi.fn(),
               emitSignal: vi.fn(),
-              focusNode: vi.fn()
-            }
-          }
-        }
-      }
+              focusNode: vi.fn(),
+            },
+          },
+        },
+      },
     });
 
-    expect(wrapper.find('.ui-signal-graph__pulse').classes()).not.toContain('ui-signal-graph__pulse--reduced');
+    expect(wrapper.find('.ui-signal-graph__pulse').classes()).not.toContain(
+      'ui-signal-graph__pulse--reduced'
+    );
   });
 });

@@ -10,7 +10,7 @@ const surface = (entry) => {
   const normalizedEntry = createSurface({
     packageLayer: packageMeta.packageLayer,
     stability: packageMeta.stability,
-    ...entry
+    ...entry,
   });
 
   validateSurfaceShape(normalizedEntry);
@@ -25,7 +25,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/tokens/README.md' }],
     requiredTestLayers: ['unit'],
-    tags: ['foundation', 'tokens']
+    tags: ['foundation', 'tokens'],
   }),
   surface({
     packageName: '@ww/themes',
@@ -34,10 +34,10 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiresDocs: true,
     docsArtifacts: [
       { type: 'readme', file: 'packages/themes/README.md' },
-      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' }
+      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
     ],
     requiredTestLayers: ['unit'],
-    tags: ['themes', 'runtime']
+    tags: ['themes', 'runtime'],
   }),
   surface({
     packageName: '@ww/themes',
@@ -45,16 +45,22 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     kind: 'theme-surface',
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts',
+      },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
-      { variant: 'scoped-theme', file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts' }
+      {
+        variant: 'scoped-theme',
+        file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/themes/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['themes', 'overlays'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['themes']
+    tags: ['themes'],
   }),
   surface({
     packageName: '@ww/primitives',
@@ -63,14 +69,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiresStorybook: true,
     requiredStoryVariants: ['overview'],
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/foundations/MotionOverview.stories.ts' }
+      { variant: 'overview', file: 'apps/docs/src/stories/foundations/MotionOverview.stories.ts' },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/primitives/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['themes', 'overlays'],
     requiredTestLayers: ['unit', 'playground'],
-    tags: ['motion', 'primitives']
+    tags: ['motion', 'primitives'],
   }),
   surface({
     packageName: '@ww/primitives',
@@ -80,14 +86,17 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiredStoryVariants: ['overview'],
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts' },
-      { variant: 'scoped-theme', file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts' }
+      {
+        variant: 'scoped-theme',
+        file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/primitives/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['overlays'],
     requiredTestLayers: ['unit', 'playground'],
-    tags: ['overlay', 'primitives']
+    tags: ['overlay', 'primitives'],
   }),
   surface({
     packageName: '@ww/core',
@@ -97,9 +106,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Buttons.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -109,9 +118,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Buttons.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -121,9 +130,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Fields.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -133,9 +142,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Selection.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -145,9 +154,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Display.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -157,9 +166,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Feedback.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -169,12 +178,18 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts' }
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+      },
     ],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['overlays', 'composition'],
-    requiredTestLayers: ['unit', 'e2e', 'playground']
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
   }),
   surface({
     packageName: '@ww/core',
@@ -184,9 +199,9 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/Tabs.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' }
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
-    requiredTestLayers: ['unit', 'e2e']
+    requiredTestLayers: ['unit', 'e2e'],
   }),
   surface({
     packageName: '@ww/core',
@@ -194,16 +209,18 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     kind: 'package-surface',
     requiresStorybook: true,
     requiredStoryVariants: ['overview'],
-    storyArtifacts: [{ variant: 'overview', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' }],
+    storyArtifacts: [
+      { variant: 'overview', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
+    ],
     requiresDocs: true,
     docsArtifacts: [
       { type: 'readme', file: 'packages/core/README.md' },
-      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' }
+      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
     ],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['themes', 'overlays', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['core']
+    tags: ['core'],
   }),
   surface({
     packageName: '@ww/charts-apex',
@@ -211,18 +228,27 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     kind: 'vendor-adapter',
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/foundations/charts/ApexOverview.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/charts/ApexOverview.stories.ts',
+      },
       { variant: 'states', file: 'apps/docs/src/stories/foundations/charts/States.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/charts/Theming.stories.ts' },
-      { variant: 'responsive', file: 'apps/docs/src/stories/foundations/charts/Responsive.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/foundations/charts/Interactions.stories.ts' }
+      {
+        variant: 'responsive',
+        file: 'apps/docs/src/stories/foundations/charts/Responsive.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/foundations/charts/Interactions.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/third-party/charts-apex/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['charts', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['third-party', 'charts']
+    tags: ['third-party', 'charts'],
   }),
   surface({
     packageName: '@ww/signal-graph',
@@ -230,18 +256,33 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     kind: 'feature-package',
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/foundations/signal-graph/Overview.stories.ts' },
-      { variant: 'states', file: 'apps/docs/src/stories/foundations/signal-graph/States.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/foundations/signal-graph/Theming.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/foundations/signal-graph/Signals.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/foundations/signal-graph/OverlaysInNodes.stories.ts' }
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/signal-graph/Overview.stories.ts',
+      },
+      {
+        variant: 'states',
+        file: 'apps/docs/src/stories/foundations/signal-graph/States.stories.ts',
+      },
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/foundations/signal-graph/Theming.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/foundations/signal-graph/Signals.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/foundations/signal-graph/OverlaysInNodes.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/signal-graph/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['signal-graph', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['system', 'signal-graph']
+    tags: ['system', 'signal-graph'],
   }),
   surface({
     packageName: '@ww/data-grid',
@@ -253,14 +294,20 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       { variant: 'overview', file: 'apps/docs/src/stories/systems/data-grid/Overview.stories.ts' },
       { variant: 'states', file: 'apps/docs/src/stories/systems/data-grid/States.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/systems/data-grid/Theming.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/systems/data-grid/BulkActions.stories.ts' },
-      { variant: 'interactions', file: 'apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts' }
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/systems/data-grid/BulkActions.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [
       { type: 'readme', file: 'packages/data-grid/README.md' },
       { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
-      { type: 'adr', file: 'docs/decisions/ADR-0015-data-grid-system-package.md' }
+      { type: 'adr', file: 'docs/decisions/ADR-0015-data-grid-system-package.md' },
     ],
     requiresPlaygroundScenario: true,
     playgroundScenarios: [
@@ -268,10 +315,10 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       'data-grid-states',
       'data-grid-theming',
       'data-grid-selection',
-      'data-grid-composition'
+      'data-grid-composition',
     ],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['system', 'data-grid']
+    tags: ['system', 'data-grid'],
   }),
   surface({
     packageName: '@ww/widgets',
@@ -280,15 +327,18 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiresStorybook: true,
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/widgets/Shell.stories.ts' },
-      { variant: 'composition', file: 'apps/docs/src/stories/architecture/WidgetsOverview.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' }
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/architecture/WidgetsOverview.stories.ts',
+      },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/widgets/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['widgets', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['widgets']
+    tags: ['widgets'],
   }),
   surface({
     packageName: '@ww/widgets',
@@ -297,44 +347,63 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     requiresStorybook: true,
     requiredStoryVariants: ['overview', 'states', 'theming', 'composition'],
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/widgets/DataTableWidgetOverview.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/widgets/DataTableWidgetOverview.stories.ts',
+      },
       { variant: 'states', file: 'apps/docs/src/stories/widgets/DataTableWidgetStates.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/widgets/DataTableWidgetTheming.stories.ts' },
-      { variant: 'composition', file: 'apps/docs/src/stories/widgets/DataTableWidgetComposition.stories.ts' },
-      { variant: 'composition', file: 'apps/docs/src/stories/widgets/DataTableWidgetExtensibility.stories.ts' },
-      { variant: 'overview', file: 'apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts' }
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/widgets/DataTableWidgetTheming.stories.ts',
+      },
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/widgets/DataTableWidgetComposition.stories.ts',
+      },
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/widgets/DataTableWidgetExtensibility.stories.ts',
+      },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [
       { type: 'readme', file: 'packages/widgets/README.md' },
       { type: 'readme', file: 'packages/widgets/src/data/data-table-widget/README.md' },
-      { type: 'adr', file: 'docs/decisions/ADR-0010-widgets-and-page-templates-layer.md' }
+      { type: 'adr', file: 'docs/decisions/ADR-0010-widgets-and-page-templates-layer.md' },
     ],
     requiresPlaygroundScenario: true,
     playgroundScenarios: [
       'widget-data-table-basic',
       'widget-data-table-states',
       'widget-data-table-theming',
-      'widget-data-table-composition'
+      'widget-data-table-composition',
     ],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['widgets', 'data-grid']
+    tags: ['widgets', 'data-grid'],
   }),
   surface({
     packageName: '@ww/page-templates',
-    exportName: 'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+    exportName:
+      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
     kind: 'page-template-shell',
     requiresStorybook: true,
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/page-templates/Shell.stories.ts' },
-      { variant: 'composition', file: 'apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts' },
-      { variant: 'theming', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' }
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts',
+      },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/page-templates/README.md' }],
     requiresPlaygroundScenario: true,
     playgroundScenarios: ['page-templates', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
-    tags: ['page-templates']
-  })
+    tags: ['page-templates'],
+  }),
 ]);

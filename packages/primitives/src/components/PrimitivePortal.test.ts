@@ -23,7 +23,7 @@ describe('PrimitivePortal', () => {
               <span id="teleported">Teleported content</span>
             </PrimitivePortal>
           </div>
-        `
+        `,
       }),
       { attachTo: document.body }
     );

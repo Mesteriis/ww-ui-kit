@@ -24,7 +24,5 @@
     "../../packages/**/*.vue",
     "../../vite.aliases.ts"
   ],
-  "exclude": [
-    "../../packages/**/*.test.ts"
-  ]
+  "exclude": ["../../packages/**/*.test.ts"]
 }

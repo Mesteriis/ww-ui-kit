@@ -14,6 +14,6 @@ export function useDataGridColumns<TRow>(options: DataGridColumnsOptions<TRow>) 
 
   return {
     normalizedColumns,
-    hideableColumns
+    hideableColumns,
   };
 }

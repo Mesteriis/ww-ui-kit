@@ -12,7 +12,7 @@ const props = withDefaults(
     disabled?: boolean;
   }>(),
   {
-    disabled: false
+    disabled: false,
   }
 );
 
@@ -20,18 +20,20 @@ const emit = defineEmits<{
   updateFilter: [filterId: string, value: DataGridFilterValue | undefined];
 }>();
 
-const toSelectOptions = (definition: DataGridFilterDefinition): Array<{ label: string; value: string }> => {
+const toSelectOptions = (
+  definition: DataGridFilterDefinition
+): Array<{ label: string; value: string }> => {
   if (definition.type === 'boolean') {
     return [
       { label: definition.trueLabel ?? 'Yes', value: 'true' },
-      { label: definition.falseLabel ?? 'No', value: 'false' }
+      { label: definition.falseLabel ?? 'No', value: 'false' },
     ];
   }
 
   if (definition.type === 'select' || definition.type === 'multi-select') {
     return definition.options.map((option) => ({
       label: option.label,
-      value: option.value
+      value: option.value,
     }));
   }
 
@@ -98,7 +100,9 @@ const onTextInput = (definitionId: string, event: Event) => {
         v-if="definition.type === 'text'"
         class="ui-input ui-data-grid-filters__control"
         type="text"
-        :value="typeof props.filters[definition.id] === 'string' ? props.filters[definition.id] : ''"
+        :value="
+          typeof props.filters[definition.id] === 'string' ? props.filters[definition.id] : ''
+        "
         :placeholder="definition.placeholder"
         :disabled="props.disabled"
         @input="onTextInput(definition.id, $event)"
@@ -108,7 +112,7 @@ const onTextInput = (definitionId: string, event: Event) => {
         v-else-if="definition.type === 'select' || definition.type === 'boolean'"
         :model-value="toSelectValue(props.filters[definition.id])"
         :options="toSelectOptions(definition)"
-        :placeholder="definition.type === 'boolean' ? 'All' : definition.placeholder ?? 'All'"
+        :placeholder="definition.type === 'boolean' ? 'All' : (definition.placeholder ?? 'All')"
         :disabled="props.disabled"
         @update:model-value="onSelect(definition, $event)"
       />

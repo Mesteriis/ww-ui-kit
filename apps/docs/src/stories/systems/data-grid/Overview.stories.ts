@@ -5,13 +5,13 @@ import { DataGridStoryHarness } from './data-grid-fixtures';
 const meta = {
   title: 'Systems/Data Grid/Overview',
   component: DataGridStoryHarness,
-  tags: ['autodocs']
+  tags: ['autodocs'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;
 
 export const Default: StoryObj<typeof meta> = {
   args: {
-    mode: 'default'
-  }
+    mode: 'default',
+  },
 };

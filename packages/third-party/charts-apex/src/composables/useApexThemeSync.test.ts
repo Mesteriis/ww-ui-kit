@@ -29,16 +29,16 @@ describe('useApexThemeSync', () => {
             {
               id: 'scope',
               'data-ui-theme': 'belovodye',
-              'data-ui-theme-type': 'light'
+              'data-ui-theme-type': 'light',
             },
             [
               h('div', {
                 id: 'host',
-                ref: hostRef
-              })
+                ref: hostRef,
+              }),
             ]
           );
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -73,7 +73,7 @@ describe('useApexThemeSync', () => {
 
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     vi.stubGlobal('queueMicrotask', undefined);
 
@@ -83,7 +83,7 @@ describe('useApexThemeSync', () => {
         const state = useApexThemeSync(hostRef);
         expose({ hostRef, ...state });
         return () => h('div', { ref: hostRef });
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -109,7 +109,7 @@ describe('useApexThemeSync', () => {
 
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
-      value: originalObserver
+      value: originalObserver,
     });
   });
 
@@ -124,9 +124,9 @@ describe('useApexThemeSync', () => {
         expose({ hostRef, ...state });
         return () =>
           h('section', { 'data-ui-theme': 'light', 'data-ui-theme-type': 'light' }, [
-            h('div', { ref: hostRef })
+            h('div', { ref: hostRef }),
           ]);
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
@@ -168,7 +168,7 @@ describe('useApexThemeSync', () => {
 
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
-      value: MockMutationObserver
+      value: MockMutationObserver,
     });
 
     const Harness = defineComponent({
@@ -178,9 +178,9 @@ describe('useApexThemeSync', () => {
         expose(state);
         return () =>
           h('section', { 'data-ui-theme': 'light', 'data-ui-theme-type': 'light' }, [
-            h('div', { ref: hostRef })
+            h('div', { ref: hostRef }),
           ]);
-      }
+      },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });

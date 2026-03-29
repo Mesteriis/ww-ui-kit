@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   ensureOverlayInteractionTracking,
-  getLastOverlayInteractionTarget
+  getLastOverlayInteractionTarget,
 } from './interaction-tracker';
 
 describe('overlay interaction tracker', () => {
@@ -93,7 +93,7 @@ describe('overlay interaction tracker', () => {
 
     Object.defineProperty(globalThis, 'HTMLElement', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     vi.advanceTimersByTime(1501);
     tabbable.dispatchEvent(new Event('pointerdown', { bubbles: true }));
@@ -101,18 +101,18 @@ describe('overlay interaction tracker', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     expect(() => ensureOverlayInteractionTracking()).not.toThrow();
     expect(getLastOverlayInteractionTarget()).toBeNull();
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
     Object.defineProperty(globalThis, 'HTMLElement', {
       configurable: true,
-      value: originalHTMLElement
+      value: originalHTMLElement,
     });
   });
 
@@ -121,23 +121,29 @@ describe('overlay interaction tracker', () => {
     const module = await import('./interaction-tracker');
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     module.ensureOverlayInteractionTracking();
 
     const originalActiveElement = Object.getOwnPropertyDescriptor(document, 'activeElement');
     Object.defineProperty(document, 'activeElement', {
       configurable: true,
-      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      get: () => document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
     });
 
-    const keydownListener = listeners.get('keydown') as ((event: KeyboardEvent) => void) | undefined;
-    const pointerdownListener = listeners.get('pointerdown') as ((event: PointerEvent) => void) | undefined;
+    const keydownListener = listeners.get('keydown') as
+      | ((event: KeyboardEvent) => void)
+      | undefined;
+    const pointerdownListener = listeners.get('pointerdown') as
+      | ((event: PointerEvent) => void)
+      | undefined;
 
     keydownListener?.({ target: { parentElement: null } } as KeyboardEvent);
     expect(module.getLastOverlayInteractionTarget()).toBeNull();
@@ -145,7 +151,7 @@ describe('overlay interaction tracker', () => {
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
     pointerdownListener?.({ target: originalDocument.body } as PointerEvent);
     keydownListener?.({ target: originalDocument.body } as KeyboardEvent);
@@ -153,7 +159,7 @@ describe('overlay interaction tracker', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
     if (originalActiveElement) {
       Object.defineProperty(document, 'activeElement', originalActiveElement);
@@ -176,25 +182,29 @@ describe('overlay interaction tracker', () => {
 
     const listeners = new Map<string, EventListener>();
     const originalAddEventListener = document.addEventListener.bind(document);
-    const addEventListenerSpy = vi
-      .spyOn(document, 'addEventListener')
-      .mockImplementation(((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
-        listeners.set(type, listener as EventListener);
-        originalAddEventListener(type, listener, options);
-      }) as typeof document.addEventListener);
+    const addEventListenerSpy = vi.spyOn(document, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      listeners.set(type, listener as EventListener);
+      originalAddEventListener(type, listener, options);
+    }) as typeof document.addEventListener);
 
     vi.resetModules();
     const listenerModule = await import('./interaction-tracker');
     listenerModule.ensureOverlayInteractionTracking();
 
-    const keydownListener = listeners.get('keydown') as ((event: KeyboardEvent) => void) | undefined;
+    const keydownListener = listeners.get('keydown') as
+      | ((event: KeyboardEvent) => void)
+      | undefined;
     keydownListener?.({ target: null } as KeyboardEvent);
     expect(listenerModule.getLastOverlayInteractionTarget()).toBeNull();
 
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     keydownListener?.({ target: null } as KeyboardEvent);
@@ -202,7 +212,7 @@ describe('overlay interaction tracker', () => {
 
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
     addEventListenerSpy.mockRestore();
   });

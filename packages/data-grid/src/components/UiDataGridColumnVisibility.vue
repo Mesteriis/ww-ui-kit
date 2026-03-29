@@ -12,7 +12,7 @@ const props = withDefaults(
     disabled?: boolean;
   }>(),
   {
-    disabled: false
+    disabled: false,
   }
 );
 
@@ -24,9 +24,7 @@ const emit = defineEmits<{
 
 <template>
   <details v-if="props.columns.length > 0" class="ui-data-grid-visibility">
-    <summary class="ui-data-grid-visibility__summary">
-      Columns
-    </summary>
+    <summary class="ui-data-grid-visibility__summary">Columns</summary>
     <div class="ui-data-grid-visibility__panel">
       <div class="ui-data-grid-visibility__list">
         <UiCheckbox

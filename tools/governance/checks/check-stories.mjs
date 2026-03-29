@@ -16,14 +16,17 @@ for (const entry of PUBLIC_SURFACE_MANIFEST.filter((surface) => surface.requires
 
   for (const artifact of entry.storyArtifacts) {
     if (!fileExists(artifact.file)) {
-      throw new Error(`Story artifact "${artifact.file}" for "${entry.exportName}" does not exist.`);
+      throw new Error(
+        `Story artifact "${artifact.file}" for "${entry.exportName}" does not exist.`
+      );
     }
 
     if (!/title:\s*['"`]/.test(readText(artifact.file))) {
-      throw new Error(`Story artifact "${artifact.file}" for "${entry.exportName}" is missing a Storybook title.`);
+      throw new Error(
+        `Story artifact "${artifact.file}" for "${entry.exportName}" is missing a Storybook title.`
+      );
     }
   }
 }
 
 console.log('Storybook coverage OK.');
-

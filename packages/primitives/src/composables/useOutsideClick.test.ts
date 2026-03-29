@@ -19,11 +19,11 @@ describe('useOutsideClick', () => {
           <div id="target" ref="target">inside</div>
           <button id="outside" type="button">outside</button>
         </div>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     await wrapper.get('#target').trigger('pointerdown');
@@ -42,15 +42,15 @@ describe('useOutsideClick', () => {
       props: {
         active: {
           type: Boolean,
-          required: true
-        }
+          required: true,
+        },
       },
       setup(props) {
         const target = ref<HTMLElement | null>(null);
         const ignore = ref<HTMLElement | null>(null);
         useOutsideClick(target, handler, {
           active: computed(() => props.active),
-          ignore: [ignore]
+          ignore: [ignore],
         });
         return { ignore, target };
       },
@@ -60,14 +60,14 @@ describe('useOutsideClick', () => {
           <div id="ignore" ref="ignore">ignore</div>
           <button id="outside" type="button">outside</button>
         </div>
-      `
+      `,
     });
 
     const wrapper = mount(Harness, {
       attachTo: document.body,
       props: {
-        active: false
-      }
+        active: false,
+      },
     });
 
     await wrapper.get('#outside').trigger('pointerdown');
@@ -76,26 +76,35 @@ describe('useOutsideClick', () => {
     await wrapper.setProps({ active: true });
 
     const ignoreElement = wrapper.get('#ignore').element as HTMLElement;
-    const ignoreEvent = new Event('pointerdown', { bubbles: true, cancelable: true }) as PointerEvent;
+    const ignoreEvent = new Event('pointerdown', {
+      bubbles: true,
+      cancelable: true,
+    }) as PointerEvent;
     Object.defineProperty(ignoreEvent, 'composedPath', {
-      value: () => [ignoreElement]
+      value: () => [ignoreElement],
     });
     wrapper.get('#outside').element.dispatchEvent(ignoreEvent);
     expect(handler).not.toHaveBeenCalled();
 
-    const fallbackEvent = new Event('pointerdown', { bubbles: true, cancelable: true }) as PointerEvent;
+    const fallbackEvent = new Event('pointerdown', {
+      bubbles: true,
+      cancelable: true,
+    }) as PointerEvent;
     Object.defineProperty(fallbackEvent, 'composedPath', {
-      value: undefined
+      value: undefined,
     });
     wrapper.get('#outside').element.dispatchEvent(fallbackEvent);
     expect(handler).toHaveBeenCalledTimes(1);
 
-    const nonNodeTargetEvent = new Event('pointerdown', { bubbles: true, cancelable: true }) as PointerEvent;
+    const nonNodeTargetEvent = new Event('pointerdown', {
+      bubbles: true,
+      cancelable: true,
+    }) as PointerEvent;
     Object.defineProperty(nonNodeTargetEvent, 'composedPath', {
-      value: undefined
+      value: undefined,
     });
     Object.defineProperty(nonNodeTargetEvent, 'target', {
-      value: 'outside'
+      value: 'outside',
     });
     document.dispatchEvent(nonNodeTargetEvent);
     expect(handler).toHaveBeenCalledTimes(2);
@@ -106,10 +115,12 @@ describe('useOutsideClick', () => {
     const detachedTarget = ref<HTMLElement | null>(document.createElement('div'));
     nullIgnoreScope.run(() => {
       useOutsideClick(detachedTarget, handler, {
-        ignore: [ref(null)]
+        ignore: [ref(null)],
       });
     });
-    document.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }) as PointerEvent);
+    document.dispatchEvent(
+      new Event('pointerdown', { bubbles: true, cancelable: true }) as PointerEvent
+    );
     expect(handler).toHaveBeenCalledTimes(3);
     nullIgnoreScope.stop();
 
@@ -117,7 +128,7 @@ describe('useOutsideClick', () => {
     const originalDocument = globalThis.document;
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: undefined
+      value: undefined,
     });
 
     expect(() => {
@@ -129,7 +140,7 @@ describe('useOutsideClick', () => {
     scope.stop();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
-      value: originalDocument
+      value: originalDocument,
     });
   });
 });

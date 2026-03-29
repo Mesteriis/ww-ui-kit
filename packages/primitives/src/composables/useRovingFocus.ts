@@ -33,7 +33,10 @@ export function useRovingFocus(options: UseRovingFocusOptions = {}) {
 
   const focusItem = async (id: string) => {
     await nextTick();
-    items.value.find((item) => item.id === id)?.element()?.focus();
+    items.value
+      .find((item) => item.id === id)
+      ?.element()
+      ?.focus();
   };
 
   const setCurrentId = (id: string) => {
@@ -89,7 +92,10 @@ export function useRovingFocus(options: UseRovingFocusOptions = {}) {
     const orientation = toValue(options.orientation) ?? 'horizontal';
     const isHorizontal = orientation === 'horizontal';
 
-    if ((event.key === 'ArrowRight' && isHorizontal) || (event.key === 'ArrowDown' && !isHorizontal)) {
+    if (
+      (event.key === 'ArrowRight' && isHorizontal) ||
+      (event.key === 'ArrowDown' && !isHorizontal)
+    ) {
       event.preventDefault();
       await move('next');
       return true;
@@ -122,6 +128,6 @@ export function useRovingFocus(options: UseRovingFocusOptions = {}) {
     move,
     onKeydown,
     registerItem,
-    setCurrentId
+    setCurrentId,
   };
 }

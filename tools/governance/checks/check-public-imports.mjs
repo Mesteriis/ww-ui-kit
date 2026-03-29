@@ -3,12 +3,12 @@ import { collectImports, listSourceFiles } from '../shared/imports.mjs';
 const disallowedPatterns = [
   {
     pattern: /^@ww\/.+\/src\//,
-    message: 'Do not deep import package source files. Use official package exports.'
+    message: 'Do not deep import package source files. Use official package exports.',
   },
   {
     pattern: /^@ww\/primitives\/(motion|overlay)$/,
-    message: 'Do not rely on non-exported @ww/primitives subpaths. Import from @ww/primitives.'
-  }
+    message: 'Do not rely on non-exported @ww/primitives subpaths. Import from @ww/primitives.',
+  },
 ];
 
 for (const relativePath of listSourceFiles()) {
@@ -22,4 +22,3 @@ for (const relativePath of listSourceFiles()) {
 }
 
 console.log('Public import hygiene OK.');
-
