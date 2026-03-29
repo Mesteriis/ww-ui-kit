@@ -1,0 +1,50 @@
+name: Feature request
+description: Propose a reusable UI capability, package improvement, or repository workflow enhancement.
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem should this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the desired behavior and the expected package/layer placement.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Target layer
+      options:
+        - tokens
+        - themes
+        - primitives
+        - core
+        - systems
+        - widgets
+        - page-templates
+        - docs
+        - playground
+        - repo tooling
+    validations:
+      required: true
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-goals
+      description: Clarify what should explicitly stay out of scope.
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Link related stories, ADRs, issues, or examples if available.

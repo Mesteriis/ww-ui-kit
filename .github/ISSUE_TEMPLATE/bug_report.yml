@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a reproducible defect in the monorepo, package APIs, or docs/playground behavior.
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the bug clearly and concretely.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction
+      description: Provide exact steps, commands, or component usage that reproduces the issue.
+      placeholder: |
+        1. Run ...
+        2. Open ...
+        3. Interact with ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Affected layer
+      options:
+        - tokens
+        - themes
+        - primitives
+        - core
+        - systems
+        - widgets
+        - page-templates
+        - docs
+        - playground
+        - repo tooling
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Node version, pnpm version, browser, and any relevant context.

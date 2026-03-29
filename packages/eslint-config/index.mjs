@@ -12,6 +12,7 @@ export function createConfig() {
         '**/dist/**',
         '**/coverage/**',
         '**/storybook-static/**',
+        '**/site-dist/**',
         '**/.idea/**',
         'vitest.workspace.ts',
         'vite.aliases.ts',
@@ -59,6 +60,16 @@ export function createConfig() {
         'vue/require-default-prop': 'off',
         'vue/require-explicit-emits': 'error',
         'vue/singleline-html-element-content-newline': 'off'
+      }
+    },
+    {
+      files: ['scripts/**/*.{js,mjs,cjs}'],
+      languageOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        globals: {
+          ...globals.node
+        }
       }
     },
     {

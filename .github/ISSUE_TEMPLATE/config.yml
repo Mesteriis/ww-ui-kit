@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation and live demos
+    url: https://mesteriis.github.io/ww-ui-kit/
+    about: Check the OSS site, Storybook docs, and playground before opening a general usage issue.
+  - name: Security policy
+    url: https://github.com/Mesteriis/ww-ui-kit/security/policy
+    about: Use the security policy for private vulnerability reporting.

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Belovodye UiKit is an OSS-ready Vue 3 monorepo with tokens, themes, primitives, core components, systems, widgets, page templates, Storybook docs, and an integration playground."
+    />
+    <title>Belovodye UiKit</title>
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <main class="site">
+      <section class="hero">
+        <p class="eyebrow">Belovodye UiKit</p>
+        <h1>Open-source Vue 3 UI foundation with real docs and a live integration playground.</h1>
+        <p class="lede">
+          Tokens, themes, primitives, core components, optional systems, widgets, and page-template
+          scaffolds in one pnpm workspace. GitHub Pages publishes the OSS landing surface, Storybook
+          docs, and the interactive playground from the same repository.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="./docs/">Open Storybook Docs</a>
+          <a class="button button--secondary" href="./playground/">Open Playground</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>What is here</h2>
+          <ul>
+            <li>Typed tokens and theme contracts</li>
+            <li>ThemeType-aware subtree theming and overlays</li>
+            <li>Motion and overlay foundations</li>
+            <li>Core UI components</li>
+            <li>Optional systems like charts and signal graph</li>
+            <li>Widgets and page-template scaffolds</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Entry points</h2>
+          <ul>
+            <li><strong>Docs:</strong> component states, architecture, motion, theming, and system demos</li>
+            <li><strong>Playground:</strong> integration-first surface for manual validation</li>
+            <li><strong>Repository:</strong> Changesets, strict coverage, CI, release PR automation</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Package layers</h2>
+          <p><code>tokens -> themes -> primitives -> core -> systems -> widgets -> page-templates -> apps</code></p>
+          <p>
+            Route-level logic stays in apps. Reusable composition belongs in widgets and page
+            templates. Optional larger capabilities live in system packages.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>OSS baseline</h2>
+          <p>
+            The repository includes a license, code of conduct, security policy, issue templates,
+            CI, Changesets-based release automation, strict `100/100/100/100` coverage, and
+            Dependabot maintenance.
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

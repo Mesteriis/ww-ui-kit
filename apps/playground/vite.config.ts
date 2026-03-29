@@ -4,9 +4,10 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 import { workspaceAliases } from '../../vite.aliases';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? './' : '/',
   plugins: [vue(), tsconfigPaths()],
   resolve: {
     alias: workspaceAliases
   }
-});
+}));

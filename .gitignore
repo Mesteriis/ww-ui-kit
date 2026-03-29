@@ -1,10 +1,43 @@
+# Dependencies
 node_modules
+.pnpm-store
+
+# Build output
 dist
 coverage
-.turbo
-.pnpm-store
-.DS_Store
-.idea
 storybook-static
 playwright-report
+test-results
+site-dist
+
+# Tool caches
+.turbo
+.cache
+.vite
+.eslintcache
+
+# Local environment files
+.env.local
+.env.*.local
+.envrc
+
+# IDEs and editors
+.idea
+.vscode
+.fleet
+*.iml
+*.swp
+*.swo
+*.orig
+
+# OS files
+.DS_Store
+
+# TypeScript incremental state
 *.tsbuildinfo
+
+# Package manager logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*

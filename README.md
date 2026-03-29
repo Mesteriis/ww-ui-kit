@@ -1,6 +1,22 @@
 # Belovodye UiKit Monorepo
 
+[![CI](https://github.com/Mesteriis/ww-ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/Mesteriis/ww-ui-kit/actions/workflows/ci.yml)
+[![GitHub Pages](https://github.com/Mesteriis/ww-ui-kit/actions/workflows/pages.yml/badge.svg)](https://github.com/Mesteriis/ww-ui-kit/actions/workflows/pages.yml)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-0a7f3f)](https://github.com/Mesteriis/ww-ui-kit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-111827.svg)](./LICENSE)
+[![Docs](https://img.shields.io/badge/docs-Storybook-ff4785)](https://mesteriis.github.io/ww-ui-kit/docs/)
+[![Playground](https://img.shields.io/badge/demo-Playground-2563eb)](https://mesteriis.github.io/ww-ui-kit/playground/)
+
 Production-grade Vue 3 + TypeScript foundation for Belovodye UiKit. The current scope covers tokens, themes, primitives, core components, motion foundation, overlay/layer foundation, optional feature adapters, widget shells, and page-template shells.
+
+Repository hygiene defaults are documented in [CONTRIBUTING.md](./CONTRIBUTING.md). Local editor files, caches, coverage output, and build artifacts are ignored by default, and line endings are normalized through [`.gitattributes`](./.gitattributes).
+
+## Project links
+
+- OSS site: `https://mesteriis.github.io/ww-ui-kit/`
+- Storybook docs: `https://mesteriis.github.io/ww-ui-kit/docs/`
+- Playground: `https://mesteriis.github.io/ww-ui-kit/playground/`
+- GitHub repository: `https://github.com/Mesteriis/ww-ui-kit`
 
 ## Architecture
 
@@ -41,6 +57,42 @@ Core CSS only consumes semantic and component variables. Raw palette values, eas
 - `@ww/tsconfig`
 - `@ww/docs`
 - `@ww/playground`
+
+## Repository automation
+
+- GitHub Actions `CI` runs `pnpm lint`, `pnpm typecheck`, `pnpm test:coverage`, and `pnpm build`.
+- GitHub Actions `Release PR` integrates with Changesets, maintains the versioning PR on `main`, and creates canonical package tags after a version PR merge.
+- Publishing is still explicit and can be enabled later with registry secrets instead of assuming a publish token from day one.
+- GitHub Actions `GitHub Pages` publishes a single static site with:
+  - landing page at `/`
+  - Storybook docs at `/docs/`
+  - integration playground at `/playground/`
+
+## OSS baseline
+
+- [`LICENSE`](./LICENSE)
+- [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
+- [`SECURITY.md`](./SECURITY.md)
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- GitHub issue templates, PR template, CI, release automation, Dependabot, and Pages deployment
+
+## GitHub Pages
+
+The repository can publish one combined Pages artifact:
+
+- `/` -> OSS landing page
+- `/docs/` -> Storybook docs
+- `/playground/` -> Vite playground
+
+Build it locally with:
+
+```bash
+pnpm build:pages
+```
+
+This produces `site-dist/`, which is the exact artifact uploaded by the GitHub Pages workflow.
+- Dependabot tracks npm dependencies and GitHub Actions updates.
+- Issue and pull request templates keep repository hygiene consistent.
 
 ## Available themes
 

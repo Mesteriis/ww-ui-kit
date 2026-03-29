@@ -1,18 +1,26 @@
 {
   "name": "belovodye-uikit",
+  "description": "Belovodye UiKit monorepo with Vue 3 foundations, optional systems, Storybook docs, playground, and OSS-ready repository tooling.",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=22.15.3",
+    "pnpm": ">=10.32.1"
+  },
   "scripts": {
     "dev:docs": "pnpm --filter @ww/tokens build && pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && pnpm --filter @ww/core build && pnpm --filter @ww/charts-apex build && pnpm --filter @ww/signal-graph build && pnpm --filter @ww/widgets build && pnpm --filter @ww/page-templates build && pnpm --filter @ww/docs storybook",
     "dev:playground": "pnpm --filter @ww/playground dev",
     "build": "pnpm --filter @ww/tokens build && pnpm --filter @ww/themes build && pnpm --filter @ww/primitives build && pnpm --filter @ww/core build && pnpm --filter @ww/charts-apex build && pnpm --filter @ww/signal-graph build && pnpm --filter @ww/widgets build && pnpm --filter @ww/page-templates build && pnpm --filter @ww/playground build && pnpm --filter @ww/docs build",
+    "build:pages": "pnpm build && node ./scripts/build-pages.mjs",
     "lint": "eslint .",
     "typecheck": "pnpm --filter @ww/tokens typecheck && pnpm --filter @ww/themes typecheck && pnpm --filter @ww/primitives typecheck && pnpm --filter @ww/core typecheck && pnpm --filter @ww/charts-apex typecheck && pnpm --filter @ww/signal-graph typecheck && pnpm --filter @ww/widgets typecheck && pnpm --filter @ww/page-templates typecheck && pnpm --filter @ww/playground typecheck && pnpm --filter @ww/docs typecheck",
     "test": "vitest run --workspace vitest.workspace.ts",
     "test:coverage": "vitest run --workspace vitest.workspace.ts --coverage.enabled --coverage.provider=istanbul --coverage.thresholds.100 --coverage.reporter=text --coverage.reporter=json-summary --coverage.include='packages/*/src/**/*.{ts,vue}' --coverage.exclude='**/*.test.ts' --coverage.reportsDirectory=coverage/global-100",
     "changeset": "changeset",
     "version-packages": "changeset version",
+    "release:tag": "changeset tag",
     "release": "changeset publish"
   },
   "devDependencies": {
