@@ -23,6 +23,7 @@ Canonical source of truth: [`docs/governance/ai-ruleset/`](./ai-ruleset/README.m
 - Keep palette, easing, z-index, ThemeName, ThemeType, motion, overlays, and subtree theming inside sanctioned contracts.
 - Update stories, docs, playground proofs, tests, ADRs, and changesets when public or architectural behavior changes.
 - Keep reusable packages free of route, backend, and product orchestration; keep vendor-backed adapters out of core.
+- Treat ARIA, keyboard flow, focus handling, overlays, and reduced-motion behavior as structural contracts.
 <!-- AI_RULES_SYNC:END -->
 
 ## Mirrors
@@ -37,6 +38,12 @@ Those files stay thin on purpose. They mirror the always baseline and point back
 - [README](./ai-ruleset/README.md)
 - [Index](./ai-ruleset/index.md)
 - [Schema](./ai-ruleset/_schema.md)
+
+## Pattern syntax
+
+- `patterns` may be a single string or an array of strings.
+- Supported glob tokens are `*`, `**`, and `?`.
+- Unsupported syntax such as `{}`, `[]`, and `!` fails `pnpm check:ai-rules`.
 
 ## Commands
 

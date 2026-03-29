@@ -4,6 +4,7 @@ title: packages/tokens path rules
 apply: by file patterns
 patterns: packages/tokens/**/*
 ---
+
 Use this rule when editing token contracts.
 
 ## Do
@@ -20,5 +21,5 @@ Use this rule when editing token contracts.
 
 ## Update together with
 
-- `packages/themes/**/*`
 - `packages/tokens/README.md`
+- `packages/themes/README.md`

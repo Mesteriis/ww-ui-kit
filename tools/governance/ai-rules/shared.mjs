@@ -11,13 +11,14 @@ export const AI_RULE_OVERVIEW_PATH = 'docs/governance/ai-rules.md';
 export const AI_RULE_MIRROR_PATHS = Object.freeze([
   AI_RULE_OVERVIEW_PATH,
   'AGENTS.md',
-  '.github/copilot-instructions.md'
+  '.github/copilot-instructions.md',
 ]);
 export const AI_RULE_INDEX_SKIP = new Set([
   AI_RULESET_README_PATH,
   AI_RULESET_INDEX_PATH,
-  AI_RULESET_SCHEMA_PATH
+  AI_RULESET_SCHEMA_PATH,
 ]);
+export const AI_RULE_UNSUPPORTED_GLOB_CHARACTERS = Object.freeze(['{', '}', '[', ']', '!']);
 
 export function parseRuleFrontmatter(markdown) {
   const match = markdown.match(/^---\n([\s\S]+?)\n---\n/);
@@ -63,7 +64,7 @@ export function parseRuleFrontmatter(markdown) {
 
   return {
     attributes,
-    body: markdown.slice(match[0].length)
+    body: markdown.slice(match[0].length),
   };
 }
 
@@ -88,7 +89,7 @@ export function parseRuleFile(relativePath) {
     relativePath,
     markdown,
     body,
-    attributes
+    attributes,
   };
 }
 
@@ -103,6 +104,17 @@ export function normalizeToArray(value) {
 export function globToRegExp(pattern) {
   if (typeof pattern !== 'string' || pattern.trim().length === 0) {
     throw new Error('Pattern must be a non-empty string.');
+  }
+
+  const unsupportedCharacters = [...new Set(pattern.split(''))].filter((character) =>
+    AI_RULE_UNSUPPORTED_GLOB_CHARACTERS.includes(character)
+  );
+  if (unsupportedCharacters.length > 0) {
+    throw new Error(
+      `Unsupported AI rule glob syntax in pattern "${pattern}": ${unsupportedCharacters.join(
+        ', '
+      )}. Use simple "*", "**", and "?" tokens only.`
+    );
   }
 
   let source = '^';
@@ -146,13 +158,13 @@ export function globToRegExp(pattern) {
 export function getRuleContext() {
   const parsedRules = AI_RULE_MANIFEST.map((entry) => ({
     manifestEntry: entry,
-    file: parseRuleFile(entry.relativePath)
+    file: parseRuleFile(entry.relativePath),
   }));
 
   return {
     parsedRules,
     parsedRuleMap: new Map(parsedRules.map((entry) => [entry.manifestEntry.id, entry])),
-    mirroredRules: parsedRules.filter((entry) => entry.manifestEntry.mirroredInSummary)
+    mirroredRules: parsedRules.filter((entry) => entry.manifestEntry.mirroredInSummary),
   };
 }
 
@@ -199,6 +211,12 @@ Those files stay thin on purpose. They mirror the always baseline and point back
 - [Index](./ai-ruleset/index.md)
 - [Schema](./ai-ruleset/_schema.md)
 
+## Pattern syntax
+
+- \`patterns\` may be a single string or an array of strings.
+- Supported glob tokens are \`*\`, \`**\`, and \`?\`.
+- Unsupported syntax such as \`{}\`, \`[]\`, and \`!\` fails \`pnpm check:ai-rules\`.
+
 ## Commands
 
 - \`pnpm build:ai-rules\` refreshes the overview, mirrors, and generated index
@@ -206,9 +224,9 @@ Those files stay thin on purpose. They mirror the always baseline and point back
 `;
 }
 
-export function renderAgentsMirror() {
+function renderThinMirror(title) {
   const summaryLines = renderAlwaysSummaryLines().join('\n');
-  return `# Repository AI Rules
+  return `# ${title}
 
 Thin mirror of the canonical repository AI rules pack.
 
@@ -221,19 +239,12 @@ ${summaryLines}
 `;
 }
 
+export function renderAgentsMirror() {
+  return renderThinMirror('Repository AI Rules');
+}
+
 export function renderCopilotInstructions() {
-  const summaryLines = renderAlwaysSummaryLines().join('\n');
-  return `# Copilot Instructions
-
-Thin mirror of the canonical repository AI rules pack.
-
-Canonical source of truth: \`docs/governance/ai-ruleset/\`
-Human overview: \`docs/governance/ai-rules.md\`
-
-<!-- AI_RULES_SYNC:START -->
-${summaryLines}
-<!-- AI_RULES_SYNC:END -->
-`;
+  return renderThinMirror('Copilot Instructions');
 }
 
 function renderIndexSection(title, applyMode, rows) {
@@ -254,7 +265,7 @@ function renderIndexSection(title, applyMode, rows) {
 export function renderRuleIndex() {
   const groupedEntries = AI_RULE_APPLY_MODES.map((applyMode) => ({
     applyMode,
-    entries: AI_RULE_MANIFEST.filter((entry) => entry.apply === applyMode)
+    entries: AI_RULE_MANIFEST.filter((entry) => entry.apply === applyMode),
   }));
 
   return `# AI Ruleset Index
@@ -271,19 +282,19 @@ Apply modes:
 - \`manually\`
 
 ${groupedEntries
-    .map(({ applyMode, entries }) => {
-      const title =
-        applyMode === 'always'
-          ? 'Always rules'
-          : applyMode === 'by model decision'
-            ? 'By-model rules'
-            : applyMode === 'by file patterns'
-              ? 'By-path rules'
-              : 'Manual rules';
+  .map(({ applyMode, entries }) => {
+    const title =
+      applyMode === 'always'
+        ? 'Always rules'
+        : applyMode === 'by model decision'
+          ? 'By-model rules'
+          : applyMode === 'by file patterns'
+            ? 'By-path rules'
+            : 'Manual rules';
 
-      return renderIndexSection(title, applyMode, entries);
-    })
-    .join('\n\n')}
+    return renderIndexSection(title, applyMode, entries);
+  })
+  .join('\n\n')}
 `;
 }
 

@@ -18,17 +18,18 @@ This repository is not only a component library. It is a governed platform repo 
 - optional systems packages
 - widgets and page-template composition layers
 - Storybook as public UI contract
-- playground as consumer-proof harness
+- playground as stable harness plus maintainer workbench
 - ADR, catalog, and AI-rule governance enforced by CI
 
 ## Links
 
 - OSS site: `https://mesteriis.github.io/ww-ui-kit/`
 - Storybook docs: `https://mesteriis.github.io/ww-ui-kit/docs/`
-- Playground harness: `https://mesteriis.github.io/ww-ui-kit/playground/`
+- Playground harness + lab: `https://mesteriis.github.io/ww-ui-kit/playground/`
 - Changelog: [`CHANGELOG.md`](./CHANGELOG.md)
 - ADRs: [`docs/decisions`](./docs/decisions)
 - Architecture docs: [`docs/architecture`](./docs/architecture)
+- Troubleshooting: [`TROUBLESHOOTING.md`](./TROUBLESHOOTING.md)
 - AI rules pack: [`docs/governance/ai-ruleset/README.md`](./docs/governance/ai-ruleset/README.md)
 - AI rules overview: [`docs/governance/ai-rules.md`](./docs/governance/ai-rules.md)
 
@@ -39,6 +40,10 @@ This repository is not only a component library. It is a governed platform repo 
 - Vite `6`
 - Vitest `3`
 - Playwright for browser verification
+
+CI validates Node `24.x` only. The repository does not claim support outside that tested baseline.
+
+Root `build`, `typecheck`, `dev:docs`, and `dev:playground` commands are workspace-topology aware. Add dependencies to package manifests instead of extending hand-maintained root package chains.
 
 ## Architecture map
 
@@ -76,6 +81,7 @@ Canonical source of truth:
 - package classification: [`tools/governance/catalog/package-classification.mjs`](./tools/governance/catalog/package-classification.mjs)
 - layer rules: [`tools/governance/catalog/layer-rules.mjs`](./tools/governance/catalog/layer-rules.mjs)
 - public surface manifest: [`tools/governance/catalog/public-surface-manifest.mjs`](./tools/governance/catalog/public-surface-manifest.mjs)
+- playground lab manifest: [`tools/governance/catalog/playground-lab-manifest.mjs`](./tools/governance/catalog/playground-lab-manifest.mjs)
 
 ## Public vs internal
 
@@ -84,6 +90,8 @@ Public API is defined by:
 1. package export maps
 2. the public surface manifest
 3. required docs, stories, playground coverage, and tests
+
+Public visual surfaces also carry lab eligibility in the adjacent playground lab manifest.
 
 Internal-only surfaces are not part of the supported consumer contract even if they exist under `src/internal/*` or app code.
 
@@ -130,9 +138,7 @@ Then build up in this order:
 Scoped theming:
 
 ```html
-<section data-ui-theme="belovodye" data-ui-theme-type="light">
-  ...
-</section>
+<section data-ui-theme="belovodye" data-ui-theme-type="light">...</section>
 ```
 
 Overlays inherit subtree themes through the existing theme-aware portal system. Do not manually invent overlay mounting rules in app code.
@@ -210,6 +216,7 @@ Theme rules:
 - `ThemeType` is derived metadata
 - type is not a second free axis
 - use `setTheme(themeName, target?)` instead of manually drifting attributes
+- `color-scheme` is owned by the shared `data-ui-theme-type` CSS contract, not duplicated through inline runtime styles
 
 ## Testing architecture
 
@@ -221,19 +228,31 @@ There are exactly three primary test contours:
 
 Root `pnpm test` runs all three.
 
+Playwright policy:
+
+- local runs use `retries=0`
+- CI uses retries and `trace: on-first-retry`
+- browser-level axe checks run on curated Storybook and playground flows instead of every possible surface
+
 Coverage and proof discipline is enforced by:
 
 - `pnpm check:catalog`
 - `pnpm check:stories`
 - `pnpm check:docs`
 - `pnpm check:playground-coverage`
+- `pnpm check:playground-lab`
 - `pnpm check:adr`
 - `pnpm check:ai-rules`
 - `pnpm check:architecture`
 
 Storybook is the public UI contract.
 
-Playground is the real consumer-proof harness. It contains stable scenarios for:
+Playground has two explicit roles:
+
+- `/testing/*` is the real consumer-proof harness. It contains stable scenarios for real multi-package composition.
+- `/lab/*` is the schema-driven maintainer workbench for lab-eligible visual surfaces.
+
+Harness coverage stays focused on:
 
 - themes
 - overlays
@@ -244,6 +263,14 @@ Playground is the real consumer-proof harness. It contains stable scenarios for:
 - signal graph
 - layered composition
 
+Lab coverage stays focused on:
+
+- one tab per lab-eligible visual surface
+- sticky inspector controls
+- single preview and curated matrix preview
+- copyable config output
+- downstream usage and dependency inspection
+
 ## Docs as contract
 
 This repo treats docs as part of the engineering contract:
@@ -251,7 +278,8 @@ This repo treats docs as part of the engineering contract:
 - package README files explain boundaries
 - architecture docs explain placement and layer rules
 - Storybook proves public UI states
-- playground proves real multi-package composition
+- playground `/testing/*` proves real multi-package composition
+- playground `/lab/*` gives maintainers a governed constructor for visual public surfaces
 - ADRs capture architecture-sensitive decisions
 
 See [`docs/architecture/docs-as-contract.md`](./docs/architecture/docs-as-contract.md).
@@ -298,6 +326,8 @@ Apply modes:
 - `by file patterns`
 - `manually`
 
+Path patterns may be a string or an array of strings. The matcher intentionally supports only `*`, `**`, and `?`; unsupported glob syntax such as `{}`, `[]`, and `!` fails `pnpm check:ai-rules`.
+
 `pnpm build:ai-rules` refreshes the overview, mirrors, and generated rules index.
 `pnpm check:ai-rules` fails if the rule pack, generated views, or mirrors drift.
 
@@ -323,10 +353,15 @@ pnpm install
 pnpm dev:docs
 pnpm dev:playground
 
+pnpm format
+pnpm format:check
+
 pnpm check:catalog
 pnpm check:stories
 pnpm check:docs
 pnpm check:playground-coverage
+pnpm build:playground-lab
+pnpm check:playground-lab
 pnpm check:adr
 pnpm build:ai-rules
 pnpm check:ai-rules
@@ -357,3 +392,4 @@ pnpm verify
 - [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
 - [`SECURITY.md`](./SECURITY.md)
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- [`TROUBLESHOOTING.md`](./TROUBLESHOOTING.md)

@@ -11,4 +11,5 @@ Human overview: `docs/governance/ai-rules.md`
 - Keep palette, easing, z-index, ThemeName, ThemeType, motion, overlays, and subtree theming inside sanctioned contracts.
 - Update stories, docs, playground proofs, tests, ADRs, and changesets when public or architectural behavior changes.
 - Keep reusable packages free of route, backend, and product orchestration; keep vendor-backed adapters out of core.
+- Treat ARIA, keyboard flow, focus handling, overlays, and reduced-motion behavior as structural contracts.
 <!-- AI_RULES_SYNC:END -->

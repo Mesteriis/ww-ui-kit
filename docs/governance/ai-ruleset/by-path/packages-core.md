@@ -4,6 +4,7 @@ title: packages/core path rules
 apply: by file patterns
 patterns: packages/core/**/*
 ---
+
 Use this rule when editing styled reusable components.
 
 ## Do
@@ -20,5 +21,6 @@ Use this rule when editing styled reusable components.
 
 ## Update together with
 
+- `packages/core/README.md`
 - `tools/governance/catalog/public-surface-manifest.mjs`
-- `apps/docs/**/*`
+- `tools/governance/catalog/storybook-requirements.mjs`

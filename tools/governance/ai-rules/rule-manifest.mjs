@@ -2,7 +2,87 @@ export const AI_RULE_APPLY_MODES = Object.freeze([
   'always',
   'by model decision',
   'by file patterns',
-  'manually'
+  'manually',
+]);
+
+export const AI_RULE_LAYER_TAGS = Object.freeze([
+  'tokens',
+  'themes',
+  'primitives',
+  'core',
+  'system',
+  'widget',
+  'page-template',
+  'app',
+  'third-party-adapter',
+]);
+
+export const AI_RULE_AREA_TAGS = Object.freeze([
+  'accessibility',
+  'adr',
+  'ai-rules',
+  'architecture',
+  'architecture-docs',
+  'audit',
+  'automation',
+  'boundaries',
+  'build',
+  'catalog',
+  'ci',
+  'core',
+  'css',
+  'data-grid',
+  'decisions',
+  'docs',
+  'docs-app',
+  'exports',
+  'focus',
+  'github',
+  'governance',
+  'keyboard',
+  'lab',
+  'maintainer',
+  'maintenance',
+  'migration',
+  'motion',
+  'overlay',
+  'packages',
+  'page-templates',
+  'placement',
+  'playground',
+  'primitives',
+  'public-api',
+  'release',
+  'reuse',
+  'root-config',
+  'scripts',
+  'signal-graph',
+  'stability',
+  'storybook',
+  'styles',
+  'systems',
+  'testing',
+  'themes',
+  'tokens',
+  'tooling',
+  'topology',
+  'widgets',
+  'workflows',
+  'changesets',
+  'third-party',
+]);
+
+export const AI_RULE_PACKAGE_TAGS = Object.freeze([
+  '@ww/core',
+  '@ww/data-grid',
+  '@ww/docs',
+  '@ww/page-templates',
+  '@ww/playground',
+  '@ww/primitives',
+  '@ww/signal-graph',
+  '@ww/themes',
+  '@ww/tokens',
+  '@ww/widgets',
 ]);
 
 export const AI_RULE_MANIFEST = Object.freeze([
@@ -11,10 +91,19 @@ export const AI_RULE_MANIFEST = Object.freeze([
     title: 'Preserve canonical layer order and placement discipline',
     relativePath: 'docs/governance/ai-ruleset/always/00-layer-placement.md',
     apply: 'always',
-    layerTags: ['tokens', 'themes', 'primitives', 'core', 'system', 'widget', 'page-template', 'app'],
+    layerTags: [
+      'tokens',
+      'themes',
+      'primitives',
+      'core',
+      'system',
+      'widget',
+      'page-template',
+      'app',
+    ],
     areaTags: ['architecture', 'placement'],
     mirroredInSummary: true,
-    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/placement-rules.md']
+    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/placement-rules.md'],
   },
   {
     id: 'ai-always-public-api-discipline',
@@ -23,25 +112,30 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'always',
     areaTags: ['public-api', 'catalog'],
     mirroredInSummary: true,
-    relatedDocs: ['docs/architecture/public-api-discipline.md']
+    relatedDocs: ['docs/architecture/public-api-discipline.md'],
   },
   {
     id: 'ai-always-visual-runtime-contracts',
-    title: 'Keep visual tokens, theme axes, motion, overlays, and z-index inside sanctioned contracts',
+    title:
+      'Keep visual tokens, theme axes, motion, overlays, and z-index inside sanctioned contracts',
     relativePath: 'docs/governance/ai-ruleset/always/02-visual-runtime-contracts.md',
     apply: 'always',
     areaTags: ['themes', 'motion', 'overlay'],
     mirroredInSummary: true,
-    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/golden-path.md']
+    relatedDocs: ['docs/architecture/layer-governance.md', 'docs/architecture/golden-path.md'],
   },
   {
     id: 'ai-always-proof-sync',
-    title: 'Synchronize stories, docs, playground proofs, tests, ADRs, and changesets with public changes',
+    title:
+      'Synchronize stories, docs, playground proofs, tests, ADRs, and changesets with public changes',
     relativePath: 'docs/governance/ai-ruleset/always/03-proof-sync.md',
     apply: 'always',
     areaTags: ['storybook', 'docs', 'playground', 'testing', 'adr', 'changesets'],
     mirroredInSummary: true,
-    relatedDocs: ['docs/architecture/docs-as-contract.md', 'docs/architecture/testing-architecture.md']
+    relatedDocs: [
+      'docs/architecture/docs-as-contract.md',
+      'docs/architecture/testing-architecture.md',
+    ],
   },
   {
     id: 'ai-always-reuse-boundaries',
@@ -51,7 +145,16 @@ export const AI_RULE_MANIFEST = Object.freeze([
     layerTags: ['core', 'system', 'widget', 'page-template', 'third-party-adapter'],
     areaTags: ['reuse', 'boundaries'],
     mirroredInSummary: true,
-    relatedDocs: ['docs/architecture/placement-rules.md', 'docs/architecture/golden-path.md']
+    relatedDocs: ['docs/architecture/placement-rules.md', 'docs/architecture/golden-path.md'],
+  },
+  {
+    id: 'ai-always-accessibility-contracts',
+    title: 'Treat accessibility contracts as structural UI behavior',
+    relativePath: 'docs/governance/ai-ruleset/always/05-accessibility-contracts.md',
+    apply: 'always',
+    areaTags: ['accessibility', 'keyboard', 'focus', 'motion', 'overlay'],
+    mirroredInSummary: true,
+    relatedDocs: ['docs/architecture/testing-architecture.md', 'docs/architecture/golden-path.md'],
   },
   {
     id: 'ai-model-architecture-sensitive-changes',
@@ -59,7 +162,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-model/00-architecture-sensitive-changes.md',
     apply: 'by model decision',
     areaTags: ['architecture', 'adr', 'governance'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-model-public-api-changes',
@@ -67,7 +170,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-model/01-public-api-changes.md',
     apply: 'by model decision',
     areaTags: ['public-api', 'exports', 'catalog'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-model-new-package-or-topology',
@@ -75,7 +178,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-model/02-new-package-or-topology.md',
     apply: 'by model decision',
     areaTags: ['packages', 'topology'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-model-testing-and-docs-contract',
@@ -83,7 +186,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-model/03-testing-and-docs-contract.md',
     apply: 'by model decision',
     areaTags: ['testing', 'docs', 'storybook', 'playground'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-model-release-and-stability',
@@ -91,7 +194,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-model/04-release-and-stability.md',
     apply: 'by model decision',
     areaTags: ['stability', 'release', 'changesets'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-model-new-layered-surface',
@@ -100,7 +203,15 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by model decision',
     layerTags: ['system', 'widget', 'page-template'],
     areaTags: ['placement', 'systems', 'widgets', 'page-templates'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
+  },
+  {
+    id: 'ai-model-css-architecture',
+    title: 'Apply CSS architecture and token discipline',
+    relativePath: 'docs/governance/ai-ruleset/by-model/06-css-architecture.md',
+    apply: 'by model decision',
+    areaTags: ['css', 'styles', 'themes', 'tokens'],
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-tokens',
@@ -109,7 +220,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/tokens'],
     areaTags: ['tokens'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-themes',
@@ -118,7 +229,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/themes'],
     areaTags: ['themes'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-primitives',
@@ -127,7 +238,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/primitives'],
     areaTags: ['primitives', 'motion', 'overlay'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-core',
@@ -136,7 +247,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/core'],
     areaTags: ['core'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-data-grid',
@@ -145,7 +256,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/data-grid'],
     areaTags: ['systems', 'data-grid'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-signal-graph',
@@ -154,7 +265,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/signal-graph'],
     areaTags: ['systems', 'signal-graph'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-widgets',
@@ -163,7 +274,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/widgets'],
     areaTags: ['widgets'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-page-templates',
@@ -172,7 +283,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/page-templates'],
     areaTags: ['page-templates'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-packages-third-party',
@@ -181,7 +292,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     layerTags: ['third-party-adapter'],
     areaTags: ['third-party'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-apps-docs',
@@ -190,7 +301,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/docs'],
     areaTags: ['storybook', 'docs-app'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-apps-playground',
@@ -199,7 +310,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     apply: 'by file patterns',
     packageTags: ['@ww/playground'],
     areaTags: ['playground'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-docs-decisions',
@@ -207,7 +318,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-path/docs-decisions.md',
     apply: 'by file patterns',
     areaTags: ['adr', 'decisions'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-docs-architecture',
@@ -215,7 +326,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-path/docs-architecture.md',
     apply: 'by file patterns',
     areaTags: ['architecture-docs'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-tools-governance',
@@ -223,7 +334,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-path/tools-governance.md',
     apply: 'by file patterns',
     areaTags: ['governance', 'automation'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-scripts',
@@ -231,7 +342,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-path/scripts.md',
     apply: 'by file patterns',
     areaTags: ['scripts', 'build'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-path-github-workflows',
@@ -239,7 +350,15 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/by-path/github-workflows.md',
     apply: 'by file patterns',
     areaTags: ['github', 'workflows', 'ci'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
+  },
+  {
+    id: 'ai-path-root-config',
+    title: 'root config path rules',
+    relativePath: 'docs/governance/ai-ruleset/by-path/root-config.md',
+    apply: 'by file patterns',
+    areaTags: ['tooling', 'root-config', 'ci'],
+    mirroredInSummary: false,
   },
   {
     id: 'ai-manual-release-maintainer',
@@ -247,7 +366,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/manual/release-maintainer.md',
     apply: 'manually',
     areaTags: ['release', 'maintainer'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-manual-adr-migration',
@@ -255,7 +374,7 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/manual/adr-migration.md',
     apply: 'manually',
     areaTags: ['adr', 'migration'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
   },
   {
     id: 'ai-manual-package-topology-audit',
@@ -263,7 +382,15 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/manual/package-topology-audit.md',
     apply: 'manually',
     areaTags: ['topology', 'audit'],
-    mirroredInSummary: false
+    mirroredInSummary: false,
+  },
+  {
+    id: 'ai-manual-playground-lab-maintenance',
+    title: 'Playground lab taxonomy and schema maintenance',
+    relativePath: 'docs/governance/ai-ruleset/manual/playground-lab-maintenance.md',
+    apply: 'manually',
+    areaTags: ['playground', 'lab', 'maintenance'],
+    mirroredInSummary: false,
   },
   {
     id: 'ai-manual-rule-pack-maintenance',
@@ -271,8 +398,8 @@ export const AI_RULE_MANIFEST = Object.freeze([
     relativePath: 'docs/governance/ai-ruleset/manual/rule-pack-maintenance.md',
     apply: 'manually',
     areaTags: ['ai-rules', 'maintenance'],
-    mirroredInSummary: false
-  }
+    mirroredInSummary: false,
+  },
 ]);
 
 export const AI_RULE_MANIFEST_MAP = Object.freeze(

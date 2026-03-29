@@ -41,6 +41,10 @@ Supporting decisions:
 - `AGENTS.md` and `.github/copilot-instructions.md` remain thin generated mirrors of the always baseline.
 - `tools/governance/ai-rules/rule-manifest.mjs` becomes the machine-readable inventory of the pack.
 - `check:ai-rules` validates rule frontmatter, apply-mode contracts, manifest coverage, generated index, and mirror sync.
+- Accessibility contracts such as ARIA, keyboard flow, focus ownership, overlay focus handling, and reduced-motion behavior belong in the always baseline rather than ad hoc path rules.
+- Root config files get explicit path-based AI rules because toolchain drift changes repository behavior even when package code does not move.
+- Path patterns stay intentionally small and explicit: `patterns` may be a string or array of strings, and unsupported glob syntax such as `{}`, `[]`, and `!` fails validation instead of being interpreted loosely.
+- Manifest metadata stays honest through validated `layerTags`, `areaTags`, and `packageTags` allow-lists instead of half-dead future-facing fields.
 
 ## Consequences
 
@@ -48,6 +52,8 @@ Supporting decisions:
 - Path-specific rules can point agents at the right source-of-truth files without bloating the always baseline.
 - Thin mirrors stay practical for tools that only need the always baseline and a pointer to the canonical pack.
 - Governance automation becomes stricter because orphan rules, invalid frontmatter, and stale generated views fail CI.
+- Agents now get accessibility and root-config guidance from the canonical pack without creating a second rules system.
+- The rules pack keeps a deliberately small glob model, which is less expressive than full minimatch syntax but safer for deterministic CI validation.
 
 ## Alternatives
 
