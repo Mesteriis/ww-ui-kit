@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { MOTION_PRESETS } from './presets';
 import {
+  __motionRuntimeTestUtils,
   applyTransitionMotionVariables,
   clearTransitionMotionVariables,
   createTransitionGroupMotionStyle,
@@ -14,6 +15,7 @@ import {
 describe('motion runtime', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
@@ -43,6 +45,7 @@ describe('motion runtime', () => {
   });
 
   it('returns false when matchMedia is unavailable', () => {
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
@@ -70,6 +73,7 @@ describe('motion runtime', () => {
   });
 
   it('reduces motion at runtime when the user prefers reduced motion', () => {
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
@@ -80,6 +84,57 @@ describe('motion runtime', () => {
 
     expect(preset.durationToken).toBe('--ui-motion-duration-instant');
     expect(preset.enter.transform).toBe('none');
+  });
+
+  it('caches and updates the reduced-motion preference when the media query changes', () => {
+    let listener: (() => void) | undefined;
+    const mediaQuery = {
+      matches: false,
+      addEventListener: vi.fn((_type: string, nextListener: () => void) => {
+        listener = nextListener;
+      }),
+      removeEventListener: vi.fn(),
+    };
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn(() => mediaQuery),
+    });
+
+    expect(prefersReducedMotion()).toBe(false);
+    expect(window.matchMedia).toHaveBeenCalledTimes(1);
+
+    mediaQuery.matches = true;
+    listener?.();
+
+    expect(prefersReducedMotion()).toBe(true);
+    expect(window.matchMedia).toHaveBeenCalledTimes(1);
+  });
+
+  it('subscribes through the legacy addListener API when addEventListener is unavailable', () => {
+    let listener: (() => void) | undefined;
+    const mediaQuery = {
+      matches: false,
+      addListener: vi.fn((nextListener: () => void) => {
+        listener = nextListener;
+      }),
+      removeListener: vi.fn(),
+    };
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn(() => mediaQuery),
+    });
+
+    expect(prefersReducedMotion()).toBe(false);
+
+    mediaQuery.matches = true;
+    listener?.();
+
+    expect(prefersReducedMotion()).toBe(true);
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
+    listener?.();
+    expect(mediaQuery.removeListener).toHaveBeenCalledTimes(1);
   });
 
   it('falls back when a collapse preset is requested as transition motion', () => {

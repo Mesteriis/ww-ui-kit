@@ -1,4 +1,4 @@
-import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
+import { expect, test, type APIRequestContext, type Browser, type Page } from '@playwright/test';
 
 import { expectNoAxeViolations } from '../../shared/a11y';
 import { failOnConsoleErrors } from '../../shared/browser';
@@ -70,7 +70,7 @@ test('opens overlays inside Storybook stories', async ({ page, request }) => {
 });
 
 test('keeps curated Storybook surfaces free of browser-level accessibility violations', async ({
-  page,
+  browser,
   request,
 }) => {
   const cases: Array<{
@@ -93,17 +93,26 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
   ];
 
   for (const story of cases) {
+    const { context: storyContext, page: storyPage } = await openA11yStoryPage(browser);
     const storyId = await getStoryId(request, story.title);
-    await openStory(page, storyId, story.globals);
+    await openStory(storyPage, storyId, story.globals);
     if (story.setup) {
-      await story.setup(page);
+      await story.setup(storyPage);
     }
-    await expectNoAxeViolations(page, {
+    await expectNoAxeViolations(storyPage, {
       include: '#storybook-root',
       disabledRules: ['landmark-one-main', 'page-has-heading-one', 'region'],
     });
+    await storyContext.close();
   }
 });
+
+async function openA11yStoryPage(browser: Browser) {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await failOnConsoleErrors(page);
+  return { context, page };
+}
 
 test('runs canonical data-grid interactions inside Storybook', async ({ page, request }) => {
   const storyId = await getStoryId(request, 'Systems/Data Grid/Overview');

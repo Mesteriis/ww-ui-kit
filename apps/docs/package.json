@@ -15,8 +15,8 @@
     "vue": "^3.5.13"
   },
   "scripts": {
-    "storybook": "storybook dev -p 6006 --disable-telemetry",
-    "build": "storybook build --disable-telemetry",
-    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
+    "storybook": "node ../../scripts/check-node-version.mjs && storybook dev -p 6006 --disable-telemetry",
+    "build": "node ../../scripts/check-node-version.mjs && storybook build --disable-telemetry",
+    "typecheck": "node ../../scripts/check-node-version.mjs && vue-tsc -p tsconfig.json --noEmit"
   }
 }

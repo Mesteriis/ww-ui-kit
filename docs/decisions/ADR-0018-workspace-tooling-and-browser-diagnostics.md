@@ -29,6 +29,7 @@ The repository had several low-risk operational gaps:
 - formatting was enforced only indirectly through ESLint
 - CI ran every gate in one long sequential job even though most steps were independent
 - the Node `24.x` baseline existed in `.node-version` and `engines`, but contributor guidance did not explain that CI validates only that range
+- local root workflows still started on unsupported Node versions and only surfaced the mismatch as noisy downstream warnings
 - `@ww/primitives/useId()` used a mutable global counter even though Vue 3.5 provides SSR-safe ids
 
 These issues were current, low-risk, and worth fixing immediately without changing the layer model or weakening governance.
@@ -44,6 +45,8 @@ The repository now standardizes on the following operational model:
 5. Prettier is the repository formatter, with explicit `format` and `format:check` commands.
 6. CI is split into parallel jobs for governance, quality, unit, coverage, browser tests, and builds, with a final `verify` aggregate job keeping the required-check surface understandable.
 7. Contributor docs and troubleshooting explicitly state that Node `24.x` is the only validated baseline.
+8. Root pnpm workflows and `pnpm install` fail fast through a shared Node-version check instead of emitting only passive engine warnings.
+9. Playground and Storybook builds split heavy vendor/runtime chunks and scope chunk-size warnings to known infra-heavy baselines so new app-level regressions remain visible.
 
 ## Consequences
 
@@ -52,6 +55,8 @@ The repository now standardizes on the following operational model:
 - Accessibility regressions have an additional browser-level safety net without turning the repo into a blanket axe crawl.
 - Formatting expectations are explicit and reproducible.
 - CI is easier to reason about and faster in wall-clock time without dropping gates.
+- Unsupported local Node runtimes stop immediately instead of wasting cycles on misleading follow-on failures.
+- Playground and Storybook builds keep large, intentional vendor chunks isolated so warning noise is lower and real bundle regressions are easier to spot.
 - Public `useId()` consumers get SSR-safe ids without changing import paths or prefix semantics.
 
 ## Alternatives
@@ -81,12 +86,17 @@ Rejected because Vue 3.5 provides an instance-aware solution with a cleaner SSR 
 5. Split CI into parallel jobs and keep a final aggregate `verify` job.
 6. Update README, CONTRIBUTING, troubleshooting guidance, and AI rules.
 7. Record the public `useId()` fix through a changeset for `@ww/primitives`.
+8. Add a shared Node-version guard to root workflows and tune app build chunking where vendor-heavy bundles are intentional.
 
 ## Related artifacts
 
 - `package.json`
 - `.node-version`
+- `scripts/check-node-version.mjs`
 - `.github/workflows/ci.yml`
+- `apps/docs/.storybook/main.ts`
+- `apps/playground/vite.config.ts`
+- `vite.chunking.ts`
 - `packages/primitives/src/composables/useId.ts`
 - `tests/e2e/playwright.storybook.config.ts`
 - `tests/playground/playwright.playground.config.ts`

@@ -1,47 +1,27 @@
-import { onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue';
+import { onBeforeUnmount, ref, watch, type Ref } from 'vue';
 
-import { findNearestThemeContainer } from '@ww/primitives';
-import {
-  THEME_ATTRIBUTE,
-  THEME_TYPE_ATTRIBUTE,
-  getThemeType,
-  type ThemeName,
-  type ThemeType,
-} from '@ww/themes';
+import { observeThemeRuntime, readThemeRuntime } from '@ww/themes';
 
 import type { SignalGraphThemeState } from '../types';
 
-function isThemeName(value: string | null): value is ThemeName {
-  return Boolean(value && value.length > 0);
-}
-
-function isThemeType(value: string | null): value is ThemeType {
-  return value === 'light' || value === 'dark';
-}
-
 function resolveThemeState(source?: HTMLElement | null): SignalGraphThemeState {
-  const container = findNearestThemeContainer(source);
-  const rawThemeName = container?.getAttribute(THEME_ATTRIBUTE) ?? null;
-  const themeName = isThemeName(rawThemeName) ? rawThemeName : 'light';
-  const rawThemeType = container?.getAttribute(THEME_TYPE_ATTRIBUTE) ?? null;
-  const themeType = isThemeType(rawThemeType) ? rawThemeType : getThemeType(themeName);
+  const runtimeState = readThemeRuntime(source);
 
   return {
-    container,
-    themeName,
-    themeType,
+    container: runtimeState.container,
+    themeName: runtimeState.themeName,
+    themeType: runtimeState.themeType,
     revision: 0,
   };
 }
 
 export function useSignalGraphTheme(hostRef: Ref<HTMLElement | null>) {
   const themeState = ref<SignalGraphThemeState>(resolveThemeState());
-  let observer: MutationObserver | null = null;
-  let refreshScheduled = false;
+  let stopObserving: (() => void) | null = null;
 
   const disconnectObserver = () => {
-    observer?.disconnect();
-    observer = null;
+    stopObserving?.();
+    stopObserving = null;
   };
 
   const refreshThemeState = () => {
@@ -56,52 +36,34 @@ export function useSignalGraphTheme(hostRef: Ref<HTMLElement | null>) {
       ...nextState,
       revision: didChange ? previousState.revision + 1 : previousState.revision,
     };
-
-    disconnectObserver();
-
-    if (typeof MutationObserver === 'undefined' || typeof document === 'undefined') {
-      return;
-    }
-
-    observer = new MutationObserver(() => {
-      if (refreshScheduled) {
-        return;
-      }
-
-      refreshScheduled = true;
-      const flush = () => {
-        refreshScheduled = false;
-        refreshThemeState();
-      };
-
-      if (typeof queueMicrotask === 'function') {
-        queueMicrotask(flush);
-        return;
-      }
-
-      void Promise.resolve().then(flush);
-    });
-
-    const targets = new Set<HTMLElement>();
-    targets.add(document.documentElement);
-
-    if (themeState.value.container && themeState.value.container !== document.documentElement) {
-      targets.add(themeState.value.container);
-    }
-
-    for (const target of targets) {
-      observer.observe(target, {
-        attributes: true,
-        attributeFilter: [THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE, 'style'],
-      });
-    }
   };
 
-  watch(hostRef, refreshThemeState, { flush: 'post' });
+  const reconnectObserver = () => {
+    disconnectObserver();
+    stopObserving = observeThemeRuntime(hostRef.value, (nextRuntimeState) => {
+      const previousState = themeState.value;
+      const didChange =
+        previousState.container !== nextRuntimeState.container ||
+        previousState.themeName !== nextRuntimeState.themeName ||
+        previousState.themeType !== nextRuntimeState.themeType;
 
-  onMounted(() => {
-    refreshThemeState();
-  });
+      themeState.value = {
+        container: nextRuntimeState.container,
+        revision: didChange ? previousState.revision + 1 : previousState.revision,
+        themeName: nextRuntimeState.themeName,
+        themeType: nextRuntimeState.themeType,
+      };
+    });
+  };
+
+  watch(
+    hostRef,
+    () => {
+      refreshThemeState();
+      reconnectObserver();
+    },
+    { flush: 'post' }
+  );
 
   onBeforeUnmount(() => {
     disconnectObserver();

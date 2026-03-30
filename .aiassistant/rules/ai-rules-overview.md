@@ -18,6 +18,7 @@ Canonical source of truth: [`docs/governance/ai-ruleset/`](./ai-ruleset/README.m
 ## Always baseline
 
 <!-- AI_RULES_SYNC:START -->
+
 - Preserve the canonical layer order and choose placement from governance sources before adding code.
 - Treat export maps and the public surface manifest as the only supported public API.
 - Keep palette, easing, z-index, ThemeName, ThemeType, motion, overlays, and subtree theming inside sanctioned contracts.

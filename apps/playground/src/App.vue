@@ -1,29 +1,44 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 import { UiBadge } from '@ww/core';
 import {
+  THEME_DENSITIES,
+  THEME_MOTION_PROFILES,
+  THEME_PERSONALITIES,
   THEME_TYPES,
   getThemeMeta,
   getThemesByType,
-  setTheme,
+  patchThemeRuntime,
+  readThemeRuntime,
   type ThemeName,
+  type ThemeDensity,
+  type ThemeMotionProfile,
+  type ThemePersonality,
+  type ThemeRuntimeState,
   type ThemeType,
 } from '@ww/themes';
 
-import LabWorkbenchView from './lab/routes/LabWorkbenchView.vue';
 import { createInitialLabEntry } from './lab/runtime/lab-catalog';
 import {
   buildPlaygroundPath,
   parsePlaygroundRoute,
   type PlaygroundRoute,
 } from './shared/navigation/playground-route';
-import TestingHarnessView from './testing/routes/TestingHarnessView.vue';
+
+const TestingHarnessView = defineAsyncComponent(
+  () => import('./testing/routes/TestingHarnessView.vue')
+);
+const LabWorkbenchView = defineAsyncComponent(() => import('./lab/routes/LabWorkbenchView.vue'));
 
 const theme = ref<ThemeName>('belovodye');
 const themeFilter = ref<ThemeType | 'all'>('all');
+const density = ref<ThemeDensity>('default');
+const motionProfile = ref<ThemeMotionProfile>('balanced');
+const personality = ref<ThemePersonality>('neutral');
 const defaultSurfaceId = createInitialLabEntry().id;
 const route = ref(parsePlaygroundRoute(window.location.pathname, defaultSurfaceId));
+const themeRuntime = ref<ThemeRuntimeState>(readThemeRuntime());
 
 const currentTheme = computed(() => getThemeMeta(theme.value));
 const themeGroups = computed(() => {
@@ -48,9 +63,15 @@ watch(themeFilter, (nextFilter) => {
 });
 
 watch(
-  theme,
-  (nextTheme) => {
-    setTheme(nextTheme);
+  [theme, density, motionProfile, personality],
+  ([nextTheme, nextDensity, nextMotionProfile, nextPersonality]) => {
+    patchThemeRuntime({
+      density: nextDensity,
+      motionProfile: nextMotionProfile,
+      personality: nextPersonality,
+      themeName: nextTheme,
+    });
+    themeRuntime.value = readThemeRuntime();
   },
   { immediate: true }
 );
@@ -145,17 +166,60 @@ onBeforeUnmount(() => {
               </optgroup>
             </select>
           </label>
+          <label class="playground__theme-picker">
+            <span>Density</span>
+            <select
+              v-model="density"
+              aria-label="Playground density"
+              class="ui-input ui-select__control playground__select"
+            >
+              <option v-for="option in THEME_DENSITIES" :key="option" :value="option">
+                {{ option }}
+              </option>
+            </select>
+          </label>
+          <label class="playground__theme-picker">
+            <span>Motion profile</span>
+            <select
+              v-model="motionProfile"
+              aria-label="Playground motion profile"
+              class="ui-input ui-select__control playground__select"
+            >
+              <option v-for="option in THEME_MOTION_PROFILES" :key="option" :value="option">
+                {{ option }}
+              </option>
+            </select>
+          </label>
+          <label class="playground__theme-picker">
+            <span>Personality</span>
+            <select
+              v-model="personality"
+              aria-label="Playground personality"
+              class="ui-input ui-select__control playground__select"
+            >
+              <option v-for="option in THEME_PERSONALITIES" :key="option" :value="option">
+                {{ option }}
+              </option>
+            </select>
+          </label>
         </div>
 
         <div class="playground__theme-indicator">
           <UiBadge variant="brand">{{ currentTheme.label }}</UiBadge>
           <UiBadge>ThemeName: {{ currentTheme.name }}</UiBadge>
           <UiBadge>ThemeType: {{ currentTheme.type }}</UiBadge>
+          <UiBadge>Density: {{ themeRuntime.density }}</UiBadge>
+          <UiBadge>Motion: {{ themeRuntime.motionProfile }}</UiBadge>
+          <UiBadge>Personality: {{ themeRuntime.personality }}</UiBadge>
         </div>
       </div>
     </header>
 
-    <TestingHarnessView v-if="route.mode === 'testing'" :theme-meta="currentTheme" />
+    <TestingHarnessView
+      v-if="route.mode === 'testing'"
+      :theme-meta="currentTheme"
+      :theme-runtime="themeRuntime"
+    />
     <LabWorkbenchView
       v-else
       :surface-id="route.surfaceId"

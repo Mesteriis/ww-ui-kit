@@ -76,3 +76,12 @@
     opacity: 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-signal-graph__pulse,
+  .ui-signal-graph__pulse--reduced {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+    animation-iteration-count: 1;
+  }
+}

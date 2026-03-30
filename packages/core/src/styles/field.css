@@ -7,6 +7,9 @@
   color: var(--ui-field-label-color);
   font-size: var(--ui-field-label-size);
   font-weight: var(--ui-field-label-weight);
+  letter-spacing: var(--ui-text-letter-spacing-label);
+  text-transform: var(--ui-text-transform-label);
+  font-feature-settings: var(--ui-text-font-feature-settings-body);
 }
 
 .ui-field__control {

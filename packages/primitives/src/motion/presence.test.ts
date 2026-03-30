@@ -39,4 +39,16 @@ describe('motion presence', () => {
     expect(presence.isLeaving.value).toBe(false);
     expect(presence.isActive.value).toBe(true);
   });
+
+  it('can force-complete a leave cycle when a transition finalizer never arrives', () => {
+    const open = ref(false);
+    const presence = useMotionPresence(() => open.value);
+
+    presence.handleBeforeLeave();
+    expect(presence.isLeaving.value).toBe(true);
+
+    presence.forceCompleteLeave();
+    expect(presence.isLeaving.value).toBe(false);
+    expect(presence.isActive.value).toBe(false);
+  });
 });

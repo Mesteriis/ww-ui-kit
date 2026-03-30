@@ -24,6 +24,9 @@
   border-radius: var(--ui-tabs-trigger-radius);
   background: transparent;
   color: var(--ui-tabs-trigger-text);
+  letter-spacing: var(--ui-text-letter-spacing-label);
+  text-transform: var(--ui-text-transform-label);
+  font-feature-settings: var(--ui-text-font-feature-settings-body);
   cursor: pointer;
   transition: var(--ui-motion-transition-focus-ring);
 }

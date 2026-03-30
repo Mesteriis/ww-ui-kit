@@ -11,6 +11,7 @@ const flushThemeWork = async () => {
 
 describe('useSignalGraphTheme', () => {
   afterEach(() => {
+    vi.restoreAllMocks();
     vi.unstubAllGlobals();
     document.body.innerHTML = '';
     document.documentElement.removeAttribute('data-ui-theme');
@@ -64,9 +65,10 @@ describe('useSignalGraphTheme', () => {
 
   it('falls back for invalid metadata and missing observers', async () => {
     const originalObserver = globalThis.MutationObserver;
-    // @ts-expect-error test-only override
-    globalThis.MutationObserver = undefined;
-    vi.stubGlobal('queueMicrotask', undefined);
+    Object.defineProperty(globalThis, 'MutationObserver', {
+      configurable: true,
+      value: undefined,
+    });
 
     const Harness = defineComponent({
       setup(_, { expose }) {
@@ -90,84 +92,42 @@ describe('useSignalGraphTheme', () => {
     await flushThemeWork();
 
     const state = wrapper.vm as typeof wrapper.vm & {
-      refreshThemeState: () => void;
       themeState: {
         themeName: string;
         themeType: string;
       };
     };
 
-    state.refreshThemeState();
-    await flushThemeWork();
-
     expect(state.themeState.themeName).toBe('light');
     expect(state.themeState.themeType).toBe('light');
 
     wrapper.unmount();
-    globalThis.MutationObserver = originalObserver;
+    Object.defineProperty(globalThis, 'MutationObserver', {
+      configurable: true,
+      value: originalObserver,
+    });
   });
 
-  it('dedupes scheduled theme refreshes when queueMicrotask is unavailable', async () => {
-    vi.stubGlobal('queueMicrotask', undefined);
-
-    const Harness = defineComponent({
-      setup(_, { expose }) {
-        const hostRef = ref<HTMLElement | null>(null);
-        const state = useSignalGraphTheme(hostRef);
-        expose(state);
-        return () =>
-          h(
-            'section',
-            {
-              id: 'scope',
-              'data-ui-theme': 'light',
-              'data-ui-theme-type': 'light',
-            },
-            [h('div', { ref: hostRef })]
-          );
-      },
-    });
-
-    const wrapper = mount(Harness, { attachTo: document.body });
-    await flushThemeWork();
-
-    const state = wrapper.vm as typeof wrapper.vm & {
-      themeState: {
-        revision: number;
-      };
-    };
-
-    const scope = wrapper.get('#scope').element as HTMLElement;
-    scope.setAttribute('data-ui-theme', 'dark');
-    scope.setAttribute('data-ui-theme-type', 'dark');
-    scope.style.setProperty('--ui-surface-default', '#111827');
-    await Promise.resolve();
-    await Promise.resolve();
-    await nextTick();
-
-    expect(state.themeState.revision).toBeGreaterThan(0);
-
-    wrapper.unmount();
-  });
-
-  it('dedupes observer-triggered refreshes while a queueMicrotask callback is pending', async () => {
-    const scheduledCallbacks: VoidFunction[] = [];
-    vi.stubGlobal('queueMicrotask', (callback: VoidFunction) => {
-      scheduledCallbacks.push(callback);
-    });
-
+  it('does not recreate the mutation observer while the host stays in the same themed container', async () => {
     let observerCallback: MutationCallback | null = null;
+    const observe = vi.fn();
+    const disconnect = vi.fn();
+    const observerInstances: MockMutationObserver[] = [];
+
     class MockMutationObserver {
+      callback: MutationCallback;
+
       constructor(callback: MutationCallback) {
+        this.callback = callback;
         observerCallback = callback;
+        observerInstances.push(this);
       }
 
-      disconnect() {}
+      disconnect = disconnect;
 
-      observe() {}
+      observe = observe;
     }
 
-    const originalObserver = globalThis.MutationObserver;
     Object.defineProperty(globalThis, 'MutationObserver', {
       configurable: true,
       value: MockMutationObserver,
@@ -194,17 +154,17 @@ describe('useSignalGraphTheme', () => {
     const wrapper = mount(Harness, { attachTo: document.body });
     await flushThemeWork();
 
-    observerCallback?.([], {} as MutationObserver);
-    observerCallback?.([], {} as MutationObserver);
-    expect(scheduledCallbacks).toHaveLength(1);
+    expect(observerInstances).toHaveLength(1);
+    expect(observe).toHaveBeenCalledTimes(2);
 
-    scheduledCallbacks.shift()?.();
+    const scope = wrapper.get('#scope').element as HTMLElement;
+    scope.setAttribute('data-ui-theme', 'dark');
+    scope.setAttribute('data-ui-theme-type', 'dark');
+    observerCallback?.([], {} as MutationObserver);
     await flushThemeWork();
 
+    expect(observerInstances).toHaveLength(1);
+
     wrapper.unmount();
-    Object.defineProperty(globalThis, 'MutationObserver', {
-      configurable: true,
-      value: originalObserver,
-    });
   });
 });

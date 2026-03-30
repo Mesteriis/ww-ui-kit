@@ -706,6 +706,14 @@ export const lightTheme: ThemeContract = {
   'text-font-size-sm': 'var(--ui-font-size-sm)',
   'text-font-size-lg': 'var(--ui-font-size-lg)',
   'text-line-height-body': 'var(--ui-line-height-body)',
+  'text-letter-spacing-body': 'var(--ui-letter-spacing-body)',
+  'text-letter-spacing-label': 'var(--ui-letter-spacing-label)',
+  'text-letter-spacing-display': 'var(--ui-letter-spacing-display)',
+  'text-transform-label': 'var(--ui-text-transform-none)',
+  'text-font-feature-settings-body': 'var(--ui-font-feature-default)',
+  'text-font-feature-settings-display': 'var(--ui-font-feature-display)',
+  'text-font-smoothing-webkit': 'var(--ui-font-smoothing-webkit)',
+  'text-font-smoothing-moz': 'var(--ui-font-smoothing-moz)',
   'surface-canvas': 'var(--ui-neutral-50)',
   'surface-sunken': 'var(--ui-neutral-100)',
   'surface-default': 'var(--ui-neutral-0)',
@@ -1110,6 +1118,519 @@ const themeDefinitions = Object.freeze({
 } satisfies Record<string, ThemeDefinitionInput>);
 
 export type ThemeName = keyof typeof themeDefinitions;
+
+export const THEME_DENSITIES = ['compact', 'default', 'comfortable'] as const;
+export type ThemeDensity = (typeof THEME_DENSITIES)[number];
+
+export const THEME_MOTION_PROFILES = ['calm', 'balanced', 'expressive'] as const;
+export type ThemeMotionProfile = (typeof THEME_MOTION_PROFILES)[number];
+
+export const THEME_PERSONALITIES = ['neutral', 'accented'] as const;
+export type ThemePersonality = (typeof THEME_PERSONALITIES)[number];
+
+export const THEME_RESPONSIVE_BREAKPOINTS = Object.freeze({
+  md: '48rem',
+  lg: '72rem',
+});
+
+export type ThemeResponsiveBreakpoint = keyof typeof THEME_RESPONSIVE_BREAKPOINTS;
+
+export interface ThemeRuntimeOptions {
+  density: ThemeDensity;
+  motionProfile: ThemeMotionProfile;
+  personality: ThemePersonality;
+}
+
+type ThemeContractPatch = Partial<ThemeContract>;
+
+export interface ThemeResponsiveOverrides {
+  md?: ThemeContractPatch;
+  lg?: ThemeContractPatch;
+}
+
+export interface ThemeCapabilityOverrides {
+  density: Partial<Record<Exclude<ThemeDensity, 'default'>, ThemeContractPatch>>;
+  motionProfile: Partial<Record<Exclude<ThemeMotionProfile, 'balanced'>, ThemeContractPatch>>;
+  personality: Partial<Record<Exclude<ThemePersonality, 'neutral'>, ThemeContractPatch>>;
+  responsive: ThemeResponsiveOverrides;
+}
+
+export interface ThemeCapabilityMatrix {
+  foundations: readonly string[];
+  componentStyles: readonly string[];
+  personality: readonly string[];
+  systems: readonly string[];
+  density: readonly string[];
+  typography: readonly string[];
+  motion: readonly string[];
+  responsive: {
+    breakpoints: Readonly<Record<ThemeResponsiveBreakpoint, string>>;
+    tokens: readonly string[];
+  };
+  runtime: {
+    writableAttributes: readonly string[];
+    derivedAttributes: readonly string[];
+  };
+}
+
+const DEFAULT_THEME_RUNTIME_OPTIONS = Object.freeze<ThemeRuntimeOptions>({
+  density: 'default',
+  motionProfile: 'balanced',
+  personality: 'neutral',
+});
+
+function createDensityOverride(config: {
+  badgeHeight: string;
+  badgePaddingInline: string;
+  buttonHeightLg: string;
+  buttonHeightMd: string;
+  buttonHeightSm: string;
+  buttonPaddingInlineLg: string;
+  buttonPaddingInlineMd: string;
+  buttonPaddingInlineSm: string;
+  cardPadding: string;
+  dialogGap: string;
+  dialogPadding: string;
+  emptyStateGap: string;
+  fieldGap: string;
+  inputMinHeight: string;
+  inputPaddingBlock: string;
+  tabsListPadding: string;
+  tabsPanelPaddingBlock: string;
+  tabsTriggerHeight: string;
+  tabsTriggerPaddingInline: string;
+}) {
+  return {
+    'badge-height': config.badgeHeight,
+    'badge-padding-inline': config.badgePaddingInline,
+    'button-height-sm': config.buttonHeightSm,
+    'button-height-md': config.buttonHeightMd,
+    'button-height-lg': config.buttonHeightLg,
+    'button-padding-inline-sm': config.buttonPaddingInlineSm,
+    'button-padding-inline-md': config.buttonPaddingInlineMd,
+    'button-padding-inline-lg': config.buttonPaddingInlineLg,
+    'card-padding': config.cardPadding,
+    'dialog-gap': config.dialogGap,
+    'dialog-padding': config.dialogPadding,
+    'empty-state-gap': config.emptyStateGap,
+    'field-gap': config.fieldGap,
+    'input-min-height': config.inputMinHeight,
+    'input-padding-block': config.inputPaddingBlock,
+    'tabs-list-padding': config.tabsListPadding,
+    'tabs-panel-padding-block': config.tabsPanelPaddingBlock,
+    'tabs-trigger-height': config.tabsTriggerHeight,
+    'tabs-trigger-padding-inline': config.tabsTriggerPaddingInline,
+  } satisfies ThemeContractPatch;
+}
+
+function createMotionProfileOverride(config: {
+  collapseOpacityFactor: string;
+  durationLg: string;
+  durationMd: string;
+  durationSm: string;
+  durationXl: string;
+  easingStandard?: string;
+  feedbackShadowStrong: string;
+  overlayEasing: string;
+  scale102: string;
+  scale104: string;
+  stepDistanceSm: string;
+  stepDistanceXs: string;
+}) {
+  return {
+    'motion-collapse-opacity-duration-factor': config.collapseOpacityFactor,
+    'motion-duration-sm': config.durationSm,
+    'motion-duration-md': config.durationMd,
+    'motion-duration-lg': config.durationLg,
+    'motion-duration-xl': config.durationXl,
+    'motion-easing-standard': config.easingStandard ?? 'var(--ui-motion-easing-standard)',
+    'motion-scale-102': config.scale102,
+    'motion-scale-104': config.scale104,
+    'motion-distance-xs': config.stepDistanceXs,
+    'motion-distance-sm': config.stepDistanceSm,
+    'motion-feedback-shadow-strong': config.feedbackShadowStrong,
+    'motion-overlay-easing': config.overlayEasing,
+  } satisfies ThemeContractPatch;
+}
+
+function createResponsiveOverride(config: {
+  buttonHeightLg?: string;
+  cardPadding: string;
+  dialogPadding: string;
+  dialogWidth: string;
+  emptyStateGap: string;
+  emptyStateIconSize: string;
+  textFontSizeLg: string;
+}) {
+  return {
+    ...(config.buttonHeightLg ? { 'button-height-lg': config.buttonHeightLg } : {}),
+    'card-padding': config.cardPadding,
+    'dialog-padding': config.dialogPadding,
+    'dialog-width': config.dialogWidth,
+    'empty-state-gap': config.emptyStateGap,
+    'empty-state-icon-size': config.emptyStateIconSize,
+    'text-font-size-lg': config.textFontSizeLg,
+  } satisfies ThemeContractPatch;
+}
+
+const themeDensityOverrides = Object.freeze({
+  light: {
+    compact: createDensityOverride({
+      badgeHeight: '1.5rem',
+      badgePaddingInline: 'var(--ui-space-2)',
+      buttonHeightSm: '1.875rem',
+      buttonHeightMd: '2.25rem',
+      buttonHeightLg: '2.625rem',
+      buttonPaddingInlineSm: 'var(--ui-space-2)',
+      buttonPaddingInlineMd: 'var(--ui-space-3)',
+      buttonPaddingInlineLg: 'var(--ui-space-4)',
+      cardPadding: 'var(--ui-space-4)',
+      dialogGap: 'var(--ui-space-3)',
+      dialogPadding: 'var(--ui-space-5)',
+      emptyStateGap: 'var(--ui-space-3)',
+      fieldGap: 'var(--ui-space-1)',
+      inputMinHeight: '2.375rem',
+      inputPaddingBlock: '0.5rem',
+      tabsListPadding: 'var(--ui-space-1)',
+      tabsPanelPaddingBlock: 'var(--ui-space-3)',
+      tabsTriggerHeight: '2rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-3)',
+    }),
+    comfortable: createDensityOverride({
+      badgeHeight: '1.875rem',
+      badgePaddingInline: 'var(--ui-space-4)',
+      buttonHeightSm: '2.125rem',
+      buttonHeightMd: '2.75rem',
+      buttonHeightLg: '3.25rem',
+      buttonPaddingInlineSm: 'var(--ui-space-3)',
+      buttonPaddingInlineMd: 'var(--ui-space-5)',
+      buttonPaddingInlineLg: 'var(--ui-space-6)',
+      cardPadding: 'var(--ui-space-8)',
+      dialogGap: 'var(--ui-space-4)',
+      dialogPadding: 'var(--ui-space-8)',
+      emptyStateGap: 'var(--ui-space-5)',
+      fieldGap: 'var(--ui-space-3)',
+      inputMinHeight: '3rem',
+      inputPaddingBlock: '0.75rem',
+      tabsListPadding: 'var(--ui-space-2)',
+      tabsPanelPaddingBlock: 'var(--ui-space-5)',
+      tabsTriggerHeight: '2.75rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-5)',
+    }),
+  },
+  dark: {
+    compact: createDensityOverride({
+      badgeHeight: '1.5rem',
+      badgePaddingInline: 'var(--ui-space-2)',
+      buttonHeightSm: '1.875rem',
+      buttonHeightMd: '2.25rem',
+      buttonHeightLg: '2.625rem',
+      buttonPaddingInlineSm: 'var(--ui-space-2)',
+      buttonPaddingInlineMd: 'var(--ui-space-3)',
+      buttonPaddingInlineLg: 'var(--ui-space-4)',
+      cardPadding: 'var(--ui-space-4)',
+      dialogGap: 'var(--ui-space-3)',
+      dialogPadding: 'var(--ui-space-5)',
+      emptyStateGap: 'var(--ui-space-3)',
+      fieldGap: 'var(--ui-space-1)',
+      inputMinHeight: '2.375rem',
+      inputPaddingBlock: '0.5rem',
+      tabsListPadding: 'var(--ui-space-1)',
+      tabsPanelPaddingBlock: 'var(--ui-space-3)',
+      tabsTriggerHeight: '2rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-3)',
+    }),
+    comfortable: createDensityOverride({
+      badgeHeight: '1.875rem',
+      badgePaddingInline: 'var(--ui-space-4)',
+      buttonHeightSm: '2.125rem',
+      buttonHeightMd: '2.75rem',
+      buttonHeightLg: '3.25rem',
+      buttonPaddingInlineSm: 'var(--ui-space-3)',
+      buttonPaddingInlineMd: 'var(--ui-space-5)',
+      buttonPaddingInlineLg: 'var(--ui-space-6)',
+      cardPadding: 'var(--ui-space-8)',
+      dialogGap: 'var(--ui-space-4)',
+      dialogPadding: 'var(--ui-space-8)',
+      emptyStateGap: 'var(--ui-space-5)',
+      fieldGap: 'var(--ui-space-3)',
+      inputMinHeight: '3rem',
+      inputPaddingBlock: '0.75rem',
+      tabsListPadding: 'var(--ui-space-2)',
+      tabsPanelPaddingBlock: 'var(--ui-space-5)',
+      tabsTriggerHeight: '2.75rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-5)',
+    }),
+  },
+  belovodye: {
+    compact: createDensityOverride({
+      badgeHeight: '1.5rem',
+      badgePaddingInline: 'var(--ui-space-2)',
+      buttonHeightSm: '1.875rem',
+      buttonHeightMd: '2.25rem',
+      buttonHeightLg: '2.625rem',
+      buttonPaddingInlineSm: 'var(--ui-space-2)',
+      buttonPaddingInlineMd: 'var(--ui-space-3)',
+      buttonPaddingInlineLg: 'var(--ui-space-4)',
+      cardPadding: 'var(--ui-space-4)',
+      dialogGap: 'var(--ui-space-3)',
+      dialogPadding: 'var(--ui-space-5)',
+      emptyStateGap: 'var(--ui-space-3)',
+      fieldGap: 'var(--ui-space-1)',
+      inputMinHeight: '2.375rem',
+      inputPaddingBlock: '0.5rem',
+      tabsListPadding: 'var(--ui-space-1)',
+      tabsPanelPaddingBlock: 'var(--ui-space-3)',
+      tabsTriggerHeight: '2rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-3)',
+    }),
+    comfortable: createDensityOverride({
+      badgeHeight: '1.875rem',
+      badgePaddingInline: 'var(--ui-space-4)',
+      buttonHeightSm: '2.125rem',
+      buttonHeightMd: '2.75rem',
+      buttonHeightLg: '3.25rem',
+      buttonPaddingInlineSm: 'var(--ui-space-3)',
+      buttonPaddingInlineMd: 'var(--ui-space-5)',
+      buttonPaddingInlineLg: 'var(--ui-space-6)',
+      cardPadding: 'var(--ui-space-8)',
+      dialogGap: 'var(--ui-space-4)',
+      dialogPadding: 'var(--ui-space-8)',
+      emptyStateGap: 'var(--ui-space-5)',
+      fieldGap: 'var(--ui-space-3)',
+      inputMinHeight: '3rem',
+      inputPaddingBlock: '0.75rem',
+      tabsListPadding: 'var(--ui-space-2)',
+      tabsPanelPaddingBlock: 'var(--ui-space-5)',
+      tabsTriggerHeight: '2.75rem',
+      tabsTriggerPaddingInline: 'var(--ui-space-5)',
+    }),
+  },
+} satisfies Record<ThemeName, ThemeCapabilityOverrides['density']>);
+
+const themeMotionProfileOverrides = Object.freeze({
+  light: {
+    calm: createMotionProfileOverride({
+      collapseOpacityFactor: '0.65',
+      durationSm: '190ms',
+      durationMd: '240ms',
+      durationLg: '300ms',
+      durationXl: '380ms',
+      feedbackShadowStrong:
+        '0 12px 30px color-mix(in srgb, var(--ui-border-focus) 14%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-decelerate)',
+      scale102: '1.015',
+      scale104: '1.03',
+      stepDistanceXs: '1px',
+      stepDistanceSm: '3px',
+    }),
+    expressive: createMotionProfileOverride({
+      collapseOpacityFactor: '0.92',
+      durationSm: '140ms',
+      durationMd: '180ms',
+      durationLg: '220ms',
+      durationXl: '300ms',
+      feedbackShadowStrong:
+        '0 18px 46px color-mix(in srgb, var(--ui-border-focus) 22%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-emphasized)',
+      scale102: '1.03',
+      scale104: '1.06',
+      stepDistanceXs: '3px',
+      stepDistanceSm: '6px',
+    }),
+  },
+  dark: {
+    calm: createMotionProfileOverride({
+      collapseOpacityFactor: '0.65',
+      durationSm: '190ms',
+      durationMd: '240ms',
+      durationLg: '300ms',
+      durationXl: '380ms',
+      feedbackShadowStrong:
+        '0 12px 30px color-mix(in srgb, var(--ui-border-focus) 14%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-decelerate)',
+      scale102: '1.015',
+      scale104: '1.03',
+      stepDistanceXs: '1px',
+      stepDistanceSm: '3px',
+    }),
+    expressive: createMotionProfileOverride({
+      collapseOpacityFactor: '0.92',
+      durationSm: '140ms',
+      durationMd: '180ms',
+      durationLg: '220ms',
+      durationXl: '300ms',
+      feedbackShadowStrong:
+        '0 18px 46px color-mix(in srgb, var(--ui-border-focus) 22%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-emphasized)',
+      scale102: '1.03',
+      scale104: '1.06',
+      stepDistanceXs: '3px',
+      stepDistanceSm: '6px',
+    }),
+  },
+  belovodye: {
+    calm: createMotionProfileOverride({
+      collapseOpacityFactor: '0.62',
+      durationSm: '210ms',
+      durationMd: '260ms',
+      durationLg: '320ms',
+      durationXl: '420ms',
+      feedbackShadowStrong:
+        '0 14px 34px color-mix(in srgb, var(--ui-border-focus) 16%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-decelerate)',
+      scale102: '1.012',
+      scale104: '1.024',
+      stepDistanceXs: '1px',
+      stepDistanceSm: '2px',
+    }),
+    expressive: createMotionProfileOverride({
+      collapseOpacityFactor: '0.9',
+      durationSm: '150ms',
+      durationMd: '190ms',
+      durationLg: '230ms',
+      durationXl: '310ms',
+      feedbackShadowStrong:
+        '0 18px 46px color-mix(in srgb, var(--ui-border-focus) 18%, transparent)',
+      overlayEasing: 'var(--ui-motion-easing-emphasized)',
+      scale102: '1.028',
+      scale104: '1.055',
+      stepDistanceXs: '3px',
+      stepDistanceSm: '5px',
+    }),
+  },
+} satisfies Record<ThemeName, ThemeCapabilityOverrides['motionProfile']>);
+
+const accentedPersonalityOverrides = Object.freeze<ThemeContractPatch>({
+  'button-radius': 'var(--ui-radius-pill)',
+  'card-border': 'var(--ui-border-strong)',
+  'card-shadow': 'var(--ui-shadow-md)',
+  'dialog-border': 'var(--ui-border-focus)',
+  'dialog-radius': 'var(--ui-radius-xl)',
+  'empty-state-icon-surface':
+    'color-mix(in srgb, var(--ui-surface-brand-soft) 82%, var(--ui-surface-default))',
+  'input-radius': 'var(--ui-radius-lg)',
+  'tabs-list-border': 'var(--ui-border-strong)',
+  'tabs-list-radius': 'var(--ui-radius-xl)',
+  'tabs-trigger-bg-active':
+    'color-mix(in srgb, var(--ui-surface-brand-soft) 58%, var(--ui-surface-default))',
+  'text-font-feature-settings-display': '"kern" 1, "liga" 1, "ss01" 1, "ss02" 1',
+  'text-letter-spacing-display': '-0.02em',
+  'text-letter-spacing-label': '0.08em',
+  'text-transform-label': 'var(--ui-text-transform-label)',
+});
+
+const themePersonalityOverrides = Object.freeze({
+  light: {
+    accented: accentedPersonalityOverrides,
+  },
+  dark: {
+    accented: {
+      ...accentedPersonalityOverrides,
+      'card-shadow': 'var(--ui-shadow-lg)',
+      'tabs-trigger-bg-active':
+        'color-mix(in srgb, var(--ui-surface-brand-soft) 72%, var(--ui-surface-default))',
+    },
+  },
+  belovodye: {
+    accented: {
+      ...accentedPersonalityOverrides,
+      'card-shadow': 'var(--ui-shadow-lg)',
+      'dialog-border': 'color-mix(in srgb, var(--ui-border-focus) 72%, var(--ui-border-strong))',
+      'text-letter-spacing-label': '0.1em',
+    },
+  },
+} satisfies Record<ThemeName, ThemeCapabilityOverrides['personality']>);
+
+const sharedResponsiveOverrides = Object.freeze<ThemeResponsiveOverrides>({
+  md: createResponsiveOverride({
+    cardPadding: 'var(--ui-space-6)',
+    dialogPadding: 'var(--ui-space-6)',
+    dialogWidth: '42rem',
+    emptyStateGap: 'var(--ui-space-5)',
+    emptyStateIconSize: '3.25rem',
+    textFontSizeLg: '1.1875rem',
+  }),
+  lg: createResponsiveOverride({
+    buttonHeightLg: '3.25rem',
+    cardPadding: 'var(--ui-space-8)',
+    dialogPadding: 'var(--ui-space-8)',
+    dialogWidth: '48rem',
+    emptyStateGap: 'var(--ui-space-6)',
+    emptyStateIconSize: '3.5rem',
+    textFontSizeLg: '1.3125rem',
+  }),
+});
+
+export const THEME_CAPABILITY_MATRIX = Object.freeze<ThemeCapabilityMatrix>({
+  foundations: ['text-primary', 'surface-default', 'border-focus', 'action-primary-bg'],
+  componentStyles: [
+    'button-radius',
+    'card-shadow',
+    'input-radius',
+    'dialog-radius',
+    'tabs-list-radius',
+    'tabs-trigger-bg-active',
+  ],
+  personality: [
+    'button-radius',
+    'card-shadow',
+    'dialog-border',
+    'text-letter-spacing-label',
+    'text-font-feature-settings-display',
+  ],
+  systems: ['data-grid-surface', 'chart-series-1', 'graph-node-surface'],
+  density: [
+    'button-height-sm',
+    'button-height-md',
+    'input-min-height',
+    'card-padding',
+    'dialog-padding',
+    'tabs-trigger-height',
+  ],
+  typography: [
+    'text-letter-spacing-body',
+    'text-letter-spacing-label',
+    'text-letter-spacing-display',
+    'text-transform-label',
+    'text-font-feature-settings-body',
+    'text-font-smoothing-webkit',
+  ],
+  motion: [
+    'motion-duration-sm',
+    'motion-duration-md',
+    'motion-distance-sm',
+    'motion-scale-102',
+    'motion-overlay-easing',
+    'motion-collapse-opacity-duration-factor',
+  ],
+  responsive: {
+    breakpoints: THEME_RESPONSIVE_BREAKPOINTS,
+    tokens: ['dialog-width', 'card-padding', 'button-height-lg', 'text-font-size-lg'],
+  },
+  runtime: {
+    writableAttributes: [
+      'data-ui-theme',
+      'data-ui-density',
+      'data-ui-motion-profile',
+      'data-ui-personality',
+    ],
+    derivedAttributes: ['data-ui-theme-type'],
+  },
+});
+
+export function getThemeRuntimeDefaults(_themeName: ThemeName): ThemeRuntimeOptions {
+  return DEFAULT_THEME_RUNTIME_OPTIONS;
+}
+
+export function getThemeCapabilityOverrides(themeName: ThemeName): ThemeCapabilityOverrides {
+  return {
+    density: themeDensityOverrides[themeName],
+    motionProfile: themeMotionProfileOverrides[themeName],
+    personality: themePersonalityOverrides[themeName],
+    responsive: sharedResponsiveOverrides,
+  };
+}
 
 export interface ThemeMeta {
   name: ThemeName;

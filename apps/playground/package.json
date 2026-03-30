@@ -15,8 +15,8 @@
     "vue": "^3.5.13"
   },
   "scripts": {
-    "dev": "node ../../tools/governance/playground-lab/build-playground-lab-artifacts.mjs && vite",
-    "build": "node ../../tools/governance/playground-lab/build-playground-lab-artifacts.mjs && vite build",
-    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
+    "dev": "node ../../scripts/check-node-version.mjs && node ../../tools/governance/playground-lab/build-playground-lab-artifacts.mjs && vite",
+    "build": "node ../../scripts/check-node-version.mjs && node ../../tools/governance/playground-lab/build-playground-lab-artifacts.mjs && vite build",
+    "typecheck": "node ../../scripts/check-node-version.mjs && vue-tsc -p tsconfig.json --noEmit"
   }
 }

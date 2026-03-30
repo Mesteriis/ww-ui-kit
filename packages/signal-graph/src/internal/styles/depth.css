@@ -58,3 +58,10 @@
   filter: none;
   transform: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-signal-graph__node-shell[data-ui-recent-signal='true'] {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}

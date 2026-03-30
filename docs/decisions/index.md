@@ -20,3 +20,4 @@
 | ADR-0016 | accepted   | Pattern Based AI Rules Pack                       | 2026-03-29 | Replaces the monolithic AI rules document with a manifest-driven rules pack and thin generated mirrors.                       |
 | ADR-0017 | accepted   | Playground Component Lab And Maintainer Workbench | 2026-03-29 | Splits playground into stable testing harness routes and a schema-driven maintainer component lab.                            |
 | ADR-0018 | accepted   | Workspace Tooling And Browser Diagnostics         | 2026-03-29 | Replaces manual workspace chains, adds retry-aware browser diagnostics, and formalizes formatting and Node baseline guidance. |
+| ADR-0019 | accepted   | Theme Capability Matrix And DOM Backed Runtime    | 2026-03-30 | Extends `@ww/themes` with DOM-backed runtime helpers and a governed matrix of sanctioned theme override capabilities.         |

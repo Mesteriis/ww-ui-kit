@@ -29,14 +29,27 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
   }),
   surface({
     packageName: '@ww/themes',
-    exportName: 'setTheme',
+    exportName: 'setTheme / patchThemeRuntime / readThemeRuntime / observeThemeRuntime',
     kind: 'helper-api',
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts',
+      },
+    ],
     requiresDocs: true,
     docsArtifacts: [
       { type: 'readme', file: 'packages/themes/README.md' },
       { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0019-theme-capability-matrix-and-dom-backed-runtime.md',
+      },
     ],
-    requiredTestLayers: ['unit'],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['themes'],
+    requiredTestLayers: ['unit', 'playground'],
     tags: ['themes', 'runtime'],
   }),
   surface({

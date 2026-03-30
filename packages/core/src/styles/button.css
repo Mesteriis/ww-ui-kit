@@ -1,4 +1,6 @@
 .ui-button {
+  --ui-button-layer-effect: 0;
+  --ui-button-layer-content: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -14,6 +16,9 @@
   font-size: var(--ui-text-font-size-body);
   font-weight: var(--ui-button-font-weight);
   line-height: 1;
+  letter-spacing: var(--ui-text-letter-spacing-label);
+  text-transform: var(--ui-text-transform-label);
+  font-feature-settings: var(--ui-text-font-feature-settings-body);
   cursor: pointer;
   text-decoration: none;
   transition: var(--ui-motion-transition-surface-lift-sm);
@@ -24,6 +29,7 @@
   content: '';
   position: absolute;
   inset: 0;
+  z-index: var(--ui-button-layer-effect);
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
@@ -31,7 +37,7 @@
 
 .ui-button > * {
   position: relative;
-  z-index: 1;
+  z-index: var(--ui-button-layer-content);
 }
 
 .ui-button--block {

@@ -8,10 +8,12 @@ Toolchain baseline:
 - pnpm `10.32.1+`
 
 CI validates Node `24.x` from `.node-version`. Do not widen support claims unless CI also validates them.
+Root pnpm workflows and `pnpm install` now fail fast when the local runtime does not match `.node-version`.
 
 Root `build`, `typecheck`, `dev:docs`, and `dev:playground` commands now rely on workspace-aware pnpm orchestration. Keep package manifests accurate instead of editing manual root package chains.
 
 ```bash
+pnpm check:node-version
 pnpm install
 pnpm dev:docs
 pnpm dev:playground

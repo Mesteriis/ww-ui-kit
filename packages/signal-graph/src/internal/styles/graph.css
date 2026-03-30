@@ -127,7 +127,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ui-signal-graph__loading-grid span {
-    animation-duration: 0.01ms;
-    animation-iteration-count: 1;
+    animation: none;
+    background-position: 0 0;
   }
 }

@@ -12,10 +12,12 @@ Symptom:
 Likely cause:
 
 - the repo only validates Node `24.x` in CI and `.node-version`
+- root pnpm workflows now stop immediately when the runtime drifts from that baseline
 
 Run:
 
 ```bash
+pnpm check:node-version
 cat .node-version
 node -v
 pnpm -v

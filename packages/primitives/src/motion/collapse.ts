@@ -5,11 +5,16 @@ interface CollapseMotionOptions {
   preset?: string;
 }
 
+// Mirrors the canonical semantic fallback when a theme does not override the collapse opacity ratio.
+const DEFAULT_COLLAPSE_OPACITY_DURATION_FACTOR = 0.8;
+const collapseMeasurements = new WeakMap<HTMLElement, { expandedHeight: number }>();
+
 function clearCollapseStyles(element: HTMLElement): void {
   element.style.removeProperty('height');
   element.style.removeProperty('opacity');
   element.style.removeProperty('overflow');
   element.style.removeProperty('transition');
+  collapseMeasurements.delete(element);
 }
 
 function parseTimeMs(rawValue: string): number {
@@ -107,16 +112,56 @@ function readDurationMs(tokenName: string, element: HTMLElement): number {
   return parseTimeMs(raw);
 }
 
+function parseNumber(rawValue: string): number | null {
+  const trimmed = rawValue.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  const value = Number.parseFloat(trimmed);
+  return Number.isFinite(value) ? value : null;
+}
+
+function readCollapseOpacityDurationFactor(element: HTMLElement): number {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return DEFAULT_COLLAPSE_OPACITY_DURATION_FACTOR;
+  }
+
+  const tokenName = '--ui-motion-collapse-opacity-duration-factor';
+  const raw =
+    window.getComputedStyle(element).getPropertyValue(tokenName).trim() ||
+    window.getComputedStyle(document.documentElement).getPropertyValue(tokenName).trim();
+  const factor = parseNumber(raw);
+
+  if (factor === null || factor <= 0) {
+    return DEFAULT_COLLAPSE_OPACITY_DURATION_FACTOR;
+  }
+
+  return Math.min(factor, 1);
+}
+
+function rememberCollapseMeasurement(element: HTMLElement): number {
+  const expandedHeight = element.scrollHeight;
+  collapseMeasurements.set(element, { expandedHeight });
+  return expandedHeight;
+}
+
+function readCollapseMeasurement(element: HTMLElement): number {
+  return collapseMeasurements.get(element)?.expandedHeight ?? rememberCollapseMeasurement(element);
+}
+
 export function beforeCollapseMotion(element: HTMLElement, options: CollapseMotionOptions): void {
   if (prefersReducedMotion()) {
     return;
   }
 
+  const expandedHeight = rememberCollapseMeasurement(element);
+
   if (options.phase === 'enter') {
     element.style.height = '0px';
     element.style.opacity = '0';
   } else {
-    element.style.height = `${element.scrollHeight}px`;
+    element.style.height = `${expandedHeight}px`;
     element.style.opacity = '1';
   }
 
@@ -136,12 +181,12 @@ export function runCollapseMotion(
   const preset = resolveCollapseMotionPreset(options.preset, 'collapse-y-soft');
   const durationMs = readDurationMs(preset.durationToken, element);
   const easing = `var(${preset.easingToken})`;
-  const opacityDurationMs = Math.max(Math.round(durationMs * 0.8), 1);
+  const opacityDurationMs = Math.max(
+    Math.round(durationMs * readCollapseOpacityDurationFactor(element)),
+    1
+  );
+  const expandedHeight = readCollapseMeasurement(element);
   const scheduleTransitionFallback = waitForTransitionEnd(element, done);
-
-  if (options.phase === 'leave') {
-    void element.offsetHeight;
-  }
 
   element.style.transition = [
     `height var(${preset.durationToken}) ${easing}`,
@@ -149,9 +194,11 @@ export function runCollapseMotion(
   ].join(', ');
 
   const applyTransition = () => {
-    element.style.height = options.phase === 'enter' ? `${element.scrollHeight}px` : '0px';
+    element.style.height = options.phase === 'enter' ? `${expandedHeight}px` : '0px';
     element.style.opacity = options.phase === 'enter' ? '1' : '0';
-    scheduleTransitionFallback(readLongestTransitionMs(element, durationMs));
+    scheduleTransitionFallback(
+      readLongestTransitionMs(element, Math.max(durationMs, opacityDurationMs))
+    );
   };
 
   if (typeof requestAnimationFrame === 'function') {

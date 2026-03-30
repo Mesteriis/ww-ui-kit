@@ -27,7 +27,13 @@ export function useMotionPresence(open: MaybeRefOrGetter<boolean>) {
     }
   }
 
+  function forceCompleteLeave(): void {
+    leavingTransitions.value = 0;
+    isLeaving.value = false;
+  }
+
   return {
+    forceCompleteLeave,
     handleAfterEnter,
     handleAfterLeave,
     handleBeforeEnter,

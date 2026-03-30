@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { defineAsyncComponent, nextTick, ref, watch } from 'vue';
 
 import { UiApexChart, type UiApexChartOptions, type UiApexChartSeries } from '@ww/charts-apex';
 import {
@@ -29,19 +29,33 @@ import {
   resolveTransitionMotionPreset,
   runCollapseMotion,
 } from '@ww/primitives';
-import { getThemeMeta, type ThemeMeta } from '@ww/themes';
+import {
+  THEME_CAPABILITY_MATRIX,
+  THEME_DENSITIES,
+  THEME_MOTION_PROFILES,
+  THEME_PERSONALITIES,
+  getThemeMeta,
+  patchThemeRuntime,
+  readThemeRuntime,
+  type ThemeMeta,
+  type ThemeRuntimeState,
+} from '@ww/themes';
 
-import DataGridShowcase from '../../DataGridShowcase.vue';
-import DataTableWidgetShowcase from '../../DataTableWidgetShowcase.vue';
-import LayerScaffoldShowcase from '../../LayerScaffoldShowcase.vue';
-import SignalGraphShowcase from '../../SignalGraphShowcase.vue';
 import { PLAYGROUND_SCENARIOS } from '../scenarios';
 import { buildPlaygroundPath } from '../../shared/navigation/playground-route';
+
+const DataGridShowcase = defineAsyncComponent(() => import('../../DataGridShowcase.vue'));
+const DataTableWidgetShowcase = defineAsyncComponent(
+  () => import('../../DataTableWidgetShowcase.vue')
+);
+const LayerScaffoldShowcase = defineAsyncComponent(() => import('../../LayerScaffoldShowcase.vue'));
+const SignalGraphShowcase = defineAsyncComponent(() => import('../../SignalGraphShowcase.vue'));
 
 defineOptions({ name: 'TestingHarnessView' });
 
 const props = defineProps<{
   themeMeta: ThemeMeta;
+  themeRuntime: ThemeRuntimeState;
 }>();
 
 const dialogOpen = ref(false);
@@ -54,7 +68,12 @@ const motionPreset = ref<(typeof MOTION_PRESET_NAMES)[number]>('modal-fade-scale
 const motionVisible = ref(true);
 const collapseOpen = ref(true);
 const explicitPortalTarget = ref<HTMLElement | null>(null);
+const scopedThemeHost = ref<HTMLElement | null>(null);
 const scopedThemeInputValue = ref('Scoped Belovodye surface');
+const scopedThemeDensity = ref<(typeof THEME_DENSITIES)[number]>('default');
+const scopedThemeMotionProfile = ref<(typeof THEME_MOTION_PROFILES)[number]>('balanced');
+const scopedThemePersonality = ref<(typeof THEME_PERSONALITIES)[number]>('neutral');
+const scopedThemeRuntime = ref<ThemeRuntimeState | null>(null);
 const scopedThemeSwitchValue = ref(true);
 const scopedThemeTabValue = ref('surface');
 const tabValue = ref('overview');
@@ -112,6 +131,39 @@ const donutChartOptions: UiApexChartOptions = {
 
 const scopedTheme = getThemeMeta('belovodye');
 const taxonomyEntries = Object.entries(MOTION_TAXONOMY);
+const capabilityMatrixEntries = [
+  ['Foundations', THEME_CAPABILITY_MATRIX.foundations],
+  ['Component styles', THEME_CAPABILITY_MATRIX.componentStyles],
+  ['Systems', THEME_CAPABILITY_MATRIX.systems],
+  ['Density', THEME_CAPABILITY_MATRIX.density],
+  ['Typography', THEME_CAPABILITY_MATRIX.typography],
+  ['Motion', THEME_CAPABILITY_MATRIX.motion],
+  ['Personality', THEME_CAPABILITY_MATRIX.personality],
+  ['Responsive', THEME_CAPABILITY_MATRIX.responsive.tokens],
+] as const;
+
+const syncScopedThemeRuntime = () => {
+  if (!scopedThemeHost.value) {
+    return;
+  }
+
+  patchThemeRuntime(
+    {
+      density: scopedThemeDensity.value,
+      motionProfile: scopedThemeMotionProfile.value,
+      personality: scopedThemePersonality.value,
+      themeName: scopedTheme.name,
+    },
+    scopedThemeHost.value
+  );
+  scopedThemeRuntime.value = readThemeRuntime(scopedThemeHost.value);
+};
+
+watch(scopedThemeHost, syncScopedThemeRuntime, { flush: 'post' });
+watch(
+  [scopedThemeDensity, scopedThemeMotionProfile, scopedThemePersonality],
+  syncScopedThemeRuntime
+);
 
 const replayMotion = async () => {
   motionVisible.value = false;
@@ -329,8 +381,45 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
 
     <section id="testing-themes" class="playground__grid" data-playground-scenario="themes">
       <UiCard>
+        <template #header>Theme runtime contract</template>
+        <div class="ui-stack">
+          <p>
+            Runtime theming stays DOM-backed. The root scope owns theme, density, motion profile,
+            and personality attributes while <code>ThemeType</code> remains derived metadata.
+          </p>
+          <div class="ui-cluster">
+            <UiBadge variant="brand">{{ props.themeMeta.label }}</UiBadge>
+            <UiBadge>ThemeName: {{ props.themeRuntime.themeName }}</UiBadge>
+            <UiBadge>ThemeType: {{ props.themeRuntime.themeType }}</UiBadge>
+            <UiBadge>Density: {{ props.themeRuntime.density }}</UiBadge>
+            <UiBadge>Motion: {{ props.themeRuntime.motionProfile }}</UiBadge>
+            <UiBadge>Personality: {{ props.themeRuntime.personality }}</UiBadge>
+          </div>
+          <div class="playground__taxonomy">
+            <div
+              v-for="[label, tokens] in capabilityMatrixEntries"
+              :key="label"
+              class="playground__taxonomy-group"
+            >
+              <UiBadge variant="brand">{{ label }}</UiBadge>
+              <div class="ui-cluster">
+                <code v-for="token in tokens" :key="token">{{ token }}</code>
+              </div>
+            </div>
+          </div>
+          <p style="margin: 0; color: var(--ui-text-secondary)">
+            Responsive overrides stay inside the generated theme sheets at
+            <code>{{ THEME_CAPABILITY_MATRIX.responsive.breakpoints.md }}</code> and
+            <code>{{ THEME_CAPABILITY_MATRIX.responsive.breakpoints.lg }}</code
+            >.
+          </p>
+        </div>
+      </UiCard>
+
+      <UiCard>
         <template #header>Theme subtree proof</template>
         <section
+          ref="scopedThemeHost"
           class="playground__scoped-surface"
           :data-ui-theme="scopedTheme.name"
           :data-ui-theme-type="scopedTheme.type"
@@ -342,11 +431,58 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
             </p>
             <div class="ui-cluster">
               <UiBadge variant="brand">{{ scopedTheme.label }}</UiBadge>
-              <UiBadge>ThemeName: {{ scopedTheme.name }}</UiBadge>
-              <UiBadge>ThemeType: {{ scopedTheme.type }}</UiBadge>
+              <UiBadge>ThemeName: {{ scopedThemeRuntime?.themeName ?? scopedTheme.name }}</UiBadge>
+              <UiBadge>ThemeType: {{ scopedThemeRuntime?.themeType ?? scopedTheme.type }}</UiBadge>
+              <UiBadge>Density: {{ scopedThemeRuntime?.density ?? scopedThemeDensity }}</UiBadge>
+              <UiBadge
+                >Motion:
+                {{ scopedThemeRuntime?.motionProfile ?? scopedThemeMotionProfile }}</UiBadge
+              >
+              <UiBadge
+                >Personality:
+                {{ scopedThemeRuntime?.personality ?? scopedThemePersonality }}</UiBadge
+              >
               <UiSwitch v-model="scopedThemeSwitchValue" ariaLabel="Enable scoped theme state">
                 Scoped theme state
               </UiSwitch>
+            </div>
+            <div class="ui-cluster">
+              <label class="playground__theme-picker">
+                <span>Density</span>
+                <select
+                  v-model="scopedThemeDensity"
+                  aria-label="Scoped density"
+                  class="ui-input ui-select__control playground__select"
+                >
+                  <option v-for="option in THEME_DENSITIES" :key="option" :value="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </label>
+              <label class="playground__theme-picker">
+                <span>Motion profile</span>
+                <select
+                  v-model="scopedThemeMotionProfile"
+                  aria-label="Scoped motion profile"
+                  class="ui-input ui-select__control playground__select"
+                >
+                  <option v-for="option in THEME_MOTION_PROFILES" :key="option" :value="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </label>
+              <label class="playground__theme-picker">
+                <span>Personality</span>
+                <select
+                  v-model="scopedThemePersonality"
+                  aria-label="Scoped personality"
+                  class="ui-input ui-select__control playground__select"
+                >
+                  <option v-for="option in THEME_PERSONALITIES" :key="option" :value="option">
+                    {{ option }}
+                  </option>
+                </select>
+              </label>
             </div>
             <UiField label="Scoped input" hint="Same component contracts, different theme scope">
               <UiInput v-model="scopedThemeInputValue" />

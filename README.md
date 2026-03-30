@@ -42,6 +42,7 @@ This repository is not only a component library. It is a governed platform repo 
 - Playwright for browser verification
 
 CI validates Node `24.x` only. The repository does not claim support outside that tested baseline.
+Root pnpm workflows fail fast when the active runtime does not match `.node-version`.
 
 Root `build`, `typecheck`, `dev:docs`, and `dev:playground` commands are workspace-topology aware. Add dependencies to package manifests instead of extending hand-maintained root package chains.
 
@@ -122,9 +123,10 @@ Use one obvious bootstrapping path:
 ```ts
 import '@ww/themes/theme-light.css';
 import '@ww/core/styles.css';
-import { setTheme } from '@ww/themes';
+import { patchThemeRuntime, setTheme } from '@ww/themes';
 
 setTheme('light');
+patchThemeRuntime({ density: 'default', motionProfile: 'balanced', personality: 'neutral' });
 ```
 
 Then build up in this order:
@@ -216,7 +218,10 @@ Theme rules:
 - `ThemeType` is derived metadata
 - type is not a second free axis
 - use `setTheme(themeName, target?)` instead of manually drifting attributes
+- use `patchThemeRuntime({ themeName?, density?, motionProfile?, personality? }, target?)` for sanctioned runtime capability changes
+- runtime attributes stay DOM-backed: `data-ui-theme`, `data-ui-density`, `data-ui-motion-profile`, `data-ui-personality`
 - `color-scheme` is owned by the shared `data-ui-theme-type` CSS contract, not duplicated through inline runtime styles
+- responsive theme overrides stay inside generated theme CSS, not a parallel runtime registry
 
 ## Testing architecture
 

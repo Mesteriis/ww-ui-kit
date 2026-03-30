@@ -27,6 +27,8 @@
   margin: 0;
   color: var(--ui-empty-state-title-color);
   font-size: var(--ui-empty-state-title-size);
+  letter-spacing: var(--ui-text-letter-spacing-display);
+  font-feature-settings: var(--ui-text-font-feature-settings-display);
 }
 
 .ui-empty-state__description {

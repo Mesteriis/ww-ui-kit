@@ -1,4 +1,4 @@
-import { computed, nextTick, ref, useSlots, watch } from 'vue';
+import { computed, ref, useSlots, watch } from 'vue';
 
 import {
   applyTransitionMotionVariables,
@@ -26,6 +26,23 @@ interface UseOverlayOptions {
   backdropPreset?: MotionPresetName | (() => MotionPresetName);
 }
 
+function parseTimeMs(rawValue: string): number {
+  const value = rawValue.trim();
+  if (!value) {
+    return 0;
+  }
+
+  if (value.endsWith('ms')) {
+    return Number.parseFloat(value) || 0;
+  }
+
+  if (value.endsWith('s')) {
+    return (Number.parseFloat(value) || 0) * 1000;
+  }
+
+  return Number.parseFloat(value) || 0;
+}
+
 function resolvePresetName(preset: MotionPresetName | (() => MotionPresetName)) {
   return typeof preset === 'function' ? preset() : preset;
 }
@@ -44,6 +61,8 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
 
   const presence = useMotionPresence(() => props.open);
   let focusRestoreRequested = false;
+  let leaveFallbackTimer: number | null = null;
+  let leaveFallbackMs = 0;
 
   const overlaySurface = useOverlaySurface({
     open: presence.isActive,
@@ -68,17 +87,61 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
     overlaySurface.restoreFocus();
   };
 
+  const clearLeaveFallback = () => {
+    leaveFallbackMs = 0;
+    if (leaveFallbackTimer !== null) {
+      window.clearTimeout(leaveFallbackTimer);
+      leaveFallbackTimer = null;
+    }
+  };
+
   watch(
     () => props.open,
     (isOpen) => {
       if (isOpen) {
+        clearLeaveFallback();
         focusRestoreRequested = false;
         return;
       }
 
-      void nextTick().then(requestFocusRestore);
+      void Promise.resolve().then(() => {
+        if (!props.open && !presence.isLeaving.value) {
+          requestFocusRestore();
+        }
+      });
     }
   );
+
+  const readDurationMs = (
+    element: HTMLElement | null,
+    preset: MotionPresetName | (() => MotionPresetName)
+  ) => {
+    const resolvedPreset = resolveTransitionMotionPreset(resolvePresetName(preset), 'fade-in');
+    const target = element ?? panelRef.value ?? document.documentElement;
+    const raw =
+      window.getComputedStyle(target).getPropertyValue(resolvedPreset.durationToken).trim() ||
+      window
+        .getComputedStyle(document.documentElement)
+        .getPropertyValue(resolvedPreset.durationToken)
+        .trim();
+
+    return parseTimeMs(raw);
+  };
+
+  const scheduleLeaveFallback = (
+    element: HTMLElement | null,
+    preset: MotionPresetName | (() => MotionPresetName)
+  ) => {
+    const nextFallbackMs = Math.max(leaveFallbackMs, readDurationMs(element, preset));
+    clearLeaveFallback();
+    leaveFallbackMs = Math.max(nextFallbackMs, 0);
+    leaveFallbackTimer = window.setTimeout(() => {
+      leaveFallbackTimer = null;
+      leaveFallbackMs = 0;
+      presence.forceCompleteLeave();
+      requestFocusRestore();
+    }, leaveFallbackMs);
+  };
 
   const applyMotionPreset = (
     element: Element,
@@ -105,6 +168,7 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
   const finalizeLeave = () => {
     presence.handleAfterLeave();
     if (!presence.isLeaving.value) {
+      clearLeaveFallback();
       requestFocusRestore();
     }
   };
@@ -116,6 +180,7 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
     describedBy,
     handleBackdropAfterEnter: (element: Element) => {
       clearMotion(element);
+      clearLeaveFallback();
       presence.handleAfterEnter();
     },
     handleBackdropAfterLeave: (element: Element) => {
@@ -123,15 +188,21 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
       finalizeLeave();
     },
     handleBackdropBeforeEnter: (element: Element) => {
+      clearLeaveFallback();
       presence.handleBeforeEnter();
       applyMotionPreset(element, 'enter', options.backdropPreset ?? 'backdrop-soften');
     },
     handleBackdropBeforeLeave: (element: Element) => {
       presence.handleBeforeLeave();
       applyMotionPreset(element, 'leave', options.backdropPreset ?? 'backdrop-soften');
+      scheduleLeaveFallback(
+        element instanceof HTMLElement ? element : null,
+        options.backdropPreset ?? 'backdrop-soften'
+      );
     },
     handleSurfaceAfterEnter: (element: Element) => {
       clearMotion(element);
+      clearLeaveFallback();
       presence.handleAfterEnter();
     },
     handleSurfaceAfterLeave: (element: Element) => {
@@ -139,12 +210,14 @@ export function useOverlay(props: OverlayProps, close: () => void, options: UseO
       finalizeLeave();
     },
     handleSurfaceBeforeEnter: (element: Element) => {
+      clearLeaveFallback();
       presence.handleBeforeEnter();
       applyMotionPreset(element, 'enter', options.surfacePreset);
     },
     handleSurfaceBeforeLeave: (element: Element) => {
       presence.handleBeforeLeave();
       applyMotionPreset(element, 'leave', options.surfacePreset);
+      scheduleLeaveFallback(element instanceof HTMLElement ? element : null, options.surfacePreset);
     },
     isActive: presence.isActive,
     labelledBy,

@@ -1,6 +1,6 @@
-import { onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue';
+import { onBeforeUnmount, ref, watch, type Ref } from 'vue';
 
-import { THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE } from '@ww/themes';
+import { observeThemeRuntime } from '@ww/themes';
 
 import {
   resolveApexThemeScope,
@@ -17,20 +17,14 @@ export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
     revision: 0,
   });
 
-  let observer: MutationObserver | null = null;
-  let isScheduled = false;
-  let isDisposed = false;
+  let stopObserving: (() => void) | null = null;
 
   const disconnectObserver = () => {
-    observer?.disconnect();
-    observer = null;
+    stopObserving?.();
+    stopObserving = null;
   };
 
   const refreshThemeScope = () => {
-    if (isDisposed) {
-      return;
-    }
-
     const nextScope = resolveApexThemeScope(hostRef.value);
     const previousScope = themeScope.value;
     const didChange =
@@ -42,65 +36,25 @@ export function useApexThemeSync(hostRef: Ref<HTMLElement | null>) {
       ...nextScope,
       revision: didChange ? previousScope.revision + 1 : previousScope.revision,
     };
+  };
 
+  const reconnectObserver = () => {
     disconnectObserver();
-
-    if (typeof MutationObserver === 'undefined' || typeof document === 'undefined') {
-      return;
-    }
-
-    observer = new MutationObserver(() => {
-      scheduleRefresh();
-    });
-
-    const targets = new Set<HTMLElement>();
-    targets.add(document.documentElement);
-
-    if (themeScope.value.container && themeScope.value.container !== document.documentElement) {
-      targets.add(themeScope.value.container);
-    }
-
-    for (const target of targets) {
-      observer.observe(target, {
-        attributes: true,
-        attributeFilter: [THEME_ATTRIBUTE, THEME_TYPE_ATTRIBUTE, 'style'],
-      });
-    }
-  };
-
-  const scheduleRefresh = () => {
-    if (isScheduled) {
-      return;
-    }
-
-    isScheduled = true;
-    const flush = () => {
-      isScheduled = false;
+    stopObserving = observeThemeRuntime(hostRef.value, () => {
       refreshThemeScope();
-    };
-
-    if (typeof queueMicrotask === 'function') {
-      queueMicrotask(flush);
-      return;
-    }
-
-    void Promise.resolve().then(flush);
+    });
   };
-
-  onMounted(() => {
-    refreshThemeScope();
-  });
 
   watch(
     hostRef,
     () => {
-      scheduleRefresh();
+      refreshThemeScope();
+      reconnectObserver();
     },
     { flush: 'post' }
   );
 
   onBeforeUnmount(() => {
-    isDisposed = true;
     disconnectObserver();
   });
 

@@ -8,7 +8,7 @@ export const zIndexTokens = {
     'z-overlay-slot-tooltip': '6',
     'z-overlay-slot-toast': '8',
     'z-layer-header': '100',
-    'z-layer-dropdown': 'calc(var(--ui-z-overlay-base) + var(--ui-z-overlay-slot-floating))',
+    'z-layer-dropdown': 'calc(var(--ui-z-overlay-base) - var(--ui-z-overlay-step))',
     'z-layer-overlay': 'calc(var(--ui-z-overlay-base) + var(--ui-z-overlay-slot-surface))',
   },
 } as const;

@@ -1,4 +1,5 @@
 .ui-data-grid {
+  --ui-data-grid-layer-sticky-head: 1;
   display: grid;
   gap: var(--ui-space-4);
   padding: var(--ui-space-4);
@@ -172,7 +173,7 @@
 .ui-data-grid-table__head.is-sticky th {
   position: sticky;
   inset-block-start: 0;
-  z-index: 1;
+  z-index: var(--ui-data-grid-layer-sticky-head);
 }
 
 .ui-data-grid-table th,

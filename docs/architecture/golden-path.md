@@ -7,9 +7,10 @@ This is the canonical happy path for a new consumer product.
 ```ts
 import '@ww/themes/theme-light.css';
 import '@ww/core/styles.css';
-import { setTheme } from '@ww/themes';
+import { patchThemeRuntime, setTheme } from '@ww/themes';
 
 setTheme('light');
+patchThemeRuntime({ density: 'default', motionProfile: 'balanced', personality: 'neutral' });
 ```
 
 Use:
@@ -24,11 +25,29 @@ Use:
 - Choose a concrete `ThemeName`.
 - `ThemeType` is derived automatically.
 - Core styles own `color-scheme` through `data-ui-theme-type`; `setTheme()` only needs to keep the theme attributes in sync.
+- Runtime theme capabilities stay on the same DOM-backed contract. Use `patchThemeRuntime()` for sanctioned density, motion-profile, and personality changes instead of inventing a second registry.
 - Use subtree theming when only part of a surface needs a different theme:
 
 ```html
 <section data-ui-theme="belovodye" data-ui-theme-type="light">...</section>
 ```
+
+Or apply the full scoped runtime contract from code:
+
+```ts
+patchThemeRuntime(
+  {
+    themeName: 'belovodye',
+    density: 'comfortable',
+    motionProfile: 'calm',
+    personality: 'accented',
+  },
+  scopedElement
+);
+```
+
+- Responsive theme overrides stay in generated theme CSS at the sanctioned breakpoints.
+- `ThemeType` remains derived from `ThemeName` even when runtime capabilities change.
 
 ## 3. Overlays
 

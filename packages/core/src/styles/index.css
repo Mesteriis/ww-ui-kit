@@ -18,7 +18,7 @@
 
 @keyframes ui-shimmer {
   to {
-    background-position: -200% 0;
+    transform: translateX(62.5%);
   }
 }
 
@@ -40,9 +40,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ui-button::before,
-  .ui-button::after,
+  .ui-button::after {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0 !important;
+  }
+
+  .ui-button__spinner,
   .ui-spinner,
+  .ui-skeleton::after,
   .ui-skeleton {
-    animation-duration: var(--ui-motion-duration-instant);
+    animation: none !important;
+    transform: none !important;
   }
 }

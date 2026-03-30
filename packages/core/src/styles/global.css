@@ -7,6 +7,10 @@ body {
   font-family: var(--ui-text-font-family);
   font-size: var(--ui-text-font-size-body);
   line-height: var(--ui-text-line-height-body);
+  letter-spacing: var(--ui-text-letter-spacing-body);
+  font-feature-settings: var(--ui-text-font-feature-settings-body);
+  -webkit-font-smoothing: var(--ui-text-font-smoothing-webkit);
+  -moz-osx-font-smoothing: var(--ui-text-font-smoothing-moz);
   background: var(--ui-surface-canvas);
   color: var(--ui-text-primary);
 }

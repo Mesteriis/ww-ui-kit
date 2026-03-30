@@ -6,6 +6,7 @@ import {
   beforeCollapseMotion,
   runCollapseMotion,
 } from './collapse';
+import { __motionRuntimeTestUtils } from './runtime';
 
 function dispatchTransitionEnd(element: HTMLElement, propertyName: string) {
   const event = new Event('transitionend');
@@ -20,6 +21,7 @@ describe('collapse motion', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
     vi.useFakeTimers();
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       writable: true,
@@ -37,6 +39,7 @@ describe('collapse motion', () => {
   });
 
   afterEach(() => {
+    __motionRuntimeTestUtils.resetReducedMotionPreference();
     vi.useRealTimers();
     document.documentElement.style.removeProperty('--ui-motion-duration-sm');
   });
@@ -105,6 +108,23 @@ describe('collapse motion', () => {
     expect(__collapseTestUtils.readLongestTransitionMs(element, 24)).toBe(24);
 
     window.getComputedStyle = originalGetComputedStyle;
+  });
+
+  it('falls back to the default collapse opacity factor when the local token is not finite', () => {
+    const element = document.createElement('div');
+    element.style.setProperty('--ui-motion-duration-sm', '50ms');
+    element.style.setProperty('--ui-motion-collapse-opacity-duration-factor', 'Infinity');
+    Object.defineProperty(element, 'scrollHeight', {
+      configurable: true,
+      value: 80,
+    });
+
+    const done = vi.fn();
+    runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
+
+    expect(element.style.transition).toContain('opacity 40ms');
+    vi.advanceTimersByTime(50);
+    expect(done).toHaveBeenCalledTimes(1);
   });
 
   it('covers direct transition-end fallback scheduling for helper-level cleanup branches', () => {
@@ -229,6 +249,23 @@ describe('collapse motion', () => {
     expect(done).not.toHaveBeenCalled();
 
     vi.advanceTimersByTime(1);
+    expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it('derives opacity timing from the shared collapse opacity factor token', () => {
+    const element = document.createElement('div');
+    element.style.setProperty('--ui-motion-duration-sm', '50ms');
+    element.style.setProperty('--ui-motion-collapse-opacity-duration-factor', '0.5');
+    Object.defineProperty(element, 'scrollHeight', {
+      configurable: true,
+      value: 80,
+    });
+
+    const done = vi.fn();
+    runCollapseMotion(element, { phase: 'enter', preset: 'collapse-y-soft' }, done);
+
+    expect(element.style.transition).toContain('opacity 25ms');
+    vi.advanceTimersByTime(50);
     expect(done).toHaveBeenCalledTimes(1);
   });
 

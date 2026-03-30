@@ -35,16 +35,36 @@ test('renders stable playground harness sections', async ({ page }) => {
 test('switches theme and exposes ThemeType', async ({ page }) => {
   await page.goto('/playground/testing');
 
-  await page.locator('select').first().selectOption('dark');
+  await page.getByLabel('Playground theme', { exact: true }).selectOption('dark');
   await expect(page.getByText('ThemeType: dark', { exact: true }).first()).toBeVisible();
 
-  await page.locator('select').first().selectOption('light');
-  await page.locator('select').nth(1).selectOption('belovodye');
+  await page.getByLabel('Playground theme', { exact: true }).selectOption('light');
+  await page.getByLabel('Playground theme', { exact: true }).selectOption('belovodye');
   await expect(page.getByText('ThemeName: belovodye', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('ThemeType: light', { exact: true }).first()).toBeVisible();
+
+  await page.getByLabel('Playground density').selectOption('comfortable');
+  await page.getByLabel('Playground motion profile').selectOption('calm');
+  await page.getByLabel('Playground personality').selectOption('accented');
+  await expect(page.getByText('Density: comfortable', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Motion: calm', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Personality: accented', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Component styles', { exact: true }).first()).toBeVisible();
 });
 
 test('opens dialog and restores focus to the opener', async ({ page }) => {
+  await page.goto('/playground/testing');
+
+  const openButton = page.getByRole('button', { name: 'Open dialog' });
+  await openButton.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: 'Cancel' }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(openButton).toBeFocused();
+});
+
+test('keeps overlay close and focus restoration stable under reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/playground/testing');
 
   const openButton = page.getByRole('button', { name: 'Open dialog' });

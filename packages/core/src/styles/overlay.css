@@ -80,6 +80,8 @@
   margin: 0;
   color: var(--ui-dialog-title-color);
   font-size: var(--ui-dialog-title-size);
+  letter-spacing: var(--ui-text-letter-spacing-display);
+  font-feature-settings: var(--ui-text-font-feature-settings-display);
 }
 
 .ui-overlay__description {

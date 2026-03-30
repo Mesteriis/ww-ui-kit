@@ -8,6 +8,9 @@ import {
 
 const warnedInvalidPresets = new Set<string>();
 const MAX_REDUCED_PRESET_DEPTH = 8;
+let reducedMotionQuery: MediaQueryList | null = null;
+let reducedMotionMatches = false;
+let removeReducedMotionListener: (() => void) | null = null;
 
 const NONE_TRANSITION_PRESET: MotionTransitionPreset = {
   antiUseCases: ['Reserved for reduced-motion and disabled animation paths.'],
@@ -51,13 +54,57 @@ function warnReducedPresetFallback(preset: string): void {
   );
 }
 
+function resetReducedMotionPreference(): void {
+  removeReducedMotionListener?.();
+  removeReducedMotionListener = null;
+  reducedMotionQuery = null;
+  reducedMotionMatches = false;
+}
+
+function bindReducedMotionPreference(): void {
+  if (
+    reducedMotionQuery ||
+    typeof window === 'undefined' ||
+    typeof window.matchMedia !== 'function'
+  ) {
+    return;
+  }
+
+  reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  reducedMotionMatches = reducedMotionQuery.matches;
+
+  const handleChange = () => {
+    reducedMotionMatches = reducedMotionQuery?.matches ?? false;
+  };
+
+  if (typeof reducedMotionQuery.addEventListener === 'function') {
+    reducedMotionQuery.addEventListener('change', handleChange);
+    removeReducedMotionListener = () => {
+      reducedMotionQuery?.removeEventListener('change', handleChange);
+    };
+    return;
+  }
+
+  if (typeof reducedMotionQuery.addListener === 'function') {
+    reducedMotionQuery.addListener(handleChange);
+    removeReducedMotionListener = () => {
+      reducedMotionQuery?.removeListener(handleChange);
+    };
+  }
+}
+
 export function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
     return false;
   }
 
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  bindReducedMotionPreference();
+  return reducedMotionMatches;
 }
+
+export const __motionRuntimeTestUtils = {
+  resetReducedMotionPreference,
+};
 
 export function resolveMotionPreset(
   preset: string | undefined,

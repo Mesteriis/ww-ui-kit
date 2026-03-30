@@ -8,6 +8,8 @@
   background: var(--ui-input-bg);
   color: var(--ui-input-text);
   font-size: var(--ui-input-font-size);
+  letter-spacing: var(--ui-text-letter-spacing-body);
+  font-feature-settings: var(--ui-text-font-feature-settings-body);
   transition: var(--ui-motion-transition-focus-ring);
 }
 

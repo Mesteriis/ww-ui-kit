@@ -6,9 +6,16 @@ const primitivesMocks = vi.hoisted(() => ({
   leaveCount: 0,
   applyTransitionMotionVariables: vi.fn(),
   clearTransitionMotionVariables: vi.fn(),
-  resolveTransitionMotionPreset: vi.fn((preset: string) => ({ preset })),
+  resolveTransitionMotionPreset: vi.fn((preset: string) => ({
+    durationToken: '--ui-motion-duration-sm',
+    preset,
+  })),
   restoreFocus: vi.fn(),
   focusOverlay: vi.fn(async () => true),
+  forceCompleteLeave: vi.fn(() => {
+    primitivesMocks.leaveCount = 0;
+    primitivesMocks.isLeaving.value = false;
+  }),
   handleAfterEnter: vi.fn(() => {
     primitivesMocks.leaveCount = 0;
     primitivesMocks.isLeaving.value = false;
@@ -36,6 +43,7 @@ vi.mock('@ww/primitives', () => ({
   useMotionPresence: () => ({
     isActive: computed(() => true),
     isLeaving: primitivesMocks.isLeaving,
+    forceCompleteLeave: primitivesMocks.forceCompleteLeave,
     handleBeforeEnter: primitivesMocks.handleBeforeEnter,
     handleAfterEnter: primitivesMocks.handleAfterEnter,
     handleBeforeLeave: primitivesMocks.handleBeforeLeave,
@@ -58,10 +66,12 @@ describe('useOverlay', () => {
     vi.clearAllMocks();
     primitivesMocks.leaveCount = 0;
     primitivesMocks.isLeaving.value = false;
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', '16ms');
   });
 
   afterEach(() => {
     vi.clearAllMocks();
+    document.documentElement.style.removeProperty('--ui-motion-duration-sm');
   });
 
   it('derives ids and applies motion presets for titled overlays', () => {
@@ -134,7 +144,7 @@ describe('useOverlay', () => {
     wrapper.unmount();
   });
 
-  it('falls back to aria-label flow and avoids double restoreFocus calls across close and leave completion', async () => {
+  it('falls back to aria-label flow and restores focus only after the leave cycle completes', async () => {
     const close = vi.fn();
 
     const wrapper = mount(
@@ -180,10 +190,10 @@ describe('useOverlay', () => {
     await nextTick();
     await Promise.resolve();
 
-    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+    expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
 
     vm.overlay.handleSurfaceAfterLeave(element);
-    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+    expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
 
     vm.overlay.handleBackdropAfterLeave(element);
     expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
@@ -228,14 +238,15 @@ describe('useOverlay', () => {
 
     vm.overlay.handleBackdropBeforeEnter(svgElement);
     vm.overlay.handleBackdropBeforeLeave(svgElement);
+    vm.overlay.handleSurfaceBeforeLeave(svgElement);
     vm.overlay.handleBackdropAfterLeave(svgElement);
 
     expect(primitivesMocks.applyTransitionMotionVariables).not.toHaveBeenCalled();
     expect(primitivesMocks.clearTransitionMotionVariables).not.toHaveBeenCalled();
     expect(primitivesMocks.handleBeforeEnter).toHaveBeenCalledTimes(1);
-    expect(primitivesMocks.handleBeforeLeave).toHaveBeenCalledTimes(1);
+    expect(primitivesMocks.handleBeforeLeave).toHaveBeenCalledTimes(2);
     expect(primitivesMocks.handleAfterLeave).toHaveBeenCalledTimes(1);
-    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+    expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
 
     wrapper.unmount();
   });
@@ -271,5 +282,234 @@ describe('useOverlay', () => {
     expect(primitivesMocks.restoreFocus).not.toHaveBeenCalled();
 
     wrapper.unmount();
+  });
+
+  it('forces a leave completion when a transition finalizer does not arrive', async () => {
+    vi.useFakeTimers();
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: true,
+        },
+      }
+    );
+
+    const vm = wrapper.vm as unknown as {
+      overlay: ReturnType<typeof useOverlay>;
+    };
+    const element = document.createElement('div');
+
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', '24');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(23);
+
+    expect(primitivesMocks.forceCompleteLeave).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+
+    vm.overlay.handleBackdropAfterLeave(element);
+    expect(primitivesMocks.restoreFocus).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    vi.useRealTimers();
+  });
+
+  it('parses second-based duration tokens when arming the leave fallback', async () => {
+    vi.useFakeTimers();
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: true,
+        },
+      }
+    );
+
+    const vm = wrapper.vm as unknown as {
+      overlay: ReturnType<typeof useOverlay>;
+    };
+    const element = document.createElement('div');
+
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', '0.024s');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(23);
+    expect(primitivesMocks.forceCompleteLeave).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    vi.useRealTimers();
+  });
+
+  it('falls back immediately when the leave duration token is missing', async () => {
+    vi.useFakeTimers();
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: true,
+        },
+      }
+    );
+
+    const vm = wrapper.vm as unknown as {
+      overlay: ReturnType<typeof useOverlay>;
+    };
+    const element = document.createElement('div');
+
+    document.documentElement.style.removeProperty('--ui-motion-duration-sm');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(0);
+
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    vi.useRealTimers();
+  });
+
+  it('treats invalid millisecond tokens as zero-duration leave fallbacks', async () => {
+    vi.useFakeTimers();
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: true,
+        },
+      }
+    );
+
+    const vm = wrapper.vm as unknown as {
+      overlay: ReturnType<typeof useOverlay>;
+    };
+    const element = document.createElement('div');
+
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', 'badms');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(0);
+
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    vi.useRealTimers();
+  });
+
+  it('treats invalid second and raw duration tokens as zero-duration leave fallbacks', async () => {
+    vi.useFakeTimers();
+    const close = vi.fn();
+
+    const wrapper = mount(
+      defineComponent({
+        props: {
+          open: { type: Boolean, required: true },
+        },
+        setup(props) {
+          return {
+            overlay: useOverlay(props, close, {
+              prefix: 'dialog',
+              surfacePreset: 'modal-fade-scale',
+            }),
+          };
+        },
+        template: '<div />',
+      }),
+      {
+        props: {
+          open: true,
+        },
+      }
+    );
+
+    const vm = wrapper.vm as unknown as {
+      overlay: ReturnType<typeof useOverlay>;
+    };
+    const element = document.createElement('div');
+
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', 'bads');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(0);
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+
+    primitivesMocks.forceCompleteLeave.mockClear();
+    primitivesMocks.restoreFocus.mockClear();
+    await wrapper.setProps({ open: true });
+
+    document.documentElement.style.setProperty('--ui-motion-duration-sm', 'bad');
+    vm.overlay.handleSurfaceBeforeLeave(element);
+    await wrapper.setProps({ open: false });
+    vi.advanceTimersByTime(0);
+    expect(primitivesMocks.forceCompleteLeave).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    vi.useRealTimers();
   });
 });
