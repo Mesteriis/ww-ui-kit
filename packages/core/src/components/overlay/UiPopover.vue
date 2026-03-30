@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* istanbul ignore file */
-import { computed, getCurrentInstance, ref, watch } from 'vue';
+import { computed, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
 
 import { PrimitivePortal, useControllable, useId, type FloatingPlacement } from '@ww/primitives';
 
@@ -231,6 +231,8 @@ const popoverStyle = computed<Record<string, string>>(() => ({
   ...surfaceStyle.value,
   ...(widthStyle.value ? { width: widthStyle.value } : {}),
 }));
+
+onBeforeUnmount(clearTimers);
 </script>
 
 <template>

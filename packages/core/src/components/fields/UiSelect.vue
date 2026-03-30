@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 
 import { PrimitivePortal, useId } from '@ww/primitives';
 
@@ -318,8 +318,11 @@ const onControlKeydown = async (event: KeyboardEvent) => {
     event.preventDefault();
     await openDropdown();
     const currentIndex = filteredOptions.value.findIndex((option) => option.id === activeId.value);
-    const reversed = filteredOptions.value.slice(0, Math.max(0, currentIndex)).reverse();
-    const nextOption = reversed.find((option) => !option.disabled);
+    const candidates =
+      currentIndex < 0
+        ? filteredOptions.value
+        : filteredOptions.value.slice(0, currentIndex);
+    const nextOption = candidates.reverse().find((option) => !option.disabled);
     activeId.value = nextOption?.id ?? activeId.value;
     return;
   }
@@ -377,6 +380,13 @@ const onControlKeydown = async (event: KeyboardEvent) => {
   );
   activeId.value = match?.id ?? activeId.value;
 };
+
+onBeforeUnmount(() => {
+  if (typeaheadTimer !== null) {
+    window.clearTimeout(typeaheadTimer);
+    typeaheadTimer = null;
+  }
+});
 
 const displayInputValue = computed(() => {
   if (props.searchable) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* istanbul ignore file */
-import { computed, getCurrentInstance, ref, useSlots, watch } from 'vue';
+import { computed, getCurrentInstance, onBeforeUnmount, ref, useSlots, watch } from 'vue';
 
 import { PrimitivePortal, useControllable, useId, type FloatingPlacement } from '@ww/primitives';
 
@@ -232,6 +232,8 @@ const tooltipStyle = computed<Record<string, string>>(() => ({
   ...surfaceStyle.value,
   ...(maxWidthStyle.value ? { maxWidth: maxWidthStyle.value } : {}),
 }));
+
+onBeforeUnmount(clearTimers);
 </script>
 
 <template>
