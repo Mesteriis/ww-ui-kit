@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, type ComponentPublicInstance, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, type ComponentPublicInstance, watch } from 'vue';
 
 import { PrimitivePortal, useId } from '@ww/primitives';
 
@@ -172,10 +172,11 @@ const onKeydown = (event: KeyboardEvent) => {
     event.preventDefault();
     open.value = true;
     const currentIndex = filteredItems.value.findIndex((item) => item.id === activeId.value);
-    const previousItem = filteredItems.value
-      .slice(0, Math.max(0, currentIndex))
-      .reverse()
-      .find((item) => !item.disabled);
+    const candidates =
+      currentIndex < 0
+        ? filteredItems.value.slice()
+        : filteredItems.value.slice(0, currentIndex);
+    const previousItem = candidates.reverse().find((item) => !item.disabled);
     activeId.value = previousItem?.id ?? activeId.value;
     return;
   }
@@ -227,6 +228,11 @@ const onKeydown = (event: KeyboardEvent) => {
   );
   activeId.value = match?.id ?? activeId.value;
 };
+
+onBeforeUnmount(() => {
+  window.clearTimeout(typeaheadTimer ?? undefined);
+  typeaheadTimer = null;
+});
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch, type ComponentPublicInstance } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, watch, type ComponentPublicInstance } from 'vue';
 
 import { useControllable, useRovingFocus } from '@ww/primitives';
 
@@ -170,6 +170,12 @@ const onMenuKeydown = async (event: KeyboardEvent) => {
 
   await focusItem(match.id);
 };
+
+onBeforeUnmount(() => {
+  clearTypeahead();
+  unregisterItems.forEach((unregister) => unregister());
+  unregisterItems = [];
+});
 </script>
 
 <template>

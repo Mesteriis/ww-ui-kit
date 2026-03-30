@@ -576,4 +576,83 @@ describe('floating overlays', () => {
     clickDropdown.unmount();
     controlledTooltip.unmount();
   });
+
+  it('clears overlay timers and dropdown typeahead timers on unmount', async () => {
+    const setTimeoutSpy = vi.spyOn(window, 'setTimeout');
+    const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
+
+    const tooltip = mount(UiTooltip, {
+      attachTo: document.body,
+      props: {
+        content: 'Delayed tooltip',
+        trigger: 'hover',
+        delay: { show: 25, hide: 10 },
+      },
+      slots: {
+        default: '<button id="tooltip-cleanup" type="button">Tooltip</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    await tooltip.get('.ui-tooltip__trigger').trigger('pointerenter');
+    const tooltipTimer = setTimeoutSpy.mock.results.at(-1)?.value as number;
+    tooltip.unmount();
+    expect(clearTimeoutSpy).toHaveBeenCalledWith(tooltipTimer);
+
+    const popover = mount(UiPopover, {
+      attachTo: document.body,
+      props: {
+        trigger: 'hover',
+        delay: { show: 20, hide: 10 },
+      },
+      slots: {
+        trigger: '<button id="popover-cleanup" type="button">Popover</button>',
+        default: '<button type="button">Action</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    await popover.get('.ui-popover__trigger').trigger('pointerenter');
+    const popoverTimer = setTimeoutSpy.mock.results.at(-1)?.value as number;
+    popover.unmount();
+    expect(clearTimeoutSpy).toHaveBeenCalledWith(popoverTimer);
+
+    const dropdown = mount(UiDropdown, {
+      attachTo: document.body,
+      props: {
+        items: [{ label: 'Alpha', value: 'alpha' }],
+      },
+      slots: {
+        trigger: '<button id="dropdown-cleanup" type="button">Dropdown</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    await dropdown.get('#dropdown-cleanup').trigger('click');
+    await nextTick();
+    await nextTick();
+    await (
+      dropdown.vm.$.setupState as {
+        onMenuKeydown: (event: KeyboardEvent) => Promise<void>;
+      }
+    ).onMenuKeydown(new KeyboardEvent('keydown', { key: 'a' }));
+    const dropdownClearCalls = clearTimeoutSpy.mock.calls.length;
+    dropdown.unmount();
+    expect(clearTimeoutSpy.mock.calls.length).toBeGreaterThan(dropdownClearCalls);
+
+    setTimeoutSpy.mockRestore();
+    clearTimeoutSpy.mockRestore();
+  });
 });

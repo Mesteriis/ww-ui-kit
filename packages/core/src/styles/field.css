@@ -23,7 +23,7 @@
 }
 
 .ui-field__hint {
-  color: var(--ui-text-secondary);
+  color: var(--ui-field-hint-color, var(--ui-text-secondary));
 }
 
 .ui-field__error {

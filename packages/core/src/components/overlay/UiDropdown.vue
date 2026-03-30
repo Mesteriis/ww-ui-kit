@@ -276,6 +276,8 @@ useManagedTriggerAttributes(triggerRef, () => ({
 }));
 
 onBeforeUnmount(() => {
+  clearTimers();
+  clearTypeahead();
   for (const unregister of unregisterItems) {
     unregister();
   }

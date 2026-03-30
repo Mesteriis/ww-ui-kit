@@ -34,6 +34,7 @@ const props = withDefaults(
     invalid?: boolean;
     size?: UiNumberInputSize;
     format?: 'decimal';
+    ariaLabel?: string;
     ariaDescribedby?: string;
   }>(),
   {
@@ -56,6 +57,7 @@ const emit = defineEmits<{
 const field = useFieldContext();
 const fallbackId = useId('number-input');
 const inputId = computed(() => props.id ?? field?.inputId.value ?? fallbackId.value);
+const labelId = computed(() => (props.ariaLabel ? undefined : field?.labelId.value));
 const describedBy = computed(() =>
   mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value)
 );
@@ -211,6 +213,8 @@ const onKeydown = (event: KeyboardEvent) => {
       :placeholder="props.placeholder"
       :disabled="props.disabled"
       :readonly="props.readonly"
+      :aria-label="props.ariaLabel"
+      :aria-labelledby="labelId"
       :aria-invalid="isInvalid || undefined"
       :aria-describedby="describedBy"
       data-ui-motion="ring-focus-soft"
