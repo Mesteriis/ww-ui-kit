@@ -40,7 +40,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
-    "typecheck": "pnpm check:node-version && pnpm -r --workspace-concurrency=4 --if-present typecheck",
+    "typecheck": "pnpm check:node-version && vue-tsc -p tsconfig.typecheck.json --noEmit",
     "test": "pnpm check:node-version && pnpm test:unit && pnpm test:e2e && pnpm test:playground",
     "test:unit": "vitest run --config vitest.config.ts",
     "test:e2e": "pnpm check:node-version && pnpm -r --workspace-concurrency=4 --filter @ww/docs^... --if-present build && pnpm --filter @ww/docs build && playwright test --config tests/e2e/playwright.storybook.config.ts",
