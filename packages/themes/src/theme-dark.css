@@ -1,4 +1,4 @@
-[data-ui-theme="dark"] {
+[data-ui-theme='dark'] {
   --ui-neutral-0: #ffffff;
   --ui-neutral-50: #f8fafc;
   --ui-neutral-100: #f1f5f9;
@@ -91,8 +91,8 @@
   --ui-letter-spacing-label: 0.04em;
   --ui-letter-spacing-display: -0.01em;
   --ui-text-transform-none: none;
-  --ui-font-feature-default: "kern" 1, "liga" 1, "calt" 1;
-  --ui-font-feature-display: "kern" 1, "liga" 1, "ss01" 1;
+  --ui-font-feature-default: 'kern' 1, 'liga' 1, 'calt' 1;
+  --ui-font-feature-display: 'kern' 1, 'liga' 1, 'ss01' 1;
   --ui-font-smoothing-webkit: antialiased;
   --ui-font-smoothing-moz: grayscale;
   --ui-motion-mode: full;
@@ -151,24 +151,55 @@
   --ui-motion-focus-ring-duration: var(--ui-motion-duration-xs);
   --ui-motion-focus-ring-easing: var(--ui-motion-easing-standard);
   --ui-motion-focus-ring-shadow-soft: 0 0 0 4px var(--ui-focus-ring);
-  --ui-motion-focus-ring-shadow-strong: 0 0 0 2px var(--ui-focus-ring-offset), 0 0 0 6px var(--ui-focus-ring);
-  --ui-motion-focus-ring-shadow-invalid: 0 0 0 4px color-mix(in srgb, var(--ui-border-danger) 72%, transparent);
-  --ui-motion-feedback-shadow-soft: 0 0 0 3px color-mix(in srgb, var(--ui-border-focus) 28%, transparent);
-  --ui-motion-feedback-shadow-strong: 0 16px 40px color-mix(in srgb, var(--ui-border-focus) 18%, transparent);
-  --ui-motion-feedback-glow-soft: 0 0 0 1px color-mix(in srgb, var(--ui-border-focus) 32%, transparent);
-  --ui-motion-feedback-glow-accent: 0 18px 48px color-mix(in srgb, var(--ui-border-focus) 20%, transparent);
+  --ui-motion-focus-ring-shadow-strong:
+    0 0 0 2px var(--ui-focus-ring-offset), 0 0 0 6px var(--ui-focus-ring);
+  --ui-motion-focus-ring-shadow-invalid: 0 0 0 4px
+    color-mix(in srgb, var(--ui-border-danger) 72%, transparent);
+  --ui-motion-feedback-shadow-soft: 0 0 0 3px
+    color-mix(in srgb, var(--ui-border-focus) 28%, transparent);
+  --ui-motion-feedback-shadow-strong: 0 16px 40px
+    color-mix(in srgb, var(--ui-border-focus) 18%, transparent);
+  --ui-motion-feedback-glow-soft: 0 0 0 1px
+    color-mix(in srgb, var(--ui-border-focus) 32%, transparent);
+  --ui-motion-feedback-glow-accent: 0 18px 48px
+    color-mix(in srgb, var(--ui-border-focus) 20%, transparent);
   --ui-motion-overlay-backdrop-duration: var(--ui-motion-duration-sm);
   --ui-motion-overlay-surface-duration: var(--ui-motion-duration-md);
   --ui-motion-overlay-easing: var(--ui-motion-easing-decelerate);
-  --ui-motion-transition-color-fast: color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), border-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), box-shadow var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
-  --ui-motion-transition-transform-fast: transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
-  --ui-motion-transition-transform-color-fast: transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
-  --ui-motion-transition-transform-opacity: opacity var(--ui-motion-duration-sm) var(--ui-motion-easing-standard), transform var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
-  --ui-motion-transition-focus-ring: box-shadow var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing), border-color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing), background-color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing), color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing);
-  --ui-motion-transition-surface-lift-xs: transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), border-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard), box-shadow var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
-  --ui-motion-transition-surface-lift-sm: transform var(--ui-motion-duration-sm) var(--ui-motion-easing-standard), border-color var(--ui-motion-duration-sm) var(--ui-motion-easing-standard), background-color var(--ui-motion-duration-sm) var(--ui-motion-easing-standard), box-shadow var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
-  --ui-motion-transition-overlay: opacity var(--ui-motion-overlay-backdrop-duration) var(--ui-motion-overlay-easing), transform var(--ui-motion-overlay-surface-duration) var(--ui-motion-overlay-easing);
-  --ui-motion-transition-toggle-thumb: transform var(--ui-motion-duration-sm) var(--ui-motion-easing-emphasized), background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
+  --ui-motion-transition-color-fast:
+    color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    border-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    box-shadow var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
+  --ui-motion-transition-transform-fast: transform var(--ui-motion-duration-xs)
+    var(--ui-motion-easing-standard);
+  --ui-motion-transition-transform-color-fast:
+    transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
+  --ui-motion-transition-transform-opacity:
+    opacity var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    transform var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
+  --ui-motion-transition-focus-ring:
+    box-shadow var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing),
+    border-color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing),
+    background-color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing),
+    color var(--ui-motion-focus-ring-duration) var(--ui-motion-focus-ring-easing);
+  --ui-motion-transition-surface-lift-xs:
+    transform var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    border-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard),
+    box-shadow var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
+  --ui-motion-transition-surface-lift-sm:
+    transform var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    border-color var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    background-color var(--ui-motion-duration-sm) var(--ui-motion-easing-standard),
+    box-shadow var(--ui-motion-duration-sm) var(--ui-motion-easing-standard);
+  --ui-motion-transition-overlay:
+    opacity var(--ui-motion-overlay-backdrop-duration) var(--ui-motion-overlay-easing),
+    transform var(--ui-motion-overlay-surface-duration) var(--ui-motion-overlay-easing);
+  --ui-motion-transition-toggle-thumb:
+    transform var(--ui-motion-duration-sm) var(--ui-motion-easing-emphasized),
+    background-color var(--ui-motion-duration-xs) var(--ui-motion-easing-standard);
   --ui-motion-collapse-opacity-duration-factor: 0.8;
   --ui-elevation-surface-soft: var(--ui-shadow-sm);
   --ui-elevation-surface-raised: var(--ui-shadow-md);
@@ -177,7 +208,7 @@
   --ui-glow-accent-ambient: 0 18px 48px color-mix(in srgb, var(--ui-border-focus) 20%, transparent);
 }
 
-[data-ui-theme="dark"] {
+[data-ui-theme='dark'] {
   --ui-text-primary: var(--ui-neutral-50);
   --ui-text-secondary: var(--ui-neutral-300);
   --ui-text-muted: var(--ui-neutral-400);
@@ -450,7 +481,11 @@
   --ui-spinner-track: var(--ui-border-subtle);
   --ui-spinner-indicator: var(--ui-action-primary-bg);
   --ui-data-grid-surface: color-mix(in srgb, var(--ui-surface-default) 96%, transparent);
-  --ui-data-grid-header-surface: color-mix(in srgb, var(--ui-surface-sunken) 84%, var(--ui-surface-default));
+  --ui-data-grid-header-surface: color-mix(
+    in srgb,
+    var(--ui-surface-sunken) 84%,
+    var(--ui-surface-default)
+  );
   --ui-data-grid-toolbar-surface: rgba(99, 102, 241, 0.12);
   --ui-data-grid-row-border: var(--ui-border-subtle);
   --ui-data-grid-row-hover: rgba(148, 163, 184, 0.08);
@@ -531,7 +566,7 @@
   --ui-empty-state-icon-surface: rgba(99, 102, 241, 0.16);
 }
 
-[data-ui-theme="dark"][data-ui-density="compact"] {
+[data-ui-theme='dark'][data-ui-density='compact'] {
   --ui-badge-height: 1.5rem;
   --ui-badge-padding-inline: var(--ui-space-2);
   --ui-button-height-sm: 1.875rem;
@@ -553,7 +588,7 @@
   --ui-tabs-trigger-padding-inline: var(--ui-space-3);
 }
 
-[data-ui-theme="dark"][data-ui-density="comfortable"] {
+[data-ui-theme='dark'][data-ui-density='comfortable'] {
   --ui-badge-height: 1.875rem;
   --ui-badge-padding-inline: var(--ui-space-4);
   --ui-button-height-sm: 2.125rem;
@@ -575,7 +610,7 @@
   --ui-tabs-trigger-padding-inline: var(--ui-space-5);
 }
 
-[data-ui-theme="dark"][data-ui-motion-profile="calm"] {
+[data-ui-theme='dark'][data-ui-motion-profile='calm'] {
   --ui-motion-collapse-opacity-duration-factor: 0.65;
   --ui-motion-duration-sm: 190ms;
   --ui-motion-duration-md: 240ms;
@@ -586,11 +621,12 @@
   --ui-motion-scale-104: 1.03;
   --ui-motion-distance-xs: 1px;
   --ui-motion-distance-sm: 3px;
-  --ui-motion-feedback-shadow-strong: 0 12px 30px color-mix(in srgb, var(--ui-border-focus) 14%, transparent);
+  --ui-motion-feedback-shadow-strong: 0 12px 30px
+    color-mix(in srgb, var(--ui-border-focus) 14%, transparent);
   --ui-motion-overlay-easing: var(--ui-motion-easing-decelerate);
 }
 
-[data-ui-theme="dark"][data-ui-motion-profile="expressive"] {
+[data-ui-theme='dark'][data-ui-motion-profile='expressive'] {
   --ui-motion-collapse-opacity-duration-factor: 0.92;
   --ui-motion-duration-sm: 140ms;
   --ui-motion-duration-md: 180ms;
@@ -601,29 +637,38 @@
   --ui-motion-scale-104: 1.06;
   --ui-motion-distance-xs: 3px;
   --ui-motion-distance-sm: 6px;
-  --ui-motion-feedback-shadow-strong: 0 18px 46px color-mix(in srgb, var(--ui-border-focus) 22%, transparent);
+  --ui-motion-feedback-shadow-strong: 0 18px 46px
+    color-mix(in srgb, var(--ui-border-focus) 22%, transparent);
   --ui-motion-overlay-easing: var(--ui-motion-easing-emphasized);
 }
 
-[data-ui-theme="dark"][data-ui-personality="accented"] {
+[data-ui-theme='dark'][data-ui-personality='accented'] {
   --ui-button-radius: var(--ui-radius-pill);
   --ui-card-border: var(--ui-border-strong);
   --ui-card-shadow: var(--ui-shadow-lg);
   --ui-dialog-border: var(--ui-border-focus);
   --ui-dialog-radius: var(--ui-radius-xl);
-  --ui-empty-state-icon-surface: color-mix(in srgb, var(--ui-surface-brand-soft) 82%, var(--ui-surface-default));
+  --ui-empty-state-icon-surface: color-mix(
+    in srgb,
+    var(--ui-surface-brand-soft) 82%,
+    var(--ui-surface-default)
+  );
   --ui-input-radius: var(--ui-radius-lg);
   --ui-tabs-list-border: var(--ui-border-strong);
   --ui-tabs-list-radius: var(--ui-radius-xl);
-  --ui-tabs-trigger-bg-active: color-mix(in srgb, var(--ui-surface-brand-soft) 72%, var(--ui-surface-default));
-  --ui-text-font-feature-settings-display: "kern" 1, "liga" 1, "ss01" 1, "ss02" 1;
+  --ui-tabs-trigger-bg-active: color-mix(
+    in srgb,
+    var(--ui-surface-brand-soft) 72%,
+    var(--ui-surface-default)
+  );
+  --ui-text-font-feature-settings-display: 'kern' 1, 'liga' 1, 'ss01' 1, 'ss02' 1;
   --ui-text-letter-spacing-display: -0.02em;
   --ui-text-letter-spacing-label: 0.08em;
   --ui-text-transform-label: var(--ui-text-transform-label);
 }
 
 @media (min-width: 48rem) {
-  [data-ui-theme="dark"] {
+  [data-ui-theme='dark'] {
     --ui-card-padding: var(--ui-space-6);
     --ui-dialog-padding: var(--ui-space-6);
     --ui-dialog-width: 42rem;
@@ -634,7 +679,7 @@
 }
 
 @media (min-width: 72rem) {
-  [data-ui-theme="dark"] {
+  [data-ui-theme='dark'] {
     --ui-button-height-lg: 3.25rem;
     --ui-card-padding: var(--ui-space-8);
     --ui-dialog-padding: var(--ui-space-8);

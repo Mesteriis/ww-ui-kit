@@ -67,20 +67,5 @@ export function resolveStorybookManualChunk(id: string): string | undefined {
     return 'vendor-axe';
   }
 
-  if (
-    includesPath(id, '/node_modules/@storybook/addon-a11y/') ||
-    includesPath(id, '/node_modules/@storybook/test/')
-  ) {
-    return 'storybook-a11y';
-  }
-
-  if (
-    includesPath(id, '/node_modules/@storybook/blocks/') ||
-    includesPath(id, '/node_modules/@mdx-js/') ||
-    includesPath(id, '/node_modules/storybook/internal/docs-tools/')
-  ) {
-    return 'storybook-docs';
-  }
-
   return undefined;
 }

@@ -43,7 +43,7 @@
     "typecheck": "pnpm check:node-version && pnpm -r --workspace-concurrency=4 --if-present typecheck",
     "test": "pnpm check:node-version && pnpm test:unit && pnpm test:e2e && pnpm test:playground",
     "test:unit": "vitest run --config vitest.config.ts",
-    "test:e2e": "pnpm check:node-version && pnpm --filter @ww/docs build && playwright test --config tests/e2e/playwright.storybook.config.ts",
+    "test:e2e": "pnpm check:node-version && pnpm -r --workspace-concurrency=4 --filter @ww/docs^... --if-present build && pnpm --filter @ww/docs build && playwright test --config tests/e2e/playwright.storybook.config.ts",
     "test:playground": "pnpm check:node-version && pnpm --filter @ww/playground build && playwright test --config tests/playground/playwright.playground.config.ts",
     "test:coverage": "pnpm check:node-version && vitest run --config vitest.config.ts --coverage.enabled --coverage.provider=istanbul --coverage.thresholds.100 --coverage.reporter=text --coverage.reporter=json-summary --coverage.include='packages/*/src/**/*.{ts,vue}' --coverage.include='packages/third-party/*/src/**/*.{ts,vue}' --coverage.exclude='**/*.test.ts' --coverage.reportsDirectory=coverage/global-100",
     "verify": "pnpm check:node-version && pnpm check:catalog && pnpm check:stories && pnpm check:docs && pnpm check:playground-coverage && pnpm check:playground-lab && pnpm check:adr && pnpm check:ai-rules && pnpm check:architecture && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm build:pages",
