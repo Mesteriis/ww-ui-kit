@@ -69,14 +69,14 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 ### 4) Covered elsewhere / do not export as new public core surface
 
-| Family                                                                       | Status                  | Placement                 | Contract                                                   | Decision                       | Note                                                                                |
-| ---------------------------------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
-| UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter | mislayered              | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | extend page-template shell family only if existing shell contracts are insufficient |
-| UiSidebar (as shell)                                                         | mislayered              | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | `UiMenu` may be core; sidebar shell is page-template territory                      |
-| UiDrawerForm / UiDialogForm                                                  | composition-only        | `@ww/widgets` or `apps/*` | `no public core export`                                    | **do not export now**          | keep as composed proof until a repeatable cross-app contract exists                 |
-| UiConfigProvider                                                             | reject                  | existing theme runtime    | `no new export`                                            | **do not add**                 | would create a second source of truth beside theme runtime                          |
-| UiNotification                                                               | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | one canonical transient-feedback surface                                            |
-| UiMessage                                                                    | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | no parallel lightweight-toast system                                                |
+| Family                                                                       | Status                  | Placement                 | Contract                                                   | Decision                       | Note                                                                                                  |
+| ---------------------------------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter | implemented             | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | canonical generic shell family now lives in `@ww/page-templates`; old page-prefixed naming is retired |
+| UiSidebar (as shell)                                                         | mislayered              | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | `UiMenu` may be core; sidebar shell is page-template territory                                        |
+| UiDrawerForm / UiDialogForm                                                  | composition-only        | `@ww/widgets` or `apps/*` | `no public core export`                                    | **do not export now**          | keep as composed proof until a repeatable cross-app contract exists                                   |
+| UiConfigProvider                                                             | reject                  | existing theme runtime    | `no new export`                                            | **do not add**                 | would create a second source of truth beside theme runtime                                            |
+| UiNotification                                                               | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | one canonical transient-feedback surface                                                              |
+| UiMessage                                                                    | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | no parallel lightweight-toast system                                                                  |
 
 ## Summary aligned to canonical backlog
 
@@ -405,7 +405,9 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter
 
-- Keep shell-level layout in `@ww/page-templates`.
+- Canonical generic shell family is implemented in `@ww/page-templates`.
+- Keep shell-level layout in `@ww/page-templates`, not `@ww/core`.
+- Treat `UiLayout*` as the shell-level contract; do not reintroduce the old page-prefixed naming as a parallel public family.
 - Do not reintroduce app-shell orchestration into `@ww/core`.
 
 #### UiSidebar (as shell)

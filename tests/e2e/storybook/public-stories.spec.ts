@@ -110,6 +110,19 @@ test('runs selection and navigation interactions inside Storybook', async ({ pag
   await expect(page.locator('.ui-breadcrumb [aria-current="page"]')).toContainText('Review');
 });
 
+test('renders dashboard-like and marketing-like layout stories inside Storybook', async ({
+  page,
+  request,
+}) => {
+  const storyId = await getStoryId(request, 'Page Templates/Shell');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('Dashboard operations shell', { exact: true })).toBeVisible();
+  await expect(page.getByText('Marketing launch shell', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Create report' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Launch campaign' })).toBeVisible();
+});
+
 test('keeps curated Storybook surfaces free of browser-level accessibility violations', async ({
   browser,
   request,
@@ -134,6 +147,7 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
       },
     },
     { title: 'Systems/Data Grid/Overview' },
+    { title: 'Page Templates/Shell' },
   ];
 
   for (const story of cases) {

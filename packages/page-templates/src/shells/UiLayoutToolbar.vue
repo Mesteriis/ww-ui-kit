@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ name: 'UiPageToolbar' });
+defineOptions({ name: 'UiLayoutToolbar' });
 </script>
 
 <template>
-  <div class="ui-page-toolbar">
+  <div class="ui-layout-toolbar">
     <slot />
   </div>
 </template>

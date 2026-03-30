@@ -8,11 +8,11 @@ withDefaults(
   }
 );
 
-defineOptions({ name: 'UiPageBody' });
+defineOptions({ name: 'UiLayoutContent' });
 </script>
 
 <template>
-  <div class="ui-page-body" :data-ui-padded="padded">
+  <div class="ui-layout-content" :data-ui-padded="padded">
     <slot />
   </div>
 </template>

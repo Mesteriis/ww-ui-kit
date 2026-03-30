@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 
 import type { DataGridQuery } from '@ww/data-grid';
 import { UiBadge, UiButton, UiCard } from '@ww/core';
-import { UiPageSection, UiPageTemplate } from '@ww/page-templates';
+import { UiLayout, UiLayoutContent, UiLayoutHeader, UiLayoutSection } from '@ww/page-templates';
 import { getThemeMeta } from '@ww/themes';
 import { DataTableWidget } from '@ww/widgets';
 
@@ -160,38 +160,47 @@ const scopedTheme = getThemeMeta('belovodye');
       class="playground__foundation-grid"
       data-playground-scenario="widget-data-table-composition"
     >
-      <UiPageTemplate
-        title="Operations workspace"
-        description="Widget + page-template composition proof"
-      >
-        <UiPageSection
-          title="Accounts block"
-          description="Apps can consume a widget instead of hand-wrapping the grid every time."
-        >
-          <DataTableWidget
-            title="Accounts"
-            description="Composed inside a reusable page shell."
-            surface="subtle"
-            :rows="compositionResult.pageRows"
-            :columns="dataGridUiColumns"
-            :query="compositionQuery"
-            :total-rows="compositionResult.totalRows"
-            :selected-row-ids="compositionSelection"
-            :filter-definitions="dataGridFilterDefinitions"
-            caption="Composed accounts table widget"
-            aria-label="Composed accounts table widget"
-            @update:query="compositionQuery = $event"
-            @update:selected-row-ids="compositionSelection = $event"
+      <UiLayout>
+        <template #header>
+          <UiLayoutHeader>
+            <div style="display: grid; gap: var(--ui-space-2)">
+              <h1 style="margin: 0">Operations workspace</h1>
+              <p style="margin: 0; color: var(--ui-text-secondary)">
+                Widget + layout composition proof
+              </p>
+            </div>
+          </UiLayoutHeader>
+        </template>
+        <UiLayoutContent :padded="false">
+          <UiLayoutSection
+            title="Accounts block"
+            description="Apps can consume a widget instead of hand-wrapping the grid every time."
           >
-            <template #header-actions>
-              <UiButton variant="secondary" size="sm">Export later</UiButton>
-            </template>
-            <template #footer>
-              Page-template layout stays separate from the table engine and widget shell.
-            </template>
-          </DataTableWidget>
-        </UiPageSection>
-      </UiPageTemplate>
+            <DataTableWidget
+              title="Accounts"
+              description="Composed inside a reusable layout shell."
+              surface="subtle"
+              :rows="compositionResult.pageRows"
+              :columns="dataGridUiColumns"
+              :query="compositionQuery"
+              :total-rows="compositionResult.totalRows"
+              :selected-row-ids="compositionSelection"
+              :filter-definitions="dataGridFilterDefinitions"
+              caption="Composed accounts table widget"
+              aria-label="Composed accounts table widget"
+              @update:query="compositionQuery = $event"
+              @update:selected-row-ids="compositionSelection = $event"
+            >
+              <template #header-actions>
+                <UiButton variant="secondary" size="sm">Export later</UiButton>
+              </template>
+              <template #footer>
+                Layout shell stays separate from the table engine and widget shell.
+              </template>
+            </DataTableWidget>
+          </UiLayoutSection>
+        </UiLayoutContent>
+      </UiLayout>
     </section>
   </section>
 </template>

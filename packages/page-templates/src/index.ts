@@ -1,16 +1,13 @@
-export { default as UiPageTemplate } from './shells/UiPageTemplate.vue';
-export { default as UiPageHeader } from './shells/UiPageHeader.vue';
-export { default as UiPageBody } from './shells/UiPageBody.vue';
-export { default as UiPageSidebar } from './shells/UiPageSidebar.vue';
-export { default as UiPageSection } from './shells/UiPageSection.vue';
-export { default as UiPageToolbar } from './shells/UiPageToolbar.vue';
+export { default as UiLayout } from './shells/UiLayout.vue';
+export { default as UiLayoutHeader } from './shells/UiLayoutHeader.vue';
+export { default as UiLayoutSider } from './shells/UiLayoutSider.vue';
+export { default as UiLayoutContent } from './shells/UiLayoutContent.vue';
+export { default as UiLayoutFooter } from './shells/UiLayoutFooter.vue';
+export { default as UiLayoutSection } from './shells/UiLayoutSection.vue';
+export { default as UiLayoutToolbar } from './shells/UiLayoutToolbar.vue';
 export {
   PAGE_TEMPLATE_LAYER_RULES,
   RESERVED_PAGE_TEMPLATE_NAMESPACES,
   type PageTemplateLayerRule,
 } from './shared/page-template-contracts';
-export {
-  PAGE_TEMPLATE_WIDTHS,
-  type PageTemplateProps,
-  type PageTemplateWidth,
-} from './shared/types';
+export { LAYOUT_WIDTHS, type LayoutWidth, type UiLayoutProps } from './shared/types';

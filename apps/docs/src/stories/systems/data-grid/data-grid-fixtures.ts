@@ -10,7 +10,7 @@ import {
   type DataGridQuery,
 } from '@ww/data-grid';
 import { UiBadge, UiButton, UiCard } from '@ww/core';
-import { UiPageTemplate, UiPageSection } from '@ww/page-templates';
+import { UiLayout, UiLayoutContent, UiLayoutHeader, UiLayoutSection } from '@ww/page-templates';
 import { getThemeMeta, type ThemeName } from '@ww/themes';
 import { UiWidgetShell } from '@ww/widgets';
 
@@ -416,8 +416,10 @@ export const DataGridStoryHarness = defineComponent({
     UiButton,
     UiCard,
     UiDataGrid,
-    UiPageSection,
-    UiPageTemplate,
+    UiLayout,
+    UiLayoutContent,
+    UiLayoutHeader,
+    UiLayoutSection,
     UiWidgetShell,
   },
   props: {
@@ -503,14 +505,21 @@ export const DataGridStoryHarness = defineComponent({
       :data-ui-theme-type="themeMeta?.type"
       style="gap: var(--ui-space-4);"
     >
-      <UiPageTemplate
+      <UiLayout
         v-if="composed"
-        title="Operations surface"
-        description="Page-template + widget shell composition proof"
-        :has-sidebar="false"
       >
-        <template #default>
-          <UiPageSection title="Account operations" description="System package embedded inside composition layers.">
+        <template #header>
+          <UiLayoutHeader>
+            <div style="display: grid; gap: var(--ui-space-2);">
+              <h1 style="margin: 0;">Operations surface</h1>
+              <p style="margin: 0; color: var(--ui-text-secondary);">
+                Layout + widget shell composition proof
+              </p>
+            </div>
+          </UiLayoutHeader>
+        </template>
+        <UiLayoutContent :padded="false">
+          <UiLayoutSection title="Account operations" description="System package embedded inside composition layers.">
             <UiWidgetShell title="Accounts table" description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer above @ww/data-grid." surface="subtle">
               <UiDataGrid
                 :rows="uiRows"
@@ -538,9 +547,9 @@ export const DataGridStoryHarness = defineComponent({
                 </template>
               </UiDataGrid>
             </UiWidgetShell>
-          </UiPageSection>
-        </template>
-      </UiPageTemplate>
+          </UiLayoutSection>
+        </UiLayoutContent>
+      </UiLayout>
 
       <UiDataGrid
         v-else

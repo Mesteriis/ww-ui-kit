@@ -633,7 +633,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
   surface({
     packageName: '@ww/page-templates',
     exportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     kind: 'page-template-shell',
     requiresStorybook: true,
     storyArtifacts: [

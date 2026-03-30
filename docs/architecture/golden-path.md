@@ -59,7 +59,7 @@ patchThemeRuntime(
 
 - Use `UiWidgetShell` for reusable composed blocks.
 - Use `DataTableWidget` when you want reusable table-shell framing above `@ww/data-grid`.
-- Use `UiPageTemplate` and related shells for reusable page layout skeletons.
+- Use `UiLayout` and related layout primitives for reusable page-shell skeletons; named dashboard or marketing templates compose above them.
 - Keep route pages, backend orchestration, and product-specific state in apps.
 
 ## 5. Optional systems

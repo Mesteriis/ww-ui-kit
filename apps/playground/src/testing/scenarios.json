@@ -57,7 +57,7 @@
     "id": "data-grid-composition",
     "label": "Data Grid Composition",
     "hash": "#testing-data-grid-composition",
-    "description": "System package composed inside widget and page-template shells."
+    "description": "System package composed inside widget and layout shells."
   },
   {
     "id": "widgets",
@@ -87,18 +87,18 @@
     "id": "widget-data-table-composition",
     "label": "Data Table Widget Composition",
     "hash": "#testing-widgets-data-table-composition",
-    "description": "Widget composed inside page-template shells without duplicating the underlying data-grid engine."
+    "description": "Widget composed inside layout shells without duplicating the underlying data-grid engine."
   },
   {
     "id": "page-templates",
     "label": "Page Templates",
     "hash": "#testing-page-templates",
-    "description": "Page-shell layer and reusable layout skeletons above widgets."
+    "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives."
   },
   {
     "id": "composition",
     "label": "Composition",
     "hash": "#testing-composition",
-    "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core."
+    "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core."
   }
 ]

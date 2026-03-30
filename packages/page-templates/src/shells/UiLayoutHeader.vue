@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ name: 'UiPageHeader' });
+defineOptions({ name: 'UiLayoutHeader' });
 </script>
 
 <template>
-  <header class="ui-page-header">
+  <header class="ui-layout-header">
     <slot />
   </header>
 </template>

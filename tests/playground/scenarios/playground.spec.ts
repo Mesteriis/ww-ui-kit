@@ -183,6 +183,26 @@ test('runs data-table-widget flows in the built playground', async ({ page }) =>
   await expect(compositionSection.getByText('Export later', { exact: true })).toBeVisible();
 });
 
+test('renders dashboard-like and marketing-like layout compositions in the built playground', async ({
+  page,
+}) => {
+  await page.goto('/playground/testing');
+
+  const templatesSection = page.locator('#testing-page-templates');
+  await expect(
+    templatesSection.getByText('Dashboard operations shell', { exact: true })
+  ).toBeVisible();
+  await expect(
+    templatesSection.getByText('Marketing campaign shell', { exact: true })
+  ).toBeVisible();
+  await expect(templatesSection.getByRole('button', { name: 'Launch campaign' })).toBeVisible();
+
+  const compositionSection = page.locator('#testing-composition');
+  await expect(
+    compositionSection.getByText('Widget shell showcase', { exact: true })
+  ).toBeVisible();
+});
+
 test('keeps key playground flows free of browser-level accessibility violations', async ({
   page,
 }) => {

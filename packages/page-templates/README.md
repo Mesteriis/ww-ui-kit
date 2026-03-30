@@ -1,6 +1,6 @@
 # @ww/page-templates
 
-`@ww/page-templates` is the layout and page-shell layer above `@ww/widgets`, `@ww/core`, and optional systems packages.
+`@ww/page-templates` is the reusable page-shell and layout-composition layer above `@ww/widgets`, `@ww/core`, and optional systems packages.
 
 Page templates are:
 
@@ -15,17 +15,18 @@ Page templates are not:
 - product-specific screens
 - a substitute for app routing
 
-This scaffold release adds only shell-level infrastructure and reserved namespaces.
+The canonical generic shell family is layout-first so future dashboard, marketing, workspace, and settings templates can compose on top of it without leaking route semantics into the base layer.
 
 ## Public API
 
-- `UiPageTemplate`
-- `UiPageHeader`
-- `UiPageBody`
-- `UiPageSidebar`
-- `UiPageSection`
-- `UiPageToolbar`
-- page-template shell types and layer contracts
+- `UiLayout`
+- `UiLayoutHeader`
+- `UiLayoutSider`
+- `UiLayoutContent`
+- `UiLayoutFooter`
+- `UiLayoutSection`
+- `UiLayoutToolbar`
+- layout shell types and page-template layer contracts
 
 Import the package styles explicitly:
 
@@ -36,19 +37,41 @@ import '@ww/page-templates/styles.css';
 ## Usage
 
 ```vue
-<UiPageTemplate title="Workspace" description="Reusable page shell" has-sidebar>
+<UiLayout width="full">
+  <template #header>
+    <UiLayoutHeader>
+      <div style="display: grid; gap: var(--ui-space-2);">
+        <h1 style="margin: 0;">Workspace shell</h1>
+        <p style="margin: 0; color: var(--ui-text-secondary);">
+          Structural layout primitives stay reusable across future named templates.
+        </p>
+      </div>
+    </UiLayoutHeader>
+  </template>
+
   <template #toolbar>
-    <UiButton variant="secondary">Refresh</UiButton>
+    <UiLayoutToolbar>
+      <UiButton variant="secondary">Refresh</UiButton>
+      <UiButton>Share</UiButton>
+    </UiLayoutToolbar>
   </template>
 
-  <UiPageSection title="Overview">
-    Main page content
-  </UiPageSection>
+  <UiLayoutContent :padded="false">
+    <UiLayoutSection title="Overview">
+      Main layout content
+    </UiLayoutSection>
+  </UiLayoutContent>
 
-  <template #sidebar>
-    Sidebar content
+  <template #sider>
+    <UiLayoutSider>
+      <UiLayoutSection title="Sidebar">Sidebar content</UiLayoutSection>
+    </UiLayoutSider>
   </template>
-</UiPageTemplate>
+
+  <template #footer>
+    <UiLayoutFooter>Route pages stay in apps.</UiLayoutFooter>
+  </template>
+</UiLayout>
 ```
 
 ## Reserved namespaces

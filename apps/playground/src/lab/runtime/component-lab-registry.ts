@@ -14,7 +14,7 @@ import uiDrawer from '../schemas/ui-drawer.lab';
 import uiEmptyState from '../schemas/ui-empty-state.lab';
 import uiIconButton from '../schemas/ui-icon-button.lab';
 import uiInput from '../schemas/ui-input.lab';
-import uiPageTemplate from '../schemas/ui-page-template.lab';
+import uiLayout from '../schemas/ui-layout.lab';
 import uiPopover from '../schemas/ui-popover.lab';
 import uiSelectSimple from '../schemas/ui-select-simple.lab';
 import uiSignalGraph from '../schemas/ui-signal-graph.lab';
@@ -49,7 +49,7 @@ const definitions = [
   uiDataGrid,
   uiWidgetShell,
   dataTableWidget,
-  uiPageTemplate,
+  uiLayout,
 ] as const;
 
 export const componentLabRegistry = Object.freeze(

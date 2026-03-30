@@ -2,7 +2,7 @@ import { computed, defineComponent, ref, type PropType } from 'vue';
 
 import type { DataGridQuery } from '@ww/data-grid';
 import { UiBadge, UiButton, UiCard } from '@ww/core';
-import { UiPageSection, UiPageTemplate } from '@ww/page-templates';
+import { UiLayout, UiLayoutContent, UiLayoutHeader, UiLayoutSection } from '@ww/page-templates';
 import { getThemeMeta, type ThemeName } from '@ww/themes';
 import { DataTableWidget } from '@ww/widgets';
 
@@ -22,8 +22,10 @@ export const DataTableWidgetStoryHarness = defineComponent({
     UiBadge,
     UiButton,
     UiCard,
-    UiPageSection,
-    UiPageTemplate,
+    UiLayout,
+    UiLayoutContent,
+    UiLayoutHeader,
+    UiLayoutSection,
   },
   props: {
     mode: {
@@ -82,12 +84,21 @@ export const DataTableWidgetStoryHarness = defineComponent({
       :data-ui-theme-type="themeMeta?.type"
       style="gap: var(--ui-space-4);"
     >
-      <UiPageTemplate
+      <UiLayout
         v-if="composed"
-        title="Operations workspace"
-        description="Widget-level proof above the data-grid system package"
       >
-        <UiPageSection title="Accounts table widget" description="Reusable black-box surface over @ww/data-grid.">
+        <template #header>
+          <UiLayoutHeader>
+            <div style="display: grid; gap: var(--ui-space-2);">
+              <h1 style="margin: 0;">Operations workspace</h1>
+              <p style="margin: 0; color: var(--ui-text-secondary);">
+                Widget-level proof above the data-grid system package
+              </p>
+            </div>
+          </UiLayoutHeader>
+        </template>
+        <UiLayoutContent :padded="false">
+          <UiLayoutSection title="Accounts table widget" description="Reusable black-box surface over @ww/data-grid.">
           <DataTableWidget
             title="Accounts"
             description="Widget framing for dense admin table usage."
@@ -118,8 +129,9 @@ export const DataTableWidgetStoryHarness = defineComponent({
               Widget footer metadata stays outside app routing and backend logic.
             </template>
           </DataTableWidget>
-        </UiPageSection>
-      </UiPageTemplate>
+          </UiLayoutSection>
+        </UiLayoutContent>
+      </UiLayout>
 
       <DataTableWidget
         v-else

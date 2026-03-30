@@ -8,11 +8,11 @@ withDefaults(
   }
 );
 
-defineOptions({ name: 'UiPageSidebar' });
+defineOptions({ name: 'UiLayoutSider' });
 </script>
 
 <template>
-  <aside class="ui-page-sidebar" :data-ui-padded="padded">
+  <aside class="ui-layout-sider" :data-ui-padded="padded">
     <slot />
   </aside>
 </template>

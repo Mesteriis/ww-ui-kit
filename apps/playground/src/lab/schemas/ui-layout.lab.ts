@@ -3,7 +3,7 @@ import type {
   LabMatrixItem,
   LabSurfaceDefinition,
 } from '../manifest/component-lab.types';
-import PageTemplateLabPreview from '../components/PageTemplateLabPreview.vue';
+import LayoutLabPreview from '../components/LayoutLabPreview.vue';
 import {
   buildThemeScopeAttrs,
   markPreviewComponent,
@@ -11,44 +11,42 @@ import {
   themeScopeOptions,
 } from '../runtime/schema-helpers';
 
-type UiPageTemplateLabState = {
+type UiLayoutLabState = {
   title: string;
   description: string;
   width: 'full' | 'content' | 'narrow';
-  hasSidebar: boolean;
+  hasSider: boolean;
   padded: boolean;
   subtreeTheme: 'inherit' | 'belovodye' | 'dark';
   matrixPresets: readonly string[];
 };
 
-const defaultState: Readonly<UiPageTemplateLabState> = Object.freeze({
+const defaultState: Readonly<UiLayoutLabState> = Object.freeze({
   title: 'Operations workspace',
-  description: 'Reusable page shell above widgets and systems.',
+  description: 'Reusable layout shell above widgets and systems.',
   width: 'content',
-  hasSidebar: true,
+  hasSider: true,
   padded: true,
   subtreeTheme: 'inherit',
   matrixPresets: ['content', 'full', 'narrow'],
 });
 
-function buildMatrixItems(
-  state: UiPageTemplateLabState
-): readonly LabMatrixItem<UiPageTemplateLabState>[] {
+function buildMatrixItems(state: UiLayoutLabState): readonly LabMatrixItem<UiLayoutLabState>[] {
   return state.matrixPresets.map((preset) => ({
     id: preset,
     title: `${preset.charAt(0).toUpperCase()}${preset.slice(1)} width`,
     patch: {
-      width: preset as UiPageTemplateLabState['width'],
+      width: preset as UiLayoutLabState['width'],
     },
   }));
 }
 
-function serializeCopy(format: LabCopyFormat, state: UiPageTemplateLabState) {
+function serializeCopy(format: LabCopyFormat, state: UiLayoutLabState) {
   const payload = {
     ...(state.title ? { title: state.title } : {}),
     ...(state.description ? { description: state.description } : {}),
     ...(state.width !== 'content' ? { width: state.width } : {}),
-    ...(state.hasSidebar ? { hasSidebar: true } : {}),
+    ...(state.hasSider ? { hasSider: true } : {}),
     ...(state.padded === false ? { padded: false } : {}),
   };
 
@@ -56,14 +54,14 @@ function serializeCopy(format: LabCopyFormat, state: UiPageTemplateLabState) {
     format,
     payload,
     () =>
-      `<script setup lang="ts">\nimport { UiPageSection, UiPageTemplate } from '@ww/page-templates';\n</script>\n\n<template>\n  <UiPageTemplate${payload.title ? `\n    title=${JSON.stringify(state.title)}` : ''}${payload.description ? `\n    description=${JSON.stringify(state.description)}` : ''}${state.width !== 'content' ? `\n    width="${state.width}"` : ''}${state.hasSidebar ? '\n    has-sidebar' : ''}${state.padded === false ? '\n    :padded="false"' : ''}\n  >\n    <UiPageSection title="Workspace section" description="Reusable page-shell content.">\n      Shell content\n    </UiPageSection>\n  </UiPageTemplate>\n</template>\n`
+      `<script setup lang="ts">\nimport {\n  UiLayout,\n  UiLayoutContent,\n  UiLayoutHeader,\n  UiLayoutSection,\n  UiLayoutSider,\n} from '@ww/page-templates';\n</script>\n\n<template>\n  <UiLayout${state.width !== 'content' ? `\n    width="${state.width}"` : ''}\n  >\n    <template #header>\n      <UiLayoutHeader>\n        <div style="display: grid; gap: var(--ui-space-2);">\n          <h1 style="margin: 0;">${state.title}</h1>\n          <p style="margin: 0; color: var(--ui-text-secondary);">\n            ${state.description}\n          </p>\n        </div>\n      </UiLayoutHeader>\n    </template>\n\n    <UiLayoutContent${state.padded === false ? ' :padded="false"' : ''}>\n      <UiLayoutSection title="Workspace section" description="Reusable layout-shell content.">\n        Shell content\n      </UiLayoutSection>\n    </UiLayoutContent>\n${state.hasSider ? `\n    <template #sider>\n      <UiLayoutSider${state.padded === false ? ' :padded="false"' : ''}>\n        <UiLayoutSection title="Sidebar notes">\n          Sidebar content\n        </UiLayoutSection>\n      </UiLayoutSider>\n    </template>` : ''}\n  </UiLayout>\n</template>\n`
   );
 }
 
-const definition: LabSurfaceDefinition<UiPageTemplateLabState> = {
-  id: 'ui-page-template',
-  title: 'UiPageTemplate',
-  description: 'Reusable layout shell above widgets, systems, and core components.',
+const definition: LabSurfaceDefinition<UiLayoutLabState> = {
+  id: 'ui-layout',
+  title: 'UiLayout',
+  description: 'Reusable structural shell above widgets, systems, and core components.',
   defaultState,
   controlSections: [
     {
@@ -88,7 +86,7 @@ const definition: LabSurfaceDefinition<UiPageTemplateLabState> = {
             { label: 'Narrow', value: 'narrow' },
           ],
         },
-        { id: 'hasSidebar', kind: 'boolean', label: 'Sidebar' },
+        { id: 'hasSider', kind: 'boolean', label: 'Sider' },
         { id: 'padded', kind: 'boolean', label: 'Padded' },
         { id: 'subtreeTheme', kind: 'select', label: 'Theme scope', options: themeScopeOptions },
       ],
@@ -116,21 +114,21 @@ const definition: LabSurfaceDefinition<UiPageTemplateLabState> = {
   defaultPreviewMode: 'single',
   copyFormats: ['json', 'ts-object', 'vue'],
   defaultCopyFormat: 'vue',
-  previewComponent: markPreviewComponent(PageTemplateLabPreview),
+  previewComponent: markPreviewComponent(LayoutLabPreview),
   buildMatrixItems,
   serializeCopy,
   buildPreviewProps: (state, context) => ({
-    templateProps: {
-      title: state.title,
-      description: state.description,
+    layoutProps: {
       width: state.width,
-      hasSidebar: state.hasSidebar,
-      padded: state.padded,
     },
+    hasSider: state.hasSider,
+    padded: state.padded,
+    title: state.title,
+    description: state.description,
     sectionTitle: 'Workspace section',
-    sectionDescription: 'Reusable page-shell content that remains route-agnostic.',
+    sectionDescription: 'Reusable layout-shell content that remains route-agnostic.',
     widgetTitle: 'Workspace widget',
-    widgetDescription: 'Nested widget shell inside the page template.',
+    widgetDescription: 'Nested widget shell inside the layout shell.',
     sidebarNotes: ['Widgets', 'Systems', 'Theme-aware'],
     footerText: 'Layer order: core + systems -> widgets -> page-templates -> apps',
     wrapperAttrs: buildThemeScopeAttrs(state, context),

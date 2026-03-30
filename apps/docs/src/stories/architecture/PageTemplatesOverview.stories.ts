@@ -22,15 +22,19 @@ export const PageTemplatesLayer: StoryObj = {
     template: `
       <div class="ui-stack">
         <UiCard>
-          <template #header>What page templates are</template>
+          <template #header>Current shell level</template>
           <div class="ui-stack">
             <p style="margin: 0; color: var(--ui-text-secondary);">
-              Page templates define reusable layout shells. They are not route pages and they do not fetch domain data.
+              <code>@ww/page-templates</code> now exposes generic layout primitives first. Named dashboard and marketing templates are composed above this shell level later.
             </p>
             <div class="ui-cluster">
-              <UiBadge variant="brand">AuthPageTemplate</UiBadge>
-              <UiBadge variant="brand">WorkspacePageTemplate</UiBadge>
-              <UiBadge variant="brand">DashboardPageTemplate</UiBadge>
+              <UiBadge variant="brand">UiLayout</UiBadge>
+              <UiBadge variant="brand">UiLayoutHeader</UiBadge>
+              <UiBadge variant="brand">UiLayoutSider</UiBadge>
+              <UiBadge>UiLayoutContent</UiBadge>
+              <UiBadge>UiLayoutFooter</UiBadge>
+              <UiBadge>UiLayoutSection</UiBadge>
+              <UiBadge>UiLayoutToolbar</UiBadge>
             </div>
           </div>
         </UiCard>
@@ -57,8 +61,13 @@ export const PageTemplatesLayer: StoryObj = {
 
         <UiCard>
           <template #header>Reserved namespaces</template>
-          <div class="ui-cluster">
-            <code v-for="namespace in namespaces" :key="namespace">{{ namespace }}</code>
+          <div class="ui-stack" style="gap: var(--ui-space-3);">
+            <p style="margin: 0; color: var(--ui-text-secondary);">
+              Future named templates such as dashboard and marketing consumers stay in this package, but they build on top of UiLayout instead of replacing it.
+            </p>
+            <div class="ui-cluster">
+              <code v-for="namespace in namespaces" :key="namespace">{{ namespace }}</code>
+            </div>
           </div>
         </UiCard>
       </div>

@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 
 import { UiDataGrid, type DataGridQuery } from '@ww/data-grid';
 import { UiBadge, UiButton, UiCard } from '@ww/core';
-import { UiPageSection, UiPageTemplate } from '@ww/page-templates';
+import { UiLayout, UiLayoutContent, UiLayoutHeader, UiLayoutSection } from '@ww/page-templates';
 import { getThemeMeta } from '@ww/themes';
 import { UiWidgetShell } from '@ww/widgets';
 
@@ -232,38 +232,47 @@ const scopedTheme = getThemeMeta('belovodye');
       class="playground__foundation-grid"
       data-playground-scenario="data-grid-composition"
     >
-      <UiPageTemplate
-        title="Workspace shell"
-        description="Page-template + widget + data-grid composition proof"
-      >
-        <UiPageSection
-          title="Accounts workspace"
-          description="System package stays controlled while the composition layer remains route-agnostic."
-        >
-          <UiWidgetShell
-            title="Accounts table widget shell"
-            description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer."
-            surface="subtle"
+      <UiLayout>
+        <template #header>
+          <UiLayoutHeader>
+            <div style="display: grid; gap: var(--ui-space-2)">
+              <h1 style="margin: 0">Workspace shell</h1>
+              <p style="margin: 0; color: var(--ui-text-secondary)">
+                Layout + widget + data-grid composition proof
+              </p>
+            </div>
+          </UiLayoutHeader>
+        </template>
+        <UiLayoutContent :padded="false">
+          <UiLayoutSection
+            title="Accounts workspace"
+            description="System package stays controlled while the composition layer remains route-agnostic."
           >
-            <UiDataGrid
-              :rows="compositionUiRows"
-              :columns="dataGridUiColumns"
-              :query="compositionQuery"
-              :total-rows="compositionResult.totalRows"
-              :selected-row-ids="compositionSelection"
-              :filter-definitions="dataGridFilterDefinitions"
-              caption="Composed accounts grid"
-              aria-label="Composed accounts data grid"
-              @update:query="compositionQuery = $event"
-              @update:selected-row-ids="compositionSelection = $event"
+            <UiWidgetShell
+              title="Accounts table widget shell"
+              description="Raw shell composition remains possible, but DataTableWidget now owns the reusable widget layer."
+              surface="subtle"
             >
-              <template #toolbar-end>
-                <UiBadge>Composable system package</UiBadge>
-              </template>
-            </UiDataGrid>
-          </UiWidgetShell>
-        </UiPageSection>
-      </UiPageTemplate>
+              <UiDataGrid
+                :rows="compositionUiRows"
+                :columns="dataGridUiColumns"
+                :query="compositionQuery"
+                :total-rows="compositionResult.totalRows"
+                :selected-row-ids="compositionSelection"
+                :filter-definitions="dataGridFilterDefinitions"
+                caption="Composed accounts grid"
+                aria-label="Composed accounts data grid"
+                @update:query="compositionQuery = $event"
+                @update:selected-row-ids="compositionSelection = $event"
+              >
+                <template #toolbar-end>
+                  <UiBadge>Composable system package</UiBadge>
+                </template>
+              </UiDataGrid>
+            </UiWidgetShell>
+          </UiLayoutSection>
+        </UiLayoutContent>
+      </UiLayout>
     </section>
   </section>
 </template>

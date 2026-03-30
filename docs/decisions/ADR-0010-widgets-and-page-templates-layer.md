@@ -34,7 +34,10 @@ Two new top-level layers are added:
 These layers start as scaffold packages with real shell components:
 
 - `UiWidgetShell`, `UiWidgetHeader`, `UiWidgetBody`, `UiWidgetFooter`
-- `UiPageTemplate`, `UiPageHeader`, `UiPageBody`, `UiPageSidebar`, `UiPageSection`, `UiPageToolbar`
+- `UiLayout`, `UiLayoutHeader`, `UiLayoutSider`, `UiLayoutContent`, `UiLayoutFooter`
+- `UiLayoutSection`, `UiLayoutToolbar`
+
+The generic page-template shell level is intentionally layout-first. Page-shaped concerns such as title orchestration, route ownership, menu state, and product-specific behavior stay out of the base shell API so future dashboard and marketing templates can compose on top of it honestly.
 
 Reserved namespaces document where future `LoginWindow`, `AuthPageTemplate`, `WorkspacePageTemplate`, and similar entities should live. `DataTableWidget` is now a realized widget in this layer rather than a reserved placeholder.
 
@@ -46,6 +49,7 @@ The first realized widget above the systems layer is `DataTableWidget`, which co
 - Apps keep ownership of route pages, backend integration, and domain orchestration.
 - Future systems packages can be composed by widgets without leaking vendor or engine concerns into apps.
 - Page templates stay distinct from route pages and remain reusable across multiple apps or product areas.
+- Generic layout primitives in `@ww/page-templates` stay structural so higher-level named templates can be added without expanding `@ww/core`.
 - `DataTableWidget` proves the widgets layer with a real reusable business block above `@ww/data-grid`.
 
 ## Alternatives
@@ -58,6 +62,7 @@ The first realized widget above the systems layer is `DataTableWidget`, which co
 
 - The change is additive.
 - Existing packages keep their current roles.
+- The canonical generic shell family in `@ww/page-templates` is `UiLayout*`; the older page-prefixed shell names are retired.
 - Future composed blocks should be added to `@ww/widgets` or `@ww/page-templates` instead of `@ww/core` or `apps/*` when they are intended to be reusable across products or routes.
 
 ## Related artifacts

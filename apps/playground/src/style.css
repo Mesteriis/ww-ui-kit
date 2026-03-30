@@ -212,7 +212,7 @@
 .lab-preview__signal-graph-surface,
 .lab-preview__data-grid-surface,
 .lab-preview__widget-surface,
-.lab-preview__page-template-surface,
+.lab-preview__layout-surface,
 .lab-preview__tabs-surface {
   display: grid;
   gap: var(--ui-space-4);
@@ -227,7 +227,7 @@
 .lab-preview__signal-graph-surface,
 .lab-preview__data-grid-surface,
 .lab-preview__widget-surface,
-.lab-preview__page-template-surface {
+.lab-preview__layout-surface {
   min-height: 24rem;
 }
 

@@ -639,80 +639,92 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     }),
   }),
   visualSurface({
-    id: 'ui-page-template',
-    title: 'UiPageTemplate',
+    id: 'ui-layout',
+    title: 'UiLayout',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageTemplate',
+    exportName: 'UiLayout',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: true,
     previewModes: ['single', 'matrix'],
     copyFormats: ['json', 'ts-object', 'vue'],
     runtimeFiles: Object.freeze({
-      schema: 'apps/playground/src/lab/schemas/ui-page-template.lab.ts',
-      preview: 'apps/playground/src/lab/components/PageTemplateLabPreview.vue',
+      schema: 'apps/playground/src/lab/schemas/ui-layout.lab.ts',
+      preview: 'apps/playground/src/lab/components/LayoutLabPreview.vue',
     }),
   }),
   visualSurface({
-    id: 'ui-page-header',
-    title: 'UiPageHeader',
+    id: 'ui-layout-header',
+    title: 'UiLayoutHeader',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageHeader',
+    exportName: 'UiLayoutHeader',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: false,
     labExemptionReason:
-      'UiPageHeader is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.',
+      'UiLayoutHeader is verified through consumer-style layout compositions because header structure only makes sense with surrounding shell context.',
   }),
   visualSurface({
-    id: 'ui-page-body',
-    title: 'UiPageBody',
+    id: 'ui-layout-sider',
+    title: 'UiLayoutSider',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageBody',
+    exportName: 'UiLayoutSider',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: false,
     labExemptionReason:
-      'UiPageBody is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.',
+      'UiLayoutSider is verified through consumer-style layout compositions because sider structure depends on the surrounding shell.',
   }),
   visualSurface({
-    id: 'ui-page-sidebar',
-    title: 'UiPageSidebar',
+    id: 'ui-layout-content',
+    title: 'UiLayoutContent',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageSidebar',
+    exportName: 'UiLayoutContent',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: false,
     labExemptionReason:
-      'UiPageSidebar is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.',
+      'UiLayoutContent is verified through consumer-style layout compositions because the content region is structural rather than standalone.',
   }),
   visualSurface({
-    id: 'ui-page-section',
-    title: 'UiPageSection',
+    id: 'ui-layout-footer',
+    title: 'UiLayoutFooter',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageSection',
+    exportName: 'UiLayoutFooter',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: false,
     labExemptionReason:
-      'UiPageSection is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.',
+      'UiLayoutFooter is verified through consumer-style layout compositions because footer structure depends on the shell context.',
   }),
   visualSurface({
-    id: 'ui-page-toolbar',
-    title: 'UiPageToolbar',
+    id: 'ui-layout-section',
+    title: 'UiLayoutSection',
     packageName: '@ww/page-templates',
-    exportName: 'UiPageToolbar',
+    exportName: 'UiLayoutSection',
     parentManifestExportName:
-      'UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar',
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     family: 'Page Templates',
     labEligible: false,
     labExemptionReason:
-      'UiPageToolbar is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.',
+      'UiLayoutSection is verified through layout stories and playground proofs because its value comes from shell composition rather than isolated tuning.',
+  }),
+  visualSurface({
+    id: 'ui-layout-toolbar',
+    title: 'UiLayoutToolbar',
+    packageName: '@ww/page-templates',
+    exportName: 'UiLayoutToolbar',
+    parentManifestExportName:
+      'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
+    family: 'Page Templates',
+    labEligible: false,
+    labExemptionReason:
+      'UiLayoutToolbar is verified through consumer-style layout compositions because toolbar placement only makes sense inside a larger shell.',
   }),
 ]);
 

@@ -48,7 +48,7 @@ export const playgroundLabUsage = {
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
             "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/OverlaySurfaceLabPreview.vue"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
       ],
@@ -80,8 +80,8 @@ export const playgroundLabUsage = {
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
             "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/OverlaySurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
             "apps/playground/src/lab/components/SignalGraphLabPreview.vue"
           ]
         },
@@ -1212,7 +1212,7 @@ export const playgroundLabUsage = {
             "apps/playground/src/SignalGraphShowcase.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         },
         {
@@ -1252,7 +1252,7 @@ export const playgroundLabUsage = {
             "apps/playground/src/SignalGraphShowcase.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/SignalGraphLabPreview.vue",
             "apps/playground/src/lab/components/WidgetShellLabPreview.vue"
           ]
@@ -2218,7 +2218,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -2364,7 +2364,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -3853,7 +3853,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -4011,7 +4011,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -4199,7 +4199,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4317,7 +4317,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4414,7 +4414,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4511,7 +4511,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4608,7 +4608,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4705,7 +4705,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4802,7 +4802,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4899,7 +4899,7 @@ export const playgroundLabUsage = {
         {
           "id": "data-grid-composition",
           "label": "Data Grid Composition",
-          "description": "System package composed inside widget and page-template shells.",
+          "description": "System package composed inside widget and layout shells.",
           "path": "/testing#testing-data-grid-composition"
         }
       ],
@@ -4956,7 +4956,7 @@ export const playgroundLabUsage = {
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/WidgetShellLabPreview.vue",
             "apps/playground/src/lab/schemas/ui-widget-shell.lab.ts"
           ]
@@ -4978,7 +4978,7 @@ export const playgroundLabUsage = {
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/WidgetShellLabPreview.vue",
             "apps/playground/src/lab/schemas/ui-widget-shell.lab.ts"
           ]
@@ -5011,7 +5011,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5051,7 +5051,7 @@ export const playgroundLabUsage = {
           "area": "playground"
         },
         {
-          "file": "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
           "area": "playground"
         },
         {
@@ -5104,7 +5104,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5164,7 +5164,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5224,7 +5224,7 @@ export const playgroundLabUsage = {
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5346,7 +5346,7 @@ export const playgroundLabUsage = {
         {
           "id": "widget-data-table-composition",
           "label": "Data Table Widget Composition",
-          "description": "Widget composed inside page-template shells without duplicating the underlying data-grid engine.",
+          "description": "Widget composed inside layout shells without duplicating the underlying data-grid engine.",
           "path": "/testing#testing-widgets-data-table-composition"
         }
       ],
@@ -5392,16 +5392,16 @@ export const playgroundLabUsage = {
         }
       ]
     },
-    "ui-page-template": {
-      "id": "ui-page-template",
-      "title": "UiPageTemplate",
-      "exportName": "UiPageTemplate",
+    "ui-layout": {
+      "id": "ui-layout",
+      "title": "UiLayout",
+      "exportName": "UiLayout",
       "packageName": "@ww/page-templates",
       "packageLayer": "page-template",
       "stability": "incubating",
       "family": "Page Templates",
       "labEligible": true,
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
       "downstreamPackages": [
         {
           "packageName": "@ww/docs",
@@ -5416,13 +5416,12 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 5,
+          "count": 4,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-            "apps/playground/src/lab/schemas/ui-page-template.lab.ts"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
       ],
@@ -5438,13 +5437,12 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 5,
+          "count": 4,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-            "apps/playground/src/lab/schemas/ui-page-template.lab.ts"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
       ],
@@ -5469,13 +5467,13 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
           "path": "/testing#testing-page-templates"
         },
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5519,206 +5517,22 @@ export const playgroundLabUsage = {
           "area": "playground"
         },
         {
-          "file": "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-          "area": "playground"
-        },
-        {
-          "file": "apps/playground/src/lab/schemas/ui-page-template.lab.ts",
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
           "area": "playground"
         }
       ]
     },
-    "ui-page-header": {
-      "id": "ui-page-header",
-      "title": "UiPageHeader",
-      "exportName": "UiPageHeader",
+    "ui-layout-header": {
+      "id": "ui-layout-header",
+      "title": "UiLayoutHeader",
+      "exportName": "UiLayoutHeader",
       "packageName": "@ww/page-templates",
       "packageLayer": "page-template",
       "stability": "incubating",
       "family": "Page Templates",
       "labEligible": false,
-      "labExemptionReason": "UiPageHeader is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.",
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
-      "downstreamPackages": [],
-      "usageGroups": [],
-      "relatedStorybook": [
-        {
-          "variant": "overview",
-          "title": "Page Templates/Shell",
-          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
-        },
-        {
-          "variant": "composition",
-          "title": "Architecture/Page Templates/Overview",
-          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
-        },
-        {
-          "variant": "theming",
-          "title": "Core/System Showcase",
-          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
-        }
-      ],
-      "relatedHarnesses": [
-        {
-          "id": "page-templates",
-          "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
-          "path": "/testing#testing-page-templates"
-        },
-        {
-          "id": "composition",
-          "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
-          "path": "/testing#testing-composition"
-        }
-      ],
-      "relatedDocs": [
-        {
-          "type": "readme",
-          "file": "packages/page-templates/README.md"
-        }
-      ],
-      "requiredTestLayers": [
-        "unit",
-        "e2e",
-        "playground"
-      ],
-      "tags": [
-        "page-templates"
-      ],
-      "knownUsages": []
-    },
-    "ui-page-body": {
-      "id": "ui-page-body",
-      "title": "UiPageBody",
-      "exportName": "UiPageBody",
-      "packageName": "@ww/page-templates",
-      "packageLayer": "page-template",
-      "stability": "incubating",
-      "family": "Page Templates",
-      "labEligible": false,
-      "labExemptionReason": "UiPageBody is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.",
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
-      "downstreamPackages": [],
-      "usageGroups": [],
-      "relatedStorybook": [
-        {
-          "variant": "overview",
-          "title": "Page Templates/Shell",
-          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
-        },
-        {
-          "variant": "composition",
-          "title": "Architecture/Page Templates/Overview",
-          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
-        },
-        {
-          "variant": "theming",
-          "title": "Core/System Showcase",
-          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
-        }
-      ],
-      "relatedHarnesses": [
-        {
-          "id": "page-templates",
-          "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
-          "path": "/testing#testing-page-templates"
-        },
-        {
-          "id": "composition",
-          "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
-          "path": "/testing#testing-composition"
-        }
-      ],
-      "relatedDocs": [
-        {
-          "type": "readme",
-          "file": "packages/page-templates/README.md"
-        }
-      ],
-      "requiredTestLayers": [
-        "unit",
-        "e2e",
-        "playground"
-      ],
-      "tags": [
-        "page-templates"
-      ],
-      "knownUsages": []
-    },
-    "ui-page-sidebar": {
-      "id": "ui-page-sidebar",
-      "title": "UiPageSidebar",
-      "exportName": "UiPageSidebar",
-      "packageName": "@ww/page-templates",
-      "packageLayer": "page-template",
-      "stability": "incubating",
-      "family": "Page Templates",
-      "labEligible": false,
-      "labExemptionReason": "UiPageSidebar is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.",
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
-      "downstreamPackages": [],
-      "usageGroups": [],
-      "relatedStorybook": [
-        {
-          "variant": "overview",
-          "title": "Page Templates/Shell",
-          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
-        },
-        {
-          "variant": "composition",
-          "title": "Architecture/Page Templates/Overview",
-          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
-        },
-        {
-          "variant": "theming",
-          "title": "Core/System Showcase",
-          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
-        }
-      ],
-      "relatedHarnesses": [
-        {
-          "id": "page-templates",
-          "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
-          "path": "/testing#testing-page-templates"
-        },
-        {
-          "id": "composition",
-          "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
-          "path": "/testing#testing-composition"
-        }
-      ],
-      "relatedDocs": [
-        {
-          "type": "readme",
-          "file": "packages/page-templates/README.md"
-        }
-      ],
-      "requiredTestLayers": [
-        "unit",
-        "e2e",
-        "playground"
-      ],
-      "tags": [
-        "page-templates"
-      ],
-      "knownUsages": []
-    },
-    "ui-page-section": {
-      "id": "ui-page-section",
-      "title": "UiPageSection",
-      "exportName": "UiPageSection",
-      "packageName": "@ww/page-templates",
-      "packageLayer": "page-template",
-      "stability": "incubating",
-      "family": "Page Templates",
-      "labEligible": false,
-      "labExemptionReason": "UiPageSection is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.",
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
+      "labExemptionReason": "UiLayoutHeader is verified through consumer-style layout compositions because header structure only makes sense with surrounding shell context.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
       "downstreamPackages": [
         {
           "packageName": "@ww/docs",
@@ -5733,13 +5547,12 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 5,
+          "count": 4,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-            "apps/playground/src/lab/schemas/ui-page-template.lab.ts"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
       ],
@@ -5755,13 +5568,12 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 5,
+          "count": 4,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
-            "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-            "apps/playground/src/lab/schemas/ui-page-template.lab.ts"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
       ],
@@ -5786,13 +5598,13 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
           "path": "/testing#testing-page-templates"
         },
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5836,28 +5648,58 @@ export const playgroundLabUsage = {
           "area": "playground"
         },
         {
-          "file": "apps/playground/src/lab/components/PageTemplateLabPreview.vue",
-          "area": "playground"
-        },
-        {
-          "file": "apps/playground/src/lab/schemas/ui-page-template.lab.ts",
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
           "area": "playground"
         }
       ]
     },
-    "ui-page-toolbar": {
-      "id": "ui-page-toolbar",
-      "title": "UiPageToolbar",
-      "exportName": "UiPageToolbar",
+    "ui-layout-sider": {
+      "id": "ui-layout-sider",
+      "title": "UiLayoutSider",
+      "exportName": "UiLayoutSider",
       "packageName": "@ww/page-templates",
       "packageLayer": "page-template",
       "stability": "incubating",
       "family": "Page Templates",
       "labEligible": false,
-      "labExemptionReason": "UiPageToolbar is tuned through UiPageTemplate because page header, body, sidebar, section, and toolbar are only meaningful together.",
-      "sourcePublicSurface": "UiPageTemplate / UiPageHeader / UiPageBody / UiPageSidebar / UiPageSection / UiPageToolbar",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "labExemptionReason": "UiLayoutSider is verified through consumer-style layout compositions because sider structure depends on the surrounding shell.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -5879,13 +5721,13 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-shell layer and reusable layout skeletons above widgets.",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
           "path": "/testing#testing-page-templates"
         },
         {
           "id": "composition",
           "label": "Composition",
-          "description": "Consumer-proof multi-layer flows composed from templates, widgets, systems, and core.",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
           "path": "/testing#testing-composition"
         }
       ],
@@ -5903,7 +5745,496 @@ export const playgroundLabUsage = {
       "tags": [
         "page-templates"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-layout-content": {
+      "id": "ui-layout-content",
+      "title": "UiLayoutContent",
+      "exportName": "UiLayoutContent",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": false,
+      "labExemptionReason": "UiLayoutContent is verified through consumer-style layout compositions because the content region is structural rather than standalone.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts",
+            "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+            "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/playground/src/DataGridShowcase.vue",
+            "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts",
+            "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+            "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 4,
+          "files": [
+            "apps/playground/src/DataGridShowcase.vue",
+            "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "path": "/testing#testing-page-templates"
+        },
+        {
+          "id": "composition",
+          "label": "Composition",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
+          "path": "/testing#testing-composition"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/DataGridShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/DataTableWidgetShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-layout-footer": {
+      "id": "ui-layout-footer",
+      "title": "UiLayoutFooter",
+      "exportName": "UiLayoutFooter",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": false,
+      "labExemptionReason": "UiLayoutFooter is verified through consumer-style layout compositions because footer structure depends on the shell context.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "path": "/testing#testing-page-templates"
+        },
+        {
+          "id": "composition",
+          "label": "Composition",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
+          "path": "/testing#testing-composition"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-layout-section": {
+      "id": "ui-layout-section",
+      "title": "UiLayoutSection",
+      "exportName": "UiLayoutSection",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": false,
+      "labExemptionReason": "UiLayoutSection is verified through layout stories and playground proofs because its value comes from shell composition rather than isolated tuning.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts",
+            "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+            "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/playground/src/DataGridShowcase.vue",
+            "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts",
+            "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+            "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 4,
+          "files": [
+            "apps/playground/src/DataGridShowcase.vue",
+            "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "path": "/testing#testing-page-templates"
+        },
+        {
+          "id": "composition",
+          "label": "Composition",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
+          "path": "/testing#testing-composition"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/DataGridShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/DataTableWidgetShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-layout-toolbar": {
+      "id": "ui-layout-toolbar",
+      "title": "UiLayoutToolbar",
+      "exportName": "UiLayoutToolbar",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": false,
+      "labExemptionReason": "UiLayoutToolbar is verified through consumer-style layout compositions because toolbar placement only makes sense inside a larger shell.",
+      "sourcePublicSurface": "UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "path": "/testing#testing-page-templates"
+        },
+        {
+          "id": "composition",
+          "label": "Composition",
+          "description": "Consumer-proof multi-layer flows composed from layout shells, widgets, systems, and core.",
+          "path": "/testing#testing-composition"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
     }
   }
 };
