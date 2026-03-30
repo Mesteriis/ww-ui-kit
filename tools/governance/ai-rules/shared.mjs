@@ -8,6 +8,7 @@ export const AI_RULESET_INDEX_PATH = `${AI_RULESET_ROOT}/index.md`;
 export const AI_RULESET_README_PATH = `${AI_RULESET_ROOT}/README.md`;
 export const AI_RULESET_SCHEMA_PATH = `${AI_RULESET_ROOT}/_schema.md`;
 export const AI_RULE_OVERVIEW_PATH = 'docs/governance/ai-rules.md';
+export const AIASSISTANT_RULES_PATH = '.aiassistant/rules';
 export const AI_RULE_MIRROR_PATHS = Object.freeze([
   AI_RULE_OVERVIEW_PATH,
   'AGENTS.md',
@@ -245,6 +246,28 @@ export function renderAgentsMirror() {
 
 export function renderCopilotInstructions() {
   return renderThinMirror('Copilot Instructions');
+}
+
+export function writeAiAssistantMirror() {
+  const outputDirectory = resolveFromRoot(AIASSISTANT_RULES_PATH);
+  fs.rmSync(outputDirectory, { force: true, recursive: true });
+  fs.mkdirSync(outputDirectory, { recursive: true });
+
+  fs.copyFileSync(
+    resolveFromRoot(AI_RULE_OVERVIEW_PATH),
+    resolveFromRoot(AIASSISTANT_RULES_PATH, 'ai-rules-overview.md')
+  );
+
+  for (const relativePath of walkFiles(AI_RULESET_ROOT, (candidatePath) =>
+    candidatePath.endsWith('.md')
+  )) {
+    const rulesetRelativePath = relativePath.replace(`${AI_RULESET_ROOT}/`, '');
+    const targetName = `ai-ruleset-${rulesetRelativePath.replaceAll('/', '-')}`;
+    fs.copyFileSync(
+      resolveFromRoot(relativePath),
+      resolveFromRoot(AIASSISTANT_RULES_PATH, targetName)
+    );
+  }
 }
 
 function renderIndexSection(title, applyMode, rows) {

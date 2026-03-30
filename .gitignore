@@ -25,6 +25,7 @@ site-dist
 .idea
 .vscode
 .fleet
+.aiassistant
 *.iml
 *.swp
 *.swo

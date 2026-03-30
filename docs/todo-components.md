@@ -1,702 +1,433 @@
-Сгруппировано по приоритетам: 🔴 P0 (must-have), 🟡 P1 (important), 🟢 P2 (nice-to-have)
-
-1. 🔴 FORM — Ввод данных
-   UiRadio / UiRadioGroup
-   Инварианты:
-
-RadioGroup управляет единственным выбранным значением (modelValue: string | number)
-Roving focus по стрелкам (↑↓ между radio в группе)
-orientation: 'horizontal' | 'vertical'
-Каждый Radio имеет value, disabled, label (slot)
-Группа имеет name, required, invalid, ariaDescribedby
-Интеграция с UiField (label, hint, error)
-disabled на группе каскадируется на всех детей
-UiNumberInput (Stepper)
-Инварианты:
-
-modelValue: number | null, min, max, step, precision
-Кнопки increment/decrement (слоты incrementIcon, decrementIcon)
-Keyboard: ↑/↓ для step, PageUp/PageDown для ×10, Home/End для min/max
-format: 'decimal' | 'currency' | 'percent' с locale-aware форматированием
-allowEmpty: boolean — разрешает null
-disabled, readonly, invalid, size: 'sm' | 'md' | 'lg'
-inputMode: 'numeric' для мобильных
-clampOnBlur: boolean — приведение к min/max при потере фокуса
-UiSlider / UiRangeSlider
-Инварианты:
-
-Slider: modelValue: number, min, max, step
-RangeSlider: modelValue: [number, number], minRange (минимальная дельта)
-orientation: 'horizontal' | 'vertical'
-marks: { value: number, label?: string }[] — метки на дорожке
-tooltip: 'always' | 'hover' | 'focus' | 'never'
-formatTooltip: (value: number) => string
-Keyboard: ←→ для step, PageUp/PageDown для ×10, Home/End
-ARIA: role="slider", aria-valuemin/max/now/text
-disabled state блокирует взаимодействие, но оставляет видимость
-showInput: boolean — показать числовое поле рядом
-UiColorPicker
-Инварианты:
-
-modelValue: string (hex, rgb, hsl)
-format: 'hex' | 'rgb' | 'hsl'
-presets: string[] — предзаготовленные цвета
-showAlpha: boolean — канал прозрачности
-showInput: boolean — текстовое поле для ввода
-Gradient area (saturation × lightness) + hue strip + alpha strip
-Режим inline или popup (использует overlay)
-disabled, size
-UiDatePicker / UiDateRangePicker
-Инварианты:
-
-DatePicker: modelValue: Date | string | null
-DateRangePicker: modelValue: [Date, Date] | null
-mode: 'date' | 'month' | 'year' | 'datetime' | 'time'
-locale: string, firstDayOfWeek: 0-6
-disabledDates: (date: Date) => boolean
-minDate, maxDate
-format: string (dayjs/date-fns формат)
-placeholder, clearable
-Навигация: месяц/год переключатели, keyboard navigation внутри сетки
-panelCount: 1 | 2 — одна или две панели (для range)
-Интеграция с UiField
-Inline или popup режим
-showWeekNumbers: boolean
-UiTimePicker
-Инварианты:
-
-modelValue: string (HH:mm или HH:mm:ss)
-format: '12' | '24'
-minuteStep: number, secondStep: number
-showSeconds: boolean
-disabledHours: number[], disabledMinutes: (hour) => number[]
-Spinner или dropdown колонки для часов/минут/секунд
-Keyboard: ↑↓ для значения, Tab между колонками
-UiAutocomplete
-Инварианты:
-
-modelValue: string | string[] (single / multiple)
-suggestions: T[] или fetchSuggestions: (query: string) => Promise<T[]>
-field: keyof T — поле для отображения
-minLength: number — минимум символов для поиска
-delay: number — debounce в ms
-multiple: boolean
-maxSuggestions: number
-Keyboard: ↑↓ навигация, Enter выбор, Escape закрытие
-loading state при async-загрузке
-Slot item для кастомного рендера предложений
-completeOnFocus: boolean — показать список при фокусе
-UiSelect (rich select, замена UiSelectSimple)
-Инварианты:
-
-modelValue: T | T[]
-options: SelectOption<T>[] с { label, value, group?, disabled?, icon? }
-multiple: boolean, searchable: boolean, clearable: boolean
-groupBy: string — группировка опций
-placeholder, maxSelection: number
-virtualScroll: boolean — виртуализация для 1000+ опций
-remote: boolean + onSearch: (query: string) => Promise<Option[]>
-Keyboard: type-ahead, ↑↓ навигация, Space/Enter выбор
-chip mode для multiple — выбранные как теги
-Slots: option, selected, header, footer, empty
-filter: 'contains' | 'startsWith' | custom
-Использует overlay system для dropdown
-UiCascader
-Инварианты:
-
-modelValue: (string | number)[] — path в дереве
-options: CascaderOption[] с { label, value, children?, disabled?, leaf? }
-expandTrigger: 'click' | 'hover'
-multiple: boolean, checkStrictly: boolean
-showAllLevels: boolean — показывать полный путь или только last level
-searchable: boolean с flat-search по всем уровням
-lazy: boolean + lazyLoad: (node) => Promise<children>
-Keyboard: ←→ для уровней, ↑↓ для элементов
-UiTransfer
-Инварианты:
-
-modelValue: (string | number)[] — IDs правого списка
-data: { key, label, disabled? }[]
-filterable: boolean
-titles: [string, string]
-format: { noChecked, hasChecked } — шаблоны счётчика
-Двунаправленный перенос с кнопками ←→
-Checkbox-based выбор элементов для переноса
-Slots: default (кастомный рендер строки), leftFooter, rightFooter
-UiRating
-Инварианты:
-
-modelValue: number
-max: number (default: 5)
-allowHalf: boolean, allowClear: boolean
-icon slot / icons: Component[] (разные иконки для уровней)
-colors: string[] — цвет по уровню
-disabled, readonly, size: 'sm' | 'md' | 'lg'
-Keyboard: ←→ для значения
-ARIA: role="radiogroup" с value announcement
-tooltips: string[] — подсказки при hover
-UiUpload / UiFilePicker
-Инварианты:
-
-fileList: UploadFile[] (modelValue)
-accept: string (MIME types), maxSize: number (bytes)
-maxCount: number, multiple: boolean
-action: string | ((file: File) => Promise<string>) — endpoint или handler
-beforeUpload: (file: File) => boolean | Promise<boolean>
-listType: 'text' | 'picture' | 'picture-card'
-draggable: boolean — drag & drop zone
-auto: boolean — авто-загрузка или ручной trigger
-Slots: default (trigger area), file (рендер элемента списка)
-Emits: select, upload, success, error, remove, progress
-Показ прогресса загрузки каждого файла
-UiMention
-Инварианты:
-
-modelValue: string
-suggestions: MentionOption[] с { label, value, avatar? }
-trigger: string (default: '@'), можно несколько (['@', '#'])
-prefix: string[], placement: 'top' | 'bottom'
-Popup при вводе триггер-символа
-Keyboard: ↑↓ навигация, Enter/Tab выбор
-loading, notFoundContent 2. 🔴 OVERLAY / FLOATING — Всплывающие элементы
-UiTooltip
-Инварианты:
-
-content: string (или slot)
-placement: Placement (12 позиций: top, top-start, top-end, right, ...)
-trigger: 'hover' | 'focus' | 'click' | 'manual'
-delay: { show: number, hide: number } (default: 200/0)
-offset: number (default: 8)
-disabled: boolean
-arrow: boolean — показать стрелку
-maxWidth: number | string
-Auto-flip при выходе за viewport (используя Floating UI)
-ARIA: role="tooltip", aria-describedby на trigger
-Layer kind: tooltip (slot 6 в overlay system)
-Reduced motion: instant appear без анимации
-Одновременно может быть виден только 1 tooltip (singleton опционально)
-UiPopover
-Инварианты:
-
-open: boolean (v-model)
-placement: Placement (12 позиций)
-trigger: 'click' | 'hover' | 'focus' | 'manual'
-offset, arrow, closeOnClickOutside: boolean
-Фокус не трапается (в отличие от Dialog)
-Layer kind: floating
-Slots: trigger (reference element), default (content)
-width: 'trigger' | number | 'auto' — ширина относительно trigger
-Close при Escape, но focus возвращается на trigger
-Может содержать интерактивные элементы (кнопки, ссылки)
-UiPopconfirm
-Инварианты:
-
-Расширение UiPopover + подтверждающий UI
-title: string, description?: string
-icon, confirmText, cancelText
-confirmVariant: ButtonVariant
-onConfirm, onCancel callbacks
-Фокус на confirmButton при открытии
-disabled: boolean
-UiDropdown / UiDropdownMenu
-Инварианты:
-
-trigger: 'click' | 'hover' | 'contextmenu'
-placement: Placement
-Items: { label, value, icon?, disabled?, divider?, children? }
-DropdownItem — элемент меню (может быть вложенным)
-DropdownDivider — разделитель
-DropdownGroup — группа с заголовком
-Keyboard: ↑↓ навигация, Enter выбор, → для submenu, ← назад, Escape закрытие
-ARIA: role="menu", role="menuitem"
-Roving focus по пунктам
-Type-ahead: печать букв для поиска пункта
-Submenu: вложенные dropdown при hover/→
-UiContextMenu
-Инварианты:
-
-trigger: 'contextmenu' (правый клик на trigger area)
-Тот же UiDropdownMenu, но привязан к позиции курсора
-event: MouseEvent координаты для позиционирования
-Автоматический flip при выходе за экран
-Закрытие при scroll / resize
-UiToast / UiNotification
-Инварианты:
-
-Imperative API: toast.success('Saved!'), toast.error('Failed', { duration: 5000 })
-position: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
-duration: number (auto-dismiss), 0 = persistent
-type: 'info' | 'success' | 'warning' | 'error'
-closable: boolean, action: { label, onClick }
-Stack behaviour: новые появляются сверху/снизу (зависит от position)
-max: number — максимальное количество одновременных
-Layer kind: toast (slot 8 — самый высокий)
-Компонент-провайдер: <UiToastProvider> в корне приложения
-Transition: slide-in + fade, exit slide-out
-Pause on hover (таймер паузится при наведении)
-ARIA: role="status", aria-live="polite" (info/success), "assertive" (error) 3. 🔴 NAVIGATION — Навигация
-UiMenu / UiSidebar
-Инварианты:
-
-items: MenuItem[] с { label, icon?, to?, href?, children?, disabled?, badge? }
-collapsed: boolean (свёрнутое состояние для sidebar)
-mode: 'vertical' | 'horizontal' | 'inline'
-openKeys: string[] — раскрытые подменю (v-model)
-selectedKeys: string[] — активные пункты (v-model)
-accordion: boolean — только один открытый submenu
-Keyboard: ↑↓ навигация, Enter/Space активация, →/← submenu
-ARIA: role="menubar" / role="menu", aria-expanded
-indent: number — отступ вложенных уровней
-Tooltip при collapsed для label
-UiBreadcrumb
-Инварианты:
-
-items: BreadcrumbItem[] с { label, to?, href?, icon? }
-separator: string | Component (default: '/')
-maxItems: number + ellipsis collapse (показать первые N и последний)
-Последний элемент — текущая страница (aria-current="page")
-ARIA: nav с aria-label="Breadcrumb", ol > li
-Slot item для кастомного рендера
-router-link интеграция опциональна
-UiPagination
-Инварианты:
-
-modelValue: number (текущая страница)
-totalItems: number, pageSize: number
-siblingCount: number — количество страниц рядом с текущей
-boundaryCount: number — страниц у краёв
-showFirstLast: boolean — кнопки «в начало» / «в конец»
-showPrevNext: boolean
-showSizeChanger: boolean + pageSizeOptions: number[]
-showQuickJumper: boolean — «Перейти к странице N»
-showTotal: (total, range) => string — отображение счётчика
-disabled, size: 'sm' | 'md' | 'lg'
-simple: boolean — упрощённый вид (только «Prev 1/10 Next»)
-ARIA: nav с aria-label="Pagination", текущая страница aria-current="page"
-UiSteps / UiStepper
-Инварианты:
-
-activeStep: number (v-model)
-orientation: 'horizontal' | 'vertical'
-items: StepItem[] с { title, description?, icon?, status? }
-status per step: 'pending' | 'active' | 'completed' | 'error'
-clickable: boolean — можно ли кликать по шагам для навигации
-linear: boolean — только последовательный прогресс
-Connector line между шагами (с анимацией заполнения)
-size: 'sm' | 'md' | 'lg'
-ARIA: role="tablist", aria-current="step" на активном
-Slots: icon, title, description на каждом шаге
-UiAnchor (page section navigation)
-Инварианты:
-
-items: AnchorItem[] с { href: '#section', title }
-offset: number — offset от верха при scroll
-affix: boolean — липкое позиционирование
-targetContainer: HTMLElement — скролл-контейнер
-Active link tracking при scroll
-Smooth scroll при клике
-direction: 'vertical' | 'horizontal'
-Indicator line/dot на активном 4. 🟡 DATA DISPLAY — Отображение данных
-UiAvatar / UiAvatarGroup
-Инварианты:
-
-Avatar: src, alt, fallback (initials или icon), size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number
-shape: 'circle' | 'square'
-color: string — фон для fallback
-Fallback cascade: image → initials → icon → default icon
-onError — обработка ошибки загрузки
-AvatarGroup: max: number, size, surplus показывается как +N
-spacing: 'tight' | 'normal' | 'loose' — overlap между аватарами
-UiTag / UiChip
-Инварианты:
-
-label: string (или slot)
-variant: 'neutral' | 'brand' | 'success' | 'warning' | 'danger' | 'info'
-appearance: 'solid' | 'outline' | 'soft'
-size: 'sm' | 'md' | 'lg'
-closable: boolean → emit close
-icon slot, rounded: boolean (pill shape)
-clickable: boolean → keyboard accessible, cursor pointer
-disabled: boolean
-maxWidth с text-overflow: ellipsis
-UiAlert
-Инварианты:
-
-type: 'info' | 'success' | 'warning' | 'error'
-title: string, description: string | slot
-closable: boolean, showIcon: boolean
-banner: boolean — полноширинный режим без border-radius
-appearance: 'solid' | 'outline' | 'soft'
-ARIA: role="alert" (для error/warning), role="status" (для info/success)
-Slot: icon, action, close
-Close animation (collapse)
-UiTimeline
-Инварианты:
-
-items: TimelineItem[] с { content, timestamp?, icon?, color?, type? }
-mode: 'left' | 'right' | 'alternate'
-reverse: boolean
-pending: boolean | string — показать «загружается» последним пунктом
-Slots: dot (кастомная точка), content, opposite (для alternate)
-Connector line между элементами
-UiDescriptions
-Инварианты:
-
-column: number (количество колонок, default: 3)
-layout: 'horizontal' | 'vertical'
-bordered: boolean
-size: 'sm' | 'md' | 'lg'
-title, extra slots
-Children: UiDescriptionItem с { label, span?, labelAlign? }
-Responsive: column count меняется по breakpoints
-UiStatistic
-Инварианты:
-
-title: string, value: number | string
-prefix, suffix (string или slot)
-precision: number — десятичные знаки
-formatter: (value) => string — кастомное форматирование
-valueStyle: CSSProperties
-loading: boolean
-Sub-компонент UiCountdown: value: number (timestamp), format: string, emit finish
-UiResult
-Инварианты:
-
-status: 'success' | 'error' | 'info' | 'warning' | '403' | '404' | '500'
-title: string, subtitle: string
-icon slot, extra slot (actions)
-Предустановленные иконки для каждого status
-Обычно fullscreen / centered
-UiCollapse / UiAccordion
-Инварианты:
-
-modelValue: string | string[] — раскрытые панели
-accordion: boolean — только одна открытая панель
-Children: UiCollapsePanel с { value, title, disabled? }
-Keyboard: Enter/Space toggle, ↑↓ между панелями
-ARIA: role="region", aria-expanded, aria-controls
-expandIcon slot / position: 'left' | 'right'
-Animated height transition (используя collapseMotion())
-bordered: boolean, ghost: boolean
-UiTree
-Инварианты:
-
-data: TreeNode[] с { key, label, children?, disabled?, isLeaf? }
-modelValue: (string | number)[] — checked nodes (v-model)
-expandedKeys: (string | number)[] (v-model)
-selectedKeys: (string | number)[] (v-model)
-checkable: boolean, selectable: boolean
-checkStrictly: boolean — parent/child check independence
-draggable: boolean
-lazy: boolean + loadData: (node) => Promise<children>
-searchable: boolean + filterMethod
-virtualScroll: boolean — для 10,000+ узлов
-Keyboard: ↑↓ навигация, →/← expand/collapse, Space check, Enter select
-ARIA: role="tree", role="treeitem", aria-expanded
-Slots: title, icon, switcherIcon
-showLine: boolean
-UiTreeSelect
-Инварианты:
-
-Комбинация UiSelect + UiTree
-Dropdown содержит дерево вместо flat list
-treeData, treeCheckable, showSearch, multiple
-treeDefaultExpandAll, treeExpandedKeys
-UiImage / UiImagePreview
-Инварианты:
-
-src, alt, fallback, placeholder (компонент при загрузке)
-lazy: boolean — ленивая загрузка (IntersectionObserver)
-fit: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
-preview: boolean — клик для увеличения (opens overlay)
-ImagePreview: галерея с навигацией, zoom, rotate
-previewGroup — группа для пролистывания
-UiList / UiListItem
-Инварианты:
-
-dataSource: T[], renderItem slot
-grid: { column, gutter } — grid layout
-loading: boolean, loadMore slot
-pagination: PaginationConfig
-bordered: boolean, size: 'sm' | 'md' | 'lg'
-UiListItem: title, description, avatar, actions slots
-UiListItemMeta: structured metadata display
-UiTable (простая таблица, не DataGrid)
-Инварианты:
-
-columns: Column[], data: T[]
-bordered: boolean, striped: boolean
-size: 'sm' | 'md' | 'lg'
-stickyHeader: boolean
-scroll: { x?, y? } — scroll dimensions
-Simpler API чем DataGrid (без toolbar, filters, pagination)
-rowClassName, cellClassName
-Column: title, dataIndex, width, align, fixed, sorter, render
-UiCalendar
-Инварианты:
-
-modelValue: Date
-mode: 'month' | 'year'
-fullscreen: boolean
-disabledDate: (date) => boolean
-dateCellRender slot — кастомное содержимое ячейки
-headerRender slot
-locale, validRange: [Date, Date]
-Переключение месяцев/лет 5. 🟡 LAYOUT — Компоновка
-UiGrid (Row + Col)
-Инварианты:
-
-UiRow: gutter: number | [number, number], justify, align, wrap
-UiCol: span: 1-24, offset, push, pull, order
-Responsive: xs, sm, md, lg, xl, xxl breakpoint overrides
-CSS Grid или Flexbox based
-gutter может быть responsive: { xs: 8, sm: 16, md: 24 }
-UiSpace
-Инварианты:
-
-direction: 'horizontal' | 'vertical'
-size: 'sm' | 'md' | 'lg' | number
-align: 'start' | 'end' | 'center' | 'baseline'
-wrap: boolean
-separator slot (элемент между children)
-Compact mode (removes spacing)
-UiFlex
-Инварианты:
-
-direction: 'row' | 'column' | 'row-reverse' | 'column-reverse'
-wrap: 'nowrap' | 'wrap' | 'wrap-reverse'
-justify, align, gap: number | string
-Utility component — тонкая обёртка над CSS flex
-UiLayout (App Shell)
-Инварианты:
-
-UiLayout, UiLayoutHeader, UiLayoutSider, UiLayoutContent, UiLayoutFooter
-Sider: collapsed (v-model), collapsedWidth, width, breakpoint, trigger slot
-Layout: auto-detects sider и adjusts content margin
-Responsive collapse через media queries
-theme: 'light' | 'dark' на sider
-UiScrollArea (custom scrollbar)
-Инварианты:
-
-Кастомные скроллбары (overlay поверх content)
-type: 'auto' | 'always' | 'scroll' | 'hover' — когда показывать
-orientation: 'vertical' | 'horizontal' | 'both'
-scrollbarSize: number
-Touch-friendly на мобильных
-onScroll event, scrollTo() API
-UiAffix (Sticky)
-Инварианты:
-
-offsetTop: number, offsetBottom: number
-target: () => HTMLElement — scroll container
-Emits: change: (affixed: boolean)
-CSS position: sticky с JS fallback
-UiSplitter (Resizable Panels)
-Инварианты:
-
-orientation: 'horizontal' | 'vertical'
-Children: UiSplitterPanel с { size, minSize, maxSize, collapsible }
-Drag handle между панелями
-Keyboard: ←→/↑↓ для resize, Enter для collapse
-onResize callback
-gutterSize: number 6. 🟡 FEEDBACK — Обратная связь
-UiProgress (Linear + Circular)
-Инварианты:
-
-value: number (0-100), max: number
-type: 'linear' | 'circle' | 'dashboard'
-size: 'sm' | 'md' | 'lg' или width: number (для circle)
-strokeWidth: number
-status: 'active' | 'success' | 'exception'
-showValue: boolean, format: (percent) => string
-indeterminate: boolean — анимация без значения
-color: string | ((percent) => string) — кастомный цвет / gradient
-ARIA: role="progressbar", aria-valuenow/min/max
-UiMessage (inline message, lightweight toast)
-Инварианты:
-
-Imperative API: message.info('Hello'), message.success('Done')
-Упрощённый UiToast: появляется сверху по центру
-duration: number, closable: boolean
-type: 'info' | 'success' | 'warning' | 'error' | 'loading'
-loading type: возвращает handler для закрытия/обновления
-Стек: одновременно несколько, но compact
-UiAlertDialog (confirmation dialog)
-Инварианты:
-
-Расширение UiDialog для confirm/alert actions
-type: 'info' | 'success' | 'warning' | 'error'
-Imperative API: confirm({ title, content, onOk, onCancel })
-okText, cancelText, okVariant
-Focus trap обязателен
-closable: boolean (может быть false для force-confirm)
-UiDrawerForm / UiDialogForm
-Инварианты:
-
-Composition of Dialog/Drawer + Form
-initialValues, onSubmit, onCancel
-Закрытие при успешном submit
-Unsaved changes warning при закрытии с изменениями 7. 🟢 FORM ADVANCED — Сложные формы
-UiForm / UiFormItem
-Инварианты:
-
-UiForm: model: Record<string, any>, rules: ValidationRules
-layout: 'horizontal' | 'vertical' | 'inline'
-labelWidth: number | string, labelAlign: 'left' | 'right'
-disabled: boolean — каскадируется на все поля
-Methods: validate(), validateField(name), resetFields(), clearValidation()
-UiFormItem: field: string, label, rules, required
-Валидация: trigger: 'blur' | 'change' | 'submit'
-Rule format: { required?, type?, min?, max?, pattern?, validator?, message }
-Async validation support
-Cross-field validation
-Scroll-to-first-error при submit
-UiInputGroup
-Инварианты:
-
-Объединение нескольких inputs визуально
-compact: boolean — убрать gap между элементами
-Поддержка prepend/append addons (текст, select, button)
-Unified border-radius (rounded только у первого и последнего)
-UiInputTag / UiChipInput
-Инварианты:
-
-modelValue: string[]
-Ввод текста → Enter → добавление тега
-max: number, allowDuplicates: boolean
-validation: (tag: string) => boolean | string
-Backspace удаляет последний тег
-separator: string — можно вставить несколько через paste
-disabled, readonly, placeholder
-UiInputPassword
-Инварианты:
-
-Расширение UiInput с toggle visibility
-showToggle: boolean (default: true)
-strengthMeter: boolean — показать индикатор сложности
-strengthRules: PasswordRule[] — чеклист правил
-Иконка eye/eye-off для toggle
-UiInputOtp (One-Time Password)
-Инварианты:
-
-modelValue: string, length: number (default: 6)
-type: 'numeric' | 'alphanumeric'
-mask: boolean — скрывать введённые символы
-Auto-focus следующего поля при вводе
-Backspace → фокус на предыдущее
-Paste: распределить по полям
-separator между группами (после 3-го символа)
-disabled, invalid 8. 🟢 MISC — Утилитарные
-UiIcon
-Инварианты:
-
-name: string (из иконочного набора)
-size: number | 'sm' | 'md' | 'lg'
-color: string
-spin: boolean — вращение (для loading)
-rotate: number — угол поворота
-Рендер через SVG спрайт или inline SVG
-ariaLabel для accessibility
-Поддержка кастомных SVG через slot
-UiScrollTop (Back to Top)
-Инварианты:
-
-target: HTMLElement | Window
-visibilityHeight: number — порог появления
-behavior: 'smooth' | 'instant'
-bottom, right — позиция
-Slot: кастомная кнопка
-Transition: fade-in/out
-UiConfigProvider
-Инварианты:
-
-locale: Locale
-theme: ThemeName
-size: 'sm' | 'md' | 'lg' — глобальный размер
-componentDefaults: Record<ComponentName, DefaultProps>
-Wraps всё приложение, provides context
-Nested providers для overrides
-UiWatermark
-Инварианты:
-
-content: string | string[]
-rotate: number (default: -22)
-gap: [number, number]
-offset: [number, number]
-font: { color, fontSize, fontFamily, fontWeight }
-Canvas-rendered watermark overlay
-MutationObserver protection от удаления
-UiTour (Guide / Walkthrough)
-Инварианты:
-
-steps: TourStep[] с { target, title, description, placement }
-current: number (v-model)
-open: boolean (v-model)
-type: 'default' | 'primary'
-Highlight target element + overlay вокруг
-Prev/Next/Finish buttons
-Scroll-to-step автоматически
-mask: boolean — затемнение вокруг target
-UiVirtualScroll / UiVirtualList
-Инварианты:
-
-items: T[], itemSize: number | ((index) => number)
-renderItem: (item, index) => VNode
-overscan: number — дополнительные элементы за viewport
-orientation: 'vertical' | 'horizontal'
-scrollToIndex(index) API
-Поддержка 100,000+ элементов
-Dynamic height (measured) mode
-UiInfiniteScroll
-Инварианты:
-
-loading: boolean, disabled: boolean
-distance: number — расстояние до конца для trigger
-direction: 'top' | 'bottom'
-Emit: load-more
-Slot: loading (спиннер)
-📊 Сводка
-Группа Уже есть Нужно добавить Итого
-Form Basic 6 13 19
-Form Advanced 0 5 5
-Overlay/Floating 2 7 9
-Navigation 4 5 9
-Data Display 5 14 19
-Feedback 1 4 5
-Layout 2 7 9
-Utility 3 7 10
-Data (complex) 8 0 8
-Visualization 2 0 2
-Page Templates 6 0 6
-Widgets 6 0 6
-ИТОГО ~45 ~62 ~107
-🗓️ Рекомендуемый порядок реализации
-Phase 1 — «Ежедневные» компоненты (2-3 недели)
-Без них невозможно собрать production-приложение
-
-UiTooltip + UiPopover — используют готовый overlay system
-UiDropdown / UiDropdownMenu — зависит от overlay
-UiToast / UiNotification — toast slot уже зарезервирован
-UiAlert — простой, но критичный
-UiAvatar / UiAvatarGroup — визуальный базис
-UiTag / UiChip — нужен для UiSelect с chips
-UiRadioGroup — базовая форма
-UiCollapse / UiAccordion — collapseMotion() уже есть
-UiBreadcrumb — navigation must-have
-UiPagination — standalone (DataGrid имеет встроенную)
-Phase 2 — «Составные» компоненты (3-4 недели)
-Компоненты, которые собираются из Phase 1
-
-UiSelect (rich) — использует UiDropdown + UiTag
-UiAutocomplete — использует overlay
-UiMenu / UiSidebar — navigation core
-UiForm / UiFormItem — валидация
-UiProgress — feedback
-UiTree — data display
-UiDatePicker — complex form input
-UiSteps — navigation
-UiLayout — app shell
-Phase 3 — «Продвинутые» компоненты (3-4 недели)
-Polish и сложные компоненты
-
-20-30. Всё остальное: Transfer, Cascader, Upload, VirtualScroll, Tour, etc.
+# Component Backlog
+
+`Canonical component backlog` is the source of truth for order, placement, and decision status in this document.
+
+If any summary, phase plan, or detailed contract below conflicts with the canonical backlog, the canonical backlog wins.
+
+## Canonical component backlog
+
+### Legend
+
+- `core standard` = manifest row + Storybook + tests + docs update when contract expands
+- `overlay standard` = `core standard` + playground coverage/tests for overlay/composition flows
+- `ADR-first` = do not export publicly until placement and contract are fixed
+- `no public core export` = keep in the existing layer/package or as composition-only
+
+### 1) Add to `@ww/core` now
+
+| Family                      | Status        | Placement  | Contract                                        | Decision           | Note                                                                                |
+| --------------------------- | ------------- | ---------- | ----------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
+| UiTooltip                   | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | reuse existing overlay foundation, portal, reduced-motion rules                     |
+| UiPopover                   | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | interactive floating surface without dialog-style focus trap                        |
+| UiDropdown / UiDropdownMenu | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | menu semantics first; submenu/contextmenu extensions later                          |
+| UiToast                     | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | single canonical transient-feedback surface; absorbs notification/message use-cases |
+| UiRadio / UiRadioGroup      | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | missing baseline selection control                                                  |
+| UiAlert                     | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | low-risk baseline feedback surface                                                  |
+| UiTag / UiChip              | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | reusable display primitive; later useful for multi-select chip mode                 |
+| UiCollapse / UiAccordion    | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | existing motion foundation already supports collapse-style behavior                 |
+| UiBreadcrumb                | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | baseline navigation surface                                                         |
+| UiPagination (simple)       | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | standalone only; no data-grid orchestration leaks into core                         |
+
+### 2) Add to `@ww/core` later
+
+| Family                                                                   | Status    | Placement  | Contract                                        | Decision | Note                                                               |
+| ------------------------------------------------------------------------ | --------- | ---------- | ----------------------------------------------- | -------- | ------------------------------------------------------------------ |
+| UiAvatar / UiAvatarGroup                                                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | broad utility, but weaker ROI than current floating/selection gaps |
+| UiNumberInput                                                            | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | baseline field extension after radio/overlay pass                  |
+| UiSelect (rich)                                                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | ship next to `UiSelectSimple`; no blind replacement                |
+| UiAutocomplete                                                           | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | after listbox/overlay behavior settles                             |
+| UiMenu                                                                   | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | menu only; sidebar shell stays out of core                         |
+| UiProgress                                                               | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | useful, but not blocking current core story                        |
+| UiSteps / UiStepper                                                      | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | navigation pattern, not first-wave infrastructure                  |
+| UiTable (simple)                                                         | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | deliberately simple table; no toolbar/filter/query engine          |
+| UiPopconfirm                                                             | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | only after popover contract is stable                              |
+| UiContextMenu                                                            | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | extension of dropdown/menu semantics                               |
+| UiSlider / UiRangeSlider                                                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | baseline input, but lower ROI than current gaps                    |
+| UiGrid / UiSpace / UiFlex                                                | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility layout only, never app-shell replacement                   |
+| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility surfaces after baseline controls are closed                |
+| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | shallow field enrichments after base form/input backlog            |
+| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | useful display utilities, but not current platform blockers        |
+| UiImage                                                                  | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | keep preview/gallery behavior out until separate scope is cut      |
+
+### 3) ADR-first / separate scope
+
+| Family                                                       | Status        | Placement        | Contract          | Decision                 | Note                                                                      |
+| ------------------------------------------------------------ | ------------- | ---------------- | ----------------- | ------------------------ | ------------------------------------------------------------------------- |
+| UiDatePicker / UiDateRangePicker / UiTimePicker / UiCalendar | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | locale, parsing, calendar engine, formatting, min/max, keyboard grid      |
+| UiForm / UiFormItem                                          | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | validation model and imperative methods become long-lived contract        |
+| UiTree / UiTreeSelect / UiCascader / UiTransfer              | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | hierarchical state, lazy loading, search, check model, virtualized scale  |
+| UiUpload / UiFilePicker                                      | not confirmed | `split required` | `TBD / ADR-first` | **explicit scope first** | file-picker UI may be core; transport/orchestration must stay out of core |
+| UiColorPicker                                                | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | color model + popup + alpha/presets are not current baseline              |
+| UiMention                                                    | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | caret-positioning and trigger parsing are specialized runtime behavior    |
+| UiTour                                                       | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | onboarding/workflow system, not baseline control                          |
+| UiVirtualScroll / UiVirtualList / UiInfiniteScroll           | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | more likely primitive/helper or system capability than core surface       |
+| UiSplitter                                                   | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | resize state + keyboard semantics are non-trivial                         |
+| UiAlertDialog / imperative confirm                           | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | first prove composition over dialog before public imperative API          |
+| UiImagePreview / previewGroup                                | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | gallery/zoom/rotate overlay is a separate surface family                  |
+| UiWatermark                                                  | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | niche utility with canvas/runtime concerns                                |
+| UiIcon                                                       | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | icon asset pipeline and naming contract must exist before wrapper export  |
+
+### 4) Covered elsewhere / do not export as new public core surface
+
+| Family                                                                       | Status                  | Placement                 | Contract                                                   | Decision                       | Note                                                                                |
+| ---------------------------------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
+| UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter | mislayered              | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | extend page-template shell family only if existing shell contracts are insufficient |
+| UiSidebar (as shell)                                                         | mislayered              | `@ww/page-templates`      | `page-template-shell / incubating / no public core export` | **do not add to core backlog** | `UiMenu` may be core; sidebar shell is page-template territory                      |
+| UiDrawerForm / UiDialogForm                                                  | composition-only        | `@ww/widgets` or `apps/*` | `no public core export`                                    | **do not export now**          | keep as composed proof until a repeatable cross-app contract exists                 |
+| UiConfigProvider                                                             | reject                  | existing theme runtime    | `no new export`                                            | **do not add**                 | would create a second source of truth beside theme runtime                          |
+| UiNotification                                                               | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | one canonical transient-feedback surface                                            |
+| UiMessage                                                                    | reject as separate name | fold into `UiToast`       | `no new export`                                            | **do not add separately**      | no parallel lightweight-toast system                                                |
+
+## Summary aligned to canonical backlog
+
+| Bucket                                    | Family rows | Notes                                                   |
+| ----------------------------------------- | ----------: | ------------------------------------------------------- |
+| Add to `@ww/core` now                     |          10 | all P0                                                  |
+| Add to `@ww/core` later                   |          16 | 8 P1 + 8 P2                                             |
+| ADR-first / separate scope                |          13 | no public export before scope/placement decision        |
+| Covered elsewhere / no public core export |           6 | keep in existing layer or as composition-only           |
+| Total canonical family rows               |          45 | this count is the only planning total used in this file |
+
+## Recommended implementation order
+
+1. `Phase 1 / P0`: implement every row from `Add to @ww/core now` in the exact canonical order.
+2. `Phase 2 / P1`: continue with the first eight rows from `Add to @ww/core later`.
+3. `Phase 3 / P2`: continue with the remaining eight rows from `Add to @ww/core later`.
+4. `Phase 4 / ADR-first`: cut explicit scope first, then promote rows from `ADR-first / separate scope`.
+5. `Out of scope for core`: keep rows from `Covered elsewhere / do not export as new public core surface` in their current layer.
+
+### Phase 1 / P0
+
+`UiTooltip`, `UiPopover`, `UiDropdown / UiDropdownMenu`, `UiToast`, `UiRadio / UiRadioGroup`, `UiAlert`, `UiTag / UiChip`, `UiCollapse / UiAccordion`, `UiBreadcrumb`, `UiPagination (simple)`.
+
+### Phase 2 / P1
+
+`UiAvatar / UiAvatarGroup`, `UiNumberInput`, `UiSelect (rich)`, `UiAutocomplete`, `UiMenu`, `UiProgress`, `UiSteps / UiStepper`, `UiTable (simple)`.
+
+### Phase 3 / P2
+
+`UiPopconfirm`, `UiContextMenu`, `UiSlider / UiRangeSlider`, `UiGrid / UiSpace / UiFlex`, `UiAffix / UiScrollArea / UiScrollTop / UiAnchor`, `UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp`, `UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList`, `UiImage`.
+
+### Phase 4 / ADR-first
+
+Everything under `ADR-first / separate scope`, in canonical row order only after scope and placement are explicitly fixed.
+
+## Detailed contracts aligned to canonical order
+
+### 1) Add to `@ww/core` now
+
+#### UiTooltip
+
+- `content`: string or slot.
+- `placement`: 12-position Floating UI placement set.
+- `trigger`: `'hover' | 'focus' | 'click' | 'manual'`.
+- `delay`: `{ show, hide }`, default `200 / 0`.
+- `offset`: default `8`.
+- `arrow`, `disabled`, `maxWidth`.
+- ARIA contract: `role="tooltip"` + `aria-describedby` on trigger.
+- Layer kind: `tooltip`.
+- Reduced motion: instant appear without decorative animation.
+
+#### UiPopover
+
+- `open` via `v-model`.
+- `placement`, `trigger`, `offset`, `arrow`.
+- `closeOnClickOutside`.
+- No focus trap.
+- Layer kind: `floating`.
+- Slots: `trigger`, `default`.
+- `width`: `'trigger' | number | 'auto'`.
+- Close on `Escape` and return focus to trigger.
+
+#### UiDropdown / UiDropdownMenu
+
+- `trigger`: `'click' | 'hover' | 'contextmenu'`.
+- `placement`.
+- Items support `label`, `value`, `icon`, `disabled`, `divider`, `children`.
+- Keyboard: arrow navigation, `Enter`, submenu open/close, `Escape`.
+- ARIA contract: `role="menu"` and `role="menuitem"`.
+- Roving focus and type-ahead are required.
+- Submenu support follows the same menu semantics.
+
+#### UiToast
+
+- Imperative API is the canonical transient-feedback surface.
+- `position`: top/bottom with left/center/right variants.
+- `duration`, `closable`, optional action.
+- `type`: `info`, `success`, `warning`, `error`.
+- `max`: maximum simultaneous items in stack.
+- Layer kind: `toast`.
+- Provider sits at application root.
+- Pause timer on hover.
+- ARIA: `status` / `aria-live="polite"` for neutral states, assertive for errors.
+
+#### UiRadio / UiRadioGroup
+
+- Group owns a single selected value.
+- Arrow-key roving focus inside the group.
+- `orientation`: `'horizontal' | 'vertical'`.
+- Each radio exposes `value`, `disabled`, and label slot.
+- Group exposes `name`, `required`, `invalid`, `ariaDescribedby`.
+- Integrates with `UiField`.
+- Group-level `disabled` cascades to children.
+
+#### UiAlert
+
+- `type`: `info`, `success`, `warning`, `error`.
+- `title`, `description`, optional slots for icon, action, close.
+- `closable`, `showIcon`, `banner`, `appearance`.
+- ARIA: `role="alert"` for error/warning, `role="status"` for info/success.
+- Close animation should collapse instead of abruptly disappearing.
+
+#### UiTag / UiChip
+
+- `label` or slot-based content.
+- `variant`: `neutral`, `brand`, `success`, `warning`, `danger`, `info`.
+- `appearance`: `solid`, `outline`, `soft`.
+- `size`: `sm`, `md`, `lg`.
+- `closable`, `icon`, `rounded`, `clickable`, `disabled`.
+- Long text must support truncation.
+
+#### UiCollapse / UiAccordion
+
+- `modelValue`: single id or array of ids.
+- `accordion` mode allows one open panel.
+- `UiCollapsePanel` children expose `value`, `title`, `disabled`.
+- Keyboard: `Enter` / `Space` toggle, arrows move between headers.
+- ARIA: region ownership, `aria-expanded`, `aria-controls`.
+- `expandIcon`, `position`, `bordered`, `ghost`.
+- Height animation uses the existing collapse motion foundation.
+
+#### UiBreadcrumb
+
+- Items expose `label`, optional `to`, `href`, `icon`.
+- `separator`, `maxItems`, ellipsis collapse.
+- Last item is current page with `aria-current="page"`.
+- ARIA container: `nav` with breadcrumb label and ordered list semantics.
+- Custom item slot allowed.
+
+#### UiPagination (simple)
+
+- `modelValue`: current page.
+- `totalItems`, `pageSize`.
+- `siblingCount`, `boundaryCount`.
+- `showFirstLast`, `showPrevNext`.
+- `showSizeChanger`, `pageSizeOptions`.
+- `showQuickJumper`, `showTotal`.
+- `disabled`, `size`, `simple`.
+- ARIA container: `nav` with current page marked via `aria-current`.
+
+### 2) Add to `@ww/core` later
+
+#### UiAvatar / UiAvatarGroup
+
+- Avatar supports `src`, `alt`, fallback, `size`, `shape`, `color`, `onError`.
+- Fallback cascade: image -> initials -> icon -> default icon.
+- Group supports `max`, `size`, surplus `+N`, and spacing/overlap variants.
+
+#### UiNumberInput
+
+- `modelValue: number | null`, `min`, `max`, `step`, `precision`.
+- Increment/decrement controls with icon slots.
+- Keyboard: arrows, `PageUp/PageDown`, `Home/End`.
+- Locale-aware format modes: decimal, currency, percent.
+- `allowEmpty`, `clampOnBlur`, `disabled`, `readonly`, `invalid`, `size`.
+- Mobile-friendly numeric input mode.
+
+#### UiSelect (rich)
+
+- `modelValue` may be single or multiple.
+- Options support `label`, `value`, `group`, `disabled`, `icon`.
+- `multiple`, `searchable`, `clearable`, `groupBy`, `placeholder`.
+- `maxSelection`, `virtualScroll`, `remote`, `onSearch`.
+- Keyboard: type-ahead, arrows, `Space` / `Enter`.
+- Chip mode for multiple selection.
+- Slots: `option`, `selected`, `header`, `footer`, `empty`.
+- Overlay system owns the dropdown layer.
+
+#### UiAutocomplete
+
+- Single or multiple string model.
+- Suggestions may be sync array or async fetcher.
+- `field`, `minLength`, `delay`, `multiple`, `maxSuggestions`.
+- Keyboard navigation and async loading state are required.
+- Supports custom item slot and `completeOnFocus`.
+
+#### UiMenu
+
+- Items support `label`, `icon`, `to`, `href`, `children`, `disabled`, `badge`.
+- `mode`: `vertical`, `horizontal`, `inline`.
+- `openKeys`, `selectedKeys`, `accordion`.
+- Keyboard navigation, submenu open/close, and ARIA menu semantics are required.
+- `UiSidebar` shell stays out of core even if `UiMenu` lands in core.
+
+#### UiProgress
+
+- `value`, `max`, `type`, `size`, `strokeWidth`.
+- `status`, `showValue`, formatter, custom color, `indeterminate`.
+- ARIA contract: `role="progressbar"` and numeric state attributes.
+
+#### UiSteps / UiStepper
+
+- `activeStep` via `v-model`.
+- `orientation`.
+- Items expose `title`, `description`, `icon`, `status`.
+- `clickable`, `linear`, `size`.
+- Connector line supports progress fill animation.
+- ARIA uses step-aware navigation semantics.
+
+#### UiTable (simple)
+
+- `columns`, `data`.
+- `bordered`, `striped`, `size`, `stickyHeader`, `scroll`.
+- Simpler contract than `DataGrid`: no toolbar, filter, or query engine.
+- `rowClassName`, `cellClassName`, and render hooks stay presentation-oriented.
+
+#### UiPopconfirm
+
+- Specialization of `UiPopover` with confirmation UI.
+- `title`, optional `description`, icon, confirm/cancel text.
+- `confirmVariant`, `onConfirm`, `onCancel`.
+- Focus lands on the confirm action when opened.
+
+#### UiContextMenu
+
+- Uses the same menu contract as dropdown, but anchors to pointer coordinates.
+- Trigger is context-menu gesture.
+- Must auto-flip and close on scroll / resize.
+
+#### UiSlider / UiRangeSlider
+
+- Slider: single numeric value with `min`, `max`, `step`.
+- Range slider: tuple value with `minRange`.
+- `orientation`, `marks`, `tooltip`, `formatTooltip`, `showInput`.
+- Keyboard: arrows, `PageUp/PageDown`, `Home/End`.
+- ARIA slider semantics are required.
+
+#### UiGrid / UiSpace / UiFlex
+
+- `UiGrid` exposes row/column gutter, justify, align, wrap, and responsive spans.
+- `UiSpace` exposes direction, size, align, wrap, separator, and compact mode.
+- `UiFlex` is a thin flexbox utility with direction, wrap, justify, align, and gap.
+- All three stay utility-only and must not drift into app-shell behavior.
+
+#### UiAffix / UiScrollArea / UiScrollTop / UiAnchor
+
+- `UiAffix`: `offsetTop`, `offsetBottom`, target container, sticky state event.
+- `UiScrollArea`: custom scrollbars, visibility mode, orientation, sizing, `scrollTo`.
+- `UiScrollTop`: target, visibility threshold, behavior, position, custom trigger slot.
+- `UiAnchor`: section items, offset, affix, target container, active link tracking, smooth scroll.
+
+#### UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp
+
+- `UiInputPassword`: visibility toggle, optional strength meter and rules checklist.
+- `UiInputGroup`: compact grouping, prepend/append addons, unified border treatment.
+- `UiInputTag`: string-array model, validation, duplicate policy, paste separator behavior.
+- `UiInputOtp`: fixed-length segmented input with auto-advance, paste distribution, masking, and keyboard backspace flow.
+
+#### UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList
+
+- `UiRating`: `max`, `allowHalf`, `allowClear`, custom icons/colors, keyboard support, radiogroup semantics.
+- `UiTimeline`: items, mode, reverse, pending state, custom dot/content/opposite slots.
+- `UiDescriptions`: `column`, `layout`, `bordered`, `size`, responsive spans, title/extra.
+- `UiStatistic`: title, value, prefix/suffix, precision, formatter, loading, countdown variant.
+- `UiResult`: predefined status presets with title, subtitle, icon, and extra slot.
+- `UiList`: `dataSource`, render slot, grid mode, loading, load-more, pagination, metadata slots.
+
+#### UiImage
+
+- `src`, `alt`, fallback, placeholder.
+- `lazy` loading support.
+- `fit` variants.
+- Core image surface stays separate from preview/gallery runtime.
+
+### 3) ADR-first / separate scope
+
+#### UiDatePicker / UiDateRangePicker / UiTimePicker / UiCalendar
+
+- Date and time controls require explicit decisions on locale, parsing, formatting, disabled ranges, and keyboard navigation.
+- Popup versus inline behavior must be fixed with overlay ownership before export.
+- `UiCalendar` belongs to the same scope because it shares calendar-engine and locale contracts.
+
+#### UiForm / UiFormItem
+
+- Form scope must define validation lifecycle, rule model, imperative methods, and cross-field behavior.
+- Group-level disabled propagation, layout, and scroll-to-error behavior need explicit contract ownership.
+
+#### UiTree / UiTreeSelect / UiCascader / UiTransfer
+
+- All four require explicit decisions on hierarchical state, lazy loading, search, virtualization, and keyboard semantics.
+- `UiTreeSelect` and `UiCascader` also depend on overlay/listbox contracts.
+
+#### UiUpload / UiFilePicker
+
+- File picker UI and transport/orchestration must be split before placement is fixed.
+- Upload transport cannot leak backend workflow into core.
+
+#### UiColorPicker
+
+- Requires explicit decision on color model, alpha support, presets, popup behavior, and inline editing.
+
+#### UiMention
+
+- Requires explicit decision on trigger parsing, caret positioning, and async suggestion lifecycle.
+
+#### UiTour
+
+- Requires explicit decision on onboarding/runtime ownership, target highlighting, masking, and step navigation.
+
+#### UiVirtualScroll / UiVirtualList / UiInfiniteScroll
+
+- Requires explicit decision on whether this is a primitive/helper capability or a public core surface.
+- Windowing, measurement, and infinite loading contracts must be isolated first.
+
+#### UiSplitter
+
+- Requires explicit decision on resize model, keyboard semantics, persistence, and collapse behavior.
+
+#### UiAlertDialog / imperative confirm
+
+- Requires explicit decision on whether composition over `UiDialog` is sufficient before exposing imperative API.
+
+#### UiImagePreview / previewGroup
+
+- Requires explicit decision on gallery, zoom, rotate, navigation, and overlay ownership separate from base `UiImage`.
+
+#### UiWatermark
+
+- Requires explicit decision on canvas/runtime behavior, protection model, and whether it belongs in reusable core at all.
+
+#### UiIcon
+
+- Requires explicit decision on icon asset pipeline, naming, and bundle/runtime ownership before any wrapper export.
+
+### 4) Covered elsewhere / do not export as new public core surface
+
+#### UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter
+
+- Keep shell-level layout in `@ww/page-templates`.
+- Do not reintroduce app-shell orchestration into `@ww/core`.
+
+#### UiSidebar (as shell)
+
+- Treat sidebar shell as page-template territory.
+- `UiMenu` may still be core; the shell is not.
+
+#### UiDrawerForm / UiDialogForm
+
+- Keep these as composition-only in widgets or apps until a repeatable cross-app contract exists.
+
+#### UiConfigProvider
+
+- Do not add.
+- Existing theme runtime already owns global visual/runtime configuration.
+
+#### UiNotification
+
+- Do not add as a separate public surface.
+- Fold notification behavior into the canonical `UiToast` family.
+
+#### UiMessage
+
+- Do not add as a separate public surface.
+- Fold lightweight transient messaging into the canonical `UiToast` family.
