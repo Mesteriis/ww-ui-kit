@@ -1,0 +1,101 @@
+.ui-breadcrumb__list,
+.ui-pagination__list {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.ui-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  min-inline-size: 0;
+}
+
+.ui-breadcrumb__link,
+.ui-breadcrumb__current {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  min-inline-size: 0;
+}
+
+.ui-breadcrumb__link {
+  color: var(--ui-text-secondary);
+  text-decoration: none;
+}
+
+.ui-breadcrumb__current {
+  color: var(--ui-text-primary);
+  font-weight: 600;
+}
+
+.ui-breadcrumb__separator,
+.ui-breadcrumb__ellipsis {
+  color: var(--ui-text-muted);
+}
+
+.ui-pagination {
+  display: inline-flex;
+}
+
+.ui-pagination__simple {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+}
+
+.ui-pagination__simple-status {
+  color: var(--ui-text-secondary);
+}
+
+.ui-pagination__page,
+.ui-pagination__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.25rem;
+  min-inline-size: 2.25rem;
+  padding-inline: var(--ui-space-3);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-radius-md);
+  background: var(--ui-surface-default);
+  color: var(--ui-text-primary);
+  cursor: pointer;
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-pagination__page:hover:not(:disabled),
+.ui-pagination__nav:hover:not(:disabled) {
+  background: var(--ui-surface-sunken);
+}
+
+.ui-pagination__page:focus-visible,
+.ui-pagination__nav:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-pagination__page.is-current {
+  border-color: var(--ui-border-focus);
+  background: var(--ui-surface-brand-soft);
+}
+
+.ui-pagination__page:disabled,
+.ui-pagination__nav:disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.25rem;
+  color: var(--ui-text-muted);
+}

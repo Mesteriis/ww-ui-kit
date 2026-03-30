@@ -5,6 +5,7 @@ export interface FieldContext {
   inputId: ComputedRef<string>;
   describedBy: ComputedRef<string | undefined>;
   invalid: ComputedRef<boolean>;
+  labelId: ComputedRef<string>;
 }
 
 const fieldContextKey = Symbol('UiFieldContext');
@@ -27,6 +28,7 @@ export function createFieldState(
   fallbackId: string
 ) {
   const inputId = computed(() => props.id ?? fallbackId);
+  const labelId = computed(() => `${inputId.value}-label`);
   const hintId = computed(() => (props.hint ? `${inputId.value}-hint` : undefined));
   const errorId = computed(() => (props.error ? `${inputId.value}-error` : undefined));
   const invalid = computed(() => Boolean(props.error));
@@ -38,5 +40,6 @@ export function createFieldState(
     hintId,
     inputId,
     invalid,
+    labelId,
   };
 }

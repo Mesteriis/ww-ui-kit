@@ -13,6 +13,7 @@ test('renders stable playground harness sections', async ({ page }) => {
   for (const scenarioId of [
     'themes',
     'overlays',
+    'core-wave',
     'charts',
     'signal-graph',
     'data-grid-basic',
@@ -61,6 +62,61 @@ test('opens dialog and restores focus to the opener', async ({ page }) => {
   await page.getByRole('button', { name: 'Cancel' }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(openButton).toBeFocused();
+});
+
+test('exercises floating overlays, dropdown keyboard flows, and toast stacking in the playground', async ({
+  page,
+}) => {
+  await page.goto('/playground/testing');
+
+  const popoverTrigger = page.getByRole('button', { name: 'Open popover' });
+  await popoverTrigger.click();
+  await expect(page.locator('.ui-popover')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.ui-popover')).toHaveCount(0);
+  await expect(popoverTrigger).toBeFocused();
+
+  const dropdownTrigger = page.getByRole('button', { name: 'Open action menu' }).first();
+  await dropdownTrigger.click();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('c');
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Last menu action: Charlie', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Show toast stack' }).click();
+  await expect(page.locator('.ui-toast')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Dismiss toast' }).first().click();
+  await expect(page.locator('.ui-toast')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Dismiss toast' }).first().click();
+  await expect(page.locator('.ui-toast')).toHaveCount(0);
+});
+
+test('keeps the first core wave flow interactive in the playground harness', async ({ page }) => {
+  await page.goto('/playground/testing');
+
+  const coreWave = page.locator('#testing-core-wave');
+  const designRadio = coreWave.getByRole('radio', { name: 'Design' });
+  await designRadio.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(coreWave.getByText('Selected stage: review', { exact: true })).toBeVisible();
+
+  const auditHeader = coreWave.getByRole('button', { name: 'Audit trail' });
+  await auditHeader.focus();
+  await page.keyboard.press('Enter');
+  await expect(
+    coreWave.getByText(
+      'Checks, sign-offs, and rollback notes stay discoverable through region semantics.',
+      { exact: true }
+    )
+  ).toBeVisible();
+
+  await coreWave.getByRole('button', { name: 'Critical' }).click();
+  await expect(coreWave.getByText('Active filter: Critical', { exact: true })).toBeVisible();
+
+  await coreWave.getByRole('button', { name: 'Next page' }).first().click();
+  await expect(coreWave.locator('.ui-pagination__page[aria-current="page"]')).toContainText('3');
+  await expect(coreWave.getByText('Current page: 3', { exact: true })).toBeVisible();
+  await expect(coreWave.locator('[aria-current="page"]').first()).toContainText('Approve');
 });
 
 test('keeps overlay close and focus restoration stable under reduced motion', async ({ page }) => {

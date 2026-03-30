@@ -1,7 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { computed, ref } from 'vue';
 
-import { UiBadge, UiButton, UiCard, UiDialog, UiDrawer } from '@ww/core';
+import {
+  UiBadge,
+  UiButton,
+  UiCard,
+  UiDialog,
+  UiDrawer,
+  UiDropdown,
+  UiPopover,
+  UiToast,
+  UiTooltip,
+} from '@ww/core';
 import { readOverlayLayerScale, resolveOverlayLayerSlots } from '@ww/primitives';
 
 const meta = {
@@ -13,23 +23,73 @@ export default meta;
 
 export const LayerScaleAndNestedStack: StoryObj = {
   render: () => ({
-    components: { UiBadge, UiButton, UiCard, UiDialog, UiDrawer },
+    components: {
+      UiBadge,
+      UiButton,
+      UiCard,
+      UiDialog,
+      UiDrawer,
+      UiDropdown,
+      UiPopover,
+      UiToast,
+      UiTooltip,
+    },
     setup() {
       const drawerOpen = ref(false);
       const dialogOpen = ref(false);
+      const popoverOpen = ref(false);
+      const toastRef = ref<{
+        push: (payload: {
+          title: string;
+          description?: string;
+          type?: 'info' | 'success' | 'warning' | 'error';
+        }) => string;
+      } | null>(null);
+      const lastAction = ref('review');
       const scale = computed(() => readOverlayLayerScale());
       const firstModal = computed(() => resolveOverlayLayerSlots(0, 'modal'));
       const secondModal = computed(() => resolveOverlayLayerSlots(1, 'modal'));
       const floatingLayer = computed(() => resolveOverlayLayerSlots(0, 'floating'));
       const toastLayer = computed(() => resolveOverlayLayerSlots(0, 'toast'));
+      const dropdownItems = [
+        { label: 'Review queue', value: 'review' },
+        { label: 'Promote release', value: 'promote' },
+        { type: 'divider' as const },
+        {
+          type: 'group' as const,
+          label: 'Deploy',
+          items: [
+            { label: 'Bravo', value: 'bravo' },
+            { label: 'Charlie', value: 'charlie' },
+          ],
+        },
+      ];
+
+      const onSelect = (payload: { label: string }) => {
+        lastAction.value = payload.label;
+      };
+
+      const pushToast = () => {
+        toastRef.value?.push({
+          title: 'Toast layer proof',
+          description: 'Toast surfaces stay above floating layers without raw z-index overrides.',
+          type: 'info',
+        });
+      };
 
       return {
         dialogOpen,
         drawerOpen,
+        dropdownItems,
         firstModal,
         floatingLayer,
+        lastAction,
+        onSelect,
+        popoverOpen,
+        pushToast,
         scale,
         secondModal,
+        toastRef,
         toastLayer,
       };
     },
@@ -128,6 +188,33 @@ export const LayerScaleAndNestedStack: StoryObj = {
               Nested modal surface {{ secondModal.content }}
             </div>
           </div>
+        </UiCard>
+
+        <UiCard>
+          <template #header>Floating and toast proofs</template>
+          <div class="ui-stack">
+            <div class="ui-cluster">
+              <UiTooltip content="Tooltip surfaces occupy the dedicated tooltip layer.">
+                <UiButton variant="secondary">Hover for tooltip</UiButton>
+              </UiTooltip>
+              <UiPopover v-model:open="popoverOpen" width="trigger">
+                <template #trigger>
+                  <UiButton variant="secondary">Open floating popover</UiButton>
+                </template>
+                <p style="margin: 0; max-width: 16rem;">
+                  Floating surfaces resolve above modal backdrops but below toast stacks.
+                </p>
+              </UiPopover>
+              <UiDropdown :items="dropdownItems" @select="onSelect">
+                <template #trigger>
+                  <UiButton variant="secondary">Open action dropdown</UiButton>
+                </template>
+              </UiDropdown>
+              <UiButton @click="pushToast">Fire toast</UiButton>
+            </div>
+            <p style="margin: 0;">Last floating action: {{ lastAction }}</p>
+          </div>
+          <UiToast ref="toastRef" />
         </UiCard>
 
         <UiCard>

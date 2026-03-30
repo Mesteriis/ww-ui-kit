@@ -3,18 +3,30 @@ import { defineAsyncComponent, nextTick, ref, watch } from 'vue';
 
 import { UiApexChart, type UiApexChartOptions, type UiApexChartSeries } from '@ww/charts-apex';
 import {
+  UiAlert,
   UiBadge,
+  UiBreadcrumb,
   UiButton,
   UiCard,
+  UiCollapse,
+  UiCollapsePanel,
+  UiDropdown,
   UiDialog,
   UiDrawer,
   UiField,
   UiInput,
+  UiPagination,
+  UiPopover,
+  UiRadio,
+  UiRadioGroup,
   UiSwitch,
+  UiTag,
   UiTabsList,
   UiTabsPanel,
   UiTabsRoot,
   UiTabsTrigger,
+  UiToast,
+  UiTooltip,
 } from '@ww/core';
 import {
   MOTION_PRESET_NAMES,
@@ -64,6 +76,22 @@ const nestedDialogOpen = ref(false);
 const scopedDialogOpen = ref(false);
 const scopedDrawerOpen = ref(false);
 const explicitDrawerOpen = ref(false);
+const floatingPopoverOpen = ref(false);
+const floatingMenuSelection = ref('Review queue');
+const toastHostRef = ref<{
+  clear: () => void;
+  dismiss: (id: string) => void;
+  push: (payload: {
+    title: string;
+    description?: string;
+    type?: 'info' | 'success' | 'warning' | 'error';
+  }) => string;
+} | null>(null);
+const releaseStage = ref('design');
+const releaseFlowPage = ref(2);
+const releaseAlertOpen = ref(true);
+const activeTag = ref('Pinned');
+const releaseFlowPanels = ref<string[]>(['queue']);
 const motionPreset = ref<(typeof MOTION_PRESET_NAMES)[number]>('modal-fade-scale');
 const motionVisible = ref(true);
 const collapseOpen = ref(true);
@@ -87,6 +115,27 @@ const utilityRows = [
   },
   { label: 'Glow accent', motion: 'glow-accent', badge: 'danger' as const },
   { label: 'Loading shimmer', motion: 'loading-shimmer', badge: 'success' as const },
+];
+
+const floatingDropdownItems = [
+  { label: 'Review queue', value: 'Review queue' },
+  { label: 'Escalate', value: 'Escalate' },
+  { type: 'divider' as const },
+  {
+    type: 'group' as const,
+    label: 'Deploy',
+    items: [
+      { label: 'Bravo', value: 'Bravo' },
+      { label: 'Charlie', value: 'Charlie' },
+    ],
+  },
+];
+
+const releaseBreadcrumbItems = [
+  { label: 'Workspace', href: '#workspace' },
+  { label: 'Releases', href: '#releases' },
+  { label: 'Wave one', href: '#wave-one' },
+  { label: 'Approve', current: true },
 ];
 
 const chartCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -164,6 +213,37 @@ watch(
   [scopedThemeDensity, scopedThemeMotionProfile, scopedThemePersonality],
   syncScopedThemeRuntime
 );
+
+const onFloatingMenuSelect = (payload: { label: string }) => {
+  floatingMenuSelection.value = payload.label;
+};
+
+const pushHarnessToast = (type: 'success' | 'warning' | 'error') => {
+  toastHostRef.value?.push({
+    title:
+      type === 'success'
+        ? 'Release checklist synced'
+        : type === 'warning'
+          ? 'Manual review required'
+          : 'Toast stack reached failure state',
+    description:
+      type === 'success'
+        ? 'Toast surfaces share the same overlay runtime and stack limits.'
+        : type === 'warning'
+          ? 'Pause on hover and dismiss controls stay inside the single canonical toast runtime.'
+          : 'Error toasts switch to assertive live-region semantics.',
+    type,
+  });
+};
+
+const clearHarnessToasts = () => {
+  toastHostRef.value?.clear();
+};
+
+const pushHarnessToastStack = () => {
+  pushHarnessToast('success');
+  pushHarnessToast('warning');
+};
 
 const replayMotion = async () => {
   motionVisible.value = false;
@@ -375,6 +455,124 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
               <code v-for="name in names" :key="name">{{ name }}</code>
             </div>
           </div>
+        </div>
+      </UiCard>
+
+      <UiCard>
+        <template #header>Floating overlays and toast runtime</template>
+        <div class="ui-stack">
+          <div class="ui-cluster">
+            <UiTooltip content="Tooltip surfaces stay on the sanctioned tooltip layer.">
+              <UiButton variant="secondary">Hover for tooltip</UiButton>
+            </UiTooltip>
+
+            <UiPopover v-model:open="floatingPopoverOpen" width="trigger">
+              <template #trigger>
+                <UiButton>Open popover</UiButton>
+              </template>
+              <div class="ui-stack" style="max-width: 16rem">
+                <p style="margin: 0">Escape closes the popover and returns focus to the trigger.</p>
+                <UiButton size="sm" variant="secondary" @click="floatingPopoverOpen = false">
+                  Close popover
+                </UiButton>
+              </div>
+            </UiPopover>
+
+            <UiDropdown :items="floatingDropdownItems" @select="onFloatingMenuSelect">
+              <template #trigger>
+                <UiButton variant="secondary">Open action menu</UiButton>
+              </template>
+            </UiDropdown>
+          </div>
+
+          <p style="margin: 0">Last menu action: {{ floatingMenuSelection }}</p>
+
+          <div class="ui-cluster">
+            <UiButton variant="secondary" @click="pushHarnessToast('success')">
+              Show success toast
+            </UiButton>
+            <UiButton tone="warning" appearance="outline" @click="pushHarnessToast('warning')">
+              Show warning toast
+            </UiButton>
+            <UiButton variant="secondary" @click="pushHarnessToastStack">Show toast stack</UiButton>
+            <UiButton variant="ghost" @click="clearHarnessToasts">Clear toasts</UiButton>
+          </div>
+
+          <UiToast ref="toastHostRef" :duration="10000" :max-stack="3" position="bottom-end" />
+        </div>
+      </UiCard>
+    </section>
+
+    <section id="testing-core-wave" class="playground__grid" data-playground-scenario="core-wave">
+      <UiCard>
+        <template #header>Selection and disclosure contracts</template>
+        <div class="ui-stack">
+          <UiField label="Release stage" hint="Arrow keys move the active radio">
+            <UiRadioGroup v-model="releaseStage" orientation="horizontal">
+              <UiRadio value="design">Design</UiRadio>
+              <UiRadio value="review">Review</UiRadio>
+              <UiRadio value="ship">Ship</UiRadio>
+            </UiRadioGroup>
+          </UiField>
+
+          <p style="margin: 0">Selected stage: {{ releaseStage }}</p>
+
+          <UiCollapse v-model="releaseFlowPanels" accordion>
+            <UiCollapsePanel value="queue" title="Queue details">
+              Review notes, blockers, and next actions stay inside the shared disclosure runtime.
+            </UiCollapsePanel>
+            <UiCollapsePanel value="audit" title="Audit trail">
+              Checks, sign-offs, and rollback notes stay discoverable through region semantics.
+            </UiCollapsePanel>
+          </UiCollapse>
+        </div>
+      </UiCard>
+
+      <UiCard>
+        <template #header>Release inbox flow</template>
+        <div class="ui-stack">
+          <UiBreadcrumb :items="releaseBreadcrumbItems" :max-items="4" />
+
+          <UiAlert
+            v-if="releaseAlertOpen"
+            type="warning"
+            title="Approvals pending"
+            description="This composed consumer flow stays inside core without dragging in data-grid orchestration."
+            closable
+            @update:open="releaseAlertOpen = $event"
+          >
+            <template #action>
+              <UiButton size="sm" variant="secondary">Review queue</UiButton>
+            </template>
+          </UiAlert>
+
+          <div class="ui-cluster">
+            <UiTag variant="brand" clickable @click="activeTag = 'Pinned'">Pinned</UiTag>
+            <UiTag variant="success" appearance="outline" clickable @click="activeTag = 'Healthy'">
+              Healthy
+            </UiTag>
+            <UiTag variant="warning" closable @close="activeTag = 'Needs review'">
+              Needs review
+            </UiTag>
+            <UiTag variant="info" clickable @click="activeTag = 'Critical'">
+              <template #icon>⌘</template>
+              Critical
+            </UiTag>
+          </div>
+
+          <p style="margin: 0">Active filter: {{ activeTag }}</p>
+
+          <UiPagination
+            v-model="releaseFlowPage"
+            :total-items="96"
+            :page-size="12"
+            :sibling-count="1"
+            :boundary-count="1"
+          />
+
+          <UiPagination :model-value="releaseFlowPage" :total-items="96" :page-size="12" simple />
+
+          <p style="margin: 0">Current page: {{ releaseFlowPage }}</p>
         </div>
       </UiCard>
     </section>

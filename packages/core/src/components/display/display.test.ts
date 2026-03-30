@@ -6,6 +6,7 @@ import UiCard from './UiCard.vue';
 import UiDivider from './UiDivider.vue';
 import UiSkeleton from './UiSkeleton.vue';
 import UiSpinner from './UiSpinner.vue';
+import UiTag from './UiTag.vue';
 
 describe('display components', () => {
   it('renders badge, card, divider, spinner, and skeleton', () => {
@@ -78,5 +79,26 @@ describe('display components', () => {
     expect(skeleton.attributes('style')).toContain('--ui-skeleton-width: 100%;');
     expect(skeleton.attributes('style')).toContain('--ui-skeleton-height: 1rem;');
     expect(skeleton.classes()).toContain('ui-skeleton--rounded');
+  });
+
+  it('supports clickable and closable tag states', async () => {
+    const wrapper = mount(UiTag, {
+      props: {
+        clickable: true,
+        closable: true,
+        ellipsis: true,
+        label: 'Needs review',
+        variant: 'warning',
+      },
+    });
+
+    expect(wrapper.classes()).toContain('ui-tag--warning');
+    expect(wrapper.classes()).toContain('ui-tag--ellipsis');
+
+    await wrapper.trigger('click');
+    expect(wrapper.emitted('click')).toHaveLength(1);
+
+    await wrapper.get('button[aria-label="Remove tag"]').trigger('click');
+    expect(wrapper.emitted('close')).toHaveLength(1);
   });
 });

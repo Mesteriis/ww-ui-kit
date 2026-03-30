@@ -1,0 +1,107 @@
+.ui-alert {
+  --ui-alert-bg: var(--ui-surface-brand-soft);
+  --ui-alert-border: color-mix(in srgb, var(--ui-border-focus) 28%, transparent);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--ui-space-3);
+  align-items: start;
+  padding: var(--ui-space-4);
+  border: 1px solid var(--ui-alert-border);
+  border-radius: var(--ui-radius-lg);
+  background: var(--ui-alert-bg);
+  color: var(--ui-text-primary);
+}
+
+.ui-alert--banner {
+  inline-size: 100%;
+}
+
+.ui-alert--outline {
+  background: transparent;
+}
+
+.ui-alert--solid {
+  color: var(--ui-text-inverse);
+}
+
+.ui-alert--info {
+  --ui-alert-bg: var(--ui-surface-brand-soft);
+  --ui-alert-border: color-mix(in srgb, var(--ui-border-focus) 28%, transparent);
+}
+
+.ui-alert--success {
+  --ui-alert-bg: var(--ui-surface-success-soft);
+  --ui-alert-border: color-mix(in srgb, var(--ui-text-success) 28%, transparent);
+}
+
+.ui-alert--warning {
+  --ui-alert-bg: var(--ui-surface-warning-soft);
+  --ui-alert-border: color-mix(in srgb, var(--ui-text-warning) 28%, transparent);
+}
+
+.ui-alert--error {
+  --ui-alert-bg: var(--ui-surface-danger-soft);
+  --ui-alert-border: color-mix(in srgb, var(--ui-text-danger) 28%, transparent);
+}
+
+.ui-alert--solid.ui-alert--info {
+  background: var(--ui-border-focus);
+}
+
+.ui-alert--solid.ui-alert--success {
+  background: var(--ui-text-success);
+}
+
+.ui-alert--solid.ui-alert--warning {
+  background: var(--ui-text-warning);
+}
+
+.ui-alert--solid.ui-alert--error {
+  background: var(--ui-text-danger);
+}
+
+.ui-alert__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.ui-alert__body {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.ui-alert__title {
+  font-weight: 600;
+}
+
+.ui-alert__description {
+  color: inherit;
+}
+
+.ui-alert__actions {
+  display: flex;
+  gap: var(--ui-space-2);
+  flex-wrap: wrap;
+}
+
+.ui-alert__close {
+  display: inline-flex;
+}
+
+.ui-alert__close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 1px solid var(--ui-alert-border);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}

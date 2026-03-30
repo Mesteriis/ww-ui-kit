@@ -1,8 +1,10 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 
 import UiCheckbox from './UiCheckbox.vue';
+import UiRadio from './UiRadio.vue';
+import UiRadioGroup from './UiRadioGroup.vue';
 import UiSwitch from './UiSwitch.vue';
 import UiField from '../fields/UiField.vue';
 
@@ -148,5 +150,52 @@ describe('selection controls', () => {
     };
     switchSetupState.toggle();
     expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+  });
+
+  it('supports radio-group roving focus, field wiring, and disabled cascades', async () => {
+    const wrapper = mount(
+      defineComponent({
+        components: { UiField, UiRadio, UiRadioGroup },
+        setup() {
+          const value = ref('alpha');
+          return { value };
+        },
+        template: `
+          <UiField label="Stage" hint="Pick one" error="Required">
+            <UiRadioGroup v-model="value" orientation="horizontal">
+              <UiRadio value="alpha">Alpha</UiRadio>
+              <UiRadio value="beta">Beta</UiRadio>
+              <UiRadio value="gamma" disabled>Gamma</UiRadio>
+            </UiRadioGroup>
+          </UiField>
+        `,
+      }),
+      {
+        attachTo: document.body,
+      }
+    );
+
+    const radios = wrapper.findAll('input[type="radio"]');
+    const [alpha, beta, gamma] = radios;
+    if (!alpha || !beta || !gamma) {
+      throw new Error('Expected radio inputs.');
+    }
+
+    expect(wrapper.get('[role="radiogroup"]').attributes('aria-describedby')).toContain('-hint');
+    expect(wrapper.get('[role="radiogroup"]').attributes('aria-describedby')).toContain('-error');
+    expect(alpha.attributes('checked')).toBeDefined();
+    expect(gamma.attributes('disabled')).toBeDefined();
+
+    await alpha.trigger('focus');
+    await wrapper.get('[role="radiogroup"]').trigger('keydown', { key: 'ArrowRight' });
+    await nextTick();
+    await nextTick();
+
+    expect(document.activeElement).toBe(beta.element);
+    expect(wrapper.text()).toContain('Beta');
+    expect((beta.element as HTMLInputElement).checked).toBe(true);
+
+    await beta.trigger('change');
+    expect((beta.element as HTMLInputElement).checked).toBe(true);
   });
 });

@@ -9,7 +9,13 @@
     "id": "overlays",
     "label": "Overlays",
     "hash": "#testing-overlays",
-    "description": "Motion, layer slots, dialogs, drawers, and focus restore."
+    "description": "Motion, layer slots, floating overlays, toasts, dialogs, drawers, and focus restore."
+  },
+  {
+    "id": "core-wave",
+    "label": "Core Wave",
+    "hash": "#testing-core-wave",
+    "description": "Selection, disclosure, feedback, breadcrumb, pagination, and one composed consumer-style flow."
   },
   {
     "id": "charts",

@@ -20,12 +20,18 @@ provideFieldContext({
   describedBy: fieldState.describedBy,
   inputId: fieldState.inputId,
   invalid: fieldState.invalid,
+  labelId: fieldState.labelId,
 });
 </script>
 
 <template>
   <div class="ui-field" :data-invalid="fieldState.invalid.value || undefined">
-    <label v-if="label" class="ui-field__label" :for="fieldState.inputId.value">
+    <label
+      v-if="label"
+      :id="fieldState.labelId.value"
+      class="ui-field__label"
+      :for="fieldState.inputId.value"
+    >
       {{ label }}
       <span v-if="required" aria-hidden="true"> *</span>
     </label>

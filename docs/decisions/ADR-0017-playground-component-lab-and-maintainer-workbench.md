@@ -2,7 +2,7 @@
 id: ADR-0017
 title: Playground Component Lab And Maintainer Workbench
 status: accepted
-date: 2026-03-29
+date: 2026-03-30
 owners:
   - platform
 tags:
@@ -42,6 +42,7 @@ Supporting decisions:
 - Stable `/testing/*` routes stay available for Playwright and consumer-proof browser verification.
 - Public visual surface changes now require an explicit lab-eligibility decision instead of ad hoc playground pages.
 - Governance becomes stricter because lab manifest coverage, runtime files, usage data, and serializers are checked automatically.
+- New core waves extend the same governed split instead of introducing parallel showcase routes or second documentation runtimes.
 
 ## Alternatives
 

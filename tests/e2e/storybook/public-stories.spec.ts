@@ -34,6 +34,7 @@ test.beforeEach(async ({ page }) => {
 test('renders canonical public story groups', async ({ page, request }) => {
   const storyTitles = [
     'Core/System Showcase',
+    'Core/Navigation',
     'Foundations/Theme System Overview',
     'Foundations/Charts/Apex Overview',
     'Foundations/Signal Graph/Overview',
@@ -69,6 +70,46 @@ test('opens overlays inside Storybook stories', async ({ page, request }) => {
   await expect(page.getByRole('heading', { name: 'Nested dialog' })).toBeVisible();
 });
 
+test('runs floating overlay and toast interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Overlay');
+  await openStory(page, storyId);
+
+  const popoverTrigger = page.getByRole('button', { name: 'Open popover' });
+  await popoverTrigger.click();
+  await expect(page.locator('.ui-popover')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.ui-popover')).toHaveCount(0);
+  await expect(popoverTrigger).toBeFocused();
+
+  const dropdownTrigger = page.getByRole('button', { name: 'Open action menu' });
+  await dropdownTrigger.click();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('c');
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Last dropdown action: Charlie', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Show toast' }).click();
+  await expect(page.locator('.ui-toast')).toContainText('Saved to the overlay proof queue');
+});
+
+test('runs selection and navigation interactions inside Storybook', async ({ page, request }) => {
+  const selectionStoryId = await getStoryId(request, 'Core/Selection');
+  await openStory(page, selectionStoryId);
+
+  const designRadio = page.getByRole('radio', { name: 'Design' });
+  await designRadio.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByText('Selected stage: review', { exact: true })).toBeVisible();
+
+  const navigationStoryId = await getStoryId(request, 'Core/Navigation');
+  await openStory(page, navigationStoryId);
+
+  await page.getByRole('button', { name: 'Next page' }).first().click();
+  await expect(page.locator('.ui-pagination__page[aria-current="page"]')).toContainText('4');
+  await expect(page.getByText('Current page: 4', { exact: true })).toBeVisible();
+  await expect(page.locator('.ui-breadcrumb [aria-current="page"]')).toContainText('Review');
+});
+
 test('keeps curated Storybook surfaces free of browser-level accessibility violations', async ({
   browser,
   request,
@@ -81,6 +122,9 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
     { title: 'Core/Buttons' },
     { title: 'Core/Buttons', globals: 'theme:belovodye' },
     { title: 'Core/Fields' },
+    { title: 'Core/Selection' },
+    { title: 'Core/Feedback' },
+    { title: 'Core/Navigation' },
     { title: 'Core/Tabs' },
     {
       title: 'Core/Overlay',

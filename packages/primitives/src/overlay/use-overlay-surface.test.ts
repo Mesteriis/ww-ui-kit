@@ -136,6 +136,58 @@ describe('useOverlaySurface', () => {
     wrapper.unmount();
   });
 
+  it('skips autofocus when autoFocus is disabled', async () => {
+    const opener = document.createElement('button');
+    opener.textContent = 'opener';
+    document.body.append(opener);
+    opener.focus();
+
+    const wrapper = mount(
+      defineComponent({
+        setup(_, { expose }) {
+          const open = ref(true);
+          const sourceRef = ref<HTMLElement | null>(null);
+          const contentRef = ref<HTMLElement | null>(null);
+
+          const surface = useOverlaySurface({
+            open,
+            kind: 'floating',
+            contentRef,
+            sourceRef,
+            autoFocus: false,
+            onDismiss: vi.fn(),
+          });
+
+          expose({ surface });
+          return { contentRef, sourceRef, surface };
+        },
+        template: `
+          <div>
+            <button ref="sourceRef" type="button">Anchor</button>
+            <div ref="contentRef" tabindex="-1">
+              <button id="inside" type="button">Inside</button>
+            </div>
+          </div>
+        `,
+      }),
+      {
+        attachTo: document.body,
+      }
+    );
+
+    await nextTick();
+    await nextTick();
+
+    const vm = wrapper.vm as unknown as {
+      surface: ReturnType<typeof useOverlaySurface>;
+    };
+
+    expect(await vm.surface.focusOverlay()).toBe(false);
+    expect(document.activeElement).toBe(opener);
+
+    wrapper.unmount();
+  });
+
   it('uses a fallback restore focus target when no opener can be resolved', async () => {
     const fallbackButton = document.createElement('button');
     document.body.append(fallbackButton);

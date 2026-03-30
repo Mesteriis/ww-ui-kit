@@ -3,7 +3,9 @@ import {
   nextTick,
   onBeforeUnmount,
   shallowRef,
+  toValue,
   watch,
+  type MaybeRefOrGetter,
   type ComputedRef,
   type Ref,
   type ShallowRef,
@@ -36,6 +38,7 @@ interface UseOverlaySurfaceOptions {
   lockScroll?: boolean;
   onDismiss: (reason: OverlayDismissReason) => void;
   initialFocus?: () => HTMLElement | null;
+  autoFocus?: MaybeRefOrGetter<boolean | undefined>;
 }
 
 interface UseOverlaySurfaceResult {
@@ -74,6 +77,10 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
   }
 
   async function focusOverlay(): Promise<boolean> {
+    if (toValue(options.autoFocus) === false) {
+      return false;
+    }
+
     await nextTick();
 
     const preferredTarget = options.initialFocus?.();
@@ -163,11 +170,15 @@ export function useOverlaySurface(options: UseOverlaySurfaceOptions): UseOverlay
     const target = resolveRestoreFocusTarget();
     if (!target) return;
 
-    window.setTimeout(() => {
+    if (target.isConnected && document.activeElement !== target) {
+      target.focus();
+    }
+
+    void Promise.resolve().then(() => {
       if (target.isConnected && document.activeElement !== target) {
         target.focus();
       }
-    }, 0);
+    });
   }
 
   watch(

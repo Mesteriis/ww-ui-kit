@@ -6,7 +6,10 @@
 @import './input.css';
 @import './selection.css';
 @import './display.css';
+@import './feedback.css';
 @import './overlay.css';
+@import './disclosure.css';
+@import './navigation.css';
 @import './tabs.css';
 @import './empty-state.css';
 

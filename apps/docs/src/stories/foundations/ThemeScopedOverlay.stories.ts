@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import { UiButton, UiCard, UiDialog, UiDrawer } from '@ww/core';
+import { UiButton, UiCard, UiDialog, UiDrawer, UiPopover, UiTooltip } from '@ww/core';
 import { getThemeMeta } from '@ww/themes';
 
 const meta = {
@@ -13,15 +13,25 @@ export default meta;
 
 export const ScopedThemeAndExplicitTarget: StoryObj = {
   render: () => ({
-    components: { UiButton, UiCard, UiDialog, UiDrawer },
+    components: { UiButton, UiCard, UiDialog, UiDrawer, UiPopover, UiTooltip },
     setup() {
       const dialogOpen = ref(false);
       const scopedDrawerOpen = ref(false);
       const drawerOpen = ref(false);
+      const popoverOpen = ref(false);
+      const explicitPopoverOpen = ref(false);
       const explicitPortalTarget = ref<HTMLElement | null>(null);
       const scopedTheme = getThemeMeta('belovodye');
 
-      return { dialogOpen, scopedDrawerOpen, drawerOpen, explicitPortalTarget, scopedTheme };
+      return {
+        dialogOpen,
+        drawerOpen,
+        explicitPopoverOpen,
+        explicitPortalTarget,
+        popoverOpen,
+        scopedDrawerOpen,
+        scopedTheme,
+      };
     },
     template: `
       <div class="ui-stack">
@@ -46,6 +56,17 @@ export const ScopedThemeAndExplicitTarget: StoryObj = {
             <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
               <UiButton @click="dialogOpen = true">Open Belovodye dialog</UiButton>
               <UiButton variant="secondary" @click="scopedDrawerOpen = true">Open Belovodye drawer</UiButton>
+              <UiTooltip content="Tooltip portals stay inside the nearest themed subtree.">
+                <UiButton variant="ghost">Hover tooltip</UiButton>
+              </UiTooltip>
+              <UiPopover v-model:open="popoverOpen" width="trigger">
+                <template #trigger>
+                  <UiButton variant="secondary">Open scoped popover</UiButton>
+                </template>
+                <p style="margin: 0; max-width: 16rem;">
+                  Floating overlays inherit Belovodye because the portal host stays inside this themed section.
+                </p>
+              </UiPopover>
             </div>
             <UiDialog v-model:open="dialogOpen" title="Scoped dialog">
               The overlay inherits the subtree theme because the portal root is mounted inside this container.
@@ -71,7 +92,21 @@ export const ScopedThemeAndExplicitTarget: StoryObj = {
             >
               Explicit portal host
             </div>
-            <UiButton variant="secondary" @click="drawerOpen = true">Open drawer in explicit host</UiButton>
+            <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
+              <UiButton variant="secondary" @click="drawerOpen = true">Open drawer in explicit host</UiButton>
+              <UiPopover
+                v-model:open="explicitPopoverOpen"
+                width="trigger"
+                :portal-target="explicitPortalTarget"
+              >
+                <template #trigger>
+                  <UiButton variant="secondary">Open popover in explicit host</UiButton>
+                </template>
+                <p style="margin: 0; max-width: 16rem;">
+                  Explicit targets work for floating overlays without managing portal roots manually.
+                </p>
+              </UiPopover>
+            </div>
             <UiDrawer
               v-model:open="drawerOpen"
               title="Explicit portal drawer"

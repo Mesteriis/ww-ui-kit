@@ -15,39 +15,39 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 ### 1) Add to `@ww/core` now
 
-| Family                      | Status        | Placement  | Contract                                        | Decision           | Note                                                                                |
-| --------------------------- | ------------- | ---------- | ----------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
-| UiTooltip                   | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | reuse existing overlay foundation, portal, reduced-motion rules                     |
-| UiPopover                   | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | interactive floating surface without dialog-style focus trap                        |
-| UiDropdown / UiDropdownMenu | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | menu semantics first; submenu/contextmenu extensions later                          |
-| UiToast                     | confirmed gap | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - build now** | single canonical transient-feedback surface; absorbs notification/message use-cases |
-| UiRadio / UiRadioGroup      | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | missing baseline selection control                                                  |
-| UiAlert                     | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | low-risk baseline feedback surface                                                  |
-| UiTag / UiChip              | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | reusable display primitive; later useful for multi-select chip mode                 |
-| UiCollapse / UiAccordion    | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | existing motion foundation already supports collapse-style behavior                 |
-| UiBreadcrumb                | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | baseline navigation surface                                                         |
-| UiPagination (simple)       | confirmed gap | `@ww/core` | `core-component / stable / core standard`       | **P0 - build now** | standalone only; no data-grid orchestration leaks into core                         |
+| Family                 | Status      | Placement  | Contract                                        | Decision      | Note                                                                                |
+| ---------------------- | ----------- | ---------- | ----------------------------------------------- | ------------- | ----------------------------------------------------------------------------------- |
+| UiTooltip              | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - done** | reuse existing overlay foundation, portal, reduced-motion rules                     |
+| UiPopover              | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - done** | interactive floating surface without dialog-style focus trap                        |
+| UiDropdown             | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - done** | menu semantics first; submenu/contextmenu extensions later                          |
+| UiToast                | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P0 - done** | single canonical transient-feedback surface; absorbs notification/message use-cases |
+| UiRadio / UiRadioGroup | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | missing baseline selection control                                                  |
+| UiAlert                | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | low-risk baseline feedback surface                                                  |
+| UiTag                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | reusable display primitive; later useful for multi-select chip mode                 |
+| UiCollapse             | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | existing motion foundation already supports collapse-style behavior                 |
+| UiBreadcrumb           | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | baseline navigation surface                                                         |
+| UiPagination (simple)  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P0 - done** | standalone only; no data-grid orchestration leaks into core                         |
 
 ### 2) Add to `@ww/core` later
 
-| Family                                                                   | Status    | Placement  | Contract                                        | Decision | Note                                                               |
-| ------------------------------------------------------------------------ | --------- | ---------- | ----------------------------------------------- | -------- | ------------------------------------------------------------------ |
-| UiAvatar / UiAvatarGroup                                                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | broad utility, but weaker ROI than current floating/selection gaps |
-| UiNumberInput                                                            | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | baseline field extension after radio/overlay pass                  |
-| UiSelect (rich)                                                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | ship next to `UiSelectSimple`; no blind replacement                |
-| UiAutocomplete                                                           | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | after listbox/overlay behavior settles                             |
-| UiMenu                                                                   | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | menu only; sidebar shell stays out of core                         |
-| UiProgress                                                               | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | useful, but not blocking current core story                        |
-| UiSteps / UiStepper                                                      | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | navigation pattern, not first-wave infrastructure                  |
-| UiTable (simple)                                                         | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | deliberately simple table; no toolbar/filter/query engine          |
-| UiPopconfirm                                                             | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | only after popover contract is stable                              |
-| UiContextMenu                                                            | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | extension of dropdown/menu semantics                               |
-| UiSlider / UiRangeSlider                                                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | baseline input, but lower ROI than current gaps                    |
-| UiGrid / UiSpace / UiFlex                                                | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility layout only, never app-shell replacement                   |
-| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility surfaces after baseline controls are closed                |
-| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | shallow field enrichments after base form/input backlog            |
-| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | useful display utilities, but not current platform blockers        |
-| UiImage                                                                  | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | keep preview/gallery behavior out until separate scope is cut      |
+| Family                                                                   | Status    | Placement  | Contract                                        | Decision | Note                                                                             |
+| ------------------------------------------------------------------------ | --------- | ---------- | ----------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| UiAvatar / UiAvatarGroup                                                 | deferred  | `@ww/core` | `core-component / stable / core standard`       | **P1**   | deferred from the first `@ww/core` wave while the floating/selection pass landed |
+| UiNumberInput                                                            | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | baseline field extension after radio/overlay pass                                |
+| UiSelect (rich)                                                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | ship next to `UiSelectSimple`; no blind replacement                              |
+| UiAutocomplete                                                           | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | after listbox/overlay behavior settles                                           |
+| UiMenu                                                                   | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | menu only; sidebar shell stays out of core                                       |
+| UiProgress                                                               | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | useful, but not blocking current core story                                      |
+| UiSteps / UiStepper                                                      | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | navigation pattern, not first-wave infrastructure                                |
+| UiTable (simple)                                                         | hardening | `@ww/core` | `core-component / stable / core standard`       | **P1**   | deliberately simple table; no toolbar/filter/query engine                        |
+| UiPopconfirm                                                             | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | only after popover contract is stable                                            |
+| UiContextMenu                                                            | hardening | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**   | extension of dropdown/menu semantics                                             |
+| UiSlider / UiRangeSlider                                                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | baseline input, but lower ROI than current gaps                                  |
+| UiGrid / UiSpace / UiFlex                                                | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility layout only, never app-shell replacement                                 |
+| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | utility surfaces after baseline controls are closed                              |
+| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | shallow field enrichments after base form/input backlog                          |
+| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | useful display utilities, but not current platform blockers                      |
+| UiImage                                                                  | hardening | `@ww/core` | `core-component / stable / core standard`       | **P2**   | keep preview/gallery behavior out until separate scope is cut                    |
 
 ### 3) ADR-first / separate scope
 
@@ -98,7 +98,7 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 ### Phase 1 / P0
 
-`UiTooltip`, `UiPopover`, `UiDropdown / UiDropdownMenu`, `UiToast`, `UiRadio / UiRadioGroup`, `UiAlert`, `UiTag / UiChip`, `UiCollapse / UiAccordion`, `UiBreadcrumb`, `UiPagination (simple)`.
+Implemented in the current pass: `UiTooltip`, `UiPopover`, `UiDropdown`, `UiToast`, `UiRadio / UiRadioGroup`, `UiAlert`, `UiTag`, `UiCollapse`, `UiBreadcrumb`, `UiPagination (simple)`.
 
 ### Phase 2 / P1
 
