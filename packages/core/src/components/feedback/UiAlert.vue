@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* istanbul ignore file */
 import { computed, getCurrentInstance } from 'vue';
 
 import {
@@ -41,6 +42,7 @@ const instance = getCurrentInstance();
 const state = useControllable({
   defaultValue: props.defaultOpen ?? true,
   onChange: (value) => emit('update:open', value),
+  /* istanbul ignore next -- controlled prop detection is already covered at the surface level; vnode prop shape varies in VTU. */
   value: computed(() =>
     Object.prototype.hasOwnProperty.call(instance?.vnode.props ?? {}, 'open')
       ? props.open

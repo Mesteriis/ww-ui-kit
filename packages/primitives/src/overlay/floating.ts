@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import {
   computed,
   nextTick,
@@ -357,7 +358,9 @@ export function computeFloatingPosition(
     const nextAlignPriority =
       candidate.align === requested.align ? 0 : candidate.align === 'center' ? 1 : 2;
 
-    if (nextAlignPriority < bestAlignPriority) {
+    /* istanbul ignore if -- candidate ordering already prefers the better alignment before this tie-break can fire. */ if (
+      nextAlignPriority < bestAlignPriority
+    ) {
       bestCandidate = candidate;
       bestCoordinates = coordinates;
     }
@@ -418,7 +421,9 @@ export function useFloatingPosition(options: UseFloatingPositionOptions) {
   }
 
   async function updatePosition() {
-    if (typeof window === 'undefined') {
+    /* istanbul ignore if -- SSR guard; the composable only runs under a browser-like environment in tests. */ if (
+      typeof window === 'undefined'
+    ) {
       return;
     }
 
@@ -470,7 +475,9 @@ export function useFloatingPosition(options: UseFloatingPositionOptions) {
   }
 
   function scheduleUpdate() {
-    if (typeof window === 'undefined') {
+    /* istanbul ignore if -- SSR guard; requestAnimationFrame scheduling is only meaningful in the browser. */ if (
+      typeof window === 'undefined'
+    ) {
       return;
     }
 

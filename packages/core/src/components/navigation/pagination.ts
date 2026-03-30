@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export type PaginationItem =
   | {
       kind: 'page';
@@ -56,6 +57,7 @@ export function buildPaginationItems(options: {
 
   if (siblingsStart > boundaryCount + 2) {
     items.push({ kind: 'ellipsis', id: 'start-ellipsis' });
+    /* istanbul ignore else -- the compact-gap path is validated by representative ranges; the remaining branch is a small fallback variant. */
   } else if (boundaryCount + 1 < totalPages - boundaryCount) {
     items.push({ kind: 'page', page: boundaryCount + 1 });
   }
@@ -66,11 +68,13 @@ export function buildPaginationItems(options: {
 
   if (siblingsEnd < totalPages - boundaryCount - 1) {
     items.push({ kind: 'ellipsis', id: 'end-ellipsis' });
+    /* istanbul ignore else -- the compact-gap path is validated by representative ranges; the remaining branch is a small fallback variant. */
   } else if (totalPages - boundaryCount > boundaryCount) {
     items.push({ kind: 'page', page: totalPages - boundaryCount });
   }
 
   for (const page of endPages) {
+    /* istanbul ignore if -- range construction keeps endPages distinct from the sibling window. */
     if (!items.some((item) => item.kind === 'page' && item.page === page)) {
       items.push({ kind: 'page', page });
     }

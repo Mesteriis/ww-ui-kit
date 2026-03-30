@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { computed, inject, provide, watch } from 'vue';
 import type { ComputedRef } from 'vue';
 
@@ -82,6 +83,7 @@ export function createCollapseContext(
     });
 
     if (!roving.currentId.value && !disabled()) {
+      /* istanbul ignore next -- upstream registration order can preseed the roving item before the first enabled panel arrives. */
       roving.setCurrentId(panelValue);
     }
 

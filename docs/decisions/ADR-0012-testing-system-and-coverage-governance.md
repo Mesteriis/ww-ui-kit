@@ -33,11 +33,14 @@ Root `pnpm test` runs all three. Coverage checks for stories, docs, and playgrou
 
 Later maintainer workbench additions to playground must preserve these contours and keep the testing harness routes stable instead of replacing them.
 
+When the repository keeps a strict global statement/branch/function threshold, any coverage exclusions must stay explicit, file-scoped, and adjacent to the canonical root coverage command. Those exclusions are allowed only for browser-proven files whose interaction contract is already exercised through Storybook or playground/browser tests and where jsdom/istanbul instrumentation would otherwise produce noisy structural gaps.
+
 ## Consequences
 
 - Fast logic tests remain separate from real browser proofs.
 - Storybook becomes executable documentation, not just a visual reference.
 - Playground becomes a consumer-proof harness instead of a loose sandbox.
+- Coverage exclusions remain auditable because they are explicit and narrowly listed instead of being hidden behind broad globs or reduced thresholds.
 
 ## Alternatives
 

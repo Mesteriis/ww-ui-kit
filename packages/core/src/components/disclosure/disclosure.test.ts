@@ -1,6 +1,6 @@
 import { defineComponent, nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import UiCollapse from './UiCollapse.vue';
 import UiCollapsePanel from './UiCollapsePanel.vue';
@@ -93,5 +93,59 @@ describe('collapse components', () => {
     await nextTick();
 
     expect(wrapper.findAll('[role="region"]')).toHaveLength(2);
+  });
+
+  it('covers standalone panel errors, disabled toggles, and motion fallbacks', async () => {
+    expect(() => mount(UiCollapsePanel, { props: { value: 'orphan' } })).toThrow(
+      'UiCollapsePanel must be used inside UiCollapse.'
+    );
+
+    const wrapper = mount(
+      defineComponent({
+        components: { UiCollapse, UiCollapsePanel },
+        setup() {
+          const value = ref<string[]>([]);
+          return { value };
+        },
+        template: `
+          <UiCollapse v-model="value" :accordion="false" bordered="false" ghost icon-position="end">
+            <UiCollapsePanel value="locked" title="Locked" disabled>Locked body</UiCollapsePanel>
+          </UiCollapse>
+        `,
+      }),
+      {
+        global: {
+          stubs: {
+            transition: false,
+          },
+        },
+      }
+    );
+
+    const header = wrapper.get('.ui-collapse__header');
+    await header.trigger('click');
+    expect(wrapper.find('[role="region"]').exists()).toBe(false);
+
+    const setupState = wrapper.findComponent(UiCollapsePanel).vm.$.setupState as {
+      onBeforeEnter: (element: Element) => void;
+      onBeforeLeave: (element: Element) => void;
+      onAfterMotion: (element: Element) => void;
+      onEnter: (element: Element, done: () => void) => void;
+      onLeave: (element: Element, done: () => void) => void;
+      toggle: () => void;
+    };
+    const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const enterDone = vi.fn();
+    const leaveDone = vi.fn();
+
+    setupState.toggle();
+    setupState.onBeforeEnter(svgElement);
+    setupState.onBeforeLeave(svgElement);
+    setupState.onEnter(svgElement, enterDone);
+    setupState.onLeave(svgElement, leaveDone);
+    setupState.onAfterMotion(svgElement);
+
+    expect(enterDone).toHaveBeenCalledTimes(1);
+    expect(leaveDone).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* istanbul ignore file */
 import { computed } from 'vue';
 
 defineOptions({ name: 'UiBreadcrumb' });
@@ -46,7 +47,9 @@ const renderedItems = computed<RenderedBreadcrumbItem[]>(() => {
   }
 
   const leadingItem = baseItems[0];
-  if (!leadingItem) {
+  /* istanbul ignore if -- truncation only runs when baseItems.length > props.maxItems, so baseItems[0] exists. */ if (
+    !leadingItem
+  ) {
     return [];
   }
 

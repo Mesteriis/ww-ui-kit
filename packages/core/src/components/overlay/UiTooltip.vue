@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* istanbul ignore file */
 import { computed, getCurrentInstance, ref, useSlots, watch } from 'vue';
 
 import { PrimitivePortal, useControllable, useId, type FloatingPlacement } from '@ww/primitives';

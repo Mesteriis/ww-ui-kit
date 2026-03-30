@@ -101,4 +101,60 @@ describe('display components', () => {
     await wrapper.get('button[aria-label="Remove tag"]').trigger('click');
     expect(wrapper.emitted('close')).toHaveLength(1);
   });
+
+  it('covers tag keyboard activation, icon slots, button roots, and disabled guards', async () => {
+    const buttonTag = mount(UiTag, {
+      props: {
+        clickable: true,
+        label: 'Open release',
+      },
+      slots: {
+        icon: '◇',
+      },
+    });
+
+    expect(buttonTag.element.tagName).toBe('BUTTON');
+    expect(buttonTag.attributes('type')).toBe('button');
+    expect(buttonTag.find('.ui-tag__icon').exists()).toBe(true);
+
+    await buttonTag.trigger('click');
+    expect(buttonTag.emitted('click')).toHaveLength(1);
+
+    const keyboardTag = mount(UiTag, {
+      props: {
+        clickable: true,
+        closable: true,
+        label: 'Keyboard tag',
+      },
+    });
+
+    expect(keyboardTag.attributes('role')).toBe('button');
+    expect(keyboardTag.attributes('tabindex')).toBe('0');
+
+    await keyboardTag.trigger('keydown', { key: 'Enter' });
+    await keyboardTag.trigger('keydown', { key: ' ' });
+    await keyboardTag.trigger('keydown', { key: 'Escape' });
+    expect(keyboardTag.emitted('click')).toHaveLength(2);
+
+    const disabledTag = mount(UiTag, {
+      props: {
+        clickable: true,
+        closable: true,
+        disabled: true,
+        label: 'Disabled tag',
+      },
+    });
+
+    await disabledTag.trigger('click');
+    await disabledTag.trigger('keydown', { key: 'Enter' });
+    await disabledTag.get('button[aria-label="Remove tag"]').trigger('click');
+    expect(disabledTag.emitted('click')).toBeUndefined();
+    expect(disabledTag.emitted('close')).toBeUndefined();
+
+    const disabledSetupState = disabledTag.vm.$.setupState as {
+      onClose: (event: MouseEvent) => void;
+    };
+    disabledSetupState.onClose(new MouseEvent('click'));
+    expect(disabledTag.emitted('close')).toBeUndefined();
+  });
 });

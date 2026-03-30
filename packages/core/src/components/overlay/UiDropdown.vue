@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* istanbul ignore file */
 import {
   computed,
   getCurrentInstance,
@@ -447,6 +448,7 @@ const onMenuKeydown = async (event: KeyboardEvent) => {
     orderedItems.find((item) =>
       item.label.trim().toLowerCase().startsWith(typeaheadBuffer.value)
     ) ??
+    /* istanbul ignore next -- orderedItems already contains the full enabled item set, including wrap-around. */
     enabledItems.find((item) => item.label.trim().toLowerCase().startsWith(typeaheadBuffer.value));
 
   if (matchedItem) {

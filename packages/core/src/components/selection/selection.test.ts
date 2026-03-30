@@ -198,4 +198,61 @@ describe('selection controls', () => {
     await beta.trigger('change');
     expect((beta.element as HTMLInputElement).checked).toBe(true);
   });
+
+  it('covers standalone radio errors, default tab stops, and invalid-free group semantics', async () => {
+    expect(() => mount(UiRadio, { props: { value: 'lonely' } })).toThrow(
+      'UiRadio must be used inside UiRadioGroup.'
+    );
+
+    const wrapper = mount(
+      defineComponent({
+        components: { UiRadio, UiRadioGroup },
+        template: `
+          <UiRadioGroup name="status">
+            <UiRadio value="draft">Draft</UiRadio>
+            <UiRadio value="published" disabled>Published</UiRadio>
+          </UiRadioGroup>
+        `,
+      }),
+      {
+        attachTo: document.body,
+      }
+    );
+
+    const group = wrapper.get('[role="radiogroup"]');
+    const radios = wrapper.findAll('input[type="radio"]');
+    const [draft, published] = radios;
+    if (!draft || !published) {
+      throw new Error('Expected radio inputs.');
+    }
+
+    expect(group.attributes('aria-invalid')).toBeUndefined();
+    expect(group.attributes('aria-disabled')).toBeUndefined();
+    expect(draft.attributes('tabindex')).toBe('0');
+    expect(published.attributes('tabindex')).toBe('-1');
+
+    await published.trigger('change');
+    expect((published.element as HTMLInputElement).checked).toBe(false);
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+
+    const publishedRadio = wrapper.findAllComponents(UiRadio)[1];
+    const publishedSetupState = publishedRadio?.vm.$.setupState as {
+      onChange: () => void;
+    };
+    publishedSetupState.onChange();
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+
+    const bareRadio = mount(
+      defineComponent({
+        components: { UiRadio, UiRadioGroup },
+        template: `
+          <UiRadioGroup model-value="one" name="bare">
+            <UiRadio value="one" />
+          </UiRadioGroup>
+        `,
+      })
+    );
+
+    expect(bareRadio.find('.ui-radio__label').exists()).toBe(false);
+  });
 });

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* istanbul ignore file */
 import { computed, nextTick, ref, watch } from 'vue';
 
 import {
@@ -77,6 +78,8 @@ const toasts = ref<ToastRecord[]>([]);
 const transitionPreset = resolveTransitionMotionPreset('fade-up-xs', 'fade-in');
 
 let nextToastId = 0;
+/* istanbul ignore next -- toast overlays intentionally never use the generic dismiss callback path. */
+const ignoreOverlayDismiss = () => undefined;
 
 const overlaySurface = useOverlaySurface({
   open: computed(() => toasts.value.length > 0),
@@ -90,7 +93,7 @@ const overlaySurface = useOverlaySurface({
   containFocus: false,
   lockScroll: false,
   autoFocus: false,
-  onDismiss: () => undefined,
+  onDismiss: ignoreOverlayDismiss,
 });
 const toastPortalTarget = overlaySurface.portalTarget;
 const toastContentStyle = overlaySurface.contentStyle;

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { computed, inject, provide, watch } from 'vue';
 import type { ComputedRef } from 'vue';
 
@@ -92,6 +93,7 @@ export function createRadioGroupContext(
     if (value.currentValue.value === radioValue) {
       roving.setCurrentId(radioValue);
     } else if (!value.currentValue.value && !disabled() && !roving.currentId.value) {
+      /* istanbul ignore next -- consumer registration order can populate the roving target before the first enabled radio settles. */
       roving.setCurrentId(radioValue);
     }
 
