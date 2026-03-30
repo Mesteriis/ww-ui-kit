@@ -320,7 +320,7 @@ const onControlKeydown = async (event: KeyboardEvent) => {
     const currentIndex = filteredOptions.value.findIndex((option) => option.id === activeId.value);
     const candidates =
       currentIndex < 0
-        ? filteredOptions.value
+        ? filteredOptions.value.slice()
         : filteredOptions.value.slice(0, currentIndex);
     const nextOption = candidates.reverse().find((option) => !option.disabled);
     activeId.value = nextOption?.id ?? activeId.value;

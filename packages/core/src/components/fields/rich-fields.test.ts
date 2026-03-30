@@ -78,6 +78,7 @@ describe('rich field controls', () => {
     );
 
     const input = host.get('input');
+    expect(input.attributes('aria-labelledby')).toContain('-label');
     expect(input.attributes('aria-describedby')).toContain('-hint');
     expect(input.attributes('aria-invalid')).toBe('true');
     expect(input.attributes('inputmode')).toBe('numeric');
@@ -226,6 +227,15 @@ describe('rich field controls', () => {
     await readonly.findAll('button')[0]?.trigger('click');
     await readonly.get('input').trigger('keydown', { key: 'PageUp' });
     expect(readonly.emitted('update:modelValue')).toBeUndefined();
+
+    const unlabelled = mount(UiNumberInput, {
+      props: {
+        modelValue: 1,
+        ariaLabel: 'Budget amount',
+      },
+    });
+    expect(unlabelled.get('input').attributes('aria-label')).toBe('Budget amount');
+    expect(unlabelled.get('input').attributes('aria-labelledby')).toBeUndefined();
   });
 
   it('covers searchable select filtering, empty state, disabled options, and clearing', async () => {
@@ -374,6 +384,7 @@ describe('rich field controls', () => {
     await control.trigger('keydown', { key: 'Enter' });
     await flushFloating();
     await control.trigger('keydown', { key: 'ArrowUp' });
+    expect(control.attributes('aria-activedescendant')).toContain('option-0');
     await control.trigger('keydown', { key: 'ArrowDown' });
     await control.trigger('keydown', { key: 'ArrowUp' });
     await control.trigger('keydown', { key: 'Home' });
@@ -383,20 +394,54 @@ describe('rich field controls', () => {
     await control.trigger('keydown', { key: 'ArrowDown' });
     expect(control.attributes('aria-activedescendant')).toContain('option-2');
     await control.trigger('keydown', { key: 'x', ctrlKey: true });
+    const selectSetTimeoutSpy = vi.spyOn(window, 'setTimeout');
+    const selectClearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
     await control.trigger('keydown', { key: 'c' });
-    vi.advanceTimersByTime(500);
     expect(control.attributes('aria-activedescendant')).toContain('option-2');
-    await control.trigger('keydown', { key: 'z' });
-    vi.advanceTimersByTime(500);
-    expect(control.attributes('aria-activedescendant')).toContain('option-2');
-    await control.trigger('keydown', { key: 'Enter' });
-    expect((single.vm as { value: string | number | null }).value).toBe('charlie');
+    const selectTypeaheadTimer = selectSetTimeoutSpy.mock.results.at(-1)?.value as number;
+    single.unmount();
+    expect(selectClearTimeoutSpy).toHaveBeenCalledWith(selectTypeaheadTimer);
+    selectSetTimeoutSpy.mockRestore();
+    selectClearTimeoutSpy.mockRestore();
 
-    await control.trigger('keydown', { key: 'Enter' });
+    const singleTypeahead = mount(
+      defineComponent({
+        components: { UiSelect },
+        setup() {
+          const value = ref<string | number | null>(null);
+          const options = [
+            { label: 'Alpha', value: 'alpha' },
+            { label: 'Bravo', value: 'bravo', disabled: true },
+            { label: 'Charlie', value: 'charlie' },
+          ];
+
+          return { options, value };
+        },
+        template: `<UiSelect v-model="value" aria-label="Plain select" :options="options" />`,
+      }),
+      {
+        attachTo: document.body,
+        global: {
+          stubs: {
+            transition: false,
+          },
+        },
+      }
+    );
+    const typeaheadControl = singleTypeahead.get('.ui-rich-select__control');
+    await typeaheadControl.trigger('keydown', { key: 'Enter' });
     await flushFloating();
-    await control.trigger('keydown', { key: 'Escape' });
+    await typeaheadControl.trigger('keydown', { key: 'c' });
+    expect(typeaheadControl.attributes('aria-activedescendant')).toContain('option-2');
+    vi.advanceTimersByTime(500);
+    await typeaheadControl.trigger('keydown', { key: 'Enter' });
+    expect((singleTypeahead.vm as { value: string | number | null }).value).toBe('charlie');
+
+    await typeaheadControl.trigger('keydown', { key: 'Enter' });
     await flushFloating();
-    expect(control.attributes('aria-expanded')).toBe('false');
+    await typeaheadControl.trigger('keydown', { key: 'Escape' });
+    await flushFloating();
+    expect(typeaheadControl.attributes('aria-expanded')).toBe('false');
 
     const multiple = mount(
       defineComponent({
@@ -635,8 +680,9 @@ describe('rich field controls', () => {
     await flushFloating();
     await input.trigger('focus');
     await flushFloating();
+    (autocomplete.vm.$.setupState as { activeId: string | null }).activeId = null;
     await input.trigger('keydown', { key: 'ArrowUp' });
-    expect(input.attributes('aria-activedescendant')).toContain('option-0');
+    expect(input.attributes('aria-activedescendant')).toContain('option-1');
 
     await input.trigger('keydown', { key: 'ArrowDown' });
     await input.trigger('keydown', { key: 'ArrowUp' });
@@ -647,14 +693,42 @@ describe('rich field controls', () => {
     await input.trigger('keydown', { key: 'ArrowDown' });
     expect(input.attributes('aria-activedescendant')).toContain('option-1');
     await input.trigger('keydown', { key: 'b' });
-    vi.advanceTimersByTime(500);
     expect(input.attributes('aria-activedescendant')).toContain('option-1');
-    await input.trigger('keydown', { key: 'z' });
+
+    const searchableAutocomplete = mount(
+      defineComponent({
+        components: { UiAutocomplete },
+        setup() {
+          const value = ref('');
+          const items = [
+            { label: 'Alpha', value: 'alpha' },
+            { label: 'Bravo', value: 'bravo', description: 'Deploy lane' },
+            { label: 'Charlie', value: 'charlie', disabled: true, description: 'Disabled lane' },
+          ];
+
+          return { items, value };
+        },
+        template: `<UiAutocomplete v-model="value" :items="items" />`,
+      }),
+      {
+        attachTo: document.body,
+        global: {
+          stubs: {
+            transition: false,
+          },
+        },
+      }
+    );
+    const searchableInput = searchableAutocomplete.get('input');
+    mockRect(searchableInput.element, 260);
+    await searchableInput.trigger('focus');
+    await flushFloating();
+    await searchableInput.trigger('keydown', { key: 'b' });
+    expect(searchableInput.attributes('aria-activedescendant')).toContain('option-1');
     vi.advanceTimersByTime(500);
-    expect(input.attributes('aria-activedescendant')).toContain('option-1');
-    await input.trigger('keydown', { key: 'Enter' });
-    expect((host.vm as { value: string }).value).toBe('bravo');
-    expect(autocomplete.emitted('select')?.at(-1)?.[0]).toEqual({
+    await searchableInput.trigger('keydown', { key: 'Enter' });
+    expect((searchableAutocomplete.vm as { value: string }).value).toBe('bravo');
+    expect(searchableAutocomplete.findComponent(UiAutocomplete).emitted('select')?.at(-1)?.[0]).toEqual({
       item: {
         label: 'Bravo',
         value: 'bravo',
@@ -662,6 +736,35 @@ describe('rich field controls', () => {
       },
       value: 'bravo',
     });
+    searchableAutocomplete.unmount();
+
+    const autocompleteSetTimeoutSpy = vi.spyOn(window, 'setTimeout');
+    const autocompleteClearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
+    const cleanupAutocomplete = mount(UiAutocomplete, {
+      attachTo: document.body,
+      props: {
+        modelValue: '',
+        items: [
+          { label: 'Alpha', value: 'alpha' },
+          { label: 'Bravo', value: 'bravo' },
+        ],
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+    const cleanupInput = cleanupAutocomplete.get('input');
+    mockRect(cleanupInput.element, 260);
+    await cleanupInput.trigger('focus');
+    await flushFloating();
+    await cleanupInput.trigger('keydown', { key: 'b' });
+    const autocompleteTypeaheadTimer = autocompleteSetTimeoutSpy.mock.results.at(-1)?.value as number;
+    cleanupAutocomplete.unmount();
+    expect(autocompleteClearTimeoutSpy).toHaveBeenCalledWith(autocompleteTypeaheadTimer);
+    autocompleteSetTimeoutSpy.mockRestore();
+    autocompleteClearTimeoutSpy.mockRestore();
 
     await input.setValue('zzz');
     await flushFloating();

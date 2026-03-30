@@ -221,4 +221,21 @@ describe('menu and steps', () => {
     expect(passive.find('.ui-steps__item--error').text()).toContain('!');
     expect(passive.text()).toContain('Ready to release');
   });
+
+  it('clears menu typeahead timers on unmount', async () => {
+    const wrapper = mount(UiMenu, {
+      props: {
+        items: [
+          { key: 'alpha', label: 'Alpha' },
+          { key: 'bravo', label: 'Bravo' },
+        ],
+      },
+    });
+
+    await wrapper.get('[role="menu"]').trigger('keydown', { key: 'b' });
+    expect(vi.getTimerCount()).toBeGreaterThan(0);
+
+    wrapper.unmount();
+    expect(vi.getTimerCount()).toBe(0);
+  });
 });

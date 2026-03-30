@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, type ComponentPublicInstance, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, type ComponentPublicInstance, watch } from 'vue';
 
 import { PrimitivePortal, useId } from '@ww/primitives';
 
 import {
   findBoundaryListboxRecord,
+  findListboxTypeaheadRecord,
   filterListboxRecords,
 } from './listbox';
 import { mergeDescribedBy, useFieldContext } from './field-context';
@@ -65,6 +66,8 @@ const surfaceRef = ref<HTMLElement | null>(null);
 const inputRef = ref<HTMLInputElement | null>(null);
 const open = ref(false);
 const activeId = ref<string | null>(null);
+const typeaheadBuffer = ref('');
+let typeaheadTimer: number | null = null;
 
 const registerInputRef = (element: Element | ComponentPublicInstance | null) => {
   if (element instanceof HTMLInputElement) {
@@ -171,7 +174,7 @@ const onKeydown = (event: KeyboardEvent) => {
     const currentIndex = filteredItems.value.findIndex((item) => item.id === activeId.value);
     const candidates =
       currentIndex < 0
-        ? filteredItems.value
+        ? filteredItems.value.slice()
         : filteredItems.value.slice(0, currentIndex);
     const previousItem = candidates.reverse().find((item) => !item.disabled);
     activeId.value = previousItem?.id ?? activeId.value;
@@ -204,8 +207,32 @@ const onKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
     event.preventDefault();
     open.value = false;
+    return;
   }
+
+  if (event.key.length !== 1 || event.altKey || event.ctrlKey || event.metaKey) {
+    return;
+  }
+
+  typeaheadBuffer.value = `${typeaheadBuffer.value}${event.key.toLowerCase()}`;
+  window.clearTimeout(typeaheadTimer ?? undefined);
+  typeaheadTimer = window.setTimeout(() => {
+    typeaheadBuffer.value = '';
+    typeaheadTimer = null;
+  }, 500);
+
+  const match = findListboxTypeaheadRecord(
+    filteredItems.value,
+    typeaheadBuffer.value,
+    activeId.value
+  );
+  activeId.value = match?.id ?? activeId.value;
 };
+
+onBeforeUnmount(() => {
+  window.clearTimeout(typeaheadTimer ?? undefined);
+  typeaheadTimer = null;
+});
 </script>
 
 <template>
