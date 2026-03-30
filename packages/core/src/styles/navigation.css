@@ -149,13 +149,14 @@
   transition: var(--ui-motion-transition-focus-ring);
 }
 
-.ui-menu__action:hover:not(:disabled),
+.ui-menu__action:hover:not(:disabled):not([aria-disabled='true']),
 .ui-menu__action.is-active,
 .ui-menu__action.is-selected {
   background: var(--ui-surface-sunken);
 }
 
-.ui-menu__action:disabled {
+.ui-menu__action:disabled,
+.ui-menu__action[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: var(--ui-state-disabled-opacity);
 }
