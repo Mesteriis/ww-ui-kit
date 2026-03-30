@@ -15,7 +15,7 @@
     "id": "core-wave",
     "label": "Core Wave",
     "hash": "#testing-core-wave",
-    "description": "Selection, disclosure, feedback, breadcrumb, pagination, and one composed consumer-style flow."
+    "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow."
   },
   {
     "id": "charts",

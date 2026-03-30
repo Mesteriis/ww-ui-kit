@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { defineAsyncComponent, nextTick, ref, watch } from 'vue';
+import { computed, defineAsyncComponent, nextTick, ref, watch } from 'vue';
 
 import { UiApexChart, type UiApexChartOptions, type UiApexChartSeries } from '@ww/charts-apex';
 import {
   UiAlert,
+  UiAutocomplete,
+  UiAvatar,
+  UiAvatarGroup,
   UiBadge,
   UiBreadcrumb,
   UiButton,
@@ -15,10 +18,14 @@ import {
   UiDrawer,
   UiField,
   UiInput,
+  UiMenu,
+  UiNumberInput,
   UiPagination,
   UiPopover,
+  UiProgress,
   UiRadio,
   UiRadioGroup,
+  UiSelect,
   UiSwitch,
   UiTag,
   UiTabsList,
@@ -26,6 +33,8 @@ import {
   UiTabsRoot,
   UiTabsTrigger,
   UiToast,
+  UiTable,
+  UiSteps,
   UiTooltip,
 } from '@ww/core';
 import {
@@ -92,6 +101,14 @@ const releaseFlowPage = ref(2);
 const releaseAlertOpen = ref(true);
 const activeTag = ref('Pinned');
 const releaseFlowPanels = ref<string[]>(['queue']);
+const releaseBudget = ref<number | null>(12.5);
+const releaseLane = ref<string | null>('bravo');
+const releaseCoverage = ref<Array<string | number>>(['tokens']);
+const releaseSearch = ref('');
+const lastAutocompleteSelection = ref('none');
+const releaseMenuKeys = ref(['review']);
+const lastCoreMenuSelection = ref('review');
+const releaseStep = ref(1);
 const motionPreset = ref<(typeof MOTION_PRESET_NAMES)[number]>('modal-fade-scale');
 const motionVisible = ref(true);
 const collapseOpen = ref(true);
@@ -136,6 +153,84 @@ const releaseBreadcrumbItems = [
   { label: 'Releases', href: '#releases' },
   { label: 'Wave one', href: '#wave-one' },
   { label: 'Approve', current: true },
+];
+
+const releaseLaneOptions = [
+  { label: 'Overview queue', value: 'overview', icon: '⌘', keywords: ['queue'] },
+  {
+    type: 'group' as const,
+    label: 'Deploy lanes',
+    options: [
+      { label: 'Bravo lane', value: 'bravo', icon: 'B', keywords: ['deploy', 'blue'] },
+      { label: 'Charlie lane', value: 'charlie', disabled: true, icon: 'C' },
+    ],
+  },
+];
+
+const releaseCoverageOptions = [
+  { label: 'Tokens', value: 'tokens' },
+  { label: 'Themes', value: 'themes' },
+  { label: 'Core', value: 'core' },
+  { label: 'Docs', value: 'docs' },
+];
+
+const releaseAutocompleteItems = [
+  {
+    label: 'Belovodye control room',
+    value: 'Belovodye control room',
+    description: 'Scoped theme release surface',
+    keywords: ['belovodye', 'theme'],
+  },
+  {
+    label: 'Core wave verify',
+    value: 'Core wave verify',
+    description: 'Manifest, stories, playground, and tests',
+    keywords: ['verify', 'core'],
+  },
+  {
+    label: 'Bravo deploy lane',
+    value: 'Bravo deploy lane',
+    description: 'Menu and select collection flows',
+    keywords: ['deploy', 'bravo'],
+  },
+];
+
+const coreMenuItems = [
+  { label: 'Overview', key: 'overview', value: 'overview' },
+  { type: 'divider' as const },
+  {
+    type: 'group' as const,
+    label: 'Deploy',
+    items: [
+      { label: 'Review', key: 'review', value: 'review', icon: '⌘' },
+      { label: 'Ship', key: 'ship', value: 'ship' },
+    ],
+  },
+];
+
+const coreStepItems = [
+  { title: 'Design', description: 'Shape the shared contract' },
+  { title: 'Review', description: 'Stories, playground, and tests' },
+  { title: 'Ship', description: 'Green verify before merge' },
+];
+
+const coreAvatarItems = [
+  { initials: 'BV', alt: 'Belovodye', tone: 'brand' as const },
+  { initials: 'QA', alt: 'Quality gate', tone: 'success' as const },
+  { initials: 'DX', alt: 'Developer experience', tone: 'warning' as const },
+  { initials: 'CI', alt: 'Continuous integration', tone: 'info' as const },
+];
+
+const coreTableColumns = [
+  { key: 'surface', header: 'Surface' },
+  { key: 'status', header: 'Status', align: 'center' as const },
+  { key: 'proof', header: 'Proof' },
+];
+
+const coreTableData = [
+  { surface: 'UiSelect', status: 'Shipped', proof: 'Stories + unit + playground' },
+  { surface: 'UiMenu', status: 'Shipped', proof: 'Keyboard + ARIA coverage' },
+  { surface: 'UiTable', status: 'Shipped', proof: 'Semantic table + slots' },
 ];
 
 const chartCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -216,6 +311,15 @@ watch(
 
 const onFloatingMenuSelect = (payload: { label: string }) => {
   floatingMenuSelection.value = payload.label;
+};
+
+const onAutocompleteSelect = (payload: { value: string }) => {
+  lastAutocompleteSelection.value = payload.value;
+};
+
+const onCoreMenuSelect = (payload: { key: string }) => {
+  releaseMenuKeys.value = [payload.key];
+  lastCoreMenuSelection.value = payload.key;
 };
 
 const pushHarnessToast = (type: 'success' | 'warning' | 'error') => {
@@ -306,6 +410,9 @@ const layerScale = readOverlayLayerScale();
 const firstModalLayers = resolveOverlayLayerSlots(0, 'modal');
 const secondModalLayers = resolveOverlayLayerSlots(1, 'modal');
 const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
+const currentReleaseStepLabel = computed(
+  () => coreStepItems[releaseStep.value]?.title ?? 'Unknown'
+);
 </script>
 
 <template>
@@ -529,7 +636,57 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
       </UiCard>
 
       <UiCard>
-        <template #header>Release inbox flow</template>
+        <template #header>Rich fields and collection controls</template>
+        <div class="ui-stack">
+          <UiField label="Budget" hint="Number input stays decimal-only and field-aware">
+            <UiNumberInput
+              v-model="releaseBudget"
+              :min="0"
+              :max="24"
+              :step="0.5"
+              :precision="1"
+              allow-empty
+            />
+          </UiField>
+
+          <UiField label="Deploy lane" hint="Select uses the sanctioned floating surface">
+            <UiSelect
+              v-model="releaseLane"
+              searchable
+              clearable
+              placeholder="Pick a lane"
+              :options="releaseLaneOptions"
+            />
+          </UiField>
+
+          <UiField label="Coverage tags" hint="Multiple selection stays beside UiSelectSimple">
+            <UiSelect
+              v-model="releaseCoverage"
+              multiple
+              searchable
+              clearable
+              placeholder="Choose tags"
+              :options="releaseCoverageOptions"
+            />
+          </UiField>
+
+          <UiField label="Command search" hint="Autocomplete keeps local suggestion control">
+            <UiAutocomplete
+              v-model="releaseSearch"
+              :items="releaseAutocompleteItems"
+              @select="onAutocompleteSelect"
+            />
+          </UiField>
+
+          <p style="margin: 0">Budget value: {{ releaseBudget ?? 'empty' }}</p>
+          <p style="margin: 0">Selected lane: {{ releaseLane ?? 'none' }}</p>
+          <p style="margin: 0">Coverage tags: {{ releaseCoverage.join(', ') || 'none' }}</p>
+          <p style="margin: 0">Autocomplete selection: {{ lastAutocompleteSelection }}</p>
+        </div>
+      </UiCard>
+
+      <UiCard>
+        <template #header>Menu, steps, and release inbox flow</template>
         <div class="ui-stack">
           <UiBreadcrumb :items="releaseBreadcrumbItems" :max-items="4" />
 
@@ -560,6 +717,35 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
             </UiTag>
           </div>
 
+          <div
+            style="
+              display: grid;
+              gap: var(--ui-space-4);
+              grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+            "
+          >
+            <div class="ui-stack">
+              <UiMenu
+                v-model:selected-keys="releaseMenuKeys"
+                :items="coreMenuItems"
+                aria-label="Core wave menu"
+                @select="onCoreMenuSelect"
+              />
+              <p style="margin: 0">Menu selection: {{ lastCoreMenuSelection }}</p>
+            </div>
+
+            <div class="ui-stack">
+              <UiSteps
+                v-model="releaseStep"
+                :items="coreStepItems"
+                clickable
+                linear
+                aria-label="Core wave steps"
+              />
+              <p style="margin: 0">Current step: {{ currentReleaseStepLabel }}</p>
+            </div>
+          </div>
+
           <p style="margin: 0">Active filter: {{ activeTag }}</p>
 
           <UiPagination
@@ -568,11 +754,62 @@ const floatingLayers = resolveOverlayLayerSlots(0, 'floating');
             :page-size="12"
             :sibling-count="1"
             :boundary-count="1"
+            aria-label="Release flow pages"
           />
 
-          <UiPagination :model-value="releaseFlowPage" :total-items="96" :page-size="12" simple />
+          <UiPagination
+            :model-value="releaseFlowPage"
+            :total-items="96"
+            :page-size="12"
+            simple
+            aria-label="Release flow pages summary"
+          />
 
           <p style="margin: 0">Current page: {{ releaseFlowPage }}</p>
+        </div>
+      </UiCard>
+
+      <UiCard>
+        <template #header>Display and data surfaces</template>
+        <div class="ui-stack">
+          <div class="ui-cluster">
+            <UiAvatar initials="BV" alt="Belovodye avatar" tone="brand" />
+            <UiAvatar icon="⚙" alt="Settings avatar" tone="warning" />
+            <UiAvatarGroup :items="coreAvatarItems" :max="3" />
+          </div>
+
+          <div class="ui-cluster">
+            <UiProgress :value="64" show-value aria-label="Current rollout" />
+            <UiProgress
+              variant="circular"
+              :value="82"
+              show-value
+              status="success"
+              aria-label="Background verify"
+            />
+            <UiProgress indeterminate status="warning" aria-label="Indeterminate deploy" />
+          </div>
+
+          <UiTable
+            caption="Core wave contract proof"
+            :columns="coreTableColumns"
+            :data="coreTableData"
+            :max-height="240"
+            bordered
+            striped
+          >
+            <template #cell="{ column, row, value }">
+              <span
+                v-if="column.key === 'surface'"
+                style="display: inline-flex; align-items: center; gap: var(--ui-space-2)"
+              >
+                <UiAvatar :initials="String(row.surface).slice(2, 4)" size="sm" tone="brand" />
+                <strong>{{ value }}</strong>
+              </span>
+              <UiBadge v-else-if="column.key === 'status'" variant="success">{{ value }}</UiBadge>
+              <span v-else>{{ value }}</span>
+            </template>
+          </UiTable>
         </div>
       </UiCard>
     </section>

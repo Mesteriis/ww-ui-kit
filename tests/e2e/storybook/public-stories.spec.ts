@@ -34,6 +34,8 @@ test.beforeEach(async ({ page }) => {
 test('renders canonical public story groups', async ({ page, request }) => {
   const storyTitles = [
     'Core/System Showcase',
+    'Core/Fields',
+    'Core/Display',
     'Core/Navigation',
     'Foundations/Theme System Overview',
     'Foundations/Charts/Apex Overview',
@@ -104,10 +106,54 @@ test('runs selection and navigation interactions inside Storybook', async ({ pag
   const navigationStoryId = await getStoryId(request, 'Core/Navigation');
   await openStory(page, navigationStoryId);
 
+  const firstMenuItem = page.getByRole('menuitem', { name: 'Overview' }).first();
+  await firstMenuItem.focus();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Last menu action: ship', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: /Ship Green CI before merge/ }).click();
+  await expect(page.getByText('Current step: Ship', { exact: true })).toBeVisible();
+
   await page.getByRole('button', { name: 'Next page' }).first().click();
   await expect(page.locator('.ui-pagination__page[aria-current="page"]')).toContainText('4');
   await expect(page.getByText('Current page: 4', { exact: true })).toBeVisible();
   await expect(page.locator('.ui-breadcrumb [aria-current="page"]')).toContainText('Review');
+});
+
+test('runs rich field interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Fields');
+  await openStory(page, storyId);
+
+  const budgetInput = page.getByRole('textbox', { name: 'Budget' });
+  await budgetInput.focus();
+  await page.keyboard.press('ArrowUp');
+  await expect(page.getByText('Budget value: 13', { exact: true })).toBeVisible();
+
+  const deployLane = page.getByRole('combobox', { name: 'Deploy lane' });
+  await deployLane.click();
+  await deployLane.fill('br');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Rich select: bravo', { exact: true })).toBeVisible();
+
+  const commandSearch = page.getByRole('combobox', { name: 'Suggestion search' });
+  await commandSearch.fill('bel');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(
+    page.getByText('Autocomplete value: Belovodye control room', { exact: true })
+  ).toBeVisible();
+});
+
+test('renders display data surfaces inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Display');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('Current rollout: 64%', { exact: true })).toBeVisible();
+  await expect(page.getByText('Core second-wave coverage', { exact: true })).toBeVisible();
+  await expect(page.getByRole('table')).toBeVisible();
 });
 
 test('renders dashboard-like and marketing-like layout stories inside Storybook', async ({
@@ -135,6 +181,7 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
     { title: 'Core/Buttons' },
     { title: 'Core/Buttons', globals: 'theme:belovodye' },
     { title: 'Core/Fields' },
+    { title: 'Core/Display' },
     { title: 'Core/Selection' },
     { title: 'Core/Feedback' },
     { title: 'Core/Navigation' },

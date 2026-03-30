@@ -13,7 +13,7 @@ withDefaults(
 <template>
   <section class="ui-layout-section">
     <div v-if="title || description" class="ui-layout-section__header">
-      <h3 v-if="title" class="ui-layout-section__title">{{ title }}</h3>
+      <h2 v-if="title" class="ui-layout-section__title">{{ title }}</h2>
       <p v-if="description" class="ui-layout-section__description">{{ description }}</p>
     </div>
     <div class="ui-layout-section__body">

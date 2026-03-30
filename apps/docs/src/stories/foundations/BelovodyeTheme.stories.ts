@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import {
   UiAlert,
+  UiAutocomplete,
+  UiAvatar,
+  UiAvatarGroup,
   UiBadge,
   UiBreadcrumb,
   UiButton,
@@ -10,19 +13,25 @@ import {
   UiCheckbox,
   UiCollapse,
   UiCollapsePanel,
-  UiDropdown,
   UiDialog,
   UiDrawer,
+  UiDropdown,
   UiEmptyState,
   UiField,
   UiIconButton,
   UiInput,
+  UiMenu,
+  UiNumberInput,
   UiPagination,
   UiPopover,
+  UiProgress,
   UiRadio,
   UiRadioGroup,
+  UiSelect,
   UiSelectSimple,
   UiSwitch,
+  UiSteps,
+  UiTable,
   UiTag,
   UiTabsList,
   UiTabsPanel,
@@ -45,6 +54,9 @@ export const SystemShowcase: StoryObj = {
   render: () => ({
     components: {
       UiAlert,
+      UiAutocomplete,
+      UiAvatar,
+      UiAvatarGroup,
       UiBadge,
       UiBreadcrumb,
       UiButton,
@@ -52,19 +64,25 @@ export const SystemShowcase: StoryObj = {
       UiCheckbox,
       UiCollapse,
       UiCollapsePanel,
-      UiDropdown,
       UiDialog,
       UiDrawer,
+      UiDropdown,
       UiEmptyState,
       UiField,
       UiIconButton,
       UiInput,
+      UiMenu,
+      UiNumberInput,
       UiPagination,
       UiPopover,
+      UiProgress,
       UiRadio,
       UiRadioGroup,
+      UiSelect,
       UiSelectSimple,
       UiSwitch,
+      UiSteps,
+      UiTable,
       UiTag,
       UiTabsList,
       UiTabsPanel,
@@ -80,6 +98,9 @@ export const SystemShowcase: StoryObj = {
         'Cold light surfaces, calm contrast, and restrained river-blue accents.'
       );
       const selectValue = ref('dashboard');
+      const richSelectValue = ref<string | null>('bravo');
+      const autocompleteValue = ref('');
+      const numberValue = ref<number | null>(6.5);
       const checkboxValue = ref(true);
       const switchValue = ref(true);
       const stageValue = ref('review');
@@ -88,6 +109,8 @@ export const SystemShowcase: StoryObj = {
       const drawerOpen = ref(false);
       const popoverOpen = ref(false);
       const currentPage = ref(2);
+      const currentStep = ref(1);
+      const selectedMenuKeys = ref(['review']);
       const lastDropdownAction = ref('Review queue');
       const toastRef = ref<{
         push: (payload: {
@@ -97,12 +120,14 @@ export const SystemShowcase: StoryObj = {
         }) => string;
       } | null>(null);
       const belovodyeTheme = getThemeMeta('belovodye');
+
       const breadcrumbItems = [
         { label: 'Belovodye', href: '#theme' },
         { label: 'Core', href: '#core' },
-        { label: 'Wave one', href: '#wave-one' },
+        { label: 'Wave two', href: '#wave-two' },
         { label: 'Review', current: true },
       ];
+
       const dropdownItems = [
         { label: 'Review queue', value: 'review' },
         { label: 'Promote release', value: 'promote' },
@@ -123,6 +148,62 @@ export const SystemShowcase: StoryObj = {
         { label: 'Ops console', value: 'ops' },
       ];
 
+      const richOptions = [
+        { label: 'Overview queue', value: 'overview', icon: '⌘' },
+        {
+          type: 'group' as const,
+          label: 'Deploy lanes',
+          options: [
+            { label: 'Bravo lane', value: 'bravo', icon: 'B' },
+            { label: 'Charlie lane', value: 'charlie', disabled: true, icon: 'C' },
+          ],
+        },
+      ];
+
+      const autocompleteItems = [
+        { label: 'Belovodye control room', value: 'Belovodye control room' },
+        { label: 'Core wave verify', value: 'Core wave verify' },
+        { label: 'Bravo deploy lane', value: 'Bravo deploy lane' },
+      ];
+
+      const avatarItems = [
+        { initials: 'BV', alt: 'Belovodye', tone: 'brand' as const },
+        { initials: 'QA', alt: 'Quality gate', tone: 'success' as const },
+        { initials: 'DX', alt: 'Developer experience', tone: 'info' as const },
+      ];
+
+      const menuItems = [
+        { label: 'Overview', key: 'overview', value: 'overview' },
+        {
+          type: 'group' as const,
+          label: 'Deploy',
+          items: [
+            { label: 'Review', key: 'review', value: 'review', icon: '⌘' },
+            { label: 'Ship', key: 'ship', value: 'ship' },
+          ],
+        },
+      ];
+
+      const steps = [
+        { title: 'Design', description: 'Shape the shared contract' },
+        { title: 'Review', description: 'Keep the proof surfaces aligned' },
+        { title: 'Ship', description: 'Green CI before merge' },
+      ];
+
+      const tableColumns = [
+        { key: 'surface', header: 'Surface' },
+        { key: 'status', header: 'Status', align: 'center' as const },
+        { key: 'proof', header: 'Proof' },
+      ];
+
+      const tableData = [
+        { surface: 'UiAvatar', status: 'Theme-aware', proof: 'Fallback + tone tokens' },
+        { surface: 'UiSelect', status: 'Theme-aware', proof: 'Shared floating surface' },
+        { surface: 'UiProgress', status: 'Theme-aware', proof: 'Linear and circular tracks' },
+      ];
+
+      const currentStepLabel = computed(() => steps[currentStep.value]?.title ?? 'Unknown');
+
       const onSelect = (payload: { label: string }) => {
         lastDropdownAction.value = payload.label;
       };
@@ -136,23 +217,36 @@ export const SystemShowcase: StoryObj = {
       };
 
       return {
-        checkboxValue,
+        autocompleteItems,
+        autocompleteValue,
+        avatarItems,
+        belovodyeTheme,
         breadcrumbItems,
-        dialogOpen,
+        checkboxValue,
         currentPage,
+        currentStep,
+        currentStepLabel,
+        dialogOpen,
         dropdownItems,
         drawerOpen,
-        belovodyeTheme,
         inputValue,
         lastDropdownAction,
+        menuItems,
+        numberValue,
         onSelect,
         options,
         popoverOpen,
         pushToast,
+        richOptions,
+        richSelectValue,
         selectValue,
+        selectedMenuKeys,
         stageValue,
+        steps,
         switchValue,
         tabValue,
+        tableColumns,
+        tableData,
         toastRef,
         textareaValue,
       };
@@ -178,6 +272,7 @@ export const SystemShowcase: StoryObj = {
               <UiBadge variant="brand">{{ belovodyeTheme.label }}</UiBadge>
               <UiBadge>{{ belovodyeTheme.type }} family</UiBadge>
             </div>
+
             <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap; align-items: center;">
               <UiButton>Primary action</UiButton>
               <UiButton variant="secondary">Secondary</UiButton>
@@ -197,6 +292,21 @@ export const SystemShowcase: StoryObj = {
               </UiField>
               <UiField label="Description" error="State styling review">
                 <UiTextarea v-model="textareaValue" />
+              </UiField>
+              <UiField label="Budget">
+                <UiNumberInput v-model="numberValue" :min="0" :max="12" :step="0.5" :precision="1" />
+              </UiField>
+              <UiField label="Deploy lane">
+                <UiSelect
+                  v-model="richSelectValue"
+                  searchable
+                  clearable
+                  placeholder="Pick a lane"
+                  :options="richOptions"
+                />
+              </UiField>
+              <UiField label="Command search">
+                <UiAutocomplete v-model="autocompleteValue" :items="autocompleteItems" />
               </UiField>
             </div>
 
@@ -223,6 +333,11 @@ export const SystemShowcase: StoryObj = {
               <UiBadge variant="danger">Danger</UiBadge>
             </div>
             <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
+              <UiAvatar initials="BV" alt="Belovodye avatar" tone="brand" />
+              <UiAvatar icon="⚙" alt="Settings avatar" tone="warning" />
+              <UiAvatarGroup :items="avatarItems" :max="2" />
+            </div>
+            <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
               <UiTag variant="brand">Pinned</UiTag>
               <UiTag variant="success" appearance="outline">Healthy</UiTag>
               <UiTag variant="warning" closable>Review later</UiTag>
@@ -232,7 +347,27 @@ export const SystemShowcase: StoryObj = {
 
         <div style="display: grid; gap: var(--ui-space-6); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));">
           <UiCard>
-            <template #header>Tabs and display</template>
+            <template #header>Steps, menus, and display</template>
+            <div class="ui-stack">
+              <UiMenu v-model:selected-keys="selectedMenuKeys" :items="menuItems" aria-label="Belovodye menu" />
+              <UiSteps v-model="currentStep" :items="steps" clickable linear aria-label="Belovodye release steps" />
+              <p style="margin: 0;">Current step: {{ currentStepLabel }}</p>
+              <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
+                <UiProgress :value="64" show-value />
+                <UiProgress variant="circular" :value="82" show-value status="success" />
+              </div>
+              <UiTable caption="Belovodye review matrix" :columns="tableColumns" :data="tableData" bordered>
+                <template #cell="{ column, value }">
+                  <strong v-if="column.key === 'surface'">{{ value }}</strong>
+                  <UiBadge v-else-if="column.key === 'status'" variant="brand">{{ value }}</UiBadge>
+                  <span v-else>{{ value }}</span>
+                </template>
+              </UiTable>
+            </div>
+          </UiCard>
+
+          <UiCard>
+            <template #header>Tabs, disclosure, and overlays</template>
             <UiTabsRoot v-model="tabValue">
               <UiTabsList>
                 <UiTabsTrigger value="controls">Controls</UiTabsTrigger>
@@ -240,7 +375,7 @@ export const SystemShowcase: StoryObj = {
                 <UiTabsTrigger value="empty">Empty state</UiTabsTrigger>
               </UiTabsList>
               <UiTabsPanel value="controls">
-                Buttons, inputs, badges, and tabs share the same cold-neutral contrast system.
+                Buttons, inputs, badges, menus, and steps share the same cold-neutral contrast system.
               </UiTabsPanel>
               <UiTabsPanel value="overlay">
                 Dialog and drawer surfaces inherit Belovodye through the theme-aware portal stack.
@@ -257,23 +392,21 @@ export const SystemShowcase: StoryObj = {
                 Tooltip, popover, dropdown, dialog, drawer, and toast all inherit the subtree theme.
               </UiCollapsePanel>
             </UiCollapse>
+            <UiAlert
+              type="warning"
+              title="Scoped proof remains synchronized"
+              description="The same surface contract stays visible under a subtree theme."
+            >
+              <template #action>
+                <UiButton size="sm" variant="secondary">Review proof</UiButton>
+              </template>
+            </UiAlert>
           </UiCard>
-
-          <UiEmptyState
-            title="Belovodye empty state"
-            description="This baseline presentation stays calm, light, and readable across dashboard and landing contexts."
-          >
-            <template #icon>◇</template>
-            <template #actions>
-              <UiButton variant="secondary">Learn more</UiButton>
-              <UiButton @click="dialogOpen = true">Open dialog</UiButton>
-            </template>
-          </UiEmptyState>
         </div>
 
         <UiCard>
-          <template #header>Navigation and overlay review</template>
-          <div style="display: grid; gap: var(--ui-space-4);">
+          <template #header>Navigation and floating surfaces</template>
+          <div class="ui-stack">
             <UiBreadcrumb :items="breadcrumbItems" :max-items="4" />
             <UiPagination
               v-model="currentPage"
@@ -281,66 +414,75 @@ export const SystemShowcase: StoryObj = {
               :page-size="12"
               :sibling-count="1"
               :boundary-count="1"
+              aria-label="Belovodye release pages"
             />
-            <UiAlert
-              type="warning"
-              title="Belovodye review notice"
-              description="Alerts, tags, navigation, and overlays stay inside the same themed baseline."
+            <p style="margin: 0;">Current page: {{ currentPage }}</p>
+            <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
+              <UiTooltip content="Belovodye tooltip surface">
+                <UiButton variant="secondary">Hover for tooltip</UiButton>
+              </UiTooltip>
+
+              <UiPopover v-model:open="popoverOpen" width="trigger">
+                <template #trigger>
+                  <UiButton>Open popover</UiButton>
+                </template>
+                <div class="ui-stack" style="max-width: 16rem;">
+                  <p style="margin: 0;">Scoped overlay surfaces inherit Belovodye tokens.</p>
+                  <UiButton size="sm" variant="secondary" @click="popoverOpen = false">
+                    Close popover
+                  </UiButton>
+                </div>
+              </UiPopover>
+
+              <UiDropdown :items="dropdownItems" @select="onSelect">
+                <template #trigger>
+                  <UiButton variant="secondary">Open action menu</UiButton>
+                </template>
+              </UiDropdown>
+
+              <UiButton variant="secondary" @click="dialogOpen = true">Open dialog</UiButton>
+              <UiButton variant="ghost" @click="drawerOpen = true">Open drawer</UiButton>
+              <UiButton variant="secondary" @click="pushToast">Show toast</UiButton>
+            </div>
+
+            <p style="margin: 0;">Last dropdown action: {{ lastDropdownAction }}</p>
+
+            <UiDialog
+              v-model:open="dialogOpen"
+              title="Belovodye dialog"
+              description="Modal surfaces inherit the scoped theme without a second provider."
             >
-              <template #action>
-                <UiButton size="sm" variant="secondary">Review queue</UiButton>
+              <p style="margin: 0;">Dialog content keeps the same cold-neutral palette.</p>
+              <template #footer>
+                <UiButton variant="secondary" @click="dialogOpen = false">Cancel</UiButton>
+                <UiButton @click="dialogOpen = false">Confirm</UiButton>
               </template>
-            </UiAlert>
+            </UiDialog>
+
+            <UiDrawer
+              v-model:open="drawerOpen"
+              title="Belovodye drawer"
+              description="Drawer surfaces stay inside the same overlay ownership path."
+            >
+              <div class="ui-stack">
+                <p style="margin: 0;">Drawer content stays aligned with the subtree theme.</p>
+                <UiButton variant="secondary" @click="drawerOpen = false">Close drawer</UiButton>
+              </div>
+            </UiDrawer>
+
+            <UiEmptyState
+              title="Belovodye baseline"
+              description="Theme-aware proof still avoids product-specific orchestration."
+            >
+              <template #icon>◇</template>
+              <template #actions>
+                <UiButton variant="secondary">Read theme ADR</UiButton>
+              </template>
+            </UiEmptyState>
+
+            <UiToast ref="toastRef" />
           </div>
-          <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap; margin-top: var(--ui-space-4);">
-            <UiTooltip content="Tooltip portals stay inside the themed subtree.">
-              <UiButton variant="secondary">Hover tooltip</UiButton>
-            </UiTooltip>
-            <UiPopover v-model:open="popoverOpen" width="trigger">
-              <template #trigger>
-                <UiButton variant="secondary">Open Belovodye popover</UiButton>
-              </template>
-              <p style="margin: 0; max-width: 16rem;">
-                Floating surfaces keep the same cool, premium light tone.
-              </p>
-            </UiPopover>
-            <UiDropdown :items="dropdownItems" @select="onSelect">
-              <template #trigger>
-                <UiButton variant="secondary">Open action menu</UiButton>
-              </template>
-            </UiDropdown>
-            <UiButton @click="dialogOpen = true">Open Belovodye dialog</UiButton>
-            <UiButton variant="secondary" @click="drawerOpen = true">Open Belovodye drawer</UiButton>
-            <UiButton variant="ghost" @click="pushToast">Show Belovodye toast</UiButton>
-          </div>
-          <p style="margin: var(--ui-space-3) 0 0;">Last dropdown action: {{ lastDropdownAction }}</p>
         </UiCard>
-
-        <UiToast ref="toastRef" />
-
-        <UiDialog
-          v-model:open="dialogOpen"
-          title="Belovodye dialog"
-          description="Overlay surfaces keep the same cool, premium light tone."
-        >
-          <p style="margin: 0;">Dialog border, surface, text, and focus states inherit the Belovodye subtree theme.</p>
-          <template #footer>
-            <UiButton variant="secondary" @click="dialogOpen = false">Cancel</UiButton>
-            <UiButton @click="dialogOpen = false">Confirm</UiButton>
-          </template>
-        </UiDialog>
-
-        <UiDrawer
-          v-model:open="drawerOpen"
-          title="Belovodye drawer"
-          description="Drawer surfaces stay aligned with the same surface and border language."
-          side="right"
-        >
-          <div style="display: grid; gap: var(--ui-space-4);">
-            <p style="margin: 0;">This drawer inherits the same subtree theme through the shared portal resolution.</p>
-            <UiBadge variant="brand">Scoped overlay</UiBadge>
-          </div>
-        </UiDrawer>
       </section>
     `,
   }),

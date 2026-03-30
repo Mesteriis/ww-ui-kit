@@ -59,3 +59,184 @@
   color: var(--ui-text-muted);
   pointer-events: none;
 }
+
+.ui-number-input {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  inline-size: 100%;
+}
+
+.ui-number-input__control {
+  text-align: center;
+  border-radius: 0;
+}
+
+.ui-number-input__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.5rem;
+  border: 1px solid var(--ui-input-border);
+  background: var(--ui-surface-default);
+  color: var(--ui-text-primary);
+  cursor: pointer;
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-number-input__button:first-child {
+  border-radius: var(--ui-input-radius) 0 0 var(--ui-input-radius);
+}
+
+.ui-number-input__button:last-child {
+  border-radius: 0 var(--ui-input-radius) var(--ui-input-radius) 0;
+}
+
+.ui-number-input__button:hover:not(:disabled) {
+  background: var(--ui-surface-sunken);
+}
+
+.ui-number-input__button:focus-visible {
+  outline: 2px solid var(--ui-input-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-number-input__button:disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-number-input--sm .ui-number-input__button {
+  min-inline-size: 2rem;
+}
+
+.ui-number-input--lg .ui-number-input__button {
+  min-inline-size: 2.875rem;
+}
+
+.ui-rich-select {
+  inline-size: 100%;
+}
+
+.ui-rich-select__control {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  min-inline-size: 0;
+  cursor: pointer;
+}
+
+.ui-rich-select__control.is-disabled {
+  cursor: not-allowed;
+}
+
+.ui-rich-select__selected {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  flex: 1;
+  min-inline-size: 0;
+  flex-wrap: wrap;
+}
+
+.ui-rich-select__input {
+  flex: 1;
+  min-inline-size: 4rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.ui-rich-select__input:focus {
+  outline: none;
+}
+
+.ui-rich-select__value,
+.ui-rich-select__placeholder {
+  min-inline-size: 0;
+}
+
+.ui-rich-select__placeholder {
+  color: var(--ui-input-placeholder);
+}
+
+.ui-rich-select__clear {
+  border: 0;
+  background: transparent;
+  color: var(--ui-text-muted);
+  cursor: pointer;
+}
+
+.ui-rich-select__caret {
+  color: var(--ui-text-muted);
+}
+
+.ui-rich-select__dropdown,
+.ui-autocomplete__dropdown {
+  display: grid;
+  gap: var(--ui-space-1);
+  padding: var(--ui-space-2);
+}
+
+.ui-rich-select__group-label {
+  padding-inline: var(--ui-space-2);
+  padding-block: var(--ui-space-1);
+  color: var(--ui-text-muted);
+  font-size: var(--ui-text-font-size-sm);
+  text-transform: var(--ui-text-transform-label);
+  letter-spacing: var(--ui-text-letter-spacing-label);
+}
+
+.ui-rich-select__option,
+.ui-autocomplete__option {
+  display: grid;
+  gap: var(--ui-space-1);
+  inline-size: 100%;
+  padding: var(--ui-space-2) var(--ui-space-3);
+  border: 0;
+  border-radius: var(--ui-radius-md);
+  background: transparent;
+  color: var(--ui-text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-rich-select__option:hover:not(:disabled),
+.ui-rich-select__option.is-active,
+.ui-autocomplete__option:hover:not(:disabled),
+.ui-autocomplete__option.is-active {
+  background: var(--ui-surface-sunken);
+}
+
+.ui-rich-select__option.is-selected {
+  color: var(--ui-border-focus);
+}
+
+.ui-rich-select__option:disabled,
+.ui-autocomplete__option:disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-rich-select__option:focus-visible,
+.ui-autocomplete__option:focus-visible,
+.ui-rich-select__clear:focus-visible {
+  outline: 2px solid var(--ui-input-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-rich-select__empty,
+.ui-autocomplete__state {
+  padding: var(--ui-space-3);
+  color: var(--ui-text-secondary);
+}
+
+.ui-autocomplete__option-description {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}

@@ -24,53 +24,22 @@ import {
   useTriggerElement,
 } from './floating-utils';
 import { useFloatingSurface } from './useFloatingSurface';
+import {
+  findMenuTypeaheadMatch,
+  flattenMenuItems,
+  normalizeMenuItems,
+  type NormalizedUiMenuEntry,
+  type UiMenuItem,
+  type UiMenuValue,
+} from '../navigation/menu-model';
 
 defineOptions({ name: 'UiDropdown' });
-
-type DropdownItemValue = string | number;
-
-type DropdownItem =
-  | {
-      type?: 'item';
-      label: string;
-      value: DropdownItemValue;
-      icon?: string;
-      disabled?: boolean;
-    }
-  | {
-      type: 'divider';
-    }
-  | {
-      type: 'group';
-      label: string;
-      items: DropdownItem[];
-    };
-
-type NormalizedDropdownEntry =
-  | {
-      kind: 'item';
-      id: string;
-      label: string;
-      value: DropdownItemValue;
-      icon?: string;
-      disabled: boolean;
-    }
-  | {
-      kind: 'divider';
-      id: string;
-    }
-  | {
-      kind: 'group';
-      id: string;
-      label: string;
-      items: NormalizedDropdownEntry[];
-    };
 
 const props = withDefaults(
   defineProps<{
     open?: boolean;
     defaultOpen?: boolean;
-    items: DropdownItem[];
+    items: UiMenuItem[];
     placement?: FloatingPlacement;
     trigger?: 'click' | 'hover' | 'manual';
     delay?: number | { show?: number; hide?: number };
@@ -93,58 +62,15 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   'update:open': [value: boolean];
-  select: [payload: { value: DropdownItemValue; label: string }];
+  select: [payload: { value: UiMenuValue | string; label: string }];
 }>();
-
-function normalizeItems(items: DropdownItem[], path = 'item'): NormalizedDropdownEntry[] {
-  return items.map((item, index) => {
-    const id = `${path}-${index}`;
-
-    if (item.type === 'divider') {
-      return {
-        kind: 'divider',
-        id,
-      };
-    }
-
-    if (item.type === 'group') {
-      return {
-        kind: 'group',
-        id,
-        label: item.label,
-        items: normalizeItems(item.items, `${id}-group`),
-      };
-    }
-
-    return {
-      kind: 'item',
-      id,
-      label: item.label,
-      value: item.value,
-      disabled: Boolean(item.disabled),
-      ...(item.icon ? { icon: item.icon } : {}),
-    };
-  });
-}
-
-function flattenItems(
-  items: NormalizedDropdownEntry[]
-): Array<Extract<NormalizedDropdownEntry, { kind: 'item' }>> {
-  return items.flatMap((item) => {
-    if (item.kind === 'group') {
-      return flattenItems(item.items);
-    }
-
-    return item.kind === 'item' ? [item] : [];
-  });
-}
 
 const fallbackId = useId('dropdown');
 const instance = getCurrentInstance();
 const menuId = computed(() => props.id ?? fallbackId.value);
 const delay = computed(() => normalizeDelayConfig(props.delay, { show: 80, hide: 100 }));
-const normalizedItems = computed(() => normalizeItems(props.items));
-const flatItems = computed(() => flattenItems(normalizedItems.value));
+const normalizedItems = computed(() => normalizeMenuItems(props.items));
+const flatItems = computed(() => flattenMenuItems(normalizedItems.value));
 const flatItemMap = computed(() => new Map(flatItems.value.map((item) => [item.id, item])));
 const { triggerRef, wrapperRef } = useTriggerElement();
 const surfaceRef = ref<HTMLElement | null>(null);
@@ -389,7 +315,7 @@ const onItemFocus = (id: string) => {
   roving.setCurrentId(id);
 };
 
-const selectItem = (item: Extract<NormalizedDropdownEntry, { kind: 'item' }>) => {
+const selectItem = (item: Extract<NormalizedUiMenuEntry, { kind: 'item' }>) => {
   if (item.disabled) {
     return;
   }
@@ -434,22 +360,11 @@ const onMenuKeydown = async (event: KeyboardEvent) => {
     typeaheadBuffer.value = '';
   }, 500);
 
-  const enabledItems = flatItems.value.filter((item) => !item.disabled);
-  if (enabledItems.length === 0) {
-    return;
-  }
-
-  const currentIndex = enabledItems.findIndex((item) => item.id === roving.currentId.value);
-  const orderedItems = [
-    ...enabledItems.slice(Math.max(currentIndex, 0) + 1),
-    ...enabledItems.slice(0, Math.max(currentIndex, 0) + 1),
-  ];
-  const matchedItem =
-    orderedItems.find((item) =>
-      item.label.trim().toLowerCase().startsWith(typeaheadBuffer.value)
-    ) ??
-    /* istanbul ignore next -- orderedItems already contains the full enabled item set, including wrap-around. */
-    enabledItems.find((item) => item.label.trim().toLowerCase().startsWith(typeaheadBuffer.value));
+  const matchedItem = findMenuTypeaheadMatch(
+    flatItems.value,
+    typeaheadBuffer.value,
+    roving.currentId.value
+  );
 
   if (matchedItem) {
     await focusItem(matchedItem.id);

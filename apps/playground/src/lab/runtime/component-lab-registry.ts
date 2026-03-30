@@ -4,6 +4,7 @@ import dataTableWidget from '../schemas/data-table-widget.lab';
 import uiApexChart from '../schemas/ui-apex-chart.lab';
 import uiAlert from '../schemas/ui-alert.lab';
 import uiBadge from '../schemas/ui-badge.lab';
+import uiAvatar from '../schemas/ui-avatar.lab';
 import uiButton from '../schemas/ui-button.lab';
 import uiCard from '../schemas/ui-card.lab';
 import uiCheckbox from '../schemas/ui-checkbox.lab';
@@ -15,7 +16,10 @@ import uiEmptyState from '../schemas/ui-empty-state.lab';
 import uiIconButton from '../schemas/ui-icon-button.lab';
 import uiInput from '../schemas/ui-input.lab';
 import uiLayout from '../schemas/ui-layout.lab';
+import uiNumberInput from '../schemas/ui-number-input.lab';
 import uiPopover from '../schemas/ui-popover.lab';
+import uiProgress from '../schemas/ui-progress.lab';
+import uiSelect from '../schemas/ui-select.lab';
 import uiSelectSimple from '../schemas/ui-select-simple.lab';
 import uiSignalGraph from '../schemas/ui-signal-graph.lab';
 import uiSwitch from '../schemas/ui-switch.lab';
@@ -31,12 +35,16 @@ const definitions = [
   uiInput,
   uiTextarea,
   uiSelectSimple,
+  uiNumberInput,
+  uiSelect,
   uiCheckbox,
   uiSwitch,
   uiAlert,
   uiBadge,
+  uiAvatar,
   uiCard,
   uiTag,
+  uiProgress,
   uiEmptyState,
   uiDialog,
   uiTooltip,

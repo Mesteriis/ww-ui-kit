@@ -52,8 +52,11 @@
   .ui-button__spinner,
   .ui-spinner,
   .ui-skeleton::after,
-  .ui-skeleton {
+  .ui-skeleton,
+  .ui-progress__linear-indicator,
+  .ui-progress__circular-indicator {
     animation: none !important;
     transform: none !important;
+    transition: none !important;
   }
 }

@@ -113,10 +113,43 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await coreWave.getByRole('button', { name: 'Critical' }).click();
   await expect(coreWave.getByText('Active filter: Critical', { exact: true })).toBeVisible();
 
+  const budgetInput = coreWave.getByRole('textbox', { name: 'Budget' });
+  await budgetInput.focus();
+  await page.keyboard.press('ArrowUp');
+  await expect(coreWave.getByText('Budget value: 13', { exact: true })).toBeVisible();
+
+  const deployLane = coreWave.getByRole('combobox', { name: 'Deploy lane' });
+  await deployLane.click();
+  await deployLane.fill('br');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(coreWave.getByText('Selected lane: bravo', { exact: true })).toBeVisible();
+
+  const commandSearch = coreWave.getByRole('combobox', { name: 'Command search' });
+  await commandSearch.fill('bel');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(
+    coreWave.getByText('Autocomplete selection: Belovodye control room', { exact: true })
+  ).toBeVisible();
+
+  const firstMenuItem = coreWave.getByRole('menuitem', { name: 'Overview' }).first();
+  await firstMenuItem.focus();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect(coreWave.getByText('Menu selection: ship', { exact: true })).toBeVisible();
+
+  await coreWave.getByRole('button', { name: /Ship Green verify before merge/ }).click();
+  await expect(coreWave.getByText('Current step: Ship', { exact: true })).toBeVisible();
+
   await coreWave.getByRole('button', { name: 'Next page' }).first().click();
   await expect(coreWave.locator('.ui-pagination__page[aria-current="page"]')).toContainText('3');
   await expect(coreWave.getByText('Current page: 3', { exact: true })).toBeVisible();
   await expect(coreWave.locator('[aria-current="page"]').first()).toContainText('Approve');
+
+  await expect(coreWave.getByText('Core wave contract proof', { exact: true })).toBeVisible();
+  await expect(coreWave.getByRole('table')).toBeVisible();
 });
 
 test('keeps overlay close and focus restoration stable under reduced motion', async ({ page }) => {
@@ -208,6 +241,7 @@ test('keeps key playground flows free of browser-level accessibility violations'
 }) => {
   await page.goto('/playground/testing');
 
+  await expectNoAxeViolations(page, { include: '#testing-core-wave' });
   await expectNoAxeViolations(page, { include: '#testing-data-grid-basic' });
 
   await page.getByRole('button', { name: 'Open dialog' }).click();
@@ -238,6 +272,10 @@ test('loads the component lab, switches surfaces, and keeps usage metadata visib
   await page.locator('[data-lab-nav-item="ui-input"]').click();
   await expect(page).toHaveURL(/\/playground\/lab\/ui-input$/);
   await expect(page.getByRole('heading', { name: 'UiInput' })).toBeVisible();
+
+  await page.locator('[data-lab-nav-item="ui-number-input"]').click();
+  await expect(page).toHaveURL(/\/playground\/lab\/ui-number-input$/);
+  await expect(page.getByRole('heading', { name: 'UiNumberInput' })).toBeVisible();
 });
 
 test('copies the current lab configuration and confirms clipboard feedback', async ({
