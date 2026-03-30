@@ -10,7 +10,7 @@ const config: StorybookConfig = {
     options: {},
   },
   stories: ['../src/**/*.stories.ts'],
-  viteFinal: async (baseConfig) =>
+  viteFinal: (baseConfig) =>
     mergeConfig(baseConfig, {
       build: {
         chunkSizeWarningLimit: STORYBOOK_CHUNK_WARNING_LIMIT,

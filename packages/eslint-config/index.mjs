@@ -17,6 +17,7 @@ export function createConfig() {
         '**/.idea/**',
         'vitest.config.ts',
         'vite.aliases.ts',
+        'vite.chunking.ts',
         '**/vite.config.ts',
         '**/vitest.config.ts',
       ],
