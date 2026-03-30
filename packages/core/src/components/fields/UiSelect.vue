@@ -317,12 +317,11 @@ const onControlKeydown = async (event: KeyboardEvent) => {
   if (event.key === 'ArrowUp') {
     event.preventDefault();
     await openDropdown();
-    const currentIndex = filteredOptions.value.findIndex((option) => option.id === activeId.value);
-    const candidates =
-      currentIndex < 0
-        ? filteredOptions.value.slice()
-        : filteredOptions.value.slice(0, currentIndex);
-    const nextOption = candidates.reverse().find((option) => !option.disabled);
+    const reversedOptions = filteredOptions.value.slice().reverse();
+    const currentReverseIndex = reversedOptions.findIndex((option) => option.id === activeId.value);
+    const nextOption = reversedOptions
+      .slice(Math.max(0, currentReverseIndex + 1))
+      .find((option) => !option.disabled);
     activeId.value = nextOption?.id ?? activeId.value;
     return;
   }
@@ -382,10 +381,8 @@ const onControlKeydown = async (event: KeyboardEvent) => {
 };
 
 onBeforeUnmount(() => {
-  if (typeaheadTimer !== null) {
-    window.clearTimeout(typeaheadTimer);
-    typeaheadTimer = null;
-  }
+  window.clearTimeout(typeaheadTimer ?? undefined);
+  typeaheadTimer = null;
 });
 
 const displayInputValue = computed(() => {

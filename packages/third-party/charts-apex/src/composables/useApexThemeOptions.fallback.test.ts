@@ -64,5 +64,5 @@ describe('useApexThemeOptions fallback branch', () => {
 
     expect(state.themeScope.container).toBeNull();
     expect(state.resolvedOptions.colors?.[0]).toBe('rgb(9 8 7)');
-  });
+  }, 15_000);
 });

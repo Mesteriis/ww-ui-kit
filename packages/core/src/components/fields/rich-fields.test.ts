@@ -433,6 +433,8 @@ describe('rich field controls', () => {
     await flushFloating();
     await typeaheadControl.trigger('keydown', { key: 'c' });
     expect(typeaheadControl.attributes('aria-activedescendant')).toContain('option-2');
+    await typeaheadControl.trigger('keydown', { key: 'z' });
+    expect(typeaheadControl.attributes('aria-activedescendant')).toContain('option-2');
     vi.advanceTimersByTime(500);
     await typeaheadControl.trigger('keydown', { key: 'Enter' });
     expect((singleTypeahead.vm as { value: string | number | null }).value).toBe('charlie');
@@ -537,6 +539,13 @@ describe('rich field controls', () => {
     await disabled.get('.ui-rich-select__control').trigger('click');
     await disabled.get('.ui-rich-select__control').trigger('keydown', { key: 'ArrowDown' });
     expect(disabled.emitted('open')).toBeUndefined();
+
+    const idleSelect = mount(UiSelect, {
+      props: {
+        options: [{ label: 'Alpha', value: 'alpha' }],
+      },
+    });
+    idleSelect.unmount();
 
     const defaultEmpty = mount(UiSelect, {
       attachTo: document.body,
@@ -686,6 +695,9 @@ describe('rich field controls', () => {
 
     await input.trigger('keydown', { key: 'ArrowDown' });
     await input.trigger('keydown', { key: 'ArrowUp' });
+    expect(input.attributes('aria-activedescendant')).toContain('option-0');
+    await input.trigger('keydown', { key: 'ArrowUp' });
+    expect(input.attributes('aria-activedescendant')).toContain('option-0');
     await input.trigger('keydown', { key: 'Home' });
     expect(input.attributes('aria-activedescendant')).toContain('option-0');
     await input.trigger('keydown', { key: 'End' });
@@ -725,10 +737,14 @@ describe('rich field controls', () => {
     await flushFloating();
     await searchableInput.trigger('keydown', { key: 'b' });
     expect(searchableInput.attributes('aria-activedescendant')).toContain('option-1');
+    await searchableInput.trigger('keydown', { key: 'z' });
+    expect(searchableInput.attributes('aria-activedescendant')).toContain('option-1');
     vi.advanceTimersByTime(500);
     await searchableInput.trigger('keydown', { key: 'Enter' });
     expect((searchableAutocomplete.vm as { value: string }).value).toBe('bravo');
-    expect(searchableAutocomplete.findComponent(UiAutocomplete).emitted('select')?.at(-1)?.[0]).toEqual({
+    expect(
+      searchableAutocomplete.findComponent(UiAutocomplete).emitted('select')?.at(-1)?.[0]
+    ).toEqual({
       item: {
         label: 'Bravo',
         value: 'bravo',
@@ -760,7 +776,8 @@ describe('rich field controls', () => {
     await cleanupInput.trigger('focus');
     await flushFloating();
     await cleanupInput.trigger('keydown', { key: 'b' });
-    const autocompleteTypeaheadTimer = autocompleteSetTimeoutSpy.mock.results.at(-1)?.value as number;
+    const autocompleteTypeaheadTimer = autocompleteSetTimeoutSpy.mock.results.at(-1)
+      ?.value as number;
     cleanupAutocomplete.unmount();
     expect(autocompleteClearTimeoutSpy).toHaveBeenCalledWith(autocompleteTypeaheadTimer);
     autocompleteSetTimeoutSpy.mockRestore();

@@ -171,12 +171,11 @@ const onKeydown = (event: KeyboardEvent) => {
   if (event.key === 'ArrowUp') {
     event.preventDefault();
     open.value = true;
-    const currentIndex = filteredItems.value.findIndex((item) => item.id === activeId.value);
-    const candidates =
-      currentIndex < 0
-        ? filteredItems.value.slice()
-        : filteredItems.value.slice(0, currentIndex);
-    const previousItem = candidates.reverse().find((item) => !item.disabled);
+    const reversedItems = filteredItems.value.slice().reverse();
+    const currentReverseIndex = reversedItems.findIndex((item) => item.id === activeId.value);
+    const previousItem = reversedItems
+      .slice(Math.max(0, currentReverseIndex + 1))
+      .find((item) => !item.disabled);
     activeId.value = previousItem?.id ?? activeId.value;
     return;
   }
