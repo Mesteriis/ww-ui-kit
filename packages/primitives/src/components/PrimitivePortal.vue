@@ -21,11 +21,11 @@ onMounted(() => {
 });
 
 const canTeleport = computed(() => isMounted.value && !props.disabled && Boolean(props.to));
+const teleportTarget = computed(() => props.to ?? 'body');
 </script>
 
 <template>
-  <Teleport v-if="canTeleport" :to="props.to">
+  <Teleport :to="teleportTarget" :disabled="!canTeleport">
     <slot />
   </Teleport>
-  <slot v-else />
 </template>

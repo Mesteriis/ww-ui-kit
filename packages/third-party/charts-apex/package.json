@@ -36,7 +36,8 @@
     "vue3-apexcharts": "^1.8.0"
   },
   "scripts": {
-    "build": "vite build",
-    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
+    "build": "pnpm typecheck:build && vite build",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "vue-tsc -p tsconfig.build.json --noEmit"
   }
 }

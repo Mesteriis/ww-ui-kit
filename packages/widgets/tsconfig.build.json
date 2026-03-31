@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@ww/core": ["../core/dist/index.d.ts"],
+      "@ww/data-grid": ["../data-grid/dist/index.d.ts"],
+      "@ww/primitives": ["../primitives/dist/index.d.ts"],
+      "@ww/themes": ["../themes/dist/index.d.ts"],
+      "@ww/tokens": ["../tokens/dist/index.d.ts"]
+    }
+  },
+  "references": []
+}

@@ -39,7 +39,8 @@
     "@ww/tokens": "workspace:*"
   },
   "scripts": {
-    "build": "vite build",
-    "typecheck": "vue-tsc -p tsconfig.json --noEmit"
+    "build": "pnpm typecheck:build && vite build",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "vue-tsc -p tsconfig.build.json --noEmit"
   }
 }
