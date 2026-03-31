@@ -92,6 +92,10 @@ Public API is defined by:
 2. the public surface manifest
 3. required docs, stories, playground coverage, and tests
 
+Named runtime exports from each public package root entrypoint must be covered by the public surface manifest, either directly in `exportName` or through `coveredExports`.
+Public visual surfaces must also declare Storybook coverage in that manifest.
+Storybook-backed surfaces may also declare extra required invariants such as accessibility, keyboard flow, focus handling, overlay runtime, reduced motion, or theme-type proofs.
+
 Public visual surfaces also carry lab eligibility in the adjacent playground lab manifest.
 
 Internal-only surfaces are not part of the supported consumer contract even if they exist under `src/internal/*` or app code.

@@ -22,6 +22,39 @@ const visualSurface = (entry) => {
 
 export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
   visualSurface({
+    id: 'primitive-portal',
+    title: 'PrimitivePortal',
+    packageName: '@ww/primitives',
+    exportName: 'PrimitivePortal',
+    parentManifestExportName: 'PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden',
+    family: 'Foundations',
+    labEligible: false,
+    labExemptionReason:
+      'PrimitivePortal is reviewed through Storybook and integration flows because portal targeting and mount timing are behavioral contracts rather than standalone visual tuning.',
+  }),
+  visualSurface({
+    id: 'primitive-focus-trap',
+    title: 'PrimitiveFocusTrap',
+    packageName: '@ww/primitives',
+    exportName: 'PrimitiveFocusTrap',
+    parentManifestExportName: 'PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden',
+    family: 'Foundations',
+    labEligible: false,
+    labExemptionReason:
+      'PrimitiveFocusTrap is reviewed through Storybook and unit tests because keyboard loop and focus restore are interaction contracts rather than matrix-style visual tuning.',
+  }),
+  visualSurface({
+    id: 'primitive-visually-hidden',
+    title: 'PrimitiveVisuallyHidden',
+    packageName: '@ww/primitives',
+    exportName: 'PrimitiveVisuallyHidden',
+    parentManifestExportName: 'PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden',
+    family: 'Foundations',
+    labEligible: false,
+    labExemptionReason:
+      'PrimitiveVisuallyHidden is reviewed through Storybook and unit tests because its value is accessible-name behavior instead of standalone visual styling knobs.',
+  }),
+  visualSurface({
     id: 'ui-button',
     title: 'UiButton',
     packageName: '@ww/core',

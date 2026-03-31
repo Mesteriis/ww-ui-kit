@@ -24,6 +24,9 @@ pnpm format
 
 - choose the correct layer before adding code
 - update the public surface manifest when adding or changing public API
+- keep every named runtime export from a public package root entrypoint covered by `exportName` or `coveredExports` in the public surface manifest
+- keep every public visual surface on an explicit Storybook contract in the public surface manifest
+- map any extra Storybook invariants for that surface to concrete story artifacts in the public surface manifest
 - decide whether each public visual surface is lab-eligible and update `tools/governance/catalog/playground-lab-manifest.mjs`
 - add or update Storybook coverage for public UI surfaces
 - add or update docs coverage for public packages and architecture rules
@@ -47,6 +50,9 @@ pnpm format
 - hardcoding raw palette values outside tokens/themes
 - hardcoding raw easing curves outside tokens/themes
 - adding public exports without catalog/docs/tests updates
+- adding a named root runtime export without extending manifest coverage for it
+- leaving a public visual surface without Storybook coverage or an explicit manifest decision
+- declaring Storybook invariants in the manifest without mapping them to real story artifacts
 - changing architecture-sensitive areas without ADR updates
 - editing generated AI rule mirrors by hand instead of updating the canonical rules pack
 

@@ -59,6 +59,9 @@ Symptom:
 Likely cause:
 
 - a public surface changed without matching Storybook, docs, playground harness, or lab manifest updates
+- a named runtime export was added to a public package root entrypoint without manifest coverage
+- a visual public surface exists in the manifest without `requiresStorybook` and story artifacts
+- a Storybook-backed surface declares required invariants that are not covered by its mapped story artifacts
 
 Run:
 

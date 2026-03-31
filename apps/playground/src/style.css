@@ -34,16 +34,48 @@
 }
 
 .playground-shell__bar {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
+  position: relative;
+  display: grid;
   gap: var(--ui-space-8);
+  grid-template-columns: minmax(0, 1.4fr) minmax(20rem, 32rem);
+  align-items: start;
   padding: var(--ui-space-8);
   backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.playground-shell__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto auto;
+  width: min(28rem, 44%);
+  height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ui-surface-brand-soft) 46%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--ui-brand-500) 18%, transparent),
+      transparent 62%
+    );
+  pointer-events: none;
+}
+
+.playground-shell__intro,
+.playground-shell__branding {
+  display: grid;
+}
+
+.playground-shell__intro {
+  position: relative;
+  z-index: 1;
+  gap: var(--ui-space-6);
 }
 
 .playground-shell__branding {
-  display: grid;
   gap: var(--ui-space-3);
   max-width: 42rem;
 }
@@ -78,14 +110,38 @@
 }
 
 .playground-shell__controls {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: var(--ui-space-4);
-  justify-items: end;
-  min-width: 22rem;
+  min-width: 0;
+  padding: var(--ui-space-5);
+  border: 1px solid color-mix(in srgb, var(--ui-border-subtle) 92%, transparent);
+  border-radius: calc(var(--ui-radius-xl) - var(--ui-space-1));
+  background: color-mix(in srgb, var(--ui-surface-default) 82%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 28%, transparent);
+}
+
+.playground-shell__controls-copy {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+
+.playground-shell__controls-copy h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: var(--ui-line-height-tight);
+}
+
+.playground-shell__controls-copy p:last-child {
+  margin: 0;
+  color: var(--ui-text-secondary);
+  max-width: 30ch;
 }
 
 .playground-shell__mode-switch {
   display: inline-flex;
+  justify-self: start;
   gap: var(--ui-space-2);
   padding: var(--ui-space-1);
   border-radius: var(--ui-radius-full);
@@ -121,8 +177,9 @@
 .playground__theme-controls,
 .playground-shell__theme-controls {
   display: grid;
-  gap: var(--ui-space-4);
-  justify-items: end;
+  gap: var(--ui-space-3);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: stretch;
 }
 
 .playground__scenario-nav {
@@ -178,7 +235,8 @@
 }
 
 .playground__select {
-  max-width: 18rem;
+  width: 100%;
+  max-width: none;
 }
 
 .playground__theme-picker {
@@ -192,7 +250,7 @@
   display: flex;
   gap: var(--ui-space-3);
   flex-wrap: wrap;
-  justify-content: end;
+  justify-content: start;
 }
 
 .playground__motion-stage {
@@ -500,22 +558,32 @@
 .lab-meta {
   display: grid;
   gap: var(--ui-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
   margin: 0;
 }
 
-.lab-meta div {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--ui-space-3);
+.lab-meta__item {
+  display: grid;
+  gap: var(--ui-space-2);
+  min-width: 0;
+  padding: var(--ui-space-3);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-radius-lg);
+  background: color-mix(in srgb, var(--ui-surface-sunken) 76%, transparent);
 }
 
 .lab-meta dt {
   color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .lab-meta dd {
   margin: 0;
-  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: var(--ui-line-height-body);
 }
 
 .lab-panel__controls {
@@ -621,6 +689,10 @@
 }
 
 @media (max-width: 1180px) {
+  .playground-shell__bar {
+    grid-template-columns: 1fr;
+  }
+
   .lab-workbench {
     grid-template-columns: 1fr;
   }
@@ -641,19 +713,18 @@
 
   .playground-shell__bar,
   .playground__hero {
-    flex-direction: column;
-    align-items: start;
+    padding: var(--ui-space-5);
   }
 
   .playground-shell__controls,
   .playground-shell__theme-controls,
   .playground__theme-controls {
-    justify-items: start;
     min-width: 0;
   }
 
-  .playground__theme-indicator {
-    justify-content: start;
+  .playground-shell__theme-controls,
+  .playground__theme-controls {
+    grid-template-columns: 1fr;
   }
 
   .lab-copy {

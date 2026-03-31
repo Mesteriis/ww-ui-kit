@@ -1,6 +1,263 @@
 export const playgroundLabUsage = {
   "generatedAt": "generated-at-build",
   "surfaces": {
+    "primitive-portal": {
+      "id": "primitive-portal",
+      "title": "PrimitivePortal",
+      "exportName": "PrimitivePortal",
+      "packageName": "@ww/primitives",
+      "packageLayer": "primitives",
+      "stability": "stable",
+      "family": "Foundations",
+      "labEligible": false,
+      "labExemptionReason": "PrimitivePortal is reviewed through Storybook and integration flows because portal targeting and mount timing are behavioral contracts rather than standalone visual tuning.",
+      "sourcePublicSurface": "PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/core",
+          "packageLayer": "core",
+          "count": 8,
+          "files": [
+            "packages/core/src/components/fields/UiAutocomplete.vue",
+            "packages/core/src/components/fields/UiSelect.vue",
+            "packages/core/src/components/overlay/UiDialog.vue",
+            "packages/core/src/components/overlay/UiDrawer.vue",
+            "packages/core/src/components/overlay/UiDropdown.vue",
+            "packages/core/src/components/overlay/UiPopover.vue",
+            "packages/core/src/components/overlay/UiToast.vue",
+            "packages/core/src/components/overlay/UiTooltip.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "core",
+          "count": 8,
+          "files": [
+            "packages/core/src/components/fields/UiAutocomplete.vue",
+            "packages/core/src/components/fields/UiSelect.vue",
+            "packages/core/src/components/overlay/UiDialog.vue",
+            "packages/core/src/components/overlay/UiDrawer.vue",
+            "packages/core/src/components/overlay/UiDropdown.vue",
+            "packages/core/src/components/overlay/UiPopover.vue",
+            "packages/core/src/components/overlay/UiToast.vue",
+            "packages/core/src/components/overlay/UiTooltip.vue"
+          ]
+        },
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Foundations/Primitives/Overview",
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/primitives/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit"
+      ],
+      "tags": [
+        "primitives",
+        "a11y",
+        "overlay"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiAutocomplete.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiSelect.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiDialog.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiDrawer.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiDropdown.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiPopover.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiToast.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiTooltip.vue",
+          "area": "core"
+        }
+      ]
+    },
+    "primitive-focus-trap": {
+      "id": "primitive-focus-trap",
+      "title": "PrimitiveFocusTrap",
+      "exportName": "PrimitiveFocusTrap",
+      "packageName": "@ww/primitives",
+      "packageLayer": "primitives",
+      "stability": "stable",
+      "family": "Foundations",
+      "labEligible": false,
+      "labExemptionReason": "PrimitiveFocusTrap is reviewed through Storybook and unit tests because keyboard loop and focus restore are interaction contracts rather than matrix-style visual tuning.",
+      "sourcePublicSurface": "PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Foundations/Primitives/Overview",
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/primitives/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit"
+      ],
+      "tags": [
+        "primitives",
+        "a11y",
+        "overlay"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "area": "docs"
+        }
+      ]
+    },
+    "primitive-visually-hidden": {
+      "id": "primitive-visually-hidden",
+      "title": "PrimitiveVisuallyHidden",
+      "exportName": "PrimitiveVisuallyHidden",
+      "packageName": "@ww/primitives",
+      "packageLayer": "primitives",
+      "stability": "stable",
+      "family": "Foundations",
+      "labEligible": false,
+      "labExemptionReason": "PrimitiveVisuallyHidden is reviewed through Storybook and unit tests because its value is accessible-name behavior instead of standalone visual styling knobs.",
+      "sourcePublicSurface": "PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/core",
+          "packageLayer": "core",
+          "count": 1,
+          "files": [
+            "packages/core/src/components/buttons/UiButton.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "core",
+          "count": 1,
+          "files": [
+            "packages/core/src/components/buttons/UiButton.vue"
+          ]
+        },
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Foundations/Primitives/Overview",
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/primitives/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit"
+      ],
+      "tags": [
+        "primitives",
+        "a11y",
+        "overlay"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "packages/core/src/components/buttons/UiButton.vue",
+          "area": "core"
+        }
+      ]
+    },
     "ui-button": {
       "id": "ui-button",
       "title": "UiButton",
@@ -24,7 +281,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 15,
+          "count": 16,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -55,7 +312,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 15,
+          "count": 16,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -66,7 +323,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
             "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts",
             "apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts",
-            "apps/docs/src/stories/foundations/signal-graph/Signals.stories.ts"
+            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
           ]
         },
         {
@@ -156,6 +413,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/signal-graph/Signals.stories.ts",
           "area": "docs"
         },
@@ -178,10 +439,6 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts",
           "area": "docs"
-        },
-        {
-          "file": "apps/playground/src/DataGridShowcase.vue",
-          "area": "playground"
         }
       ]
     },
@@ -1525,7 +1782,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 19,
+          "count": 20,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1564,7 +1821,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 19,
+          "count": 20,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1683,6 +1940,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
           "area": "docs"
         },
@@ -1692,10 +1953,6 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/systems/data-grid/Theming.stories.ts",
-          "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
           "area": "docs"
         }
       ]
@@ -1714,7 +1971,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 22,
+          "count": 23,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1742,7 +1999,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 22,
+          "count": 23,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -4838,6 +5095,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Foundations/Charts/Interactions",
           "file": "apps/docs/src/stories/foundations/charts/Interactions.stories.ts"
+        },
+        {
+          "variant": "theme-type",
+          "title": "Foundations/Charts/ThemeType",
+          "file": "apps/docs/src/stories/foundations/charts/ThemeType.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -4996,6 +5258,16 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Foundations/Signal Graph/Overlays in Nodes",
           "file": "apps/docs/src/stories/foundations/signal-graph/OverlaysInNodes.stories.ts"
+        },
+        {
+          "variant": "focus",
+          "title": "Foundations/Signal Graph/Focus and Depth",
+          "file": "apps/docs/src/stories/foundations/signal-graph/FocusAndDepth.stories.ts"
+        },
+        {
+          "variant": "reduced-motion",
+          "title": "Foundations/Signal Graph/Reduced Motion",
+          "file": "apps/docs/src/stories/foundations/signal-graph/ReducedMotion.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5166,6 +5438,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5284,6 +5561,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5381,6 +5663,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5478,6 +5765,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5575,6 +5867,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5672,6 +5969,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5769,6 +6071,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [
@@ -5866,6 +6173,11 @@ export const playgroundLabUsage = {
           "variant": "interactions",
           "title": "Systems/Data Grid/Column Visibility",
           "file": "apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts"
+        },
+        {
+          "variant": "accessibility",
+          "title": "Systems/Data Grid/Accessibility",
+          "file": "apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts"
         }
       ],
       "relatedHarnesses": [

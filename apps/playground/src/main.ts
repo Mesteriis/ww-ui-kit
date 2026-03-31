@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-import { setTheme } from '@ww/themes';
+import { patchThemeRuntime } from '@ww/themes';
 
 import '@ww/themes/theme-light.css';
 import '@ww/themes/theme-dark.css';
@@ -14,7 +14,15 @@ import '@ww/page-templates/styles.css';
 import './style.css';
 
 import App from './App.vue';
+import { readPlaygroundThemePreferences } from './theme-preferences';
 
-setTheme('belovodye');
+const initialThemePreferences = readPlaygroundThemePreferences();
+
+patchThemeRuntime({
+  themeName: initialThemePreferences.themeName,
+  density: initialThemePreferences.density,
+  motionProfile: initialThemePreferences.motionProfile,
+  personality: initialThemePreferences.personality,
+});
 
 createApp(App).mount('#app');

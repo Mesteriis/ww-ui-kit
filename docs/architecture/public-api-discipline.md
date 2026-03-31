@@ -11,6 +11,9 @@ Visual maintainer workbench coverage is governed separately by [`tools/governanc
 ## Public API rules
 
 - Additions to public exports must update the public surface manifest.
+- Named runtime exports from a public package root entrypoint must be covered by a manifest entry, either directly in `exportName` or through `coveredExports`.
+- Public visual surfaces must declare Storybook coverage in the manifest; implicit visual exports are not allowed.
+- Public visual surfaces with Storybook coverage must also declare any extra required Storybook invariants in the manifest.
 - Additions or changes to public visual surfaces must also record lab eligibility in the playground lab manifest.
 - Public exports must use official package entrypoints only.
 - Deep imports such as `@ww/package/src/**` are forbidden.

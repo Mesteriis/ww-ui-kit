@@ -11,10 +11,70 @@ export const STORY_VARIANTS_BY_KIND = Object.freeze({
   'helper-api': [],
 });
 
+export const STORYBOOK_INVARIANT_IDS = Object.freeze([
+  'overview',
+  'states',
+  'theming',
+  'scoped-theme',
+  'composition',
+  'interactions',
+  'responsive',
+  'accessibility',
+  'keyboard',
+  'focus',
+  'reduced-motion',
+  'overlay-runtime',
+  'theme-type',
+]);
+
+export const STORYBOOK_INVARIANTS_BY_VARIANT = Object.freeze({
+  overview: ['overview'],
+  states: ['states'],
+  theming: ['theming'],
+  'scoped-theme': ['scoped-theme'],
+  composition: ['composition'],
+  interactions: ['interactions'],
+  responsive: ['responsive'],
+  accessibility: ['accessibility'],
+  keyboard: ['keyboard'],
+  focus: ['focus'],
+  'reduced-motion': ['reduced-motion'],
+  'overlay-runtime': ['overlay-runtime'],
+  'theme-type': ['theme-type'],
+});
+
+export const VISUAL_SURFACE_KINDS = Object.freeze([
+  'core-component',
+  'overlay-component',
+  'theme-surface',
+  'vendor-adapter',
+  'feature-package',
+  'widget-shell',
+  'page-template-shell',
+  'primitive',
+]);
+
 export function getRequiredStoryVariants(entry) {
   if (entry.requiredStoryVariants.length > 0) {
     return entry.requiredStoryVariants;
   }
 
   return STORY_VARIANTS_BY_KIND[entry.kind] ?? [];
+}
+
+export function kindRequiresStorybook(kind) {
+  return VISUAL_SURFACE_KINDS.includes(kind);
+}
+
+export function getRequiredStorybookInvariants(entry) {
+  return [...new Set([...getRequiredStoryVariants(entry), ...entry.requiredStorybookInvariants])];
+}
+
+export function getStoryArtifactInvariantCoverage(artifact) {
+  return [
+    ...new Set([
+      ...(STORYBOOK_INVARIANTS_BY_VARIANT[artifact.variant] ?? []),
+      ...(artifact.covers ?? []),
+    ]),
+  ];
 }

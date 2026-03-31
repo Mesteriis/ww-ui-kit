@@ -55,7 +55,7 @@ const emit = defineEmits<{
 const hostRef = ref<HTMLElement | null>(null);
 const clientReady = ref(false);
 const graphId = useId('signal-graph');
-const flowStore = useVueFlow({ id: graphId.value });
+const flowStore = useVueFlow(graphId.value);
 
 const { themeState } = useSignalGraphTheme(hostRef);
 const { reducedMotion } = useSignalGraphReducedMotion(computed(() => props.options?.motionMode));

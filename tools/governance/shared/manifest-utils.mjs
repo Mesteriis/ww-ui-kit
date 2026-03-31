@@ -6,6 +6,8 @@ export function createSurface(entry) {
     requiresStorybook: false,
     requiresDocs: false,
     requiresPlaygroundScenario: false,
+    coveredExports: [],
+    requiredStorybookInvariants: [],
     requiredStoryVariants: [],
     storyArtifacts: [],
     requiredDocsArtifacts: [],
@@ -29,5 +31,23 @@ export function validateSurfaceShape(entry) {
     throw new Error(
       `Manifest entry "${entry.exportName}" has invalid stability "${entry.stability}".`
     );
+  }
+
+  if (!Array.isArray(entry.coveredExports)) {
+    throw new Error(`Manifest entry "${entry.exportName}" has invalid "coveredExports".`);
+  }
+
+  if (!Array.isArray(entry.requiredStorybookInvariants)) {
+    throw new Error(
+      `Manifest entry "${entry.exportName}" has invalid "requiredStorybookInvariants".`
+    );
+  }
+
+  for (const artifact of entry.storyArtifacts) {
+    if (artifact.covers !== undefined && !Array.isArray(artifact.covers)) {
+      throw new Error(
+        `Manifest entry "${entry.exportName}" has a story artifact with invalid "covers".`
+      );
+    }
   }
 }

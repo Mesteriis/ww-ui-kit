@@ -32,6 +32,9 @@ Introduce a machine-checked governance layer.
 
 - package classification and layer rules live under `tools/governance/catalog/*`
 - public surfaces are declared in `public-surface-manifest.mjs`
+- `check:catalog` audits named runtime exports from public package root entrypoints against manifest coverage
+- `check:stories` treats Storybook coverage as mandatory for public visual surfaces
+- `check:stories` also audits manifest-declared Storybook invariants against the story artifacts attached to each public surface
 - stability status is mandatory for every public surface
 - docs, Storybook, and playground coverage are checked against the manifest
 - layer boundaries, topology, and public import hygiene are checked in CI
@@ -40,6 +43,9 @@ Introduce a machine-checked governance layer.
 ## Consequences
 
 - Public API changes become explicit and reviewable.
+- Public root entrypoints cannot grow named runtime exports without an explicit manifest decision.
+- Public visual surfaces cannot drift outside Storybook without an explicit governance failure.
+- Storybook proof becomes more precise because behavior-level invariants are declared and checked instead of inferred informally.
 - Layer violations fail CI instead of relying on reviewer memory.
 - New contributors and AI agents have one operational source of truth instead of scattered prose.
 

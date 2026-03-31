@@ -1,82 +1,162 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, h, ref, type PropType } from 'vue';
 
 import { UiBadge, UiButton, UiDialog, UiDrawer, UiField, UiInput, UiSwitch } from '@ww/core';
-import { createSignalGraphNodeDefinition } from '@ww/signal-graph';
+import {
+  createSignalGraphNodeDefinition,
+  type SignalGraphDepthState,
+  type SignalGraphNode,
+  type SignalGraphNodeRendererProps,
+} from '@ww/signal-graph';
+
+type RuntimeNodeData = {
+  title: string;
+  subtitle: string;
+  status: string;
+  metric: string;
+};
+
+type ControlsNodeData = {
+  channel: string;
+  enabled: boolean;
+};
+
+type OverlayNodeData = Record<string, never>;
+
+const stackStyle = { gap: 'var(--ui-space-3)' } as const;
+const clusterSpaceBetweenStyle = {
+  justifyContent: 'space-between',
+  alignItems: 'center',
+} as const;
+const mutedCopyStyle = {
+  margin: '0',
+  color: 'var(--ui-text-secondary)',
+  fontSize: 'var(--ui-font-size-sm)',
+} as const;
 
 const RuntimeNode = defineComponent({
   name: 'PlaygroundRuntimeNode',
-  components: { UiBadge, UiButton },
   props: {
-    data: { type: Object, required: true },
-    depthState: { type: String, required: true },
-    graph: { type: Object, required: true },
+    data: { type: Object as PropType<RuntimeNodeData>, required: true },
+    depthState: { type: String as PropType<SignalGraphDepthState>, required: true },
+    graph: {
+      type: Object as PropType<SignalGraphNodeRendererProps<RuntimeNodeData>['graph']>,
+      required: true,
+    },
     hasRecentSignal: { type: Boolean, required: true },
-    node: { type: Object, required: true },
+    node: { type: Object as PropType<SignalGraphNode<RuntimeNodeData>>, required: true },
   },
-  template: `
-    <div class="ui-stack" style="gap: var(--ui-space-3);">
-      <div class="ui-cluster" style="justify-content: space-between; align-items: center;">
-        <strong>{{ data.title }}</strong>
-        <UiBadge :variant="hasRecentSignal ? 'success' : 'brand'">{{ depthState }}</UiBadge>
-      </div>
-      <p style="margin: 0; color: var(--ui-text-secondary); font-size: var(--ui-font-size-sm);">
-        {{ data.subtitle }}
-      </p>
-      <div class="ui-cluster">
-        <UiBadge>{{ data.status }}</UiBadge>
-        <UiBadge variant="brand">{{ data.metric }}</UiBadge>
-      </div>
-      <UiButton size="sm" variant="secondary" class="nodrag" @click="graph.focusNode(node.id)">
-        Focus node
-      </UiButton>
-    </div>
-  `,
+  setup(props) {
+    return () =>
+      h('div', { class: 'ui-stack', style: stackStyle }, [
+        h('div', { class: 'ui-cluster', style: clusterSpaceBetweenStyle }, [
+          h('strong', props.data.title),
+          h(
+            UiBadge,
+            { variant: props.hasRecentSignal ? 'success' : 'brand' },
+            () => props.depthState
+          ),
+        ]),
+        h('p', { style: mutedCopyStyle }, props.data.subtitle),
+        h('div', { class: 'ui-cluster' }, [
+          h(UiBadge, null, () => props.data.status),
+          h(UiBadge, { variant: 'brand' }, () => props.data.metric),
+        ]),
+        h(
+          UiButton,
+          {
+            size: 'sm',
+            variant: 'secondary',
+            class: 'nodrag',
+            onClick: () => props.graph.focusNode(props.node.id),
+          },
+          () => 'Focus node'
+        ),
+      ]);
+  },
 });
 
 const ControlsNode = defineComponent({
   name: 'PlaygroundControlsNode',
-  components: { UiField, UiInput, UiSwitch },
   props: {
-    data: { type: Object, required: true },
+    data: { type: Object as PropType<ControlsNodeData>, required: true },
   },
-  template: `
-    <div class="ui-stack" style="gap: var(--ui-space-3);">
-      <UiField label="Channel">
-        <UiInput :model-value="String(data.channel)" readonly />
-      </UiField>
-      <label class="ui-cluster" style="justify-content: space-between; align-items: center;">
-        <span style="font-size: var(--ui-font-size-sm); color: var(--ui-text-secondary);">Auto-retry</span>
-        <UiSwitch :model-value="Boolean(data.enabled)" disabled />
-      </label>
-    </div>
-  `,
+  setup(props) {
+    return () =>
+      h('div', { class: 'ui-stack', style: stackStyle }, [
+        h(
+          UiField,
+          { label: 'Channel' },
+          {
+            default: ({ inputId }: { inputId: string }) =>
+              h(UiInput, { id: inputId, modelValue: String(props.data.channel), readonly: true }),
+          }
+        ),
+        h('label', { class: 'ui-cluster', style: clusterSpaceBetweenStyle }, [
+          h('span', { style: mutedCopyStyle }, 'Auto-retry'),
+          h(UiSwitch, { modelValue: Boolean(props.data.enabled), disabled: true }),
+        ]),
+      ]);
+  },
 });
 
 const OverlayNode = defineComponent({
   name: 'PlaygroundOverlayNode',
-  components: { UiButton, UiDialog, UiDrawer },
+  props: {
+    data: { type: Object as PropType<OverlayNodeData>, required: true },
+  },
   setup() {
     const dialogOpen = ref(false);
     const drawerOpen = ref(false);
-    return {
-      dialogOpen,
-      drawerOpen,
-    };
+
+    return () =>
+      h('div', { class: 'ui-stack', style: stackStyle }, [
+        h(
+          UiButton,
+          {
+            size: 'sm',
+            class: 'nodrag',
+            onClick: () => {
+              dialogOpen.value = true;
+            },
+          },
+          () => 'Node dialog'
+        ),
+        h(
+          UiButton,
+          {
+            size: 'sm',
+            variant: 'secondary',
+            class: 'nodrag',
+            onClick: () => {
+              drawerOpen.value = true;
+            },
+          },
+          () => 'Node drawer'
+        ),
+        h(
+          UiDialog,
+          {
+            open: dialogOpen.value,
+            title: 'Graph node dialog',
+            'onUpdate:open': (value: boolean) => {
+              dialogOpen.value = value;
+            },
+          },
+          () => 'Overlay opened from inside graph node content.'
+        ),
+        h(
+          UiDrawer,
+          {
+            open: drawerOpen.value,
+            title: 'Graph node drawer',
+            'onUpdate:open': (value: boolean) => {
+              drawerOpen.value = value;
+            },
+          },
+          () => 'Drawer opened from node content stays inside current theme scope.'
+        ),
+      ]);
   },
-  template: `
-    <div class="ui-stack" style="gap: var(--ui-space-3);">
-      <UiButton size="sm" class="nodrag" @click="dialogOpen = true">Node dialog</UiButton>
-      <UiButton size="sm" variant="secondary" class="nodrag" @click="drawerOpen = true">
-        Node drawer
-      </UiButton>
-      <UiDialog v-model:open="dialogOpen" title="Graph node dialog">
-        Overlay opened from inside graph node content.
-      </UiDialog>
-      <UiDrawer v-model:open="drawerOpen" title="Graph node drawer">
-        Drawer opened from node content stays inside current theme scope.
-      </UiDrawer>
-    </div>
-  `,
 });
 
 export const signalGraphNodeDefinitions = {

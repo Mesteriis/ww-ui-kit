@@ -67,7 +67,7 @@ Playground browser checks also include curated axe coverage for stable harness f
 
 ## Coverage governance
 
-Docs, stories, and playground scenarios are checked against the public surface manifest. Visual maintainer workbench coverage is checked through the adjacent playground lab manifest.
+Docs, stories, and playground scenarios are checked against the public surface manifest. `check:catalog` also verifies that named runtime exports from each public package root entrypoint are covered by that manifest. `check:stories` now fails when a public visual surface lacks an explicit Storybook contract or when declared Storybook invariants are not covered by the mapped stories. Visual maintainer workbench coverage is checked through the adjacent playground lab manifest.
 
 Required governance checks:
 

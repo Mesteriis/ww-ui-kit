@@ -5,6 +5,7 @@ import {
 } from '../catalog/package-classification.mjs';
 import { PUBLIC_SURFACE_MANIFEST } from '../catalog/public-surface-manifest.mjs';
 import { STABILITY_LEVELS } from '../catalog/stability-rules.mjs';
+import { auditRuntimeExportCoverage } from '../shared/public-exports.mjs';
 import { fileExists, listWorkspacePackages } from '../shared/workspace.mjs';
 
 const workspacePackages = listWorkspacePackages();
@@ -81,6 +82,32 @@ for (const surface of PUBLIC_SURFACE_MANIFEST) {
   if (surface.stability !== packageMeta.stability) {
     throw new Error(
       `Manifest entry "${surface.exportName}" has stability "${surface.stability}" but package "${surface.packageName}" is classified as "${packageMeta.stability}".`
+    );
+  }
+}
+
+for (const packageEntry of PACKAGE_CLASSIFICATION.filter((entry) => entry.public)) {
+  const surfaces = PUBLIC_SURFACE_MANIFEST.filter(
+    (surface) => surface.packageName === packageEntry.packageName
+  );
+  const { indexPath, missingExports, orphanedCoveredExports } = auditRuntimeExportCoverage(
+    packageEntry,
+    surfaces
+  );
+
+  if (missingExports.length > 0) {
+    throw new Error(
+      `Public package "${packageEntry.packageName}" has named runtime exports in "${indexPath}" that are not covered by the public surface manifest: ${missingExports.join(
+        ', '
+      )}.`
+    );
+  }
+
+  if (orphanedCoveredExports.length > 0) {
+    throw new Error(
+      `Public package "${packageEntry.packageName}" declares covered exports that are not named runtime exports in "${indexPath}": ${orphanedCoveredExports.join(
+        ', '
+      )}.`
     );
   }
 }

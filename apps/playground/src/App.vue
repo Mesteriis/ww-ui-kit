@@ -21,6 +21,10 @@ import {
 
 import { createInitialLabEntry } from './lab/runtime/lab-catalog';
 import {
+  readPlaygroundThemePreferences,
+  writePlaygroundThemePreferences,
+} from './theme-preferences';
+import {
   buildPlaygroundPath,
   parsePlaygroundRoute,
   type PlaygroundRoute,
@@ -31,11 +35,12 @@ const TestingHarnessView = defineAsyncComponent(
 );
 const LabWorkbenchView = defineAsyncComponent(() => import('./lab/routes/LabWorkbenchView.vue'));
 
-const theme = ref<ThemeName>('belovodye');
-const themeFilter = ref<ThemeType | 'all'>('all');
-const density = ref<ThemeDensity>('default');
-const motionProfile = ref<ThemeMotionProfile>('balanced');
-const personality = ref<ThemePersonality>('neutral');
+const initialThemePreferences = readPlaygroundThemePreferences();
+const theme = ref<ThemeName>(initialThemePreferences.themeName);
+const themeFilter = ref<ThemeType | 'all'>(initialThemePreferences.themeFilter);
+const density = ref<ThemeDensity>(initialThemePreferences.density);
+const motionProfile = ref<ThemeMotionProfile>(initialThemePreferences.motionProfile);
+const personality = ref<ThemePersonality>(initialThemePreferences.personality);
 const defaultSurfaceId = createInitialLabEntry().id;
 const route = ref(parsePlaygroundRoute(window.location.pathname, defaultSurfaceId));
 const themeRuntime = ref<ThemeRuntimeState>(readThemeRuntime());
@@ -63,8 +68,8 @@ watch(themeFilter, (nextFilter) => {
 });
 
 watch(
-  [theme, density, motionProfile, personality],
-  ([nextTheme, nextDensity, nextMotionProfile, nextPersonality]) => {
+  [theme, themeFilter, density, motionProfile, personality],
+  ([nextTheme, nextThemeFilter, nextDensity, nextMotionProfile, nextPersonality]) => {
     patchThemeRuntime({
       density: nextDensity,
       motionProfile: nextMotionProfile,
@@ -72,6 +77,13 @@ watch(
       themeName: nextTheme,
     });
     themeRuntime.value = readThemeRuntime();
+    writePlaygroundThemePreferences({
+      themeName: nextTheme,
+      themeFilter: nextThemeFilter,
+      density: nextDensity,
+      motionProfile: nextMotionProfile,
+      personality: nextPersonality,
+    });
   },
   { immediate: true }
 );
@@ -98,17 +110,17 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="playground-shell" data-playground-app="ww-ui-kit">
-    <header class="playground-shell__bar">
-      <div class="playground-shell__branding">
-        <p class="playground-shell__eyebrow">Belovodye UiKit playground</p>
-        <h1>Maintainer workbench + stable integration harness</h1>
-        <p>
-          Storybook remains the public UI contract. Playground now exposes a schema-driven lab
-          alongside the existing testing harness.
-        </p>
-      </div>
+    <header class="playground-shell__bar" :data-playground-mode="route.mode">
+      <div class="playground-shell__intro">
+        <div class="playground-shell__branding">
+          <p class="playground-shell__eyebrow">Belovodye UiKit playground</p>
+          <h1>Maintainer workbench + stable integration harness</h1>
+          <p>
+            Storybook remains the public UI contract. Playground now exposes a schema-driven lab
+            alongside the existing testing harness.
+          </p>
+        </div>
 
-      <div class="playground-shell__controls">
         <nav class="playground-shell__mode-switch" aria-label="Playground mode">
           <button
             type="button"
@@ -134,6 +146,14 @@ onBeforeUnmount(() => {
             Component lab
           </button>
         </nav>
+      </div>
+
+      <section class="playground-shell__controls" aria-label="Playground theme runtime">
+        <div class="playground-shell__controls-copy">
+          <p class="playground-shell__eyebrow">Preview runtime</p>
+          <h2>Shared theme context</h2>
+          <p>One runtime controls the testing harness and every component-lab preview.</p>
+        </div>
 
         <div class="playground-shell__theme-controls">
           <label class="playground__theme-picker">
@@ -212,7 +232,7 @@ onBeforeUnmount(() => {
           <UiBadge>Motion: {{ themeRuntime.motionProfile }}</UiBadge>
           <UiBadge>Personality: {{ themeRuntime.personality }}</UiBadge>
         </div>
-      </div>
+      </section>
     </header>
 
     <TestingHarnessView

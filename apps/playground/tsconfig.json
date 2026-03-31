@@ -25,7 +25,8 @@
     "../../tools/**/*.mjs",
     "../../packages/**/*.ts",
     "../../packages/**/*.vue",
-    "../../vite.aliases.ts"
+    "../../vite.aliases.ts",
+    "../../vite.chunking.ts"
   ],
   "exclude": ["../../packages/**/*.test.ts"]
 }

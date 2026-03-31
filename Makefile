@@ -1,4 +1,4 @@
-.PHONY: docs playground aiassistant-rules
+.PHONY: docs dev lab playground aiassistant-rules
 
 docs:
 	pnpm dev:docs

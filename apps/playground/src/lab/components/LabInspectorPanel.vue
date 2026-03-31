@@ -79,29 +79,31 @@ const copyConfig = async () => {
         <p>Package, layer, stability, and active theme metadata for the selected surface.</p>
       </header>
       <dl class="lab-meta">
-        <div>
+        <div class="lab-meta__item" data-lab-meta="package">
           <dt>Package</dt>
-          <dd>{{ props.entry.packageName }}</dd>
+          <dd :title="props.entry.packageName">{{ props.entry.packageName }}</dd>
         </div>
-        <div>
+        <div class="lab-meta__item" data-lab-meta="layer">
           <dt>Layer</dt>
-          <dd>{{ props.entry.packageLayer }}</dd>
+          <dd :title="props.entry.packageLayer">{{ props.entry.packageLayer }}</dd>
         </div>
-        <div>
+        <div class="lab-meta__item" data-lab-meta="stability">
           <dt>Stability</dt>
-          <dd>{{ props.entry.stability }}</dd>
+          <dd :title="props.entry.stability">{{ props.entry.stability }}</dd>
         </div>
-        <div>
+        <div class="lab-meta__item" data-lab-meta="export">
           <dt>Export</dt>
-          <dd>{{ props.entry.exportName }}</dd>
+          <dd :title="props.entry.exportName">{{ props.entry.exportName }}</dd>
         </div>
-        <div>
+        <div class="lab-meta__item" data-lab-meta="theme-name">
           <dt>ThemeName</dt>
-          <dd>{{ props.previewContext.themeName }}</dd>
+          <dd :title="props.previewContext.themeName">{{ props.previewContext.themeName }}</dd>
         </div>
-        <div>
+        <div class="lab-meta__item" data-lab-meta="theme-type">
           <dt>ThemeType</dt>
-          <dd>{{ props.previewContext.themeMeta.type }}</dd>
+          <dd :title="props.previewContext.themeMeta.type">
+            {{ props.previewContext.themeMeta.type }}
+          </dd>
         </div>
       </dl>
     </section>

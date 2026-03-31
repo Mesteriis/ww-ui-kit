@@ -31,11 +31,13 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/themes',
     exportName: 'setTheme / patchThemeRuntime / readThemeRuntime / observeThemeRuntime',
     kind: 'helper-api',
+    requiredStorybookInvariants: ['theme-type'],
     requiresStorybook: true,
     storyArtifacts: [
       {
         variant: 'overview',
         file: 'apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts',
+        covers: ['theme-type'],
       },
     ],
     requiresDocs: true,
@@ -56,11 +58,13 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/themes',
     exportName: 'theme-surfaces',
     kind: 'theme-surface',
+    requiredStorybookInvariants: ['theme-type'],
     requiresStorybook: true,
     storyArtifacts: [
       {
         variant: 'overview',
         file: 'apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts',
+        covers: ['theme-type'],
       },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
       {
@@ -95,10 +99,15 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/primitives',
     exportName: 'overlay-foundation',
     kind: 'helper-api',
+    requiredStorybookInvariants: ['overlay-runtime'],
     requiresStorybook: true,
     requiredStoryVariants: ['overview'],
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
+      },
       {
         variant: 'scoped-theme',
         file: 'apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts',
@@ -112,12 +121,35 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     tags: ['overlay', 'primitives'],
   }),
   surface({
+    packageName: '@ww/primitives',
+    exportName: 'PrimitivePortal / PrimitiveFocusTrap / PrimitiveVisuallyHidden',
+    kind: 'primitive',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/primitives/Overview.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [{ type: 'readme', file: 'packages/primitives/README.md' }],
+    requiredTestLayers: ['unit'],
+    tags: ['primitives', 'a11y', 'overlay'],
+  }),
+  surface({
     packageName: '@ww/core',
     exportName: 'UiButton',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Buttons.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Buttons.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -127,9 +159,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiIconButton',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Buttons.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Buttons.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -139,9 +176,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiField / UiInput / UiTextarea / UiSelectSimple',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Fields.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Fields.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -151,9 +193,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiNumberInput / UiSelect / UiAutocomplete',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Fields.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Fields.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -168,9 +215,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiCheckbox / UiSwitch',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Selection.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Selection.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -180,9 +232,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiRadio',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Selection.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Selection.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -197,9 +254,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiRadioGroup',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Selection.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Selection.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -214,9 +276,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiBadge / UiCard / UiDivider / UiSpinner / UiSkeleton',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Display.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Display.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -226,9 +293,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiAvatar / UiAvatarGroup / UiProgress / UiTable',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Display.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Display.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -243,9 +315,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiTag',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Display.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Display.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -260,9 +337,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiEmptyState',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Feedback.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Feedback.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -272,9 +354,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiAlert',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Feedback.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Feedback.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -289,9 +376,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiDialog / UiDrawer',
     kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Overlay.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       {
         variant: 'theming',
@@ -300,6 +392,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
       },
     ],
     requiresPlaygroundScenario: true,
@@ -310,9 +403,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiTooltip',
     kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'focus', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Overlay.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       {
         variant: 'theming',
@@ -321,6 +419,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
       },
     ],
     requiresDocs: true,
@@ -334,9 +433,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiPopover',
     kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Overlay.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       {
         variant: 'theming',
@@ -345,6 +449,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
       },
     ],
     requiresDocs: true,
@@ -358,9 +463,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiDropdown',
     kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Overlay.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       {
         variant: 'theming',
@@ -369,6 +479,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
       },
     ],
     requiresDocs: true,
@@ -382,9 +493,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiToast',
     kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Overlay.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Overlay.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       {
         variant: 'theming',
@@ -393,6 +509,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/OverlayLayers.stories.ts',
+        covers: ['overlay-runtime'],
       },
     ],
     requiresDocs: true,
@@ -406,10 +523,19 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiCollapse',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Feedback.stories.ts' },
-      { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Feedback.stories.ts',
+        covers: ['accessibility'],
+      },
+      {
+        variant: 'states',
+        file: 'apps/docs/src/stories/CoreShowcase.stories.ts',
+        covers: ['keyboard'],
+      },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
     requiresDocs: true,
@@ -423,10 +549,19 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiCollapsePanel',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Feedback.stories.ts' },
-      { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Feedback.stories.ts',
+        covers: ['accessibility'],
+      },
+      {
+        variant: 'states',
+        file: 'apps/docs/src/stories/CoreShowcase.stories.ts',
+        covers: ['keyboard'],
+      },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
     requiresDocs: true,
@@ -440,9 +575,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiBreadcrumb',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Navigation.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Navigation.stories.ts',
+        covers: ['accessibility'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -457,9 +597,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiPagination',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Navigation.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Navigation.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -474,9 +619,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiMenu / UiSteps',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Navigation.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Navigation.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -491,9 +641,14 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/core',
     exportName: 'UiTabsRoot / UiTabsList / UiTabsTrigger / UiTabsPanel',
     kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
     requiresStorybook: true,
     storyArtifacts: [
-      { variant: 'overview', file: 'apps/docs/src/stories/Tabs.stories.ts' },
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Tabs.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
       { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
       { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
     ],
@@ -522,6 +677,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/charts-apex',
     exportName: 'UiApexChart',
     kind: 'vendor-adapter',
+    requiredStorybookInvariants: ['theme-type'],
     requiresStorybook: true,
     storyArtifacts: [
       {
@@ -538,6 +694,10 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/charts/Interactions.stories.ts',
       },
+      {
+        variant: 'theme-type',
+        file: 'apps/docs/src/stories/foundations/charts/ThemeType.stories.ts',
+      },
     ],
     requiresDocs: true,
     docsArtifacts: [{ type: 'readme', file: 'packages/third-party/charts-apex/README.md' }],
@@ -550,6 +710,8 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/signal-graph',
     exportName: 'UiSignalGraph',
     kind: 'feature-package',
+    coveredExports: ['createSignalGraphNodeDefinition'],
+    requiredStorybookInvariants: ['focus', 'reduced-motion', 'overlay-runtime'],
     requiresStorybook: true,
     storyArtifacts: [
       {
@@ -571,6 +733,15 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/foundations/signal-graph/OverlaysInNodes.stories.ts',
+        covers: ['overlay-runtime'],
+      },
+      {
+        variant: 'focus',
+        file: 'apps/docs/src/stories/foundations/signal-graph/FocusAndDepth.stories.ts',
+      },
+      {
+        variant: 'reduced-motion',
+        file: 'apps/docs/src/stories/foundations/signal-graph/ReducedMotion.stories.ts',
       },
     ],
     requiresDocs: true,
@@ -585,6 +756,8 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     exportName:
       'UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility',
     kind: 'feature-package',
+    coveredExports: ['createDataGridColumn', 'normalizeDataGridQuery'],
+    requiredStorybookInvariants: ['accessibility'],
     requiresStorybook: true,
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/systems/data-grid/Overview.stories.ts' },
@@ -597,6 +770,10 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       {
         variant: 'interactions',
         file: 'apps/docs/src/stories/systems/data-grid/ColumnVisibility.stories.ts',
+      },
+      {
+        variant: 'accessibility',
+        file: 'apps/docs/src/stories/systems/data-grid/Accessibility.stories.ts',
       },
     ],
     requiresDocs: true,
@@ -620,6 +797,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     packageName: '@ww/widgets',
     exportName: 'UiWidgetShell / UiWidgetHeader / UiWidgetBody / UiWidgetFooter',
     kind: 'widget-shell',
+    coveredExports: ['RESERVED_WIDGET_NAMESPACES', 'WIDGET_LAYER_RULES', 'WIDGET_SURFACES'],
     requiresStorybook: true,
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/widgets/Shell.stories.ts' },
@@ -686,6 +864,11 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     exportName:
       'UiLayout / UiLayoutHeader / UiLayoutSider / UiLayoutContent / UiLayoutFooter / UiLayoutSection / UiLayoutToolbar',
     kind: 'page-template-shell',
+    coveredExports: [
+      'LAYOUT_WIDTHS',
+      'PAGE_TEMPLATE_LAYER_RULES',
+      'RESERVED_PAGE_TEMPLATE_NAMESPACES',
+    ],
     requiresStorybook: true,
     storyArtifacts: [
       { variant: 'overview', file: 'apps/docs/src/stories/page-templates/Shell.stories.ts' },

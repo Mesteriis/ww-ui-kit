@@ -11,6 +11,9 @@ Public API is explicit and machine-checked.
 
 - Treat package export maps and `tools/governance/catalog/public-surface-manifest.mjs` as the public contract.
 - Update the public surface manifest when adding or changing public exports.
+- Keep named runtime exports from public package root entrypoints covered by a manifest row, either directly in `exportName` or through `coveredExports`.
+- Keep every public visual surface on an explicit Storybook contract; do not rely on undocumented implicit coverage.
+- Keep manifest-declared Storybook invariants honest by mapping them to concrete story artifacts instead of hand-waving that a story “probably covers it”.
 - Record lab eligibility for public visual surfaces in `tools/governance/catalog/playground-lab-manifest.mjs`.
 - Keep style entrypoints explicit when a package needs them.
 - Use package entrypoints, not source file paths, from apps and other packages.
