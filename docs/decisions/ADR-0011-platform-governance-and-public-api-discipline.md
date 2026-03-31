@@ -35,6 +35,7 @@ Introduce a machine-checked governance layer.
 - stability status is mandatory for every public surface
 - docs, Storybook, and playground coverage are checked against the manifest
 - layer boundaries, topology, and public import hygiene are checked in CI
+- ADR enforcement still applies to architecture-sensitive manifest changes, but pure dependency-range bumps inside `package.json` dependency fields do not require a matching ADR edit
 
 ## Consequences
 
