@@ -2,14 +2,7 @@
 id: ai-path-theme-vs-component-boundary
 title: Theme vs component boundary path rules
 apply: by file patterns
-patterns:
-  - packages/themes/**/*
-  - packages/core/**/*
-  - packages/data-grid/**/*
-  - packages/signal-graph/**/*
-  - packages/widgets/**/*
-  - packages/page-templates/**/*
-  - packages/third-party/**/*
+patterns: packages/themes/**/*, packages/core/**/*, packages/data-grid/**/*, packages/signal-graph/**/*, packages/widgets/**/*, packages/page-templates/**/*, packages/third-party/**/*
 ---
 
 Use this rule when a visual change could land in a theme file, a reusable component package, or the token contract that feeds both.
