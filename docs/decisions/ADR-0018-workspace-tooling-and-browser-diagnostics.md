@@ -93,6 +93,7 @@ Rejected because Vue 3.5 provides an instance-aware solution with a cleaner SSR 
 - `package.json`
 - `.node-version`
 - `scripts/check-node-version.mjs`
+- [`ADR-0020 Build Time Declaration Contracts And Unit Concurrency`](./ADR-0020-build-time-declaration-contracts-and-unit-concurrency.md)
 - `.github/workflows/ci.yml`
 - `apps/docs/.storybook/main.ts`
 - `apps/playground/vite.config.ts`

@@ -30,8 +30,10 @@ export function parsePlaygroundRoute(pathname: string, defaultSurfaceId: string)
   };
 }
 
-export function buildPlaygroundPath(route: PlaygroundRoute, pathname = window.location.pathname) {
-  const basePrefix = getBasePrefix(pathname);
+export function buildPlaygroundPath(route: PlaygroundRoute, pathname?: string) {
+  const resolvedPathname =
+    pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+  const basePrefix = getBasePrefix(resolvedPathname);
 
   if (route.mode === 'lab') {
     return `${basePrefix}/lab/${route.surfaceId}`;

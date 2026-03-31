@@ -36,7 +36,8 @@
     "@ww/tokens": "workspace:*"
   },
   "scripts": {
-    "build": "vite build && node ./scripts/generate-theme-css.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "pnpm typecheck:build && vite build && node ./scripts/generate-theme-css.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "tsc -p tsconfig.build.json --noEmit"
   }
 }

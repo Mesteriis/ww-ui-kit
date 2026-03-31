@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [
     dts({
       entryRoot: 'src',
-      tsconfigPath: './tsconfig.json',
+      tsconfigPath: './tsconfig.build.json',
     }),
   ],
   build: {

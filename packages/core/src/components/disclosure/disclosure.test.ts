@@ -108,7 +108,7 @@ describe('collapse components', () => {
           return { value };
         },
         template: `
-          <UiCollapse v-model="value" :accordion="false" bordered="false" ghost icon-position="end">
+          <UiCollapse v-model="value" :accordion="false" :bordered="false" ghost icon-position="end">
             <UiCollapsePanel value="locked" title="Locked" disabled>Locked body</UiCollapsePanel>
           </UiCollapse>
         `,
