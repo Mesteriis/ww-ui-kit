@@ -46,6 +46,7 @@ Apply mode: `by file patterns`
 | --- | --- | --- |
 | ai-path-packages-tokens | packages/tokens path rules | [by-path/packages-tokens.md](./by-path/packages-tokens.md) |
 | ai-path-packages-themes | packages/themes path rules | [by-path/packages-themes.md](./by-path/packages-themes.md) |
+| ai-path-theme-vs-component-boundary | Theme vs component boundary path rules | [by-path/theme-vs-component-boundary.md](./by-path/theme-vs-component-boundary.md) |
 | ai-path-packages-primitives | packages/primitives path rules | [by-path/packages-primitives.md](./by-path/packages-primitives.md) |
 | ai-path-packages-core | packages/core path rules | [by-path/packages-core.md](./by-path/packages-core.md) |
 | ai-path-packages-data-grid | packages/data-grid path rules | [by-path/packages-data-grid.md](./by-path/packages-data-grid.md) |
