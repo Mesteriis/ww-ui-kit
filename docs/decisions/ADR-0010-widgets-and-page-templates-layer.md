@@ -41,6 +41,10 @@ The generic page-template shell level is intentionally layout-first. Page-shaped
 
 Reserved namespaces document where future `LoginWindow`, `AuthPageTemplate`, `WorkspacePageTemplate`, and similar entities should live. `DataTableWidget` is now a realized widget in this layer rather than a reserved placeholder.
 
+The first named dashboard template in `@ww/page-templates` is `UiDashboardLayout`. It stays
+slot-driven and layout-only in the page-template layer instead of mutating the generic
+`UiLayout*` family into dashboard-specific behavior.
+
 The first realized widget above the systems layer is `DataTableWidget`, which composes `@ww/data-grid` without reimplementing its engine logic.
 
 ## Consequences
@@ -50,6 +54,8 @@ The first realized widget above the systems layer is `DataTableWidget`, which co
 - Future systems packages can be composed by widgets without leaking vendor or engine concerns into apps.
 - Page templates stay distinct from route pages and remain reusable across multiple apps or product areas.
 - Generic layout primitives in `@ww/page-templates` stay structural so higher-level named templates can be added without expanding `@ww/core`.
+- `UiDashboardLayout` proves that a named template can be added inside `@ww/page-templates`
+  without turning the generic shell family into a dashboard framework.
 - `DataTableWidget` proves the widgets layer with a real reusable business block above `@ww/data-grid`.
 
 ## Alternatives

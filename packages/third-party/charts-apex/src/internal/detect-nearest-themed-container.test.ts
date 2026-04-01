@@ -15,7 +15,7 @@ describe('detectNearestThemedContainer', () => {
   it('resolves the nearest themed subtree container', () => {
     const scope = document.createElement('section');
     scope.setAttribute('data-ui-theme', 'belovodye');
-    scope.setAttribute('data-ui-theme-type', 'light');
+    scope.setAttribute('data-ui-theme-type', 'dark');
     const host = document.createElement('div');
     scope.append(host);
     document.body.append(scope);
@@ -24,7 +24,7 @@ describe('detectNearestThemedContainer', () => {
     expect(resolveApexThemeScope(host)).toEqual({
       container: scope,
       themeName: 'belovodye',
-      themeType: 'light',
+      themeType: 'dark',
     });
   });
 

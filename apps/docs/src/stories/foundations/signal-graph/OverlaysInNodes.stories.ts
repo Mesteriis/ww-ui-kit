@@ -22,7 +22,7 @@ export const OverlaysInNodes: StoryObj<typeof UiSignalGraph> = {
       };
     },
     template: `
-      <section data-ui-theme="belovodye" data-ui-theme-type="light" style="padding: var(--ui-space-4); border-radius: var(--ui-radius-xl); background: var(--ui-surface-canvas);">
+      <section data-ui-theme="belovodye" data-ui-theme-type="dark" style="padding: var(--ui-space-4); border-radius: var(--ui-radius-xl); background: var(--ui-surface-canvas);">
         <UiSignalGraph
           aria-label="Signal graph overlays in themed nodes"
           :nodes="nodes"

@@ -8,11 +8,13 @@ import uiAvatar from '../schemas/ui-avatar.lab';
 import uiButton from '../schemas/ui-button.lab';
 import uiCard from '../schemas/ui-card.lab';
 import uiCheckbox from '../schemas/ui-checkbox.lab';
+import uiDashboardLayout from '../schemas/ui-dashboard-layout.lab';
 import uiDataGrid from '../schemas/ui-data-grid.lab';
 import uiDialog from '../schemas/ui-dialog.lab';
 import uiDropdown from '../schemas/ui-dropdown.lab';
 import uiDrawer from '../schemas/ui-drawer.lab';
 import uiEmptyState from '../schemas/ui-empty-state.lab';
+import uiHorizontalLayout from '../schemas/ui-horizontal-layout.lab';
 import uiIconButton from '../schemas/ui-icon-button.lab';
 import uiInput from '../schemas/ui-input.lab';
 import uiLayout from '../schemas/ui-layout.lab';
@@ -26,7 +28,9 @@ import uiSwitch from '../schemas/ui-switch.lab';
 import uiTag from '../schemas/ui-tag.lab';
 import uiTabsRoot from '../schemas/ui-tabs-root.lab';
 import uiTextarea from '../schemas/ui-textarea.lab';
+import uiTsParticlesBackdrop from '../schemas/ui-tsparticles-backdrop.lab';
 import uiTooltip from '../schemas/ui-tooltip.lab';
+import uiVerticalLayout from '../schemas/ui-vertical-layout.lab';
 import uiWidgetShell from '../schemas/ui-widget-shell.lab';
 
 const definitions = [
@@ -53,11 +57,15 @@ const definitions = [
   uiDrawer,
   uiTabsRoot,
   uiApexChart,
+  uiTsParticlesBackdrop,
   uiSignalGraph,
   uiDataGrid,
   uiWidgetShell,
   dataTableWidget,
   uiLayout,
+  uiVerticalLayout,
+  uiHorizontalLayout,
+  uiDashboardLayout,
 ] as const;
 
 export const componentLabRegistry = Object.freeze(

@@ -20,9 +20,14 @@ export const Overview: StoryObj = {
           description: 'Baseline components and visual contracts.',
         },
         {
+          name: 'Third-party adapters',
+          package: '@ww/charts-apex · @ww/tsparticles',
+          description: 'Optional vendor-backed adapters with honest public boundaries.',
+        },
+        {
           name: 'Systems',
-          package: '@ww/charts-apex · @ww/data-grid · @ww/signal-graph',
-          description: 'Larger subsystems and optional adapters.',
+          package: '@ww/data-grid · @ww/signal-graph',
+          description: 'Larger feature-first subsystems above core.',
         },
         {
           name: 'Widgets',
@@ -44,9 +49,11 @@ export const Overview: StoryObj = {
       const examples = [
         ['LoginWindow', '@ww/widgets'],
         ['DataTableWidget', '@ww/widgets'],
+        ['UiTsParticlesBackdrop', '@ww/tsparticles'],
         ['UiDataGrid', '@ww/data-grid'],
+        ['UiVerticalLayout', '@ww/page-templates'],
         ['AuthPageTemplate', '@ww/page-templates'],
-        ['DashboardPageTemplate', '@ww/page-templates'],
+        ['UiDashboardLayout', '@ww/page-templates'],
         ['Actual route page', 'apps/*'],
       ];
 

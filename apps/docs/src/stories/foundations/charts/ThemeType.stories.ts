@@ -17,8 +17,8 @@ export const ThemeType: StoryObj<typeof UiApexChart> = {
   render: () => ({
     components: { UiApexChart, UiBadge },
     setup() {
-      const lightTheme = getThemeMeta('belovodye');
-      const darkTheme = getThemeMeta('dark');
+      const lightTheme = getThemeMeta('light');
+      const darkTheme = getThemeMeta('belovodye');
 
       return {
         darkTheme,
@@ -56,7 +56,7 @@ export const ThemeType: StoryObj<typeof UiApexChart> = {
             type="donut"
             :series="donutSeries"
             :options="donutOptions"
-            title="Dark-family defaults"
+            title="Belovodye dark-family defaults"
             description="Tooltip theme, chart mode, and fallbacks derive from ThemeType=dark."
           />
         </section>

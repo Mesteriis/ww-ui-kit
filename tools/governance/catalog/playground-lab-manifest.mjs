@@ -609,6 +609,21 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     }),
   }),
   visualSurface({
+    id: 'ui-tsparticles-backdrop',
+    title: 'UiTsParticlesBackdrop',
+    packageName: '@ww/tsparticles',
+    exportName: 'UiTsParticlesBackdrop',
+    parentManifestExportName: 'UiTsParticlesBackdrop',
+    family: 'Third-party adapters',
+    labEligible: true,
+    previewModes: ['single', 'matrix'],
+    copyFormats: ['json', 'ts-object', 'vue'],
+    runtimeFiles: Object.freeze({
+      schema: 'apps/playground/src/lab/schemas/ui-tsparticles-backdrop.lab.ts',
+      preview: 'apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue',
+    }),
+  }),
+  visualSurface({
     id: 'ui-signal-graph',
     title: 'UiSignalGraph',
     packageName: '@ww/signal-graph',
@@ -815,6 +830,36 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
       'UiLayoutHeader is verified through consumer-style layout compositions because header structure only makes sense with surrounding shell context.',
   }),
   visualSurface({
+    id: 'ui-vertical-layout',
+    title: 'UiVerticalLayout',
+    packageName: '@ww/page-templates',
+    exportName: 'UiVerticalLayout',
+    parentManifestExportName: 'UiVerticalLayout / UiHorizontalLayout',
+    family: 'Page Templates',
+    labEligible: true,
+    previewModes: ['single', 'matrix'],
+    copyFormats: ['json', 'ts-object', 'vue'],
+    runtimeFiles: Object.freeze({
+      schema: 'apps/playground/src/lab/schemas/ui-vertical-layout.lab.ts',
+      preview: 'apps/playground/src/lab/components/FlowLayoutLabPreview.vue',
+    }),
+  }),
+  visualSurface({
+    id: 'ui-horizontal-layout',
+    title: 'UiHorizontalLayout',
+    packageName: '@ww/page-templates',
+    exportName: 'UiHorizontalLayout',
+    parentManifestExportName: 'UiVerticalLayout / UiHorizontalLayout',
+    family: 'Page Templates',
+    labEligible: true,
+    previewModes: ['single', 'matrix'],
+    copyFormats: ['json', 'ts-object', 'vue'],
+    runtimeFiles: Object.freeze({
+      schema: 'apps/playground/src/lab/schemas/ui-horizontal-layout.lab.ts',
+      preview: 'apps/playground/src/lab/components/FlowLayoutLabPreview.vue',
+    }),
+  }),
+  visualSurface({
     id: 'ui-layout-sider',
     title: 'UiLayoutSider',
     packageName: '@ww/page-templates',
@@ -873,6 +918,21 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     labEligible: false,
     labExemptionReason:
       'UiLayoutToolbar is verified through consumer-style layout compositions because toolbar placement only makes sense inside a larger shell.',
+  }),
+  visualSurface({
+    id: 'ui-dashboard-layout',
+    title: 'UiDashboardLayout',
+    packageName: '@ww/page-templates',
+    exportName: 'UiDashboardLayout',
+    parentManifestExportName: 'UiDashboardLayout',
+    family: 'Page Templates',
+    labEligible: true,
+    previewModes: ['single', 'matrix'],
+    copyFormats: ['json', 'ts-object', 'vue'],
+    runtimeFiles: Object.freeze({
+      schema: 'apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts',
+      preview: 'apps/playground/src/lab/components/DashboardLayoutLabPreview.vue',
+    }),
   }),
 ]);
 

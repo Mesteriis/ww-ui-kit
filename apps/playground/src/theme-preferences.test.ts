@@ -47,7 +47,7 @@ describe('theme preferences', () => {
       PLAYGROUND_THEME_PREFERENCES_STORAGE_KEY,
       JSON.stringify({
         themeName: 'belovodye',
-        themeFilter: 'dark',
+        themeFilter: 'light',
         density: 'default',
         motionProfile: 'balanced',
         personality: 'neutral',
@@ -56,7 +56,7 @@ describe('theme preferences', () => {
 
     expect(readPlaygroundThemePreferences(storage)).toEqual({
       themeName: 'belovodye',
-      themeFilter: 'light',
+      themeFilter: 'dark',
       density: 'default',
       motionProfile: 'balanced',
       personality: 'neutral',

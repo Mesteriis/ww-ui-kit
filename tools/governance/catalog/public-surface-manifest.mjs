@@ -707,6 +707,44 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     tags: ['third-party', 'charts'],
   }),
   surface({
+    packageName: '@ww/tsparticles',
+    exportName: 'UiTsParticlesBackdrop',
+    kind: 'vendor-adapter',
+    requiredStorybookInvariants: ['scoped-theme'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/foundations/particles/Overview.stories.ts',
+      },
+      {
+        variant: 'states',
+        file: 'apps/docs/src/stories/foundations/particles/States.stories.ts',
+        covers: ['reduced-motion'],
+      },
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/foundations/particles/Theming.stories.ts',
+        covers: ['scoped-theme'],
+      },
+      {
+        variant: 'responsive',
+        file: 'apps/docs/src/stories/foundations/particles/Responsive.stories.ts',
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/third-party/tsparticles/README.md' },
+      { type: 'architecture-doc', file: 'docs/architecture/package-topology.md' },
+      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0014-third-party-topology.md' },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['particles'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['third-party', 'particles'],
+  }),
+  surface({
     packageName: '@ww/signal-graph',
     exportName: 'UiSignalGraph',
     kind: 'feature-package',
@@ -884,5 +922,63 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     playgroundScenarios: ['page-templates', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
     tags: ['page-templates'],
+  }),
+  surface({
+    packageName: '@ww/page-templates',
+    exportName: 'UiVerticalLayout / UiHorizontalLayout',
+    kind: 'page-template-shell',
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/page-templates/Shell.stories.ts',
+      },
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts',
+      },
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/page-templates/Shell.stories.ts',
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [{ type: 'readme', file: 'packages/page-templates/README.md' }],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['page-templates'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['page-templates', 'flow-layout'],
+  }),
+  surface({
+    packageName: '@ww/page-templates',
+    exportName: 'UiDashboardLayout',
+    kind: 'page-template-shell',
+    requiredStorybookInvariants: ['responsive'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/page-templates/DashboardLayout.stories.ts',
+        covers: ['responsive'],
+      },
+      {
+        variant: 'composition',
+        file: 'apps/docs/src/stories/page-templates/DashboardLayout.stories.ts',
+      },
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/page-templates/DashboardLayout.stories.ts',
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/page-templates/README.md' },
+      { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
+      { type: 'architecture-doc', file: 'docs/architecture/placement-rules.md' },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['page-templates'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['page-templates', 'dashboard'],
   }),
 ]);

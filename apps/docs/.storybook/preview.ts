@@ -9,6 +9,7 @@ import '@ww/core/styles.css';
 import '@ww/charts-apex/styles.css';
 import '@ww/signal-graph/styles.css';
 import '@ww/data-grid/styles.css';
+import '@ww/tsparticles/styles.css';
 import '@ww/widgets/styles.css';
 import '@ww/page-templates/styles.css';
 

@@ -78,7 +78,7 @@ describe('useApexThemeOptions', () => {
     expect(state.resolvedOptions.markers?.size).toBe(0);
   });
 
-  it('merges user options while keeping the prop type canonical in light scopes', async () => {
+  it('merges user options while keeping the prop type canonical in belovodye dark scopes', async () => {
     const Harness = defineComponent({
       setup(_, { expose }) {
         const hostRef = ref<HTMLElement | null>(null);
@@ -101,7 +101,7 @@ describe('useApexThemeOptions', () => {
         });
         expose({ options, ...state });
         return () =>
-          h('section', { 'data-ui-theme': 'belovodye', 'data-ui-theme-type': 'light' }, [
+          h('section', { 'data-ui-theme': 'belovodye', 'data-ui-theme-type': 'dark' }, [
             h('div', { ref: hostRef }),
           ]);
       },
@@ -124,8 +124,8 @@ describe('useApexThemeOptions', () => {
     expect(state.resolvedOptions.chart?.type).toBe('area');
     expect(state.resolvedOptions.colors).toEqual(['#123456']);
     expect(state.resolvedOptions.fill?.opacity).toBe(0.18);
-    expect(state.resolvedOptions.tooltip?.theme).toBe('light');
-    expect(state.resolvedOptions.theme?.mode).toBe('light');
+    expect(state.resolvedOptions.tooltip?.theme).toBe('dark');
+    expect(state.resolvedOptions.theme?.mode).toBe('dark');
   });
 
   it('falls back cleanly when the host element is not mounted yet', async () => {

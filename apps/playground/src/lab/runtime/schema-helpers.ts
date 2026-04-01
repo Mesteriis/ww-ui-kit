@@ -1,6 +1,7 @@
 import { h, markRaw, toRaw, type Component } from 'vue';
 
 import { UiButton } from '@ww/core';
+import { getThemeMeta, type ThemeName } from '@ww/themes';
 import type {
   LabCopyFormat,
   LabMatrixItem,
@@ -180,12 +181,17 @@ export function markPreviewComponent<T extends Component>(component: T) {
   return markRaw(component);
 }
 
+function isThemeName(value: string): value is ThemeName {
+  return value === 'light' || value === 'dark' || value === 'belovodye';
+}
+
 export function buildThemeScopeAttrs(state: Record<string, unknown>, context: LabPreviewContext) {
   const scopedTheme = state.subtreeTheme;
-  if (typeof scopedTheme === 'string' && scopedTheme !== 'inherit') {
+  if (typeof scopedTheme === 'string' && scopedTheme !== 'inherit' && isThemeName(scopedTheme)) {
+    const scopedThemeMeta = getThemeMeta(scopedTheme);
     return {
       'data-ui-theme': scopedTheme,
-      'data-ui-theme-type': scopedTheme === 'dark' ? 'dark' : 'light',
+      'data-ui-theme-type': scopedThemeMeta.type,
     };
   }
 

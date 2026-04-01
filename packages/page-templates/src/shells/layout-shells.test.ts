@@ -2,6 +2,8 @@ import { mount } from '@vue/test-utils';
 import { defineComponent } from 'vue';
 
 import {
+  UiDashboardLayout,
+  UiHorizontalLayout,
   UiLayout,
   UiLayoutContent,
   UiLayoutFooter,
@@ -9,10 +11,13 @@ import {
   UiLayoutSection,
   UiLayoutSider,
   UiLayoutToolbar,
+  UiVerticalLayout,
 } from '../index';
 
 describe('page-templates package', () => {
   it('exports the public shell components', () => {
+    expect(UiDashboardLayout).toBeTruthy();
+    expect(UiHorizontalLayout).toBeTruthy();
     expect(UiLayout).toBeTruthy();
     expect(UiLayoutHeader).toBeTruthy();
     expect(UiLayoutSider).toBeTruthy();
@@ -20,6 +25,88 @@ describe('page-templates package', () => {
     expect(UiLayoutFooter).toBeTruthy();
     expect(UiLayoutSection).toBeTruthy();
     expect(UiLayoutToolbar).toBeTruthy();
+    expect(UiVerticalLayout).toBeTruthy();
+  });
+
+  it('renders the dashboard layout slot contract with semantic regions', () => {
+    const wrapper = mount(UiDashboardLayout, {
+      slots: {
+        'aside-header':
+          '<div><strong>WW</strong><span>Workspace overview</span><p>Reusable dashboard shell</p></div>',
+        'aside-content':
+          '<nav aria-label="Dashboard navigation"><a href="#summary">Summary</a><a href="#queue">Queue</a></nav>',
+        'aside-actions':
+          '<button type="button">Create insight</button><button type="button">Invite analyst</button>',
+        header: '<div><h1>Operations cockpit</h1><p>Route state stays in apps.</p></div>',
+        'header-actions': '<button type="button">Open workspace menu</button>',
+        default: '<article><h2>Pipeline coverage</h2><p>Dashboard content</p></article>',
+      },
+    });
+
+    expect(wrapper.find('section.ui-dashboard-layout[data-ui-region="shell"]').exists()).toBe(true);
+    expect(wrapper.find('aside.ui-dashboard-layout__aside[data-ui-region="aside"]').exists()).toBe(
+      true
+    );
+    expect(wrapper.find('section.ui-dashboard-layout__main[data-ui-region="main"]').exists()).toBe(
+      true
+    );
+    expect(
+      wrapper.find('header.ui-dashboard-layout__header[data-ui-region="header"]').exists()
+    ).toBe(true);
+    expect(
+      wrapper.find('section.ui-dashboard-layout__content[data-ui-region="content"]').exists()
+    ).toBe(true);
+    expect(wrapper.find('[data-ui-slot="aside-header"]').text()).toContain('Workspace overview');
+    expect(wrapper.find('[data-ui-slot="aside-content"]').text()).toContain('Summary');
+    expect(wrapper.find('[data-ui-slot="aside-actions"]').text()).toContain('Create insight');
+    expect(wrapper.find('[data-ui-slot="header"]').text()).toContain('Operations cockpit');
+    expect(wrapper.find('[data-ui-slot="header-actions"]').text()).toContain('Open workspace menu');
+    expect(wrapper.find('[data-ui-region="content"]').text()).toContain('Pipeline coverage');
+  });
+
+  it('keeps dashboard layout region wrappers stable when optional slots are omitted', () => {
+    const wrapper = mount(UiDashboardLayout, {
+      slots: {
+        default: '<div>Only main content</div>',
+      },
+    });
+
+    expect(wrapper.find('[data-ui-slot="aside-header"]').exists()).toBe(true);
+    expect(wrapper.find('[data-ui-slot="aside-content"]').exists()).toBe(true);
+    expect(wrapper.find('[data-ui-slot="aside-actions"]').exists()).toBe(true);
+    expect(wrapper.find('[data-ui-slot="header"]').exists()).toBe(true);
+    expect(wrapper.find('[data-ui-slot="header-actions"]').exists()).toBe(true);
+    expect(wrapper.find('[data-ui-region="content"]').text()).toContain('Only main content');
+  });
+
+  it('locks document scroll while the dashboard layout is mounted and restores it on unmount', () => {
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const originalClientWidth = document.documentElement.clientWidth;
+
+    Object.defineProperty(document.documentElement, 'clientWidth', {
+      configurable: true,
+      value: window.innerWidth,
+    });
+
+    const wrapper = mount(UiDashboardLayout, {
+      attachTo: document.body,
+      slots: {
+        default: '<div>Scroll lock proof</div>',
+      },
+    });
+
+    expect(document.body.style.overflow).toBe('hidden');
+
+    wrapper.unmount();
+
+    expect(document.body.style.overflow).toBe(originalOverflow);
+    expect(document.body.style.paddingRight).toBe(originalPaddingRight);
+
+    Object.defineProperty(document.documentElement, 'clientWidth', {
+      configurable: true,
+      value: originalClientWidth,
+    });
   });
 
   it('renders structural regions through explicit layout composition', () => {
@@ -49,12 +136,77 @@ describe('page-templates package', () => {
     expect(wrapper.text()).toContain('Footer meta');
   });
 
+  it('renders vertical and horizontal flow layouts with gap and scroll contracts', () => {
+    const vertical = mount(UiVerticalLayout, {
+      props: {
+        gap: '2rem',
+        scroll: true,
+      },
+      slots: {
+        default: '<span>Filters</span><span>Approvals</span><span>Escalations</span>',
+      },
+    });
+
+    const horizontal = mount(UiHorizontalLayout, {
+      props: {
+        gap: '1.25rem',
+      },
+      slots: {
+        default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
+    const horizontalScrollable = mount(UiHorizontalLayout, {
+      props: {
+        gap: '1.25rem',
+        scroll: true,
+      },
+      slots: {
+        default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
+    expect(vertical.classes()).toContain('ui-flow-layout');
+    expect(vertical.classes()).toContain('ui-vertical-layout');
+    expect(vertical.attributes('data-ui-direction')).toBe('vertical');
+    expect(vertical.attributes('data-ui-scroll')).toBe('true');
+    expect(vertical.attributes('tabindex')).toBe('0');
+    expect(vertical.attributes('style')).toContain('--ui-layout-flow-gap: 2rem;');
+    expect(vertical.text()).toContain('Filters');
+    expect(vertical.text()).toContain('Escalations');
+
+    expect(horizontal.classes()).toContain('ui-flow-layout');
+    expect(horizontal.classes()).toContain('ui-horizontal-layout');
+    expect(horizontal.attributes('data-ui-direction')).toBe('horizontal');
+    expect(horizontal.attributes('data-ui-scroll')).toBe('false');
+    expect(horizontal.attributes('tabindex')).toBeUndefined();
+    expect(horizontal.attributes('style')).toContain('--ui-layout-flow-gap: 1.25rem;');
+    expect(horizontal.text()).toContain('North lane');
+    expect(horizontal.text()).toContain('Bravo');
+
+    expect(horizontalScrollable.classes()).toContain('ui-flow-layout');
+    expect(horizontalScrollable.classes()).toContain('ui-horizontal-layout');
+    expect(horizontalScrollable.attributes('data-ui-direction')).toBe('horizontal');
+    expect(horizontalScrollable.attributes('data-ui-scroll')).toBe('true');
+    expect(horizontalScrollable.attributes('tabindex')).toBe('0');
+    expect(horizontalScrollable.attributes('style')).toContain('--ui-layout-flow-gap: 1.25rem;');
+    expect(horizontalScrollable.text()).toContain('North lane');
+    expect(horizontalScrollable.text()).toContain('Bravo');
+  });
+
   it('renders safely inside a themed subtree container', () => {
     const wrapper = mount(
       defineComponent({
-        components: { UiLayout, UiLayoutContent, UiLayoutHeader, UiLayoutSection },
+        components: {
+          UiHorizontalLayout,
+          UiLayout,
+          UiLayoutContent,
+          UiLayoutHeader,
+          UiLayoutSection,
+          UiVerticalLayout,
+        },
         template: `
-          <section data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section data-ui-theme="belovodye" data-ui-theme-type="dark">
             <UiLayout>
               <template #header>
                 <UiLayoutHeader>
@@ -67,6 +219,8 @@ describe('page-templates package', () => {
                 <UiLayoutSection title="Primary section">Subtree content</UiLayoutSection>
               </UiLayoutContent>
             </UiLayout>
+            <UiVerticalLayout><span>Scoped vertical</span></UiVerticalLayout>
+            <UiHorizontalLayout><span>Scoped horizontal</span></UiHorizontalLayout>
           </section>
         `,
       })
@@ -76,6 +230,8 @@ describe('page-templates package', () => {
     expect(wrapper.text()).toContain('Scoped shell');
     expect(wrapper.text()).toContain('Primary section');
     expect(wrapper.text()).toContain('Subtree content');
+    expect(wrapper.text()).toContain('Scoped vertical');
+    expect(wrapper.text()).toContain('Scoped horizontal');
   });
 
   it('renders helper regions and optional section metadata', () => {

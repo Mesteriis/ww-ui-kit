@@ -20,7 +20,7 @@ describe('LabWorkbenchView', () => {
     expect(wrapper.text()).toContain('Downstream usage');
     expect(wrapper.get('[data-lab-meta="package"]').text()).toContain('@ww/core');
     expect(wrapper.get('[data-lab-meta="theme-name"]').text()).toContain('belovodye');
-    expect(wrapper.get('[data-lab-meta="theme-type"]').text()).toContain('light');
+    expect(wrapper.get('[data-lab-meta="theme-type"]').text()).toContain('dark');
 
     const labelInput = wrapper.get('[data-lab-control="label"] input');
     await labelInput.setValue('Ship release');

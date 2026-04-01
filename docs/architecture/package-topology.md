@@ -17,6 +17,7 @@ The repository has three physical package groups:
 - `packages/widgets`
 - `packages/page-templates`
 - `packages/third-party/charts-apex`
+- `packages/third-party/tsparticles`
 - `packages/eslint-config`
 - `packages/tsconfig`
 - `apps/docs`
@@ -31,6 +32,9 @@ Current decision:
 - `@ww/charts-apex` lives in `packages/third-party/charts-apex`
   - public API is honest about ApexCharts
   - vendor dependency is real and adapter-shaped
+- `@ww/tsparticles` lives in `packages/third-party/tsparticles`
+  - public API is honest about the tsParticles backdrop dependency
+  - vendor dependency is decorative and adapter-shaped
 - `@ww/signal-graph` stays outside `third-party`
   - public API is feature-first
   - Vue Flow is an internal engine, not the product-level contract

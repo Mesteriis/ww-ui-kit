@@ -6,6 +6,7 @@ export default defineConfig({
       'packages/themes/vitest.config.ts',
       'packages/primitives/vitest.config.ts',
       'packages/third-party/charts-apex/vitest.config.ts',
+      'packages/third-party/tsparticles/vitest.config.ts',
       'packages/signal-graph/vitest.config.ts',
       'packages/data-grid/vitest.config.ts',
       'packages/widgets/vitest.config.ts',

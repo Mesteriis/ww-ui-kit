@@ -36,7 +36,7 @@ describe('widgets package', () => {
       defineComponent({
         components: { UiWidgetShell },
         template: `
-          <section data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section data-ui-theme="belovodye" data-ui-theme-type="dark">
             <UiWidgetShell title="Scoped widget">
               <template #empty>
                 <span>Empty scoped shell</span>

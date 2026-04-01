@@ -95,7 +95,7 @@ export const SystemShowcase: StoryObj = {
     setup() {
       const inputValue = ref('Belovodye analytics workspace');
       const textareaValue = ref(
-        'Cold light surfaces, calm contrast, and restrained river-blue accents.'
+        'Dark glass surfaces, cyan-teal accents, and dashboard-grade contrast copied from the canonical frontend.'
       );
       const selectValue = ref('dashboard');
       const richSelectValue = ref<string | null>('bravo');
@@ -261,8 +261,10 @@ export const SystemShowcase: StoryObj = {
           padding: var(--ui-space-6);
           border-radius: var(--ui-radius-xl);
           background:
-            radial-gradient(circle at top right, var(--ui-surface-brand-soft), transparent 32%),
-            linear-gradient(180deg, var(--ui-surface-canvas), var(--ui-surface-default));
+            radial-gradient(circle at 62% -4%, rgba(46, 157, 168, 0.14), transparent 30%),
+            radial-gradient(circle at 18% 10%, rgba(26, 140, 131, 0.22), transparent 38%),
+            radial-gradient(circle at 82% 84%, rgba(18, 96, 98, 0.2), transparent 42%),
+            linear-gradient(168deg, #02060d 0%, #05131c 40%, #062118 74%, #030c14 100%);
         "
       >
         <UiCard>
@@ -317,7 +319,7 @@ export const SystemShowcase: StoryObj = {
               </UiSwitch>
             </div>
 
-            <UiField label="Release stage" hint="Selection surfaces keep the same cold-neutral rhythm">
+              <UiField label="Release stage" hint="Selection surfaces keep the same dark glass rhythm">
               <UiRadioGroup v-model="stageValue" orientation="horizontal">
                 <UiRadio value="design">Design</UiRadio>
                 <UiRadio value="review">Review</UiRadio>
@@ -375,7 +377,7 @@ export const SystemShowcase: StoryObj = {
                 <UiTabsTrigger value="empty">Empty state</UiTabsTrigger>
               </UiTabsList>
               <UiTabsPanel value="controls">
-                Buttons, inputs, badges, menus, and steps share the same cold-neutral contrast system.
+                Buttons, inputs, badges, menus, and steps share the same dark dashboard contrast system.
               </UiTabsPanel>
               <UiTabsPanel value="overlay">
                 Dialog and drawer surfaces inherit Belovodye through the theme-aware portal stack.
@@ -452,7 +454,7 @@ export const SystemShowcase: StoryObj = {
               title="Belovodye dialog"
               description="Modal surfaces inherit the scoped theme without a second provider."
             >
-              <p style="margin: 0;">Dialog content keeps the same cold-neutral palette.</p>
+              <p style="margin: 0;">Dialog content keeps the same dark Belovodye palette.</p>
               <template #footer>
                 <UiButton variant="secondary" @click="dialogOpen = false">Cancel</UiButton>
                 <UiButton @click="dialogOpen = false">Confirm</UiButton>

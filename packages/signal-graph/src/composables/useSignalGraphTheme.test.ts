@@ -30,7 +30,7 @@ describe('useSignalGraphTheme', () => {
             {
               id: 'scope',
               'data-ui-theme': 'belovodye',
-              'data-ui-theme-type': 'light',
+              'data-ui-theme-type': 'dark',
             },
             [h('div', { id: 'host', ref: hostRef })]
           );
@@ -51,7 +51,7 @@ describe('useSignalGraphTheme', () => {
 
     expect(state.themeState.container?.id).toBe('scope');
     expect(state.themeState.themeName).toBe('belovodye');
-    expect(state.themeState.themeType).toBe('light');
+    expect(state.themeState.themeType).toBe('dark');
 
     const scope = wrapper.get('#scope').element as HTMLElement;
     scope.setAttribute('data-ui-theme', 'dark');

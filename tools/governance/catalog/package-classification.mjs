@@ -45,6 +45,15 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     readmePath: 'packages/third-party/charts-apex/README.md',
   },
   {
+    packageName: '@ww/tsparticles',
+    physicalPath: 'packages/third-party/tsparticles',
+    packageLayer: 'third-party-adapter',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: true,
+    readmePath: 'packages/third-party/tsparticles/README.md',
+  },
+  {
     packageName: '@ww/signal-graph',
     physicalPath: 'packages/signal-graph',
     packageLayer: 'system',

@@ -115,7 +115,7 @@ const replayReducedSignal = () => {
       <section
         class="playground__scoped-surface"
         data-ui-theme="belovodye"
-        data-ui-theme-type="light"
+        data-ui-theme-type="dark"
       >
         <div class="ui-stack">
           <div class="ui-cluster">

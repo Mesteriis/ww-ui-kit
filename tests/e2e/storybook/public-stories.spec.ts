@@ -39,11 +39,13 @@ test('renders canonical public story groups', async ({ page, request }) => {
     'Core/Navigation',
     'Foundations/Theme System Overview',
     'Foundations/Charts/Apex Overview',
+    'Foundations/Particles/Overview',
     'Foundations/Signal Graph/Overview',
     'Systems/Data Grid/Overview',
     'Widgets/Data Table Widget/Overview',
     'Widgets/Shell',
     'Page Templates/Shell',
+    'Page Templates/Dashboard Layout',
   ];
 
   for (const title of storyTitles) {
@@ -60,7 +62,7 @@ test('applies theme switching through Storybook globals', async ({ page, request
 
   await openStory(page, storyId, 'theme:belovodye');
   await expect(page.getByText('ThemeName: belovodye', { exact: true }).first()).toBeVisible();
-  await expect(page.getByText('ThemeType: light', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('ThemeType: dark', { exact: true }).first()).toBeVisible();
 });
 
 test('opens overlays inside Storybook stories', async ({ page, request }) => {
@@ -156,17 +158,70 @@ test('renders display data surfaces inside Storybook', async ({ page, request })
   await expect(page.getByRole('table')).toBeVisible();
 });
 
-test('renders dashboard-like and marketing-like layout stories inside Storybook', async ({
-  page,
-  request,
-}) => {
+test('renders generic layout stories inside Storybook', async ({ page, request }) => {
   const storyId = await getStoryId(request, 'Page Templates/Shell');
   await openStory(page, storyId);
 
-  await expect(page.getByText('Dashboard operations shell', { exact: true })).toBeVisible();
+  await expect(page.getByText('Operations workspace shell', { exact: true })).toBeVisible();
   await expect(page.getByText('Marketing launch shell', { exact: true })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Create report' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Launch campaign' })).toBeVisible();
+  await expect(page.getByText('UiVerticalLayout', { exact: true })).toBeVisible();
+  await expect(page.getByText('UiHorizontalLayout', { exact: true })).toBeVisible();
+
+  const verticalFrame = page.locator('[data-ui-proof="vertical-default-frame"]');
+  const verticalLayout = verticalFrame.locator('.ui-vertical-layout');
+  const horizontalFrame = page.locator('[data-ui-proof="horizontal-default-frame"]');
+  const horizontalLayout = horizontalFrame.locator('.ui-horizontal-layout');
+
+  const verticalFrameBox = await verticalFrame.boundingBox();
+  const verticalLayoutBox = await verticalLayout.boundingBox();
+  const horizontalFrameBox = await horizontalFrame.boundingBox();
+  const horizontalLayoutBox = await horizontalLayout.boundingBox();
+  expect(verticalFrameBox).not.toBeNull();
+  expect(verticalLayoutBox).not.toBeNull();
+  expect(horizontalFrameBox).not.toBeNull();
+  expect(horizontalLayoutBox).not.toBeNull();
+
+  if (!verticalFrameBox || !verticalLayoutBox || !horizontalFrameBox || !horizontalLayoutBox) {
+    throw new Error('Flow layout boxes were not available inside Storybook.');
+  }
+
+  expect(verticalLayoutBox.width).toBeLessThan(verticalFrameBox.width);
+  expect(horizontalLayoutBox.width).toBeLessThan(horizontalFrameBox.width);
+
+  const verticalScrollMetrics = await page
+    .locator('[data-ui-proof="vertical-scroll-frame"] .ui-vertical-layout')
+    .evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+    }));
+  expect(verticalScrollMetrics.scrollHeight).toBeGreaterThan(verticalScrollMetrics.clientHeight);
+
+  const horizontalScrollMetrics = await page
+    .locator('[data-ui-proof="horizontal-scroll-frame"] .ui-horizontal-layout')
+    .evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+  expect(horizontalScrollMetrics.scrollWidth).toBeGreaterThan(horizontalScrollMetrics.clientWidth);
+});
+
+test('renders the named dashboard layout story inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Page Templates/Dashboard Layout');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('Operations cockpit', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Dashboard workspace menu' }).click();
+  await expect(page.getByText('GitHub repository', { exact: true })).toBeVisible();
+  await expect(page.getByText('Willow Works Analytics', { exact: true })).toBeVisible();
+});
+
+test('renders the tsParticles backdrop story group inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Foundations/Particles/Overview');
+  await openStory(page, storyId);
+
+  await expect(page.locator('.ui-tsparticles-backdrop').first()).toBeVisible();
+  await expect(page.getByText('Decorative token-driven backdrop', { exact: true })).toBeVisible();
 });
 
 test('keeps curated Storybook surfaces free of browser-level accessibility violations', async ({
@@ -186,6 +241,7 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
     { title: 'Core/Feedback' },
     { title: 'Core/Navigation' },
     { title: 'Core/Tabs' },
+    { title: 'Foundations/Particles/Overview' },
     {
       title: 'Core/Overlay',
       setup: async (activePage) => {
@@ -195,6 +251,7 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
     },
     { title: 'Systems/Data Grid/Overview' },
     { title: 'Page Templates/Shell' },
+    { title: 'Page Templates/Dashboard Layout' },
   ];
 
   for (const story of cases) {

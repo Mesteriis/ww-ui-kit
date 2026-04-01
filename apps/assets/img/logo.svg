@@ -1,0 +1,181 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#09131d"/>
+    <stop offset="52%" stop-color="#061827"/>
+    <stop offset="100%" stop-color="#0a2238"/>
+  </linearGradient>
+  <radialGradient id="bgGlowTop" cx="18%" cy="12%" r="44%">
+    <stop offset="0%" stop-color="#10314e" stop-opacity="0.44"/>
+    <stop offset="55%" stop-color="#0b2237" stop-opacity="0.16"/>
+    <stop offset="100%" stop-color="#0b2237" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="bgGlowCenter" cx="50%" cy="46%" r="56%">
+    <stop offset="0%" stop-color="#0c2a45" stop-opacity="0.18"/>
+    <stop offset="68%" stop-color="#081829" stop-opacity="0.03"/>
+    <stop offset="100%" stop-color="#081829" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="outerAura" cx="50%" cy="50%" r="44%">
+    <stop offset="0%" stop-color="#6bbdc5" stop-opacity="0.07"/>
+    <stop offset="65%" stop-color="#6bbdc5" stop-opacity="0.02"/>
+    <stop offset="100%" stop-color="#6bbdc5" stop-opacity="0"/>
+  </radialGradient>
+
+  <linearGradient id="ringShell" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#15283a"/>
+    <stop offset="100%" stop-color="#0f2133"/>
+  </linearGradient>
+  <linearGradient id="ringGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#e6edf5"/>
+    <stop offset="48%" stop-color="#aab9c8"/>
+    <stop offset="100%" stop-color="#6f8294"/>
+  </linearGradient>
+  <linearGradient id="sceneSky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1a3046"/>
+    <stop offset="52%" stop-color="#163048"/>
+    <stop offset="100%" stop-color="#10283e"/>
+  </linearGradient>
+  <radialGradient id="dawnGlow" cx="50%" cy="31%" r="34%">
+    <stop offset="0%" stop-color="#a9f0da" stop-opacity="0.22"/>
+    <stop offset="40%" stop-color="#c7edff" stop-opacity="0.12"/>
+    <stop offset="100%" stop-color="#c7edff" stop-opacity="0"/>
+  </radialGradient>
+
+  <linearGradient id="mist" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#d6e8f5" stop-opacity="0"/>
+    <stop offset="20%" stop-color="#d6e8f5" stop-opacity="0.32"/>
+    <stop offset="50%" stop-color="#f2f9ff" stop-opacity="0.58"/>
+    <stop offset="80%" stop-color="#d6e8f5" stop-opacity="0.32"/>
+    <stop offset="100%" stop-color="#d6e8f5" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#153d5a"/>
+    <stop offset="56%" stop-color="#123650"/>
+    <stop offset="100%" stop-color="#0e2a44"/>
+  </linearGradient>
+  <linearGradient id="waterHighlight" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#a9f0da" stop-opacity="0"/>
+    <stop offset="24%" stop-color="#a9f0da" stop-opacity="0.18"/>
+    <stop offset="50%" stop-color="#effcff" stop-opacity="0.38"/>
+    <stop offset="76%" stop-color="#a9f0da" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#a9f0da" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="monoGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4f9ff"/>
+    <stop offset="52%" stop-color="#d8e5f1"/>
+    <stop offset="100%" stop-color="#b2c5d5"/>
+  </linearGradient>
+  <linearGradient id="monoStroke" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94"/>
+    <stop offset="100%" stop-color="#94ddd5" stop-opacity="0.84"/>
+  </linearGradient>
+  <radialGradient id="monoGlow" cx="50%" cy="46%" r="42%">
+    <stop offset="0%" stop-color="#d8fcff" stop-opacity="0.24"/>
+    <stop offset="72%" stop-color="#a0e3d4" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="#a0e3d4" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="snowLine" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f4f9ff"/>
+    <stop offset="100%" stop-color="#b9c9d8"/>
+  </linearGradient>
+
+  <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+  <filter id="mistBlur" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="10"/>
+  </filter>
+  <filter id="medallionShadow" x="-35%" y="-35%" width="170%" height="170%">
+    <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#01060b" flood-opacity="0.60"/>
+  </filter>
+  <filter id="ringGlow" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#8fd7dc" flood-opacity="0.12"/>
+  </filter>
+  <filter id="monoShadow" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#03101c" flood-opacity="0.72"/>
+    <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#bdf6ed" flood-opacity="0.10"/>
+  </filter>
+
+  <clipPath id="medallionClip">
+    <circle cx="512" cy="512" r="336"/>
+  </clipPath>
+</defs>
+
+<circle cx="512" cy="512" r="352" fill="url(#outerAura)"/>
+
+<g filter="url(#medallionShadow)">
+  <circle cx="512" cy="512" r="370" fill="#08131f" fill-opacity="0.24"/>
+  <circle cx="512" cy="512" r="360" fill="url(#ringShell)" stroke="#344a5f" stroke-opacity="0.32" stroke-width="18"/>
+  <circle cx="512" cy="512" r="343" fill="none" stroke="url(#ringGrad)" stroke-width="2.8" opacity="0.82" filter="url(#ringGlow)"/>
+  <circle cx="512" cy="512" r="336" fill="url(#sceneSky)" stroke="#dbe7f2" stroke-opacity="0.20" stroke-width="1.6"/>
+</g>
+
+<g clip-path="url(#medallionClip)">
+  <rect x="176" y="176" width="672" height="672" fill="url(#sceneSky)"/>
+  <circle cx="512" cy="360" r="168" fill="url(#dawnGlow)"/>
+
+  <path d="M176 426 C258 396, 342 338, 398 284 C432 252, 476 272, 504 334 C520 366, 544 392, 576 404 C602 414, 632 410, 662 386 C706 352, 766 362, 848 424 L848 530 L176 530 Z"
+        fill="#43586c" fill-opacity="0.90"/>
+  <path d="M176 470 C252 446, 320 406, 374 360 C412 328, 454 344, 488 390 C506 414, 528 438, 560 444 C592 450, 628 438, 662 410 C708 374, 768 390, 848 458 L848 566 L176 566 Z"
+        fill="#6c8296" fill-opacity="0.78"/>
+  <path d="M176 522 C266 510, 342 490, 414 474 C470 462, 552 462, 610 474 C682 490, 758 510, 848 522 L848 604 L176 604 Z"
+        fill="#35526a" fill-opacity="0.62"/>
+
+  <path d="M244 424 C314 392, 362 350, 406 304 C424 287, 452 292, 470 318 C494 355, 516 390, 554 406 C576 416, 605 413, 628 391 C664 355, 718 365, 780 423"
+        fill="none" stroke="url(#snowLine)" stroke-opacity="0.38" stroke-width="6" stroke-linecap="round"/>
+  <path d="M246 456 C320 430, 386 392, 434 350 C454 333, 480 340, 499 363 C523 394, 545 420, 577 424 C604 427, 635 418, 664 395 C703 363, 752 374, 798 410"
+        fill="none" stroke="#eaf3ff" stroke-opacity="0.18" stroke-width="4" stroke-linecap="round"/>
+
+  <ellipse cx="512" cy="470" rx="274" ry="18" fill="url(#mist)" filter="url(#mistBlur)"/>
+  <ellipse cx="512" cy="508" rx="312" ry="24" fill="url(#mist)" opacity="0.8" filter="url(#mistBlur)"/>
+  <ellipse cx="512" cy="548" rx="326" ry="28" fill="#dff4ff" fill-opacity="0.10" filter="url(#softBlur)"/>
+
+  <path d="M176 586 C254 592, 334 582, 420 566 C486 554, 538 554, 604 566 C690 582, 770 592, 848 586 L848 848 L176 848 Z"
+        fill="url(#waterGrad)"/>
+  <path d="M206 618 C300 612, 376 598, 444 586 C494 578, 530 578, 580 586 C648 598, 724 612, 818 618" fill="none" stroke="url(#waterHighlight)" stroke-width="4"/>
+  <path d="M222 652 C316 648, 394 637, 458 628 C500 622, 524 622, 566 628 C630 637, 708 648, 802 652" fill="none" stroke="#c8f9f6" stroke-opacity="0.18" stroke-width="3"/>
+  <path d="M244 688 C338 686, 416 678, 474 671 C503 668, 521 668, 550 671 C608 678, 686 686, 780 688" fill="none" stroke="#f0fbff" stroke-opacity="0.11" stroke-width="2.5"/>
+
+  <circle cx="512" cy="530" r="176" fill="url(#monoGlow)" opacity="0.8"/>
+</g>
+
+<g opacity="0.72">
+  <g transform="translate(250 292) scale(1.0)">
+    <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="none" stroke="#8adad3" stroke-opacity="0.34" stroke-width="1.65"/>
+    <path d="M28 10 H54 M41 -3 V23" fill="none" stroke="#b8cddd" stroke-opacity="0.28" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(698 292) scale(1.0)">
+    <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="none" stroke="#8adad3" stroke-opacity="0.34" stroke-width="1.65"/>
+    <path d="M28 10 H54 M41 -3 V23" fill="none" stroke="#b8cddd" stroke-opacity="0.28" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(250 706) scale(0.92)">
+    <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="none" stroke="#8adad3" stroke-opacity="0.34" stroke-width="1.65"/>
+    <path d="M28 10 H54 M41 -3 V23" fill="none" stroke="#b8cddd" stroke-opacity="0.28" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(698 706) scale(0.92)">
+    <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="none" stroke="#8adad3" stroke-opacity="0.34" stroke-width="1.65"/>
+    <path d="M28 10 H54 M41 -3 V23" fill="none" stroke="#b8cddd" stroke-opacity="0.28" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+</g>
+
+<g opacity="0.4">
+  <circle cx="512" cy="530" r="186" fill="none" stroke="#eaf4ff" stroke-opacity="0.08" stroke-width="1.6"/>
+  <circle cx="512" cy="530" r="186" fill="none" stroke="#88d9d6" stroke-opacity="0.05" stroke-width="10"/>
+</g>
+
+<g filter="url(#monoShadow)">
+  <path d="M322 432 L408 672 L484 588 L512 628 L540 588 L616 672 L702 432 L628 384 L570 522 L512 438 L454 522 L396 384 Z
+           M478 534 L512 486 L546 534 L512 578 Z"
+        fill="url(#monoGrad)" fill-rule="evenodd" stroke="url(#monoStroke)" stroke-width="4.2" stroke-linejoin="round"/>
+  <path d="M336 440 L411 642 L481 566 L512 606 L543 566 L613 642 L688 440 L622 400 L565 522 L512 452 L459 522 L402 400 Z"
+        fill="#ffffff" fill-opacity="0.10"/>
+</g>
+
+<g opacity="0.4">
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#f4fbff" stroke-opacity="0.22" stroke-width="1"/>
+  <circle cx="512" cy="512" r="370" fill="none" stroke="#8adad3" stroke-opacity="0.08" stroke-width="1"/>
+</g>
+</svg>

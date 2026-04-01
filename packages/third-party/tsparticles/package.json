@@ -1,0 +1,43 @@
+{
+  "name": "@ww/tsparticles",
+  "version": "0.1.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/third-party/tsparticles"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/third-party/tsparticles#readme",
+  "sideEffects": [
+    "./src/styles/index.css"
+  ],
+  "files": [
+    "dist",
+    "src/styles",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles/index.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@ww/primitives": "workspace:*",
+    "@ww/themes": "workspace:*",
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/slim": "^3.9.1"
+  },
+  "scripts": {
+    "build": "pnpm typecheck:build && vite build",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "vue-tsc -p tsconfig.build.json --noEmit"
+  }
+}

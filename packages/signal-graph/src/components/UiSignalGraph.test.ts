@@ -471,7 +471,7 @@ describe('UiSignalGraph', () => {
           };
         },
         template: `
-          <section id="scope" data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section id="scope" data-ui-theme="belovodye" data-ui-theme-type="dark">
             <UiSignalGraph :nodes="nodes" :edges="edges" :node-definitions="nodeDefinitions" />
           </section>
         `,

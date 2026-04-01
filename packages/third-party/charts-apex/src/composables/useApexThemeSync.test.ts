@@ -30,7 +30,7 @@ describe('useApexThemeSync', () => {
             {
               id: 'scope',
               'data-ui-theme': 'belovodye',
-              'data-ui-theme-type': 'light',
+              'data-ui-theme-type': 'dark',
             },
             [h('div', { id: 'host', ref: hostRef })]
           );
@@ -51,7 +51,7 @@ describe('useApexThemeSync', () => {
 
     expect(state.themeScope.container?.id).toBe('scope');
     expect(state.themeScope.themeName).toBe('belovodye');
-    expect(state.themeScope.themeType).toBe('light');
+    expect(state.themeScope.themeType).toBe('dark');
 
     const scope = wrapper.get('#scope').element as HTMLElement;
     scope.setAttribute('data-ui-theme', 'dark');

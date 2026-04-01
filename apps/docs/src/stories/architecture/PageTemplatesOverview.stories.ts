@@ -25,10 +25,15 @@ export const PageTemplatesLayer: StoryObj = {
           <template #header>Current shell level</template>
           <div class="ui-stack">
             <p style="margin: 0; color: var(--ui-text-secondary);">
-              <code>@ww/page-templates</code> now exposes generic layout primitives first. Named dashboard and marketing templates are composed above this shell level later.
+              <code>@ww/page-templates</code> exposes the generic <code>UiLayout</code> family,
+              directional flow wrappers, and the named <code>UiDashboardLayout</code> surface
+              without moving route ownership into the package.
             </p>
             <div class="ui-cluster">
               <UiBadge variant="brand">UiLayout</UiBadge>
+              <UiBadge variant="brand">UiVerticalLayout</UiBadge>
+              <UiBadge variant="brand">UiHorizontalLayout</UiBadge>
+              <UiBadge variant="brand">UiDashboardLayout</UiBadge>
               <UiBadge variant="brand">UiLayoutHeader</UiBadge>
               <UiBadge variant="brand">UiLayoutSider</UiBadge>
               <UiBadge>UiLayoutContent</UiBadge>
@@ -63,7 +68,9 @@ export const PageTemplatesLayer: StoryObj = {
           <template #header>Reserved namespaces</template>
           <div class="ui-stack" style="gap: var(--ui-space-3);">
             <p style="margin: 0; color: var(--ui-text-secondary);">
-              Future named templates such as dashboard and marketing consumers stay in this package, but they build on top of UiLayout instead of replacing it.
+              Dashboard templates and smaller flow wrappers now live beside the generic shell family
+              in this package. Future marketing and workspace variants still build on top of the
+              same layer placement.
             </p>
             <div class="ui-cluster">
               <code v-for="namespace in namespaces" :key="namespace">{{ namespace }}</code>

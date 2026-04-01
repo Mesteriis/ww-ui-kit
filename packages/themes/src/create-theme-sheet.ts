@@ -61,6 +61,14 @@ const serializeResponsiveBlock = (
     .join('\n')}\n}\n`;
 };
 
+const serializeThemeExtraCss = (themeName: ThemeName) => {
+  if (themeName !== 'belovodye') {
+    return '';
+  }
+
+  return `[${THEME_ATTRIBUTE}="${themeName}"] body {\n  background-color: var(--ui-surface-canvas);\n  background-image:\n    radial-gradient(circle at 18% 14%, rgba(214, 248, 255, 0.18), transparent 24%),\n    radial-gradient(circle at 76% 8%, rgba(110, 242, 220, 0.16), transparent 28%),\n    radial-gradient(circle at 72% 78%, rgba(46, 157, 168, 0.14), transparent 34%),\n    linear-gradient(162deg, #091623 0%, #102434 36%, #0f2927 72%, #08131d 100%);\n}\n`;
+};
+
 export function createThemeSheet(themeName: ThemeName, themeTokens: ThemeContract) {
   const selectors =
     themeName === 'light'
@@ -92,6 +100,7 @@ export function createThemeSheet(themeName: ThemeName, themeTokens: ThemeContrac
         THEME_RESPONSIVE_BREAKPOINTS[breakpoint as keyof typeof THEME_RESPONSIVE_BREAKPOINTS]
       )
     ),
+    serializeThemeExtraCss(themeName),
   ];
 
   return blocks.filter(Boolean).join('\n');

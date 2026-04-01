@@ -36,7 +36,7 @@ Theme metadata is centralized in `@ww/themes`.
 
 ## Consequences
 
-- Invalid combinations such as `data-ui-theme="belovodye"` with `data-ui-theme-type="dark"` are no longer part of the supported model.
+- Invalid combinations such as `data-ui-theme="belovodye"` with `data-ui-theme-type="light"` are no longer part of the supported model.
 - Storybook and playground can show both the current theme name and type from one source of truth.
 - New themes must declare their `type` when added to the registry.
 - Browser-native UI behavior can align with the canonical theme family through the shared `data-ui-theme-type` selectors.
