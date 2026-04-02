@@ -83,6 +83,24 @@ function roundMetric(value: number) {
   return Number(value.toFixed(2));
 }
 
+export function normalizeTextForExactMatch(value: string | null | undefined) {
+  return value?.replace(/\s+/g, ' ').trim() ?? '';
+}
+
+export function hasExactTextMatch(
+  candidateTexts: readonly (string | null | undefined)[],
+  expectedText: string
+) {
+  const normalizedExpected = normalizeTextForExactMatch(expectedText);
+  if (!normalizedExpected) {
+    return false;
+  }
+
+  return candidateTexts.some(
+    (candidateText) => normalizeTextForExactMatch(candidateText) === normalizedExpected
+  );
+}
+
 function resolveFromRoot(relativePath: string) {
   return path.join(ROOT_DIR, relativePath);
 }
@@ -226,6 +244,26 @@ async function measureInputFlow(page: Page, measurement: InputFlowMeasurement) {
         throw new Error(`Missing input "${inputSelector}" in "${scopeSelector}".`);
       }
 
+      const normalizeTextForExactMatch = (value: string | null | undefined) =>
+        value?.replace(/\s+/g, ' ').trim() ?? '';
+      const hasExactTextMatch = (
+        candidateTexts: readonly (string | null | undefined)[],
+        expectedText: string
+      ) => {
+        const normalizedExpected = normalizeTextForExactMatch(expectedText);
+        if (!normalizedExpected) {
+          return false;
+        }
+
+        return candidateTexts.some(
+          (candidateText) => normalizeTextForExactMatch(candidateText) === normalizedExpected
+        );
+      };
+      const collectScopeTextCandidates = (scopeElement: HTMLElement) => [
+        scopeElement.textContent,
+        ...[...scopeElement.querySelectorAll('*')].map((element) => element.textContent),
+      ];
+
       const waitForCondition = (predicate: () => boolean) =>
         new Promise<void>((resolve, reject) => {
           const deadline = performance.now() + timeoutMilliseconds;
@@ -251,7 +289,9 @@ async function measureInputFlow(page: Page, measurement: InputFlowMeasurement) {
       input.focus();
       input.value = inputValue;
       input.dispatchEvent(new Event('input', { bubbles: true }));
-      await waitForCondition(() => (scope.textContent ?? '').includes(successText));
+      await waitForCondition(() =>
+        hasExactTextMatch(collectScopeTextCandidates(scope), successText)
+      );
       return Number((performance.now() - start).toFixed(2));
     },
     {
@@ -282,6 +322,26 @@ async function measureCheckboxFlow(page: Page, measurement: CheckboxFlowMeasurem
         throw new Error(`Missing checkbox "${checkboxSelector}" in "${scopeSelector}".`);
       }
 
+      const normalizeTextForExactMatch = (value: string | null | undefined) =>
+        value?.replace(/\s+/g, ' ').trim() ?? '';
+      const hasExactTextMatch = (
+        candidateTexts: readonly (string | null | undefined)[],
+        expectedText: string
+      ) => {
+        const normalizedExpected = normalizeTextForExactMatch(expectedText);
+        if (!normalizedExpected) {
+          return false;
+        }
+
+        return candidateTexts.some(
+          (candidateText) => normalizeTextForExactMatch(candidateText) === normalizedExpected
+        );
+      };
+      const collectScopeTextCandidates = (scopeElement: HTMLElement) => [
+        scopeElement.textContent,
+        ...[...scopeElement.querySelectorAll('*')].map((element) => element.textContent),
+      ];
+
       const waitForCondition = (predicate: () => boolean) =>
         new Promise<void>((resolve, reject) => {
           const deadline = performance.now() + timeoutMilliseconds;
@@ -307,7 +367,9 @@ async function measureCheckboxFlow(page: Page, measurement: CheckboxFlowMeasurem
 
       const start = performance.now();
       checkbox.click();
-      await waitForCondition(() => (scope.textContent ?? '').includes(successText));
+      await waitForCondition(() =>
+        hasExactTextMatch(collectScopeTextCandidates(scope), successText)
+      );
       return Number((performance.now() - start).toFixed(2));
     },
     {

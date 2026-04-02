@@ -56,12 +56,26 @@ describe('page-templates package', () => {
     expect(
       wrapper.find('section.ui-dashboard-layout__content[data-ui-region="content"]').exists()
     ).toBe(true);
+    expect(wrapper.find('[data-ui-region="aside-content"]').attributes('data-ui-scroll')).toBe(
+      'true'
+    );
+    expect(wrapper.find('[data-ui-region="aside-content"]').attributes('role')).toBe('region');
+    expect(wrapper.find('[data-ui-region="aside-content"]').attributes('tabindex')).toBe('0');
+    expect(wrapper.find('[data-ui-region="aside-content"]').attributes('aria-label')).toBe(
+      'Dashboard sidebar content'
+    );
     expect(wrapper.find('[data-ui-slot="aside-header"]').text()).toContain('Workspace overview');
     expect(wrapper.find('[data-ui-slot="aside-content"]').text()).toContain('Summary');
     expect(wrapper.find('[data-ui-slot="aside-actions"]').text()).toContain('Create insight');
     expect(wrapper.find('[data-ui-slot="header"]').text()).toContain('Operations cockpit');
     expect(wrapper.find('[data-ui-slot="header-actions"]').text()).toContain('Open workspace menu');
     expect(wrapper.find('[data-ui-region="content"]').text()).toContain('Pipeline coverage');
+    expect(wrapper.find('[data-ui-region="content"]').attributes('data-ui-scroll')).toBe('true');
+    expect(wrapper.find('[data-ui-region="content"]').attributes('role')).toBe('region');
+    expect(wrapper.find('[data-ui-region="content"]').attributes('tabindex')).toBe('0');
+    expect(wrapper.find('[data-ui-region="content"]').attributes('aria-label')).toBe(
+      'Dashboard main content'
+    );
   });
 
   it('keeps dashboard layout region wrappers stable when optional slots are omitted', () => {
@@ -136,7 +150,7 @@ describe('page-templates package', () => {
     expect(wrapper.text()).toContain('Footer meta');
   });
 
-  it('renders vertical and horizontal flow layouts with gap and scroll contracts', () => {
+  it('renders vertical and horizontal flow layouts with gap, scroll, and accessible region contracts', () => {
     const vertical = mount(UiVerticalLayout, {
       props: {
         gap: '2rem',
@@ -161,6 +175,9 @@ describe('page-templates package', () => {
         gap: '1.25rem',
         scroll: true,
       },
+      attrs: {
+        'aria-label': 'Dashboard swimlanes',
+      },
       slots: {
         default: '<button type="button">North lane</button><button type="button">Bravo</button>',
       },
@@ -170,7 +187,9 @@ describe('page-templates package', () => {
     expect(vertical.classes()).toContain('ui-vertical-layout');
     expect(vertical.attributes('data-ui-direction')).toBe('vertical');
     expect(vertical.attributes('data-ui-scroll')).toBe('true');
+    expect(vertical.attributes('role')).toBe('region');
     expect(vertical.attributes('tabindex')).toBe('0');
+    expect(vertical.attributes('aria-label')).toBe('Scrollable vertical layout');
     expect(vertical.attributes('style')).toContain('--ui-layout-flow-gap: 2rem;');
     expect(vertical.text()).toContain('Filters');
     expect(vertical.text()).toContain('Escalations');
@@ -188,7 +207,9 @@ describe('page-templates package', () => {
     expect(horizontalScrollable.classes()).toContain('ui-horizontal-layout');
     expect(horizontalScrollable.attributes('data-ui-direction')).toBe('horizontal');
     expect(horizontalScrollable.attributes('data-ui-scroll')).toBe('true');
+    expect(horizontalScrollable.attributes('role')).toBe('region');
     expect(horizontalScrollable.attributes('tabindex')).toBe('0');
+    expect(horizontalScrollable.attributes('aria-label')).toBe('Dashboard swimlanes');
     expect(horizontalScrollable.attributes('style')).toContain('--ui-layout-flow-gap: 1.25rem;');
     expect(horizontalScrollable.text()).toContain('North lane');
     expect(horizontalScrollable.text()).toContain('Bravo');

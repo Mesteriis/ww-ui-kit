@@ -3,18 +3,26 @@ import { expect, test, type APIRequestContext, type Browser, type Page } from '@
 import { expectNoAxeViolations } from '../../shared/a11y';
 import { failOnConsoleErrors } from '../../shared/browser';
 
-async function getStoryId(request: APIRequestContext, title: string) {
+async function getStoryId(request: APIRequestContext, title: string, storyName?: string) {
   const response = await request.get('/index.json');
   const index = (await response.json()) as {
-    entries: Record<string, { id: string; title: string; type?: string }>;
+    entries: Record<string, { id: string; name?: string; title: string; type?: string }>;
   };
 
   const entry =
     Object.values(index.entries).find(
-      (candidate) => candidate.title === title && candidate.type === 'story'
-    ) ?? Object.values(index.entries).find((candidate) => candidate.title === title);
+      (candidate) =>
+        candidate.title === title &&
+        candidate.type === 'story' &&
+        (storyName === undefined || candidate.name === storyName)
+    ) ??
+    (storyName === undefined
+      ? Object.values(index.entries).find((candidate) => candidate.title === title)
+      : undefined);
   if (!entry) {
-    throw new Error(`Storybook title "${title}" was not found in index.json.`);
+    throw new Error(
+      `Storybook title "${title}"${storyName ? ` story "${storyName}"` : ''} was not found in index.json.`
+    );
   }
 
   return entry.id;
@@ -192,17 +200,29 @@ test('renders generic layout stories inside Storybook', async ({ page, request }
   const verticalScrollMetrics = await page
     .locator('[data-ui-proof="vertical-scroll-frame"] .ui-vertical-layout')
     .evaluate((element) => ({
+      ariaLabel: element.getAttribute('aria-label'),
       clientHeight: element.clientHeight,
+      role: element.getAttribute('role'),
       scrollHeight: element.scrollHeight,
+      tabIndex: element.getAttribute('tabindex'),
     }));
+  expect(verticalScrollMetrics.role).toBe('region');
+  expect(verticalScrollMetrics.tabIndex).toBe('0');
+  expect(verticalScrollMetrics.ariaLabel).toBe('Scrollable vertical layout');
   expect(verticalScrollMetrics.scrollHeight).toBeGreaterThan(verticalScrollMetrics.clientHeight);
 
   const horizontalScrollMetrics = await page
     .locator('[data-ui-proof="horizontal-scroll-frame"] .ui-horizontal-layout')
     .evaluate((element) => ({
+      ariaLabel: element.getAttribute('aria-label'),
       clientWidth: element.clientWidth,
+      role: element.getAttribute('role'),
       scrollWidth: element.scrollWidth,
+      tabIndex: element.getAttribute('tabindex'),
     }));
+  expect(horizontalScrollMetrics.role).toBe('region');
+  expect(horizontalScrollMetrics.tabIndex).toBe('0');
+  expect(horizontalScrollMetrics.ariaLabel).toBe('Scrollable horizontal layout');
   expect(horizontalScrollMetrics.scrollWidth).toBeGreaterThan(horizontalScrollMetrics.clientWidth);
 });
 
@@ -214,6 +234,75 @@ test('renders the named dashboard layout story inside Storybook', async ({ page,
   await page.getByRole('button', { name: 'Dashboard workspace menu' }).click();
   await expect(page.getByText('GitHub repository', { exact: true })).toBeVisible();
   await expect(page.getByText('Willow Works Analytics', { exact: true })).toBeVisible();
+
+  const dashboardScrollRegions = await page
+    .locator('.ui-dashboard-layout')
+    .first()
+    .evaluate((layout) => {
+      const asideContent = layout.querySelector('.ui-dashboard-layout__aside-content');
+      const content = layout.querySelector('.ui-dashboard-layout__content');
+
+      return {
+        bodyOverflow: window.getComputedStyle(document.body).overflow,
+        asideContent:
+          asideContent instanceof HTMLElement
+            ? {
+                ariaLabel: asideContent.getAttribute('aria-label'),
+                clientHeight: asideContent.clientHeight,
+                overflowY: window.getComputedStyle(asideContent).overflowY,
+                role: asideContent.getAttribute('role'),
+                scrollHeight: asideContent.scrollHeight,
+                tabIndex: asideContent.getAttribute('tabindex'),
+              }
+            : null,
+        content:
+          content instanceof HTMLElement
+            ? {
+                ariaLabel: content.getAttribute('aria-label'),
+                clientHeight: content.clientHeight,
+                overflowY: window.getComputedStyle(content).overflowY,
+                role: content.getAttribute('role'),
+                scrollHeight: content.scrollHeight,
+                tabIndex: content.getAttribute('tabindex'),
+              }
+            : null,
+      };
+    });
+
+  expect(dashboardScrollRegions.bodyOverflow).toBe('hidden');
+  expect(dashboardScrollRegions.asideContent).not.toBeNull();
+  expect(dashboardScrollRegions.content).not.toBeNull();
+
+  if (!dashboardScrollRegions.asideContent || !dashboardScrollRegions.content) {
+    throw new Error('Dashboard scroll regions were not available inside Storybook.');
+  }
+
+  expect(dashboardScrollRegions.asideContent.role).toBe('region');
+  expect(dashboardScrollRegions.asideContent.tabIndex).toBe('0');
+  expect(dashboardScrollRegions.asideContent.ariaLabel).toBe('Dashboard sidebar content');
+  expect(dashboardScrollRegions.asideContent.overflowY).toBe('auto');
+  expect(dashboardScrollRegions.asideContent.scrollHeight).toBeGreaterThan(
+    dashboardScrollRegions.asideContent.clientHeight
+  );
+
+  expect(dashboardScrollRegions.content.role).toBe('region');
+  expect(dashboardScrollRegions.content.tabIndex).toBe('0');
+  expect(dashboardScrollRegions.content.ariaLabel).toBe('Dashboard main content');
+  expect(dashboardScrollRegions.content.overflowY).toBe('auto');
+  expect(dashboardScrollRegions.content.scrollHeight).toBeGreaterThan(
+    dashboardScrollRegions.content.clientHeight
+  );
+});
+
+test('keeps the dashboard theming story on the canonical Belovodye theme contract', async ({
+  page,
+  request,
+}) => {
+  const storyId = await getStoryId(request, 'Page Templates/Dashboard Layout', 'Theming');
+  await openStory(page, storyId);
+
+  const themedContainer = page.locator('[data-ui-theme="belovodye"]').first();
+  await expect(themedContainer).toHaveAttribute('data-ui-theme-type', 'dark');
 });
 
 test('renders the tsParticles backdrop story group inside Storybook', async ({ page, request }) => {

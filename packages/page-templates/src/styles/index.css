@@ -84,7 +84,8 @@
 .ui-dashboard-layout__content {
   align-content: start;
   min-block-size: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .ui-dashboard-layout__main {

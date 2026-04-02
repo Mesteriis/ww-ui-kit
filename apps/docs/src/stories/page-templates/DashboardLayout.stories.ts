@@ -12,17 +12,17 @@ const dashboardNavigationGroups = [
   {
     id: 'dashboards',
     title: 'Dashboards',
-    items: ['Executive summary', 'Delivery desk', 'Incident review'],
+    items: ['Executive summary', 'Delivery desk', 'Incident review', 'Launch radar'],
   },
   {
     id: 'teams',
     title: 'Teams',
-    items: ['Platform', 'Revenue', 'Operations'],
+    items: ['Platform', 'Revenue', 'Operations', 'Enablement'],
   },
   {
     id: 'views',
     title: 'Saved views',
-    items: ['Quarter close', 'On-call week', 'Launch readiness'],
+    items: ['Quarter close', 'On-call week', 'Launch readiness', 'Audit backlog'],
   },
 ] as const;
 
@@ -45,6 +45,30 @@ const dashboardPanels = [
 ] as const;
 
 const deliverySignals = ['Stable slots', 'Route-agnostic', 'Widget-ready'] as const;
+
+const dashboardSidebarNotes = [
+  'Escalation inbox',
+  'Audit handoff',
+  'Runbook sync',
+  'Capacity queue',
+  'Launch readiness',
+  'Partner asks',
+  'Weekly review',
+  'Exception triage',
+] as const;
+
+const dashboardActivityLog = [
+  'Quarter close review deck',
+  'Change approval queue',
+  'Partner launch readiness',
+  'Incident replay timeline',
+  'Executive follow-up digest',
+  'Open release blockers',
+  'Rollback decision log',
+  'Audit sampling queue',
+  'Vendor handoff notes',
+  'Launch exception register',
+] as const;
 
 const meta = {
   title: 'Page Templates/Dashboard Layout',
@@ -76,7 +100,9 @@ function createDashboardRender(options: {
     setup() {
       return {
         dashboardNavigationGroups,
+        dashboardActivityLog,
         dashboardPanels,
+        dashboardSidebarNotes,
         deliverySignals,
         options,
         repositoryMenuItems,
@@ -84,7 +110,7 @@ function createDashboardRender(options: {
           options.theme === 'belovodye'
             ? {
                 'data-ui-theme': 'belovodye',
-                'data-ui-theme-type': 'light',
+                'data-ui-theme-type': 'dark',
               }
             : {},
       };
@@ -119,19 +145,45 @@ function createDashboardRender(options: {
           </template>
 
           <template #aside-content>
-            <nav aria-label="Dashboard navigation" style="display: grid; gap: var(--ui-space-5);">
+            <div style="display: grid; gap: var(--ui-space-5);">
+              <nav aria-label="Dashboard navigation" style="display: grid; gap: var(--ui-space-5);">
+                <div
+                  v-for="group in dashboardNavigationGroups"
+                  :key="group.id"
+                  style="display: grid; gap: var(--ui-space-3);"
+                >
+                  <strong style="font-size: var(--ui-text-font-size-sm); color: var(--ui-text-secondary);">
+                    {{ group.title }}
+                  </strong>
+
+                  <div style="display: grid; gap: var(--ui-space-2);">
+                    <div
+                      v-for="item in group.items"
+                      :key="item"
+                      style="
+                        padding: var(--ui-space-3) var(--ui-space-4);
+                        border: 1px solid var(--ui-border-subtle);
+                        border-radius: var(--ui-radius-lg);
+                        background: color-mix(in srgb, var(--ui-surface-default) 94%, transparent);
+                      "
+                    >
+                      {{ item }}
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
               <div
-                v-for="group in dashboardNavigationGroups"
-                :key="group.id"
+                data-ui-proof="dashboard-aside-scroll-content"
                 style="display: grid; gap: var(--ui-space-3);"
               >
                 <strong style="font-size: var(--ui-text-font-size-sm); color: var(--ui-text-secondary);">
-                  {{ group.title }}
+                  Shift ledger
                 </strong>
 
                 <div style="display: grid; gap: var(--ui-space-2);">
                   <div
-                    v-for="item in group.items"
+                    v-for="item in dashboardSidebarNotes"
                     :key="item"
                     style="
                       padding: var(--ui-space-3) var(--ui-space-4);
@@ -144,7 +196,7 @@ function createDashboardRender(options: {
                   </div>
                 </div>
               </div>
-            </nav>
+            </div>
           </template>
 
           <template #aside-actions>
@@ -251,6 +303,25 @@ function createDashboardRender(options: {
                 </UiCard>
               </div>
             </UiWidgetShell>
+
+            <div
+              data-ui-proof="dashboard-content-scroll-list"
+              style="display: grid; gap: var(--ui-space-3);"
+            >
+              <h3 style="margin: 0;">Activity log</h3>
+              <div
+                v-for="item in dashboardActivityLog"
+                :key="item"
+                style="
+                  padding: var(--ui-space-4);
+                  border: 1px solid var(--ui-border-subtle);
+                  border-radius: var(--ui-radius-lg);
+                  background: color-mix(in srgb, var(--ui-surface-default) 94%, transparent);
+                "
+              >
+                {{ item }}
+              </div>
+            </div>
           </div>
         </UiDashboardLayout>
       </div>
