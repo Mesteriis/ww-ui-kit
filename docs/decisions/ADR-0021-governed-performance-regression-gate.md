@@ -32,6 +32,7 @@ Add a governed performance regression gate without changing the primary testing 
 - The only supported source of truth for build and runtime budgets is `tools/governance/catalog/performance-requirements.mjs`.
 - Build budgets are validated from real `@ww/playground` production output and track named manual chunks that already exist in `vite.chunking.ts`.
 - Runtime budgets run against built `/playground/testing` flows in Chromium through Playwright, use warm-up runs plus measured runs, and decide with the median instead of an average.
+- Runtime mount budgets are calibrated against the slower of the current local and GitHub Actions baselines, then rounded with modest headroom so the gate fails on regressions instead of runner noise.
 - The perf gate writes a machine-readable summary artifact and is enforced in CI and `pnpm verify`.
 
 The runtime suite reuses the existing built playground harness and server logic. Storybook remains the public UI contract, `/playground/testing/*` remains the browser-tested proof harness, and `/playground/lab/*` remains the maintainer workbench.

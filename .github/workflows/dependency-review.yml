@@ -13,10 +13,25 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - name: Detect dependency graph support
+        id: dependency-graph
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status="$(gh api repos/${{ github.repository }} --jq '.security_and_analysis.dependency_graph.status // "disabled"' || echo disabled)"
+          if [ "$status" = "enabled" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Dependency Graph is disabled for this repository; skipping dependency review."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout repository
+        if: steps.dependency-graph.outputs.enabled == 'true'
         uses: actions/checkout@v6
 
       - name: Dependency review
+        if: steps.dependency-graph.outputs.enabled == 'true'
         uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: moderate
