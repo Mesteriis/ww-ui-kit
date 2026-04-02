@@ -6,6 +6,151 @@
   color: var(--ui-text-primary);
 }
 
+.ui-flow-layout {
+  display: flex;
+  gap: var(--ui-layout-flow-gap, var(--ui-space-4));
+  min-inline-size: 0;
+  min-block-size: 0;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  color: var(--ui-text-primary);
+}
+
+.ui-vertical-layout,
+.ui-horizontal-layout {
+  inline-size: fit-content;
+  block-size: fit-content;
+}
+
+.ui-vertical-layout {
+  flex-direction: column;
+}
+
+.ui-horizontal-layout {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ui-vertical-layout[data-ui-scroll='true'] {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ui-horizontal-layout[data-ui-scroll='true'] {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ui-dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  min-block-size: 100dvh;
+  block-size: 100dvh;
+  inline-size: 100%;
+  gap: var(--ui-space-3);
+  align-items: stretch;
+  color: var(--ui-text-primary);
+}
+
+.ui-dashboard-layout__aside,
+.ui-dashboard-layout__main,
+.ui-dashboard-layout__header-content,
+.ui-dashboard-layout__header-actions,
+.ui-dashboard-layout__content {
+  min-inline-size: 0;
+}
+
+.ui-dashboard-layout__aside {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--ui-space-5);
+  min-block-size: 0;
+  padding: var(--ui-space-6);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: calc(var(--ui-radius-xl) - var(--ui-space-1));
+  box-shadow: var(--ui-shadow-xs);
+  background: color-mix(in srgb, var(--ui-surface-default) 88%, var(--ui-surface-sunken));
+}
+
+.ui-dashboard-layout__aside-header,
+.ui-dashboard-layout__aside-content,
+.ui-dashboard-layout__aside-actions,
+.ui-dashboard-layout__content {
+  display: grid;
+  gap: var(--ui-space-4);
+}
+
+.ui-dashboard-layout__aside-content,
+.ui-dashboard-layout__content {
+  align-content: start;
+  min-block-size: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ui-dashboard-layout__main {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--ui-space-5);
+  min-block-size: 0;
+}
+
+.ui-dashboard-layout__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-auto-rows: 4.6875rem;
+  align-items: stretch;
+  gap: var(--ui-space-5);
+}
+
+.ui-dashboard-layout__header-content {
+  min-block-size: 0;
+  max-block-size: 4.6875rem;
+  padding: var(--ui-space-5);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: calc(var(--ui-radius-xl) - var(--ui-space-1));
+  background: color-mix(in srgb, var(--ui-surface-default) 92%, transparent);
+  box-shadow: var(--ui-shadow-xs);
+}
+
+.ui-dashboard-layout__header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--ui-space-3);
+  min-block-size: 4.6875rem;
+  max-block-size: 4.6875rem;
+  overflow: visible;
+}
+
+.ui-dashboard-layout__header-actions > * {
+  inline-size: 4.6875rem;
+  block-size: 4.6875rem;
+  flex: 0 0 4.6875rem;
+}
+
+.ui-dashboard-layout__content {
+  padding: var(--ui-space-5);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: calc(var(--ui-radius-xl) - var(--ui-space-1));
+  background: color-mix(in srgb, var(--ui-surface-default) 92%, transparent);
+  box-shadow: var(--ui-shadow-xs);
+}
+
+[data-ui-theme='belovodye'] .ui-dashboard-layout__aside,
+[data-ui-theme='belovodye'] .ui-dashboard-layout__header-content,
+[data-ui-theme='belovodye'] .ui-dashboard-layout__content {
+  border-color: color-mix(in srgb, var(--ui-border-strong) 74%, transparent);
+  background: linear-gradient(
+    152deg,
+    color-mix(in srgb, var(--ui-surface-default) 76%, transparent),
+    color-mix(in srgb, var(--ui-surface-raised) 80%, transparent)
+  );
+  box-shadow: var(--ui-shadow-sm);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  backdrop-filter: blur(18px) saturate(145%);
+}
+
 .ui-layout[data-ui-width='full'] {
   width: 100%;
 }
@@ -117,6 +262,23 @@
 }
 
 @media (max-width: 900px) {
+  .ui-dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ui-dashboard-layout__aside {
+    padding: var(--ui-space-5);
+  }
+
+  .ui-dashboard-layout__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ui-dashboard-layout__header-actions {
+    justify-content: flex-start;
+    inline-size: 100%;
+  }
+
   .ui-layout[data-ui-has-sider='true'] .ui-layout__body {
     grid-template-columns: minmax(0, 1fr);
   }

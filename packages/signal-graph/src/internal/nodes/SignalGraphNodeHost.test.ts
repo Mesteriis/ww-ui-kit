@@ -118,7 +118,7 @@ describe('SignalGraphNodeHost', () => {
               container: null,
               revision: 1,
               themeName: 'belovodye',
-              themeType: 'light',
+              themeType: 'dark',
             }),
             graphApi: {
               centerNode: vi.fn(),

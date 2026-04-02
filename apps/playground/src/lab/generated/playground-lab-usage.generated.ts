@@ -281,7 +281,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 16,
+          "count": 17,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -296,23 +296,23 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 20,
+          "count": 24,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
-            "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+            "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue"
           ]
         }
       ],
       "usageGroups": [
         {
           "area": "docs",
-          "count": 16,
+          "count": 17,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -328,18 +328,18 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 20,
+          "count": 24,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
             "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/LayoutLabPreview.vue",
-            "apps/playground/src/lab/components/OverlaySurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/SignalGraphLabPreview.vue"
+            "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         },
         {
@@ -425,6 +425,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         },
@@ -434,10 +438,6 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/widgets/Shell.stories.ts",
-          "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts",
           "area": "docs"
         }
       ]
@@ -466,8 +466,11 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 1,
+          "count": 4,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
             "apps/playground/src/lab/schemas/ui-icon-button.lab.ts"
           ]
         }
@@ -484,8 +487,11 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 1,
+          "count": 4,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
             "apps/playground/src/lab/schemas/ui-icon-button.lab.ts"
           ]
         }
@@ -526,6 +532,18 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-icon-button.lab.ts",
@@ -1782,7 +1800,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 20,
+          "count": 25,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1797,16 +1815,16 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 13,
+          "count": 17,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
-            "apps/playground/src/lab/components/DataGridLabPreview.vue",
-            "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+            "apps/playground/src/lab/components/DataGridLabPreview.vue"
           ]
         },
         {
@@ -1821,7 +1839,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 20,
+          "count": 25,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1837,18 +1855,18 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 13,
+          "count": 17,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/LayoutLabPreview.vue",
-            "apps/playground/src/lab/components/SignalGraphLabPreview.vue",
-            "apps/playground/src/lab/components/WidgetShellLabPreview.vue"
+            "apps/playground/src/lab/components/FlowLayoutLabPreview.vue"
           ]
         },
         {
@@ -1940,19 +1958,19 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/foundations/primitives/Overview.stories.ts",
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
+          "file": "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "file": "apps/docs/src/stories/foundations/particles/States.stories.ts",
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/systems/data-grid/Theming.stories.ts",
+          "file": "apps/docs/src/stories/foundations/particles/Theming.stories.ts",
           "area": "docs"
         }
       ]
@@ -1971,7 +1989,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 23,
+          "count": 29,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -1986,20 +2004,23 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 5,
+          "count": 11,
           "files": [
+            "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
-            "apps/playground/src/lab/schemas/ui-card.lab.ts",
-            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue"
           ]
         }
       ],
       "usageGroups": [
         {
           "area": "docs",
-          "count": 23,
+          "count": 29,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -2015,13 +2036,18 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 5,
+          "count": 11,
           "files": [
+            "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/schemas/ui-card.lab.ts",
-            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts"
           ]
         }
       ],
@@ -2252,8 +2278,10 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 2,
+          "count": 4,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/lab/schemas/ui-avatar.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -2271,8 +2299,10 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 2,
+          "count": 4,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/lab/schemas/ui-avatar.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -2330,6 +2360,14 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-avatar.lab.ts",
@@ -3728,19 +3766,25 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 2,
+          "count": 7,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
             "apps/playground/src/lab/schemas/ui-dropdown.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -3749,18 +3793,24 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 2,
+          "count": 7,
           "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
             "apps/playground/src/lab/schemas/ui-dropdown.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -3827,6 +3877,30 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-dropdown.lab.ts",
@@ -5170,6 +5244,154 @@ export const playgroundLabUsage = {
         }
       ]
     },
+    "ui-tsparticles-backdrop": {
+      "id": "ui-tsparticles-backdrop",
+      "title": "UiTsParticlesBackdrop",
+      "exportName": "UiTsParticlesBackdrop",
+      "packageName": "@ww/tsparticles",
+      "packageLayer": "third-party-adapter",
+      "stability": "incubating",
+      "family": "Third-party adapters",
+      "labEligible": true,
+      "sourcePublicSurface": "UiTsParticlesBackdrop",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/foundations/particles/States.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Theming.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/foundations/particles/States.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Theming.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 4,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Foundations/Particles/Overview",
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Foundations/Particles/States",
+          "file": "apps/docs/src/stories/foundations/particles/States.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Particles/Theming",
+          "file": "apps/docs/src/stories/foundations/particles/Theming.stories.ts"
+        },
+        {
+          "variant": "responsive",
+          "title": "Foundations/Particles/Responsive",
+          "file": "apps/docs/src/stories/foundations/particles/Responsive.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "particles",
+          "label": "Particles",
+          "description": "Neutral tsParticles backdrop wrapper that stays token-driven and layout-safe.",
+          "path": "/testing#testing-particles"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/third-party/tsparticles/README.md"
+        },
+        {
+          "type": "architecture-doc",
+          "file": "docs/architecture/package-topology.md"
+        },
+        {
+          "type": "architecture-doc",
+          "file": "docs/architecture/golden-path.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0014-third-party-topology.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "third-party",
+        "particles"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/particles/States.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Theming.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
     "ui-signal-graph": {
       "id": "ui-signal-graph",
       "title": "UiSignalGraph",
@@ -6251,8 +6473,9 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/Shell.stories.ts"
@@ -6261,10 +6484,11 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 5,
+          "count": 6,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/WidgetShellLabPreview.vue",
             "apps/playground/src/lab/schemas/ui-widget-shell.lab.ts"
@@ -6274,8 +6498,9 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/Shell.stories.ts"
@@ -6283,10 +6508,11 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 5,
+          "count": 6,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue",
             "apps/playground/src/lab/components/WidgetShellLabPreview.vue",
             "apps/playground/src/lab/schemas/ui-widget-shell.lab.ts"
@@ -6340,6 +6566,10 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         },
@@ -6357,6 +6587,10 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
           "area": "playground"
         },
         {
@@ -6715,8 +6949,9 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -6725,11 +6960,12 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -6737,8 +6973,9 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -6746,11 +6983,12 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -6776,7 +7014,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -6802,6 +7040,10 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         },
@@ -6823,6 +7065,10 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
           "area": "playground"
         },
         {
@@ -6846,8 +7092,9 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -6856,11 +7103,12 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -6868,8 +7116,9 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -6877,11 +7126,12 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -6907,7 +7157,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -6933,6 +7183,10 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         },
@@ -6957,7 +7211,291 @@ export const playgroundLabUsage = {
           "area": "playground"
         },
         {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
+          "area": "playground"
+        },
+        {
           "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-vertical-layout": {
+      "id": "ui-vertical-layout",
+      "title": "UiVerticalLayout",
+      "exportName": "UiVerticalLayout",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": true,
+      "sourcePublicSurface": "UiVerticalLayout / UiHorizontalLayout",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 7,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-vertical-layout.lab.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 7,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-vertical-layout.lab.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
+          "path": "/testing#testing-page-templates"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates",
+        "flow-layout"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-vertical-layout.lab.ts",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-horizontal-layout": {
+      "id": "ui-horizontal-layout",
+      "title": "UiHorizontalLayout",
+      "exportName": "UiHorizontalLayout",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": true,
+      "sourcePublicSurface": "UiVerticalLayout / UiHorizontalLayout",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 7,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-horizontal-layout.lab.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 2,
+          "files": [
+            "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+            "apps/docs/src/stories/page-templates/Shell.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 7,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
+            "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+            "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-horizontal-layout.lab.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Architecture/Page Templates/Overview",
+          "file": "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Page Templates/Shell",
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
+          "path": "/testing#testing-page-templates"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates",
+        "flow-layout"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Responsive.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/FlowLayoutLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/TsParticlesBackdropLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-horizontal-layout.lab.ts",
           "area": "playground"
         }
       ]
@@ -7030,7 +7568,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -7084,8 +7622,9 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -7094,11 +7633,12 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -7106,8 +7646,9 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts",
             "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
             "apps/docs/src/stories/widgets/data-table-widget-fixtures.ts"
@@ -7115,11 +7656,12 @@ export const playgroundLabUsage = {
         },
         {
           "area": "playground",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -7145,7 +7687,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -7170,6 +7712,10 @@ export const playgroundLabUsage = {
         "page-templates"
       ],
       "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
         {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
@@ -7195,6 +7741,10 @@ export const playgroundLabUsage = {
           "area": "playground"
         },
         {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
+          "area": "playground"
+        },
+        {
           "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
           "area": "playground"
         }
@@ -7215,17 +7765,19 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 1,
+          "count": 2,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 2,
+          "count": 3,
           "files": [
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -7233,16 +7785,18 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 1,
+          "count": 2,
           "files": [
+            "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
             "apps/docs/src/stories/page-templates/Shell.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 2,
+          "count": 3,
           "files": [
             "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/LayoutLabPreview.vue"
           ]
         }
@@ -7268,7 +7822,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -7294,11 +7848,19 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
+          "file": "apps/docs/src/stories/foundations/particles/Overview.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         },
         {
           "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/TsParticlesShowcase.vue",
           "area": "playground"
         },
         {
@@ -7383,7 +7945,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -7506,7 +8068,7 @@ export const playgroundLabUsage = {
         {
           "id": "page-templates",
           "label": "Page Templates",
-          "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives.",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
           "path": "/testing#testing-page-templates"
         },
         {
@@ -7541,6 +8103,133 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/lab/components/LayoutLabPreview.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-dashboard-layout": {
+      "id": "ui-dashboard-layout",
+      "title": "UiDashboardLayout",
+      "exportName": "UiDashboardLayout",
+      "packageName": "@ww/page-templates",
+      "packageLayer": "page-template",
+      "stability": "incubating",
+      "family": "Page Templates",
+      "labEligible": true,
+      "sourcePublicSurface": "UiDashboardLayout",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 5,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 5,
+          "files": [
+            "apps/playground/src/App.vue",
+            "apps/playground/src/LayerScaffoldShowcase.vue",
+            "apps/playground/src/PlaygroundHomeView.vue",
+            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Dashboards",
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
+        },
+        {
+          "variant": "composition",
+          "title": "Dashboards",
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Dashboards",
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "page-templates",
+          "label": "Page Templates",
+          "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts.",
+          "path": "/testing#testing-page-templates"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/page-templates/README.md"
+        },
+        {
+          "type": "architecture-doc",
+          "file": "docs/architecture/golden-path.md"
+        },
+        {
+          "type": "architecture-doc",
+          "file": "docs/architecture/placement-rules.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "page-templates",
+        "dashboard"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/App.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/LayerScaffoldShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/PlaygroundHomeView.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts",
           "area": "playground"
         }
       ]

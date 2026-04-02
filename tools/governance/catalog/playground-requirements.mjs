@@ -3,6 +3,7 @@ export const PLAYGROUND_SCENARIO_IDS = Object.freeze([
   'overlays',
   'core-wave',
   'charts',
+  'particles',
   'signal-graph',
   'data-grid-basic',
   'data-grid-states',

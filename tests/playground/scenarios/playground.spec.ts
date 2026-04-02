@@ -7,14 +7,30 @@ test.beforeEach(async ({ page }) => {
   await failOnConsoleErrors(page);
 });
 
+test('renders the playground root as the dashboard overview', async ({ page }) => {
+  await page.goto('/playground/');
+
+  const home = page.locator('[data-playground-mode="home"]');
+  await expect(home).toBeVisible();
+  await expect(home.locator('.ui-dashboard-layout')).toBeVisible();
+  await expect(home.getByRole('heading', { level: 2, name: '/playground/' })).toBeVisible();
+  await home.getByRole('button', { name: 'Open workspace menu' }).click();
+  await expect(page.getByText('GitHub repository', { exact: true })).toBeVisible();
+  await expect(home.getByRole('link', { name: 'Open testing harness' })).toBeVisible();
+});
+
 test('renders stable playground harness sections', async ({ page }) => {
   await page.goto('/playground/testing');
+
+  await expect(page.locator('.ui-dashboard-layout').first()).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: '/playground/testing' })).toBeVisible();
 
   for (const scenarioId of [
     'themes',
     'overlays',
     'core-wave',
     'charts',
+    'particles',
     'signal-graph',
     'data-grid-basic',
     'data-grid-states',
@@ -42,7 +58,7 @@ test('switches theme and exposes ThemeType', async ({ page }) => {
   await page.getByLabel('Playground theme', { exact: true }).selectOption('light');
   await page.getByLabel('Playground theme', { exact: true }).selectOption('belovodye');
   await expect(page.getByText('ThemeName: belovodye', { exact: true }).first()).toBeVisible();
-  await expect(page.getByText('ThemeType: light', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('ThemeType: dark', { exact: true }).first()).toBeVisible();
 
   await page.getByLabel('Playground density').selectOption('comfortable');
   await page.getByLabel('Playground motion profile').selectOption('calm');
@@ -164,11 +180,12 @@ test('keeps overlay close and focus restoration stable under reduced motion', as
   await expect(openButton).toBeFocused();
 });
 
-test('renders charts and signal graph scenarios in the built consumer harness', async ({
+test('renders charts, particles, and signal graph scenarios in the built consumer harness', async ({
   page,
 }) => {
   await page.goto('/playground/testing');
   await expect(page.locator('#testing-charts .ui-apex-chart').first()).toBeVisible();
+  await expect(page.locator('#testing-particles .ui-tsparticles-backdrop').first()).toBeVisible();
   await expect(page.locator('#testing-signal-graph .ui-signal-graph').first()).toBeVisible();
 });
 
@@ -189,7 +206,7 @@ test('runs controlled data-grid flows in the built playground', async ({ page })
 
   const themingSection = page.locator('#testing-data-grid-theming');
   await expect(themingSection.getByText('ThemeName: belovodye', { exact: true })).toBeVisible();
-  await expect(themingSection.getByText('ThemeType: light', { exact: true })).toBeVisible();
+  await expect(themingSection.getByText('ThemeType: dark', { exact: true })).toBeVisible();
 
   const compositionSection = page.locator('#testing-data-grid-composition');
   await expect(
@@ -209,31 +226,183 @@ test('runs data-table-widget flows in the built playground', async ({ page }) =>
 
   const themingSection = page.locator('#testing-widgets-data-table-theming');
   await expect(themingSection.getByText('ThemeName: belovodye', { exact: true })).toBeVisible();
-  await expect(themingSection.getByText('ThemeType: light', { exact: true })).toBeVisible();
+  await expect(themingSection.getByText('ThemeType: dark', { exact: true })).toBeVisible();
 
   const compositionSection = page.locator('#testing-widgets-data-table-composition');
   await expect(compositionSection.getByText('Operations workspace', { exact: true })).toBeVisible();
   await expect(compositionSection.getByText('Export later', { exact: true })).toBeVisible();
 });
 
-test('renders dashboard-like and marketing-like layout compositions in the built playground', async ({
+test('renders the named dashboard layout and generic shell compositions in the built playground', async ({
   page,
 }) => {
   await page.goto('/playground/testing');
 
   const templatesSection = page.locator('#testing-page-templates');
-  await expect(
-    templatesSection.getByText('Dashboard operations shell', { exact: true })
-  ).toBeVisible();
+  await expect(templatesSection.getByText('Operations cockpit', { exact: true })).toBeVisible();
   await expect(
     templatesSection.getByText('Marketing campaign shell', { exact: true })
   ).toBeVisible();
+  await templatesSection.getByRole('button', { name: 'Dashboard workspace menu' }).click();
+  await expect(page.getByText('GitHub repository', { exact: true })).toBeVisible();
   await expect(templatesSection.getByRole('button', { name: 'Launch campaign' })).toBeVisible();
+  await expect(templatesSection.getByText('UiVerticalLayout', { exact: true })).toBeVisible();
+  await expect(templatesSection.getByText('UiHorizontalLayout', { exact: true })).toBeVisible();
 
   const compositionSection = page.locator('#testing-composition');
   await expect(
     compositionSection.getByText('Widget shell showcase', { exact: true })
   ).toBeVisible();
+});
+
+test('keeps directional flow layouts shrink-wrapped by default and scrollable on demand in the built playground', async ({
+  page,
+}) => {
+  await page.goto('/playground/testing');
+
+  const templatesSection = page.locator('#testing-page-templates');
+  const verticalFrame = templatesSection.locator('[data-ui-proof="vertical-default-frame"]');
+  const verticalLayout = verticalFrame.locator('.ui-vertical-layout');
+  const horizontalFrame = templatesSection.locator('[data-ui-proof="horizontal-default-frame"]');
+  const horizontalLayout = horizontalFrame.locator('.ui-horizontal-layout');
+
+  const verticalFrameBox = await verticalFrame.boundingBox();
+  const verticalLayoutBox = await verticalLayout.boundingBox();
+  const horizontalFrameBox = await horizontalFrame.boundingBox();
+  const horizontalLayoutBox = await horizontalLayout.boundingBox();
+  expect(verticalFrameBox).not.toBeNull();
+  expect(verticalLayoutBox).not.toBeNull();
+  expect(horizontalFrameBox).not.toBeNull();
+  expect(horizontalLayoutBox).not.toBeNull();
+
+  if (!verticalFrameBox || !verticalLayoutBox || !horizontalFrameBox || !horizontalLayoutBox) {
+    throw new Error('Flow layout boxes were not available.');
+  }
+
+  expect(verticalLayoutBox.width).toBeLessThan(verticalFrameBox.width);
+  expect(horizontalLayoutBox.width).toBeLessThan(horizontalFrameBox.width);
+
+  const verticalScrollMetrics = await templatesSection
+    .locator('[data-ui-proof="vertical-scroll-frame"] .ui-vertical-layout')
+    .evaluate((element) => ({
+      ariaLabel: element.getAttribute('aria-label'),
+      clientHeight: element.clientHeight,
+      role: element.getAttribute('role'),
+      scrollHeight: element.scrollHeight,
+      tabIndex: element.getAttribute('tabindex'),
+    }));
+  expect(verticalScrollMetrics.role).toBe('region');
+  expect(verticalScrollMetrics.tabIndex).toBe('0');
+  expect(verticalScrollMetrics.ariaLabel).toBe('Scrollable vertical layout');
+  expect(verticalScrollMetrics.scrollHeight).toBeGreaterThan(verticalScrollMetrics.clientHeight);
+
+  const horizontalScrollMetrics = await templatesSection
+    .locator('[data-ui-proof="horizontal-scroll-frame"] .ui-horizontal-layout')
+    .evaluate((element) => ({
+      ariaLabel: element.getAttribute('aria-label'),
+      clientWidth: element.clientWidth,
+      role: element.getAttribute('role'),
+      scrollWidth: element.scrollWidth,
+      tabIndex: element.getAttribute('tabindex'),
+    }));
+  expect(horizontalScrollMetrics.role).toBe('region');
+  expect(horizontalScrollMetrics.tabIndex).toBe('0');
+  expect(horizontalScrollMetrics.ariaLabel).toBe('Scrollable horizontal layout');
+  expect(horizontalScrollMetrics.scrollWidth).toBeGreaterThan(horizontalScrollMetrics.clientWidth);
+});
+
+test('keeps the dashboard layout at a 1:3 desktop split, preserves body scroll lock, and exposes internal scroll regions', async ({
+  page,
+}) => {
+  await page.goto('/playground/testing');
+
+  const dashboardLayout = page.locator('#testing-page-templates .ui-dashboard-layout').first();
+  const aside = dashboardLayout.locator('.ui-dashboard-layout__aside');
+  const main = dashboardLayout.locator('.ui-dashboard-layout__main');
+
+  const asideBox = await aside.boundingBox();
+  const mainBox = await main.boundingBox();
+  expect(asideBox).not.toBeNull();
+  expect(mainBox).not.toBeNull();
+
+  if (!asideBox || !mainBox) {
+    throw new Error('Dashboard layout boxes were not available.');
+  }
+
+  const widthRatio = mainBox.width / asideBox.width;
+  expect(widthRatio).toBeGreaterThan(2.7);
+  expect(widthRatio).toBeLessThan(3.3);
+
+  const dashboardScrollRegions = await dashboardLayout.evaluate((layout) => {
+    const asideContent = layout.querySelector('.ui-dashboard-layout__aside-content');
+    const content = layout.querySelector('.ui-dashboard-layout__content');
+
+    return {
+      bodyOverflow: window.getComputedStyle(document.body).overflow,
+      asideContent:
+        asideContent instanceof HTMLElement
+          ? {
+              ariaLabel: asideContent.getAttribute('aria-label'),
+              clientHeight: asideContent.clientHeight,
+              overflowY: window.getComputedStyle(asideContent).overflowY,
+              role: asideContent.getAttribute('role'),
+              scrollHeight: asideContent.scrollHeight,
+              tabIndex: asideContent.getAttribute('tabindex'),
+            }
+          : null,
+      content:
+        content instanceof HTMLElement
+          ? {
+              ariaLabel: content.getAttribute('aria-label'),
+              clientHeight: content.clientHeight,
+              overflowY: window.getComputedStyle(content).overflowY,
+              role: content.getAttribute('role'),
+              scrollHeight: content.scrollHeight,
+              tabIndex: content.getAttribute('tabindex'),
+            }
+          : null,
+    };
+  });
+
+  expect(dashboardScrollRegions.bodyOverflow).toBe('hidden');
+  expect(dashboardScrollRegions.asideContent).not.toBeNull();
+  expect(dashboardScrollRegions.content).not.toBeNull();
+
+  if (!dashboardScrollRegions.asideContent || !dashboardScrollRegions.content) {
+    throw new Error('Dashboard scroll regions were not available in the playground harness.');
+  }
+
+  expect(dashboardScrollRegions.asideContent.role).toBe('region');
+  expect(dashboardScrollRegions.asideContent.tabIndex).toBe('0');
+  expect(dashboardScrollRegions.asideContent.ariaLabel).toBe('Dashboard sidebar content');
+  expect(dashboardScrollRegions.asideContent.overflowY).toBe('auto');
+  expect(dashboardScrollRegions.asideContent.scrollHeight).toBeGreaterThan(
+    dashboardScrollRegions.asideContent.clientHeight
+  );
+
+  expect(dashboardScrollRegions.content.role).toBe('region');
+  expect(dashboardScrollRegions.content.tabIndex).toBe('0');
+  expect(dashboardScrollRegions.content.ariaLabel).toBe('Dashboard main content');
+  expect(dashboardScrollRegions.content.overflowY).toBe('auto');
+  expect(dashboardScrollRegions.content.scrollHeight).toBeGreaterThan(
+    dashboardScrollRegions.content.clientHeight
+  );
+
+  await page.setViewportSize({ width: 720, height: 1400 });
+  await page.goto('/playground/testing');
+
+  const stackedLayout = page.locator('#testing-page-templates .ui-dashboard-layout').first();
+  const stackedAsideBox = await stackedLayout.locator('.ui-dashboard-layout__aside').boundingBox();
+  const stackedMainBox = await stackedLayout.locator('.ui-dashboard-layout__main').boundingBox();
+  expect(stackedAsideBox).not.toBeNull();
+  expect(stackedMainBox).not.toBeNull();
+
+  if (!stackedAsideBox || !stackedMainBox) {
+    throw new Error('Dashboard layout boxes were not available after resize.');
+  }
+
+  expect(Math.abs(stackedAsideBox.x - stackedMainBox.x)).toBeLessThan(2);
+  expect(stackedMainBox.y).toBeGreaterThan(stackedAsideBox.y + stackedAsideBox.height - 2);
 });
 
 test('keeps key playground flows free of browser-level accessibility violations', async ({
@@ -254,7 +423,11 @@ test('loads the component lab, switches surfaces, and keeps usage metadata visib
 }) => {
   await page.goto('/playground/lab/ui-button');
 
-  await expect(page.locator('[data-playground-mode="lab"]')).toBeVisible();
+  await expect(page.locator('.ui-dashboard-layout').first()).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: '/playground/lab/ui-button' })
+  ).toBeVisible();
+  await expect(page.locator('section[data-playground-mode="lab"]')).toBeVisible();
   await expect(page.locator('[data-lab-nav-item="ui-button"]')).toHaveClass(/is-active/);
   await page.locator('[data-lab-control="label"] input').fill('Ship release');
   await expect(page.getByRole('button', { name: 'Ship release' })).toBeVisible();

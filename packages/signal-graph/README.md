@@ -177,7 +177,7 @@ The package uses the existing theme system.
 Scoped themes work directly:
 
 ```html
-<section data-ui-theme="belovodye" data-ui-theme-type="light">
+<section data-ui-theme="belovodye" data-ui-theme-type="dark">
   <UiSignalGraph ... />
 </section>
 ```

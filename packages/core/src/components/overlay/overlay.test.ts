@@ -144,7 +144,7 @@ describe('overlay components', () => {
           return { dialogOpen, drawerOpen, explicitTarget };
         },
         template: `
-          <section id="scope" data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section id="scope" data-ui-theme="belovodye" data-ui-theme-type="dark">
             <div id="explicit-target" ref="explicitTarget"></div>
             <UiButton id="dialog-open" @click="dialogOpen = true">Open scoped dialog</UiButton>
             <UiButton id="drawer-open" @click="drawerOpen = true">Open scoped drawer</UiButton>

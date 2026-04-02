@@ -1,0 +1,44 @@
+.ui-tsparticles-backdrop {
+  position: relative;
+  display: block;
+  min-inline-size: 0;
+  min-block-size: 0;
+  isolation: isolate;
+}
+
+.ui-tsparticles-backdrop--fill {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.ui-tsparticles-backdrop__layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.ui-tsparticles-backdrop__canvas {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.ui-tsparticles-backdrop__canvas canvas {
+  display: block;
+  inline-size: 100% !important;
+  block-size: 100% !important;
+}
+
+.ui-tsparticles-backdrop__content {
+  position: relative;
+  z-index: 1;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+.ui-tsparticles-backdrop--fill > .ui-tsparticles-backdrop__content {
+  inline-size: 100%;
+  block-size: 100%;
+}

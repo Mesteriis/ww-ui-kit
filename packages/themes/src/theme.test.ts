@@ -43,7 +43,7 @@ describe('themes', () => {
     expect(THEMES.belovodye).toMatchObject({
       name: 'belovodye',
       label: 'Belovodye',
-      type: 'light',
+      type: 'dark',
     });
     expect(themeRegistry.belovodye).toBe(belovodyeTheme);
   });
@@ -54,15 +54,18 @@ describe('themes', () => {
       label: 'Dark',
       type: 'dark',
     });
-    expect(getThemeType('belovodye')).toBe('light');
+    expect(getThemeType('belovodye')).toBe('dark');
     expect(getThemesByType('light').map(({ name }) => name)).toEqual(
-      expect.arrayContaining(['light', 'belovodye'])
+      expect.arrayContaining(['light'])
     );
-    expect(getThemesByType('dark').map(({ name }) => name)).toEqual(['dark']);
+    expect(getThemesByType('dark').map(({ name }) => name)).toEqual(
+      expect.arrayContaining(['dark', 'belovodye'])
+    );
     expect(isLightTheme('light')).toBe(true);
     expect(isLightTheme('dark')).toBe(false);
+    expect(isLightTheme('belovodye')).toBe(false);
     expect(isDarkTheme('dark')).toBe(true);
-    expect(isDarkTheme('belovodye')).toBe(false);
+    expect(isDarkTheme('belovodye')).toBe(true);
   });
 
   it('sets theme name and type on the document element by default without inline color-scheme drift', () => {
@@ -70,7 +73,7 @@ describe('themes', () => {
 
     expect(target).toBe(document.documentElement);
     expect(document.documentElement.getAttribute(THEME_ATTRIBUTE)).toBe('belovodye');
-    expect(document.documentElement.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('light');
+    expect(document.documentElement.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('dark');
     expect(document.documentElement.style.colorScheme).toBe('');
   });
 
@@ -102,7 +105,7 @@ describe('themes', () => {
     );
 
     expect(container.getAttribute(THEME_ATTRIBUTE)).toBe('belovodye');
-    expect(container.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('light');
+    expect(container.getAttribute(THEME_TYPE_ATTRIBUTE)).toBe('dark');
     expect(container.getAttribute(THEME_DENSITY_ATTRIBUTE)).toBe('compact');
     expect(container.getAttribute(THEME_MOTION_PROFILE_ATTRIBUTE)).toBe('expressive');
     expect(container.getAttribute(THEME_PERSONALITY_ATTRIBUTE)).toBe('accented');
@@ -111,7 +114,7 @@ describe('themes', () => {
       motionProfile: 'expressive',
       personality: 'accented',
       themeName: 'belovodye',
-      themeType: 'light',
+      themeType: 'dark',
     });
 
     patchThemeRuntime({ themeName: 'dark' }, container);
@@ -263,14 +266,16 @@ describe('themes', () => {
     const sheet = createThemeSheet('belovodye', belovodyeTheme);
 
     expect(sheet).toContain('[data-ui-theme="belovodye"]');
+    expect(sheet).toContain('[data-ui-theme="belovodye"] body');
     expect(sheet).toContain('[data-ui-theme="belovodye"][data-ui-density="compact"]');
     expect(sheet).toContain('[data-ui-theme="belovodye"][data-ui-motion-profile="expressive"]');
     expect(sheet).toContain('[data-ui-theme="belovodye"][data-ui-personality="accented"]');
     expect(sheet).toContain('@media (min-width: 48rem)');
+    expect(sheet).toContain('background-image:');
     expect(sheet).toContain('--ui-overlay-backdrop');
-    expect(sheet).toContain('--ui-brand-500: #169fe8;');
-    expect(sheet).toContain('--ui-button-brand-solid-bg: var(--ui-brand-700);');
-    expect(sheet).toContain('--ui-button-info-solid-bg: var(--ui-brand-700);');
+    expect(sheet).toContain('--ui-brand-500: #2dd4bf;');
+    expect(sheet).toContain('--ui-button-brand-solid-bg: var(--ui-brand-400);');
+    expect(sheet).toContain('--ui-button-info-solid-bg: var(--ui-brand-300);');
     expect(sheet).toContain(
       '--ui-z-layer-dropdown: calc(var(--ui-z-overlay-base) - var(--ui-z-overlay-step));'
     );

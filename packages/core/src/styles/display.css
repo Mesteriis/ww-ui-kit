@@ -48,6 +48,17 @@
   transition: var(--ui-motion-transition-surface-lift-sm);
 }
 
+[data-ui-theme='belovodye'] .ui-card {
+  border-color: color-mix(in srgb, var(--ui-card-border) 82%, transparent);
+  background: linear-gradient(
+    152deg,
+    color-mix(in srgb, var(--ui-surface-default) 78%, transparent),
+    color-mix(in srgb, var(--ui-surface-raised) 82%, transparent)
+  );
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  backdrop-filter: blur(18px) saturate(145%);
+}
+
 .ui-card__header,
 .ui-card__footer {
   color: var(--ui-text-secondary);

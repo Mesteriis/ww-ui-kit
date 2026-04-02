@@ -21,6 +21,8 @@ It does not own:
 
 Use `@ww/themes` for theme metadata, scoped subtree theming, and theme-aware runtime helpers. Theme values must stay here instead of leaking into `@ww/core`, widgets, or apps.
 
+`belovodye` is the sanctioned dark dashboard theme in this registry. Consumers should treat its `ThemeType` as `dark` and let runtime helpers derive that metadata instead of hardcoding a second theme-family source of truth.
+
 `setTheme()` synchronizes `data-ui-theme` and derived `data-ui-theme-type`. Browser `color-scheme` follows the shared CSS contract keyed off `data-ui-theme-type`, so runtime helpers should not duplicate it with inline styles.
 
 ## Runtime contract

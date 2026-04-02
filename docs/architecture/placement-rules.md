@@ -28,6 +28,8 @@ Use these rules before creating a new file or package.
 - it is a reusable layout or page shell
 - it composes widgets and core without becoming a route page
 - it should not fetch data or know product routing
+- named dashboard shells such as `UiDashboardLayout` stay here when the contract is still
+  slot-driven and route-agnostic
 
 ## Put it in `apps/*` when
 

@@ -354,7 +354,7 @@ describe('DataTableWidget', () => {
           };
         },
         template: `
-          <section data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section data-ui-theme="belovodye" data-ui-theme-type="dark">
             <DataTableWidget
               title="Scoped accounts"
               :rows="[]"

@@ -8,6 +8,12 @@ The repository has exactly three primary test contours:
 
 `pnpm test` runs all three in that order.
 
+Performance regression coverage is not a fourth contour. It is a separate governed gate:
+
+- `pnpm test:perf` runs a Chromium-only runtime benchmark suite against built playground output.
+- `pnpm check:perf` validates build chunk budgets, reads or launches the runtime suite, and writes a machine-readable perf summary artifact.
+- perf budgets live only in `tools/governance/catalog/performance-requirements.mjs`.
+
 ## Unit tests
 
 Unit tests cover:
@@ -65,6 +71,16 @@ Framework: Playwright.
 
 Playground browser checks also include curated axe coverage for stable harness flows.
 
+## Performance regression gate
+
+The performance gate protects two signals:
+
+- build chunk budgets from real `@ww/playground` production output
+- runtime regression budgets from governed `/playground/testing` browser flows
+
+The gate stays separate from `pnpm test` so the repo preserves its three primary contours while still enforcing performance regressions in CI and `pnpm verify`.
+Runtime measurements use warm-up runs, measured runs, and median-based decisions to reduce noise.
+
 ## Coverage governance
 
 Docs, stories, and playground scenarios are checked against the public surface manifest. `check:catalog` also verifies that named runtime exports from each public package root entrypoint are covered by that manifest. `check:stories` now fails when a public visual surface lacks an explicit Storybook contract or when declared Storybook invariants are not covered by the mapped stories. Visual maintainer workbench coverage is checked through the adjacent playground lab manifest.
@@ -75,6 +91,7 @@ Required governance checks:
 - `check:docs`
 - `check:playground-coverage`
 - `check:playground-lab`
+- `check:perf`
 
 Formatting and operational checks remain part of the repository gate:
 

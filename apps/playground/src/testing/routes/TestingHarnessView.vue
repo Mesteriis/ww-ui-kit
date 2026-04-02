@@ -71,6 +71,7 @@ const DataTableWidgetShowcase = defineAsyncComponent(
 );
 const LayerScaffoldShowcase = defineAsyncComponent(() => import('../../LayerScaffoldShowcase.vue'));
 const SignalGraphShowcase = defineAsyncComponent(() => import('../../SignalGraphShowcase.vue'));
+const TsParticlesShowcase = defineAsyncComponent(() => import('../../TsParticlesShowcase.vue'));
 
 defineOptions({ name: 'TestingHarnessView' });
 
@@ -1081,6 +1082,8 @@ const currentReleaseStepLabel = computed(
     </section>
 
     <SignalGraphShowcase />
+
+    <TsParticlesShowcase />
 
     <LayerScaffoldShowcase />
 

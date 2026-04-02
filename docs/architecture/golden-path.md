@@ -29,7 +29,7 @@ Use:
 - Use subtree theming when only part of a surface needs a different theme:
 
 ```html
-<section data-ui-theme="belovodye" data-ui-theme-type="light">...</section>
+<section data-ui-theme="belovodye" data-ui-theme-type="dark">...</section>
 ```
 
 Or apply the full scoped runtime contract from code:
@@ -59,12 +59,16 @@ patchThemeRuntime(
 
 - Use `UiWidgetShell` for reusable composed blocks.
 - Use `DataTableWidget` when you want reusable table-shell framing above `@ww/data-grid`.
-- Use `UiLayout` and related layout primitives for reusable page-shell skeletons; named dashboard or marketing templates compose above them.
+- Use `UiLayout` and related layout primitives for reusable page-shell skeletons.
+- Use `UiDashboardLayout` when you need a reusable dashboard-like shell with dedicated aside,
+  header, and content slots.
+- Keep future marketing or workspace templates composed above the generic `UiLayout` family.
 - Keep route pages, backend orchestration, and product-specific state in apps.
 
 ## 5. Optional systems
 
 - `@ww/charts-apex` is a vendor-backed adapter and stays optional.
+- `@ww/tsparticles` is a vendor-backed decorative backdrop adapter and stays optional.
 - `@ww/signal-graph` is feature-first and stays optional.
 - `@ww/data-grid` is the canonical dense admin/business table system package.
 

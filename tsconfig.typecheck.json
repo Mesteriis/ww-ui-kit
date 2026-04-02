@@ -9,6 +9,7 @@
       "@ww/page-templates": ["./packages/page-templates/src/index.ts"],
       "@ww/primitives": ["./packages/primitives/src/index.ts"],
       "@ww/signal-graph": ["./packages/signal-graph/src/index.ts"],
+      "@ww/tsparticles": ["./packages/third-party/tsparticles/src/index.ts"],
       "@ww/themes": ["./packages/themes/src/index.ts"],
       "@ww/tokens": ["./packages/tokens/src/index.ts"],
       "@ww/widgets": ["./packages/widgets/src/index.ts"]

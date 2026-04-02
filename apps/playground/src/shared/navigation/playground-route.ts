@@ -1,5 +1,8 @@
 export type PlaygroundRoute =
   | {
+      mode: 'home';
+    }
+  | {
       mode: 'testing';
     }
   | {
@@ -18,10 +21,22 @@ export function parsePlaygroundRoute(pathname: string, defaultSurfaceId: string)
     : pathname;
   const segments = normalizedPath.split('/').filter(Boolean);
 
+  if (segments.length === 0) {
+    return {
+      mode: 'home',
+    };
+  }
+
   if (segments[0] === 'lab') {
     return {
       mode: 'lab',
       surfaceId: segments[1] ?? defaultSurfaceId,
+    };
+  }
+
+  if (segments[0] === 'testing') {
+    return {
+      mode: 'testing',
     };
   }
 
@@ -37,6 +52,10 @@ export function buildPlaygroundPath(route: PlaygroundRoute, pathname?: string) {
 
   if (route.mode === 'lab') {
     return `${basePrefix}/lab/${route.surfaceId}`;
+  }
+
+  if (route.mode === 'home') {
+    return basePrefix ? `${basePrefix}/` : '/';
   }
 
   return `${basePrefix}/testing`;

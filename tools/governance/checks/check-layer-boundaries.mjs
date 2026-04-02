@@ -23,6 +23,8 @@ function getWorkspaceImport(specifier) {
 const allowedVendorImports = new Map([
   ['apexcharts', '@ww/charts-apex'],
   ['vue3-apexcharts', '@ww/charts-apex'],
+  ['@tsparticles/engine', '@ww/tsparticles'],
+  ['@tsparticles/slim', '@ww/tsparticles'],
   ['@vue-flow/core', '@ww/signal-graph'],
   ['@vue-flow/background', '@ww/signal-graph'],
   ['@vue-flow/minimap', '@ww/signal-graph'],

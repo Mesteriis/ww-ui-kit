@@ -30,6 +30,10 @@ export const workspaceAliases: Alias[] = [
     replacement: path.resolve(rootDir, 'packages/third-party/charts-apex/src/styles/index.css'),
   },
   {
+    find: /^@ww\/tsparticles\/styles\.css$/,
+    replacement: path.resolve(rootDir, 'packages/third-party/tsparticles/src/styles/index.css'),
+  },
+  {
     find: /^@ww\/signal-graph\/styles\.css$/,
     replacement: path.resolve(rootDir, 'packages/signal-graph/src/styles/index.css'),
   },
@@ -64,6 +68,10 @@ export const workspaceAliases: Alias[] = [
   {
     find: /^@ww\/charts-apex$/,
     replacement: path.resolve(rootDir, 'packages/third-party/charts-apex/src/index.ts'),
+  },
+  {
+    find: /^@ww\/tsparticles$/,
+    replacement: path.resolve(rootDir, 'packages/third-party/tsparticles/src/index.ts'),
   },
   {
     find: /^@ww\/signal-graph$/,

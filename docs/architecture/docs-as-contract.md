@@ -21,6 +21,7 @@ Docs in this repository are part of the engineering contract.
   - `/testing/*` is the proof harness for real multi-package composition.
   - `/lab/*` is the maintainer-facing styling workbench and constructor.
 - Browser-level accessibility checks are a curated safety net on top of Storybook and playground proofs.
+- Performance budgets for built playground proof routes are contract data too: the governed catalog defines the only supported thresholds and the perf gate publishes a machine-readable summary artifact.
 - Public visual surfaces must record lab eligibility in the governed playground lab manifest.
 - Architecture docs must point to machine-checked source files when possible.
 
@@ -32,5 +33,6 @@ CI checks:
 - `check:stories`
 - `check:playground-coverage`
 - `check:playground-lab`
+- `check:perf`
 - `check:adr`
 - `format:check`

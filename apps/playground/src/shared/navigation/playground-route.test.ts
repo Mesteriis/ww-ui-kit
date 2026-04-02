@@ -4,6 +4,12 @@ import { buildPlaygroundPath, parsePlaygroundRoute } from './playground-route';
 
 describe('playground route helpers', () => {
   it('parses testing and lab routes under the playground base prefix', () => {
+    expect(parsePlaygroundRoute('/playground', 'fallback-surface')).toEqual({
+      mode: 'home',
+    });
+    expect(parsePlaygroundRoute('/playground/', 'fallback-surface')).toEqual({
+      mode: 'home',
+    });
     expect(parsePlaygroundRoute('/playground/testing', 'fallback-surface')).toEqual({
       mode: 'testing',
     });
@@ -18,6 +24,7 @@ describe('playground route helpers', () => {
   });
 
   it('builds routes from an explicit pathname and stays safe without window access', () => {
+    expect(buildPlaygroundPath({ mode: 'home' }, '/playground/testing')).toBe('/playground/');
     expect(
       buildPlaygroundPath({ mode: 'lab', surfaceId: 'overlay-stack' }, '/playground/testing')
     ).toBe('/playground/lab/overlay-stack');
@@ -33,6 +40,7 @@ describe('playground route helpers', () => {
         value: undefined,
       });
 
+      expect(buildPlaygroundPath({ mode: 'home' })).toBe('/');
       expect(buildPlaygroundPath({ mode: 'testing' })).toBe('/testing');
       expect(buildPlaygroundPath({ mode: 'lab', surfaceId: 'fallback-surface' })).toBe(
         '/lab/fallback-surface'

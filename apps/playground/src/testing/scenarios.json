@@ -24,6 +24,12 @@
     "description": "Vendor-backed chart adapter inside the shared theme and motion model."
   },
   {
+    "id": "particles",
+    "label": "Particles",
+    "hash": "#testing-particles",
+    "description": "Neutral tsParticles backdrop wrapper that stays token-driven and layout-safe."
+  },
+  {
     "id": "signal-graph",
     "label": "Signal Graph",
     "hash": "#testing-signal-graph",
@@ -93,7 +99,7 @@
     "id": "page-templates",
     "label": "Page Templates",
     "hash": "#testing-page-templates",
-    "description": "Page-template layer proving dashboard-like and marketing-like shells from shared UiLayout primitives."
+    "description": "Page-template layer proving UiDashboardLayout, the generic UiLayout shell family, and directional flow layouts."
   },
   {
     "id": "composition",

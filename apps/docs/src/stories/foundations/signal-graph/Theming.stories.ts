@@ -29,7 +29,7 @@ export const Theming: StoryObj<typeof UiSignalGraph> = {
         <section data-ui-theme="dark" data-ui-theme-type="dark" style="padding: var(--ui-space-4); border-radius: var(--ui-radius-xl); background: var(--ui-surface-canvas);">
           <UiSignalGraph aria-label="Dark scoped signal graph" :nodes="nodes" :edges="edges" :node-definitions="nodeDefinitions" />
         </section>
-        <section data-ui-theme="belovodye" data-ui-theme-type="light" style="padding: var(--ui-space-4); border-radius: var(--ui-radius-xl); background: var(--ui-surface-canvas);">
+        <section data-ui-theme="belovodye" data-ui-theme-type="dark" style="padding: var(--ui-space-4); border-radius: var(--ui-radius-xl); background: var(--ui-surface-canvas);">
           <UiSignalGraph aria-label="Belovodye scoped signal graph" :nodes="nodes" :edges="edges" :node-definitions="nodeDefinitions" />
         </section>
       </div>

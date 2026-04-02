@@ -30,7 +30,8 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@ww/core": "workspace:*"
+    "@ww/core": "workspace:*",
+    "@ww/primitives": "workspace:*"
   },
   "scripts": {
     "build": "pnpm typecheck:build && vite build",

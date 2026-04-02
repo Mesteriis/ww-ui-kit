@@ -10,6 +10,7 @@ tags:
   - third-party
 relatedPackages:
   - @ww/charts-apex
+  - @ww/tsparticles
   - @ww/signal-graph
 supersedes: []
 supersededBy: []
@@ -28,6 +29,7 @@ Introduce `packages/third-party/*` for vendor-backed adapters whose public contr
 Current application:
 
 - move `@ww/charts-apex` to `packages/third-party/charts-apex`
+- keep `@ww/tsparticles` in `packages/third-party/tsparticles` because its public surface is an honest vendor-backed decorative adapter
 - keep `@ww/signal-graph` outside `third-party` because its public API is feature-first and Vue Flow remains internal
 
 ## Consequences
@@ -53,3 +55,4 @@ Current application:
 - [`docs/architecture/package-topology.md`](../architecture/package-topology.md)
 - [`tools/governance/checks/check-package-topology.mjs`](../../tools/governance/checks/check-package-topology.mjs)
 - [`packages/third-party/charts-apex`](../../packages/third-party/charts-apex)
+- [`packages/third-party/tsparticles`](../../packages/third-party/tsparticles)

@@ -53,7 +53,7 @@ describe('useOverlaySurface', () => {
           return { contentRef, preferredRef, sourceRef, surface };
         },
         template: `
-          <section data-ui-theme="belovodye" data-ui-theme-type="light">
+          <section data-ui-theme="belovodye" data-ui-theme-type="dark">
             <button ref="sourceRef" id="opener" type="button">Open</button>
             <div ref="contentRef" tabindex="-1">
               <button ref="preferredRef" id="inside" type="button">Inside</button>
