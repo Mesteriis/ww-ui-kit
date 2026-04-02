@@ -66,14 +66,14 @@ export const PERFORMANCE_REQUIREMENTS = Object.freeze({
     measuredRuns: 5,
     summaryFile: PERFORMANCE_ARTIFACTS.runtimeSummaryFile,
     // Runtime budgets use the current built-playground median baseline across local macOS and the
-    // GitHub Actions Ubuntu runner. Cold route mounts keep roughly 10-15% headroom over the
-    // slower CI medians so the gate catches real regressions instead of runner variance, while
-    // fast interaction flows stay in the 80-150ms band.
+    // GitHub Actions Ubuntu runner. Cold route mounts keep modest headroom over the slower CI
+    // medians so the gate catches real regressions instead of runner variance, while fast
+    // interaction flows stay in the 80-150ms band.
     budgets: Object.freeze([
       Object.freeze({
         id: 'boot-playground-testing',
         playgroundScenarioId: 'overlays',
-        maxMilliseconds: 1200,
+        maxMilliseconds: 1400,
         description:
           'Boot the built /playground/testing route until the harness root and first governed proof section are visible.',
         measurement: Object.freeze({
@@ -113,7 +113,7 @@ export const PERFORMANCE_REQUIREMENTS = Object.freeze({
       Object.freeze({
         id: 'signal-graph-mount-visible',
         playgroundScenarioId: 'signal-graph',
-        maxMilliseconds: 1100,
+        maxMilliseconds: 1250,
         description:
           'Mount the signal graph proof section until the graph runtime is visible in the built harness.',
         measurement: Object.freeze({

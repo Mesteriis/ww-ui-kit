@@ -170,6 +170,16 @@ describe('page-templates package', () => {
       },
     });
 
+    const horizontalScrollableWithFallback = mount(UiHorizontalLayout, {
+      props: {
+        gap: '1.25rem',
+        scroll: true,
+      },
+      slots: {
+        default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
     const horizontalScrollable = mount(UiHorizontalLayout, {
       props: {
         gap: '1.25rem',
@@ -180,6 +190,71 @@ describe('page-templates package', () => {
       },
       slots: {
         default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
+    const horizontalBlankAriaLabel = mount(UiHorizontalLayout, {
+      props: {
+        gap: '1.25rem',
+        scroll: true,
+      },
+      attrs: {
+        'aria-label': '   ',
+      },
+      slots: {
+        default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
+    const horizontalBlankLabelledBy = mount(UiHorizontalLayout, {
+      props: {
+        gap: '1.25rem',
+        scroll: true,
+      },
+      attrs: {
+        'aria-labelledby': '   ',
+      },
+      slots: {
+        default: '<button type="button">North lane</button><button type="button">Bravo</button>',
+      },
+    });
+
+    const verticalLabelled = mount(UiVerticalLayout, {
+      props: {
+        gap: '2rem',
+        scroll: true,
+      },
+      attrs: {
+        'aria-labelledby': 'dashboard-filters-heading',
+      },
+      slots: {
+        default: '<span id="dashboard-filters-heading">Filters</span><span>Approvals</span>',
+      },
+    });
+
+    const verticalBlankAriaLabel = mount(UiVerticalLayout, {
+      props: {
+        gap: '2rem',
+        scroll: true,
+      },
+      attrs: {
+        'aria-label': '   ',
+      },
+      slots: {
+        default: '<span>Filters</span><span>Approvals</span>',
+      },
+    });
+
+    const verticalBlankLabelledBy = mount(UiVerticalLayout, {
+      props: {
+        gap: '2rem',
+        scroll: true,
+      },
+      attrs: {
+        'aria-labelledby': '   ',
+      },
+      slots: {
+        default: '<span>Filters</span><span>Approvals</span>',
       },
     });
 
@@ -203,6 +278,21 @@ describe('page-templates package', () => {
     expect(horizontal.text()).toContain('North lane');
     expect(horizontal.text()).toContain('Bravo');
 
+    expect(horizontalScrollableWithFallback.classes()).toContain('ui-flow-layout');
+    expect(horizontalScrollableWithFallback.classes()).toContain('ui-horizontal-layout');
+    expect(horizontalScrollableWithFallback.attributes('data-ui-direction')).toBe('horizontal');
+    expect(horizontalScrollableWithFallback.attributes('data-ui-scroll')).toBe('true');
+    expect(horizontalScrollableWithFallback.attributes('role')).toBe('region');
+    expect(horizontalScrollableWithFallback.attributes('tabindex')).toBe('0');
+    expect(horizontalScrollableWithFallback.attributes('aria-label')).toBe(
+      'Scrollable horizontal layout'
+    );
+    expect(horizontalScrollableWithFallback.attributes('style')).toContain(
+      '--ui-layout-flow-gap: 1.25rem;'
+    );
+    expect(horizontalScrollableWithFallback.text()).toContain('North lane');
+    expect(horizontalScrollableWithFallback.text()).toContain('Bravo');
+
     expect(horizontalScrollable.classes()).toContain('ui-flow-layout');
     expect(horizontalScrollable.classes()).toContain('ui-horizontal-layout');
     expect(horizontalScrollable.attributes('data-ui-direction')).toBe('horizontal');
@@ -213,6 +303,48 @@ describe('page-templates package', () => {
     expect(horizontalScrollable.attributes('style')).toContain('--ui-layout-flow-gap: 1.25rem;');
     expect(horizontalScrollable.text()).toContain('North lane');
     expect(horizontalScrollable.text()).toContain('Bravo');
+
+    expect(horizontalBlankAriaLabel.attributes('data-ui-scroll')).toBe('true');
+    expect(horizontalBlankAriaLabel.attributes('role')).toBe('region');
+    expect(horizontalBlankAriaLabel.attributes('tabindex')).toBe('0');
+    expect(horizontalBlankAriaLabel.attributes('aria-label')).toBe('Scrollable horizontal layout');
+    expect(horizontalBlankAriaLabel.text()).toContain('North lane');
+    expect(horizontalBlankAriaLabel.text()).toContain('Bravo');
+
+    expect(horizontalBlankLabelledBy.attributes('data-ui-scroll')).toBe('true');
+    expect(horizontalBlankLabelledBy.attributes('role')).toBe('region');
+    expect(horizontalBlankLabelledBy.attributes('tabindex')).toBe('0');
+    expect(horizontalBlankLabelledBy.attributes('aria-label')).toBe('Scrollable horizontal layout');
+    expect(horizontalBlankLabelledBy.attributes('aria-labelledby')).toBeUndefined();
+    expect(horizontalBlankLabelledBy.text()).toContain('North lane');
+    expect(horizontalBlankLabelledBy.text()).toContain('Bravo');
+
+    expect(verticalLabelled.classes()).toContain('ui-flow-layout');
+    expect(verticalLabelled.classes()).toContain('ui-vertical-layout');
+    expect(verticalLabelled.attributes('data-ui-direction')).toBe('vertical');
+    expect(verticalLabelled.attributes('data-ui-scroll')).toBe('true');
+    expect(verticalLabelled.attributes('role')).toBe('region');
+    expect(verticalLabelled.attributes('tabindex')).toBe('0');
+    expect(verticalLabelled.attributes('aria-label')).toBeUndefined();
+    expect(verticalLabelled.attributes('aria-labelledby')).toBe('dashboard-filters-heading');
+    expect(verticalLabelled.attributes('style')).toContain('--ui-layout-flow-gap: 2rem;');
+    expect(verticalLabelled.text()).toContain('Filters');
+    expect(verticalLabelled.text()).toContain('Approvals');
+
+    expect(verticalBlankAriaLabel.attributes('data-ui-scroll')).toBe('true');
+    expect(verticalBlankAriaLabel.attributes('role')).toBe('region');
+    expect(verticalBlankAriaLabel.attributes('tabindex')).toBe('0');
+    expect(verticalBlankAriaLabel.attributes('aria-label')).toBe('Scrollable vertical layout');
+    expect(verticalBlankAriaLabel.text()).toContain('Filters');
+    expect(verticalBlankAriaLabel.text()).toContain('Approvals');
+
+    expect(verticalBlankLabelledBy.attributes('data-ui-scroll')).toBe('true');
+    expect(verticalBlankLabelledBy.attributes('role')).toBe('region');
+    expect(verticalBlankLabelledBy.attributes('tabindex')).toBe('0');
+    expect(verticalBlankLabelledBy.attributes('aria-label')).toBe('Scrollable vertical layout');
+    expect(verticalBlankLabelledBy.attributes('aria-labelledby')).toBeUndefined();
+    expect(verticalBlankLabelledBy.text()).toContain('Filters');
+    expect(verticalBlankLabelledBy.text()).toContain('Approvals');
   });
 
   it('renders safely inside a themed subtree container', () => {

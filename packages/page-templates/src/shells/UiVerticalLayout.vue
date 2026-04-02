@@ -23,6 +23,26 @@ const layoutStyle = computed(() => ({
   '--ui-layout-flow-gap': props.gap,
 }));
 
+const forwardedAttrs = computed(() => {
+  if (!props.scroll) {
+    return attrs;
+  }
+
+  const nextAttrs = { ...attrs };
+  const ariaLabel = nextAttrs['aria-label'];
+  const ariaLabelledby = nextAttrs['aria-labelledby'];
+
+  if (typeof ariaLabel === 'string' && ariaLabel.trim().length === 0) {
+    delete nextAttrs['aria-label'];
+  }
+
+  if (typeof ariaLabelledby === 'string' && ariaLabelledby.trim().length === 0) {
+    delete nextAttrs['aria-labelledby'];
+  }
+
+  return nextAttrs;
+});
+
 const fallbackAriaLabel = computed(() => {
   const ariaLabel = attrs['aria-label'];
   const ariaLabelledby = attrs['aria-labelledby'];
@@ -47,7 +67,7 @@ const fallbackAriaLabel = computed(() => {
     :role="props.scroll ? 'region' : undefined"
     :tabindex="props.scroll ? 0 : undefined"
     :aria-label="props.scroll ? fallbackAriaLabel : undefined"
-    v-bind="attrs"
+    v-bind="forwardedAttrs"
   >
     <slot />
   </div>
