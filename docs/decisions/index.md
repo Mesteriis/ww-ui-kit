@@ -22,3 +22,4 @@
 | ADR-0018 | accepted   | Workspace Tooling And Browser Diagnostics             | 2026-03-29 | Replaces manual workspace chains, adds retry-aware browser diagnostics, and formalizes formatting and Node baseline guidance.   |
 | ADR-0019 | accepted   | Theme Capability Matrix And DOM Backed Runtime        | 2026-03-30 | Extends `@ww/themes` with DOM-backed runtime helpers and a governed matrix of sanctioned theme override capabilities.           |
 | ADR-0020 | accepted   | Build Time Declaration Contracts And Unit Concurrency | 2026-03-31 | Splits development and build-time package resolution, makes declaration failures fatal, and caps default unit-test concurrency. |
+| ADR-0021 | accepted   | Governed Performance Regression Gate                  | 2026-04-02 | Adds build and runtime perf budgets as a separate repo gate without changing the three primary test contours.                   |

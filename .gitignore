@@ -9,6 +9,7 @@ storybook-static
 playwright-report
 test-results
 site-dist
+artifacts/perf
 
 # Tool caches
 .turbo
@@ -26,6 +27,7 @@ site-dist
 .vscode
 .fleet
 .aiassistant
+.qwen
 *.iml
 *.swp
 *.swo

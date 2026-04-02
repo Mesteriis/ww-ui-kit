@@ -57,5 +57,6 @@ When the repository keeps a strict global statement/branch/function threshold, a
 ## Related artifacts
 
 - [`docs/architecture/testing-architecture.md`](../architecture/testing-architecture.md)
+- [`docs/decisions/ADR-0021-governed-performance-regression-gate.md`](./ADR-0021-governed-performance-regression-gate.md)
 - [`tests/e2e`](../../tests/e2e)
 - [`tests/playground`](../../tests/playground)

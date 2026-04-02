@@ -83,6 +83,7 @@ Canonical source of truth:
 - layer rules: [`tools/governance/catalog/layer-rules.mjs`](./tools/governance/catalog/layer-rules.mjs)
 - public surface manifest: [`tools/governance/catalog/public-surface-manifest.mjs`](./tools/governance/catalog/public-surface-manifest.mjs)
 - playground lab manifest: [`tools/governance/catalog/playground-lab-manifest.mjs`](./tools/governance/catalog/playground-lab-manifest.mjs)
+- performance budgets: [`tools/governance/catalog/performance-requirements.mjs`](./tools/governance/catalog/performance-requirements.mjs)
 
 ## Public vs internal
 
@@ -95,6 +96,7 @@ Public API is defined by:
 Named runtime exports from each public package root entrypoint must be covered by the public surface manifest, either directly in `exportName` or through `coveredExports`.
 Public visual surfaces must also declare Storybook coverage in that manifest.
 Storybook-backed surfaces may also declare extra required invariants such as accessibility, keyboard flow, focus handling, overlay runtime, reduced motion, or theme-type proofs.
+Performance-sensitive playground proofs are budgeted separately through the governed performance catalog and enforced by `pnpm check:perf`.
 
 Public visual surfaces also carry lab eligibility in the adjacent playground lab manifest.
 
@@ -237,6 +239,12 @@ There are exactly three primary test contours:
 
 Root `pnpm test` runs all three.
 
+Performance regression coverage is a separate governed gate:
+
+- `pnpm test:perf` runs the Chromium-only runtime benchmark suite against built playground output and writes a machine-readable runtime summary.
+- `pnpm check:perf` validates build chunk budgets, runs or reuses that runtime summary, and fails on actual budget breaches.
+- Perf does not become a fourth primary contour; it remains a separate repo gate.
+
 Playwright policy:
 
 - local runs use `retries=0`
@@ -250,6 +258,7 @@ Coverage and proof discipline is enforced by:
 - `pnpm check:docs`
 - `pnpm check:playground-coverage`
 - `pnpm check:playground-lab`
+- `pnpm check:perf`
 - `pnpm check:adr`
 - `pnpm check:ai-rules`
 - `pnpm check:architecture`
@@ -371,6 +380,8 @@ pnpm check:docs
 pnpm check:playground-coverage
 pnpm build:playground-lab
 pnpm check:playground-lab
+pnpm test:perf
+pnpm check:perf
 pnpm check:adr
 pnpm build:ai-rules
 pnpm check:ai-rules
