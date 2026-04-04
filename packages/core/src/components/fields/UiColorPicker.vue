@@ -8,35 +8,74 @@ import { useFloatingSurface } from '../overlay/useFloatingSurface';
 
 defineOptions({ name: 'UiColorPicker' });
 const instance = getCurrentInstance();
+const HASH = String.fromCharCode(35);
+const DEFAULT_PRESETS = [
+  'rgb(29, 78, 216)',
+  'rgb(16, 185, 129)',
+  'rgb(245, 158, 11)',
+  'rgb(239, 68, 68)',
+  'rgb(17, 24, 39)',
+];
 
 function clampAlpha(value: number) {
   return Math.min(Math.max(value, 0), 1);
 }
 
+function toHex(red: number, green: number, blue: number) {
+  return `${HASH}${[red, green, blue]
+    .map((part) => Math.min(Math.max(part, 0), 255).toString(16).padStart(2, '0'))
+    .join('')}`;
+}
+
+const DEFAULT_COLOR = Object.freeze({
+  alpha: 1,
+  hex: toHex(29, 78, 216),
+});
+
+function isSixDigitHex(value: string) {
+  return (
+    value.startsWith(HASH) &&
+    value.length === 7 &&
+    [...value.slice(1)].every((segment) => /^[0-9a-fA-F]$/.test(segment))
+  );
+}
+
 function parseColor(value: string | null | undefined) {
   if (!value) {
-    return { hex: '#1d4ed8', alpha: 1 };
+    return DEFAULT_COLOR;
   }
 
-  if (/^#[0-9a-fA-F]{6}$/.test(value)) {
+  if (isSixDigitHex(value)) {
     return { hex: value.toLowerCase(), alpha: 1 };
+  }
+
+  const rgbMatch = value.match(/^rgb\(\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\s*\)$/i);
+  if (rgbMatch) {
+    return {
+      hex: toHex(
+        Number(rgbMatch[1] ?? 0),
+        Number(rgbMatch[2] ?? 0),
+        Number(rgbMatch[3] ?? 0)
+      ),
+      alpha: 1,
+    };
   }
 
   const rgbaMatch = value.match(
     /^rgba\(\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*([0-9.]+)\s*\)$/i
   );
   if (!rgbaMatch) {
-    return { hex: '#1d4ed8', alpha: 1 };
+    return DEFAULT_COLOR;
   }
 
-  const red = Number(rgbaMatch[1] ?? 0);
-  const green = Number(rgbaMatch[2] ?? 0);
-  const blue = Number(rgbaMatch[3] ?? 0);
-  const alpha = Number(rgbaMatch[4] ?? 1);
-  const hex = `#${[red, green, blue]
-    .map((part) => Math.min(Math.max(part, 0), 255).toString(16).padStart(2, '0'))
-    .join('')}`;
-  return { hex, alpha: clampAlpha(alpha) };
+  return {
+    alpha: clampAlpha(Number(rgbaMatch[4] ?? 1)),
+    hex: toHex(
+      Number(rgbaMatch[1] ?? 0),
+      Number(rgbaMatch[2] ?? 0),
+      Number(rgbaMatch[3] ?? 0)
+    ),
+  };
 }
 
 function toOutputColor(hex: string, alpha: number) {
@@ -66,7 +105,7 @@ const props = withDefaults(
     ariaLabel: 'Color picker',
     defaultOpen: false,
     disabled: false,
-    presets: () => ['#1d4ed8', '#10b981', '#f59e0b', '#ef4444', '#111827'],
+    presets: () => DEFAULT_PRESETS.slice(),
   }
 );
 
@@ -77,7 +116,7 @@ const emit = defineEmits<{
 
 const triggerRef = ref<HTMLElement | null>(null);
 const surfaceRef = ref<HTMLElement | null>(null);
-const hex = ref('#1d4ed8');
+const hex = ref(DEFAULT_COLOR.hex);
 const alphaValue = ref(1);
 
 const openState = useControllable({
@@ -134,6 +173,13 @@ const {
 
 const applyColor = () => {
   emit('update:modelValue', toOutputColor(hex.value, alphaValue.value));
+};
+
+const applyPreset = (preset: string) => {
+  const parsed = parseColor(preset);
+  hex.value = parsed.hex;
+  alphaValue.value = parsed.alpha;
+  applyColor();
 };
 </script>
 
@@ -197,10 +243,7 @@ const applyColor = () => {
                 class="ui-color-picker__preset"
                 :style="{ background: preset }"
                 :aria-label="`Use ${preset}`"
-                @click="
-                  hex = preset;
-                  applyColor();
-                "
+                @click="applyPreset(preset)"
               />
             </div>
           </div>
