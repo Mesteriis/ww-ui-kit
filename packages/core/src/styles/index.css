@@ -13,6 +13,7 @@
 @import './navigation.css';
 @import './tabs.css';
 @import './empty-state.css';
+@import './advanced.css';
 
 @keyframes ui-rotate {
   to {

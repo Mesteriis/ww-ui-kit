@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch, type ComponentPublicIn
 
 import { useControllable, useRovingFocus } from '@ww/primitives';
 
+import UiIcon from '../display/UiIcon.vue';
 import {
   findMenuItemByKey,
   findMenuTypeaheadMatch,
@@ -218,9 +219,7 @@ onBeforeUnmount(() => {
                 @mouseenter="onItemFocus(item.key)"
                 @click="activateItem(item.key)"
               >
-                <span v-if="item.icon" class="ui-menu__icon" aria-hidden="true">
-                  {{ item.icon }}
-                </span>
+                <UiIcon v-if="item.icon" class="ui-menu__icon" decorative>{{ item.icon }}</UiIcon>
                 <slot name="item" :item="item" :selected="selectedKeySet.has(item.key)">
                   <span class="ui-menu__label">{{ item.label }}</span>
                 </slot>
@@ -249,9 +248,7 @@ onBeforeUnmount(() => {
             @mouseenter="onItemFocus(entry.key)"
             @click="activateItem(entry.key)"
           >
-            <span v-if="entry.icon" class="ui-menu__icon" aria-hidden="true">
-              {{ entry.icon }}
-            </span>
+            <UiIcon v-if="entry.icon" class="ui-menu__icon" decorative>{{ entry.icon }}</UiIcon>
             <slot name="item" :item="entry" :selected="selectedKeySet.has(entry.key)">
               <span class="ui-menu__label">{{ entry.label }}</span>
             </slot>

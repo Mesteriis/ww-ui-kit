@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, watch } from 'vue';
 
+import UiIcon from './UiIcon.vue';
+
 defineOptions({ name: 'UiAvatar' });
 
 export type UiAvatarShape = 'circle' | 'square';
@@ -79,11 +81,11 @@ const onImageError = (event: Event) => {
     <span v-else-if="showInitials" class="ui-avatar__initials" aria-hidden="true">
       {{ normalizedInitials }}
     </span>
-    <span v-else-if="showIcon" class="ui-avatar__icon" aria-hidden="true">
+    <UiIcon v-else-if="showIcon" class="ui-avatar__icon" decorative>
       <slot name="icon">
         {{ props.icon }}
       </slot>
-    </span>
+    </UiIcon>
     <span v-else class="ui-avatar__default" aria-hidden="true">◌</span>
   </span>
 </template>

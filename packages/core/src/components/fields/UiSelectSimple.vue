@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import { useId } from '@ww/primitives';
 
 import { mergeDescribedBy, useFieldContext } from './field-context';
+import UiIcon from '../display/UiIcon.vue';
 
 defineOptions({ name: 'UiSelectSimple' });
 
@@ -78,6 +79,6 @@ const onChange = (event: Event) => {
         {{ option.label }}
       </option>
     </select>
-    <span class="ui-select__icon" aria-hidden="true">▾</span>
+    <UiIcon class="ui-select__icon" name="chevronDown" decorative />
   </div>
 </template>

@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import { useId } from '@ww/primitives';
 
 import { mergeDescribedBy, useFieldContext } from '../fields/field-context';
+import UiIcon from '../display/UiIcon.vue';
 
 defineOptions({ name: 'UiCheckbox' });
 
@@ -58,9 +59,7 @@ const onChange = (event: Event) => {
       @change="onChange"
     />
     <span class="ui-checkbox__control" aria-hidden="true">
-      <svg class="ui-checkbox__icon" viewBox="0 0 16 16" focusable="false">
-        <path d="M3.5 8.5 6.5 11.5 12.5 4.5" />
-      </svg>
+      <UiIcon class="ui-checkbox__icon" name="check" decorative />
     </span>
     <span v-if="$slots.default" class="ui-checkbox__label">
       <slot />

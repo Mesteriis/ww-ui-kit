@@ -10,6 +10,7 @@ import {
 } from './listbox';
 import { mergeDescribedBy, useFieldContext } from './field-context';
 import { useFloatingSurface } from '../overlay/useFloatingSurface';
+import UiIcon from '../display/UiIcon.vue';
 import UiTag from '../display/UiTag.vue';
 
 defineOptions({ name: 'UiSelect' });
@@ -544,9 +545,9 @@ const displayInputValue = computed(() => {
                 :active="activeId === option.id"
                 :selected="selectedValueSet.has(option.value)"
               >
-                <span v-if="option.icon" class="ui-rich-select__option-icon" aria-hidden="true">
+                <UiIcon v-if="option.icon" class="ui-rich-select__option-icon" decorative>
                   {{ option.icon }}
-                </span>
+                </UiIcon>
                 <span class="ui-rich-select__option-label">{{ option.label }}</span>
               </slot>
             </button>

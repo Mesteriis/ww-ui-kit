@@ -9,6 +9,7 @@ import type {
   UiButtonVariant,
 } from './button.types';
 import { resolveButtonStyle } from './button.types';
+import UiIcon from '../display/UiIcon.vue';
 
 defineOptions({ name: 'UiIconButton' });
 
@@ -67,8 +68,8 @@ const accessibleLabel = computed(() =>
     data-ui-motion="lift-xs ring-focus-soft"
   >
     <span v-if="props.loading" class="ui-button__spinner" aria-hidden="true" />
-    <span v-else class="ui-button__icon" aria-hidden="true">
+    <UiIcon v-else class="ui-button__icon" decorative>
       <slot />
-    </span>
+    </UiIcon>
   </button>
 </template>

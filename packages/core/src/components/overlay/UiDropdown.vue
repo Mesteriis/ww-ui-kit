@@ -18,6 +18,7 @@ import {
   type FloatingPlacement,
 } from '@ww/primitives';
 
+import UiIcon from '../display/UiIcon.vue';
 import {
   normalizeDelayConfig,
   useManagedTriggerAttributes,
@@ -482,9 +483,9 @@ const dropdownStyle = computed<Record<string, string>>(() => ({
                     @mouseenter="onItemFocus(groupEntry.id)"
                     @click="selectItem(groupEntry)"
                   >
-                    <span v-if="groupEntry.icon" class="ui-dropdown__icon" aria-hidden="true">
+                    <UiIcon v-if="groupEntry.icon" class="ui-dropdown__icon" decorative>
                       {{ groupEntry.icon }}
-                    </span>
+                    </UiIcon>
                     <span class="ui-dropdown__label">{{ groupEntry.label }}</span>
                   </button>
                 </li>
@@ -504,9 +505,9 @@ const dropdownStyle = computed<Record<string, string>>(() => ({
                 @mouseenter="onItemFocus(entry.id)"
                 @click="selectItem(entry)"
               >
-                <span v-if="entry.icon" class="ui-dropdown__icon" aria-hidden="true">
+                <UiIcon v-if="entry.icon" class="ui-dropdown__icon" decorative>
                   {{ entry.icon }}
-                </span>
+                </UiIcon>
                 <span class="ui-dropdown__label">{{ entry.label }}</span>
               </button>
             </li>

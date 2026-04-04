@@ -3,6 +3,7 @@ import { computed } from 'vue';
 
 import { PrimitiveVisuallyHidden } from '@ww/primitives';
 
+import UiIcon from '../display/UiIcon.vue';
 import type {
   UiButtonAppearance,
   UiButtonEffect,
@@ -68,16 +69,16 @@ const resolvedStyle = computed(() =>
     :data-ui-button-effect="props.effect"
     data-ui-motion="lift-xs ring-focus-soft"
   >
-    <span v-if="$slots.leftIcon && !props.loading" class="ui-button__icon" aria-hidden="true">
+    <UiIcon v-if="$slots.leftIcon && !props.loading" class="ui-button__icon" decorative>
       <slot name="leftIcon" />
-    </span>
+    </UiIcon>
     <span v-if="props.loading" class="ui-button__spinner" aria-hidden="true" />
     <span class="ui-button__content">
       <slot />
     </span>
-    <span v-if="$slots.rightIcon && !props.loading" class="ui-button__icon" aria-hidden="true">
+    <UiIcon v-if="$slots.rightIcon && !props.loading" class="ui-button__icon" decorative>
       <slot name="rightIcon" />
-    </span>
+    </UiIcon>
     <PrimitiveVisuallyHidden v-if="props.loading">Loading</PrimitiveVisuallyHidden>
   </button>
 </template>

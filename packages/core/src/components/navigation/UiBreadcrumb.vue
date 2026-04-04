@@ -2,6 +2,8 @@
 /* istanbul ignore file */
 import { computed } from 'vue';
 
+import UiIcon from '../display/UiIcon.vue';
+
 defineOptions({ name: 'UiBreadcrumb' });
 
 type UiBreadcrumbItem = {
@@ -91,15 +93,11 @@ const resolveHref = (item: UiBreadcrumbItem) => item.href ?? item.to;
             class="ui-breadcrumb__current"
             :aria-current="item.isCurrent ? 'page' : undefined"
           >
-            <span v-if="item.icon" class="ui-breadcrumb__icon" aria-hidden="true">{{
-              item.icon
-            }}</span>
+            <UiIcon v-if="item.icon" class="ui-breadcrumb__icon" decorative>{{ item.icon }}</UiIcon>
             <span>{{ item.label }}</span>
           </span>
           <a v-else class="ui-breadcrumb__link" :href="resolveHref(item)">
-            <span v-if="item.icon" class="ui-breadcrumb__icon" aria-hidden="true">{{
-              item.icon
-            }}</span>
+            <UiIcon v-if="item.icon" class="ui-breadcrumb__icon" decorative>{{ item.icon }}</UiIcon>
             <span>{{ item.label }}</span>
           </a>
         </slot>

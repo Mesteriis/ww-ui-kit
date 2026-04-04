@@ -5,6 +5,7 @@ import { PrimitivePortal, useControllable, useId, type FloatingPlacement } from 
 
 import UiButton from '../buttons/UiButton.vue';
 import type { UiButtonVariant } from '../buttons/button.types';
+import UiIcon from '../display/UiIcon.vue';
 import { useManagedTriggerAttributes, useTriggerElement } from './floating-utils';
 import { useFloatingSurface } from './useFloatingSurface';
 
@@ -174,7 +175,7 @@ const popconfirmStyle = computed<Record<string, string>>(() => ({
         :aria-describedby="props.description ? descriptionId : undefined"
       >
         <div class="ui-popconfirm__header">
-          <span class="ui-popconfirm__icon" aria-hidden="true">{{ props.icon }}</span>
+          <UiIcon class="ui-popconfirm__icon" decorative>{{ props.icon }}</UiIcon>
           <div class="ui-popconfirm__copy">
             <h2 :id="titleId" class="ui-popconfirm__title">{{ props.title }}</h2>
             <p v-if="props.description" :id="descriptionId" class="ui-popconfirm__description">

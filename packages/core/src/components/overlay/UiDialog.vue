@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PrimitivePortal } from '@ww/primitives';
 
+import UiIcon from '../display/UiIcon.vue';
 import { useOverlay } from './useOverlay';
 
 defineOptions({ name: 'UiDialog' });
@@ -11,11 +12,13 @@ const props = withDefaults(
     title?: string;
     description?: string;
     ariaLabel?: string;
+    role?: 'dialog' | 'alertdialog';
     closeOnOverlayClick?: boolean;
-    portalTarget?: string | HTMLElement | null;
+    portalTarget?: string | HTMLElement | null | undefined;
   }>(),
   {
     closeOnOverlayClick: true,
+    role: 'dialog',
   }
 );
 
@@ -82,7 +85,7 @@ const {
           ref="panelRef"
           class="ui-overlay__surface ui-dialog"
           :style="contentStyle"
-          role="dialog"
+          :role="props.role"
           aria-modal="true"
           :aria-labelledby="labelledBy"
           :aria-describedby="describedBy"
@@ -106,7 +109,7 @@ const {
               aria-label="Close dialog"
               @click="close"
             >
-              ×
+              <UiIcon name="close" decorative />
             </button>
           </div>
 

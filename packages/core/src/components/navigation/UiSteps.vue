@@ -3,6 +3,8 @@ import { computed } from 'vue';
 
 import { useControllable } from '@ww/primitives';
 
+import UiIcon from '../display/UiIcon.vue';
+
 defineOptions({ name: 'UiSteps' });
 
 export type UiStepStatus = 'wait' | 'process' | 'complete' | 'error';
@@ -101,7 +103,8 @@ const onSelect = (item: UiStepItem, index: number) => {
           @click="onSelect(item, index)"
         >
           <span class="ui-steps__marker" aria-hidden="true">
-            {{ item.icon ?? index + 1 }}
+            <UiIcon v-if="item.icon" decorative>{{ item.icon }}</UiIcon>
+            <template v-else>{{ index + 1 }}</template>
           </span>
           <span class="ui-steps__body">
             <span class="ui-steps__title">{{ item.title }}</span>
@@ -116,7 +119,8 @@ const onSelect = (item: UiStepItem, index: number) => {
           :aria-current="index === currentStep ? 'step' : undefined"
         >
           <span class="ui-steps__marker" aria-hidden="true">
-            {{ item.icon ?? index + 1 }}
+            <UiIcon v-if="item.icon" decorative>{{ item.icon }}</UiIcon>
+            <template v-else>{{ index + 1 }}</template>
           </span>
           <span class="ui-steps__body">
             <span class="ui-steps__title">{{ item.title }}</span>
