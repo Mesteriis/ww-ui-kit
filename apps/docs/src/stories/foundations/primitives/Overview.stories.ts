@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import { UiBadge, UiButton, UiCard } from '@ww/core';
 import { PrimitiveFocusTrap, PrimitivePortal, PrimitiveVisuallyHidden } from '@ww/primitives';
@@ -23,7 +23,12 @@ export const Overview: StoryObj = {
     },
     setup() {
       const portalDisabled = ref(false);
+      const portalReady = ref(false);
       const trapOpen = ref(false);
+
+      onMounted(() => {
+        portalReady.value = true;
+      });
 
       const openTrap = () => {
         trapOpen.value = true;
@@ -37,6 +42,7 @@ export const Overview: StoryObj = {
         closeTrap,
         openTrap,
         portalDisabled,
+        portalReady,
         trapOpen,
       };
     },
@@ -93,7 +99,11 @@ export const Overview: StoryObj = {
                 "
               >
                 <strong>Story tree</strong>
-                <PrimitivePortal to="#primitive-portal-target" :disabled="portalDisabled">
+                <PrimitivePortal
+                  v-if="portalReady"
+                  to="#primitive-portal-target"
+                  :disabled="portalDisabled"
+                >
                   <div
                     style="
                       display: inline-flex;
