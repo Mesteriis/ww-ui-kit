@@ -13,6 +13,7 @@ import {
   UiFilePicker,
   UiIcon,
   UiImage,
+  UiImagePreview,
   UiImagePreviewGroup,
   UiMention,
   UiSplitter,
@@ -35,6 +36,7 @@ export default defineComponent({
     UiFilePicker,
     UiIcon,
     UiImage,
+    UiImagePreview,
     UiImagePreviewGroup,
     UiMention,
     UiSplitter,
@@ -55,6 +57,8 @@ export default defineComponent({
       { src: imageSrc, alt: 'Banner preview duplicate', caption: 'Shared preview group' },
       { src: imageSrc, alt: 'Banner preview detail', caption: 'Gallery navigation' },
     ];
+    const previewOpen = ref(false);
+    const previewIndex = ref(1);
 
     const dateValue = ref('2026-04-04');
     const rangeValue = ref(['2026-04-04', '2026-04-08']);
@@ -92,6 +96,8 @@ export default defineComponent({
       imageSrc,
       mentionItems,
       mentionValue,
+      previewIndex,
+      previewOpen,
       storyMode,
       openConfirm,
       rangeValue,
@@ -141,7 +147,13 @@ export default defineComponent({
 
         <UiCard>
           <template #header>Preview group</template>
-          <UiImagePreviewGroup :items="imageItems" :columns="storyMode === 'states' ? 2 : 3" />
+          <div style="display: grid; gap: var(--ui-space-3);">
+            <UiImagePreviewGroup :items="imageItems" :columns="storyMode === 'states' ? 2 : 3" />
+            <UiButton variant="secondary" @click="previewIndex = 1; previewOpen = true">
+              Open UiImagePreview directly
+            </UiButton>
+            <UiImagePreview v-model:open="previewOpen" v-model="previewIndex" :items="imageItems" />
+          </div>
         </UiCard>
       </div>
 

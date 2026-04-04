@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import { UiBadge, UiButton } from '@ww/core';
-import { UiWidgetShell } from '@ww/widgets';
+import { UiBadge, UiButton, UiCard } from '@ww/core';
+import { UiWidgetBody, UiWidgetFooter, UiWidgetHeader, UiWidgetShell } from '@ww/widgets';
 
 const meta = {
   title: 'Widgets/Shell',
@@ -15,6 +15,10 @@ export const Overview: StoryObj<typeof UiWidgetShell> = {
     components: {
       UiBadge,
       UiButton,
+      UiCard,
+      UiWidgetBody,
+      UiWidgetFooter,
+      UiWidgetHeader,
       UiWidgetShell,
     },
     template: `
@@ -50,6 +54,36 @@ export const Overview: StoryObj<typeof UiWidgetShell> = {
           <UiWidgetShell title="Loading widget" :loading="true" />
           <UiWidgetShell title="Error widget" error="Apps remain responsible for retry logic." />
         </div>
+
+        <UiCard>
+          <template #header>Direct shell parts</template>
+          <div class="ui-widget-shell ui-widget-shell--subtle" data-ui-surface="subtle">
+            <UiWidgetHeader>
+              <div class="ui-widget-shell__copy">
+                <h3 class="ui-widget-shell__title">UiWidgetHeader</h3>
+                <p class="ui-widget-shell__description">
+                  Header, body, and footer stay available for explicit widget composition.
+                </p>
+              </div>
+            </UiWidgetHeader>
+
+            <UiWidgetBody :padded="false">
+              <div class="ui-stack" style="padding: var(--ui-space-4);">
+                <UiBadge variant="brand">UiWidgetBody</UiBadge>
+                <p style="margin: 0;">
+                  Direct body composition remains canonical when a consumer needs custom shell assembly.
+                </p>
+              </div>
+            </UiWidgetBody>
+
+            <UiWidgetFooter>
+              <div class="ui-cluster" style="justify-content: space-between; width: 100%;">
+                <span>UiWidgetFooter</span>
+                <UiButton size="sm" variant="secondary">Acknowledge</UiButton>
+              </div>
+            </UiWidgetFooter>
+          </div>
+        </UiCard>
       </div>
     `,
   }),
