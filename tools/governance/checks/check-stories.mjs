@@ -1,3 +1,6 @@
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { PACKAGE_CLASSIFICATION } from '../catalog/package-classification.mjs';
 import {
   getRequiredStorybookInvariants,
@@ -13,6 +16,40 @@ import {
   splitManifestExportName,
 } from '../shared/public-exports.mjs';
 import { fileExists, readText } from '../shared/workspace.mjs';
+
+const STORY_SOURCE_ROOT = 'apps/docs/src/stories';
+
+const collectStorySourceFiles = (directory) =>
+  readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const nextPath = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      return collectStorySourceFiles(nextPath);
+    }
+
+    if (nextPath.endsWith('.ts') || nextPath.endsWith('.vue')) {
+      return [nextPath];
+    }
+
+    return [];
+  });
+
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const isDirectStoryReferenceExport = (exportName) => /^(Ui[A-Z]|Primitive[A-Z])/.test(exportName);
+
+const storySourceFiles = collectStorySourceFiles(STORY_SOURCE_ROOT);
+const storySourceCorpus = storySourceFiles.map((file) => readText(file)).join('\n');
+
+const hasDirectStoryReference = (exportName) => {
+  const escaped = escapeRegex(exportName);
+  return [
+    new RegExp(`<${escaped}(?=[\\s>])`),
+    new RegExp(`\\b${escaped}\\b\\s*(?:,|}|\\)|:)`),
+    new RegExp(`import[^\\n]*\\b${escaped}\\b`),
+    new RegExp(`components\\s*:\\s*{[^}]*\\b${escaped}\\b`, 's'),
+    new RegExp(`name:\\s*['"]${escaped}['"]`),
+  ].some((pattern) => pattern.test(storySourceCorpus));
+};
 
 const storybookSurfaceByExport = new Map();
 for (const entry of PUBLIC_SURFACE_MANIFEST) {
@@ -102,6 +139,18 @@ for (const entry of PUBLIC_SURFACE_MANIFEST.filter((surface) => surface.requires
     if (!actualInvariants.has(requiredInvariant)) {
       throw new Error(
         `Public surface "${entry.exportName}" is missing required Storybook invariant "${requiredInvariant}".`
+      );
+    }
+  }
+
+  for (const exportName of splitManifestExportName(entry.exportName)) {
+    if (!isDirectStoryReferenceExport(exportName)) {
+      continue;
+    }
+
+    if (!hasDirectStoryReference(exportName)) {
+      throw new Error(
+        `Public Storybook export "${exportName}" is not referenced directly by any Storybook story or harness source.`
       );
     }
   }
