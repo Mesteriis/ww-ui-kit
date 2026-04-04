@@ -6,6 +6,7 @@
       "@ww/charts-apex": ["./packages/third-party/charts-apex/src/index.ts"],
       "@ww/core": ["./packages/core/src/index.ts"],
       "@ww/data-grid": ["./packages/data-grid/src/index.ts"],
+      "@ww/interaction": ["./packages/interaction/src/index.ts"],
       "@ww/page-templates": ["./packages/page-templates/src/index.ts"],
       "@ww/primitives": ["./packages/primitives/src/index.ts"],
       "@ww/signal-graph": ["./packages/signal-graph/src/index.ts"],

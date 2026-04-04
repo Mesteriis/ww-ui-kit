@@ -42,6 +42,10 @@ export const workspaceAliases: Alias[] = [
     replacement: path.resolve(rootDir, 'packages/data-grid/src/styles/index.css'),
   },
   {
+    find: /^@ww\/interaction\/styles\.css$/,
+    replacement: path.resolve(rootDir, 'packages/interaction/src/styles/index.css'),
+  },
+  {
     find: /^@ww\/widgets\/styles\.css$/,
     replacement: path.resolve(rootDir, 'packages/widgets/src/styles/index.css'),
   },
@@ -80,6 +84,10 @@ export const workspaceAliases: Alias[] = [
   {
     find: /^@ww\/data-grid$/,
     replacement: path.resolve(rootDir, 'packages/data-grid/src/index.ts'),
+  },
+  {
+    find: /^@ww\/interaction$/,
+    replacement: path.resolve(rootDir, 'packages/interaction/src/index.ts'),
   },
   {
     find: /^@ww\/widgets$/,

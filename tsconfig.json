@@ -10,6 +10,7 @@
     { "path": "./packages/third-party/tsparticles" },
     { "path": "./packages/signal-graph" },
     { "path": "./packages/data-grid" },
+    { "path": "./packages/interaction" },
     { "path": "./packages/widgets" },
     { "path": "./packages/page-templates" },
     { "path": "./apps/playground" },

@@ -1,0 +1,42 @@
+{
+  "name": "@ww/interaction",
+  "version": "0.1.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mesteriis/ww-ui-kit.git",
+    "directory": "packages/interaction"
+  },
+  "bugs": {
+    "url": "https://github.com/Mesteriis/ww-ui-kit/issues"
+  },
+  "homepage": "https://github.com/Mesteriis/ww-ui-kit/tree/main/packages/interaction#readme",
+  "sideEffects": [
+    "./src/styles/index.css"
+  ],
+  "files": [
+    "dist",
+    "src/styles",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles/index.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@ww/core": "workspace:*",
+    "@ww/primitives": "workspace:*",
+    "@ww/themes": "workspace:*"
+  },
+  "scripts": {
+    "build": "pnpm typecheck:build && vite build",
+    "typecheck": "vue-tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "vue-tsc -p tsconfig.build.json --noEmit"
+  }
+}

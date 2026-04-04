@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@ww/core": ["../core/dist/index.d.ts"],
+      "@ww/primitives": ["../primitives/dist/index.d.ts"],
+      "@ww/themes": ["../themes/dist/index.d.ts"]
+    }
+  },
+  "references": []
+}

@@ -72,6 +72,15 @@ export const PACKAGE_CLASSIFICATION = Object.freeze([
     readmePath: 'packages/data-grid/README.md',
   },
   {
+    packageName: '@ww/interaction',
+    physicalPath: 'packages/interaction',
+    packageLayer: 'system',
+    stability: 'incubating',
+    public: true,
+    vendorBacked: false,
+    readmePath: 'packages/interaction/README.md',
+  },
+  {
     packageName: '@ww/widgets',
     physicalPath: 'packages/widgets',
     packageLayer: 'widget',

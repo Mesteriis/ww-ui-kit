@@ -7,6 +7,7 @@
     "@ww/charts-apex": "workspace:*",
     "@ww/core": "workspace:*",
     "@ww/data-grid": "workspace:*",
+    "@ww/interaction": "workspace:*",
     "@ww/page-templates": "workspace:*",
     "@ww/primitives": "workspace:*",
     "@ww/signal-graph": "workspace:*",

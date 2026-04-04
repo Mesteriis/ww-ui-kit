@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig/vue-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "paths": {
+      "@ww/core": ["../core/src/index.ts"],
+      "@ww/primitives": ["../primitives/src/index.ts"],
+      "@ww/themes": ["../themes/src/index.ts"]
+    },
+    "rootDir": "src"
+  },
+  "exclude": ["src/**/*.test.ts"],
+  "references": [{ "path": "../primitives" }, { "path": "../core" }, { "path": "../themes" }],
+  "include": ["src/**/*.ts", "src/**/*.vue"]
+}
