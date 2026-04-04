@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, type CSSProperties } from 'vue';
+import bannerSvg from '../../assets/img/banner.svg';
 
 import {
   UiAlertDialog,
@@ -39,7 +40,7 @@ import {
 
 defineOptions({ name: 'InteractionShowcase' });
 
-const imageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
+const imageSrc = bannerSvg;
 const imageItems = [
   { src: imageSrc, alt: 'Preview banner', caption: 'Preview surface' },
   { src: imageSrc, alt: 'Preview banner duplicate', caption: 'Shared preview group' },

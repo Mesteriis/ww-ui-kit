@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import CoreAdvancedStoryHarness from './core-advanced/CoreAdvancedStoryHarness.vue';
+import CoreAdvancedStoryHarness from './core-advanced/CoreAdvancedStoryHarness';
 
 const meta = {
   title: 'Core/Advanced Surfaces',

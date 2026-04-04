@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import InteractionStoryHarness from './InteractionStoryHarness.vue';
+import InteractionStoryHarness from './InteractionStoryHarness';
 
 const meta = {
   title: 'Systems/Interaction/Overview',
