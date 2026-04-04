@@ -268,3 +268,266 @@
   outline-offset: 2px;
   box-shadow: var(--ui-motion-focus-ring-shadow-soft);
 }
+
+.ui-calendar,
+.ui-time-picker,
+.ui-color-picker__surface,
+.ui-mention__surface {
+  display: grid;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-4);
+}
+
+.ui-calendar {
+  min-inline-size: 19rem;
+}
+
+.ui-calendar__header,
+.ui-calendar__weekdays,
+.ui-date-field__trigger,
+.ui-time-picker__controls,
+.ui-time-picker__actions,
+.ui-color-picker__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+}
+
+.ui-calendar__header {
+  justify-content: space-between;
+}
+
+.ui-calendar__month {
+  font-weight: 600;
+}
+
+.ui-calendar__weekdays,
+.ui-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--ui-space-1);
+}
+
+.ui-calendar__weekdays {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+  text-align: center;
+}
+
+.ui-calendar__cell {
+  min-block-size: 2.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-lg);
+  background: transparent;
+  color: var(--ui-text-primary);
+  cursor: pointer;
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-calendar__cell.is-outside {
+  color: var(--ui-text-muted);
+}
+
+.ui-calendar__cell.is-selected,
+.ui-calendar__cell.is-range-between {
+  background: var(--ui-surface-brand-soft);
+}
+
+.ui-calendar__cell.is-range-start,
+.ui-calendar__cell.is-range-end,
+.ui-calendar__cell.is-today {
+  border-color: var(--ui-border-focus);
+}
+
+.ui-calendar__cell.is-disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-calendar__cell:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+}
+
+.ui-date-field__trigger {
+  justify-content: space-between;
+  text-align: left;
+}
+
+.ui-date-field__trigger.is-placeholder {
+  color: var(--ui-input-placeholder);
+}
+
+.ui-date-field__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  color: var(--ui-text-secondary);
+}
+
+.ui-date-field__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ui-date-surface {
+  padding: 0;
+}
+
+.ui-time-picker__controls {
+  align-items: end;
+}
+
+.ui-time-picker__controls label,
+.ui-color-picker__alpha {
+  display: grid;
+  gap: var(--ui-space-2);
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-color-picker__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+}
+
+.ui-color-picker__swatch,
+.ui-color-picker__preset {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--ui-border-subtle);
+}
+
+.ui-color-picker__panel {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.ui-color-picker__native {
+  inline-size: 100%;
+  block-size: 3rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.ui-color-picker__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+
+.ui-color-picker__preset {
+  cursor: pointer;
+}
+
+.ui-file-picker {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.ui-file-picker__input {
+  display: none;
+}
+
+.ui-file-picker__dropzone {
+  display: grid;
+  justify-items: center;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-5);
+  border: 1px dashed var(--ui-border-subtle);
+  border-radius: var(--ui-radius-xl);
+  background: color-mix(in srgb, var(--ui-surface-sunken) 76%, transparent);
+  text-align: center;
+}
+
+.ui-file-picker.is-dragging .ui-file-picker__dropzone {
+  border-color: var(--ui-border-focus);
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-file-picker__icon {
+  inline-size: 2rem;
+  block-size: 2rem;
+  color: var(--ui-border-focus);
+}
+
+.ui-file-picker__label,
+.ui-file-picker__list {
+  margin: 0;
+}
+
+.ui-file-picker__list {
+  display: grid;
+  gap: var(--ui-space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.ui-file-picker__list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: var(--ui-space-2);
+  align-items: center;
+  padding: var(--ui-space-2) var(--ui-space-3);
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--ui-radius-lg);
+}
+
+.ui-file-picker__file-name {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-file-picker__file-size {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
+
+.ui-file-picker__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ui-text-secondary);
+  cursor: pointer;
+}
+
+.ui-mention__surface {
+  min-inline-size: 16rem;
+  padding: var(--ui-space-2);
+}
+
+.ui-mention__option {
+  display: grid;
+  gap: var(--ui-space-1);
+  padding: var(--ui-space-2) var(--ui-space-3);
+  border: 0;
+  border-radius: var(--ui-radius-lg);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ui-mention__option.is-active,
+.ui-mention__option:hover {
+  background: var(--ui-surface-brand-soft);
+}
+
+.ui-mention__option-description {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-text-font-size-sm);
+}
