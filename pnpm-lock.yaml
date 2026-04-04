@@ -107,6 +107,9 @@ importers:
       '@ww/data-grid':
         specifier: workspace:*
         version: link:../../packages/data-grid
+      '@ww/interaction':
+        specifier: workspace:*
+        version: link:../../packages/interaction
       '@ww/page-templates':
         specifier: workspace:*
         version: link:../../packages/page-templates
@@ -140,6 +143,9 @@ importers:
       '@ww/data-grid':
         specifier: workspace:*
         version: link:../../packages/data-grid
+      '@ww/interaction':
+        specifier: workspace:*
+        version: link:../../packages/interaction
       '@ww/page-templates':
         specifier: workspace:*
         version: link:../../packages/page-templates
@@ -190,6 +196,21 @@ importers:
         version: 3.5.31(typescript@5.9.3)
 
   packages/eslint-config: {}
+
+  packages/interaction:
+    dependencies:
+      '@ww/core':
+        specifier: workspace:*
+        version: link:../core
+      '@ww/primitives':
+        specifier: workspace:*
+        version: link:../primitives
+      '@ww/themes':
+        specifier: workspace:*
+        version: link:../themes
+      vue:
+        specifier: ^3.5.0
+        version: 3.5.31(typescript@5.9.3)
 
   packages/page-templates:
     dependencies:

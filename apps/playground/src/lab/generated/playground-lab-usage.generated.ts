@@ -16,16 +16,16 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/core",
           "packageLayer": "core",
-          "count": 10,
+          "count": 15,
           "files": [
             "packages/core/src/components/fields/UiAutocomplete.vue",
+            "packages/core/src/components/fields/UiColorPicker.vue",
+            "packages/core/src/components/fields/UiDatePicker.vue",
+            "packages/core/src/components/fields/UiDateRangePicker.vue",
+            "packages/core/src/components/fields/UiMention.vue",
             "packages/core/src/components/fields/UiSelect.vue",
-            "packages/core/src/components/overlay/UiContextMenu.vue",
-            "packages/core/src/components/overlay/UiDialog.vue",
-            "packages/core/src/components/overlay/UiDrawer.vue",
-            "packages/core/src/components/overlay/UiDropdown.vue",
-            "packages/core/src/components/overlay/UiPopconfirm.vue",
-            "packages/core/src/components/overlay/UiPopover.vue"
+            "packages/core/src/components/fields/UiTimePicker.vue",
+            "packages/core/src/components/overlay/UiContextMenu.vue"
           ]
         },
         {
@@ -35,23 +35,42 @@ export const playgroundLabUsage = {
           "files": [
             "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
           ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 3,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue"
+          ]
         }
       ],
       "usageGroups": [
         {
+          "area": "apps/internal",
+          "count": 3,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue"
+          ]
+        },
+        {
           "area": "core",
-          "count": 10,
+          "count": 15,
           "files": [
             "packages/core/src/components/fields/UiAutocomplete.vue",
+            "packages/core/src/components/fields/UiColorPicker.vue",
+            "packages/core/src/components/fields/UiDatePicker.vue",
+            "packages/core/src/components/fields/UiDateRangePicker.vue",
+            "packages/core/src/components/fields/UiMention.vue",
             "packages/core/src/components/fields/UiSelect.vue",
+            "packages/core/src/components/fields/UiTimePicker.vue",
             "packages/core/src/components/overlay/UiContextMenu.vue",
             "packages/core/src/components/overlay/UiDialog.vue",
-            "packages/core/src/components/overlay/UiDrawer.vue",
-            "packages/core/src/components/overlay/UiDropdown.vue",
-            "packages/core/src/components/overlay/UiPopconfirm.vue",
-            "packages/core/src/components/overlay/UiPopover.vue",
-            "packages/core/src/components/overlay/UiToast.vue",
-            "packages/core/src/components/overlay/UiTooltip.vue"
+            "packages/core/src/components/overlay/UiDrawer.vue"
           ]
         },
         {
@@ -94,7 +113,27 @@ export const playgroundLabUsage = {
           "area": "core"
         },
         {
+          "file": "packages/core/src/components/fields/UiColorPicker.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiDatePicker.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiDateRangePicker.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiMention.vue",
+          "area": "core"
+        },
+        {
           "file": "packages/core/src/components/fields/UiSelect.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiTimePicker.vue",
           "area": "core"
         },
         {
@@ -297,7 +336,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 19,
+          "count": 21,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -305,30 +344,53 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 5,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTransfer.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue",
+            "packages/interaction/src/components/UiUpload.vue"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 27,
+          "count": 28,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
             "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
-            "apps/playground/src/lab/components/DataGridLabPreview.vue",
-            "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue"
+            "apps/playground/src/lab/components/DataGridLabPreview.vue"
           ]
         }
       ],
       "usageGroups": [
         {
+          "area": "apps/internal",
+          "count": 5,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTransfer.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue",
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
+        {
           "area": "docs",
-          "count": 19,
+          "count": 21,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -336,26 +398,26 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 27,
+          "count": 28,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
             "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
             "apps/playground/src/lab/components/DataGridLabPreview.vue",
             "apps/playground/src/lab/components/DataTableWidgetLabPreview.vue",
-            "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue",
-            "apps/playground/src/lab/components/LayoutLabPreview.vue"
+            "apps/playground/src/lab/components/FloatingSurfaceLabPreview.vue"
           ]
         },
         {
@@ -417,6 +479,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
         },
@@ -450,10 +516,6 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/page-templates/DashboardLayout.stories.ts",
-          "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
           "area": "docs"
         }
       ]
@@ -1264,6 +1326,106 @@ export const playgroundLabUsage = {
         }
       ]
     },
+    "ui-splitter": {
+      "id": "ui-splitter",
+      "title": "UiSplitter",
+      "exportName": "UiSplitter",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": false,
+      "labExemptionReason": "UiSplitter is reviewed through Storybook and the playground harness because drag, keyboard resizing, and composed pane content matter more than isolated matrix tuning.",
+      "sourcePublicSurface": "UiSplitter",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0036-core-splitter-and-alert-dialog-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "splitter"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
     "ui-icon-button": {
       "id": "ui-icon-button",
       "title": "UiIconButton",
@@ -1388,20 +1550,31 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 5,
+          "count": 7,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Selection.stories.ts",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
+            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiFormItem.vue"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/components/FieldSurfaceLabPreview.vue",
             "apps/playground/src/signal-graph-demo.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
@@ -1410,20 +1583,30 @@ export const playgroundLabUsage = {
       ],
       "usageGroups": [
         {
+          "area": "apps/internal",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiFormItem.vue"
+          ]
+        },
+        {
           "area": "docs",
-          "count": 5,
+          "count": 7,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Selection.stories.ts",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
+            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
           ]
         },
         {
           "area": "playground",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/components/FieldSurfaceLabPreview.vue",
             "apps/playground/src/signal-graph-demo.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
@@ -1468,12 +1651,24 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
         },
         {
           "file": "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/components/FieldSurfaceLabPreview.vue",
@@ -1486,6 +1681,10 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
           "area": "playground"
+        },
+        {
+          "file": "packages/interaction/src/components/UiFormItem.vue",
+          "area": "apps/internal"
         }
       ]
     },
@@ -1511,20 +1710,22 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 5,
+          "count": 6,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
+            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/schemas/ui-input.lab.ts",
             "apps/playground/src/signal-graph-demo.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
@@ -1534,19 +1735,21 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 5,
+          "count": 6,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
+            "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
           ]
         },
         {
           "area": "playground",
-          "count": 3,
+          "count": 4,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/schemas/ui-input.lab.ts",
             "apps/playground/src/signal-graph-demo.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
@@ -1604,6 +1807,14 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-input.lab.ts",
@@ -2829,6 +3040,809 @@ export const playgroundLabUsage = {
         }
       ]
     },
+    "ui-calendar": {
+      "id": "ui-calendar",
+      "title": "UiCalendar",
+      "exportName": "UiCalendar",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiCalendar is reviewed through Storybook and the playground harness because keyboard navigation, month changes, and range semantics are interaction-heavy contracts.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-date-picker": {
+      "id": "ui-date-picker",
+      "title": "UiDatePicker",
+      "exportName": "UiDatePicker",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiDatePicker is reviewed through Storybook and the playground harness because overlay timing, keyboard flow, and parsing are better proven in browser interactions.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-date-range-picker": {
+      "id": "ui-date-range-picker",
+      "title": "UiDateRangePicker",
+      "exportName": "UiDateRangePicker",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiDateRangePicker is reviewed through Storybook and the playground harness because two-value range selection and overlay behavior are interaction-heavy contracts.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-time-picker": {
+      "id": "ui-time-picker",
+      "title": "UiTimePicker",
+      "exportName": "UiTimePicker",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiTimePicker is reviewed through Storybook and the playground harness because keyboard stepping and overlay commit flow are more important than static visual tuning.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-color-picker": {
+      "id": "ui-color-picker",
+      "title": "UiColorPicker",
+      "exportName": "UiColorPicker",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiColorPicker is reviewed through Storybook and the playground harness because native picker integration and preset selection are interaction contracts rather than matrix-only styling.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-file-picker": {
+      "id": "ui-file-picker",
+      "title": "UiFilePicker",
+      "exportName": "UiFilePicker",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiFilePicker is reviewed through Storybook and the playground harness because drag-drop, native file input, and removal flow are behavior-first contracts.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "apps/internal",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "packages/interaction/src/components/UiUpload.vue",
+          "area": "apps/internal"
+        }
+      ]
+    },
+    "ui-mention": {
+      "id": "ui-mention",
+      "title": "UiMention",
+      "exportName": "UiMention",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiMention is reviewed through Storybook and the playground harness because text insertion and suggestion flow are interaction-heavy rather than matrix-only tuning.",
+      "sourcePublicSurface": "UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0034-core-color-and-mention-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "date",
+        "time",
+        "file",
+        "mention",
+        "color"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
     "ui-autocomplete": {
       "id": "ui-autocomplete",
       "title": "UiAutocomplete",
@@ -3588,7 +4602,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 31,
+          "count": 33,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -3603,23 +4617,23 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 13,
+          "count": 14,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
-            "apps/playground/src/TsParticlesShowcase.vue",
-            "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue"
+            "apps/playground/src/TsParticlesShowcase.vue"
           ]
         }
       ],
       "usageGroups": [
         {
           "area": "docs",
-          "count": 31,
+          "count": 33,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -3629,24 +4643,24 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
             "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 13,
+          "count": 14,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/LayerScaffoldShowcase.vue",
             "apps/playground/src/PlaygroundHomeView.vue",
             "apps/playground/src/SignalGraphShowcase.vue",
             "apps/playground/src/TsParticlesShowcase.vue",
             "apps/playground/src/lab/components/DashboardLayoutLabPreview.vue",
-            "apps/playground/src/lab/schemas/ui-card.lab.ts",
-            "apps/playground/src/lab/schemas/ui-dashboard-layout.lab.ts"
+            "apps/playground/src/lab/schemas/ui-card.lab.ts"
           ]
         }
       ],
@@ -3708,6 +4722,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
         },
@@ -3734,10 +4752,6 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/charts/Interactions.stories.ts",
           "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/foundations/charts/Responsive.stories.ts",
-          "area": "docs"
         }
       ]
     },
@@ -3755,12 +4769,22 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 2,
+          "files": [
+            "packages/interaction/src/components/UiTreeSelect.vue",
+            "packages/interaction/src/components/UiUpload.vue"
           ]
         },
         {
@@ -3776,13 +4800,22 @@ export const playgroundLabUsage = {
       ],
       "usageGroups": [
         {
+          "area": "apps/internal",
+          "count": 2,
+          "files": [
+            "packages/interaction/src/components/UiTreeSelect.vue",
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
+        {
           "area": "docs",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
           ]
         },
         {
@@ -3852,6 +4885,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
           "file": "apps/playground/src/lab/schemas/ui-tag.lab.ts",
           "area": "playground"
         },
@@ -3862,6 +4899,14 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
           "area": "playground"
+        },
+        {
+          "file": "packages/interaction/src/components/UiTreeSelect.vue",
+          "area": "apps/internal"
+        },
+        {
+          "file": "packages/interaction/src/components/UiUpload.vue",
+          "area": "apps/internal"
         }
       ]
     },
@@ -4112,18 +5157,20 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 2,
+          "count": 3,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/schemas/ui-image.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -4132,17 +5179,19 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 2,
+          "count": 3,
           "files": [
+            "apps/playground/src/InteractionShowcase.vue",
             "apps/playground/src/lab/schemas/ui-image.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
@@ -4198,8 +5247,16 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-image.lab.ts",
@@ -4207,6 +5264,422 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-icon": {
+      "id": "ui-icon",
+      "title": "UiIcon",
+      "exportName": "UiIcon",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiIcon is reviewed through Storybook and the playground harness because icon naming, decorative semantics, and cross-component adoption matter more than a standalone tuning pane.",
+      "sourcePublicSurface": "UiIcon / UiWatermark",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 5,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTransfer.vue",
+            "packages/interaction/src/components/UiTree.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "apps/internal",
+          "count": 5,
+          "files": [
+            "packages/interaction/src/components/UiCascader.vue",
+            "packages/interaction/src/components/UiTour.vue",
+            "packages/interaction/src/components/UiTransfer.vue",
+            "packages/interaction/src/components/UiTree.vue",
+            "packages/interaction/src/components/UiTreeSelect.vue"
+          ]
+        },
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "icon",
+        "watermark"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        },
+        {
+          "file": "packages/interaction/src/components/UiCascader.vue",
+          "area": "apps/internal"
+        },
+        {
+          "file": "packages/interaction/src/components/UiTour.vue",
+          "area": "apps/internal"
+        },
+        {
+          "file": "packages/interaction/src/components/UiTransfer.vue",
+          "area": "apps/internal"
+        },
+        {
+          "file": "packages/interaction/src/components/UiTree.vue",
+          "area": "apps/internal"
+        },
+        {
+          "file": "packages/interaction/src/components/UiTreeSelect.vue",
+          "area": "apps/internal"
+        }
+      ]
+    },
+    "ui-watermark": {
+      "id": "ui-watermark",
+      "title": "UiWatermark",
+      "exportName": "UiWatermark",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiWatermark is reviewed through Storybook and the playground harness because its value depends on composed content and repeat layout rather than isolated matrix controls.",
+      "sourcePublicSurface": "UiIcon / UiWatermark",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "icon",
+        "watermark"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-image-preview": {
+      "id": "ui-image-preview",
+      "title": "UiImagePreview",
+      "exportName": "UiImagePreview",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiImagePreview is reviewed through Storybook and the playground harness because zoom, rotation, and overlay focus flow are interaction contracts.",
+      "sourcePublicSurface": "UiImagePreview / UiImagePreviewGroup",
+      "downstreamPackages": [],
+      "usageGroups": [],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "image",
+        "overlay"
+      ],
+      "knownUsages": []
+    },
+    "ui-image-preview-group": {
+      "id": "ui-image-preview-group",
+      "title": "UiImagePreviewGroup",
+      "exportName": "UiImagePreviewGroup",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiImagePreviewGroup is reviewed through Storybook and the playground harness because grouped gallery navigation is better proven in full media compositions.",
+      "sourcePublicSurface": "UiImagePreview / UiImagePreviewGroup",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "image",
+        "overlay"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
           "area": "playground"
         }
       ]
@@ -4669,6 +6142,14 @@ export const playgroundLabUsage = {
           ]
         },
         {
+          "packageName": "@ww/interaction",
+          "packageLayer": "system",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
+        {
           "packageName": "@ww/playground",
           "packageLayer": "app",
           "count": 2,
@@ -4679,6 +6160,13 @@ export const playgroundLabUsage = {
         }
       ],
       "usageGroups": [
+        {
+          "area": "apps/internal",
+          "count": 1,
+          "files": [
+            "packages/interaction/src/components/UiUpload.vue"
+          ]
+        },
         {
           "area": "docs",
           "count": 3,
@@ -4757,6 +6245,10 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
           "area": "playground"
+        },
+        {
+          "file": "packages/interaction/src/components/UiUpload.vue",
+          "area": "apps/internal"
         }
       ]
     },
@@ -6135,6 +7627,118 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-alert-dialog": {
+      "id": "ui-alert-dialog",
+      "title": "UiAlertDialog",
+      "exportName": "UiAlertDialog",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Overlays",
+      "labEligible": false,
+      "labExemptionReason": "UiAlertDialog is reviewed through Storybook and the playground harness because modal confirmation flow and imperative confirm behavior are interaction-first contracts.",
+      "sourcePublicSurface": "UiAlertDialog",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Core/Advanced Surfaces",
+          "file": "apps/docs/src/stories/CoreAdvanced.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-advanced",
+          "label": "Core Advanced",
+          "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces.",
+          "path": "/testing#testing-core-advanced"
+        },
+        {
+          "id": "overlays",
+          "label": "Overlays",
+          "description": "Motion, layer slots, floating overlays, toasts, dialogs, drawers, and focus restore.",
+          "path": "/testing#testing-overlays"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0036-core-splitter-and-alert-dialog-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "overlay",
+        "alert",
+        "confirmation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
           "area": "playground"
         }
       ]
@@ -9078,6 +10682,1348 @@ export const playgroundLabUsage = {
         "data-grid"
       ],
       "knownUsages": []
+    },
+    "ui-virtual-scroll": {
+      "id": "ui-virtual-scroll",
+      "title": "UiVirtualScroll",
+      "exportName": "UiVirtualScroll",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiVirtualScroll is reviewed through Storybook and the playground harness because viewport math and visible-range behavior require realistic scrolling proof instead of isolated matrix controls.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-virtual-list": {
+      "id": "ui-virtual-list",
+      "title": "UiVirtualList",
+      "exportName": "UiVirtualList",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiVirtualList is reviewed through Storybook and the playground harness because list semantics and virtualization windows only make sense inside a populated scrolling runtime.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-infinite-scroll": {
+      "id": "ui-infinite-scroll",
+      "title": "UiInfiniteScroll",
+      "exportName": "UiInfiniteScroll",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiInfiniteScroll is reviewed through Storybook and the playground harness because load-more thresholds and item growth depend on a live scrolling composition.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-form": {
+      "id": "ui-form",
+      "title": "UiForm",
+      "exportName": "UiForm",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiForm is reviewed through Storybook and the playground harness because validation, submit flow, and field registration require composed controls instead of isolated visual tuning.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-form-item": {
+      "id": "ui-form-item",
+      "title": "UiFormItem",
+      "exportName": "UiFormItem",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiFormItem is reviewed through UiForm because its contract depends on the shared form context and field registration runtime.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-tree": {
+      "id": "ui-tree",
+      "title": "UiTree",
+      "exportName": "UiTree",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiTree is reviewed through Storybook and the playground harness because expansion, selection, and checked-state behavior depend on keyboard and hierarchy interactions.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-tree-select": {
+      "id": "ui-tree-select",
+      "title": "UiTreeSelect",
+      "exportName": "UiTreeSelect",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiTreeSelect is reviewed through Storybook and the playground harness because overlay selection and hierarchical search are interaction contracts rather than isolated visuals.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-cascader": {
+      "id": "ui-cascader",
+      "title": "UiCascader",
+      "exportName": "UiCascader",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiCascader is reviewed through Storybook and the playground harness because path traversal and keyboard navigation depend on coordinated overlay panels.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-transfer": {
+      "id": "ui-transfer",
+      "title": "UiTransfer",
+      "exportName": "UiTransfer",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiTransfer is reviewed through Storybook and the playground harness because dual-list coordination and optional virtualization require a real data set.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-upload": {
+      "id": "ui-upload",
+      "title": "UiUpload",
+      "exportName": "UiUpload",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiUpload is reviewed through Storybook and the playground harness because queue, progress, and transport orchestration must stay attached to the real upload runtime.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-tour": {
+      "id": "ui-tour",
+      "title": "UiTour",
+      "exportName": "UiTour",
+      "packageName": "@ww/interaction",
+      "packageLayer": "system",
+      "stability": "incubating",
+      "family": "Systems",
+      "labEligible": false,
+      "labExemptionReason": "UiTour is reviewed through Storybook and the playground harness because spotlight placement, step flow, and scroll-to-target behavior depend on live page composition.",
+      "sourcePublicSurface": "UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/InteractionShowcase.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Systems/Interaction/Overview",
+          "file": "apps/docs/src/stories/systems/interaction/Overview.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "interaction-systems",
+          "label": "Interaction Systems",
+          "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs.",
+          "path": "/testing#testing-interaction-systems"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/interaction/README.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0031-interaction-form-runtime.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0033-file-selection-and-upload-split.md"
+        },
+        {
+          "type": "adr",
+          "file": "docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "system",
+        "interaction",
+        "forms",
+        "tree",
+        "virtualization",
+        "upload",
+        "tour"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/InteractionShowcase.vue",
+          "area": "playground"
+        }
+      ]
     },
     "ui-widget-shell": {
       "id": "ui-widget-shell",
