@@ -31,6 +31,10 @@ function resolveSharedVendorChunk(id: string): string | undefined {
 export const PLAYGROUND_CHUNK_WARNING_LIMIT = 600;
 export const STORYBOOK_CHUNK_WARNING_LIMIT = 1200;
 
+function sanitizeChunkNameSegment(value: string): string {
+  return value.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
+}
+
 export function resolvePlaygroundManualChunk(id: string): string | undefined {
   const sharedVendorChunk = resolveSharedVendorChunk(id);
   if (sharedVendorChunk) {
@@ -55,6 +59,16 @@ export function resolvePlaygroundManualChunk(id: string): string | undefined {
     includesPath(id, '/apps/playground/src/SignalGraphShowcase.vue')
   ) {
     return 'playground-showcases';
+  }
+
+  if (includesPath(id, '/apps/playground/src/lab/generated/')) {
+    return 'playground-usage';
+  }
+
+  const labSchemaMatch = id.match(/\/apps\/playground\/src\/lab\/schemas\/([^/]+)\.lab\.ts$/);
+  const labSchemaId = labSchemaMatch?.[1];
+  if (labSchemaId) {
+    return `playground-schema-${sanitizeChunkNameSegment(labSchemaId)}`;
   }
 
   if (includesPath(id, '/apps/playground/src/lab/')) {

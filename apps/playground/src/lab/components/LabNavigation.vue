@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { ComponentLabEntry } from '../manifest/component-lab.types';
+import type { ComponentLabCatalogEntry } from '../manifest/component-lab.types';
 
 defineOptions({ name: 'LabNavigation' });
 
 const props = defineProps<{
   families: readonly {
     family: string;
-    entries: readonly ComponentLabEntry<Record<string, unknown>>[];
+    entries: readonly ComponentLabCatalogEntry[];
   }[];
   selectedId: string;
 }>();

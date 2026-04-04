@@ -1,12 +1,12 @@
 import { PLAYGROUND_LAB_MANIFEST } from '../../../../../tools/governance/catalog/playground-lab-manifest.mjs';
 
 import type {
+  ComponentLabCatalogEntry,
   ComponentLabEntry,
   GovernanceLabSurfaceEntry,
   LabUsageRecord,
 } from '../manifest/component-lab.types';
-import { playgroundLabUsage } from '../generated/playground-lab-usage.generated';
-import { componentLabRegistry } from './component-lab-registry';
+import { loadComponentLabDefinition } from './component-lab-registry';
 
 const familyOrder = [
   'Actions',
@@ -26,46 +26,20 @@ const familyOrder = [
 type LabFamily = (typeof familyOrder)[number];
 
 const familyRank = new Map<LabFamily, number>(familyOrder.map((family, index) => [family, index]));
-const usageRecords = playgroundLabUsage.surfaces as Record<string, LabUsageRecord>;
 const governanceManifest = PLAYGROUND_LAB_MANIFEST as readonly GovernanceLabSurfaceEntry[];
-
-function resolveDefinition(id: string) {
-  const definition = componentLabRegistry[id];
-  if (!definition) {
-    throw new Error(`Missing runtime component lab definition for "${id}".`);
-  }
-
-  return definition;
-}
-
-function resolveUsage(id: string) {
-  const usage = usageRecords[id];
-  if (!usage) {
-    throw new Error(`Missing generated usage record for "${id}".`);
-  }
-
-  return usage;
-}
+let usageRecordsPromise: Promise<Record<string, LabUsageRecord>> | null = null;
+const definitionCache = new Map<string, Promise<ComponentLabEntry<Record<string, unknown>>['definition']>>();
 
 function compareFamilies(left: string, right: string) {
   return (familyRank.get(left as LabFamily) ?? 999) - (familyRank.get(right as LabFamily) ?? 999);
 }
 
 const entries = governanceManifest
-  .map((entry) => {
-    const definition = resolveDefinition(entry.id);
-    const usage = resolveUsage(entry.id);
-
-    return {
-      ...entry,
-      definition,
-      usage,
-    } satisfies ComponentLabEntry<Record<string, unknown>>;
-  })
+  .map((entry) => entry satisfies ComponentLabCatalogEntry)
   .sort(
     (
-      left: ComponentLabEntry<Record<string, unknown>>,
-      right: ComponentLabEntry<Record<string, unknown>>
+      left: ComponentLabCatalogEntry,
+      right: ComponentLabCatalogEntry
     ) => {
       const familyDiff = compareFamilies(left.family, right.family);
       if (familyDiff !== 0) {
@@ -76,20 +50,18 @@ const entries = governanceManifest
     }
   );
 
-export const componentLabEntries = Object.freeze(entries) as readonly ComponentLabEntry<
-  Record<string, unknown>
->[];
+export const componentLabEntries = Object.freeze(entries) as readonly ComponentLabCatalogEntry[];
 
 export const componentLabEntryMap = Object.freeze(
   Object.fromEntries(componentLabEntries.map((entry) => [entry.id, entry]))
-) as Readonly<Record<string, ComponentLabEntry<Record<string, unknown>>>>;
+) as Readonly<Record<string, ComponentLabCatalogEntry>>;
 
 export const componentLabFamilies = Object.freeze(
   familyOrder
     .map((family) => ({
       family,
       entries: componentLabEntries.filter(
-        (entry: ComponentLabEntry<Record<string, unknown>>) => entry.family === family
+        (entry: ComponentLabCatalogEntry) => entry.family === family
       ),
     }))
     .filter((group) => group.entries.length > 0)
@@ -104,6 +76,51 @@ export function createInitialLabEntry(fallbackId = 'ui-button') {
   return entry;
 }
 
-export function resolveLabEntry(surfaceId: string) {
+export function resolveLabCatalogEntry(surfaceId: string) {
   return componentLabEntryMap[surfaceId] ?? createInitialLabEntry();
+}
+
+async function loadUsageRecords() {
+  if (!usageRecordsPromise) {
+    usageRecordsPromise = import('../generated/playground-lab-usage.generated').then(
+      ({ playgroundLabUsage }) => playgroundLabUsage.surfaces as Record<string, LabUsageRecord>
+    );
+  }
+
+  return usageRecordsPromise;
+}
+
+async function resolveUsage(surfaceId: string) {
+  const usageRecords = await loadUsageRecords();
+  const usage = usageRecords[surfaceId];
+  if (!usage) {
+    throw new Error(`Missing generated usage record for "${surfaceId}".`);
+  }
+
+  return usage;
+}
+
+function resolveDefinition(surfaceId: string) {
+  const cachedDefinition = definitionCache.get(surfaceId);
+  if (cachedDefinition) {
+    return cachedDefinition;
+  }
+
+  const nextDefinition = loadComponentLabDefinition(surfaceId);
+  definitionCache.set(surfaceId, nextDefinition);
+  return nextDefinition;
+}
+
+export async function loadLabEntry(surfaceId: string) {
+  const entry = resolveLabCatalogEntry(surfaceId);
+  const [definition, usage] = await Promise.all([
+    resolveDefinition(entry.id),
+    resolveUsage(entry.id),
+  ]);
+
+  return {
+    ...entry,
+    definition,
+    usage,
+  } satisfies ComponentLabEntry<Record<string, unknown>>;
 }
