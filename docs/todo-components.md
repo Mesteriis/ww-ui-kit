@@ -50,23 +50,23 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 | UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed information-display and outcome surfaces landed with Storybook, playground, docs, and tests |
 | UiImage                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed base image surface landed; preview/gallery behavior stays out of core                       |
 
-### 3) ADR-first / separate scope
+### 3) ADR-first / separate scope and shipped status
 
-| Family                                                       | Status        | Placement        | Contract          | Decision                 | Note                                                                      |
-| ------------------------------------------------------------ | ------------- | ---------------- | ----------------- | ------------------------ | ------------------------------------------------------------------------- |
-| UiDatePicker / UiDateRangePicker / UiTimePicker / UiCalendar | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | locale, parsing, calendar engine, formatting, min/max, keyboard grid      |
-| UiForm / UiFormItem                                          | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | validation model and imperative methods become long-lived contract        |
-| UiTree / UiTreeSelect / UiCascader / UiTransfer              | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | hierarchical state, lazy loading, search, check model, virtualized scale  |
-| UiUpload / UiFilePicker                                      | not confirmed | `split required` | `TBD / ADR-first` | **explicit scope first** | file-picker UI may be core; transport/orchestration must stay out of core |
-| UiColorPicker                                                | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | color model + popup + alpha/presets are not current baseline              |
-| UiMention                                                    | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | caret-positioning and trigger parsing are specialized runtime behavior    |
-| UiTour                                                       | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | onboarding/workflow system, not baseline control                          |
-| UiVirtualScroll / UiVirtualList / UiInfiniteScroll           | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | more likely primitive/helper or system capability than core surface       |
-| UiSplitter                                                   | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | resize state + keyboard semantics are non-trivial                         |
-| UiAlertDialog / imperative confirm                           | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | first prove composition over dialog before public imperative API          |
-| UiImagePreview / previewGroup                                | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | gallery/zoom/rotate overlay is a separate surface family                  |
-| UiWatermark                                                  | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | niche utility with canvas/runtime concerns                                |
-| UiIcon                                                       | not confirmed | `TBD`            | `TBD / ADR-first` | **explicit scope first** | icon asset pipeline and naming contract must exist before wrapper export  |
+| Family                                                       | Status      | Placement                        | Contract                                        | Decision      | Note                                                                                      |
+| ------------------------------------------------------------ | ----------- | -------------------------------- | ----------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| UiDatePicker / UiDateRangePicker / UiTimePicker / UiCalendar | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0030 fixed locale, formatting, disabled-range, and keyboard grid contract             |
+| UiForm / UiFormItem                                          | implemented | `@ww/interaction`                | `system-component / stable / core standard`     | **P3 - done** | ADR-0031 fixed controlled model, validation lifecycle, and field binding ownership        |
+| UiTree / UiTreeSelect / UiCascader / UiTransfer              | implemented | `@ww/interaction`                | `system-component / stable / core standard`     | **P3 - done** | ADR-0032 fixed hierarchical state, search, selection, and virtualization-aware placement  |
+| UiUpload / UiFilePicker                                      | implemented | `@ww/core + @ww/interaction`     | `split surfaces / stable / core standard`       | **P3 - done** | ADR-0033 split file-selection UI from upload queue/runtime transport                      |
+| UiColorPicker                                                | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0034 fixed color model, popup editing, tokenized palette, and alpha contract          |
+| UiMention                                                    | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0034 fixed trigger parsing, suggestion ownership, and caret-safe composition          |
+| UiTour                                                       | implemented | `@ww/interaction`                | `overlay-component / stable / overlay standard` | **P3 - done** | ADR-0035 fixed guided overlay ownership, target flow, and controlled step navigation      |
+| UiVirtualScroll / UiVirtualList / UiInfiniteScroll           | implemented | `@ww/interaction`                | `system-component / stable / core standard`     | **P3 - done** | ADR-0035 fixed virtualization runtime placement and replaced ad-hoc scroll math           |
+| UiSplitter                                                   | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0036 fixed resize model, keyboard behavior, and tokenized pane ownership              |
+| UiAlertDialog / imperative confirm                           | implemented | `@ww/core`                       | `overlay-component / stable / overlay standard` | **P3 - done** | ADR-0036 fixed composition over dialog plus canonical imperative confirm API              |
+| UiImagePreview / previewGroup                                | implemented | `@ww/core`                       | `overlay-component / stable / overlay standard` | **P3 - done** | ADR-0037 fixed preview/gallery ownership and direct composition with `UiImage`            |
+| UiWatermark                                                  | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0037 fixed runtime watermark behavior without a second media or asset subsystem       |
+| UiIcon                                                       | implemented | `@ww/core`                       | `core-component / stable / core standard`       | **P3 - done** | ADR-0037 fixed canonical icon surface and removed scattered raw icon rendering as primary |
 
 ### 4) Covered elsewhere / do not export as new public core surface
 
@@ -85,7 +85,7 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 | ------------------------------------------------- | ----------: | ------------------------------------------------------- |
 | Add to `@ww/core` now                             |          10 | all P0                                                  |
 | `@ww/core` second-wave backlog and shipped status |          17 | 9 P1 implemented + 8 P2 implemented                     |
-| ADR-first / separate scope                        |          13 | no public export before scope/placement decision        |
+| ADR-first / separate scope                        |          13 | all 13 rows are now ADR-backed and publicly shipped     |
 | Covered elsewhere / no public core export         |           6 | keep in existing layer or as composition-only           |
 | Total canonical family rows                       |          46 | this count is the only planning total used in this file |
 
@@ -94,7 +94,7 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 1. `Phase 1 / P0`: implement every row from `Add to @ww/core now` in the exact canonical order.
 2. `Phase 2 / P1`: implemented in the current pass; keep Storybook, playground, docs, tests, manifest, and changeset aligned.
 3. `Phase 3 / P2`: implemented in the current pass; keep Storybook, playground, docs, tests, manifest, and changeset aligned.
-4. `Phase 4 / ADR-first`: cut explicit scope first, then promote rows from `ADR-first / separate scope`.
+4. `Phase 4 / ADR-first`: implemented in the current pass after explicit scope and placement decisions.
 5. `Out of scope for core`: keep rows from `Covered elsewhere / do not export as new public core surface` in their current layer.
 
 ### Phase 1 / P0
@@ -113,7 +113,7 @@ Remaining backlog: none inside the current `@ww/core` second-wave backlog.
 
 ### Phase 4 / ADR-first
 
-Everything under `ADR-first / separate scope`, in canonical row order only after scope and placement are explicitly fixed.
+Implemented in the current pass: `UiCalendar`, `UiDatePicker`, `UiDateRangePicker`, `UiTimePicker`, `UiForm`, `UiFormItem`, `UiTree`, `UiTreeSelect`, `UiCascader`, `UiTransfer`, `UiUpload`, `UiFilePicker`, `UiColorPicker`, `UiMention`, `UiTour`, `UiVirtualScroll`, `UiVirtualList`, `UiInfiniteScroll`, `UiSplitter`, `UiAlertDialog`, imperative confirm, `UiImagePreview`, preview group, `UiWatermark`, `UiIcon`.
 
 ## Detailed contracts aligned to canonical order
 
@@ -366,65 +366,76 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 - `loading`, `decoding`, `fit`, and governed aspect presets keep layout explicit.
 - Core image surface stays separate from preview/gallery runtime.
 
-### 3) ADR-first / separate scope
+### 3) ADR-first / separate scope and shipped status
 
 #### UiDatePicker / UiDateRangePicker / UiTimePicker / UiCalendar
 
-- Date and time controls require explicit decisions on locale, parsing, formatting, disabled ranges, and keyboard navigation.
-- Popup versus inline behavior must be fixed with overlay ownership before export.
-- `UiCalendar` belongs to the same scope because it shares calendar-engine and locale contracts.
+- Status: implemented in `@ww/core` via ADR-0030.
+- Date and time controls now share one governed locale, parsing, formatting, disabled-range, and keyboard-grid contract.
+- `UiCalendar` is the inline calendar source of truth; popup pickers compose over the same model instead of forking behavior.
 
 #### UiForm / UiFormItem
 
-- Form scope must define validation lifecycle, rule model, imperative methods, and cross-field behavior.
-- Group-level disabled propagation, layout, and scroll-to-error behavior need explicit contract ownership.
+- Status: implemented in `@ww/interaction` via ADR-0031.
+- The form runtime is controlled-first, keeps field registration and validation in systems scope, and does not promote a second field model into `@ww/core`.
+- `UiFormItem` owns field-level label, help, invalid, and binding composition over governed core inputs.
 
 #### UiTree / UiTreeSelect / UiCascader / UiTransfer
 
-- All four require explicit decisions on hierarchical state, lazy loading, search, virtualization, and keyboard semantics.
-- `UiTreeSelect` and `UiCascader` also depend on overlay/listbox contracts.
+- Status: implemented in `@ww/interaction` via ADR-0032.
+- All four now share explicit hierarchical state, key-based selection, search, and virtualization-aware ownership in the systems layer.
+- `UiTreeSelect` and `UiCascader` reuse governed overlay/listbox contracts instead of introducing parallel popup state.
 
 #### UiUpload / UiFilePicker
 
-- File picker UI and transport/orchestration must be split before placement is fixed.
-- Upload transport cannot leak backend workflow into core.
+- Status: implemented as a split family via ADR-0033.
+- `UiFilePicker` is the governed selection UI in `@ww/core`; `UiUpload` is the queue/orchestration runtime in `@ww/interaction`.
+- Transport remains injected above reusable UI and does not leak backend workflow into `@ww/core`.
 
 #### UiColorPicker
 
-- Requires explicit decision on color model, alpha support, presets, popup behavior, and inline editing.
+- Status: implemented in `@ww/core` via ADR-0034.
+- The surface fixes color model, alpha support, popup editing, presets, and token-safe styling inside the field layer.
 
 #### UiMention
 
-- Requires explicit decision on trigger parsing, caret positioning, and async suggestion lifecycle.
+- Status: implemented in `@ww/core` via ADR-0034.
+- Trigger parsing, caret-safe suggestions, and async option ownership now compose over the governed field and overlay runtime.
 
 #### UiTour
 
-- Requires explicit decision on onboarding/runtime ownership, target highlighting, masking, and step navigation.
+- Status: implemented in `@ww/interaction` via ADR-0035.
+- Guided target highlighting, masking, scroll alignment, and step navigation are now fixed as one overlay-capable system surface.
 
 #### UiVirtualScroll / UiVirtualList / UiInfiniteScroll
 
-- Requires explicit decision on whether this is a primitive/helper capability or a public core surface.
-- Windowing, measurement, and infinite loading contracts must be isolated first.
+- Status: implemented in `@ww/interaction` via ADR-0035.
+- Virtualization, measurement, and infinite loading now live in the systems layer and replace ad-hoc scroll math in dependent surfaces.
 
 #### UiSplitter
 
-- Requires explicit decision on resize model, keyboard semantics, persistence, and collapse behavior.
+- Status: implemented in `@ww/core` via ADR-0036.
+- Resize model, keyboard semantics, and governed pane ownership are fixed without escalating to a shell-layout engine.
 
 #### UiAlertDialog / imperative confirm
 
-- Requires explicit decision on whether composition over `UiDialog` is sufficient before exposing imperative API.
+- Status: implemented in `@ww/core` via ADR-0036.
+- The family now proves composition over `UiDialog` first and exposes `confirmAlertDialog` as the only imperative confirm path.
 
 #### UiImagePreview / previewGroup
 
-- Requires explicit decision on gallery, zoom, rotate, navigation, and overlay ownership separate from base `UiImage`.
+- Status: implemented in `@ww/core` via ADR-0037.
+- Gallery navigation and preview overlay behavior now compose directly with `UiImage` instead of creating a second media source of truth.
 
 #### UiWatermark
 
-- Requires explicit decision on canvas/runtime behavior, protection model, and whether it belongs in reusable core at all.
+- Status: implemented in `@ww/core` via ADR-0037.
+- Runtime watermark rendering is now fixed as a reusable display utility without claiming backend or protection ownership.
 
 #### UiIcon
 
-- Requires explicit decision on icon asset pipeline, naming, and bundle/runtime ownership before any wrapper export.
+- Status: implemented in `@ww/core` via ADR-0037.
+- `UiIcon` is now the canonical icon surface, with naming and runtime ownership fixed before broader adoption.
 
 ### 4) Covered elsewhere / do not export as new public core surface
 
@@ -474,49 +485,26 @@ Verification run before implementation work:
 - Overlay runtime is already canonical through `@ww/primitives` plus `UiDialog`, `UiDrawer`, `UiPopover`, `UiDropdown`, `UiPopconfirm`, and `UiToast`.
 - Field and listbox foundations already exist through `UiField`, `UiInput`, `UiTextarea`, `UiSelectSimple`, `UiSelect`, `UiAutocomplete`, `UiInputGroup`, `UiInputPassword`, `UiInputTag`, and shared `listbox.ts`.
 - Scroll foundations already exist through `UiAffix`, `UiScrollArea`, `UiScrollTop`, `UiAnchor`, and shared scroll helpers.
-- Image foundation already exists through `UiImage`, but preview/gallery behavior is explicitly kept out of core today.
+- Image foundation now composes through `UiImage`, `UiImagePreview`, and `UiImagePreviewGroup` without introducing a second media source of truth.
 - Existing systems layer already proves the pattern through `@ww/data-grid` and `@ww/signal-graph`.
 
 ### Partial implementations
 
-- Date/time scope has reusable overlay, input, slider, number, and scroll primitives, but no calendar engine, canonical parsing/formatting contract, or keyboard date grid.
-- Form scope has `UiField` context and field-level invalid/described-by wiring, but no form state model, cross-field validation lifecycle, or submit orchestration.
-- Tree/cascader/transfer scope has menu, listbox, select, and selection primitives, but no hierarchical data model, expansion/check model, or virtualized scale contract.
-- Upload scope has display media and overlay primitives, but no file picker surface, queue model, or transport separation.
-- Mention scope has autocomplete and textarea behaviors, but no trigger parser or caret-anchored suggestion runtime.
-- Tour scope has overlay, anchor, and scroll utilities, but no guided-step system or spotlight masking contract.
-- Virtualization scope has scroll utilities and dense system surfaces, but no canonical windowing/infinite-loading runtime.
-- Alert dialog scope is only indirectly covered through `UiDialog` and `UiPopconfirm`; no dedicated destructive modal or imperative confirm API exists.
-- Image preview scope is partially covered by `UiImage` and overlay primitives; zoom, rotate, and grouped navigation are absent.
-- Icon scope is only partially covered by `UiIconButton` and per-component icon props/slots; no canonical icon surface or registry exists.
+- None inside the advanced ADR-backed family scope tracked in section `3`.
+- Follow-up work is limited to non-contract-expanding hardening and does not block any listed public surface.
 
 ### Missing pieces
 
-- `UiCalendar`, `UiDatePicker`, `UiDateRangePicker`, `UiTimePicker`
-- `UiForm`, `UiFormItem`
-- `UiTree`, `UiTreeSelect`, `UiCascader`, `UiTransfer`
-- `UiUpload`, `UiFilePicker`
-- `UiColorPicker`
-- `UiMention`
-- `UiTour`
-- `UiVirtualScroll`, `UiVirtualList`, `UiInfiniteScroll`
-- `UiSplitter`
-- `UiAlertDialog` and imperative confirm
-- `UiImagePreview` and preview group
-- `UiWatermark`
-- `UiIcon`
+- None for the advanced families tracked in section `3`.
 
 ### Duplicated or ad-hoc behavior to replace
 
-- Icon rendering is scattered across raw glyph strings and slots in buttons, menu, select, breadcrumb, steps, popconfirm, avatar, rating, stories, and playground schemas.
-- `UiCheckbox` still owns inline SVG markup for its check indicator instead of delegating to a canonical icon surface.
-- Confirm flows are split between lightweight `UiPopconfirm` and ad-hoc `UiDialog` compositions with no canonical alert-dialog contract.
-- Scroll-aware behaviors are distributed across `UiScrollArea`, `UiAnchor`, data-grid containers, and playground proofs without a shared virtualization runtime.
-- Suggestion and option behaviors are duplicated across autocomplete, rich select, dropdown, and menu without a hierarchical or mention-specific extension point.
+- Raw icon usage was consolidated behind `UiIcon` adoption across reusable surfaces.
+- Alert-style destructive confirmation now resolves through `UiAlertDialog` and `confirmAlertDialog` instead of ad-hoc dialog compositions.
+- Virtualized and infinite scroll behavior now resolves through the governed interaction runtime instead of per-surface scroll math.
+- Image preview behavior now resolves through `UiImagePreview` and preview group composition with `UiImage`.
+- File-selection and upload runtime are now split between `UiFilePicker` UI and `UiUpload` transport-aware orchestration.
 
 ### Replacement candidates
 
-- Replace raw icon glyph usage with one governed `UiIcon` surface.
-- Reuse the shared floating overlay runtime for date, time, color, mention, alert-dialog, and image-preview surfaces instead of introducing parallel overlays.
-- Reuse a single virtualization engine for tree, transfer, cascader, and infinite scroll instead of per-surface scroll math.
-- Reuse a single file-selection contract and keep upload transport/orchestration above that UI surface.
+- Completed in the current pass through the canonical surfaces listed in section `3`.
