@@ -29,6 +29,8 @@ test('renders stable playground harness sections', async ({ page }) => {
     'themes',
     'overlays',
     'core-wave',
+    'core-advanced',
+    'interaction-systems',
     'charts',
     'particles',
     'signal-graph',
@@ -275,6 +277,45 @@ test('keeps overlay close and focus restoration stable under reduced motion', as
   await page.getByRole('button', { name: 'Cancel' }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(openButton).toBeFocused();
+});
+
+test('runs advanced core family flows in the playground harness', async ({ page }) => {
+  await page.goto('/playground/testing');
+
+  const advancedSection = page.locator('#testing-core-advanced');
+  await expect(advancedSection.getByText('One governed watermark surface.', { exact: true })).toBeVisible();
+
+  await advancedSection.getByRole('button', { name: 'Preview Preview proof' }).click();
+  await expect(page.getByRole('dialog', { name: 'Image preview' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: 'Image preview' })).toHaveCount(0);
+
+  await advancedSection.getByRole('button', { name: 'Open alert dialog' }).click();
+  await expect(page.getByRole('dialog', { name: 'Advanced core surfaces' })).toBeVisible();
+  await page.getByRole('button', { name: 'Acknowledge' }).click();
+  await expect(advancedSection.getByText('Core advanced state: acknowledged', { exact: true })).toBeVisible();
+
+  await advancedSection.getByRole('button', { name: 'Imperative confirm' }).click();
+  await expect(page.getByRole('dialog', { name: 'Ship advanced core surfaces?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Confirm' }).click();
+  await expect(advancedSection.getByText('Core advanced state: confirmed', { exact: true })).toBeVisible();
+});
+
+test('runs interaction system flows in the playground harness', async ({ page }) => {
+  await page.goto('/playground/testing');
+
+  const interactionSection = page.locator('#testing-interaction-systems');
+  await expect(interactionSection.getByText('1. Virtual 1', { exact: true })).toBeVisible();
+
+  await interactionSection.getByRole('textbox', { name: 'Title' }).fill('Interaction proof');
+  await interactionSection.getByRole('textbox', { name: 'Owner' }).fill('Platform');
+  await interactionSection.getByRole('button', { name: 'Submit form' }).click();
+  await expect(interactionSection.getByText('Form state: submitted', { exact: true })).toBeVisible();
+
+  await interactionSection.getByRole('button', { name: 'Start tour' }).click();
+  await expect(page.getByRole('dialog', { name: 'Tour target A' })).toBeVisible();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await expect(page.getByRole('dialog', { name: 'Tour target B' })).toBeVisible();
 });
 
 test('renders charts, particles, and signal graph scenarios in the built consumer harness', async ({

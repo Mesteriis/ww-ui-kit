@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 
 import UiIcon from './UiIcon.vue';
+import UiImage from './UiImage.vue';
 import UiImagePreview from './UiImagePreview.vue';
 import UiImagePreviewGroup from './UiImagePreviewGroup.vue';
 import UiWatermark from './UiWatermark.vue';
@@ -33,7 +34,7 @@ describe('icon and media extensions', () => {
   it('renders watermark overlays as a generated data-url surface', () => {
     const wrapper = mount(UiWatermark, {
       props: {
-        text: 'Governed proof',
+        content: 'Governed proof',
       },
       slots: {
         default: '<div>Content</div>',
@@ -41,8 +42,8 @@ describe('icon and media extensions', () => {
     });
 
     expect(wrapper.text()).toContain('Content');
-    expect(wrapper.get('.ui-watermark__overlay').attributes('style')).toContain(
-      'data:image/svg+xml'
+    expect(decodeURIComponent(wrapper.get('.ui-watermark__overlay').attributes('style'))).toContain(
+      'Governed proof'
     );
   });
 
@@ -81,7 +82,26 @@ describe('icon and media extensions', () => {
     await group.get('.ui-image-preview-group__thumb').trigger('click');
     expect(document.body.textContent).toContain('First image');
 
-    preview.unmount();
     group.unmount();
+    const image = mount(UiImage, {
+      attachTo: document.body,
+      props: {
+        src: '/one.png',
+        alt: 'Integrated preview',
+        previewable: true,
+        previewItems,
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    preview.unmount();
+    await image.get('.ui-image__frame').trigger('click');
+    expect(document.body.textContent).toContain('First image');
+
+    image.unmount();
   });
 });

@@ -46,10 +46,12 @@ test('renders canonical public story groups', async ({ page, request }) => {
     'Core/Display',
     'Core/Layout',
     'Core/Navigation',
+    'Core/Advanced Surfaces',
     'Foundations/Theme System Overview',
     'Foundations/Charts/Apex Overview',
     'Foundations/Particles/Overview',
     'Foundations/Signal Graph/Overview',
+    'Systems/Interaction/Overview',
     'Systems/Data Grid/Overview',
     'Widgets/Data Table Widget/Overview',
     'Widgets/Shell',
@@ -243,6 +245,42 @@ test('renders display data surfaces inside Storybook', async ({ page, request })
   await page.getByRole('button', { name: 'Next page' }).click();
   await expect(page.getByText('List page: 2', { exact: true })).toBeVisible();
   await expect(page.getByText('UiStatistic', { exact: true })).toBeVisible();
+});
+
+test('runs advanced core interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Advanced Surfaces', 'Interactions');
+  await openStory(page, storyId);
+
+  await page.getByRole('button', { name: 'Preview Governed preview image' }).click();
+  await expect(page.getByRole('dialog', { name: 'Image preview' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: 'Image preview' })).toHaveCount(0);
+
+  await page.getByRole('button', { name: 'Open alert dialog' }).click();
+  await expect(page.getByRole('dialog', { name: 'Advanced core surfaces' })).toBeVisible();
+  await page.getByRole('button', { name: 'Acknowledge' }).click();
+  await expect(page.getByText('Last confirm: acknowledged', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Run imperative confirm' }).click();
+  await expect(page.getByRole('dialog', { name: 'Ship core advanced surfaces?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Ship' }).click();
+  await expect(page.getByText('Last confirm: confirmed', { exact: true })).toBeVisible();
+});
+
+test('runs interaction system flows inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Systems/Interaction/Overview', 'Interactions');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('1. Governed row 1', { exact: true })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Title' }).fill('Governed form title');
+  await page.getByRole('textbox', { name: 'Owner' }).fill('Platform');
+  await page.getByRole('button', { name: 'Submit form' }).click();
+  await expect(page.getByText('Form state: submitted', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Start tour' }).click();
+  await expect(page.getByRole('dialog', { name: 'Tour spotlight' })).toBeVisible();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await expect(page.getByRole('dialog', { name: 'Tour follow-up' })).toBeVisible();
 });
 
 test('renders feedback result surfaces inside Storybook', async ({ page, request }) => {
@@ -456,11 +494,13 @@ test('keeps curated Storybook surfaces free of browser-level accessibility viola
     { title: 'Core/Buttons', globals: 'theme:belovodye' },
     { title: 'Core/Fields' },
     { title: 'Core/Display' },
+    { title: 'Core/Advanced Surfaces' },
     { title: 'Core/Selection' },
     { title: 'Core/Feedback' },
     { title: 'Core/Navigation' },
     { title: 'Core/Tabs' },
     { title: 'Foundations/Particles/Overview' },
+    { title: 'Systems/Interaction/Overview' },
     {
       title: 'Core/Overlay',
       setup: async (activePage) => {
