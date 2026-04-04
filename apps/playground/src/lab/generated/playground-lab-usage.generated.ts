@@ -344,7 +344,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
@@ -398,7 +398,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
             "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
@@ -479,7 +479,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -1343,7 +1343,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -1360,7 +1360,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -1417,7 +1417,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -1555,10 +1555,10 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Selection.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -1596,10 +1596,10 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
             "apps/docs/src/stories/Selection.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -1651,7 +1651,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -1663,7 +1663,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -1717,7 +1717,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -1742,7 +1742,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -1809,7 +1809,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3057,7 +3057,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3074,7 +3074,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3143,7 +3143,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3169,7 +3169,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3186,7 +3186,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3255,7 +3255,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3281,7 +3281,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3298,7 +3298,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3367,7 +3367,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3393,7 +3393,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3410,7 +3410,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3479,7 +3479,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3505,7 +3505,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3522,7 +3522,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3591,7 +3591,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3617,7 +3617,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3649,7 +3649,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3718,7 +3718,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -3748,7 +3748,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3765,7 +3765,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -3834,7 +3834,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -4643,7 +4643,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
             "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
@@ -4722,7 +4722,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -4775,7 +4775,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -4815,7 +4815,7 @@ export const playgroundLabUsage = {
             "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -4885,7 +4885,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -5161,7 +5161,7 @@ export const playgroundLabUsage = {
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
@@ -5183,7 +5183,7 @@ export const playgroundLabUsage = {
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
@@ -5247,7 +5247,7 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -5285,7 +5285,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5325,7 +5325,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5383,7 +5383,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -5429,7 +5429,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5446,7 +5446,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5504,7 +5504,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -5595,7 +5595,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5612,7 +5612,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -5675,7 +5675,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -7648,7 +7648,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -7665,7 +7665,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue"
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
           ]
         },
         {
@@ -7734,7 +7734,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.vue",
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -10700,7 +10700,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -10717,7 +10717,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -10796,7 +10796,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -10822,7 +10822,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -10839,7 +10839,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -10918,7 +10918,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -10944,7 +10944,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -10961,7 +10961,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11040,7 +11040,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11066,7 +11066,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11083,7 +11083,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11162,7 +11162,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11188,7 +11188,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11205,7 +11205,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11284,7 +11284,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11310,7 +11310,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11327,7 +11327,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11406,7 +11406,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11432,7 +11432,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11449,7 +11449,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11528,7 +11528,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11554,7 +11554,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11571,7 +11571,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11650,7 +11650,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11676,7 +11676,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11693,7 +11693,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11772,7 +11772,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11798,7 +11798,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11815,7 +11815,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11894,7 +11894,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
@@ -11920,7 +11920,7 @@ export const playgroundLabUsage = {
           "packageLayer": "app",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -11937,7 +11937,7 @@ export const playgroundLabUsage = {
           "area": "docs",
           "count": 1,
           "files": [
-            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue"
+            "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts"
           ]
         },
         {
@@ -12016,7 +12016,7 @@ export const playgroundLabUsage = {
       ],
       "knownUsages": [
         {
-          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.vue",
+          "file": "apps/docs/src/stories/systems/interaction/InteractionStoryHarness.ts",
           "area": "docs"
         },
         {
