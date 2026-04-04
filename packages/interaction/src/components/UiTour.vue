@@ -2,7 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 
 import { UiButton, UiIcon } from '@ww/core';
-import { PrimitivePortal, useControllable } from '@ww/primitives';
+import { PrimitivePortal, useControllable, useId } from '@ww/primitives';
 import type { UiTourStep } from '../types';
 
 defineOptions({ name: 'UiTour' });
@@ -26,6 +26,8 @@ const emit = defineEmits<{
 
 const panelRef = ref<HTMLElement | null>(null);
 const spotlightRect = ref<DOMRect | null>(null);
+const titleId = useId('tour-title');
+const descriptionId = useId('tour-description');
 
 const openState = useControllable<boolean>({
   defaultValue: false,
@@ -217,10 +219,18 @@ const panelStyle = computed<Record<string, string>>(() => {
       <div class="ui-tour__backdrop" @click="skipTour" />
       <div v-if="spotlightStyle" class="ui-tour__spotlight" :style="spotlightStyle" />
 
-      <section ref="panelRef" class="ui-tour__panel" :style="panelStyle" role="dialog" aria-modal="true">
+      <section
+        ref="panelRef"
+        class="ui-tour__panel"
+        :style="panelStyle"
+        role="dialog"
+        aria-modal="true"
+        :aria-labelledby="titleId"
+        :aria-describedby="currentStep.description ? descriptionId : undefined"
+      >
         <p class="ui-tour__step">Step {{ stepState.currentValue.value + 1 }} / {{ props.steps.length }}</p>
-        <h3>{{ currentStep.title }}</h3>
-        <p v-if="currentStep.description">{{ currentStep.description }}</p>
+        <h3 :id="titleId">{{ currentStep.title }}</h3>
+        <p v-if="currentStep.description" :id="descriptionId">{{ currentStep.description }}</p>
 
         <div class="ui-tour__actions">
           <UiButton variant="ghost" size="sm" @click="skipTour">

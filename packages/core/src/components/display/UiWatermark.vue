@@ -6,6 +6,7 @@ defineOptions({ name: 'UiWatermark' });
 const props = withDefaults(
   defineProps<{
     text?: string;
+    content?: string;
     imageSrc?: string;
     rotate?: number;
     opacity?: number;
@@ -27,6 +28,8 @@ const props = withDefaults(
   }
 );
 
+const watermarkText = computed(() => props.content ?? props.text);
+
 function encodeSvg(value: string) {
   return encodeURIComponent(value).replace(/%20/g, ' ');
 }
@@ -39,7 +42,7 @@ const svgMarkup = computed(() => {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><g opacity="${props.opacity}" transform="translate(${width / 2} ${height / 2}) rotate(${props.rotate}) translate(${-width / 4} ${-height / 4})"><image href="${props.imageSrc}" width="${width / 2}" height="${height / 2}" preserveAspectRatio="xMidYMid meet" /></g></svg>`;
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><g opacity="${props.opacity}" transform="translate(${width / 2} ${height / 2}) rotate(${props.rotate})"><text x="0" y="0" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="${props.fontSize}" font-family="inherit">${props.text}</text></g></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><g opacity="${props.opacity}" transform="translate(${width / 2} ${height / 2}) rotate(${props.rotate})"><text x="0" y="0" text-anchor="middle" dominant-baseline="middle" fill="currentColor" font-size="${props.fontSize}" font-family="inherit">${watermarkText.value}</text></g></svg>`;
 });
 
 const overlayStyle = computed<Record<string, string>>(() => ({
