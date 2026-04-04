@@ -7,22 +7,22 @@ It owns:
 - buttons:
   `UiButton`, `UiButtonGroup`, `UiIconButton`
 - layout utilities:
-  `UiFlex`, `UiGrid`, `UiSpace`, `UiAffix`, `UiScrollArea`, `UiScrollTop`
+  `UiFlex`, `UiGrid`, `UiSpace`, `UiAffix`, `UiScrollArea`, `UiScrollTop`, `UiSplitter`
 - fields
 - numeric, slider, listbox, and autocomplete field surfaces:
   `UiNumberInput`, `UiRating`, `UiSlider`, `UiRangeSlider`, `UiSelect`, `UiAutocomplete`
 - field enrichments:
-  `UiInputGroup`, `UiInputPassword`, `UiInputTag`, `UiInputOtp`
+  `UiInputGroup`, `UiInputPassword`, `UiInputTag`, `UiInputOtp`, `UiCalendar`, `UiDatePicker`, `UiDateRangePicker`, `UiTimePicker`, `UiColorPicker`, `UiFilePicker`, `UiMention`
 - selection controls:
   `UiCheckbox`, `UiSwitch`, `UiRadio`, `UiRadioGroup`
 - display components:
-  `UiAvatar`, `UiAvatarGroup`, `UiBadge`, `UiCard`, `UiDescriptions`, `UiDivider`, `UiImage`, `UiList`, `UiProgress`, `UiSkeleton`, `UiSpinner`, `UiStatistic`, `UiTable`, `UiTag`, `UiTimeline`
+  `UiAvatar`, `UiAvatarGroup`, `UiBadge`, `UiCard`, `UiDescriptions`, `UiDivider`, `UiIcon`, `UiImage`, `UiImagePreview`, `UiImagePreviewGroup`, `UiList`, `UiProgress`, `UiSkeleton`, `UiSpinner`, `UiStatistic`, `UiTable`, `UiTag`, `UiTimeline`, `UiWatermark`
 - feedback and disclosure components:
   `UiEmptyState`, `UiAlert`, `UiResult`, `UiCollapse`, `UiCollapsePanel`
 - navigation components:
   `UiTabsRoot`, `UiTabsList`, `UiTabsTrigger`, `UiTabsPanel`, `UiBreadcrumb`, `UiAnchor`, `UiMenu`, `UiPagination`, `UiSteps`
 - overlay surfaces:
-  `UiDialog`, `UiDrawer`, `UiTooltip`, `UiPopover`, `UiPopconfirm`, `UiDropdown`, `UiContextMenu`, `UiToast`
+  `UiDialog`, `UiDrawer`, `UiTooltip`, `UiPopover`, `UiPopconfirm`, `UiDropdown`, `UiContextMenu`, `UiToast`, `UiAlertDialog`, `confirmAlertDialog`
 - tokenized styles that consume semantic and component CSS variables
 - shared style entrypoints such as `styles.css` and `motion.css`
 
@@ -108,6 +108,61 @@ Out of scope:
 - zoom, rotate, lightbox, or preview groups
 - upload, transport, or async media orchestration
 - media galleries that deserve separate overlay scope
+
+`UiImage` now composes with `UiImagePreview` and `UiImagePreviewGroup` through explicit
+`previewable`, `previewItems`, and `previewIndex` props instead of spawning a second media source of
+truth.
+
+## UiIcon / UiWatermark / UiImagePreview / UiImagePreviewGroup
+
+These surfaces extend the governed display layer without creating a second icon asset system or a
+system-layer media engine.
+
+Use them for:
+
+- canonical icon rendering across reusable components
+- slot-based watermark overlays on governed content
+- image lightbox and gallery behavior that composes directly over `UiImage`
+
+Out of scope:
+
+- app-specific icon registries and transport-backed asset pipelines
+- DRM/security claims on watermark rendering
+- media management or gallery orchestration beyond preview state
+
+## UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention
+
+These surfaces extend the field layer without promoting a form engine or upload transport into
+`@ww/core`.
+
+Use them for:
+
+- reusable date, range, and time picking inside governed fields
+- token-aware color, file, and mention inputs
+- keyboard-safe picker and suggestion flows that stay component-level
+
+Out of scope:
+
+- form registration and validation orchestration
+- upload transport, queue, or retry policy
+- backend suggestion services
+
+## UiSplitter / UiAlertDialog
+
+`UiSplitter` and `UiAlertDialog` add reusable layout and modal specializations while staying inside
+the core layer.
+
+Use them for:
+
+- two-pane resizing with keyboard support
+- destructive or blocking confirmation on the governed dialog stack
+- imperative confirm flows that must still use the same alert dialog source of truth
+
+Out of scope:
+
+- workspace shell layout engines
+- multi-step workflow orchestration
+- product-level modal managers
 
 ## UiSlider / UiRangeSlider
 

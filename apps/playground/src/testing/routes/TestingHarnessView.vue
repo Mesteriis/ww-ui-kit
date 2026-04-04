@@ -85,6 +85,7 @@ const DataGridShowcase = defineAsyncComponent(() => import('../../DataGridShowca
 const DataTableWidgetShowcase = defineAsyncComponent(
   () => import('../../DataTableWidgetShowcase.vue')
 );
+const InteractionShowcase = defineAsyncComponent(() => import('../../InteractionShowcase.vue'));
 const LayerScaffoldShowcase = defineAsyncComponent(() => import('../../LayerScaffoldShowcase.vue'));
 const SignalGraphShowcase = defineAsyncComponent(() => import('../../SignalGraphShowcase.vue'));
 const TestingHarnessCoreAnchorProof = defineAsyncComponent(
@@ -1306,6 +1307,8 @@ const currentReleaseStepLabel = computed(
         </section>
       </UiCard>
     </section>
+
+    <InteractionShowcase />
 
     <DataGridShowcase />
 
