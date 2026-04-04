@@ -105,7 +105,6 @@ const props = withDefaults(
     ariaLabel: 'Color picker',
     defaultOpen: false,
     disabled: false,
-    presets: () => DEFAULT_PRESETS.slice(),
   }
 );
 
@@ -118,6 +117,7 @@ const triggerRef = ref<HTMLElement | null>(null);
 const surfaceRef = ref<HTMLElement | null>(null);
 const hex = ref(DEFAULT_COLOR.hex);
 const alphaValue = ref(1);
+const resolvedPresets = computed(() => props.presets ?? DEFAULT_PRESETS);
 
 const openState = useControllable({
   defaultValue: props.defaultOpen,
@@ -237,7 +237,7 @@ const applyPreset = (preset: string) => {
             </label>
             <div class="ui-color-picker__presets">
               <button
-                v-for="preset in props.presets"
+                v-for="preset in resolvedPresets"
                 :key="preset"
                 type="button"
                 class="ui-color-picker__preset"
