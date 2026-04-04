@@ -11,7 +11,7 @@ const meta = {
 
 export default meta;
 
-export const BuildingBlocks: StoryObj = {
+export const Overview: StoryObj = {
   render: () => ({
     components: {
       PrimitiveFocusTrap,
@@ -65,6 +65,24 @@ export const BuildingBlocks: StoryObj = {
               "
             >
               <div
+                id="primitive-portal-target"
+                style="
+                  display: grid;
+                  gap: var(--ui-space-3);
+                  min-height: 7rem;
+                  padding: var(--ui-space-4);
+                  border: 1px solid var(--ui-border-subtle);
+                  border-radius: var(--ui-radius-lg);
+                  background: var(--ui-surface-default);
+                "
+              >
+                <strong>Custom portal target</strong>
+                <p style="margin: 0; color: var(--ui-text-secondary);">
+                  This region receives the teleported subtree when portal resolution is active.
+                </p>
+              </div>
+
+              <div
                 style="
                   display: grid;
                   gap: var(--ui-space-3);
@@ -92,24 +110,6 @@ export const BuildingBlocks: StoryObj = {
                 </PrimitivePortal>
                 <p style="margin: 0; color: var(--ui-text-secondary);">
                   When disabled, the badge stays inline inside this card.
-                </p>
-              </div>
-
-              <div
-                id="primitive-portal-target"
-                style="
-                  display: grid;
-                  gap: var(--ui-space-3);
-                  min-height: 7rem;
-                  padding: var(--ui-space-4);
-                  border: 1px solid var(--ui-border-subtle);
-                  border-radius: var(--ui-radius-lg);
-                  background: var(--ui-surface-default);
-                "
-              >
-                <strong>Custom portal target</strong>
-                <p style="margin: 0; color: var(--ui-text-secondary);">
-                  This region receives the teleported subtree when portal resolution is active.
                 </p>
               </div>
             </div>
