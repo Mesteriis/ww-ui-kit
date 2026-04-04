@@ -163,6 +163,17 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
       'UiScrollTop is reviewed through Storybook and the playground harness because threshold visibility and target scrolling are interaction contracts instead of static visual tuning.',
   }),
   visualSurface({
+    id: 'ui-splitter',
+    title: 'UiSplitter',
+    packageName: '@ww/core',
+    exportName: 'UiSplitter',
+    parentManifestExportName: 'UiSplitter',
+    family: 'Layout',
+    labEligible: false,
+    labExemptionReason:
+      'UiSplitter is reviewed through Storybook and the playground harness because drag, keyboard resizing, and composed pane content matter more than isolated matrix tuning.',
+  }),
+  visualSurface({
     id: 'ui-icon-button',
     title: 'UiIconButton',
     packageName: '@ww/core',
@@ -345,6 +356,90 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     }),
   }),
   visualSurface({
+    id: 'ui-calendar',
+    title: 'UiCalendar',
+    packageName: '@ww/core',
+    exportName: 'UiCalendar',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiCalendar is reviewed through Storybook and the playground harness because keyboard navigation, month changes, and range semantics are interaction-heavy contracts.',
+  }),
+  visualSurface({
+    id: 'ui-date-picker',
+    title: 'UiDatePicker',
+    packageName: '@ww/core',
+    exportName: 'UiDatePicker',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiDatePicker is reviewed through Storybook and the playground harness because overlay timing, keyboard flow, and parsing are better proven in browser interactions.',
+  }),
+  visualSurface({
+    id: 'ui-date-range-picker',
+    title: 'UiDateRangePicker',
+    packageName: '@ww/core',
+    exportName: 'UiDateRangePicker',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiDateRangePicker is reviewed through Storybook and the playground harness because two-value range selection and overlay behavior are interaction-heavy contracts.',
+  }),
+  visualSurface({
+    id: 'ui-time-picker',
+    title: 'UiTimePicker',
+    packageName: '@ww/core',
+    exportName: 'UiTimePicker',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiTimePicker is reviewed through Storybook and the playground harness because keyboard stepping and overlay commit flow are more important than static visual tuning.',
+  }),
+  visualSurface({
+    id: 'ui-color-picker',
+    title: 'UiColorPicker',
+    packageName: '@ww/core',
+    exportName: 'UiColorPicker',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiColorPicker is reviewed through Storybook and the playground harness because native picker integration and preset selection are interaction contracts rather than matrix-only styling.',
+  }),
+  visualSurface({
+    id: 'ui-file-picker',
+    title: 'UiFilePicker',
+    packageName: '@ww/core',
+    exportName: 'UiFilePicker',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiFilePicker is reviewed through Storybook and the playground harness because drag-drop, native file input, and removal flow are behavior-first contracts.',
+  }),
+  visualSurface({
+    id: 'ui-mention',
+    title: 'UiMention',
+    packageName: '@ww/core',
+    exportName: 'UiMention',
+    parentManifestExportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiMention is reviewed through Storybook and the playground harness because text insertion and suggestion flow are interaction-heavy rather than matrix-only tuning.',
+  }),
+  visualSurface({
     id: 'ui-autocomplete',
     title: 'UiAutocomplete',
     packageName: '@ww/core',
@@ -492,6 +587,50 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
       schema: 'apps/playground/src/lab/schemas/ui-image.lab.ts',
       preview: 'apps/playground/src/lab/components/SimpleSurfaceLabPreview.vue',
     }),
+  }),
+  visualSurface({
+    id: 'ui-icon',
+    title: 'UiIcon',
+    packageName: '@ww/core',
+    exportName: 'UiIcon',
+    parentManifestExportName: 'UiIcon / UiWatermark',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiIcon is reviewed through Storybook and the playground harness because icon naming, decorative semantics, and cross-component adoption matter more than a standalone tuning pane.',
+  }),
+  visualSurface({
+    id: 'ui-watermark',
+    title: 'UiWatermark',
+    packageName: '@ww/core',
+    exportName: 'UiWatermark',
+    parentManifestExportName: 'UiIcon / UiWatermark',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiWatermark is reviewed through Storybook and the playground harness because its value depends on composed content and repeat layout rather than isolated matrix controls.',
+  }),
+  visualSurface({
+    id: 'ui-image-preview',
+    title: 'UiImagePreview',
+    packageName: '@ww/core',
+    exportName: 'UiImagePreview',
+    parentManifestExportName: 'UiImagePreview / UiImagePreviewGroup',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiImagePreview is reviewed through Storybook and the playground harness because zoom, rotation, and overlay focus flow are interaction contracts.',
+  }),
+  visualSurface({
+    id: 'ui-image-preview-group',
+    title: 'UiImagePreviewGroup',
+    packageName: '@ww/core',
+    exportName: 'UiImagePreviewGroup',
+    parentManifestExportName: 'UiImagePreview / UiImagePreviewGroup',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiImagePreviewGroup is reviewed through Storybook and the playground harness because grouped gallery navigation is better proven in full media compositions.',
   }),
   visualSurface({
     id: 'ui-timeline',
@@ -707,6 +846,17 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     labEligible: false,
     labExemptionReason:
       'UiPopconfirm is reviewed through Storybook and the overlay harness because its value is explicit confirmation flow, focus restore, and dismiss behavior rather than broad visual matrix tuning.',
+  }),
+  visualSurface({
+    id: 'ui-alert-dialog',
+    title: 'UiAlertDialog',
+    packageName: '@ww/core',
+    exportName: 'UiAlertDialog',
+    parentManifestExportName: 'UiAlertDialog',
+    family: 'Overlays',
+    labEligible: false,
+    labExemptionReason:
+      'UiAlertDialog is reviewed through Storybook and the playground harness because modal confirmation flow and imperative confirm behavior are interaction-first contracts.',
   }),
   visualSurface({
     id: 'ui-dropdown',
@@ -1014,6 +1164,138 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     labEligible: false,
     labExemptionReason:
       'UiDataGridColumnVisibility is tuned through UiDataGrid because it depends on toolbar composition and query state.',
+  }),
+  visualSurface({
+    id: 'ui-virtual-scroll',
+    title: 'UiVirtualScroll',
+    packageName: '@ww/interaction',
+    exportName: 'UiVirtualScroll',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiVirtualScroll is reviewed through Storybook and the playground harness because viewport math and visible-range behavior require realistic scrolling proof instead of isolated matrix controls.',
+  }),
+  visualSurface({
+    id: 'ui-virtual-list',
+    title: 'UiVirtualList',
+    packageName: '@ww/interaction',
+    exportName: 'UiVirtualList',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiVirtualList is reviewed through Storybook and the playground harness because list semantics and virtualization windows only make sense inside a populated scrolling runtime.',
+  }),
+  visualSurface({
+    id: 'ui-infinite-scroll',
+    title: 'UiInfiniteScroll',
+    packageName: '@ww/interaction',
+    exportName: 'UiInfiniteScroll',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiInfiniteScroll is reviewed through Storybook and the playground harness because load-more thresholds and item growth depend on a live scrolling composition.',
+  }),
+  visualSurface({
+    id: 'ui-form',
+    title: 'UiForm',
+    packageName: '@ww/interaction',
+    exportName: 'UiForm',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiForm is reviewed through Storybook and the playground harness because validation, submit flow, and field registration require composed controls instead of isolated visual tuning.',
+  }),
+  visualSurface({
+    id: 'ui-form-item',
+    title: 'UiFormItem',
+    packageName: '@ww/interaction',
+    exportName: 'UiFormItem',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiFormItem is reviewed through UiForm because its contract depends on the shared form context and field registration runtime.',
+  }),
+  visualSurface({
+    id: 'ui-tree',
+    title: 'UiTree',
+    packageName: '@ww/interaction',
+    exportName: 'UiTree',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiTree is reviewed through Storybook and the playground harness because expansion, selection, and checked-state behavior depend on keyboard and hierarchy interactions.',
+  }),
+  visualSurface({
+    id: 'ui-tree-select',
+    title: 'UiTreeSelect',
+    packageName: '@ww/interaction',
+    exportName: 'UiTreeSelect',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiTreeSelect is reviewed through Storybook and the playground harness because overlay selection and hierarchical search are interaction contracts rather than isolated visuals.',
+  }),
+  visualSurface({
+    id: 'ui-cascader',
+    title: 'UiCascader',
+    packageName: '@ww/interaction',
+    exportName: 'UiCascader',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiCascader is reviewed through Storybook and the playground harness because path traversal and keyboard navigation depend on coordinated overlay panels.',
+  }),
+  visualSurface({
+    id: 'ui-transfer',
+    title: 'UiTransfer',
+    packageName: '@ww/interaction',
+    exportName: 'UiTransfer',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiTransfer is reviewed through Storybook and the playground harness because dual-list coordination and optional virtualization require a real data set.',
+  }),
+  visualSurface({
+    id: 'ui-upload',
+    title: 'UiUpload',
+    packageName: '@ww/interaction',
+    exportName: 'UiUpload',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiUpload is reviewed through Storybook and the playground harness because queue, progress, and transport orchestration must stay attached to the real upload runtime.',
+  }),
+  visualSurface({
+    id: 'ui-tour',
+    title: 'UiTour',
+    packageName: '@ww/interaction',
+    exportName: 'UiTour',
+    parentManifestExportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    family: 'Systems',
+    labEligible: false,
+    labExemptionReason:
+      'UiTour is reviewed through Storybook and the playground harness because spotlight placement, step flow, and scroll-to-target behavior depend on live page composition.',
   }),
   visualSurface({
     id: 'ui-widget-shell',

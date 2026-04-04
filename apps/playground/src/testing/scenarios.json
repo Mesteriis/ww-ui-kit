@@ -18,6 +18,18 @@
     "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow."
   },
   {
+    "id": "core-advanced",
+    "label": "Core Advanced",
+    "hash": "#testing-core-advanced",
+    "description": "Advanced core families including icons, media preview, calendar pickers, mention, file, color, splitter, and alert dialog surfaces."
+  },
+  {
+    "id": "interaction-systems",
+    "label": "Interaction Systems",
+    "hash": "#testing-interaction-systems",
+    "description": "Form runtime, hierarchical collections, upload orchestration, virtualization, transfer, and guided tour proofs."
+  },
+  {
     "id": "charts",
     "label": "Charts",
     "hash": "#testing-charts",

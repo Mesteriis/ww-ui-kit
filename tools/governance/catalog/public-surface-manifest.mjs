@@ -306,6 +306,34 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
   }),
   surface({
     packageName: '@ww/core',
+    exportName:
+      'UiCalendar / UiDatePicker / UiDateRangePicker / UiTimePicker / UiColorPicker / UiFilePicker / UiMention',
+    kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/core/README.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0030-core-date-and-calendar-surfaces.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0033-file-selection-and-upload-split.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0034-core-color-and-mention-surfaces.md' },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-advanced'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['fields', 'date', 'time', 'file', 'mention', 'color'],
+  }),
+  surface({
+    packageName: '@ww/core',
     exportName: 'UiRating',
     kind: 'core-component',
     requiredStorybookInvariants: ['accessibility', 'keyboard'],
@@ -469,6 +497,67 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     playgroundScenarios: ['core-wave'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
     tags: ['display', 'image'],
+  }),
+  surface({
+    packageName: '@ww/core',
+    exportName: 'UiImagePreview / UiImagePreviewGroup',
+    kind: 'overlay-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['overlay-runtime'],
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/core/README.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md',
+      },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-advanced'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['display', 'image', 'overlay'],
+  }),
+  surface({
+    packageName: '@ww/core',
+    exportName: 'UiIcon / UiWatermark',
+    kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['accessibility'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/core/README.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0037-core-media-preview-watermark-and-icon-surfaces.md',
+      },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-advanced'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['display', 'icon', 'watermark'],
   }),
   surface({
     packageName: '@ww/core',
@@ -754,6 +843,40 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
   }),
   surface({
     packageName: '@ww/core',
+    exportName: 'UiAlertDialog',
+    kind: 'overlay-component',
+    coveredExports: ['confirmAlertDialog'],
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'focus', 'overlay-runtime'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['accessibility', 'keyboard', 'focus'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['overlay-runtime'],
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/core/README.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0036-core-splitter-and-alert-dialog-surfaces.md',
+      },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-advanced', 'overlays'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['overlay', 'alert', 'confirmation'],
+  }),
+  surface({
+    packageName: '@ww/core',
     exportName: 'UiToast',
     kind: 'overlay-component',
     requiredStorybookInvariants: ['accessibility', 'overlay-runtime'],
@@ -807,6 +930,34 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     playgroundScenarios: ['core-wave'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
     tags: ['disclosure'],
+  }),
+  surface({
+    packageName: '@ww/core',
+    exportName: 'UiSplitter',
+    kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/CoreAdvanced.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/CoreAdvanced.stories.ts' },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/core/README.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0036-core-splitter-and-alert-dialog-surfaces.md',
+      },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-advanced'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['layout', 'splitter'],
   }),
   surface({
     packageName: '@ww/core',
@@ -932,7 +1083,7 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
       { type: 'architecture-doc', file: 'docs/architecture/golden-path.md' },
     ],
     requiresPlaygroundScenario: true,
-    playgroundScenarios: ['themes', 'overlays', 'core-wave', 'composition'],
+    playgroundScenarios: ['themes', 'overlays', 'core-wave', 'core-advanced', 'composition'],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
     tags: ['core'],
   }),
@@ -1093,6 +1244,52 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
     ],
     requiredTestLayers: ['unit', 'e2e', 'playground'],
     tags: ['system', 'data-grid'],
+  }),
+  surface({
+    packageName: '@ww/interaction',
+    exportName:
+      'UiVirtualScroll / UiVirtualList / UiInfiniteScroll / UiForm / UiFormItem / UiTree / UiTreeSelect / UiCascader / UiTransfer / UiUpload / UiTour',
+    kind: 'feature-package',
+    requiredStorybookInvariants: ['accessibility', 'keyboard', 'overlay-runtime'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/systems/interaction/Overview.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
+      {
+        variant: 'states',
+        file: 'apps/docs/src/stories/systems/interaction/Overview.stories.ts',
+      },
+      {
+        variant: 'theming',
+        file: 'apps/docs/src/stories/systems/interaction/Overview.stories.ts',
+      },
+      {
+        variant: 'interactions',
+        file: 'apps/docs/src/stories/systems/interaction/Overview.stories.ts',
+        covers: ['overlay-runtime'],
+      },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [
+      { type: 'readme', file: 'packages/interaction/README.md' },
+      { type: 'adr', file: 'docs/decisions/ADR-0031-interaction-form-runtime.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0032-interaction-hierarchical-collection-surfaces.md',
+      },
+      { type: 'adr', file: 'docs/decisions/ADR-0033-file-selection-and-upload-split.md' },
+      {
+        type: 'adr',
+        file: 'docs/decisions/ADR-0035-interaction-guidance-and-virtualization-surfaces.md',
+      },
+    ],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['interaction-systems'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['system', 'interaction', 'forms', 'tree', 'virtualization', 'upload', 'tour'],
   }),
   surface({
     packageName: '@ww/widgets',
