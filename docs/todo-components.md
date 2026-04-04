@@ -458,3 +458,65 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 - Do not add as a separate public surface.
 - Fold lightweight transient messaging into the canonical `UiToast` family.
+
+## 2026-04-04 baseline verification for ADR-first families
+
+Verification run before implementation work:
+
+- `pnpm check:catalog`
+- `pnpm test:unit`
+- public surface manifest and package root exports in `tools/governance/catalog/public-surface-manifest.mjs` and package `src/index.ts` files
+- existing core/systems implementations in `packages/core`, `packages/data-grid`, and `packages/signal-graph`
+- current scroll, overlay, icon-adjacent, field, listbox, and image surfaces in Storybook and playground contracts
+
+### Confirmed existing pieces
+
+- Overlay runtime is already canonical through `@ww/primitives` plus `UiDialog`, `UiDrawer`, `UiPopover`, `UiDropdown`, `UiPopconfirm`, and `UiToast`.
+- Field and listbox foundations already exist through `UiField`, `UiInput`, `UiTextarea`, `UiSelectSimple`, `UiSelect`, `UiAutocomplete`, `UiInputGroup`, `UiInputPassword`, `UiInputTag`, and shared `listbox.ts`.
+- Scroll foundations already exist through `UiAffix`, `UiScrollArea`, `UiScrollTop`, `UiAnchor`, and shared scroll helpers.
+- Image foundation already exists through `UiImage`, but preview/gallery behavior is explicitly kept out of core today.
+- Existing systems layer already proves the pattern through `@ww/data-grid` and `@ww/signal-graph`.
+
+### Partial implementations
+
+- Date/time scope has reusable overlay, input, slider, number, and scroll primitives, but no calendar engine, canonical parsing/formatting contract, or keyboard date grid.
+- Form scope has `UiField` context and field-level invalid/described-by wiring, but no form state model, cross-field validation lifecycle, or submit orchestration.
+- Tree/cascader/transfer scope has menu, listbox, select, and selection primitives, but no hierarchical data model, expansion/check model, or virtualized scale contract.
+- Upload scope has display media and overlay primitives, but no file picker surface, queue model, or transport separation.
+- Mention scope has autocomplete and textarea behaviors, but no trigger parser or caret-anchored suggestion runtime.
+- Tour scope has overlay, anchor, and scroll utilities, but no guided-step system or spotlight masking contract.
+- Virtualization scope has scroll utilities and dense system surfaces, but no canonical windowing/infinite-loading runtime.
+- Alert dialog scope is only indirectly covered through `UiDialog` and `UiPopconfirm`; no dedicated destructive modal or imperative confirm API exists.
+- Image preview scope is partially covered by `UiImage` and overlay primitives; zoom, rotate, and grouped navigation are absent.
+- Icon scope is only partially covered by `UiIconButton` and per-component icon props/slots; no canonical icon surface or registry exists.
+
+### Missing pieces
+
+- `UiCalendar`, `UiDatePicker`, `UiDateRangePicker`, `UiTimePicker`
+- `UiForm`, `UiFormItem`
+- `UiTree`, `UiTreeSelect`, `UiCascader`, `UiTransfer`
+- `UiUpload`, `UiFilePicker`
+- `UiColorPicker`
+- `UiMention`
+- `UiTour`
+- `UiVirtualScroll`, `UiVirtualList`, `UiInfiniteScroll`
+- `UiSplitter`
+- `UiAlertDialog` and imperative confirm
+- `UiImagePreview` and preview group
+- `UiWatermark`
+- `UiIcon`
+
+### Duplicated or ad-hoc behavior to replace
+
+- Icon rendering is scattered across raw glyph strings and slots in buttons, menu, select, breadcrumb, steps, popconfirm, avatar, rating, stories, and playground schemas.
+- `UiCheckbox` still owns inline SVG markup for its check indicator instead of delegating to a canonical icon surface.
+- Confirm flows are split between lightweight `UiPopconfirm` and ad-hoc `UiDialog` compositions with no canonical alert-dialog contract.
+- Scroll-aware behaviors are distributed across `UiScrollArea`, `UiAnchor`, data-grid containers, and playground proofs without a shared virtualization runtime.
+- Suggestion and option behaviors are duplicated across autocomplete, rich select, dropdown, and menu without a hierarchical or mention-specific extension point.
+
+### Replacement candidates
+
+- Replace raw icon glyph usage with one governed `UiIcon` surface.
+- Reuse the shared floating overlay runtime for date, time, color, mention, alert-dialog, and image-preview surfaces instead of introducing parallel overlays.
+- Reuse a single virtualization engine for tree, transfer, cascader, and infinite scroll instead of per-surface scroll math.
+- Reuse a single file-selection contract and keep upload transport/orchestration above that UI surface.
