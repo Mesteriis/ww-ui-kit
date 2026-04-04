@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, watch, type Slots } from 'vue';
 
-import UiImagePreview, { type UiImagePreviewItem } from './UiImagePreview.vue';
+import UiImagePreview from './UiImagePreview.vue';
 
 defineOptions({ name: 'UiImage' });
+
+interface UiImagePreviewItemContract {
+  src: string;
+  alt?: string;
+  caption?: string;
+}
 
 export type UiImageAspect = 'auto' | 'square' | 'landscape' | 'portrait' | 'video' | number;
 export type UiImageFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
@@ -20,7 +26,7 @@ const props = withDefaults(
     bordered?: boolean | undefined;
     rounded?: boolean | undefined;
     previewable?: boolean | undefined;
-    previewItems?: UiImagePreviewItem[] | undefined;
+    previewItems?: UiImagePreviewItemContract[] | undefined;
     previewIndex?: number | undefined;
   }>(),
   {
@@ -60,7 +66,7 @@ const frameStyle = computed<Record<string, string> | undefined>(() =>
     ? { '--ui-image-aspect': String(props.aspect) }
     : undefined
 );
-const previewItems = computed<UiImagePreviewItem[]>(() => {
+const previewItems = computed<UiImagePreviewItemContract[]>(() => {
   if (props.previewItems && props.previewItems.length > 0) {
     return props.previewItems;
   }
@@ -69,13 +75,19 @@ const previewItems = computed<UiImagePreviewItem[]>(() => {
     return [];
   }
 
-  return [
-    {
-      src: props.src,
-      ...(props.alt ? { alt: props.alt } : {}),
-      ...(props.caption ? { caption: props.caption } : {}),
-    },
-  ];
+  const resolvedItem: UiImagePreviewItemContract = {
+    src: props.src,
+  };
+
+  if (props.alt) {
+    resolvedItem.alt = props.alt;
+  }
+
+  if (props.caption) {
+    resolvedItem.caption = props.caption;
+  }
+
+  return [resolvedItem];
 });
 
 watch(

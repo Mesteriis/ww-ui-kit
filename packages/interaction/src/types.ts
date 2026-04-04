@@ -11,7 +11,7 @@ export interface UiUploadItem {
   type: string;
   status: 'queued' | 'uploading' | 'success' | 'error' | 'canceled';
   progress: number;
-  response?: unknown | undefined;
+  response?: unknown;
   error?: string | undefined;
 }
 

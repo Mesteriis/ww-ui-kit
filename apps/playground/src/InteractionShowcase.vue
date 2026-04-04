@@ -35,7 +35,6 @@ import {
   UiVirtualList,
   type UiTourStep,
   type UiUploadItem,
-  type UiUploadTransportContext,
 } from '@ww/interaction';
 
 defineOptions({ name: 'InteractionShowcase' });
@@ -108,11 +107,11 @@ const tourSteps = computed<UiTourStep[]>(() => [
   },
 ]);
 
-const uploadTransport = async ({ onProgress }: UiUploadTransportContext) => {
+const uploadTransport = ({ onProgress }: { onProgress: (value: number) => void }) => {
   onProgress(45);
   onProgress(90);
   onProgress(100);
-  return { ok: true };
+  return Promise.resolve({ ok: true });
 };
 
 const confirmAdvanced = async () => {
@@ -295,7 +294,7 @@ const resolveInputProps = (controlProps: {
                   <UiInput
                     v-bind="resolveInputProps(controlProps)"
                     :model-value="String(value ?? '')"
-                    @update:modelValue="setValue"
+                    @update:model-value="setValue"
                     @blur="handleBlur"
                   />
                 </template>
@@ -306,7 +305,7 @@ const resolveInputProps = (controlProps: {
                   <UiInput
                     v-bind="resolveInputProps(controlProps)"
                     :model-value="String(value ?? '')"
-                    @update:modelValue="setValue"
+                    @update:model-value="setValue"
                     @blur="handleBlur"
                   />
                 </template>
@@ -331,7 +330,7 @@ const resolveInputProps = (controlProps: {
               :checked-keys="treeChecked"
               checkable
               :nodes="treeNodes"
-              @update:checkedKeys="treeChecked = $event"
+              @update:checked-keys="treeChecked = $event"
             />
             <div style="display: grid; gap: var(--ui-space-3);">
               <UiTreeSelect v-model="treeSelectValue" :nodes="treeNodes" />

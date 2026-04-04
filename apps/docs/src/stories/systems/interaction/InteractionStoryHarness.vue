@@ -16,7 +16,6 @@ import {
   UiVirtualList,
   type UiTourStep,
   type UiUploadItem,
-  type UiUploadTransportContext,
 } from '@ww/interaction';
 
 defineOptions({ name: 'InteractionStoryHarness' });
@@ -88,13 +87,11 @@ const tourSteps = computed<UiTourStep[]>(() => [
   },
 ]);
 
-const uploadTransport = async ({
-  onProgress,
-}: UiUploadTransportContext) => {
+const uploadTransport = ({ onProgress }: { onProgress: (value: number) => void }) => {
   onProgress(35);
   onProgress(85);
   onProgress(100);
-  return { uploaded: true };
+  return Promise.resolve({ uploaded: true });
 };
 
 const loadMore = () => {
@@ -190,7 +187,7 @@ const resolveInputProps = (controlProps: {
               <UiInput
                 v-bind="resolveInputProps(controlProps)"
                 :model-value="String(value ?? '')"
-                @update:modelValue="setValue"
+                @update:model-value="setValue"
                 @blur="handleBlur"
               />
             </template>
@@ -201,7 +198,7 @@ const resolveInputProps = (controlProps: {
               <UiInput
                 v-bind="resolveInputProps(controlProps)"
                 :model-value="String(value ?? '')"
-                @update:modelValue="setValue"
+                @update:model-value="setValue"
                 @blur="handleBlur"
               />
             </template>
@@ -230,7 +227,7 @@ const resolveInputProps = (controlProps: {
             :checked-keys="treeChecked"
             checkable
             :nodes="treeNodes"
-            @update:checkedKeys="treeChecked = $event"
+            @update:checked-keys="treeChecked = $event"
           />
           <UiTreeSelect
             v-model="treeSelectValue"

@@ -105,7 +105,7 @@ export function isDateDisabled(
   value: string,
   min?: string | null,
   max?: string | null,
-  disabledDates?: ((value: string) => boolean) | undefined
+  disabledDates?: (value: string) => boolean
 ) {
   if ((min && value < min) || (max && value > max)) {
     return true;

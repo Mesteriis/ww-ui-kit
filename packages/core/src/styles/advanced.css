@@ -245,6 +245,11 @@
   color: var(--ui-text-secondary);
 }
 
+.ui-alert-dialog__actions {
+  display: flex;
+  gap: var(--ui-field-gap);
+}
+
 .ui-alert-dialog__button {
   display: inline-flex;
   align-items: center;

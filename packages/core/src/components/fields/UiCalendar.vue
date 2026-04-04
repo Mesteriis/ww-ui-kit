@@ -10,7 +10,6 @@ import {
   addMonths,
   addYears,
   buildWeekdayLabels,
-  endOfMonth,
   formatDateValue,
   formatMonthValue,
   getRangeSelectionState,

@@ -1,4 +1,4 @@
-import { computed, inject, provide, ref, type ComputedRef, type Ref } from 'vue';
+import { computed, inject, provide, ref, type ComputedRef } from 'vue';
 
 import { useId } from '@ww/primitives';
 

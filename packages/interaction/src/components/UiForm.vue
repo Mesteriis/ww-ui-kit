@@ -51,6 +51,7 @@ const fields = new Map<
 >();
 const initialSnapshot = ref(cloneRecord(props.initialValues));
 const meta = createFormMetaStore();
+type FormBooleanMetaRef = typeof meta.dirty;
 
 const valueState = useControllable<UiFormValue>({
   defaultValue: cloneRecord(props.initialValues),
@@ -69,11 +70,7 @@ watch(
   { deep: true }
 );
 
-const setMetaFlag = (
-  target: typeof meta.dirty | typeof meta.touched | typeof meta.validating,
-  name: string,
-  value: boolean
-) => {
+const setMetaFlag = (target: FormBooleanMetaRef, name: string, value: boolean) => {
   target.value = {
     ...target.value,
     [name]: value,

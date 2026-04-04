@@ -34,8 +34,8 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-const confirmRef = ref<InstanceType<typeof UiButton> | null>(null);
 const cancelButtonRef = ref<HTMLButtonElement | null>(null);
+const footerRef = ref<HTMLElement | null>(null);
 
 const toneIcon = computed(() => (props.tone === 'info' ? 'info' : 'warning'));
 
@@ -62,10 +62,7 @@ watch(
       return;
     }
 
-    const button = confirmRef.value?.$el;
-    if (button instanceof HTMLButtonElement) {
-      button.focus();
-    }
+    footerRef.value?.querySelector<HTMLButtonElement>('.ui-button')?.focus();
   }
 );
 </script>
@@ -91,18 +88,20 @@ watch(
     </div>
 
     <template #footer>
-      <button
-        ref="cancelButtonRef"
-        type="button"
-        class="ui-alert-dialog__button ui-alert-dialog__button--secondary"
-        data-ui-motion="ring-focus-soft"
-        @click="onCancel"
-      >
-        {{ props.cancelText }}
-      </button>
-      <UiButton ref="confirmRef" :variant="props.confirmVariant" @click="onConfirm">
-        {{ props.confirmText }}
-      </UiButton>
+      <div ref="footerRef" class="ui-alert-dialog__actions">
+        <button
+          ref="cancelButtonRef"
+          type="button"
+          class="ui-alert-dialog__button ui-alert-dialog__button--secondary"
+          data-ui-motion="ring-focus-soft"
+          @click="onCancel"
+        >
+          {{ props.cancelText }}
+        </button>
+        <UiButton :variant="props.confirmVariant" @click="onConfirm">
+          {{ props.confirmText }}
+        </UiButton>
+      </div>
     </template>
   </UiDialog>
 </template>

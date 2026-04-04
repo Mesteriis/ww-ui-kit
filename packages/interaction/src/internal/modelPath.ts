@@ -1,6 +1,7 @@
 function cloneUnknown<TValue>(value: TValue): TValue {
   if (Array.isArray(value)) {
-    return value.map((entry) => cloneUnknown(entry)) as TValue;
+    const items = value as unknown[];
+    return items.map((entry) => cloneUnknown(entry)) as TValue;
   }
 
   if (value instanceof Date) {

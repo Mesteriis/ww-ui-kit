@@ -141,7 +141,7 @@ const onSelect = (value: string | UiDateRangeValue | null) => {
             :min="props.min"
             :max="props.max"
             :disabled-dates="props.disabledDates"
-            @update:modelValue="onSelect"
+            @update:model-value="onSelect"
           />
         </section>
       </Transition>
