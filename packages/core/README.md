@@ -10,13 +10,15 @@ It owns:
   `UiFlex`, `UiGrid`, `UiSpace`, `UiAffix`, `UiScrollArea`, `UiScrollTop`
 - fields
 - numeric, slider, listbox, and autocomplete field surfaces:
-  `UiNumberInput`, `UiSlider`, `UiRangeSlider`, `UiSelect`, `UiAutocomplete`
+  `UiNumberInput`, `UiRating`, `UiSlider`, `UiRangeSlider`, `UiSelect`, `UiAutocomplete`
+- field enrichments:
+  `UiInputGroup`, `UiInputPassword`, `UiInputTag`, `UiInputOtp`
 - selection controls:
   `UiCheckbox`, `UiSwitch`, `UiRadio`, `UiRadioGroup`
 - display components:
-  `UiAvatar`, `UiAvatarGroup`, `UiBadge`, `UiCard`, `UiDivider`, `UiImage`, `UiProgress`, `UiSkeleton`, `UiSpinner`, `UiTable`, `UiTag`
+  `UiAvatar`, `UiAvatarGroup`, `UiBadge`, `UiCard`, `UiDescriptions`, `UiDivider`, `UiImage`, `UiList`, `UiProgress`, `UiSkeleton`, `UiSpinner`, `UiStatistic`, `UiTable`, `UiTag`, `UiTimeline`
 - feedback and disclosure components:
-  `UiEmptyState`, `UiAlert`, `UiCollapse`, `UiCollapsePanel`
+  `UiEmptyState`, `UiAlert`, `UiResult`, `UiCollapse`, `UiCollapsePanel`
 - navigation components:
   `UiTabsRoot`, `UiTabsList`, `UiTabsTrigger`, `UiTabsPanel`, `UiBreadcrumb`, `UiAnchor`, `UiMenu`, `UiPagination`, `UiSteps`
 - overlay surfaces:
@@ -122,6 +124,74 @@ Out of scope:
 - chart brushing, timeline orchestration, or canvas-heavy interactions
 - date or time picking semantics
 - analytics-specific labeling or business-rule validation beyond the numeric bounds contract
+
+## UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp
+
+`UiInputPassword`, `UiInputGroup`, `UiInputTag`, and `UiInputOtp` extend the governed field layer
+without introducing form orchestration or a second validation runtime.
+
+Use them for:
+
+- grouped input/addon seams that still sit inside the field contract
+- password entry with explicit reveal state, optional strength guidance, and rule checklists
+- string-array tag entry with duplicate policy, paste splitting, and removal flow
+- one-time-code entry with segmented focus transfer, masking, and paste distribution
+
+Out of scope:
+
+- form-level validation orchestration
+- async password policy services or secret-management flows
+- domain-specific tag taxonomies or server-backed suggestion runtimes
+- authentication/session orchestration beyond the segmented input behavior
+
+## UiRating
+
+`UiRating` is the governed rating input surface inside `@ww/core`.
+
+Use it for:
+
+- review and confidence scoring with explicit half-step support
+- tokenized rating color choices without raw color overrides
+- field-aware rating input that stays keyboard-accessible and form-compatible
+
+Out of scope:
+
+- analytics dashboards that need charting or historical trend ownership
+- product-specific icon packs or asset pipelines
+- sentiment models or recommendation logic
+
+## UiTimeline / UiDescriptions / UiStatistic / UiList
+
+`UiTimeline`, `UiDescriptions`, `UiStatistic`, and `UiList` are the governed information-display surfaces inside `@ww/core`.
+
+Use them for:
+
+- milestone and status chronology without page-template ownership
+- metadata blocks and key/value layouts that stay token-aware
+- numeric metrics and countdown presentation without analytics orchestration
+- repeatable content lists with pagination and composed item slots
+
+Out of scope:
+
+- virtualized feeds, infinite scroll, or document-viewer scale
+- backend-driven list orchestration or query-state management
+- product-specific dashboard systems that deserve a higher layer
+
+## UiResult
+
+`UiResult` is the governed outcome surface for stable success, warning, error, and empty-result messaging.
+
+Use it for:
+
+- confirmation and outcome states after a completed flow
+- transport-safe preset statuses such as `success`, `warning`, `error`, `403`, `404`, and `500`
+- scoped extra actions that stay consumer-owned
+
+Out of scope:
+
+- toast-style transient feedback
+- multi-step modal workflows
+- backend retry orchestration or route-level error handling systems
 
 ## UiAffix / UiScrollArea / UiScrollTop / UiAnchor
 

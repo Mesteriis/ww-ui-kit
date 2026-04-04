@@ -246,6 +246,7 @@ const onPaste = (event: ClipboardEvent) => {
         :disabled="props.disabled || isAtLimit"
         :readonly="props.readonly"
         :aria-label="props.ariaLabel ? `${props.ariaLabel} input` : undefined"
+        :aria-labelledby="props.ariaLabel ? undefined : labelId"
         :aria-describedby="describedBy"
         :aria-invalid="isInvalid || undefined"
         data-ui-motion="ring-focus-soft"

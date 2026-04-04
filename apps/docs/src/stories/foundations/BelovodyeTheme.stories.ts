@@ -16,6 +16,7 @@ import {
   UiCheckbox,
   UiCollapse,
   UiCollapsePanel,
+  UiDescriptions,
   UiDialog,
   UiDrawer,
   UiDropdown,
@@ -30,20 +31,24 @@ import {
   UiInputPassword,
   UiInputTag,
   UiGrid,
+  UiList,
   UiMenu,
   UiNumberInput,
   UiPagination,
   UiPopover,
   UiProgress,
+  UiRating,
   UiRadio,
   UiRadioGroup,
   UiRangeSlider,
+  UiResult,
   UiScrollArea,
   UiScrollTop,
   UiSelect,
   UiSelectSimple,
   UiSlider,
   UiSwitch,
+  UiStatistic,
   UiSteps,
   UiSpace,
   UiTable,
@@ -54,6 +59,7 @@ import {
   UiTabsTrigger,
   UiToast,
   UiTextarea,
+  UiTimeline,
   UiTooltip,
 } from '@ww/core';
 import { getThemeMeta } from '@ww/themes';
@@ -82,6 +88,7 @@ export const SystemShowcase: StoryObj = {
       UiCheckbox,
       UiCollapse,
       UiCollapsePanel,
+      UiDescriptions,
       UiDialog,
       UiDrawer,
       UiDropdown,
@@ -96,20 +103,24 @@ export const SystemShowcase: StoryObj = {
       UiInputPassword,
       UiInputTag,
       UiGrid,
+      UiList,
       UiMenu,
       UiNumberInput,
       UiPagination,
       UiPopover,
       UiProgress,
+      UiRating,
       UiRadio,
       UiRadioGroup,
       UiRangeSlider,
+      UiResult,
       UiScrollArea,
       UiScrollTop,
       UiSelect,
       UiSelectSimple,
       UiSlider,
       UiSwitch,
+      UiStatistic,
       UiSteps,
       UiSpace,
       UiTable,
@@ -120,6 +131,7 @@ export const SystemShowcase: StoryObj = {
       UiTabsTrigger,
       UiToast,
       UiTextarea,
+      UiTimeline,
       UiTooltip,
     },
     setup() {
@@ -134,6 +146,7 @@ export const SystemShowcase: StoryObj = {
       const passwordVisible = ref(false);
       const tagValues = ref<string[]>(['glass', 'tokens']);
       const otpValue = ref('58');
+      const reviewRating = ref(4.5);
       const autocompleteValue = ref('');
       const numberValue = ref<number | null>(6.5);
       const sliderValue = ref(70);
@@ -150,6 +163,7 @@ export const SystemShowcase: StoryObj = {
       const affixState = ref('resting');
       const activeAnchor = ref<string | null>('overview');
       const currentStep = ref(1);
+      const listPage = ref(1);
       const selectedMenuKeys = ref(['review']);
       const lastDropdownAction = ref('Review queue');
       const toastRef = ref<{
@@ -251,8 +265,51 @@ export const SystemShowcase: StoryObj = {
         { surface: 'UiAvatar', status: 'Theme-aware', proof: 'Fallback + tone tokens' },
         { surface: 'UiImage', status: 'Theme-aware', proof: 'Surface and fallback tokens' },
         { surface: 'UiInputPassword', status: 'Theme-aware', proof: 'Field + strength tokens' },
-        { surface: 'UiSelect', status: 'Theme-aware', proof: 'Shared floating surface' },
-        { surface: 'UiProgress', status: 'Theme-aware', proof: 'Linear and circular tracks' },
+        { surface: 'UiRating', status: 'Theme-aware', proof: 'Half-step and focus tokens' },
+        {
+          surface: 'UiStatistic',
+          status: 'Theme-aware',
+          proof: 'Metric contrast and number rhythm',
+        },
+      ];
+
+      const descriptionItems = [
+        { label: 'Theme', value: belovodyeTheme.label },
+        { label: 'Type', value: belovodyeTheme.type },
+        { label: 'Coverage', value: 'Stories + playground + tests', span: 2 },
+      ];
+
+      const timelineItems = [
+        {
+          title: 'Glass surface applied',
+          description: 'Cards, inputs, and feedback share the same theme tokens.',
+          opposite: 'Theme',
+          tone: 'brand' as const,
+        },
+        {
+          title: 'Feedback aligned',
+          description: 'Results and alerts remain readable on the dark surface.',
+          opposite: 'Contrast',
+          tone: 'success' as const,
+        },
+      ];
+
+      const listItems = [
+        {
+          title: 'UiDescriptions',
+          description: 'Metadata blocks inherit Belovodye without local overrides.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiStatistic',
+          description: 'Metric emphasis stays bright without introducing raw colors.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiResult',
+          description: 'Outcome feedback keeps the same scoped contrast system.',
+          meta: 'Feedback',
+        },
       ];
 
       const layoutItems = [
@@ -332,6 +389,7 @@ export const SystemShowcase: StoryObj = {
         currentPage,
         currentStep,
         currentStepLabel,
+        descriptionItems,
         displayImageSrc,
         dialogOpen,
         dropdownItems,
@@ -340,6 +398,8 @@ export const SystemShowcase: StoryObj = {
         inputValue,
         layoutItems,
         lastDropdownAction,
+        listItems,
+        listPage,
         menuItems,
         numberValue,
         onSelect,
@@ -352,6 +412,7 @@ export const SystemShowcase: StoryObj = {
         pushToast,
         rangeValue,
         repositoryValue,
+        reviewRating,
         richOptions,
         richSelectValue,
         scrollCards,
@@ -368,6 +429,7 @@ export const SystemShowcase: StoryObj = {
         tagValues,
         toastRef,
         textareaValue,
+        timelineItems,
       };
     },
     template: `
@@ -543,6 +605,9 @@ export const SystemShowcase: StoryObj = {
               <UiField label="Verification code">
                 <UiInputOtp v-model="otpValue" :length="4" />
               </UiField>
+              <UiField label="Release confidence">
+                <UiRating v-model="reviewRating" allow-half allow-clear tone="brand" />
+              </UiField>
               <UiField label="Command search">
                 <UiAutocomplete v-model="autocompleteValue" :items="autocompleteItems" />
               </UiField>
@@ -573,6 +638,7 @@ export const SystemShowcase: StoryObj = {
               <UiSwitch v-model="switchValue" ariaLabel="Enable scoped preview">
                 Scoped preview
               </UiSwitch>
+              <UiBadge variant="brand">Rating value: {{ reviewRating || 'empty' }}</UiBadge>
             </div>
 
               <UiField label="Release stage" hint="Selection surfaces keep the same dark glass rhythm">
@@ -621,6 +687,22 @@ export const SystemShowcase: StoryObj = {
                 <UiProgress :value="64" show-value />
                 <UiProgress variant="circular" :value="82" show-value status="success" />
               </div>
+              <div
+                style="
+                  display: grid;
+                  gap: var(--ui-space-4);
+                  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+                "
+              >
+                <UiStatistic title="Belovodye score" :value="96.2" suffix="/100" :precision="1" />
+                <UiStatistic title="Queued reviews" :value="9" prefix="≈" />
+              </div>
+              <UiDescriptions title="Theme metadata" bordered :items="descriptionItems">
+                <template #extra>
+                  <UiBadge variant="brand">Scoped</UiBadge>
+                </template>
+              </UiDescriptions>
+              <UiTimeline :items="timelineItems" pending pending-label="Awaiting notes" />
               <UiTable caption="Belovodye review matrix" :columns="tableColumns" :data="tableData" bordered>
                 <template #cell="{ column, value }">
                   <strong v-if="column.key === 'surface'">{{ value }}</strong>
@@ -628,6 +710,27 @@ export const SystemShowcase: StoryObj = {
                   <span v-else>{{ value }}</span>
                 </template>
               </UiTable>
+              <UiList
+                v-model:page="listPage"
+                title="Belovodye information surfaces"
+                :data-source="listItems"
+                :page-size="2"
+                pagination
+                bordered
+              >
+                <template #item="{ item }">
+                  <strong>{{ item.title }}</strong>
+                  <p style="margin: 0; color: var(--ui-text-secondary);">{{ item.description }}</p>
+                </template>
+                <template #meta="{ item }">
+                  <UiBadge>{{ item.meta }}</UiBadge>
+                </template>
+              </UiList>
+              <UiResult
+                status="success"
+                title="Scoped verify passed"
+                subtitle="Belovodye keeps the same governed contract under subtree theming."
+              />
             </div>
           </UiCard>
 

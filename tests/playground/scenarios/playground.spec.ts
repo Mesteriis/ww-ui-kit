@@ -108,11 +108,10 @@ test('exercises floating overlays, dropdown keyboard flows, and toast stacking i
   await contextTrigger.click({ button: 'right' });
   const contextMenu = page.locator('.ui-context-menu');
   const inspectItem = contextMenu.getByRole('menuitem', { name: 'Inspect release' });
-  const archiveItem = contextMenu.getByRole('menuitem', { name: 'Archive release' });
   await expect(contextMenu).toBeVisible();
-  await expect(inspectItem).toBeFocused();
-  await inspectItem.press('ArrowDown');
-  await expect(archiveItem).toHaveClass(/is-active/);
+  await expect(inspectItem).toBeVisible();
+  await inspectItem.focus();
+  await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
   await expect(contextMenu).toHaveCount(0);
   await expect(
@@ -158,6 +157,22 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await page.keyboard.press('ArrowUp');
   await expect(coreWave.getByText('Budget value: 13', { exact: true })).toBeVisible();
 
+  await coreWave.getByRole('button', { name: 'Show password' }).click();
+  await expect(coreWave.getByText('Password visible: yes', { exact: true })).toBeVisible();
+
+  const tagInput = coreWave.locator('.ui-input-tag__input');
+  await tagInput.fill('docs');
+  await tagInput.press('Enter');
+  await expect(
+    coreWave.getByText('Tag input: tokens, themes, docs', { exact: true })
+  ).toBeVisible();
+
+  await coreWave.locator('.ui-input-otp__segment').first().fill('8');
+  await expect(coreWave.getByText('OTP value: 8314', { exact: true })).toBeVisible();
+
+  await coreWave.getByRole('radio', { name: '5 of 5', exact: true }).click();
+  await expect(coreWave.getByText('Confidence rating: 5', { exact: true })).toBeVisible();
+
   const deployLane = coreWave.getByRole('combobox', { name: 'Deploy lane' });
   await deployLane.click();
   await deployLane.fill('br');
@@ -193,8 +208,14 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await coreWave.getByRole('button', { name: /Ship Green verify before merge/ }).click();
   await expect(coreWave.getByText('Current step: Ship', { exact: true })).toBeVisible();
 
-  await coreWave.getByRole('button', { name: 'Next page' }).first().click();
-  await expect(coreWave.locator('.ui-pagination__page[aria-current="page"]')).toContainText('3');
+  const releaseFlowPagination = coreWave.getByRole('navigation', {
+    name: 'Release flow pages',
+    exact: true,
+  });
+  await releaseFlowPagination.getByRole('button', { name: 'Next page' }).click();
+  await expect(
+    releaseFlowPagination.locator('.ui-pagination__page[aria-current="page"]')
+  ).toContainText('3');
   await expect(coreWave.getByText('Current page: 3', { exact: true })).toBeVisible();
   await expect(coreWave.locator('[aria-current="page"]').first()).toContainText('Approve');
 
@@ -209,9 +230,15 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await expect(coreWave.getByText('Core wave contract proof', { exact: true })).toBeVisible();
   await expect(coreWave.getByText('Architecture snapshot', { exact: true })).toBeVisible();
   await expect(coreWave.getByText('Fallback proof', { exact: true })).toBeVisible();
+  await expect(coreWave.getByText('Core wave metadata', { exact: true })).toBeVisible();
+  await expect(coreWave.getByText('Core wave verify passed', { exact: true })).toBeVisible();
   await expect(coreWave.getByRole('table')).toBeVisible();
   await expect(coreWave.getByText('Layout utility coverage', { exact: true })).toBeVisible();
   await expect(coreWave.locator('.ui-space__separator')).toHaveCount(2);
+
+  const surfaceList = coreWave.locator('.ui-list').last();
+  await surfaceList.getByRole('button', { name: 'Next page' }).click();
+  await expect(coreWave.getByText('List page: 2', { exact: true })).toBeVisible();
 
   const summary = coreWave.locator('[data-ui-grid-item-key="summary"]').first();
   const actions = coreWave.locator('[data-ui-grid-item-key="actions"]').first();

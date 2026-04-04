@@ -63,9 +63,7 @@ const labelId = computed(() => (props.ariaLabel ? undefined : field?.labelId.val
 const strengthId = computed(() =>
   props.strength === null || props.strength === undefined ? undefined : `${inputId.value}-strength`
 );
-const rulesId = computed(() =>
-  props.rules.length > 0 ? `${inputId.value}-rules` : undefined
-);
+const rulesId = computed(() => (props.rules.length > 0 ? `${inputId.value}-rules` : undefined));
 const describedBy = computed(() =>
   mergeDescribedBy(props.ariaDescribedby, field?.describedBy.value, strengthId.value, rulesId.value)
 );
@@ -76,9 +74,7 @@ const revealState = useControllable({
   onChange: (value) => emit('update:revealed', value),
 });
 const inputType = computed(() => (revealState.currentValue.value ? 'text' : 'password'));
-const strengthValue = computed(() =>
-  Math.min(100, Math.max(0, Number(props.strength ?? 0)))
-);
+const strengthValue = computed(() => Math.min(100, Math.max(0, Number(props.strength ?? 0))));
 const strengthStatus = computed(() => {
   if (strengthValue.value >= 75) {
     return 'success';
@@ -148,7 +144,11 @@ const toggleVisibility = () => {
       </button>
     </UiInputGroup>
 
-    <div v-if="props.strength !== null && props.strength !== undefined" :id="strengthId" class="ui-input-password__meta">
+    <div
+      v-if="props.strength !== null && props.strength !== undefined"
+      :id="strengthId"
+      class="ui-input-password__meta"
+    >
       <UiProgress
         :value="strengthValue"
         :status="strengthStatus"

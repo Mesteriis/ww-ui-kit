@@ -29,3 +29,5 @@
 | ADR-0025 | accepted   | Core Image Surface                                    | 2026-04-03 | Adds `UiImage` as the governed base display surface for framed images, fallback states, and captions without preview runtime.   |
 | ADR-0026 | accepted   | Core Slider Surfaces                                  | 2026-04-04 | Adds `UiSlider` and `UiRangeSlider` as governed numeric field surfaces with keyboard, marks, and min-gap range behavior.        |
 | ADR-0027 | accepted   | Core Scroll And Anchor Utilities                      | 2026-04-04 | Adds `UiAffix`, `UiScrollArea`, `UiScrollTop`, and `UiAnchor` as governed core scroll and section-navigation utilities.         |
+| ADR-0028 | accepted   | Core Field Enrichment Surfaces                        | 2026-04-04 | Adds `UiInputGroup`, `UiInputPassword`, `UiInputTag`, and `UiInputOtp` as governed field enrichments without a form runtime.    |
+| ADR-0029 | accepted   | Core Information And Result Surfaces                  | 2026-04-04 | Adds `UiRating`, `UiTimeline`, `UiDescriptions`, `UiStatistic`, `UiResult`, and `UiList` as governed core information surfaces. |

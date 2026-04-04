@@ -293,6 +293,17 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
       'UiInputOtp is reviewed through Storybook and the playground harness because focus transfer, paste distribution, and backspace flow are better proven in composed browser interactions.',
   }),
   visualSurface({
+    id: 'ui-rating',
+    title: 'UiRating',
+    packageName: '@ww/core',
+    exportName: 'UiRating',
+    parentManifestExportName: 'UiRating',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiRating is reviewed through Storybook and the playground harness because half-step selection, clear behavior, and radiogroup keyboard flow are interaction contracts rather than matrix-only styling knobs.',
+  }),
+  visualSurface({
     id: 'ui-slider',
     title: 'UiSlider',
     packageName: '@ww/core',
@@ -483,6 +494,50 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     }),
   }),
   visualSurface({
+    id: 'ui-timeline',
+    title: 'UiTimeline',
+    packageName: '@ww/core',
+    exportName: 'UiTimeline',
+    parentManifestExportName: 'UiTimeline / UiDescriptions / UiStatistic / UiList',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiTimeline is reviewed through Storybook and the playground harness because alternating layout, opposite content, and pending state only make sense in realistic content flows.',
+  }),
+  visualSurface({
+    id: 'ui-descriptions',
+    title: 'UiDescriptions',
+    packageName: '@ww/core',
+    exportName: 'UiDescriptions',
+    parentManifestExportName: 'UiTimeline / UiDescriptions / UiStatistic / UiList',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiDescriptions is reviewed through Storybook and the playground harness because span layout and metadata density are best judged in real composed cards rather than an isolated control matrix.',
+  }),
+  visualSurface({
+    id: 'ui-statistic',
+    title: 'UiStatistic',
+    packageName: '@ww/core',
+    exportName: 'UiStatistic',
+    parentManifestExportName: 'UiTimeline / UiDescriptions / UiStatistic / UiList',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiStatistic is reviewed through Storybook and the playground harness because formatter and countdown behavior are temporal interaction contracts rather than static visual tuning.',
+  }),
+  visualSurface({
+    id: 'ui-list',
+    title: 'UiList',
+    packageName: '@ww/core',
+    exportName: 'UiList',
+    parentManifestExportName: 'UiTimeline / UiDescriptions / UiStatistic / UiList',
+    family: 'Display',
+    labEligible: false,
+    labExemptionReason:
+      'UiList is reviewed through Storybook and the playground harness because item slots, pagination, and load-more composition matter more in real content assemblies than in a single-surface matrix.',
+  }),
+  visualSurface({
     id: 'ui-progress',
     title: 'UiProgress',
     packageName: '@ww/core',
@@ -570,6 +625,17 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
       schema: 'apps/playground/src/lab/schemas/ui-alert.lab.ts',
       preview: 'apps/playground/src/lab/components/SimpleSurfaceLabPreview.vue',
     }),
+  }),
+  visualSurface({
+    id: 'ui-result',
+    title: 'UiResult',
+    packageName: '@ww/core',
+    exportName: 'UiResult',
+    parentManifestExportName: 'UiResult',
+    family: 'Feedback',
+    labEligible: false,
+    labExemptionReason:
+      'UiResult is reviewed through Storybook and the playground harness because status presets and extra-content composition are better proven in realistic outcome flows than in a standalone tuning pane.',
   }),
   visualSurface({
     id: 'ui-dialog',

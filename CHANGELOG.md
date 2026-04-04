@@ -7,10 +7,16 @@ Package-specific version history continues to live in each package `CHANGELOG.md
 
 ## [Unreleased]
 
+### Added
+
+- Added governed core field-enrichment surfaces for password entry, grouped inputs, tag inputs, and one-time passcode flows.
+- Added governed core information and result surfaces covering rating, timeline, descriptions, statistic, list, and result patterns.
+
 ### Changed
 
 - Added a canonical repository-level changelog alongside existing package changelogs.
 - Clarified the difference between monorepo release history and package-level Changesets history in the root documentation.
+- Expanded Storybook, playground proofs, ADR coverage, catalogs, and regression suites for the new public core surfaces.
 
 ## [2026-03-29]
 

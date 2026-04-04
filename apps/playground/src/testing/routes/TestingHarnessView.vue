@@ -15,6 +15,7 @@ import {
   UiCollapse,
   UiCollapsePanel,
   UiContextMenu,
+  UiDescriptions,
   UiDropdown,
   UiDialog,
   UiDrawer,
@@ -25,17 +26,21 @@ import {
   UiInputOtp,
   UiInputPassword,
   UiInputTag,
+  UiList,
   UiMenu,
   UiNumberInput,
   UiPagination,
   UiPopconfirm,
   UiPopover,
   UiProgress,
+  UiRating,
   UiRadio,
   UiRadioGroup,
   UiRangeSlider,
+  UiResult,
   UiSelect,
   UiSlider,
+  UiStatistic,
   UiSwitch,
   UiTag,
   UiTabsList,
@@ -44,6 +49,7 @@ import {
   UiTabsTrigger,
   UiToast,
   UiTable,
+  UiTimeline,
   UiSteps,
   UiTooltip,
 } from '@ww/core';
@@ -129,11 +135,13 @@ const releasePassword = ref('Belovodye-42');
 const releasePasswordVisible = ref(false);
 const releaseTagInput = ref<string[]>(['tokens', 'themes']);
 const releaseOtp = ref('7314');
+const releaseConfidence = ref(4.5);
 const releaseTarget = ref(65);
 const releaseWindow = ref<[number, number]>([25, 75]);
 const releaseLane = ref<string | null>('bravo');
 const releaseCoverage = ref<Array<string | number>>(['tokens']);
 const releaseSearch = ref('');
+const releaseListPage = ref(1);
 const lastAutocompleteSelection = ref('none');
 const releaseMenuKeys = ref(['review']);
 const lastCoreMenuSelection = ref('review');
@@ -273,10 +281,62 @@ const coreTableColumns = [
 
 const coreTableData = [
   { surface: 'UiInputPassword', status: 'Shipped', proof: 'Visibility + rules + tests' },
+  { surface: 'UiRating', status: 'Shipped', proof: 'Radiogroup + half-step keyboard flow' },
   { surface: 'UiSelect', status: 'Shipped', proof: 'Stories + unit + playground' },
-  { surface: 'UiMenu', status: 'Shipped', proof: 'Keyboard + ARIA coverage' },
+  { surface: 'UiTimeline', status: 'Shipped', proof: 'Pending state + opposite content' },
   { surface: 'UiImage', status: 'Shipped', proof: 'Fit + fallback + caption' },
   { surface: 'UiTable', status: 'Shipped', proof: 'Semantic table + slots' },
+];
+
+const coreDescriptionsItems = [
+  { label: 'Layer', value: '@ww/core' },
+  { label: 'Contract', value: 'docs-as-contract' },
+  { label: 'Coverage', value: 'Storybook + playground + unit', span: 2 },
+  { label: 'Owner', value: 'Governance' },
+];
+
+const coreTimelineItems = [
+  {
+    title: 'Surface contract fixed',
+    description: 'Layer placement, tokens, and public API were frozen before export.',
+    opposite: 'ADR',
+    tone: 'brand' as const,
+  },
+  {
+    title: 'Consumer harness updated',
+    description: 'The playground proves composed usage instead of isolated demos.',
+    opposite: 'Harness',
+    tone: 'success' as const,
+  },
+  {
+    title: 'Verify green',
+    description: 'Typecheck, lint, tests, build, and governance checks stay in lockstep.',
+    opposite: 'CI',
+    tone: 'warning' as const,
+  },
+];
+
+const coreListItems = [
+  {
+    title: 'UiDescriptions',
+    description: 'Metadata layout with spans and bordered framing.',
+    meta: 'Display',
+  },
+  {
+    title: 'UiStatistic',
+    description: 'Value presentation and countdown formatting without analytics ownership.',
+    meta: 'Display',
+  },
+  {
+    title: 'UiResult',
+    description: 'Structured outcome surface with governed status presets.',
+    meta: 'Feedback',
+  },
+  {
+    title: 'UiList',
+    description: 'Composable item rendering with pagination and load-more slot.',
+    meta: 'Display',
+  },
 ];
 
 const chartCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -729,7 +789,10 @@ const currentReleaseStepLabel = computed(
             />
           </UiField>
 
-          <UiField label="Repository URL" hint="Input groups keep addons in the same field contract">
+          <UiField
+            label="Repository URL"
+            hint="Input groups keep addons in the same field contract"
+          >
             <UiInputGroup>
               <template #prepend>https://</template>
               <UiInput v-model="releaseRepository" />
@@ -768,12 +831,25 @@ const currentReleaseStepLabel = computed(
             />
           </UiField>
 
-          <UiField label="Release tags" hint="Tag input distributes Enter, comma, and paste additions">
+          <UiField
+            label="Release tags"
+            hint="Tag input distributes Enter, comma, and paste additions"
+          >
             <UiInputTag v-model="releaseTagInput" :max-tags="5" />
           </UiField>
 
-          <UiField label="Verification code" hint="OTP input auto-advances and supports paste distribution">
+          <UiField
+            label="Verification code"
+            hint="OTP input auto-advances and supports paste distribution"
+          >
             <UiInputOtp v-model="releaseOtp" :length="4" />
+          </UiField>
+
+          <UiField
+            label="Release confidence"
+            hint="Rating keeps radiogroup semantics and half-step selection"
+          >
+            <UiRating v-model="releaseConfidence" allow-half allow-clear tone="brand" />
           </UiField>
 
           <UiField label="Rollout target" hint="Slider keeps keyboard semantics and numeric sync">
@@ -813,6 +889,7 @@ const currentReleaseStepLabel = computed(
           <p style="margin: 0">Coverage tags: {{ releaseCoverage.join(', ') || 'none' }}</p>
           <p style="margin: 0">Tag input: {{ releaseTagInput.join(', ') || 'none' }}</p>
           <p style="margin: 0">OTP value: {{ releaseOtp || 'empty' }}</p>
+          <p style="margin: 0">Confidence rating: {{ releaseConfidence || 'empty' }}</p>
           <p style="margin: 0">Rollout target: {{ releaseTarget }}</p>
           <p style="margin: 0">Deploy window: {{ releaseWindow[0] }}-{{ releaseWindow[1] }}</p>
           <p style="margin: 0">Autocomplete selection: {{ lastAutocompleteSelection }}</p>
@@ -923,6 +1000,16 @@ const currentReleaseStepLabel = computed(
 
           <p style="margin: 0">Current page: {{ releaseFlowPage }}</p>
 
+          <UiResult
+            status="success"
+            title="Core wave verify passed"
+            subtitle="Feedback outcome stays explicit without product orchestration."
+          >
+            <template #extra>
+              <UiButton variant="secondary" size="sm">Inspect evidence</UiButton>
+            </template>
+          </UiResult>
+
           <TestingHarnessCoreAnchorProof />
         </div>
       </UiCard>
@@ -956,6 +1043,26 @@ const currentReleaseStepLabel = computed(
             <UiProgress indeterminate status="warning" aria-label="Indeterminate deploy" />
           </div>
 
+          <div
+            style="
+              display: grid;
+              gap: var(--ui-space-4);
+              grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+            "
+          >
+            <UiStatistic title="Deploy score" :value="98.4" suffix="/100" :precision="1" />
+            <UiStatistic title="Queued reviews" :value="12" prefix="≈" />
+            <UiStatistic title="Countdown" :countdown-to="Date.now() + 90_000" />
+          </div>
+
+          <UiDescriptions title="Core wave metadata" bordered :items="coreDescriptionsItems">
+            <template #extra>
+              <UiBadge variant="brand">Stable</UiBadge>
+            </template>
+          </UiDescriptions>
+
+          <UiTimeline :items="coreTimelineItems" pending pending-label="Awaiting release notes" />
+
           <UiTable
             caption="Core wave contract proof"
             :columns="coreTableColumns"
@@ -980,6 +1087,28 @@ const currentReleaseStepLabel = computed(
           <UiImage alt="Fallback-only proof" caption="Fallback proof" aspect="square">
             <template #fallback>◇</template>
           </UiImage>
+
+          <UiList
+            v-model:page="releaseListPage"
+            title="Release information surfaces"
+            :data-source="coreListItems"
+            :page-size="2"
+            pagination
+            bordered
+          >
+            <template #item="{ item }">
+              <strong>{{ item.title }}</strong>
+              <p style="margin: 0; color: var(--ui-text-secondary)">{{ item.description }}</p>
+            </template>
+            <template #meta="{ item }">
+              <UiBadge>{{ item.meta }}</UiBadge>
+            </template>
+            <template #loadMore>
+              <UiButton variant="secondary" size="sm">Load more notes</UiButton>
+            </template>
+          </UiList>
+
+          <p style="margin: 0">List page: {{ releaseListPage }}</p>
         </div>
       </UiCard>
 

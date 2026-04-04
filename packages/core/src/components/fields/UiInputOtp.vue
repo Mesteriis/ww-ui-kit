@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
 
 import { useId } from '@ww/primitives';
 
@@ -78,7 +79,7 @@ const focusSegment = (index: number) => {
   segmentRefs.value[index]?.select();
 };
 
-const setSegmentRef = (index: number) => (element: Element | null) => {
+const setSegmentRef = (index: number) => (element: Element | ComponentPublicInstance | null) => {
   segmentRefs.value[index] = element instanceof HTMLInputElement ? element : null;
 };
 

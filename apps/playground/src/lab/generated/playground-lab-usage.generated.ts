@@ -297,16 +297,16 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 18,
+          "count": 19,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
+            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
           ]
         },
         {
@@ -328,18 +328,18 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 18,
+          "count": 19,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
             "apps/docs/src/stories/Feedback.stories.ts",
             "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
             "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts"
+            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
           ]
         },
         {
@@ -401,6 +401,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/Feedback.stories.ts",
           "area": "docs"
         },
@@ -450,10 +454,6 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/page-templates/Shell.stories.ts",
-          "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
           "area": "docs"
         }
       ]
@@ -1937,6 +1937,554 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/lab/schemas/ui-number-input.lab.ts",
           "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-input-group": {
+      "id": "ui-input-group",
+      "title": "UiInputGroup",
+      "exportName": "UiInputGroup",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiInputGroup is reviewed through Storybook and the playground harness because addon seams and grouped controls only make sense in composed field flows.",
+      "sourcePublicSurface": "UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "group",
+        "security",
+        "segmented"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-input-password": {
+      "id": "ui-input-password",
+      "title": "UiInputPassword",
+      "exportName": "UiInputPassword",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiInputPassword is reviewed through Storybook and the playground harness because reveal state, strength hints, and rules are interaction-heavy field contracts.",
+      "sourcePublicSurface": "UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "group",
+        "security",
+        "segmented"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-input-tag": {
+      "id": "ui-input-tag",
+      "title": "UiInputTag",
+      "exportName": "UiInputTag",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiInputTag is reviewed through Storybook and the playground harness because paste splitting, duplicate policy, and removal flow are behavioral rather than matrix-only tuning.",
+      "sourcePublicSurface": "UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "group",
+        "security",
+        "segmented"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-input-otp": {
+      "id": "ui-input-otp",
+      "title": "UiInputOtp",
+      "exportName": "UiInputOtp",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiInputOtp is reviewed through Storybook and the playground harness because focus transfer, paste distribution, and backspace flow are better proven in composed browser interactions.",
+      "sourcePublicSurface": "UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "group",
+        "security",
+        "segmented"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-rating": {
+      "id": "ui-rating",
+      "title": "UiRating",
+      "exportName": "UiRating",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiRating is reviewed through Storybook and the playground harness because half-step selection, clear behavior, and radiogroup keyboard flow are interaction contracts rather than matrix-only styling knobs.",
+      "sourcePublicSurface": "UiRating",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "rating"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
@@ -3663,6 +4211,442 @@ export const playgroundLabUsage = {
         }
       ]
     },
+    "ui-timeline": {
+      "id": "ui-timeline",
+      "title": "UiTimeline",
+      "exportName": "UiTimeline",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiTimeline is reviewed through Storybook and the playground harness because alternating layout, opposite content, and pending state only make sense in realistic content flows.",
+      "sourcePublicSurface": "UiTimeline / UiDescriptions / UiStatistic / UiList",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Display",
+          "file": "apps/docs/src/stories/Display.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "metadata",
+        "list"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-descriptions": {
+      "id": "ui-descriptions",
+      "title": "UiDescriptions",
+      "exportName": "UiDescriptions",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiDescriptions is reviewed through Storybook and the playground harness because span layout and metadata density are best judged in real composed cards rather than an isolated control matrix.",
+      "sourcePublicSurface": "UiTimeline / UiDescriptions / UiStatistic / UiList",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Display",
+          "file": "apps/docs/src/stories/Display.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "metadata",
+        "list"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-statistic": {
+      "id": "ui-statistic",
+      "title": "UiStatistic",
+      "exportName": "UiStatistic",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiStatistic is reviewed through Storybook and the playground harness because formatter and countdown behavior are temporal interaction contracts rather than static visual tuning.",
+      "sourcePublicSurface": "UiTimeline / UiDescriptions / UiStatistic / UiList",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Display",
+          "file": "apps/docs/src/stories/Display.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "metadata",
+        "list"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-list": {
+      "id": "ui-list",
+      "title": "UiList",
+      "exportName": "UiList",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": false,
+      "labExemptionReason": "UiList is reviewed through Storybook and the playground harness because item slots, pagination, and load-more composition matter more in real content assemblies than in a single-surface matrix.",
+      "sourcePublicSurface": "UiTimeline / UiDescriptions / UiStatistic / UiList",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Display",
+          "file": "apps/docs/src/stories/Display.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "metadata",
+        "list"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
     "ui-progress": {
       "id": "ui-progress",
       "title": "UiProgress",
@@ -4369,6 +5353,114 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/lab/schemas/ui-alert.lab.ts",
           "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-result": {
+      "id": "ui-result",
+      "title": "UiResult",
+      "exportName": "UiResult",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Feedback",
+      "labEligible": false,
+      "labExemptionReason": "UiResult is reviewed through Storybook and the playground harness because status presets and extra-content composition are better proven in realistic outcome flows than in a standalone tuning pane.",
+      "sourcePublicSurface": "UiResult",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Feedback.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Feedback.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Feedback",
+          "file": "apps/docs/src/stories/Feedback.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "feedback",
+        "result"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Feedback.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",

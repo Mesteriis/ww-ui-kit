@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import UiAlert from './UiAlert.vue';
 import UiEmptyState from './UiEmptyState.vue';
+import UiResult from './UiResult.vue';
 
 describe('UiEmptyState', () => {
   it('renders title, description, and slots', () => {
@@ -214,5 +215,33 @@ describe('UiEmptyState', () => {
     });
     await nextTick();
     expect(errorIcon.text()).toContain('⨯');
+  });
+
+  it('renders result presets, roles, and extra content', () => {
+    const success = mount(UiResult, {
+      props: {
+        status: 'success',
+        title: 'Verify passed',
+        subtitle: 'Everything is green.',
+      },
+      slots: {
+        extra: 'Inspect evidence',
+      },
+    });
+
+    expect(success.attributes('role')).toBe('status');
+    expect(success.classes()).toContain('ui-result--success');
+    expect(success.text()).toContain('Verify passed');
+    expect(success.text()).toContain('Inspect evidence');
+
+    const failure = mount(UiResult, {
+      props: {
+        status: '500',
+        title: 'Server failed',
+      },
+    });
+
+    expect(failure.attributes('role')).toBe('alert');
+    expect(failure.text()).toContain('500');
   });
 });

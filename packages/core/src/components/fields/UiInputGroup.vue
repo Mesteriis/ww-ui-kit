@@ -28,9 +28,7 @@ const field = useFieldContext();
 const groupAriaLabelledby = computed(() =>
   props.ariaLabel ? undefined : (props.ariaLabelledby ?? field?.labelId.value)
 );
-const role = computed(() =>
-  props.ariaLabel || groupAriaLabelledby.value ? 'group' : undefined
-);
+const role = computed(() => (props.ariaLabel || groupAriaLabelledby.value ? 'group' : undefined));
 </script>
 
 <template>

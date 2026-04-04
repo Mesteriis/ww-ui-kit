@@ -188,6 +188,20 @@ test('runs rich field interactions inside Storybook', async ({ page, request }) 
   await page.keyboard.press('ArrowUp');
   await expect(page.getByText('Budget value: 13', { exact: true })).toBeVisible();
 
+  await page.getByRole('button', { name: 'Show password' }).click();
+  await expect(page.getByText('Password visible: yes', { exact: true })).toBeVisible();
+
+  const tagInput = page.locator('.ui-input-tag__input').first();
+  await tagInput.fill('ops');
+  await tagInput.press('Enter');
+  await expect(page.getByText('Tag input: tokens, themes, ops', { exact: true })).toBeVisible();
+
+  await page.locator('.ui-input-otp__segment').first().fill('8');
+  await expect(page.getByText('OTP value: 8314', { exact: true })).toBeVisible();
+
+  await page.getByRole('radio', { name: '5 of 5', exact: true }).click();
+  await expect(page.getByText('Rating value: 5', { exact: true })).toBeVisible();
+
   const rolloutTarget = page.getByRole('slider', { name: 'Rollout target' });
   await rolloutTarget.focus();
   await page.keyboard.press('End');
@@ -222,7 +236,21 @@ test('renders display data surfaces inside Storybook', async ({ page, request })
   await expect(page.getByText('Architecture snapshot', { exact: true })).toBeVisible();
   await expect(page.getByText('Fallback proof', { exact: true })).toBeVisible();
   await expect(page.getByText('Core second-wave coverage', { exact: true })).toBeVisible();
+  await expect(page.getByText('Metadata surface', { exact: true })).toBeVisible();
+  await expect(page.getByText('Surface contract fixed', { exact: true })).toBeVisible();
   await expect(page.getByRole('table')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Next page' }).click();
+  await expect(page.getByText('List page: 2', { exact: true })).toBeVisible();
+  await expect(page.getByText('UiStatistic', { exact: true })).toBeVisible();
+});
+
+test('renders feedback result surfaces inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Feedback');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('Core verify passed', { exact: true })).toBeVisible();
+  await expect(page.getByRole('status')).toContainText('Feedback states remain explicit');
 });
 
 test('renders layout utility stories inside Storybook', async ({ page, request }) => {

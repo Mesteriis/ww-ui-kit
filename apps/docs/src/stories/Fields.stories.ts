@@ -10,6 +10,7 @@ import {
   UiInputPassword,
   UiInputTag,
   UiNumberInput,
+  UiRating,
   UiRangeSlider,
   UiSelect,
   UiSelectSimple,
@@ -35,6 +36,7 @@ export const Inputs: StoryObj<typeof UiField> = {
       UiInputPassword,
       UiInputTag,
       UiNumberInput,
+      UiRating,
       UiRangeSlider,
       UiSelect,
       UiSelectSimple,
@@ -53,6 +55,7 @@ export const Inputs: StoryObj<typeof UiField> = {
       const passwordVisible = ref(false);
       const tagValues = ref<string[]>(['tokens', 'themes']);
       const otpValue = ref('7314');
+      const reviewRating = ref(4.5);
       const autocompleteValue = ref('');
       const rolloutTarget = ref(65);
       const deployWindow = ref<[number, number]>([25, 75]);
@@ -145,6 +148,7 @@ export const Inputs: StoryObj<typeof UiField> = {
         richOptions,
         richSelected,
         rolloutTarget,
+        reviewRating,
         simpleOptions,
         simpleSelected,
         sliderMarks,
@@ -242,6 +246,10 @@ export const Inputs: StoryObj<typeof UiField> = {
             <UiInputOtp v-model="otpValue" :length="4" />
           </UiField>
 
+          <UiField label="Release confidence" hint="Rating keeps radiogroup semantics and half steps">
+            <UiRating v-model="reviewRating" allow-half allow-clear tone="brand" />
+          </UiField>
+
           <UiField label="Suggestion search" hint="Combobox keeps local suggestion control and Enter select">
             <UiAutocomplete v-model="autocompleteValue" :items="autocompleteItems">
               <template #item="{ item }">
@@ -284,6 +292,7 @@ export const Inputs: StoryObj<typeof UiField> = {
           <span>Selected tags: {{ multiSummary }}</span>
           <span>Tag input: {{ tagValues.join(', ') || 'none' }}</span>
           <span>OTP value: {{ otpValue || 'empty' }}</span>
+          <span>Rating value: {{ reviewRating || 'empty' }}</span>
           <span>Autocomplete value: {{ autocompleteValue || 'none' }}</span>
           <span>Rollout target: {{ rolloutTarget }}</span>
           <span>Deploy window: {{ deployWindow[0] }}-{{ deployWindow[1] }}</span>
@@ -353,6 +362,49 @@ export const SliderStates: StoryObj<typeof UiField> = {
             :marks="compactMarks"
             tooltip="always"
           />
+        </UiField>
+      </div>
+    `,
+  }),
+};
+
+export const RatingStates: StoryObj<typeof UiField> = {
+  render: () => ({
+    components: {
+      UiField,
+      UiRating,
+    },
+    setup() {
+      const readiness = ref(3.5);
+      const frozen = ref(4);
+      const invalid = ref(1);
+
+      return {
+        frozen,
+        invalid,
+        readiness,
+      };
+    },
+    template: `
+      <div
+        style="
+          display: grid;
+          gap: var(--ui-space-5);
+          grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+          align-items: start;
+          max-width: 72rem;
+        "
+      >
+        <UiField label="Base rating" hint="Half-step keyboard and pointer selection stay explicit">
+          <UiRating v-model="readiness" allow-half allow-clear tone="brand" />
+        </UiField>
+
+        <UiField label="Readonly review" hint="Readonly keeps the current value visible">
+          <UiRating v-model="frozen" readonly tone="success" />
+        </UiField>
+
+        <UiField label="Invalid confidence" error="Invalid styling stays token-aware">
+          <UiRating v-model="invalid" invalid tone="danger" />
         </UiField>
       </div>
     `,

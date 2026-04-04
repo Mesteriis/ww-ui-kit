@@ -18,8 +18,9 @@ export const PERFORMANCE_REQUIREMENTS = Object.freeze({
     budgets: Object.freeze([
       Object.freeze({
         chunkName: 'playground-testing',
-        maxBytes: 40 * 1024,
-        rationale: 'Stable browser-tested harness code should stay within a small dedicated chunk.',
+        maxBytes: 44 * 1024,
+        rationale:
+          'Stable browser-tested harness code should stay within a small dedicated chunk while leaving narrow headroom for governed harness proofs added to the main testing route.',
       }),
       Object.freeze({
         chunkName: 'playground-testing-core-wave',
@@ -35,9 +36,9 @@ export const PERFORMANCE_REQUIREMENTS = Object.freeze({
       }),
       Object.freeze({
         chunkName: 'playground-lab',
-        maxBytes: 840 * 1024,
+        maxBytes: 944 * 1024,
         rationale:
-          'The maintainer workbench is intentionally large, but its chunk should still surface real growth.',
+          'The maintainer workbench is intentionally large and manifest-driven; the chunk budget leaves headroom for governed visual-surface growth while still surfacing real drift.',
       }),
       Object.freeze({
         chunkName: 'vendor-vue',

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import { UiAlert, UiButton, UiCollapse, UiCollapsePanel, UiEmptyState } from '@ww/core';
+import { UiAlert, UiButton, UiCollapse, UiCollapsePanel, UiEmptyState, UiResult } from '@ww/core';
 
 const meta = {
   title: 'Core/Feedback',
@@ -11,7 +11,7 @@ export default meta;
 
 export const EmptyState: StoryObj<typeof UiEmptyState> = {
   render: () => ({
-    components: { UiAlert, UiButton, UiCollapse, UiCollapsePanel, UiEmptyState },
+    components: { UiAlert, UiButton, UiCollapse, UiCollapsePanel, UiEmptyState, UiResult },
     template: `
       <div class="ui-stack">
         <UiAlert
@@ -44,6 +44,36 @@ export const EmptyState: StoryObj<typeof UiEmptyState> = {
             <UiButton>Review package graph</UiButton>
           </template>
         </UiEmptyState>
+
+        <UiResult
+          status="success"
+          title="Core verify passed"
+          subtitle="Feedback states remain explicit without product workflow logic."
+        >
+          <template #extra>
+            <UiButton variant="secondary">Inspect proofs</UiButton>
+            <UiButton>Ship changeset</UiButton>
+          </template>
+        </UiResult>
+      </div>
+    `,
+  }),
+};
+
+export const ResultStates: StoryObj<typeof UiEmptyState> = {
+  render: () => ({
+    components: { UiResult },
+    template: `
+      <div
+        style="
+          display: grid;
+          gap: var(--ui-space-4);
+          grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        "
+      >
+        <UiResult status="info" title="Awaiting input" subtitle="Baseline informational result" />
+        <UiResult status="warning" title="Review needed" subtitle="Warning tone stays tokenized" />
+        <UiResult status="404" title="Story not found" subtitle="Status presets include common empty-result cases" />
       </div>
     `,
   }),

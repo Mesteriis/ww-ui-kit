@@ -17,6 +17,7 @@ import {
   UiCollapse,
   UiCollapsePanel,
   UiContextMenu,
+  UiDescriptions,
   UiDialog,
   UiDivider,
   UiDropdown,
@@ -32,15 +33,18 @@ import {
   UiInputPassword,
   UiInputTag,
   UiGrid,
+  UiList,
   UiMenu,
   UiNumberInput,
   UiPagination,
   UiPopconfirm,
   UiPopover,
   UiProgress,
+  UiRating,
   UiRadio,
   UiRadioGroup,
   UiRangeSlider,
+  UiResult,
   UiScrollArea,
   UiScrollTop,
   UiSelect,
@@ -48,6 +52,7 @@ import {
   UiSkeleton,
   UiSlider,
   UiSpinner,
+  UiStatistic,
   UiSteps,
   UiSwitch,
   UiSpace,
@@ -59,6 +64,7 @@ import {
   UiTabsTrigger,
   UiToast,
   UiTextarea,
+  UiTimeline,
   UiTooltip,
 } from '@ww/core';
 
@@ -87,6 +93,7 @@ export const AllCoreComponents: StoryObj = {
       UiCollapse,
       UiCollapsePanel,
       UiContextMenu,
+      UiDescriptions,
       UiDialog,
       UiDivider,
       UiDropdown,
@@ -102,15 +109,18 @@ export const AllCoreComponents: StoryObj = {
       UiInputPassword,
       UiInputTag,
       UiGrid,
+      UiList,
       UiMenu,
       UiNumberInput,
       UiPagination,
       UiPopconfirm,
       UiPopover,
       UiProgress,
+      UiRating,
       UiRadio,
       UiRadioGroup,
       UiRangeSlider,
+      UiResult,
       UiScrollArea,
       UiScrollTop,
       UiSelect,
@@ -118,6 +128,7 @@ export const AllCoreComponents: StoryObj = {
       UiSkeleton,
       UiSlider,
       UiSpinner,
+      UiStatistic,
       UiSteps,
       UiSwitch,
       UiSpace,
@@ -129,6 +140,7 @@ export const AllCoreComponents: StoryObj = {
       UiTabsTrigger,
       UiToast,
       UiTextarea,
+      UiTimeline,
       UiTooltip,
     },
     setup() {
@@ -143,6 +155,7 @@ export const AllCoreComponents: StoryObj = {
       const passwordVisible = ref(false);
       const tagValues = ref<string[]>(['tokens', 'core']);
       const otpValue = ref('7314');
+      const reviewRating = ref(4.5);
       const autocompleteValue = ref('');
       const numberValue = ref<number | null>(8.5);
       const sliderValue = ref(60);
@@ -160,6 +173,7 @@ export const AllCoreComponents: StoryObj = {
       const affixState = ref('resting');
       const activeAnchor = ref<string | null>('overview');
       const groupedAction = ref('review');
+      const listPage = ref(1);
       const selectedMenuKeys = ref(['review']);
       const currentStep = ref(1);
       const toastRef = ref<{
@@ -263,10 +277,62 @@ export const AllCoreComponents: StoryObj = {
 
       const tableData = [
         { surface: 'UiInputPassword', status: 'Shipped', proof: 'Visibility + strength + rules' },
+        { surface: 'UiRating', status: 'Shipped', proof: 'Radiogroup + half-step selection' },
         { surface: 'UiSelect', status: 'Shipped', proof: 'Storybook + harness' },
-        { surface: 'UiMenu', status: 'Shipped', proof: 'Keyboard + a11y checks' },
+        { surface: 'UiTimeline', status: 'Shipped', proof: 'Pending + opposite content' },
         { surface: 'UiImage', status: 'Shipped', proof: 'Fit + fallback + caption' },
         { surface: 'UiTable', status: 'Shipped', proof: 'Semantic table + unit slots' },
+      ];
+
+      const descriptionItems = [
+        { label: 'Layer', value: '@ww/core' },
+        { label: 'Contract', value: 'Stable public surface' },
+        { label: 'Coverage', value: 'Stories + playground + tests', span: 2 },
+        { label: 'Owner', value: 'Governance' },
+      ];
+
+      const timelineItems = [
+        {
+          title: 'API fixed',
+          description: 'Surface contract is explicit before release.',
+          opposite: 'ADR',
+          tone: 'brand' as const,
+        },
+        {
+          title: 'Proofs aligned',
+          description: 'Stories and browser flows prove the same baseline.',
+          opposite: 'Proof',
+          tone: 'success' as const,
+        },
+        {
+          title: 'Verify passed',
+          description: 'Typecheck, lint, tests, and build are green.',
+          opposite: 'CI',
+          tone: 'warning' as const,
+        },
+      ];
+
+      const listItems = [
+        {
+          title: 'UiDescriptions',
+          description: 'Metadata layout with spans and bordered framing.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiStatistic',
+          description: 'Value and countdown presentation without analytics ownership.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiResult',
+          description: 'Outcome surface with governed status presets.',
+          meta: 'Feedback',
+        },
+        {
+          title: 'UiList',
+          description: 'Composable rendering with pagination and load-more slot.',
+          meta: 'Display',
+        },
       ];
 
       const layoutItems = [
@@ -362,6 +428,7 @@ export const AllCoreComponents: StoryObj = {
         currentPage,
         currentStep,
         currentStepLabel,
+        descriptionItems,
         displayImageSrc,
         dialogOpen,
         dropdownItems,
@@ -370,6 +437,8 @@ export const AllCoreComponents: StoryObj = {
         inputValue,
         lastMenuSelection,
         layoutItems,
+        listItems,
+        listPage,
         menuItems,
         numberValue,
         onContextMenuSelect,
@@ -387,6 +456,7 @@ export const AllCoreComponents: StoryObj = {
         pushToast,
         rangeValue,
         repositoryValue,
+        reviewRating,
         richOptions,
         richSelectValue,
         scrollCards,
@@ -403,6 +473,7 @@ export const AllCoreComponents: StoryObj = {
         tabsValue,
         toastRef,
         textareaValue,
+        timelineItems,
       };
     },
     template: `
@@ -569,6 +640,9 @@ export const AllCoreComponents: StoryObj = {
             <UiField label="Verification code">
               <UiInputOtp v-model="otpValue" :length="4" />
             </UiField>
+            <UiField label="Release confidence">
+              <UiRating v-model="reviewRating" allow-half allow-clear tone="brand" />
+            </UiField>
             <UiField label="Command search">
               <UiAutocomplete v-model="autocompleteValue" :items="autocompleteItems" />
             </UiField>
@@ -596,6 +670,7 @@ export const AllCoreComponents: StoryObj = {
           <div class="ui-cluster" style="margin-top: var(--ui-space-4);">
             <UiCheckbox v-model="checkboxValue">Enable overlays</UiCheckbox>
             <UiSwitch v-model="switchValue" ariaLabel="Enable theme scope">Theme scope</UiSwitch>
+            <UiBadge variant="brand">Rating value: {{ reviewRating || 'empty' }}</UiBadge>
           </div>
           <UiField label="Release stage" hint="Roving focus stays group-aware">
             <UiRadioGroup v-model="stageValue" orientation="horizontal">
@@ -648,6 +723,23 @@ export const AllCoreComponents: StoryObj = {
               <UiProgress variant="circular" :value="82" show-value status="success" />
               <UiProgress indeterminate status="warning" />
             </div>
+            <div
+              style="
+                display: grid;
+                gap: var(--ui-space-4);
+                grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+              "
+            >
+              <UiStatistic title="Deploy score" :value="98.4" suffix="/100" :precision="1" />
+              <UiStatistic title="Queued reviews" :value="12" prefix="≈" />
+              <UiStatistic title="Countdown" :countdown-to="Date.now() + 90_000" />
+            </div>
+            <UiDescriptions title="Core wave metadata" bordered :items="descriptionItems">
+              <template #extra>
+                <UiBadge variant="brand">Stable</UiBadge>
+              </template>
+            </UiDescriptions>
+            <UiTimeline :items="timelineItems" pending pending-label="Awaiting release notes" />
             <div class="ui-cluster">
               <UiSpinner size="sm" />
               <UiSpinner />
@@ -662,6 +754,34 @@ export const AllCoreComponents: StoryObj = {
                 <span v-else>{{ value }}</span>
               </template>
             </UiTable>
+            <UiList
+              v-model:page="listPage"
+              title="Information surfaces"
+              :data-source="listItems"
+              :page-size="2"
+              pagination
+              bordered
+            >
+              <template #item="{ item }">
+                <strong>{{ item.title }}</strong>
+                <p style="margin: 0; color: var(--ui-text-secondary);">{{ item.description }}</p>
+              </template>
+              <template #meta="{ item }">
+                <UiBadge>{{ item.meta }}</UiBadge>
+              </template>
+              <template #loadMore>
+                <UiButton variant="secondary" size="sm">Load more notes</UiButton>
+              </template>
+            </UiList>
+            <UiResult
+              status="success"
+              title="Core verify passed"
+              subtitle="Feedback outcomes stay explicit and reusable."
+            >
+              <template #extra>
+                <UiButton variant="secondary" size="sm">Inspect evidence</UiButton>
+              </template>
+            </UiResult>
             <UiEmptyState
               title="Foundation baseline"
               description="No product-specific blocks are mixed into the reusable layer."

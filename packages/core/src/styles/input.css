@@ -500,10 +500,6 @@
   gap: var(--ui-space-3);
 }
 
-.ui-input-password__group .ui-input {
-  border-radius: inherit;
-}
-
 .ui-input-password__toggle {
   display: inline-flex;
   align-items: center;
@@ -655,4 +651,113 @@
 
 .ui-input-otp__group.is-disabled .ui-input-otp__segment {
   opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-rating {
+  --ui-rating-active: var(--ui-text-warning);
+  --ui-rating-inactive: color-mix(in srgb, var(--ui-text-secondary) 26%, transparent);
+  --ui-rating-size: 1.5rem;
+  display: inline-flex;
+  gap: var(--ui-space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ui-rating--sm {
+  --ui-rating-size: 1.125rem;
+}
+
+.ui-rating--lg {
+  --ui-rating-size: 1.875rem;
+}
+
+.ui-rating--neutral {
+  --ui-rating-active: var(--ui-text-primary);
+}
+
+.ui-rating--brand {
+  --ui-rating-active: var(--ui-border-focus);
+}
+
+.ui-rating--success {
+  --ui-rating-active: var(--ui-text-success);
+}
+
+.ui-rating--danger {
+  --ui-rating-active: var(--ui-text-danger);
+}
+
+.ui-rating--disabled,
+.ui-rating--readonly {
+  opacity: var(--ui-state-disabled-opacity);
+}
+
+.ui-rating__star {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ui-rating-size);
+  block-size: var(--ui-rating-size);
+  border-radius: var(--ui-radius-md);
+  transition: var(--ui-motion-transition-focus-ring);
+}
+
+.ui-rating__star.is-focused {
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
+.ui-rating--invalid .ui-rating__star.is-focused {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-text-danger) 18%, transparent);
+}
+
+.ui-rating__icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  line-height: 1;
+  font-size: var(--ui-rating-size);
+}
+
+.ui-rating__icon-empty {
+  color: var(--ui-rating-inactive);
+}
+
+.ui-rating__icon-fill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  color: var(--ui-rating-active);
+  white-space: nowrap;
+}
+
+.ui-rating__segment {
+  position: absolute;
+  inset-block: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+.ui-rating__segment--whole {
+  inset-inline: 0;
+}
+
+.ui-rating__segment--half {
+  inset-inline-start: 0;
+  inline-size: 50%;
+}
+
+.ui-rating__segment--full:not(.ui-rating__segment--whole) {
+  inset-inline-end: 0;
+  inline-size: 50%;
+}
+
+.ui-rating--readonly .ui-rating__segment,
+.ui-rating__segment:disabled {
+  cursor: not-allowed;
 }

@@ -30,25 +30,25 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 ### 2) `@ww/core` second-wave backlog and shipped status
 
-| Family                                                                   | Status      | Placement  | Contract                                        | Decision      | Note                                                                                                |
-| ------------------------------------------------------------------------ | ----------- | ---------- | ----------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------- |
-| UiButtonGroup                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | adjacent action clustering lands as a structural buttons family surface, not as a selection system  |
-| UiAvatar / UiAvatarGroup                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | fallback cascade, grouped surplus, Storybook/playground/tests, and README/manifest coverage landed  |
-| UiNumberInput                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | decimal baseline only; currency/percent remain later                                                |
-| UiSelect (rich)                                                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | ships next to `UiSelectSimple`; searchable single/multiple baseline landed                          |
-| UiAutocomplete                                                           | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | controlled local suggestions on the sanctioned floating path                                        |
-| UiMenu                                                                   | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | menu-only baseline landed; sidebar shell stays out of core                                          |
-| UiProgress                                                               | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | linear/circular determinate + indeterminate baseline landed                                         |
-| UiSteps                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | canonical public name is `UiSteps`; no `UiStepper` alias                                            |
-| UiTable (simple)                                                         | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | simple semantic table only; no data-grid toolbar/filter/query engine                                |
-| UiPopconfirm                                                             | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | specialization of the governed popover runtime with explicit confirm/cancel actions                 |
-| UiContextMenu                                                            | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | extension of governed menu semantics with pointer-anchored overlay placement                        |
-| UiSlider / UiRangeSlider                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed single-value and range slider surfaces landed with Storybook, playground, docs, and tests  |
-| UiGrid / UiSpace / UiFlex                                                | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | utility-only layout surfaces landed without crossing into page-template shell ownership             |
-| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed scroll and section-navigation utilities landed with Storybook, playground, docs, and tests |
-| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | shallow field enrichments after base form/input backlog                                             |
-| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | useful display utilities, but not current platform blockers                                         |
-| UiImage                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed base image surface landed; preview/gallery behavior stays out of core                      |
+| Family                                                                   | Status      | Placement  | Contract                                        | Decision      | Note                                                                                                 |
+| ------------------------------------------------------------------------ | ----------- | ---------- | ----------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------- |
+| UiButtonGroup                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | adjacent action clustering lands as a structural buttons family surface, not as a selection system   |
+| UiAvatar / UiAvatarGroup                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | fallback cascade, grouped surplus, Storybook/playground/tests, and README/manifest coverage landed   |
+| UiNumberInput                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | decimal baseline only; currency/percent remain later                                                 |
+| UiSelect (rich)                                                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | ships next to `UiSelectSimple`; searchable single/multiple baseline landed                           |
+| UiAutocomplete                                                           | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | controlled local suggestions on the sanctioned floating path                                         |
+| UiMenu                                                                   | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | menu-only baseline landed; sidebar shell stays out of core                                           |
+| UiProgress                                                               | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | linear/circular determinate + indeterminate baseline landed                                          |
+| UiSteps                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | canonical public name is `UiSteps`; no `UiStepper` alias                                             |
+| UiTable (simple)                                                         | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | simple semantic table only; no data-grid toolbar/filter/query engine                                 |
+| UiPopconfirm                                                             | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | specialization of the governed popover runtime with explicit confirm/cancel actions                  |
+| UiContextMenu                                                            | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | extension of governed menu semantics with pointer-anchored overlay placement                         |
+| UiSlider / UiRangeSlider                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed single-value and range slider surfaces landed with Storybook, playground, docs, and tests   |
+| UiGrid / UiSpace / UiFlex                                                | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | utility-only layout surfaces landed without crossing into page-template shell ownership              |
+| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed scroll and section-navigation utilities landed with Storybook, playground, docs, and tests  |
+| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed field enrichments landed without introducing a second form runtime                          |
+| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed information-display and outcome surfaces landed with Storybook, playground, docs, and tests |
+| UiImage                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed base image surface landed; preview/gallery behavior stays out of core                       |
 
 ### 3) ADR-first / separate scope
 
@@ -84,7 +84,7 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 | Bucket                                            | Family rows | Notes                                                   |
 | ------------------------------------------------- | ----------: | ------------------------------------------------------- |
 | Add to `@ww/core` now                             |          10 | all P0                                                  |
-| `@ww/core` second-wave backlog and shipped status |          17 | 9 P1 implemented + 5 P2 implemented + 3 P2 remaining    |
+| `@ww/core` second-wave backlog and shipped status |          17 | 9 P1 implemented + 8 P2 implemented                     |
 | ADR-first / separate scope                        |          13 | no public export before scope/placement decision        |
 | Covered elsewhere / no public core export         |           6 | keep in existing layer or as composition-only           |
 | Total canonical family rows                       |          46 | this count is the only planning total used in this file |
@@ -93,7 +93,7 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 1. `Phase 1 / P0`: implement every row from `Add to @ww/core now` in the exact canonical order.
 2. `Phase 2 / P1`: implemented in the current pass; keep Storybook, playground, docs, tests, manifest, and changeset aligned.
-3. `Phase 3 / P2`: review the remaining three rows from the second-wave backlog and ship only when the contract stays honest.
+3. `Phase 3 / P2`: implemented in the current pass; keep Storybook, playground, docs, tests, manifest, and changeset aligned.
 4. `Phase 4 / ADR-first`: cut explicit scope first, then promote rows from `ADR-first / separate scope`.
 5. `Out of scope for core`: keep rows from `Covered elsewhere / do not export as new public core surface` in their current layer.
 
@@ -107,9 +107,9 @@ Implemented in the current pass: `UiButtonGroup`, `UiAvatar / UiAvatarGroup`, `U
 
 ### Phase 3 / P2
 
-Implemented in the current pass: `UiPopconfirm`, `UiContextMenu`, `UiGrid / UiSpace / UiFlex`, `UiImage`, `UiSlider / UiRangeSlider`, `UiAffix / UiScrollArea / UiScrollTop / UiAnchor`.
+Implemented in the current pass: `UiPopconfirm`, `UiContextMenu`, `UiGrid / UiSpace / UiFlex`, `UiImage`, `UiSlider / UiRangeSlider`, `UiAffix / UiScrollArea / UiScrollTop / UiAnchor`, `UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp`, `UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList`.
 
-Remaining backlog: `UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp`, `UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList`.
+Remaining backlog: none inside the current `@ww/core` second-wave backlog.
 
 ### Phase 4 / ADR-first
 
@@ -343,6 +343,7 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp
 
+- Status: implemented in `@ww/core`.
 - `UiInputPassword`: visibility toggle, optional strength meter and rules checklist.
 - `UiInputGroup`: compact grouping, prepend/append addons, unified border treatment.
 - `UiInputTag`: string-array model, validation, duplicate policy, paste separator behavior.
@@ -350,6 +351,7 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList
 
+- Status: implemented in `@ww/core`.
 - `UiRating`: `max`, `allowHalf`, `allowClear`, custom icons/colors, keyboard support, radiogroup semantics.
 - `UiTimeline`: items, mode, reverse, pending state, custom dot/content/opposite slots.
 - `UiDescriptions`: `column`, `layout`, `bordered`, `size`, responsive spans, title/extra.

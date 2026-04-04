@@ -1,17 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
 
 import {
   UiAvatar,
   UiAvatarGroup,
   UiBadge,
+  UiButton,
   UiCard,
+  UiDescriptions,
   UiDivider,
   UiImage,
+  UiList,
   UiProgress,
   UiSkeleton,
   UiSpinner,
+  UiStatistic,
   UiTable,
   UiTag,
+  UiTimeline,
 } from '@ww/core';
 
 const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
@@ -29,16 +35,22 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
       UiAvatar,
       UiAvatarGroup,
       UiBadge,
+      UiButton,
       UiCard,
+      UiDescriptions,
       UiDivider,
       UiImage,
+      UiList,
       UiProgress,
       UiSkeleton,
       UiSpinner,
+      UiStatistic,
       UiTable,
       UiTag,
+      UiTimeline,
     },
     setup() {
+      const listPage = ref(1);
       const avatarItems = [
         { initials: 'BV', alt: 'Belovodye' },
         { initials: 'CR', alt: 'Core review', tone: 'brand' as const },
@@ -59,7 +71,67 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
         { name: 'UiTable', status: 'Shipped', coverage: 'Semantic markup + slots' },
       ];
 
-      return { avatarItems, columns, data, displayImageSrc };
+      const descriptionItems = [
+        { label: 'Layer', value: '@ww/core' },
+        { label: 'Contract', value: 'docs-as-contract' },
+        { label: 'Owner', value: 'governance' },
+        { label: 'Coverage', value: 'Storybook + unit + playground', span: 2 },
+      ];
+
+      const timelineItems = [
+        {
+          title: 'Surface contract fixed',
+          description: 'Public API shape, tokens, and states are explicit before export.',
+          opposite: 'ADR',
+          tone: 'brand' as const,
+        },
+        {
+          title: 'Stories and tests aligned',
+          description: 'Display proofs cover semantic, loading, and empty states.',
+          opposite: 'Proof',
+          tone: 'success' as const,
+        },
+        {
+          title: 'Playground harness updated',
+          description: 'Consumer usage stays synchronized with the public contract.',
+          opposite: 'Harness',
+          tone: 'warning' as const,
+        },
+      ];
+
+      const listItems = [
+        {
+          title: 'UiTimeline',
+          description: 'Milestone history and pending state without dashboard ownership.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiDescriptions',
+          description: 'Token-aware metadata grids with spans and bordered layout.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiStatistic',
+          description: 'Value and countdown presentations without analytics orchestration.',
+          meta: 'Display',
+        },
+        {
+          title: 'UiList',
+          description: 'Composable item flows with pagination and load-more slot.',
+          meta: 'Display',
+        },
+      ];
+
+      return {
+        avatarItems,
+        columns,
+        data,
+        descriptionItems,
+        displayImageSrc,
+        listItems,
+        listPage,
+        timelineItems,
+      };
     },
     template: `
       <div class="ui-stack">
@@ -140,6 +212,30 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
               </div>
             </div>
 
+            <div
+              style="
+                display: grid;
+                gap: var(--ui-space-4);
+                grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+              "
+            >
+              <UiStatistic title="Deploy score" :value="98.4" suffix="/100" :precision="1" />
+              <UiStatistic title="Queued reviews" :value="12" prefix="≈" />
+              <UiStatistic title="Countdown" :countdown-to="Date.now() + 90_000" />
+            </div>
+
+            <UiDescriptions
+              title="Metadata surface"
+              bordered
+              :items="descriptionItems"
+            >
+              <template #extra>
+                <UiBadge variant="brand">Stable</UiBadge>
+              </template>
+            </UiDescriptions>
+
+            <UiTimeline :items="timelineItems" pending pending-label="Awaiting release notes" />
+
             <div class="ui-cluster">
               <UiSpinner size="sm" />
               <UiSpinner />
@@ -174,6 +270,28 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
               <span v-else>{{ value }}</span>
             </template>
           </UiTable>
+
+          <UiList
+            v-model:page="listPage"
+            title="Information surfaces"
+            :data-source="listItems"
+            :page-size="2"
+            pagination
+            bordered
+          >
+            <template #item="{ item }">
+              <strong>{{ item.title }}</strong>
+              <p style="margin: 0; color: var(--ui-text-secondary);">{{ item.description }}</p>
+            </template>
+            <template #meta="{ item }">
+              <UiBadge>{{ item.meta }}</UiBadge>
+            </template>
+            <template #loadMore>
+              <UiButton variant="secondary" size="sm">Load more surface notes</UiButton>
+            </template>
+          </UiList>
+
+          <p style="margin: 0">List page: {{ listPage }}</p>
         </UiCard>
       </div>
     `,
@@ -214,6 +332,54 @@ export const ImagesAndFallbacks: StoryObj<typeof UiCard> = {
           <UiImage alt="Fallback contract" caption="Edge case: no source" aspect="square">
             <template #fallback>◇</template>
           </UiImage>
+        </div>
+      </UiCard>
+    `,
+  }),
+};
+
+export const InformationEdgeCases: StoryObj<typeof UiCard> = {
+  render: () => ({
+    components: {
+      UiCard,
+      UiDescriptions,
+      UiList,
+      UiStatistic,
+      UiTimeline,
+    },
+    setup() {
+      const edgeItems = [
+        { label: 'Fallback', value: 'Client-side pagination only' },
+        { label: 'Owner', value: 'Core display layer' },
+      ];
+      const reverseTimeline = [
+        {
+          title: 'Release shipped',
+          description: 'Browser proof and docs are already green.',
+          opposite: 'Now',
+          tone: 'success' as const,
+        },
+        {
+          title: 'Backfill docs',
+          description: 'Edge states stay visible as part of the contract.',
+          opposite: 'Before',
+          tone: 'warning' as const,
+        },
+      ];
+
+      return {
+        edgeItems,
+        reverseTimeline,
+      };
+    },
+    template: `
+      <UiCard>
+        <template #header>Information edge cases</template>
+        <div class="ui-stack">
+          <UiDescriptions :items="edgeItems" layout="vertical" bordered />
+          <UiStatistic title="Loading metric" loading />
+          <UiTimeline :items="reverseTimeline" reverse mode="alternate" pending />
+          <UiList title="Empty list" :data-source="[]" bordered />
         </div>
       </UiCard>
     `,
