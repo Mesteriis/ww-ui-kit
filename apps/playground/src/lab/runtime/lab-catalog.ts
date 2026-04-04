@@ -50,11 +50,11 @@ const entries = governanceManifest
     }
   );
 
-export const componentLabEntries = Object.freeze(entries) as readonly ComponentLabCatalogEntry[];
+export const componentLabEntries: readonly ComponentLabCatalogEntry[] = Object.freeze(entries);
 
-export const componentLabEntryMap = Object.freeze(
+export const componentLabEntryMap: Readonly<Record<string, ComponentLabCatalogEntry>> = Object.freeze(
   Object.fromEntries(componentLabEntries.map((entry) => [entry.id, entry]))
-) as Readonly<Record<string, ComponentLabCatalogEntry>>;
+);
 
 export const componentLabFamilies = Object.freeze(
   familyOrder

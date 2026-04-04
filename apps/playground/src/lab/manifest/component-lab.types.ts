@@ -165,7 +165,7 @@ export interface LabUsageRecord {
   knownUsages: readonly UsageFileReference[];
 }
 
-export interface ComponentLabCatalogEntry extends GovernanceLabSurfaceEntry {}
+export type ComponentLabCatalogEntry = GovernanceLabSurfaceEntry;
 
 export interface ComponentLabEntry<
   State extends Record<string, unknown> = Record<string, unknown>,
