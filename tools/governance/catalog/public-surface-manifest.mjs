@@ -284,6 +284,28 @@ export const PUBLIC_SURFACE_MANIFEST = Object.freeze([
   }),
   surface({
     packageName: '@ww/core',
+    exportName: 'UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp',
+    kind: 'core-component',
+    requiredStorybookInvariants: ['accessibility', 'keyboard'],
+    requiresStorybook: true,
+    storyArtifacts: [
+      {
+        variant: 'overview',
+        file: 'apps/docs/src/stories/Fields.stories.ts',
+        covers: ['accessibility', 'keyboard'],
+      },
+      { variant: 'states', file: 'apps/docs/src/stories/CoreShowcase.stories.ts' },
+      { variant: 'theming', file: 'apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts' },
+    ],
+    requiresDocs: true,
+    docsArtifacts: [{ type: 'readme', file: 'packages/core/README.md' }],
+    requiresPlaygroundScenario: true,
+    playgroundScenarios: ['core-wave'],
+    requiredTestLayers: ['unit', 'e2e', 'playground'],
+    tags: ['fields', 'group', 'security', 'segmented'],
+  }),
+  surface({
+    packageName: '@ww/core',
     exportName: 'UiSlider / UiRangeSlider',
     kind: 'core-component',
     requiredStorybookInvariants: ['accessibility', 'keyboard'],

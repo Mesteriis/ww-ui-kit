@@ -249,6 +249,50 @@ export const PLAYGROUND_VISUAL_SURFACE_MANIFEST = Object.freeze([
     }),
   }),
   visualSurface({
+    id: 'ui-input-group',
+    title: 'UiInputGroup',
+    packageName: '@ww/core',
+    exportName: 'UiInputGroup',
+    parentManifestExportName: 'UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiInputGroup is reviewed through Storybook and the playground harness because addon seams and grouped controls only make sense in composed field flows.',
+  }),
+  visualSurface({
+    id: 'ui-input-password',
+    title: 'UiInputPassword',
+    packageName: '@ww/core',
+    exportName: 'UiInputPassword',
+    parentManifestExportName: 'UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiInputPassword is reviewed through Storybook and the playground harness because reveal state, strength hints, and rules are interaction-heavy field contracts.',
+  }),
+  visualSurface({
+    id: 'ui-input-tag',
+    title: 'UiInputTag',
+    packageName: '@ww/core',
+    exportName: 'UiInputTag',
+    parentManifestExportName: 'UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiInputTag is reviewed through Storybook and the playground harness because paste splitting, duplicate policy, and removal flow are behavioral rather than matrix-only tuning.',
+  }),
+  visualSurface({
+    id: 'ui-input-otp',
+    title: 'UiInputOtp',
+    packageName: '@ww/core',
+    exportName: 'UiInputOtp',
+    parentManifestExportName: 'UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp',
+    family: 'Fields',
+    labEligible: false,
+    labExemptionReason:
+      'UiInputOtp is reviewed through Storybook and the playground harness because focus transfer, paste distribution, and backspace flow are better proven in composed browser interactions.',
+  }),
+  visualSurface({
     id: 'ui-slider',
     title: 'UiSlider',
     packageName: '@ww/core',
