@@ -27,6 +27,7 @@ describe('virtual surfaces', () => {
     expect(wrapper.emitted('rangeChange')?.[0]?.[0]).toEqual({ end: 7, start: 0 });
 
     const viewport = wrapper.get('.ui-virtual-scroll');
+    expect(viewport.attributes('tabindex')).toBe('0');
     Object.defineProperty(viewport.element, 'scrollTop', {
       configurable: true,
       value: 160,

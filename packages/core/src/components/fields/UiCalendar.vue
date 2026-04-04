@@ -73,7 +73,7 @@ const activeDate = ref(
     ? selectionState.currentValue.value
     : todayValue
 );
-const cellRefs = new Map<string, HTMLButtonElement>();
+const cellRefs = new Map<string, HTMLElement>();
 
 const visibleMonth = computed(() => parseMonthValue(monthState.currentValue.value) ?? startOfMonth(new Date()));
 const monthLabel = computed(() =>
@@ -112,6 +112,11 @@ const cells = computed(() => {
     };
   });
 });
+const cellRows = computed(() =>
+  Array.from({ length: Math.ceil(cells.value.length / 7) }, (_, index) =>
+    cells.value.slice(index * 7, index * 7 + 7)
+  )
+);
 
 const focusCell = async (value: string) => {
   await nextTick();
@@ -123,7 +128,7 @@ const setCellRef = (
   element: Element | ComponentPublicInstance | null
 ) => {
   if (element instanceof HTMLElement) {
-    cellRefs.set(value, element as HTMLButtonElement);
+    cellRefs.set(value, element);
     return;
   }
 
@@ -231,34 +236,40 @@ watch(
     </div>
 
     <div class="ui-calendar__grid" role="grid">
-      <button
-        v-for="cell in cells"
-        :key="cell.value"
-        :ref="(element) => setCellRef(cell.value, element)"
-        type="button"
-        class="ui-calendar__cell"
-        :class="[
-          {
-            'is-active': cell.isActive,
-            'is-disabled': cell.disabled,
-            'is-outside': !cell.inCurrentMonth,
-            'is-selected': cell.selected,
-            'is-today': cell.isToday,
-            'is-range-between': cell.rangeState === 'between',
-          },
-          cell.rangeState === 'start' ? 'is-range-start' : '',
-          cell.rangeState === 'end' ? 'is-range-end' : '',
-        ]"
-        role="gridcell"
-        :tabindex="cell.isActive ? 0 : -1"
-        :aria-selected="cell.selected || undefined"
-        :disabled="cell.disabled"
-        @click="selectDate(cell.value)"
-        @focus="activeDate = cell.value"
-        @keydown="(event) => void onKeydownCell(event, cell.value)"
+      <div
+        v-for="(row, rowIndex) in cellRows"
+        :key="row[0]?.value ?? rowIndex"
+        class="ui-calendar__row"
+        role="row"
       >
-        {{ cell.day }}
-      </button>
+        <div
+          v-for="cell in row"
+          :key="cell.value"
+          :ref="(element) => setCellRef(cell.value, element)"
+          class="ui-calendar__cell"
+          :class="[
+            {
+              'is-active': cell.isActive,
+              'is-disabled': cell.disabled,
+              'is-outside': !cell.inCurrentMonth,
+              'is-selected': cell.selected,
+              'is-today': cell.isToday,
+              'is-range-between': cell.rangeState === 'between',
+            },
+            cell.rangeState === 'start' ? 'is-range-start' : '',
+            cell.rangeState === 'end' ? 'is-range-end' : '',
+          ]"
+          role="gridcell"
+          :tabindex="cell.isActive ? 0 : -1"
+          :aria-disabled="cell.disabled || undefined"
+          :aria-selected="cell.selected || undefined"
+          @click="selectDate(cell.value)"
+          @focus="activeDate = cell.value"
+          @keydown="(event) => void onKeydownCell(event, cell.value)"
+        >
+          {{ cell.day }}
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -307,9 +307,14 @@
 }
 
 .ui-calendar__weekdays,
-.ui-calendar__grid {
+.ui-calendar__grid,
+.ui-calendar__row {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--ui-space-1);
+}
+
+.ui-calendar__grid {
   gap: var(--ui-space-1);
 }
 
@@ -320,6 +325,9 @@
 }
 
 .ui-calendar__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-block-size: 2.5rem;
   border: 1px solid transparent;
   border-radius: var(--ui-radius-lg);
@@ -354,9 +362,17 @@
   outline-offset: 2px;
 }
 
+.ui-date-field__control {
+  position: relative;
+}
+
 .ui-date-field__trigger {
   justify-content: space-between;
   text-align: left;
+}
+
+.ui-date-field__trigger.has-clear {
+  padding-inline-end: calc(var(--ui-space-6) + 1.75rem);
 }
 
 .ui-date-field__trigger.is-placeholder {
@@ -374,11 +390,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
   padding: 0;
   border: 0;
+  border-radius: var(--ui-radius-md);
   background: transparent;
   color: inherit;
   cursor: pointer;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--ui-space-3);
+  transform: translateY(-50%);
+}
+
+.ui-date-field__clear:hover {
+  background: var(--ui-action-ghost-bg-hover);
+}
+
+.ui-date-field__clear:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
 }
 
 .ui-date-surface {

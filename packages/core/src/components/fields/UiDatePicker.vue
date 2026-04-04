@@ -55,6 +55,7 @@ const openState = useControllable({
 const displayValue = computed(() =>
   props.modelValue ? formatDisplayDate(props.modelValue, props.locale) : props.placeholder
 );
+const showClearAction = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled);
 const floatingSurfaceStyle = computed<CSSProperties>(() => surfaceStyle.value as CSSProperties);
 
 const {
@@ -90,37 +91,49 @@ const onSelect = (value: string | [string | null, string | null] | null) => {
   emit('update:modelValue', typeof value === 'string' ? value : null);
   openState.setValue(false);
 };
+
+const clearDate = () => {
+  emit('update:modelValue', null);
+};
 </script>
 
 <template>
   <div class="ui-date-field">
-    <button
-      :id="fallbackId"
-      ref="triggerRef"
-      type="button"
-      class="ui-date-field__trigger ui-input"
-      :class="{ 'is-placeholder': !props.modelValue }"
-      :disabled="props.disabled"
-      :aria-label="props.ariaLabel"
-      :aria-expanded="openState.currentValue.value"
-      aria-haspopup="dialog"
-      data-ui-motion="ring-focus-soft"
-      @click="openState.setValue(!openState.currentValue.value)"
-    >
-      <span>{{ displayValue }}</span>
-      <span class="ui-date-field__actions">
-        <button
-          v-if="props.clearable && props.modelValue"
-          type="button"
-          class="ui-date-field__clear"
-          aria-label="Clear date"
-          @click.stop="emit('update:modelValue', null)"
-        >
-          <UiIcon name="close" />
-        </button>
-        <UiIcon name="calendar" decorative />
-      </span>
-    </button>
+    <div class="ui-date-field__control">
+      <button
+        :id="fallbackId"
+        ref="triggerRef"
+        type="button"
+        class="ui-date-field__trigger ui-input"
+        :class="[
+          {
+            'has-clear': showClearAction,
+            'is-placeholder': !props.modelValue,
+          },
+        ]"
+        :disabled="props.disabled"
+        :aria-label="props.ariaLabel"
+        :aria-expanded="openState.currentValue.value"
+        aria-haspopup="dialog"
+        data-ui-motion="ring-focus-soft"
+        @click="openState.setValue(!openState.currentValue.value)"
+      >
+        <span>{{ displayValue }}</span>
+        <span class="ui-date-field__actions">
+          <UiIcon name="calendar" decorative />
+        </span>
+      </button>
+
+      <button
+        v-if="showClearAction"
+        type="button"
+        class="ui-date-field__clear"
+        aria-label="Clear date"
+        @click="clearDate"
+      >
+        <UiIcon name="close" />
+      </button>
+    </div>
 
     <PrimitivePortal :to="portalTarget">
       <Transition

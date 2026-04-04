@@ -257,12 +257,12 @@ test('runs advanced core interactions inside Storybook', async ({ page, request 
   await expect(page.getByRole('dialog', { name: 'Image preview' })).toHaveCount(0);
 
   await page.getByRole('button', { name: 'Open alert dialog' }).click();
-  await expect(page.getByRole('dialog', { name: 'Advanced core surfaces' })).toBeVisible();
+  await expect(page.getByRole('alertdialog', { name: 'Advanced core surfaces' })).toBeVisible();
   await page.getByRole('button', { name: 'Acknowledge' }).click();
   await expect(page.getByText('Last confirm: acknowledged', { exact: true })).toBeVisible();
 
   await page.getByRole('button', { name: 'Run imperative confirm' }).click();
-  await expect(page.getByRole('dialog', { name: 'Ship core advanced surfaces?' })).toBeVisible();
+  await expect(page.getByRole('alertdialog', { name: 'Ship core advanced surfaces?' })).toBeVisible();
   await page.getByRole('button', { name: 'Ship' }).click();
   await expect(page.getByText('Last confirm: confirmed', { exact: true })).toBeVisible();
 });
@@ -278,8 +278,9 @@ test('runs interaction system flows inside Storybook', async ({ page, request })
   await expect(page.getByText('Form state: submitted', { exact: true })).toBeVisible();
 
   await page.getByRole('button', { name: 'Start tour' }).click();
-  await expect(page.getByRole('dialog', { name: 'Tour spotlight' })).toBeVisible();
-  await page.getByRole('button', { name: 'Next' }).click();
+  const tourDialog = page.getByRole('dialog', { name: 'Tour spotlight' });
+  await expect(tourDialog).toBeVisible();
+  await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('dialog', { name: 'Tour follow-up' })).toBeVisible();
 });
 

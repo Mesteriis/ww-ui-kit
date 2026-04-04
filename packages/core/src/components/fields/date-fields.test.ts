@@ -18,6 +18,7 @@ describe('date and time field surfaces', () => {
     const currentMonthCells = wrapper.findAll('.ui-calendar__cell').filter((cell) =>
       !cell.classes('is-outside')
     );
+    expect(wrapper.findAll('.ui-calendar__row')).toHaveLength(6);
 
     await currentMonthCells[10]?.trigger('click');
     expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toMatch(/^2026-04-/);
@@ -30,7 +31,7 @@ describe('date and time field surfaces', () => {
     const picker = mount(UiDatePicker, {
       attachTo: document.body,
       props: {
-        modelValue: null,
+        modelValue: '2026-04-04',
       },
       global: {
         stubs: {
@@ -39,12 +40,16 @@ describe('date and time field surfaces', () => {
       },
     });
 
+    expect(picker.find('.ui-date-field__trigger .ui-date-field__clear').exists()).toBe(false);
+    await picker.get('.ui-date-field__clear').trigger('click');
+    expect(picker.emitted('update:modelValue')?.[0]?.[0]).toBeNull();
+
     await picker.get('.ui-date-field__trigger').trigger('click');
     const pickerCells = [...document.querySelectorAll('.ui-calendar__cell')].filter(
       (cell) => !cell.classList.contains('is-outside')
     );
     (pickerCells[4] as HTMLButtonElement)?.click();
-    expect(picker.emitted('update:modelValue')?.[0]?.[0]).toMatch(/^20\d{2}-\d{2}-\d{2}$/);
+    expect(picker.emitted('update:modelValue')?.at(-1)?.[0]).toMatch(/^20\d{2}-\d{2}-\d{2}$/);
 
     const range = mount(UiDateRangePicker, {
       attachTo: document.body,

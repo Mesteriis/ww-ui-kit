@@ -19,6 +19,12 @@
   background: var(--ui-surface-default);
 }
 
+.ui-virtual-scroll:focus-visible {
+  outline: 2px solid var(--ui-border-focus);
+  outline-offset: 2px;
+  box-shadow: var(--ui-motion-focus-ring-shadow-soft);
+}
+
 .ui-virtual-scroll__spacer {
   position: relative;
 }

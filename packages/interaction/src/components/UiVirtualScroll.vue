@@ -98,6 +98,8 @@ defineExpose({
     :style="{ height: `${props.height}px` }"
     :role="props.role"
     :aria-label="props.ariaLabel"
+    tabindex="0"
+    data-ui-motion="ring-focus-soft"
     @scroll="onScroll"
   >
     <div class="ui-virtual-scroll__spacer" :style="{ height: `${totalHeight}px` }">
