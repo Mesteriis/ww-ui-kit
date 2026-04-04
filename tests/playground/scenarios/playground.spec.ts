@@ -99,6 +99,27 @@ test('exercises floating overlays, dropdown keyboard flows, and toast stacking i
   await page.keyboard.press('Enter');
   await expect(page.getByText('Last menu action: Charlie', { exact: true })).toBeVisible();
 
+  await page.getByRole('button', { name: 'Delete release' }).click();
+  await expect(page.getByRole('dialog', { name: 'Delete release?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Delete', exact: true }).click();
+  await expect(page.getByText('Popconfirm outcome: confirmed', { exact: true })).toBeVisible();
+
+  const contextTrigger = page.getByRole('button', { name: 'Right-click release tools' }).first();
+  await contextTrigger.click({ button: 'right' });
+  const contextMenu = page.locator('.ui-context-menu');
+  const inspectItem = contextMenu.getByRole('menuitem', { name: 'Inspect release' });
+  const archiveItem = contextMenu.getByRole('menuitem', { name: 'Archive release' });
+  await expect(contextMenu).toBeVisible();
+  await expect(inspectItem).toBeFocused();
+  await inspectItem.press('ArrowDown');
+  await expect(archiveItem).toHaveClass(/is-active/);
+  await page.keyboard.press('Enter');
+  await expect(contextMenu).toHaveCount(0);
+  await expect(
+    page.getByText('Context menu action: Archive release', { exact: true })
+  ).toBeVisible();
+  await expect(contextTrigger).toBeFocused();
+
   await page.getByRole('button', { name: 'Show toast stack' }).click();
   await expect(page.locator('.ui-toast')).toHaveCount(2);
   await page.getByRole('button', { name: 'Dismiss toast' }).first().click();
@@ -129,6 +150,9 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await coreWave.getByRole('button', { name: 'Critical' }).click();
   await expect(coreWave.getByText('Active filter: Critical', { exact: true })).toBeVisible();
 
+  await coreWave.getByRole('button', { name: 'Rollback' }).first().click();
+  await expect(coreWave.getByText('Active action group: rollback', { exact: true })).toBeVisible();
+
   const budgetInput = coreWave.getByRole('textbox', { name: 'Budget' });
   await budgetInput.focus();
   await page.keyboard.press('ArrowUp');
@@ -149,6 +173,16 @@ test('keeps the first core wave flow interactive in the playground harness', asy
     coreWave.getByText('Autocomplete selection: Belovodye control room', { exact: true })
   ).toBeVisible();
 
+  const rolloutTarget = coreWave.getByRole('slider', { name: 'Rollout target' });
+  await rolloutTarget.focus();
+  await page.keyboard.press('End');
+  await expect(coreWave.getByText('Rollout target: 100', { exact: true })).toBeVisible();
+
+  const deployWindowStart = coreWave.getByRole('slider', { name: /Minimum value/ });
+  await deployWindowStart.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(coreWave.getByText('Deploy window: 30-75', { exact: true })).toBeVisible();
+
   const firstMenuItem = coreWave.getByRole('menuitem', { name: 'Overview' }).first();
   await firstMenuItem.focus();
   await page.keyboard.press('ArrowDown');
@@ -164,8 +198,44 @@ test('keeps the first core wave flow interactive in the playground harness', asy
   await expect(coreWave.getByText('Current page: 3', { exact: true })).toBeVisible();
   await expect(coreWave.locator('[aria-current="page"]').first()).toContainText('Approve');
 
+  await coreWave.getByRole('link', { name: 'Contracts' }).click();
+  await expect(coreWave.getByText('Active anchor: contracts', { exact: true })).toBeVisible();
+
+  const anchorScrollArea = coreWave.locator('#core-wave-anchor-scroll');
+  await expect
+    .poll(async () => anchorScrollArea.evaluate((element) => element.scrollTop))
+    .toBeGreaterThan(120);
+
   await expect(coreWave.getByText('Core wave contract proof', { exact: true })).toBeVisible();
+  await expect(coreWave.getByText('Architecture snapshot', { exact: true })).toBeVisible();
+  await expect(coreWave.getByText('Fallback proof', { exact: true })).toBeVisible();
   await expect(coreWave.getByRole('table')).toBeVisible();
+  await expect(coreWave.getByText('Layout utility coverage', { exact: true })).toBeVisible();
+  await expect(coreWave.locator('.ui-space__separator')).toHaveCount(2);
+
+  const summary = coreWave.locator('[data-ui-grid-item-key="summary"]').first();
+  const actions = coreWave.locator('[data-ui-grid-item-key="actions"]').first();
+  const summaryBox = await summary.boundingBox();
+  const actionsBox = await actions.boundingBox();
+
+  expect(summaryBox).not.toBeNull();
+  expect(actionsBox).not.toBeNull();
+
+  if (!summaryBox || !actionsBox) {
+    throw new Error('Core wave layout grid boxes were not available in the playground.');
+  }
+
+  expect(summaryBox.width).toBeGreaterThan(actionsBox.width);
+
+  const scrollArea = coreWave.locator('#core-wave-scroll-area');
+  await scrollArea.evaluate((element) => {
+    element.scrollTo({ top: 180, behavior: 'auto' });
+    element.dispatchEvent(new Event('scroll'));
+  });
+  await expect(coreWave.getByText('Affix state: stuck', { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Scroll core wave utility area to top' })
+  ).toBeVisible();
 });
 
 test('keeps overlay close and focus restoration stable under reduced motion', async ({ page }) => {
@@ -449,6 +519,14 @@ test('loads the component lab, switches surfaces, and keeps usage metadata visib
   await page.locator('[data-lab-nav-item="ui-number-input"]').click();
   await expect(page).toHaveURL(/\/playground\/lab\/ui-number-input$/);
   await expect(page.getByRole('heading', { name: 'UiNumberInput' })).toBeVisible();
+
+  await page.locator('[data-lab-nav-item="ui-slider"]').click();
+  await expect(page).toHaveURL(/\/playground\/lab\/ui-slider$/);
+  await expect(page.getByRole('heading', { name: 'UiSlider' })).toBeVisible();
+
+  await page.locator('[data-lab-nav-item="ui-scroll-area"]').click();
+  await expect(page).toHaveURL(/\/playground\/lab\/ui-scroll-area$/);
+  await expect(page.getByRole('heading', { name: 'UiScrollArea' })).toBeVisible();
 });
 
 test('copies the current lab configuration and confirms clipboard feedback', async ({

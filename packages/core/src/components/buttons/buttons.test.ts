@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 
 import UiButton from './UiButton.vue';
+import UiButtonGroup from './UiButtonGroup.vue';
 import UiIconButton from './UiIconButton.vue';
 
 describe('buttons', () => {
@@ -86,5 +87,49 @@ describe('buttons', () => {
     expect(wrapper.classes()).toContain('ui-button--block');
     expect(wrapper.findAll('.ui-button__icon')).toHaveLength(2);
     expect(wrapper.text()).toContain('Save');
+  });
+
+  it('renders an attached button group with accessible grouping semantics', () => {
+    const wrapper = mount(UiButtonGroup, {
+      props: {
+        ariaLabel: 'Release actions',
+      },
+      slots: {
+        default: `
+          <button class="ui-button" type="button">Review</button>
+          <button class="ui-button" type="button">Ship</button>
+        `,
+      },
+    });
+
+    expect(wrapper.attributes('role')).toBe('group');
+    expect(wrapper.attributes('aria-label')).toBe('Release actions');
+    expect(wrapper.classes()).toContain('ui-button-group--horizontal');
+    expect(wrapper.classes()).toContain('ui-button-group--attached');
+    expect(wrapper.findAll('.ui-button')).toHaveLength(2);
+  });
+
+  it('supports stacked and wrapped layouts without forced attached seams', () => {
+    const wrapper = mount(UiButtonGroup, {
+      props: {
+        attached: true,
+        block: true,
+        orientation: 'vertical',
+        wrap: true,
+      },
+      slots: {
+        default: `
+          <button class="ui-button" type="button">Approve</button>
+          <button class="ui-button" type="button">Rollback</button>
+          <button class="ui-button ui-button--icon" type="button" aria-label="Open history">⌘</button>
+        `,
+      },
+    });
+
+    expect(wrapper.classes()).toContain('ui-button-group--vertical');
+    expect(wrapper.classes()).toContain('ui-button-group--wrap');
+    expect(wrapper.classes()).toContain('ui-button-group--block');
+    expect(wrapper.classes()).not.toContain('ui-button-group--attached');
+    expect(wrapper.find('.ui-button--icon').attributes('aria-label')).toBe('Open history');
   });
 });

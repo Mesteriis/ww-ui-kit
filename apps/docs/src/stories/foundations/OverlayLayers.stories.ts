@@ -5,9 +5,11 @@ import {
   UiBadge,
   UiButton,
   UiCard,
+  UiContextMenu,
   UiDialog,
   UiDrawer,
   UiDropdown,
+  UiPopconfirm,
   UiPopover,
   UiToast,
   UiTooltip,
@@ -27,9 +29,11 @@ export const LayerScaleAndNestedStack: StoryObj = {
       UiBadge,
       UiButton,
       UiCard,
+      UiContextMenu,
       UiDialog,
       UiDrawer,
       UiDropdown,
+      UiPopconfirm,
       UiPopover,
       UiToast,
       UiTooltip,
@@ -38,6 +42,8 @@ export const LayerScaleAndNestedStack: StoryObj = {
       const drawerOpen = ref(false);
       const dialogOpen = ref(false);
       const popoverOpen = ref(false);
+      const lastContextAction = ref('none');
+      const lastPopconfirmOutcome = ref('waiting');
       const toastRef = ref<{
         push: (payload: {
           title: string;
@@ -64,9 +70,25 @@ export const LayerScaleAndNestedStack: StoryObj = {
           ],
         },
       ];
+      const contextMenuItems = [
+        { label: 'Inspect release', value: 'inspect' },
+        { label: 'Archive release', value: 'archive' },
+      ];
 
       const onSelect = (payload: { label: string }) => {
         lastAction.value = payload.label;
+      };
+
+      const onContextSelect = (payload: { label: string }) => {
+        lastContextAction.value = payload.label;
+      };
+
+      const onPopconfirmCancel = () => {
+        lastPopconfirmOutcome.value = 'canceled';
+      };
+
+      const onPopconfirmConfirm = () => {
+        lastPopconfirmOutcome.value = 'confirmed';
       };
 
       const pushToast = () => {
@@ -78,12 +100,18 @@ export const LayerScaleAndNestedStack: StoryObj = {
       };
 
       return {
+        contextMenuItems,
         dialogOpen,
         drawerOpen,
         dropdownItems,
         firstModal,
         floatingLayer,
+        lastContextAction,
         lastAction,
+        lastPopconfirmOutcome,
+        onContextSelect,
+        onPopconfirmCancel,
+        onPopconfirmConfirm,
         onSelect,
         popoverOpen,
         pushToast,
@@ -210,9 +238,29 @@ export const LayerScaleAndNestedStack: StoryObj = {
                   <UiButton variant="secondary">Open action dropdown</UiButton>
                 </template>
               </UiDropdown>
+              <UiPopconfirm
+                title="Delete release?"
+                description="Popconfirm stays on the floating layer."
+                confirm-text="Delete"
+                cancel-text="Keep"
+                confirm-variant="danger"
+                @cancel="onPopconfirmCancel"
+                @confirm="onPopconfirmConfirm"
+              >
+                <template #trigger>
+                  <UiButton variant="danger">Delete release</UiButton>
+                </template>
+              </UiPopconfirm>
+              <UiContextMenu :items="contextMenuItems" @select="onContextSelect">
+                <template #trigger>
+                  <UiButton variant="secondary">Right-click release tools</UiButton>
+                </template>
+              </UiContextMenu>
               <UiButton @click="pushToast">Fire toast</UiButton>
             </div>
             <p style="margin: 0;">Last floating action: {{ lastAction }}</p>
+            <p style="margin: 0;">Popconfirm outcome: {{ lastPopconfirmOutcome }}</p>
+            <p style="margin: 0;">Context menu action: {{ lastContextAction }}</p>
           </div>
           <UiToast ref="toastRef" />
         </UiCard>

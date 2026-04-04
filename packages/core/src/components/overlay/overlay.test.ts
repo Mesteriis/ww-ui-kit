@@ -3,8 +3,10 @@ import { mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import UiButton from '../buttons/UiButton.vue';
+import UiContextMenu from './UiContextMenu.vue';
 import UiDialog from './UiDialog.vue';
 import UiDrawer from './UiDrawer.vue';
+import UiPopconfirm from './UiPopconfirm.vue';
 
 describe('overlay components', () => {
   afterEach(() => {
@@ -299,5 +301,179 @@ describe('overlay components', () => {
     expect(document.querySelector('.ui-drawer')).toBeNull();
 
     wrapper.unmount();
+  });
+
+  it('focuses the confirm action and emits confirm and cancel events in popconfirm', async () => {
+    const wrapper = mount(UiPopconfirm, {
+      attachTo: document.body,
+      props: {
+        cancelText: 'Keep',
+        confirmText: 'Delete',
+        confirmVariant: 'danger',
+        description: 'This cannot be undone.',
+        title: 'Delete release?',
+      },
+      slots: {
+        trigger: '<button id="popconfirm-trigger" type="button">Delete release</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    const trigger = wrapper.get('#popconfirm-trigger');
+    (trigger.element as HTMLButtonElement).focus();
+    await wrapper.get('.ui-popconfirm__trigger').trigger('click');
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    const confirmButton = document.querySelector<HTMLElement>(
+      '[data-ui-popconfirm-confirm="true"]'
+    );
+    const cancelButton = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('.ui-popconfirm button')
+    ).find((button) => button.textContent?.trim() === 'Keep');
+
+    expect(document.querySelector('.ui-popconfirm')).not.toBeNull();
+    expect(confirmButton).not.toBeNull();
+
+    cancelButton?.click();
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    expect(wrapper.emitted('cancel')).toHaveLength(1);
+    expect((trigger.element as HTMLButtonElement).getAttribute('aria-expanded')).toBe('false');
+
+    await wrapper.get('.ui-popconfirm__trigger').trigger('click');
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    (document.querySelector('[data-ui-popconfirm-confirm="true"]') as HTMLButtonElement).click();
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    expect(wrapper.emitted('confirm')).toHaveLength(1);
+    expect((trigger.element as HTMLButtonElement).getAttribute('aria-expanded')).toBe('false');
+
+    wrapper.unmount();
+  });
+
+  it('renders context menus, restores focus, and closes on scroll', async () => {
+    const wrapper = mount(UiContextMenu, {
+      attachTo: document.body,
+      props: {
+        items: [
+          { label: 'Review queue', value: 'review' },
+          { label: 'Archive', value: 'archive' },
+        ],
+      },
+      slots: {
+        trigger: '<button id="context-menu-trigger" type="button">Open release tools</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    const trigger = wrapper.get('#context-menu-trigger');
+    const triggerWrapper = wrapper.get('.ui-context-menu__trigger');
+    (trigger.element as HTMLButtonElement).focus();
+    await triggerWrapper.trigger('contextmenu', {
+      button: 2,
+      clientX: 160,
+      clientY: 96,
+    });
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    const firstMenuItem = document.querySelector<HTMLElement>('[role="menuitem"]');
+    expect(document.querySelector('.ui-context-menu')).not.toBeNull();
+    expect(firstMenuItem).not.toBeNull();
+
+    firstMenuItem?.click();
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    expect(wrapper.emitted('select')).toEqual([
+      [{ key: 'item-0', label: 'Review queue', value: 'review' }],
+    ]);
+    expect((trigger.element as HTMLButtonElement).getAttribute('aria-expanded')).toBe('false');
+
+    await triggerWrapper.trigger('contextmenu', {
+      button: 2,
+      clientX: 180,
+      clientY: 112,
+    });
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    window.dispatchEvent(new Event('scroll'));
+    await nextTick();
+    await nextTick();
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+
+    expect((trigger.element as HTMLButtonElement).getAttribute('aria-expanded')).toBe('false');
+
+    wrapper.unmount();
+  });
+
+  it('does not apply floating trigger aria metadata to disabled wrapper fallbacks', async () => {
+    const popconfirm = mount(UiPopconfirm, {
+      attachTo: document.body,
+      props: {
+        disabled: true,
+        title: 'Delete release?',
+      },
+      slots: {
+        trigger: '<button id="disabled-popconfirm-trigger" type="button" disabled>Delete</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    const contextMenu = mount(UiContextMenu, {
+      attachTo: document.body,
+      props: {
+        disabled: true,
+        items: [{ label: 'Inspect', value: 'inspect' }],
+      },
+      slots: {
+        trigger:
+          '<button id="disabled-context-menu-trigger" type="button" disabled>Inspect</button>',
+      },
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
+    });
+
+    await nextTick();
+    await nextTick();
+
+    const popconfirmTrigger = popconfirm.get('.ui-popconfirm__trigger').element as HTMLElement;
+    const contextMenuTrigger = contextMenu.get('.ui-context-menu__trigger').element as HTMLElement;
+
+    expect(popconfirmTrigger.hasAttribute('aria-haspopup')).toBe(false);
+    expect(popconfirmTrigger.hasAttribute('aria-expanded')).toBe(false);
+    expect(contextMenuTrigger.hasAttribute('aria-haspopup')).toBe(false);
+    expect(contextMenuTrigger.hasAttribute('aria-expanded')).toBe(false);
+
+    popconfirm.unmount();
+    contextMenu.unmount();
   });
 });

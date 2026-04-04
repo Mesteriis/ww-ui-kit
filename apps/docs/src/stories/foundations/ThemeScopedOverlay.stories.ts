@@ -1,7 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import { UiButton, UiCard, UiDialog, UiDrawer, UiPopover, UiTooltip } from '@ww/core';
+import {
+  UiButton,
+  UiCard,
+  UiContextMenu,
+  UiDialog,
+  UiDrawer,
+  UiPopconfirm,
+  UiPopover,
+  UiTooltip,
+} from '@ww/core';
 import { getThemeMeta } from '@ww/themes';
 
 const meta = {
@@ -13,22 +22,44 @@ export default meta;
 
 export const ScopedThemeAndExplicitTarget: StoryObj = {
   render: () => ({
-    components: { UiButton, UiCard, UiDialog, UiDrawer, UiPopover, UiTooltip },
+    components: {
+      UiButton,
+      UiCard,
+      UiContextMenu,
+      UiDialog,
+      UiDrawer,
+      UiPopconfirm,
+      UiPopover,
+      UiTooltip,
+    },
     setup() {
+      const contextItems = [
+        { label: 'Inspect themed release', value: 'inspect' },
+        { label: 'Archive themed release', value: 'archive' },
+      ];
       const dialogOpen = ref(false);
       const scopedDrawerOpen = ref(false);
       const drawerOpen = ref(false);
       const popoverOpen = ref(false);
       const explicitPopoverOpen = ref(false);
+      const scopedContextAction = ref('none');
+      const explicitContextAction = ref('none');
+      const scopedPopconfirmOutcome = ref('waiting');
+      const explicitPopconfirmOutcome = ref('waiting');
       const explicitPortalTarget = ref<HTMLElement | null>(null);
       const scopedTheme = getThemeMeta('belovodye');
 
       return {
+        contextItems,
         dialogOpen,
         drawerOpen,
+        explicitContextAction,
+        explicitPopconfirmOutcome,
         explicitPopoverOpen,
         explicitPortalTarget,
         popoverOpen,
+        scopedContextAction,
+        scopedPopconfirmOutcome,
         scopedDrawerOpen,
         scopedTheme,
       };
@@ -67,7 +98,29 @@ export const ScopedThemeAndExplicitTarget: StoryObj = {
                   Floating overlays inherit Belovodye because the portal host stays inside this themed section.
                 </p>
               </UiPopover>
+              <UiPopconfirm
+                title="Approve Belovodye release?"
+                description="The popconfirm portal stays inside the scoped theme host."
+                confirm-text="Approve"
+                cancel-text="Hold"
+                @cancel="scopedPopconfirmOutcome = 'canceled'"
+                @confirm="scopedPopconfirmOutcome = 'confirmed'"
+              >
+                <template #trigger>
+                  <UiButton variant="secondary">Scoped popconfirm</UiButton>
+                </template>
+              </UiPopconfirm>
+              <UiContextMenu
+                :items="contextItems"
+                @select="scopedContextAction = $event.label"
+              >
+                <template #trigger>
+                  <UiButton variant="ghost">Scoped context menu</UiButton>
+                </template>
+              </UiContextMenu>
             </div>
+            <p style="margin: 0;">Scoped popconfirm: {{ scopedPopconfirmOutcome }}</p>
+            <p style="margin: 0;">Scoped context action: {{ scopedContextAction }}</p>
             <UiDialog v-model:open="dialogOpen" title="Scoped dialog">
               The overlay inherits the subtree theme because the portal root is mounted inside this container.
             </UiDialog>
@@ -106,7 +159,31 @@ export const ScopedThemeAndExplicitTarget: StoryObj = {
                   Explicit targets work for floating overlays without managing portal roots manually.
                 </p>
               </UiPopover>
+              <UiPopconfirm
+                title="Ship from explicit host?"
+                description="The popconfirm surface mounts into the explicit portal target."
+                confirm-text="Ship"
+                cancel-text="Wait"
+                :portal-target="explicitPortalTarget"
+                @cancel="explicitPopconfirmOutcome = 'canceled'"
+                @confirm="explicitPopconfirmOutcome = 'confirmed'"
+              >
+                <template #trigger>
+                  <UiButton variant="secondary">Open confirm in explicit host</UiButton>
+                </template>
+              </UiPopconfirm>
+              <UiContextMenu
+                :items="contextItems"
+                :portal-target="explicitPortalTarget"
+                @select="explicitContextAction = $event.label"
+              >
+                <template #trigger>
+                  <UiButton variant="ghost">Open context menu in explicit host</UiButton>
+                </template>
+              </UiContextMenu>
             </div>
+            <p style="margin: 0;">Explicit popconfirm: {{ explicitPopconfirmOutcome }}</p>
+            <p style="margin: 0;">Explicit context action: {{ explicitContextAction }}</p>
             <UiDrawer
               v-model:open="drawerOpen"
               title="Explicit portal drawer"

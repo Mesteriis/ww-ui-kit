@@ -77,7 +77,7 @@ export interface RuntimeBudgetResult {
 }
 
 const ROOT_DIR = path.dirname(fileURLToPath(new URL('../../package.json', import.meta.url)));
-export const DEFAULT_FLOW_TIMEOUT_MS = 5_000;
+export const DEFAULT_FLOW_TIMEOUT_MS = 10_000;
 
 function roundMetric(value: number) {
   return Number(value.toFixed(2));

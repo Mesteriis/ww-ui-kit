@@ -10,6 +10,7 @@ import { componentLabRegistry } from './component-lab-registry';
 
 const familyOrder = [
   'Actions',
+  'Layout',
   'Fields',
   'Selection',
   'Display',

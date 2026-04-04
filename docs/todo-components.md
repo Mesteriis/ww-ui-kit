@@ -30,24 +30,25 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 
 ### 2) `@ww/core` second-wave backlog and shipped status
 
-| Family                                                                   | Status      | Placement  | Contract                                        | Decision      | Note                                                                                               |
-| ------------------------------------------------------------------------ | ----------- | ---------- | ----------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------- |
-| UiAvatar / UiAvatarGroup                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | fallback cascade, grouped surplus, Storybook/playground/tests, and README/manifest coverage landed |
-| UiNumberInput                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | decimal baseline only; currency/percent remain later                                               |
-| UiSelect (rich)                                                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | ships next to `UiSelectSimple`; searchable single/multiple baseline landed                         |
-| UiAutocomplete                                                           | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | controlled local suggestions on the sanctioned floating path                                       |
-| UiMenu                                                                   | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | menu-only baseline landed; sidebar shell stays out of core                                         |
-| UiProgress                                                               | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | linear/circular determinate + indeterminate baseline landed                                        |
-| UiSteps                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | canonical public name is `UiSteps`; no `UiStepper` alias                                           |
-| UiTable (simple)                                                         | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | simple semantic table only; no data-grid toolbar/filter/query engine                               |
-| UiPopconfirm                                                             | hardening   | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**        | only after popover contract is stable                                                              |
-| UiContextMenu                                                            | hardening   | `@ww/core` | `overlay-component / stable / overlay standard` | **P2**        | extension of dropdown/menu semantics                                                               |
-| UiSlider / UiRangeSlider                                                 | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | baseline input, but lower ROI than current gaps                                                    |
-| UiGrid / UiSpace / UiFlex                                                | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | utility layout only, never app-shell replacement                                                   |
-| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | utility surfaces after baseline controls are closed                                                |
-| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | shallow field enrichments after base form/input backlog                                            |
-| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | useful display utilities, but not current platform blockers                                        |
-| UiImage                                                                  | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | keep preview/gallery behavior out until separate scope is cut                                      |
+| Family                                                                   | Status      | Placement  | Contract                                        | Decision      | Note                                                                                                |
+| ------------------------------------------------------------------------ | ----------- | ---------- | ----------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| UiButtonGroup                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | adjacent action clustering lands as a structural buttons family surface, not as a selection system  |
+| UiAvatar / UiAvatarGroup                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | fallback cascade, grouped surplus, Storybook/playground/tests, and README/manifest coverage landed  |
+| UiNumberInput                                                            | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | decimal baseline only; currency/percent remain later                                                |
+| UiSelect (rich)                                                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | ships next to `UiSelectSimple`; searchable single/multiple baseline landed                          |
+| UiAutocomplete                                                           | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | controlled local suggestions on the sanctioned floating path                                        |
+| UiMenu                                                                   | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | menu-only baseline landed; sidebar shell stays out of core                                          |
+| UiProgress                                                               | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | linear/circular determinate + indeterminate baseline landed                                         |
+| UiSteps                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | canonical public name is `UiSteps`; no `UiStepper` alias                                            |
+| UiTable (simple)                                                         | implemented | `@ww/core` | `core-component / stable / core standard`       | **P1 - done** | simple semantic table only; no data-grid toolbar/filter/query engine                                |
+| UiPopconfirm                                                             | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | specialization of the governed popover runtime with explicit confirm/cancel actions                 |
+| UiContextMenu                                                            | implemented | `@ww/core` | `overlay-component / stable / overlay standard` | **P2 - done** | extension of governed menu semantics with pointer-anchored overlay placement                        |
+| UiSlider / UiRangeSlider                                                 | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed single-value and range slider surfaces landed with Storybook, playground, docs, and tests  |
+| UiGrid / UiSpace / UiFlex                                                | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | utility-only layout surfaces landed without crossing into page-template shell ownership             |
+| UiAffix / UiScrollArea / UiScrollTop / UiAnchor                          | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed scroll and section-navigation utilities landed with Storybook, playground, docs, and tests |
+| UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp                 | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | shallow field enrichments after base form/input backlog                                             |
+| UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList | hardening   | `@ww/core` | `core-component / stable / core standard`       | **P2**        | useful display utilities, but not current platform blockers                                         |
+| UiImage                                                                  | implemented | `@ww/core` | `core-component / stable / core standard`       | **P2 - done** | governed base image surface landed; preview/gallery behavior stays out of core                      |
 
 ### 3) ADR-first / separate scope
 
@@ -83,16 +84,16 @@ If any summary, phase plan, or detailed contract below conflicts with the canoni
 | Bucket                                            | Family rows | Notes                                                   |
 | ------------------------------------------------- | ----------: | ------------------------------------------------------- |
 | Add to `@ww/core` now                             |          10 | all P0                                                  |
-| `@ww/core` second-wave backlog and shipped status |          16 | 8 P1 implemented + 8 P2 reviewed/deferred               |
+| `@ww/core` second-wave backlog and shipped status |          17 | 9 P1 implemented + 5 P2 implemented + 3 P2 remaining    |
 | ADR-first / separate scope                        |          13 | no public export before scope/placement decision        |
 | Covered elsewhere / no public core export         |           6 | keep in existing layer or as composition-only           |
-| Total canonical family rows                       |          45 | this count is the only planning total used in this file |
+| Total canonical family rows                       |          46 | this count is the only planning total used in this file |
 
 ## Recommended implementation order
 
 1. `Phase 1 / P0`: implement every row from `Add to @ww/core now` in the exact canonical order.
 2. `Phase 2 / P1`: implemented in the current pass; keep Storybook, playground, docs, tests, manifest, and changeset aligned.
-3. `Phase 3 / P2`: review the remaining eight rows from the second-wave backlog and ship only when the contract stays honest.
+3. `Phase 3 / P2`: review the remaining three rows from the second-wave backlog and ship only when the contract stays honest.
 4. `Phase 4 / ADR-first`: cut explicit scope first, then promote rows from `ADR-first / separate scope`.
 5. `Out of scope for core`: keep rows from `Covered elsewhere / do not export as new public core surface` in their current layer.
 
@@ -102,11 +103,13 @@ Implemented in the current pass: `UiTooltip`, `UiPopover`, `UiDropdown`, `UiToas
 
 ### Phase 2 / P1
 
-Implemented in the current pass: `UiAvatar / UiAvatarGroup`, `UiNumberInput`, `UiSelect (rich)`, `UiAutocomplete`, `UiMenu`, `UiProgress`, `UiSteps`, `UiTable (simple)`.
+Implemented in the current pass: `UiButtonGroup`, `UiAvatar / UiAvatarGroup`, `UiNumberInput`, `UiSelect (rich)`, `UiAutocomplete`, `UiMenu`, `UiProgress`, `UiSteps`, `UiTable (simple)`.
 
 ### Phase 3 / P2
 
-`UiPopconfirm`, `UiContextMenu`, `UiSlider / UiRangeSlider`, `UiGrid / UiSpace / UiFlex`, `UiAffix / UiScrollArea / UiScrollTop / UiAnchor`, `UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp`, `UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList`, `UiImage`.
+Implemented in the current pass: `UiPopconfirm`, `UiContextMenu`, `UiGrid / UiSpace / UiFlex`, `UiImage`, `UiSlider / UiRangeSlider`, `UiAffix / UiScrollArea / UiScrollTop / UiAnchor`.
+
+Remaining backlog: `UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp`, `UiRating / UiTimeline / UiDescriptions / UiStatistic / UiResult / UiList`.
 
 ### Phase 4 / ADR-first
 
@@ -219,6 +222,14 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 ### 2) Add to `@ww/core` later
 
+#### UiButtonGroup
+
+- Status: implemented in `@ww/core`.
+- Groups adjacent `UiButton` and `UiIconButton` surfaces.
+- `orientation`, `attached`, `wrap`, and `block`.
+- Default accessibility contract stays on a labeled `role="group"` wrapper.
+- Structural only: it does not own segmented selection state or toolbar-style roving focus.
+
 #### UiAvatar / UiAvatarGroup
 
 - Status: implemented in `@ww/core`.
@@ -292,15 +303,19 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiPopconfirm
 
+- Status: implemented in `@ww/core`.
 - Specialization of `UiPopover` with confirmation UI.
-- `title`, optional `description`, icon, confirm/cancel text.
-- `confirmVariant`, `onConfirm`, `onCancel`.
+- Controlled or uncontrolled `open`, `title`, optional `description`, icon, confirm/cancel text.
+- `confirmVariant`, `onConfirm`, `onCancel`, `portalTarget`.
 - Focus lands on the confirm action when opened.
+- Trigger stays explicit through a dedicated trigger slot; async orchestration stays outside core.
 
 #### UiContextMenu
 
+- Status: implemented in `@ww/core`.
 - Uses the same menu contract as dropdown, but anchors to pointer coordinates.
-- Trigger is context-menu gesture.
+- Trigger is context-menu gesture or keyboard invocation through `ContextMenu` / `Shift+F10`.
+- `closeOnSelect`, controlled or uncontrolled `open`, and `portalTarget` stay explicit.
 - Must auto-flip and close on scroll / resize.
 
 #### UiSlider / UiRangeSlider
@@ -320,10 +335,11 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiAffix / UiScrollArea / UiScrollTop / UiAnchor
 
-- `UiAffix`: `offsetTop`, `offsetBottom`, target container, sticky state event.
-- `UiScrollArea`: custom scrollbars, visibility mode, orientation, sizing, `scrollTo`.
-- `UiScrollTop`: target, visibility threshold, behavior, position, custom trigger slot.
-- `UiAnchor`: section items, offset, affix, target container, active link tracking, smooth scroll.
+- Status: implemented in `@ww/core`.
+- `UiAffix` owns sticky utility framing with `offsetTop`, `offsetBottom`, target container tracking, and explicit stuck-state events.
+- `UiScrollArea` owns governed scroll-region semantics, tokenized scrollbar styling, sizing, orientation, and imperative `scrollTo` helpers.
+- `UiScrollTop` owns threshold-driven return-to-top affordances against a known target without pulling route scroll orchestration into core.
+- `UiAnchor` owns section-link navigation with target-container awareness, active-link tracking, offset handling, and smooth scrolling.
 
 #### UiInputPassword / UiInputGroup / UiInputTag / UiInputOtp
 
@@ -343,9 +359,9 @@ Everything under `ADR-first / separate scope`, in canonical row order only after
 
 #### UiImage
 
-- `src`, `alt`, fallback, placeholder.
-- `lazy` loading support.
-- `fit` variants.
+- Status: implemented in `@ww/core`.
+- `src`, `alt`, optional caption, fallback slot, and token-framed bordered/rounded states.
+- `loading`, `decoding`, `fit`, and governed aspect presets keep layout explicit.
 - Core image surface stays separate from preview/gallery runtime.
 
 ### 3) ADR-first / separate scope

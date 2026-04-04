@@ -16,16 +16,16 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/core",
           "packageLayer": "core",
-          "count": 8,
+          "count": 10,
           "files": [
             "packages/core/src/components/fields/UiAutocomplete.vue",
             "packages/core/src/components/fields/UiSelect.vue",
+            "packages/core/src/components/overlay/UiContextMenu.vue",
             "packages/core/src/components/overlay/UiDialog.vue",
             "packages/core/src/components/overlay/UiDrawer.vue",
             "packages/core/src/components/overlay/UiDropdown.vue",
-            "packages/core/src/components/overlay/UiPopover.vue",
-            "packages/core/src/components/overlay/UiToast.vue",
-            "packages/core/src/components/overlay/UiTooltip.vue"
+            "packages/core/src/components/overlay/UiPopconfirm.vue",
+            "packages/core/src/components/overlay/UiPopover.vue"
           ]
         },
         {
@@ -40,13 +40,15 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "core",
-          "count": 8,
+          "count": 10,
           "files": [
             "packages/core/src/components/fields/UiAutocomplete.vue",
             "packages/core/src/components/fields/UiSelect.vue",
+            "packages/core/src/components/overlay/UiContextMenu.vue",
             "packages/core/src/components/overlay/UiDialog.vue",
             "packages/core/src/components/overlay/UiDrawer.vue",
             "packages/core/src/components/overlay/UiDropdown.vue",
+            "packages/core/src/components/overlay/UiPopconfirm.vue",
             "packages/core/src/components/overlay/UiPopover.vue",
             "packages/core/src/components/overlay/UiToast.vue",
             "packages/core/src/components/overlay/UiTooltip.vue"
@@ -96,6 +98,10 @@ export const playgroundLabUsage = {
           "area": "core"
         },
         {
+          "file": "packages/core/src/components/overlay/UiContextMenu.vue",
+          "area": "core"
+        },
+        {
           "file": "packages/core/src/components/overlay/UiDialog.vue",
           "area": "core"
         },
@@ -105,6 +111,10 @@ export const playgroundLabUsage = {
         },
         {
           "file": "packages/core/src/components/overlay/UiDropdown.vue",
+          "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/overlay/UiPopconfirm.vue",
           "area": "core"
         },
         {
@@ -195,9 +205,10 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/core",
           "packageLayer": "core",
-          "count": 1,
+          "count": 2,
           "files": [
-            "packages/core/src/components/buttons/UiButton.vue"
+            "packages/core/src/components/buttons/UiButton.vue",
+            "packages/core/src/components/fields/UiRangeSlider.vue"
           ]
         },
         {
@@ -212,9 +223,10 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "core",
-          "count": 1,
+          "count": 2,
           "files": [
-            "packages/core/src/components/buttons/UiButton.vue"
+            "packages/core/src/components/buttons/UiButton.vue",
+            "packages/core/src/components/fields/UiRangeSlider.vue"
           ]
         },
         {
@@ -255,6 +267,10 @@ export const playgroundLabUsage = {
         {
           "file": "packages/core/src/components/buttons/UiButton.vue",
           "area": "core"
+        },
+        {
+          "file": "packages/core/src/components/fields/UiRangeSlider.vue",
+          "area": "core"
         }
       ]
     },
@@ -281,22 +297,22 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 17,
+          "count": 18,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Feedback.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 24,
+          "count": 27,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
@@ -312,23 +328,23 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 17,
+          "count": 18,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Feedback.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/Overlay.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
             "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
             "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts",
-            "apps/docs/src/stories/foundations/primitives/Overview.stories.ts"
+            "apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 24,
+          "count": 27,
           "files": [
             "apps/playground/src/DataGridShowcase.vue",
             "apps/playground/src/DataTableWidgetShowcase.vue",
@@ -389,6 +405,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/Overlay.stories.ts",
           "area": "docs"
         },
@@ -435,10 +455,812 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/systems/data-grid/data-grid-fixtures.ts",
           "area": "docs"
+        }
+      ]
+    },
+    "ui-button-group": {
+      "id": "ui-button-group",
+      "title": "UiButtonGroup",
+      "exportName": "UiButtonGroup",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Actions",
+      "labEligible": true,
+      "sourcePublicSurface": "UiButtonGroup",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/Buttons.stories.ts",
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
         },
         {
-          "file": "apps/docs/src/stories/widgets/Shell.stories.ts",
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-button-group.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/Buttons.stories.ts",
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-button-group.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Buttons",
+          "file": "apps/docs/src/stories/Buttons.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "buttons",
+        "group"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/Buttons.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-button-group.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-flex": {
+      "id": "ui-flex",
+      "title": "UiFlex",
+      "exportName": "UiFlex",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": true,
+      "sourcePublicSurface": "UiGrid / UiSpace / UiFlex",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-flex.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-flex.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "utilities"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-flex.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-grid": {
+      "id": "ui-grid",
+      "title": "UiGrid",
+      "exportName": "UiGrid",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": false,
+      "labExemptionReason": "UiGrid is reviewed through Storybook and the playground harness because responsive spans only make sense against realistic card and metadata compositions.",
+      "sourcePublicSurface": "UiGrid / UiSpace / UiFlex",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "utilities"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-space": {
+      "id": "ui-space",
+      "title": "UiSpace",
+      "exportName": "UiSpace",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": true,
+      "sourcePublicSurface": "UiGrid / UiSpace / UiFlex",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-space.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-space.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "utilities"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-space.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-affix": {
+      "id": "ui-affix",
+      "title": "UiAffix",
+      "exportName": "UiAffix",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": false,
+      "labExemptionReason": "UiAffix is reviewed through Storybook and the playground harness because sticky-state transitions only make sense against a real scroll container and viewport.",
+      "sourcePublicSurface": "UiAffix / UiScrollArea / UiScrollTop / UiAnchor",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "overview",
+          "title": "Core/Navigation",
+          "file": "apps/docs/src/stories/Navigation.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "scroll",
+        "navigation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-scroll-area": {
+      "id": "ui-scroll-area",
+      "title": "UiScrollArea",
+      "exportName": "UiScrollArea",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": true,
+      "sourcePublicSurface": "UiAffix / UiScrollArea / UiScrollTop / UiAnchor",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-scroll-area.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 3,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-scroll-area.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "overview",
+          "title": "Core/Navigation",
+          "file": "apps/docs/src/stories/Navigation.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "scroll",
+        "navigation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Navigation.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-scroll-area.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-scroll-top": {
+      "id": "ui-scroll-top",
+      "title": "UiScrollTop",
+      "exportName": "UiScrollTop",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Layout",
+      "labEligible": false,
+      "labExemptionReason": "UiScrollTop is reviewed through Storybook and the playground harness because threshold visibility and target scrolling are interaction contracts instead of static visual tuning.",
+      "sourcePublicSurface": "UiAffix / UiScrollArea / UiScrollTop / UiAnchor",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "overview",
+          "title": "Core/Navigation",
+          "file": "apps/docs/src/stories/Navigation.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "scroll",
+        "navigation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
+          "area": "playground"
         }
       ]
     },
@@ -689,10 +1511,11 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
           ]
@@ -711,10 +1534,11 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 4,
+          "count": 5,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/signal-graph/signal-graph-fixtures.ts"
           ]
@@ -767,6 +1591,10 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
           "area": "docs"
         },
         {
@@ -1109,6 +1937,229 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/lab/schemas/ui-number-input.lab.ts",
           "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-slider": {
+      "id": "ui-slider",
+      "title": "UiSlider",
+      "exportName": "UiSlider",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": true,
+      "sourcePublicSurface": "UiSlider / UiRangeSlider",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-slider.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-slider.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "slider",
+        "range"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-slider.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-range-slider": {
+      "id": "ui-range-slider",
+      "title": "UiRangeSlider",
+      "exportName": "UiRangeSlider",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Fields",
+      "labEligible": false,
+      "labExemptionReason": "UiRangeSlider is reviewed through Storybook and the playground harness because two-thumb pointer and keyboard coordination is behavioral rather than matrix-only visual tuning.",
+      "sourcePublicSurface": "UiSlider / UiRangeSlider",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Fields.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Fields",
+          "file": "apps/docs/src/stories/Fields.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "fields",
+        "slider",
+        "range"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Fields.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
@@ -1800,22 +2851,22 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 25,
+          "count": 26,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts",
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
             "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 17,
+          "count": 20,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
@@ -1839,23 +2890,23 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 25,
+          "count": 26,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts",
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
             "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
             "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeSystemOverview.stories.ts"
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 17,
+          "count": 20,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
@@ -1918,6 +2969,10 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts",
           "area": "docs"
         },
@@ -1968,10 +3023,6 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/particles/States.stories.ts",
           "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/foundations/particles/Theming.stories.ts",
-          "area": "docs"
         }
       ]
     },
@@ -1989,22 +3040,22 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 29,
+          "count": 31,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
             "apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts",
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
-            "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
-            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
+            "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 11,
+          "count": 13,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
@@ -2020,23 +3071,23 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 29,
+          "count": 31,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
             "apps/docs/src/stories/architecture/DataTableWidgetOverview.stories.ts",
             "apps/docs/src/stories/architecture/Layering.stories.ts",
             "apps/docs/src/stories/architecture/PageTemplatesOverview.stories.ts",
             "apps/docs/src/stories/architecture/WidgetsOverview.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
-            "apps/docs/src/stories/foundations/MotionOverview.stories.ts",
-            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
-            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+            "apps/docs/src/stories/foundations/MotionOverview.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 11,
+          "count": 13,
           "files": [
             "apps/playground/src/App.vue",
             "apps/playground/src/DataGridShowcase.vue",
@@ -2082,6 +3133,14 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Navigation.stories.ts",
           "area": "docs"
         },
         {
@@ -2131,14 +3190,6 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/charts/Responsive.stories.ts",
           "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/foundations/charts/States.stories.ts",
-          "area": "docs"
-        },
-        {
-          "file": "apps/docs/src/stories/foundations/charts/Theming.stories.ts",
-          "area": "docs"
         }
       ]
     },
@@ -2156,19 +3207,21 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 3,
+          "count": 4,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "packageName": "@ww/playground",
           "packageLayer": "app",
-          "count": 2,
+          "count": 3,
           "files": [
             "apps/playground/src/lab/schemas/ui-tag.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
         }
@@ -2176,18 +3229,20 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 3,
+          "count": 4,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/Layout.stories.ts",
             "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
           ]
         },
         {
           "area": "playground",
-          "count": 2,
+          "count": 3,
           "files": [
             "apps/playground/src/lab/schemas/ui-tag.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
           ]
         }
@@ -2241,11 +3296,19 @@ export const playgroundLabUsage = {
           "area": "docs"
         },
         {
+          "file": "apps/docs/src/stories/Layout.stories.ts",
+          "area": "docs"
+        },
+        {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
         },
         {
           "file": "apps/playground/src/lab/schemas/ui-tag.lab.ts",
+          "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue",
           "area": "playground"
         },
         {
@@ -2480,6 +3543,119 @@ export const playgroundLabUsage = {
         {
           "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
           "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-image": {
+      "id": "ui-image",
+      "title": "UiImage",
+      "exportName": "UiImage",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Display",
+      "labEligible": true,
+      "sourcePublicSurface": "UiImage",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-image.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Display.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 2,
+          "files": [
+            "apps/playground/src/lab/schemas/ui-image.lab.ts",
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Display",
+          "file": "apps/docs/src/stories/Display.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "display",
+        "image"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Display.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/lab/schemas/ui-image.lab.ts",
+          "area": "playground"
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
@@ -3752,6 +4928,125 @@ export const playgroundLabUsage = {
         }
       ]
     },
+    "ui-popconfirm": {
+      "id": "ui-popconfirm",
+      "title": "UiPopconfirm",
+      "exportName": "UiPopconfirm",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Overlays",
+      "labEligible": false,
+      "labExemptionReason": "UiPopconfirm is reviewed through Storybook and the overlay harness because its value is explicit confirmation flow, focus restore, and dismiss behavior rather than broad visual matrix tuning.",
+      "sourcePublicSurface": "UiPopconfirm",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Overlay.stories.ts",
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Overlay.stories.ts",
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Overlay",
+          "file": "apps/docs/src/stories/Overlay.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Theme Scoped Overlay",
+          "file": "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Foundations/Overlay Layers",
+          "file": "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "overlays",
+          "label": "Overlays",
+          "description": "Motion, layer slots, floating overlays, toasts, dialogs, drawers, and focus restore.",
+          "path": "/testing#testing-overlays"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "overlay",
+        "confirmation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Overlay.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
     "ui-dropdown": {
       "id": "ui-dropdown",
       "title": "UiDropdown",
@@ -3905,6 +5200,125 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/lab/schemas/ui-dropdown.lab.ts",
           "area": "playground"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-context-menu": {
+      "id": "ui-context-menu",
+      "title": "UiContextMenu",
+      "exportName": "UiContextMenu",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Overlays",
+      "labEligible": false,
+      "labExemptionReason": "UiContextMenu is reviewed through Storybook and the overlay harness because pointer anchoring, keyboard invocation, and focus return are interaction contracts rather than static workbench knobs.",
+      "sourcePublicSurface": "UiContextMenu",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Overlay.stories.ts",
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 4,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Overlay.stories.ts",
+            "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+            "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Overlay",
+          "file": "apps/docs/src/stories/Overlay.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Theme Scoped Overlay",
+          "file": "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts"
+        },
+        {
+          "variant": "interactions",
+          "title": "Foundations/Overlay Layers",
+          "file": "apps/docs/src/stories/foundations/OverlayLayers.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "overlays",
+          "label": "Overlays",
+          "description": "Motion, layer slots, floating overlays, toasts, dialogs, drawers, and focus restore.",
+          "path": "/testing#testing-overlays"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "overlay",
+        "menu"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Overlay.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/OverlayLayers.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/ThemeScopedOverlay.stories.ts",
+          "area": "docs"
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
@@ -4757,6 +6171,120 @@ export const playgroundLabUsage = {
         },
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
+          "area": "playground"
+        }
+      ]
+    },
+    "ui-anchor": {
+      "id": "ui-anchor",
+      "title": "UiAnchor",
+      "exportName": "UiAnchor",
+      "packageName": "@ww/core",
+      "packageLayer": "core",
+      "stability": "stable",
+      "family": "Navigation",
+      "labEligible": false,
+      "labExemptionReason": "UiAnchor is reviewed through Storybook and the playground harness because active-section tracking depends on live scroll containers and linked content.",
+      "sourcePublicSurface": "UiAffix / UiScrollArea / UiScrollTop / UiAnchor",
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "packageName": "@ww/playground",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 3,
+          "files": [
+            "apps/docs/src/stories/CoreShowcase.stories.ts",
+            "apps/docs/src/stories/Navigation.stories.ts",
+            "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+          ]
+        },
+        {
+          "area": "playground",
+          "count": 1,
+          "files": [
+            "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue"
+          ]
+        }
+      ],
+      "relatedStorybook": [
+        {
+          "variant": "overview",
+          "title": "Core/Layout",
+          "file": "apps/docs/src/stories/Layout.stories.ts"
+        },
+        {
+          "variant": "overview",
+          "title": "Core/Navigation",
+          "file": "apps/docs/src/stories/Navigation.stories.ts"
+        },
+        {
+          "variant": "states",
+          "title": "Core/System Showcase",
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts"
+        },
+        {
+          "variant": "theming",
+          "title": "Foundations/Belovodye Theme",
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts"
+        }
+      ],
+      "relatedHarnesses": [
+        {
+          "id": "core-wave",
+          "label": "Core Wave",
+          "description": "Selection, disclosure, rich fields, menus, steps, display/data surfaces, and one composed consumer-style flow.",
+          "path": "/testing#testing-core-wave"
+        }
+      ],
+      "relatedDocs": [
+        {
+          "type": "readme",
+          "file": "packages/core/README.md"
+        }
+      ],
+      "requiredTestLayers": [
+        "unit",
+        "e2e",
+        "playground"
+      ],
+      "tags": [
+        "layout",
+        "scroll",
+        "navigation"
+      ],
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/CoreShowcase.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/Navigation.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/docs/src/stories/foundations/BelovodyeTheme.stories.ts",
+          "area": "docs"
+        },
+        {
+          "file": "apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue",
           "area": "playground"
         }
       ]

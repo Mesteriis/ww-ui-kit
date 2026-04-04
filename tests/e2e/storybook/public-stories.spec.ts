@@ -44,6 +44,7 @@ test('renders canonical public story groups', async ({ page, request }) => {
     'Core/System Showcase',
     'Core/Fields',
     'Core/Display',
+    'Core/Layout',
     'Core/Navigation',
     'Foundations/Theme System Overview',
     'Foundations/Charts/Apex Overview',
@@ -100,8 +101,36 @@ test('runs floating overlay and toast interactions inside Storybook', async ({ p
   await page.keyboard.press('Enter');
   await expect(page.getByText('Last dropdown action: Charlie', { exact: true })).toBeVisible();
 
+  await page.getByRole('button', { name: 'Delete release' }).click();
+  await expect(page.getByRole('dialog', { name: 'Delete release?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Delete', exact: true }).click();
+  await expect(
+    page.getByText('Last popconfirm outcome: Confirmed release deletion', { exact: true })
+  ).toBeVisible();
+
+  const contextTrigger = page.getByRole('button', { name: 'Right-click release tools' });
+  await contextTrigger.click({ button: 'right' });
+  await expect(page.locator('.ui-context-menu')).toBeVisible();
+  await page.getByRole('menuitem', { name: 'Archive release' }).click();
+  await expect(page.locator('.ui-context-menu')).toHaveCount(0);
+  await expect(
+    page.getByText('Last context action: Archive release', { exact: true })
+  ).toBeVisible();
+  await expect(contextTrigger).toBeFocused();
+
   await page.getByRole('button', { name: 'Show toast' }).click();
   await expect(page.locator('.ui-toast')).toContainText('Saved to the overlay proof queue');
+});
+
+test('runs button group interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Buttons', 'Groups');
+  await openStory(page, storyId);
+
+  await page.getByRole('button', { name: 'Ship' }).first().click();
+  await expect(page.getByText('Active group action: ship', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Rollback' }).first().click();
+  await expect(page.getByText('Active group action: rollback', { exact: true })).toBeVisible();
 });
 
 test('runs selection and navigation interactions inside Storybook', async ({ page, request }) => {
@@ -132,6 +161,24 @@ test('runs selection and navigation interactions inside Storybook', async ({ pag
   await expect(page.locator('.ui-breadcrumb [aria-current="page"]')).toContainText('Review');
 });
 
+test('tracks section anchors inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Navigation', 'Section Anchor');
+  await openStory(page, storyId);
+
+  const contractsLink = page.getByRole('link', { name: 'Contracts' });
+  await contractsLink.click();
+  await expect(contractsLink).toHaveAttribute('aria-current', 'location');
+
+  const scrollArea = page.locator('#navigation-anchor-scroll');
+  await expect
+    .poll(async () => scrollArea.evaluate((element) => element.scrollTop))
+    .toBeGreaterThan(120);
+
+  const shipLink = page.getByRole('link', { name: 'Ship' });
+  await shipLink.click();
+  await expect(shipLink).toHaveAttribute('aria-current', 'location');
+});
+
 test('runs rich field interactions inside Storybook', async ({ page, request }) => {
   const storyId = await getStoryId(request, 'Core/Fields');
   await openStory(page, storyId);
@@ -140,6 +187,16 @@ test('runs rich field interactions inside Storybook', async ({ page, request }) 
   await budgetInput.focus();
   await page.keyboard.press('ArrowUp');
   await expect(page.getByText('Budget value: 13', { exact: true })).toBeVisible();
+
+  const rolloutTarget = page.getByRole('slider', { name: 'Rollout target' });
+  await rolloutTarget.focus();
+  await page.keyboard.press('End');
+  await expect(page.getByText('Rollout target: 100', { exact: true })).toBeVisible();
+
+  const deployWindowStart = page.getByRole('slider', { name: /Minimum value/ });
+  await deployWindowStart.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByText('Deploy window: 30-75', { exact: true })).toBeVisible();
 
   const deployLane = page.getByRole('combobox', { name: 'Deploy lane' });
   await deployLane.click();
@@ -162,8 +219,53 @@ test('renders display data surfaces inside Storybook', async ({ page, request })
   await openStory(page, storyId);
 
   await expect(page.getByText('Current rollout: 64%', { exact: true })).toBeVisible();
+  await expect(page.getByText('Architecture snapshot', { exact: true })).toBeVisible();
+  await expect(page.getByText('Fallback proof', { exact: true })).toBeVisible();
   await expect(page.getByText('Core second-wave coverage', { exact: true })).toBeVisible();
   await expect(page.getByRole('table')).toBeVisible();
+});
+
+test('renders layout utility stories inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Layout');
+  await openStory(page, storyId);
+
+  await expect(page.getByText('Release delivery band', { exact: true })).toBeVisible();
+  await expect(page.locator('.ui-space__separator')).toHaveCount(2);
+
+  const summary = page.locator('[data-ui-grid-item-key="summary"]').first();
+  const actions = page.locator('[data-ui-grid-item-key="actions"]').first();
+  const summaryBox = await summary.boundingBox();
+  const actionsBox = await actions.boundingBox();
+
+  expect(summaryBox).not.toBeNull();
+  expect(actionsBox).not.toBeNull();
+
+  if (!summaryBox || !actionsBox) {
+    throw new Error('Layout grid boxes were not available inside Storybook.');
+  }
+
+  expect(summaryBox.width).toBeGreaterThan(actionsBox.width);
+});
+
+test('runs scroll utility interactions inside Storybook', async ({ page, request }) => {
+  const storyId = await getStoryId(request, 'Core/Layout', 'Scroll Utilities');
+  await openStory(page, storyId);
+
+  const scrollArea = page.locator('#layout-proof-scroll-area');
+  await scrollArea.evaluate((element) => {
+    element.scrollTo({ top: 180, behavior: 'auto' });
+    element.dispatchEvent(new Event('scroll'));
+  });
+  await expect(page.getByText('Affix state: stuck', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Scroll layout proof to top' })).toBeVisible();
+
+  const horizontalMetrics = await page
+    .locator('#layout-proof-horizontal-scroll-area')
+    .evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+  expect(horizontalMetrics.scrollWidth).toBeGreaterThan(horizontalMetrics.clientWidth);
 });
 
 test('renders generic layout stories inside Storybook', async ({ page, request }) => {

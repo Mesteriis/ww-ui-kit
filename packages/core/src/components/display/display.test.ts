@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import UiBadge from './UiBadge.vue';
 import UiCard from './UiCard.vue';
 import UiDivider from './UiDivider.vue';
+import UiImage from './UiImage.vue';
 import UiSkeleton from './UiSkeleton.vue';
 import UiSpinner from './UiSpinner.vue';
 import UiTag from './UiTag.vue';
@@ -79,6 +80,56 @@ describe('display components', () => {
     expect(skeleton.attributes('style')).toContain('--ui-skeleton-width: 100%;');
     expect(skeleton.attributes('style')).toContain('--ui-skeleton-height: 1rem;');
     expect(skeleton.classes()).toContain('ui-skeleton--rounded');
+  });
+
+  it('renders image states, captions, and fallback accessibility without preview runtime', async () => {
+    const wrapper = mount(UiImage, {
+      props: {
+        alt: 'Architecture snapshot',
+        aspect: 'video',
+        bordered: true,
+        caption: 'Architecture snapshot',
+        fit: 'contain',
+        src: '/architecture.svg',
+      },
+      slots: {
+        fallback: '◇',
+      },
+    });
+
+    expect(wrapper.get('figure').classes()).toContain('ui-image--video');
+    expect(wrapper.get('figure').classes()).toContain('ui-image--bordered');
+    expect(wrapper.get('.ui-image__media').attributes('alt')).toBe('Architecture snapshot');
+    expect(wrapper.get('.ui-image__media').attributes('loading')).toBe('lazy');
+    expect(wrapper.get('.ui-image__media').attributes('style')).toContain('object-fit: contain');
+    expect(wrapper.get('.ui-image__caption').text()).toBe('Architecture snapshot');
+
+    await wrapper.get('.ui-image__media').trigger('error');
+    expect(wrapper.emitted('error')).toHaveLength(1);
+    expect(wrapper.attributes('role')).toBe('img');
+    expect(wrapper.attributes('aria-label')).toBe('Architecture snapshot');
+    expect(wrapper.get('.ui-image__fallback').text()).toContain('◇');
+
+    await wrapper.setProps({ src: '/architecture-2.svg' });
+    expect(wrapper.get('.ui-image__media').attributes('src')).toBe('/architecture-2.svg');
+
+    await wrapper.get('.ui-image__media').trigger('load');
+    expect(wrapper.emitted('load')).toHaveLength(1);
+
+    const customAspect = mount(UiImage, {
+      props: {
+        alt: '',
+        aspect: 1.5,
+        rounded: false,
+      },
+    });
+
+    expect(customAspect.classes()).toContain('ui-image--custom');
+    expect(customAspect.attributes('role')).toBeUndefined();
+    expect(customAspect.attributes('style')).toBeUndefined();
+    expect(customAspect.get('.ui-image__frame').attributes('style')).toContain(
+      '--ui-image-aspect: 1.5'
+    );
   });
 
   it('supports clickable and closable tag states', async () => {

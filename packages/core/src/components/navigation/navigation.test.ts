@@ -1,6 +1,8 @@
+import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
+import UiAnchor from './UiAnchor.vue';
 import UiBreadcrumb from './UiBreadcrumb.vue';
 import UiPagination from './UiPagination.vue';
 import { buildPaginationItems, getTotalPages } from './pagination';
@@ -227,5 +229,191 @@ describe('navigation components', () => {
 
     expect(simpleWithoutNav.find('button[aria-label="Previous page"]').exists()).toBe(false);
     expect(simpleWithoutNav.find('button[aria-label="Next page"]').exists()).toBe(false);
+  });
+
+  it('tracks anchor sections inside the target container and scrolls to the selected section', async () => {
+    const target = document.createElement('div');
+    target.id = 'anchor-proof-target';
+    document.body.append(target);
+
+    Object.defineProperty(target, 'scrollTop', {
+      configurable: true,
+      value: 0,
+      writable: true,
+    });
+    Object.defineProperty(target, 'scrollTo', {
+      configurable: true,
+      value: vi.fn(),
+      writable: true,
+    });
+    Object.defineProperty(target, 'getBoundingClientRect', {
+      configurable: true,
+      value: () => ({
+        top: 0,
+        right: 280,
+        bottom: 240,
+        left: 0,
+        width: 280,
+        height: 240,
+        x: 0,
+        y: 0,
+        toJSON() {
+          return this;
+        },
+      }),
+    });
+
+    const sectionOffsets = new Map([
+      ['overview', 0],
+      ['deploy', 260],
+    ]);
+
+    for (const id of ['overview', 'deploy']) {
+      const section = document.createElement('section');
+      section.id = id;
+      target.append(section);
+
+      Object.defineProperty(section, 'getBoundingClientRect', {
+        configurable: true,
+        value: () => {
+          const top = (sectionOffsets.get(id) ?? 0) - target.scrollTop;
+          return {
+            top,
+            right: 260,
+            bottom: top + 120,
+            left: 0,
+            width: 260,
+            height: 120,
+            x: 0,
+            y: top,
+            toJSON() {
+              return this;
+            },
+          };
+        },
+      });
+    }
+
+    const wrapper = mount(UiAnchor, {
+      attachTo: document.body,
+      props: {
+        affix: true,
+        items: [
+          { key: 'overview', label: 'Overview', href: '#overview' },
+          { key: 'deploy', label: 'Deploy', href: '#deploy' },
+        ],
+        offsetTop: 16,
+        target: '#anchor-proof-target',
+      },
+    });
+
+    await nextTick();
+
+    expect(wrapper.find('.ui-affix').exists()).toBe(true);
+    expect(wrapper.get('[aria-current="location"]').text()).toContain('Overview');
+
+    target.scrollTop = 320;
+    target.dispatchEvent(new Event('scroll'));
+    await nextTick();
+
+    expect(wrapper.get('[aria-current="location"]').text()).toContain('Deploy');
+
+    await wrapper.get('a[href="#deploy"]').trigger('click');
+    expect(target.scrollTo).toHaveBeenCalledWith({ behavior: 'smooth', left: 0, top: 244 });
+
+    wrapper.unmount();
+    target.remove();
+  });
+
+  it('keeps the last anchor item active when the target container reaches its scroll end', async () => {
+    const target = document.createElement('div');
+    target.id = 'anchor-proof-end-target';
+    document.body.append(target);
+
+    Object.defineProperty(target, 'scrollTop', {
+      configurable: true,
+      value: 0,
+      writable: true,
+    });
+    Object.defineProperty(target, 'clientHeight', {
+      configurable: true,
+      value: 240,
+    });
+    Object.defineProperty(target, 'scrollHeight', {
+      configurable: true,
+      value: 600,
+    });
+    Object.defineProperty(target, 'getBoundingClientRect', {
+      configurable: true,
+      value: () => ({
+        top: 0,
+        right: 280,
+        bottom: 240,
+        left: 0,
+        width: 280,
+        height: 240,
+        x: 0,
+        y: 0,
+        toJSON() {
+          return this;
+        },
+      }),
+    });
+
+    const sectionOffsets = new Map([
+      ['overview', 0],
+      ['contracts', 220],
+      ['ship', 460],
+    ]);
+
+    for (const id of ['overview', 'contracts', 'ship']) {
+      const section = document.createElement('section');
+      section.id = id;
+      target.append(section);
+
+      Object.defineProperty(section, 'getBoundingClientRect', {
+        configurable: true,
+        value: () => {
+          const top = (sectionOffsets.get(id) ?? 0) - target.scrollTop;
+          return {
+            top,
+            right: 260,
+            bottom: top + 120,
+            left: 0,
+            width: 260,
+            height: 120,
+            x: 0,
+            y: top,
+            toJSON() {
+              return this;
+            },
+          };
+        },
+      });
+    }
+
+    const wrapper = mount(UiAnchor, {
+      attachTo: document.body,
+      props: {
+        items: [
+          { key: 'overview', label: 'Overview', href: '#overview' },
+          { key: 'contracts', label: 'Contracts', href: '#contracts' },
+          { key: 'ship', label: 'Ship', href: '#ship' },
+        ],
+        offsetTop: 12,
+        target: '#anchor-proof-end-target',
+      },
+    });
+
+    await nextTick();
+
+    target.scrollTop = 360;
+    target.dispatchEvent(new Event('scroll'));
+    await nextTick();
+
+    expect(wrapper.get('[aria-current="location"]').text()).toContain('Ship');
+
+    wrapper.unmount();
+    target.remove();
   });
 });

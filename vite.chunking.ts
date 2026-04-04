@@ -37,6 +37,13 @@ export function resolvePlaygroundManualChunk(id: string): string | undefined {
     return sharedVendorChunk;
   }
 
+  if (
+    includesPath(id, '/apps/playground/src/testing/routes/TestingHarnessCoreAnchorProof.vue') ||
+    includesPath(id, '/apps/playground/src/testing/routes/TestingHarnessLayoutUtilitiesCard.vue')
+  ) {
+    return 'playground-testing-core-wave';
+  }
+
   if (includesPath(id, '/apps/playground/src/testing/')) {
     return 'playground-testing';
   }

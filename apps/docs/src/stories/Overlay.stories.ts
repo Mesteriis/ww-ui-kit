@@ -1,7 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import { UiButton, UiDialog, UiDrawer, UiDropdown, UiPopover, UiToast, UiTooltip } from '@ww/core';
+import {
+  UiButton,
+  UiContextMenu,
+  UiDialog,
+  UiDrawer,
+  UiDropdown,
+  UiPopconfirm,
+  UiPopover,
+  UiToast,
+  UiTooltip,
+} from '@ww/core';
 
 const meta = {
   title: 'Core/Overlay',
@@ -14,9 +24,11 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
   render: () => ({
     components: {
       UiButton,
+      UiContextMenu,
       UiDialog,
       UiDrawer,
       UiDropdown,
+      UiPopconfirm,
       UiPopover,
       UiToast,
       UiTooltip,
@@ -25,6 +37,8 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
       const dialogOpen = ref(false);
       const drawerOpen = ref(false);
       const popoverOpen = ref(false);
+      const lastContextAction = ref('Nothing selected yet.');
+      const lastPopconfirmOutcome = ref('Waiting for confirmation.');
       const toastRef = ref<{
         push: (payload: {
           title: string;
@@ -46,6 +60,10 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
           ],
         },
       ];
+      const contextMenuItems = [
+        { label: 'Inspect release', value: 'inspect' },
+        { label: 'Archive release', value: 'archive' },
+      ];
 
       const pushToast = () => {
         toastRef.value?.push({
@@ -59,11 +77,29 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
         lastDropdownAction.value = payload.label;
       };
 
+      const onContextSelect = (payload: { label: string }) => {
+        lastContextAction.value = payload.label;
+      };
+
+      const onPopconfirmCancel = () => {
+        lastPopconfirmOutcome.value = 'Canceled release deletion';
+      };
+
+      const onPopconfirmConfirm = () => {
+        lastPopconfirmOutcome.value = 'Confirmed release deletion';
+      };
+
       return {
+        contextMenuItems,
         dialogOpen,
         drawerOpen,
         dropdownItems,
+        lastContextAction,
         lastDropdownAction,
+        lastPopconfirmOutcome,
+        onContextSelect,
+        onPopconfirmCancel,
+        onPopconfirmConfirm,
         onSelect,
         popoverOpen,
         pushToast,
@@ -95,10 +131,48 @@ export const DialogAndDrawer: StoryObj<typeof UiDialog> = {
             </template>
           </UiDropdown>
 
+          <UiPopconfirm
+            title="Delete release?"
+            description="This action removes the current release candidate."
+            confirm-text="Delete"
+            cancel-text="Keep"
+            confirm-variant="danger"
+            @cancel="onPopconfirmCancel"
+            @confirm="onPopconfirmConfirm"
+          >
+            <template #trigger>
+              <UiButton variant="danger">Delete release</UiButton>
+            </template>
+          </UiPopconfirm>
+
+          <UiContextMenu :items="contextMenuItems" @select="onContextSelect">
+            <template #trigger>
+              <UiButton variant="secondary">Right-click release tools</UiButton>
+            </template>
+          </UiContextMenu>
+
           <UiButton variant="ghost" @click="pushToast">Show toast</UiButton>
         </div>
 
         <p style="margin: 0;">Last dropdown action: {{ lastDropdownAction }}</p>
+        <p style="margin: 0;">Last popconfirm outcome: {{ lastPopconfirmOutcome }}</p>
+        <p style="margin: 0;">Last context action: {{ lastContextAction }}</p>
+        <p style="margin: 0; color: var(--ui-text-secondary);">
+          Context menu opens on right click, the Context Menu key, or <kbd>Shift</kbd>+<kbd>F10</kbd>.
+        </p>
+
+        <div class="ui-cluster">
+          <UiPopconfirm title="Disabled confirm" description="Disabled triggers do not open." disabled>
+            <template #trigger>
+              <UiButton variant="secondary" disabled>Disabled confirm</UiButton>
+            </template>
+          </UiPopconfirm>
+          <UiContextMenu :items="contextMenuItems" disabled>
+            <template #trigger>
+              <UiButton variant="secondary" disabled>Disabled context menu</UiButton>
+            </template>
+          </UiContextMenu>
+        </div>
 
         <div class="ui-cluster">
           <UiButton @click="dialogOpen = true">Open dialog</UiButton>

@@ -22,6 +22,12 @@ export const PERFORMANCE_REQUIREMENTS = Object.freeze({
         rationale: 'Stable browser-tested harness code should stay within a small dedicated chunk.',
       }),
       Object.freeze({
+        chunkName: 'playground-testing-core-wave',
+        maxBytes: 6 * 1024,
+        rationale:
+          'Deferred core-wave proofs stay budgeted separately so governed utility coverage does not hide inside the main testing harness chunk.',
+      }),
+      Object.freeze({
         chunkName: 'playground-showcases',
         maxBytes: 36 * 1024,
         rationale:

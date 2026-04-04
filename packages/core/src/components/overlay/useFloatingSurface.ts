@@ -28,6 +28,7 @@ interface UseFloatingSurfaceOptions {
   motionPreset: MotionPresetName | (() => MotionPresetName);
   close: (reason?: OverlayDismissReason | 'programmatic') => void;
   triggerRef: Ref<HTMLElement | null>;
+  anchorRef?: Ref<HTMLElement | null>;
   surfaceRef: Ref<HTMLElement | null>;
   dismissOnEscape?: boolean;
   dismissOnPointerOutside?: boolean;
@@ -67,7 +68,7 @@ export function useFloatingSurface(
   const isOpen = computed(() => Boolean(toValue(props.open)));
   const floating = useFloatingPosition({
     open: presence.isActive,
-    anchorRef: options.triggerRef,
+    anchorRef: options.anchorRef ?? options.triggerRef,
     contentRef: options.surfaceRef,
     placement: computed(() => toValue(props.placement) ?? 'bottom'),
     offset: computed(() => toValue(props.offset) ?? 8),

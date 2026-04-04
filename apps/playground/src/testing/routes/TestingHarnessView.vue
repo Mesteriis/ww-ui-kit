@@ -10,22 +10,32 @@ import {
   UiBadge,
   UiBreadcrumb,
   UiButton,
+  UiButtonGroup,
   UiCard,
   UiCollapse,
   UiCollapsePanel,
+  UiContextMenu,
   UiDropdown,
   UiDialog,
   UiDrawer,
   UiField,
+  UiImage,
   UiInput,
+  UiInputGroup,
+  UiInputOtp,
+  UiInputPassword,
+  UiInputTag,
   UiMenu,
   UiNumberInput,
   UiPagination,
+  UiPopconfirm,
   UiPopover,
   UiProgress,
   UiRadio,
   UiRadioGroup,
+  UiRangeSlider,
   UiSelect,
+  UiSlider,
   UiSwitch,
   UiTag,
   UiTabsList,
@@ -71,9 +81,17 @@ const DataTableWidgetShowcase = defineAsyncComponent(
 );
 const LayerScaffoldShowcase = defineAsyncComponent(() => import('../../LayerScaffoldShowcase.vue'));
 const SignalGraphShowcase = defineAsyncComponent(() => import('../../SignalGraphShowcase.vue'));
+const TestingHarnessCoreAnchorProof = defineAsyncComponent(
+  () => import('./TestingHarnessCoreAnchorProof.vue')
+);
+const TestingHarnessLayoutUtilitiesCard = defineAsyncComponent(
+  () => import('./TestingHarnessLayoutUtilitiesCard.vue')
+);
 const TsParticlesShowcase = defineAsyncComponent(() => import('../../TsParticlesShowcase.vue'));
 
 defineOptions({ name: 'TestingHarnessView' });
+
+const coreImageSrc = new URL('../../../../assets/img/banner.svg', import.meta.url).href;
 
 const props = defineProps<{
   themeMeta: ThemeMeta;
@@ -86,6 +104,8 @@ const nestedDialogOpen = ref(false);
 const scopedDialogOpen = ref(false);
 const scopedDrawerOpen = ref(false);
 const explicitDrawerOpen = ref(false);
+const floatingContextAction = ref('none');
+const floatingPopconfirmOutcome = ref('waiting');
 const floatingPopoverOpen = ref(false);
 const floatingMenuSelection = ref('Review queue');
 const toastHostRef = ref<{
@@ -101,8 +121,16 @@ const releaseStage = ref('design');
 const releaseFlowPage = ref(2);
 const releaseAlertOpen = ref(true);
 const activeTag = ref('Pinned');
+const releaseActionGroup = ref('review');
 const releaseFlowPanels = ref<string[]>(['queue']);
+const releaseRepository = ref('governance/core-wave');
 const releaseBudget = ref<number | null>(12.5);
+const releasePassword = ref('Belovodye-42');
+const releasePasswordVisible = ref(false);
+const releaseTagInput = ref<string[]>(['tokens', 'themes']);
+const releaseOtp = ref('7314');
+const releaseTarget = ref(65);
+const releaseWindow = ref<[number, number]>([25, 75]);
 const releaseLane = ref<string | null>('bravo');
 const releaseCoverage = ref<Array<string | number>>(['tokens']);
 const releaseSearch = ref('');
@@ -149,6 +177,11 @@ const floatingDropdownItems = [
   },
 ];
 
+const floatingContextItems = [
+  { label: 'Inspect release', value: 'Inspect release' },
+  { label: 'Archive release', value: 'Archive release' },
+];
+
 const releaseBreadcrumbItems = [
   { label: 'Workspace', href: '#workspace' },
   { label: 'Releases', href: '#releases' },
@@ -175,6 +208,12 @@ const releaseCoverageOptions = [
   { label: 'Docs', value: 'docs' },
 ];
 
+const releaseSliderMarks = [
+  { value: 0, label: '0%' },
+  { value: 50, label: '50%' },
+  { value: 100, label: '100%' },
+];
+
 const releaseAutocompleteItems = [
   {
     label: 'Belovodye control room',
@@ -194,6 +233,10 @@ const releaseAutocompleteItems = [
     description: 'Menu and select collection flows',
     keywords: ['deploy', 'bravo'],
   },
+];
+const releasePasswordRules = [
+  { label: 'At least 12 characters', met: true },
+  { label: 'Contains a number', met: true },
 ];
 
 const coreMenuItems = [
@@ -229,8 +272,10 @@ const coreTableColumns = [
 ];
 
 const coreTableData = [
+  { surface: 'UiInputPassword', status: 'Shipped', proof: 'Visibility + rules + tests' },
   { surface: 'UiSelect', status: 'Shipped', proof: 'Stories + unit + playground' },
   { surface: 'UiMenu', status: 'Shipped', proof: 'Keyboard + ARIA coverage' },
+  { surface: 'UiImage', status: 'Shipped', proof: 'Fit + fallback + caption' },
   { surface: 'UiTable', status: 'Shipped', proof: 'Semantic table + slots' },
 ];
 
@@ -312,6 +357,18 @@ watch(
 
 const onFloatingMenuSelect = (payload: { label: string }) => {
   floatingMenuSelection.value = payload.label;
+};
+
+const onFloatingContextSelect = (payload: { label: string }) => {
+  floatingContextAction.value = payload.label;
+};
+
+const onFloatingPopconfirmCancel = () => {
+  floatingPopconfirmOutcome.value = 'canceled';
+};
+
+const onFloatingPopconfirmConfirm = () => {
+  floatingPopconfirmOutcome.value = 'confirmed';
 };
 
 const onAutocompleteSelect = (payload: { value: string }) => {
@@ -591,9 +648,31 @@ const currentReleaseStepLabel = computed(
                 <UiButton variant="secondary">Open action menu</UiButton>
               </template>
             </UiDropdown>
+
+            <UiPopconfirm
+              title="Delete release?"
+              description="Popconfirm stays inside the sanctioned floating runtime."
+              confirm-text="Delete"
+              cancel-text="Keep"
+              confirm-variant="danger"
+              @cancel="onFloatingPopconfirmCancel"
+              @confirm="onFloatingPopconfirmConfirm"
+            >
+              <template #trigger>
+                <UiButton variant="danger">Delete release</UiButton>
+              </template>
+            </UiPopconfirm>
+
+            <UiContextMenu :items="floatingContextItems" @select="onFloatingContextSelect">
+              <template #trigger>
+                <UiButton variant="secondary">Right-click release tools</UiButton>
+              </template>
+            </UiContextMenu>
           </div>
 
           <p style="margin: 0">Last menu action: {{ floatingMenuSelection }}</p>
+          <p style="margin: 0">Popconfirm outcome: {{ floatingPopconfirmOutcome }}</p>
+          <p style="margin: 0">Context menu action: {{ floatingContextAction }}</p>
 
           <div class="ui-cluster">
             <UiButton variant="secondary" @click="pushHarnessToast('success')">
@@ -650,6 +729,14 @@ const currentReleaseStepLabel = computed(
             />
           </UiField>
 
+          <UiField label="Repository URL" hint="Input groups keep addons in the same field contract">
+            <UiInputGroup>
+              <template #prepend>https://</template>
+              <UiInput v-model="releaseRepository" />
+              <template #append>.git</template>
+            </UiInputGroup>
+          </UiField>
+
           <UiField label="Deploy lane" hint="Select uses the sanctioned floating surface">
             <UiSelect
               v-model="releaseLane"
@@ -671,6 +758,47 @@ const currentReleaseStepLabel = computed(
             />
           </UiField>
 
+          <UiField label="Password" hint="Reveal state, strength, and rules stay consumer-owned">
+            <UiInputPassword
+              v-model="releasePassword"
+              v-model:revealed="releasePasswordVisible"
+              :strength="72"
+              strength-text="Strong"
+              :rules="releasePasswordRules"
+            />
+          </UiField>
+
+          <UiField label="Release tags" hint="Tag input distributes Enter, comma, and paste additions">
+            <UiInputTag v-model="releaseTagInput" :max-tags="5" />
+          </UiField>
+
+          <UiField label="Verification code" hint="OTP input auto-advances and supports paste distribution">
+            <UiInputOtp v-model="releaseOtp" :length="4" />
+          </UiField>
+
+          <UiField label="Rollout target" hint="Slider keeps keyboard semantics and numeric sync">
+            <UiSlider
+              v-model="releaseTarget"
+              :min="0"
+              :max="100"
+              :step="5"
+              :marks="releaseSliderMarks"
+              show-input
+            />
+          </UiField>
+
+          <UiField label="Deploy window" hint="Range slider keeps two-thumb minRange enforcement">
+            <UiRangeSlider
+              v-model="releaseWindow"
+              :min="0"
+              :max="100"
+              :step="5"
+              :min-range="10"
+              :marks="releaseSliderMarks"
+              show-input
+            />
+          </UiField>
+
           <UiField label="Command search" hint="Autocomplete keeps local suggestion control">
             <UiAutocomplete
               v-model="releaseSearch"
@@ -680,8 +808,13 @@ const currentReleaseStepLabel = computed(
           </UiField>
 
           <p style="margin: 0">Budget value: {{ releaseBudget ?? 'empty' }}</p>
+          <p style="margin: 0">Password visible: {{ releasePasswordVisible ? 'yes' : 'no' }}</p>
           <p style="margin: 0">Selected lane: {{ releaseLane ?? 'none' }}</p>
           <p style="margin: 0">Coverage tags: {{ releaseCoverage.join(', ') || 'none' }}</p>
+          <p style="margin: 0">Tag input: {{ releaseTagInput.join(', ') || 'none' }}</p>
+          <p style="margin: 0">OTP value: {{ releaseOtp || 'empty' }}</p>
+          <p style="margin: 0">Rollout target: {{ releaseTarget }}</p>
+          <p style="margin: 0">Deploy window: {{ releaseWindow[0] }}-{{ releaseWindow[1] }}</p>
           <p style="margin: 0">Autocomplete selection: {{ lastAutocompleteSelection }}</p>
         </div>
       </UiCard>
@@ -718,6 +851,27 @@ const currentReleaseStepLabel = computed(
             </UiTag>
           </div>
 
+          <UiButtonGroup aria-label="Release actions">
+            <UiButton
+              :variant="releaseActionGroup === 'review' ? 'primary' : 'secondary'"
+              @click="releaseActionGroup = 'review'"
+            >
+              Review
+            </UiButton>
+            <UiButton
+              :variant="releaseActionGroup === 'ship' ? 'primary' : 'secondary'"
+              @click="releaseActionGroup = 'ship'"
+            >
+              Ship
+            </UiButton>
+            <UiButton
+              :variant="releaseActionGroup === 'rollback' ? 'danger' : 'secondary'"
+              @click="releaseActionGroup = 'rollback'"
+            >
+              Rollback
+            </UiButton>
+          </UiButtonGroup>
+
           <div
             style="
               display: grid;
@@ -748,6 +902,7 @@ const currentReleaseStepLabel = computed(
           </div>
 
           <p style="margin: 0">Active filter: {{ activeTag }}</p>
+          <p style="margin: 0">Active action group: {{ releaseActionGroup }}</p>
 
           <UiPagination
             v-model="releaseFlowPage"
@@ -767,6 +922,8 @@ const currentReleaseStepLabel = computed(
           />
 
           <p style="margin: 0">Current page: {{ releaseFlowPage }}</p>
+
+          <TestingHarnessCoreAnchorProof />
         </div>
       </UiCard>
 
@@ -778,6 +935,14 @@ const currentReleaseStepLabel = computed(
             <UiAvatar icon="⚙" alt="Settings avatar" tone="warning" />
             <UiAvatarGroup :items="coreAvatarItems" :max="3" />
           </div>
+
+          <UiImage
+            :src="coreImageSrc"
+            alt="Core wave architecture snapshot"
+            caption="Architecture snapshot"
+            aspect="landscape"
+            bordered
+          />
 
           <div class="ui-cluster">
             <UiProgress :value="64" show-value aria-label="Current rollout" />
@@ -811,8 +976,14 @@ const currentReleaseStepLabel = computed(
               <span v-else>{{ value }}</span>
             </template>
           </UiTable>
+
+          <UiImage alt="Fallback-only proof" caption="Fallback proof" aspect="square">
+            <template #fallback>◇</template>
+          </UiImage>
         </div>
       </UiCard>
+
+      <TestingHarnessLayoutUtilitiesCard />
     </section>
 
     <section id="testing-themes" class="playground__grid" data-playground-scenario="themes">

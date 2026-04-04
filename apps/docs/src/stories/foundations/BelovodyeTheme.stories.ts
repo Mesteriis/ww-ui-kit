@@ -2,13 +2,16 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import { computed, ref } from 'vue';
 
 import {
+  UiAffix,
   UiAlert,
+  UiAnchor,
   UiAutocomplete,
   UiAvatar,
   UiAvatarGroup,
   UiBadge,
   UiBreadcrumb,
   UiButton,
+  UiButtonGroup,
   UiCard,
   UiCheckbox,
   UiCollapse,
@@ -18,8 +21,15 @@ import {
   UiDropdown,
   UiEmptyState,
   UiField,
+  UiFlex,
   UiIconButton,
+  UiImage,
   UiInput,
+  UiInputGroup,
+  UiInputOtp,
+  UiInputPassword,
+  UiInputTag,
+  UiGrid,
   UiMenu,
   UiNumberInput,
   UiPagination,
@@ -27,10 +37,15 @@ import {
   UiProgress,
   UiRadio,
   UiRadioGroup,
+  UiRangeSlider,
+  UiScrollArea,
+  UiScrollTop,
   UiSelect,
   UiSelectSimple,
+  UiSlider,
   UiSwitch,
   UiSteps,
+  UiSpace,
   UiTable,
   UiTag,
   UiTabsList,
@@ -54,12 +69,15 @@ export const SystemShowcase: StoryObj = {
   render: () => ({
     components: {
       UiAlert,
+      UiAffix,
+      UiAnchor,
       UiAutocomplete,
       UiAvatar,
       UiAvatarGroup,
       UiBadge,
       UiBreadcrumb,
       UiButton,
+      UiButtonGroup,
       UiCard,
       UiCheckbox,
       UiCollapse,
@@ -69,8 +87,15 @@ export const SystemShowcase: StoryObj = {
       UiDropdown,
       UiEmptyState,
       UiField,
+      UiFlex,
       UiIconButton,
+      UiImage,
       UiInput,
+      UiInputGroup,
+      UiInputOtp,
+      UiInputPassword,
+      UiInputTag,
+      UiGrid,
       UiMenu,
       UiNumberInput,
       UiPagination,
@@ -78,10 +103,15 @@ export const SystemShowcase: StoryObj = {
       UiProgress,
       UiRadio,
       UiRadioGroup,
+      UiRangeSlider,
+      UiScrollArea,
+      UiScrollTop,
       UiSelect,
       UiSelectSimple,
+      UiSlider,
       UiSwitch,
       UiSteps,
+      UiSpace,
       UiTable,
       UiTag,
       UiTabsList,
@@ -94,13 +124,20 @@ export const SystemShowcase: StoryObj = {
     },
     setup() {
       const inputValue = ref('Belovodye analytics workspace');
+      const repositoryValue = ref('belovodye/control-room');
       const textareaValue = ref(
         'Dark glass surfaces, cyan-teal accents, and dashboard-grade contrast copied from the canonical frontend.'
       );
       const selectValue = ref('dashboard');
       const richSelectValue = ref<string | null>('bravo');
+      const passwordValue = ref('Belovodye-42');
+      const passwordVisible = ref(false);
+      const tagValues = ref<string[]>(['glass', 'tokens']);
+      const otpValue = ref('58');
       const autocompleteValue = ref('');
       const numberValue = ref<number | null>(6.5);
+      const sliderValue = ref(70);
+      const rangeValue = ref<[number, number]>([25, 85]);
       const checkboxValue = ref(true);
       const switchValue = ref(true);
       const stageValue = ref('review');
@@ -108,7 +145,10 @@ export const SystemShowcase: StoryObj = {
       const dialogOpen = ref(false);
       const drawerOpen = ref(false);
       const popoverOpen = ref(false);
+      const groupedAction = ref('review');
       const currentPage = ref(2);
+      const affixState = ref('resting');
+      const activeAnchor = ref<string | null>('overview');
       const currentStep = ref(1);
       const selectedMenuKeys = ref(['review']);
       const lastDropdownAction = ref('Review queue');
@@ -148,6 +188,12 @@ export const SystemShowcase: StoryObj = {
         { label: 'Ops console', value: 'ops' },
       ];
 
+      const sliderMarks = [
+        { value: 0, label: '0%' },
+        { value: 50, label: '50%' },
+        { value: 100, label: '100%' },
+      ];
+
       const richOptions = [
         { label: 'Overview queue', value: 'overview', icon: '⌘' },
         {
@@ -165,12 +211,17 @@ export const SystemShowcase: StoryObj = {
         { label: 'Core wave verify', value: 'Core wave verify' },
         { label: 'Bravo deploy lane', value: 'Bravo deploy lane' },
       ];
+      const passwordRules = [
+        { label: 'At least 12 characters', met: true },
+        { label: 'Contains a number', met: true },
+      ];
 
       const avatarItems = [
         { initials: 'BV', alt: 'Belovodye', tone: 'brand' as const },
         { initials: 'QA', alt: 'Quality gate', tone: 'success' as const },
         { initials: 'DX', alt: 'Developer experience', tone: 'info' as const },
       ];
+      const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
 
       const menuItems = [
         { label: 'Overview', key: 'overview', value: 'overview' },
@@ -198,8 +249,59 @@ export const SystemShowcase: StoryObj = {
 
       const tableData = [
         { surface: 'UiAvatar', status: 'Theme-aware', proof: 'Fallback + tone tokens' },
+        { surface: 'UiImage', status: 'Theme-aware', proof: 'Surface and fallback tokens' },
+        { surface: 'UiInputPassword', status: 'Theme-aware', proof: 'Field + strength tokens' },
         { surface: 'UiSelect', status: 'Theme-aware', proof: 'Shared floating surface' },
         { surface: 'UiProgress', status: 'Theme-aware', proof: 'Linear and circular tracks' },
+      ];
+
+      const layoutItems = [
+        {
+          key: 'summary',
+          title: 'Belovodye summary',
+          description:
+            'Responsive utility spans inherit the scoped theme without turning into shell structure.',
+          span: 12,
+          responsive: { md: 7, lg: 8 },
+        },
+        {
+          key: 'actions',
+          title: 'Belovodye action rail',
+          description:
+            'Narrow companion rail shows the same tokenized spacing on the themed surface.',
+          span: 12,
+          responsive: { md: 5, lg: 4 },
+        },
+      ];
+
+      const scrollCards = [
+        'Belovodye scroll regions inherit the same dark-glass surface language.',
+        'Sticky utility notes keep the sanctioned z-layer and focus behavior.',
+        'Scroll-top stays opt-in and container-targeted for real consumer flows.',
+      ];
+
+      const anchorItems = [
+        { key: 'overview', label: 'Overview', href: '#belovodye-anchor-overview' },
+        { key: 'contracts', label: 'Contracts', href: '#belovodye-anchor-contracts' },
+        { key: 'ship', label: 'Ship', href: '#belovodye-anchor-ship' },
+      ];
+
+      const anchorSections = [
+        {
+          id: 'belovodye-anchor-overview',
+          title: 'Overview',
+          copy: 'Anchor navigation remains theme-aware without a second runtime.',
+        },
+        {
+          id: 'belovodye-anchor-contracts',
+          title: 'Contracts',
+          copy: 'Active sections update against the same scoped scroll container.',
+        },
+        {
+          id: 'belovodye-anchor-ship',
+          title: 'Ship',
+          copy: 'Smooth scrolling keeps the dark Belovodye contract intact.',
+        },
       ];
 
       const currentStepLabel = computed(() => steps[currentStep.value]?.title ?? 'Unknown');
@@ -219,6 +321,10 @@ export const SystemShowcase: StoryObj = {
       return {
         autocompleteItems,
         autocompleteValue,
+        activeAnchor,
+        affixState,
+        anchorItems,
+        anchorSections,
         avatarItems,
         belovodyeTheme,
         breadcrumbItems,
@@ -226,27 +332,40 @@ export const SystemShowcase: StoryObj = {
         currentPage,
         currentStep,
         currentStepLabel,
+        displayImageSrc,
         dialogOpen,
         dropdownItems,
         drawerOpen,
+        groupedAction,
         inputValue,
+        layoutItems,
         lastDropdownAction,
         menuItems,
         numberValue,
         onSelect,
         options,
+        otpValue,
+        passwordRules,
+        passwordValue,
+        passwordVisible,
         popoverOpen,
         pushToast,
+        rangeValue,
+        repositoryValue,
         richOptions,
         richSelectValue,
+        scrollCards,
         selectValue,
         selectedMenuKeys,
+        sliderMarks,
+        sliderValue,
         stageValue,
         steps,
         switchValue,
         tabValue,
         tableColumns,
         tableData,
+        tagValues,
         toastRef,
         textareaValue,
       };
@@ -285,9 +404,111 @@ export const SystemShowcase: StoryObj = {
               </UiIconButton>
             </div>
 
+            <div style="display: grid; gap: var(--ui-space-3);">
+              <UiButtonGroup aria-label="Belovodye action group">
+                <UiButton
+                  :variant="groupedAction === 'review' ? 'primary' : 'secondary'"
+                  @click="groupedAction = 'review'"
+                >
+                  Review
+                </UiButton>
+                <UiButton
+                  :variant="groupedAction === 'ship' ? 'primary' : 'secondary'"
+                  @click="groupedAction = 'ship'"
+                >
+                  Ship
+                </UiButton>
+                <UiButton
+                  :variant="groupedAction === 'rollback' ? 'danger' : 'secondary'"
+                  @click="groupedAction = 'rollback'"
+                >
+                  Rollback
+                </UiButton>
+              </UiButtonGroup>
+              <p style="margin: 0; color: var(--ui-text-secondary);">
+                Button group action: {{ groupedAction }}
+              </p>
+            </div>
+
+            <div style="display: grid; gap: var(--ui-space-4);">
+              <UiFlex justify="between" align="center" gap="4" block>
+                <UiBadge variant="brand">Belovodye utility layout</UiBadge>
+                <UiSpace size="2">
+                  <UiButton size="sm" variant="secondary">Preview</UiButton>
+                  <UiButton size="sm">Ship</UiButton>
+                </UiSpace>
+              </UiFlex>
+
+              <UiSpace separator="•" size="3" role="group" aria-label="Belovodye utility markers">
+                <UiTag variant="brand">UiFlex</UiTag>
+                <UiTag variant="success" appearance="outline">UiGrid</UiTag>
+                <UiTag variant="warning" appearance="outline">UiSpace</UiTag>
+              </UiSpace>
+
+              <UiGrid
+                :items="layoutItems"
+                :columns="12"
+                gap="4"
+                role="group"
+                aria-label="Belovodye layout grid"
+              >
+                <template #item="{ item }">
+                  <UiCard>
+                    <template #header>{{ item.title }}</template>
+                    <p style="margin: 0;">{{ item.description }}</p>
+                  </UiCard>
+                </template>
+              </UiGrid>
+
+              <UiScrollArea
+                id="belovodye-scroll-area"
+                :max-height="240"
+                aria-label="Belovodye layout utility scroll area"
+              >
+                <div class="ui-stack" style="padding-inline-end: var(--ui-space-2);">
+                  <UiAffix
+                    :offset-top="0"
+                    target="#belovodye-scroll-area"
+                    @stuck-change="affixState = $event ? 'stuck' : 'resting'"
+                  >
+                    <UiCard>
+                      <template #header>Affixed Belovodye note</template>
+                      <p style="margin: 0;">
+                        Sticky utility content inherits the themed surface without leaving core.
+                      </p>
+                    </UiCard>
+                  </UiAffix>
+
+                  <UiCard v-for="(copy, index) in scrollCards" :key="index">
+                    <template #header>Belovodye scroll proof {{ index + 1 }}</template>
+                    <p style="margin: 0;">{{ copy }}</p>
+                  </UiCard>
+                </div>
+              </UiScrollArea>
+
+              <p style="margin: 0; color: var(--ui-text-secondary);">
+                Affix state: {{ affixState }}
+              </p>
+              <UiScrollTop
+                target="#belovodye-scroll-area"
+                :threshold="72"
+                behavior="auto"
+                aria-label="Scroll Belovodye utility area to top"
+              >
+                Top
+              </UiScrollTop>
+            </div>
+
             <div style="display: grid; gap: var(--ui-space-4); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
               <UiField label="Workspace" hint="Field surfaces stay crisp in Belovodye">
                 <UiInput v-model="inputValue" />
+              </UiField>
+              <UiField label="Scoped repository">
+                <UiInputGroup>
+                  <template #prepend>https://</template>
+                  <UiInput v-model="repositoryValue" />
+                  <template #append>.git</template>
+                </UiInputGroup>
               </UiField>
               <UiField label="Surface family">
                 <UiSelectSimple v-model="selectValue" :options="options" />
@@ -307,8 +528,43 @@ export const SystemShowcase: StoryObj = {
                   :options="richOptions"
                 />
               </UiField>
+              <UiField label="Password">
+                <UiInputPassword
+                  v-model="passwordValue"
+                  v-model:revealed="passwordVisible"
+                  :strength="78"
+                  strength-text="Strong"
+                  :rules="passwordRules"
+                />
+              </UiField>
+              <UiField label="Surface tags">
+                <UiInputTag v-model="tagValues" />
+              </UiField>
+              <UiField label="Verification code">
+                <UiInputOtp v-model="otpValue" :length="4" />
+              </UiField>
               <UiField label="Command search">
                 <UiAutocomplete v-model="autocompleteValue" :items="autocompleteItems" />
+              </UiField>
+              <UiField label="Rollout target">
+                <UiSlider
+                  v-model="sliderValue"
+                  :min="0"
+                  :max="100"
+                  :step="5"
+                  :marks="sliderMarks"
+                  show-input
+                />
+              </UiField>
+              <UiField label="Deploy window">
+                <UiRangeSlider
+                  v-model="rangeValue"
+                  :min="0"
+                  :max="100"
+                  :step="5"
+                  :min-range="10"
+                  :marks="sliderMarks"
+                />
               </UiField>
             </div>
 
@@ -339,6 +595,13 @@ export const SystemShowcase: StoryObj = {
               <UiAvatar icon="⚙" alt="Settings avatar" tone="warning" />
               <UiAvatarGroup :items="avatarItems" :max="2" />
             </div>
+            <UiImage
+              :src="displayImageSrc"
+              alt="Belovodye architecture snapshot"
+              caption="Themed image surface"
+              aspect="landscape"
+              bordered
+            />
             <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
               <UiTag variant="brand">Pinned</UiTag>
               <UiTag variant="success" appearance="outline">Healthy</UiTag>
@@ -419,6 +682,47 @@ export const SystemShowcase: StoryObj = {
               aria-label="Belovodye release pages"
             />
             <p style="margin: 0;">Current page: {{ currentPage }}</p>
+            <div
+              style="
+                display: grid;
+                gap: var(--ui-space-4);
+                grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+                align-items: start;
+              "
+            >
+              <UiAnchor
+                v-model="activeAnchor"
+                :items="anchorItems"
+                target="#belovodye-anchor-scroll"
+                :offset-top="12"
+                aria-label="Belovodye section anchor"
+              />
+
+              <UiScrollArea
+                id="belovodye-anchor-scroll"
+                :max-height="220"
+                aria-label="Belovodye anchor sections"
+              >
+                <div class="ui-stack" style="padding-inline-end: var(--ui-space-2);">
+                  <section
+                    v-for="section in anchorSections"
+                    :id="section.id"
+                    :key="section.id"
+                    style="
+                      min-block-size: 11rem;
+                      padding: var(--ui-space-4);
+                      border: 1px solid var(--ui-border-subtle);
+                      border-radius: var(--ui-radius-lg);
+                      background: var(--ui-surface-subtle);
+                    "
+                  >
+                    <h3 style="margin-top: 0;">{{ section.title }}</h3>
+                    <p style="margin: 0;">{{ section.copy }}</p>
+                  </section>
+                </div>
+              </UiScrollArea>
+            </div>
+            <p style="margin: 0;">Active anchor: {{ activeAnchor }}</p>
             <div style="display: flex; gap: var(--ui-space-3); flex-wrap: wrap;">
               <UiTooltip content="Belovodye tooltip surface">
                 <UiButton variant="secondary">Hover for tooltip</UiButton>

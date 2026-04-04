@@ -6,12 +6,15 @@ import {
   UiBadge,
   UiCard,
   UiDivider,
+  UiImage,
   UiProgress,
   UiSkeleton,
   UiSpinner,
   UiTable,
   UiTag,
 } from '@ww/core';
+
+const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
 
 const meta = {
   title: 'Core/Display',
@@ -28,6 +31,7 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
       UiBadge,
       UiCard,
       UiDivider,
+      UiImage,
       UiProgress,
       UiSkeleton,
       UiSpinner,
@@ -50,11 +54,12 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
 
       const data = [
         { name: 'UiAvatar', status: 'Shipped', coverage: 'Stories + unit + playground' },
+        { name: 'UiImage', status: 'Shipped', coverage: 'Fit + fallback + caption' },
         { name: 'UiProgress', status: 'Shipped', coverage: 'ARIA + browser proof' },
         { name: 'UiTable', status: 'Shipped', coverage: 'Semantic markup + slots' },
       ];
 
-      return { avatarItems, columns, data };
+      return { avatarItems, columns, data, displayImageSrc };
     },
     template: `
       <div class="ui-stack">
@@ -74,6 +79,25 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
               <UiAvatar initials="DX" shape="square" tone="info" />
               <UiAvatar icon="⚙" alt="Settings avatar" tone="warning" />
               <UiAvatarGroup :items="avatarItems" :max="3" />
+            </div>
+
+            <div
+              style="
+                display: grid;
+                gap: var(--ui-space-4);
+                grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+              "
+            >
+              <UiImage
+                :src="displayImageSrc"
+                alt="Architecture snapshot"
+                caption="Architecture snapshot"
+                aspect="landscape"
+                bordered
+              />
+              <UiImage alt="Fallback-only preview" caption="Fallback proof" aspect="square" bordered>
+                <template #fallback>◇</template>
+              </UiImage>
             </div>
 
             <div class="ui-cluster">
@@ -152,6 +176,46 @@ export const SurfacesAndStatus: StoryObj<typeof UiCard> = {
           </UiTable>
         </UiCard>
       </div>
+    `,
+  }),
+};
+
+export const ImagesAndFallbacks: StoryObj<typeof UiCard> = {
+  render: () => ({
+    components: { UiCard, UiImage },
+    setup() {
+      return { displayImageSrc };
+    },
+    template: `
+      <UiCard>
+        <template #header>UiImage states</template>
+        <div
+          style="
+            display: grid;
+            gap: var(--ui-space-4);
+            grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+          "
+        >
+          <UiImage
+            :src="displayImageSrc"
+            alt="Banner snapshot"
+            caption="Base"
+            aspect="landscape"
+            bordered
+          />
+          <UiImage
+            :src="displayImageSrc"
+            alt="Contained banner"
+            caption="Contain fit"
+            aspect="video"
+            fit="contain"
+            bordered
+          />
+          <UiImage alt="Fallback contract" caption="Edge case: no source" aspect="square">
+            <template #fallback>◇</template>
+          </UiImage>
+        </div>
+      </UiCard>
     `,
   }),
 };
