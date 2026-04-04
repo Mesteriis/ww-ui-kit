@@ -1,5 +1,5 @@
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { flushPromises, mount } from '@vue/test-utils';
+import { describe, expect, it, vi } from 'vitest';
 
 import { getThemeMeta } from '@ww/themes';
 
@@ -14,6 +14,9 @@ describe('LabWorkbenchView', () => {
         themeMeta: getThemeMeta('belovodye'),
       },
     });
+
+    await vi.dynamicImportSettled();
+    await flushPromises();
 
     expect(wrapper.text()).toContain('UiButton');
     expect(wrapper.text()).toContain('@ww/core');
