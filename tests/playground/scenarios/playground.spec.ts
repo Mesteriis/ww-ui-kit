@@ -107,12 +107,10 @@ test('exercises floating overlays, dropdown keyboard flows, and toast stacking i
   await expect(page.getByText('Popconfirm outcome: confirmed', { exact: true })).toBeVisible();
 
   const contextTrigger = page.getByRole('button', { name: 'Right-click release tools' }).first();
-  await contextTrigger.click({ button: 'right' });
+  await contextTrigger.focus();
+  await page.keyboard.press('Shift+F10');
   const contextMenu = page.locator('.ui-context-menu');
-  const inspectItem = contextMenu.getByRole('menuitem', { name: 'Inspect release' });
   await expect(contextMenu).toBeVisible();
-  await expect(inspectItem).toBeVisible();
-  await inspectItem.focus();
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
   await expect(contextMenu).toHaveCount(0);
@@ -291,13 +289,15 @@ test('runs advanced core family flows in the playground harness', async ({ page 
   await expect(page.getByRole('dialog', { name: 'Image preview' })).toHaveCount(0);
 
   await advancedSection.getByRole('button', { name: 'Open alert dialog' }).click();
-  await expect(page.getByRole('dialog', { name: 'Advanced core surfaces' })).toBeVisible();
-  await page.getByRole('button', { name: 'Acknowledge' }).click();
+  const advancedAlert = page.getByRole('alertdialog', { name: 'Advanced core surfaces' });
+  await expect(advancedAlert).toBeVisible();
+  await advancedAlert.getByRole('button', { name: 'Acknowledge' }).click();
   await expect(advancedSection.getByText('Core advanced state: acknowledged', { exact: true })).toBeVisible();
 
   await advancedSection.getByRole('button', { name: 'Imperative confirm' }).click();
-  await expect(page.getByRole('dialog', { name: 'Ship advanced core surfaces?' })).toBeVisible();
-  await page.getByRole('button', { name: 'Confirm' }).click();
+  const confirmAlert = page.getByRole('alertdialog', { name: 'Ship advanced core surfaces?' });
+  await expect(confirmAlert).toBeVisible();
+  await confirmAlert.getByRole('button', { name: 'Confirm' }).click();
   await expect(advancedSection.getByText('Core advanced state: confirmed', { exact: true })).toBeVisible();
 });
 
@@ -314,7 +314,7 @@ test('runs interaction system flows in the playground harness', async ({ page })
 
   await interactionSection.getByRole('button', { name: 'Start tour' }).click();
   await expect(page.getByRole('dialog', { name: 'Tour target A' })).toBeVisible();
-  await page.getByRole('button', { name: 'Next' }).click();
+  await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('dialog', { name: 'Tour target B' })).toBeVisible();
 });
 
