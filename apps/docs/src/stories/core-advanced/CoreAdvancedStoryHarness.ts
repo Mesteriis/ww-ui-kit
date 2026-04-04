@@ -45,10 +45,10 @@ export default defineComponent({
     mode: {
       type: String,
       default: 'overview',
-    },
+  },
   },
   setup(props) {
-    const mode = toRef(props, 'mode');
+    const storyMode = toRef(props, 'mode');
     const imageSrc = bannerSvg;
     const imageItems = [
       { src: imageSrc, alt: 'Banner preview', caption: 'Previewable image' },
@@ -92,7 +92,7 @@ export default defineComponent({
       imageSrc,
       mentionItems,
       mentionValue,
-      mode,
+      storyMode,
       openConfirm,
       rangeValue,
       timeValue,
@@ -111,7 +111,7 @@ export default defineComponent({
             <UiIcon name="info" />
           </div>
 
-          <UiWatermark content="Belovodye contract" :rotate="mode === 'theming' ? -18 : -26">
+          <UiWatermark content="Belovodye contract" :rotate="storyMode === 'theming' ? -18 : -26">
             <UiCard>
               <template #header>Watermark proof</template>
               Watermark stays token-driven and purely visual.
@@ -141,13 +141,13 @@ export default defineComponent({
 
         <UiCard>
           <template #header>Preview group</template>
-          <UiImagePreviewGroup :items="imageItems" :columns="mode === 'states' ? 2 : 3" />
+          <UiImagePreviewGroup :items="imageItems" :columns="storyMode === 'states' ? 2 : 3" />
         </UiCard>
       </div>
 
       <UiCard>
         <template #header>Splitter</template>
-        <UiSplitter :initial-ratio="mode === 'states' ? 65 : 50">
+        <UiSplitter :initial-ratio="storyMode === 'states' ? 65 : 50">
           <template #first>
             <div style="padding: var(--ui-space-4);">Primary evidence panel</div>
           </template>
@@ -176,7 +176,7 @@ export default defineComponent({
             <UiField label="Time picker">
               <UiTimePicker v-model="timeValue" />
             </UiField>
-            <UiCalendar v-model="calendarValue" :mode="mode === 'states' ? 'range' : 'single'" />
+            <UiCalendar v-model="calendarValue" :mode="storyMode === 'states' ? 'range' : 'single'" />
           </div>
         </UiCard>
 

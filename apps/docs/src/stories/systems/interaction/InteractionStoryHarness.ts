@@ -42,7 +42,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const mode = toRef(props, 'mode');
+    const storyMode = toRef(props, 'mode');
     const formModel = ref({
       title: '',
       owner: '',
@@ -97,11 +97,11 @@ export default defineComponent({
         target: '#interaction-tour-target-b',
         title: 'Tour follow-up',
         description: 'Next and previous flow stays keyboard reachable.',
-        placement: mode.value === 'interactions' ? 'right' : 'bottom',
+        placement: storyMode.value === 'interactions' ? 'right' : 'bottom',
       },
     ]);
 
-    const uploadTransport = ({ onProgress }) => {
+    const uploadTransport = ({ onProgress }: { onProgress: (value: number) => void }) => {
       onProgress(35);
       onProgress(85);
       onProgress(100);
@@ -119,7 +119,12 @@ export default defineComponent({
       ];
     };
 
-    const resolveInputProps = (controlProps) => ({
+    const resolveInputProps = (controlProps: {
+      ariaDescribedby?: string;
+      disabled: boolean;
+      id: string;
+      invalid: boolean;
+    }) => ({
       disabled: controlProps.disabled,
       id: controlProps.id,
       invalid: controlProps.invalid,
@@ -132,8 +137,8 @@ export default defineComponent({
       formSubmitState,
       infiniteItems,
       loadMore,
-      mode,
       resolveInputProps,
+      storyMode,
       tourOpen,
       tourSteps,
       transferValue,
@@ -258,8 +263,8 @@ export default defineComponent({
             <UiTreeSelect
               v-model="treeSelectValue"
               :nodes="treeNodes"
-              :multiple="mode === 'states'"
-              :checkable="mode === 'interactions'"
+              :multiple="storyMode === 'states'"
+              :checkable="storyMode === 'interactions'"
             />
           </div>
         </UiCard>
@@ -270,7 +275,7 @@ export default defineComponent({
             <UiField label="Cascader path">
               <UiCascader v-model="cascaderValue" :nodes="treeNodes" />
             </UiField>
-            <UiTransfer v-model="transferValue" :items="treeNodes" :virtual="mode !== 'overview'" />
+            <UiTransfer v-model="transferValue" :items="treeNodes" :virtual="storyMode !== 'overview'" />
           </div>
         </UiCard>
       </div>
