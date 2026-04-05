@@ -33,10 +33,16 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  'update:modelValue': [value: UiFormValue];
-  invalid: [payload: { errors: Record<string, string | undefined>; values: UiFormValue }];
-  submit: [payload: { values: UiFormValue }];
-  validate: [payload: { errors: Record<string, string | undefined>; valid: boolean }];
+  (event: 'update:modelValue', value: UiFormValue): void;
+  (
+    event: 'invalid',
+    payload: { errors: Record<string, string | undefined>; values: UiFormValue }
+  ): void;
+  (event: 'submit', payload: { values: UiFormValue }): void;
+  (
+    event: 'validate',
+    payload: { errors: Record<string, string | undefined>; valid: boolean }
+  ): void;
 }>();
 
 const formRef = ref<HTMLFormElement | null>(null);
@@ -261,6 +267,6 @@ defineExpose({
     :style="props.labelWidth ? { '--ui-form-label-width': props.labelWidth } : undefined"
     @submit="onSubmit"
   >
-    <slot :values="valueState.currentValue.value" :errors="meta.errors.value" />
+    <slot :values="valueState.currentValue.value" :errors="meta.errors.value"></slot>
   </form>
 </template>

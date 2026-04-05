@@ -18,8 +18,6 @@ export function createConfig() {
         'vitest.config.ts',
         'vite.aliases.ts',
         'vite.chunking.ts',
-        '**/vite.config.ts',
-        '**/vitest.config.ts',
       ],
     },
     js.configs.recommended,
@@ -65,7 +63,22 @@ export function createConfig() {
         'no-restricted-imports': [
           'error',
           {
-            patterns: ['@ww/*/src/**'],
+            patterns: [
+              {
+                group: ['@ww/*/src/**'],
+                message: 'Import from package roots instead of package source internals.',
+              },
+              {
+                group: [
+                  '@ww/*/dist',
+                  '@ww/*/dist/**',
+                  '**/packages/*/dist/**',
+                  '**/packages/third-party/*/dist/**',
+                ],
+                message:
+                  'Workspace apps and source files must not import workspace dist artifacts.',
+              },
+            ],
             paths: [
               {
                 name: '@ww/primitives/motion',
@@ -173,6 +186,25 @@ export function createConfig() {
       languageOptions: {
         ...tseslint.configs.disableTypeChecked.languageOptions,
         globals: {
+          ...globals.node,
+        },
+        parserOptions: {
+          ...tseslint.configs.disableTypeChecked.languageOptions?.parserOptions,
+          parser: tseslint.parser,
+        },
+      },
+      rules: {
+        ...tseslint.configs.disableTypeChecked.rules,
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['apps/docs/.storybook/**/*.ts', '**/vite.config.ts', '**/vitest.config.ts'],
+      ...tseslint.configs.disableTypeChecked,
+      languageOptions: {
+        ...tseslint.configs.disableTypeChecked.languageOptions,
+        globals: {
+          ...globals.browser,
           ...globals.node,
         },
         parserOptions: {

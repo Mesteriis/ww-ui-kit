@@ -41,6 +41,7 @@ Supporting decisions:
 - App TypeScript configs map `@ww/*` package specifiers to package `src/index.ts` entrypoints for workspace authoring.
 - Sanctioned package stylesheet entrypoints also resolve to source CSS through the shared alias contract.
 - Root maintainer workflows for docs and playground no longer prebuild workspace package dependencies as a prerequisite for local app execution.
+- Lint and governance checks reject workspace `dist/` imports inside app authoring paths and fail CI when docs/playground runtime configs drift away from the shared source-first alias contract.
 - Publish-time library output, declaration generation, and package exports remain `dist/` based. This decision affects app/runtime authoring only, not release artifacts.
 - CI enforces the source-first contract through governance checks.
 
@@ -70,7 +71,7 @@ Rejected because package exports, declaration generation, and release artifacts 
 1. Make Storybook use the shared workspace alias contract.
 2. Keep docs and playground TypeScript paths aligned with source entrypoints.
 3. Remove local docs/playground workflow steps that prebuild dependency packages only to satisfy app resolution.
-4. Add governance checks that fail when app runtime configs or source imports regress toward `dist/`.
+4. Add lint and governance checks that fail when app runtime configs or source imports regress toward `dist/`.
 
 ## Related artifacts
 

@@ -68,11 +68,10 @@ export default defineComponent({
     const lastClickedRow = ref('none');
 
     const result = computed(() => applyDataGridQuery(dataGridRows, dataGridColumns, query.value));
-    const visibleColumns = computed(() =>
+    const visibleColumns = computed<readonly DataGridColumn<Record<string, unknown>>[]>(() =>
       dataGridUiColumns.filter(
-        (column) =>
-          (query.value.columnVisibility as Record<string, boolean> | undefined)?.[column.id] !== false
-      ) as readonly DataGridColumn<Record<string, unknown>>[]
+        (column) => query.value.columnVisibility?.[column.id] !== false
+      )
     );
     const pageCount = computed(() =>
       Math.max(1, Math.ceil(result.value.totalRows / query.value.pagination.pageSize))
@@ -92,8 +91,8 @@ export default defineComponent({
         pageRowIds.value.length > 0 &&
         pageRowIds.value.every((rowId) => selectedRowIds.value.includes(rowId))
     );
-    const hideableColumns = computed(() =>
-      dataGridUiColumns.filter((column) => column.hideable !== false) as readonly DataGridColumn[]
+    const hideableColumns = computed<readonly DataGridColumn<Record<string, unknown>>[]>(() =>
+      dataGridUiColumns.filter((column) => column.hideable !== false)
     );
 
     const updateQuery = (nextQuery: Partial<DataGridQuery>) => {

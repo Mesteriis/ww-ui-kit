@@ -336,7 +336,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 21,
+          "count": 22,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -390,7 +390,7 @@ export const playgroundLabUsage = {
         },
         {
           "area": "docs",
-          "count": 21,
+          "count": 22,
           "files": [
             "apps/docs/src/stories/Buttons.stories.ts",
             "apps/docs/src/stories/CoreShowcase.stories.ts",
@@ -2938,6 +2938,14 @@ export const playgroundLabUsage = {
       "sourcePublicSurface": "UiNumberInput / UiSelect / UiAutocomplete",
       "downstreamPackages": [
         {
+          "packageName": "@ww/data-grid",
+          "packageLayer": "system",
+          "count": 1,
+          "files": [
+            "packages/data-grid/src/components/UiDataGridFilters.vue"
+          ]
+        },
+        {
           "packageName": "@ww/docs",
           "packageLayer": "app",
           "count": 3,
@@ -2973,6 +2981,13 @@ export const playgroundLabUsage = {
           "files": [
             "apps/playground/src/lab/schemas/ui-select.lab.ts",
             "apps/playground/src/testing/routes/TestingHarnessView.vue"
+          ]
+        },
+        {
+          "area": "systems",
+          "count": 1,
+          "files": [
+            "packages/data-grid/src/components/UiDataGridFilters.vue"
           ]
         }
       ],
@@ -3037,6 +3052,10 @@ export const playgroundLabUsage = {
         {
           "file": "apps/playground/src/testing/routes/TestingHarnessView.vue",
           "area": "playground"
+        },
+        {
+          "file": "packages/data-grid/src/components/UiDataGridFilters.vue",
+          "area": "systems"
         }
       ]
     },
@@ -4413,7 +4432,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 26,
+          "count": 27,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -4452,7 +4471,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 26,
+          "count": 27,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -4602,7 +4621,7 @@ export const playgroundLabUsage = {
         {
           "packageName": "@ww/docs",
           "packageLayer": "app",
-          "count": 33,
+          "count": 35,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -4633,7 +4652,7 @@ export const playgroundLabUsage = {
       "usageGroups": [
         {
           "area": "docs",
-          "count": 33,
+          "count": 35,
           "files": [
             "apps/docs/src/stories/CoreShowcase.stories.ts",
             "apps/docs/src/stories/Display.stories.ts",
@@ -5524,8 +5543,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiImagePreview is reviewed through Storybook and the playground harness because zoom, rotation, and overlay focus flow are interaction contracts.",
       "sourcePublicSurface": "UiImagePreview / UiImagePreviewGroup",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -5576,7 +5612,12 @@ export const playgroundLabUsage = {
         "image",
         "overlay"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/core-advanced/CoreAdvancedStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-image-preview-group": {
       "id": "ui-image-preview-group",
@@ -9980,8 +10021,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridToolbar is tuned through UiDataGrid because it depends on the controlled query model and sibling sub-surfaces.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10069,7 +10127,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-search": {
       "id": "ui-data-grid-search",
@@ -10082,8 +10145,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridSearch is tuned through UiDataGrid because it depends on the controlled query model and toolbar composition.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10171,7 +10251,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-filters": {
       "id": "ui-data-grid-filters",
@@ -10184,8 +10269,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridFilters is tuned through UiDataGrid because it depends on filter definitions and toolbar composition.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10273,7 +10375,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-table": {
       "id": "ui-data-grid-table",
@@ -10286,8 +10393,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridTable is tuned through UiDataGrid because it depends on controller-derived visibility, sort, and selection state.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10375,7 +10499,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-pagination": {
       "id": "ui-data-grid-pagination",
@@ -10388,8 +10517,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridPagination is tuned through UiDataGrid because it depends on the controller summary and query model.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10477,7 +10623,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-bulk-actions": {
       "id": "ui-data-grid-bulk-actions",
@@ -10490,8 +10641,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridBulkActions is tuned through UiDataGrid because it depends on controlled selection state and bulk action slots.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10579,7 +10747,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-data-grid-column-visibility": {
       "id": "ui-data-grid-column-visibility",
@@ -10592,8 +10765,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiDataGridColumnVisibility is tuned through UiDataGrid because it depends on toolbar composition and query state.",
       "sourcePublicSurface": "UiDataGrid / UiDataGridToolbar / UiDataGridSearch / UiDataGridFilters / UiDataGridTable / UiDataGridPagination / UiDataGridBulkActions / UiDataGridColumnVisibility",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -10681,7 +10871,12 @@ export const playgroundLabUsage = {
         "system",
         "data-grid"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/systems/data-grid/DataGridSubcomponentsStoryHarness.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-virtual-scroll": {
       "id": "ui-virtual-scroll",
@@ -12184,8 +12379,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiWidgetHeader is tuned through UiWidgetShell because header, body, and footer are only meaningful together.",
       "sourcePublicSurface": "UiWidgetShell / UiWidgetHeader / UiWidgetBody / UiWidgetFooter",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -12231,7 +12443,12 @@ export const playgroundLabUsage = {
       "tags": [
         "widgets"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/widgets/Shell.stories.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-widget-body": {
       "id": "ui-widget-body",
@@ -12244,8 +12461,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiWidgetBody is tuned through UiWidgetShell because header, body, and footer are only meaningful together.",
       "sourcePublicSurface": "UiWidgetShell / UiWidgetHeader / UiWidgetBody / UiWidgetFooter",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -12291,7 +12525,12 @@ export const playgroundLabUsage = {
       "tags": [
         "widgets"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/widgets/Shell.stories.ts",
+          "area": "docs"
+        }
+      ]
     },
     "ui-widget-footer": {
       "id": "ui-widget-footer",
@@ -12304,8 +12543,25 @@ export const playgroundLabUsage = {
       "labEligible": false,
       "labExemptionReason": "UiWidgetFooter is tuned through UiWidgetShell because header, body, and footer are only meaningful together.",
       "sourcePublicSurface": "UiWidgetShell / UiWidgetHeader / UiWidgetBody / UiWidgetFooter",
-      "downstreamPackages": [],
-      "usageGroups": [],
+      "downstreamPackages": [
+        {
+          "packageName": "@ww/docs",
+          "packageLayer": "app",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
+      "usageGroups": [
+        {
+          "area": "docs",
+          "count": 1,
+          "files": [
+            "apps/docs/src/stories/widgets/Shell.stories.ts"
+          ]
+        }
+      ],
       "relatedStorybook": [
         {
           "variant": "overview",
@@ -12351,7 +12607,12 @@ export const playgroundLabUsage = {
       "tags": [
         "widgets"
       ],
-      "knownUsages": []
+      "knownUsages": [
+        {
+          "file": "apps/docs/src/stories/widgets/Shell.stories.ts",
+          "area": "docs"
+        }
+      ]
     },
     "data-table-widget": {
       "id": "data-table-widget",

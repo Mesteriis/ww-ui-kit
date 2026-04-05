@@ -10,6 +10,7 @@ Use this rule when editing playground testing routes or the maintainer lab.
 ## Do
 
 - Keep playground as the real integration harness for consumer-proof flows.
+- Resolve workspace `@ww/*` packages through the sanctioned source-first alias contract, not package `dist/`.
 - Keep `/testing/*` stable for browser tests and manifest-required scenarios.
 - Keep `/lab/*` curated, schema-driven, and backed by the governed lab manifest.
 - Add stable sections or scenarios that prove multi-package composition.
@@ -18,6 +19,7 @@ Use this rule when editing playground testing routes or the maintainer lab.
 ## Do not
 
 - Do not treat playground as a story clone with no added integration value.
+- Do not make playground testing or lab runtime depend on workspace package `dist/` output.
 - Do not add random demo pages or hardcoded component lists outside the manifest-driven lab runtime.
 - Do not hide broken contracts behind local mocks that bypass package APIs.
 - Do not put product routing or backend logic here.
@@ -28,3 +30,6 @@ Use this rule when editing playground testing routes or the maintainer lab.
 - `tools/governance/catalog/playground-lab-manifest.mjs`
 - `tools/governance/playground-lab/**/*`
 - `tests/playground/**/*`
+- `vite.aliases.ts`
+- `apps/playground/tsconfig.json`
+- `tools/governance/checks/check-app-source-first-resolution.mjs`
