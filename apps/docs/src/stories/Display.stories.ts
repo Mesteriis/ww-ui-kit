@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref } from 'vue';
 
+import bannerSvg from '../../../assets/img/banner.svg';
+
 import {
   UiAvatar,
   UiAvatarGroup,
@@ -20,7 +22,7 @@ import {
   UiTimeline,
 } from '@ww/core';
 
-const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
+const displayImageSrc = bannerSvg;
 
 const meta = {
   title: 'Core/Display',

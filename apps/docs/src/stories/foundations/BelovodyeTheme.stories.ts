@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { computed, ref } from 'vue';
 
+import bannerSvg from '../../../../assets/img/banner.svg';
+
 import {
   UiAffix,
   UiAlert,
@@ -235,7 +237,7 @@ export const SystemShowcase: StoryObj = {
         { initials: 'QA', alt: 'Quality gate', tone: 'success' as const },
         { initials: 'DX', alt: 'Developer experience', tone: 'info' as const },
       ];
-      const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
+      const displayImageSrc = bannerSvg;
 
       const menuItems = [
         { label: 'Overview', key: 'overview', value: 'overview' },

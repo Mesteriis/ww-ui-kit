@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { computed, ref } from 'vue';
 
+import bannerSvg from '../../../assets/img/banner.svg';
+
 import {
   UiAffix,
   UiAlert,
@@ -261,7 +263,7 @@ export const AllCoreComponents: StoryObj = {
         { initials: 'CR', alt: 'Core review', tone: 'brand' as const },
         { initials: 'QA', alt: 'Quality gate', tone: 'success' as const },
       ];
-      const displayImageSrc = new URL('../../../assets/img/banner.svg', import.meta.url).href;
+      const displayImageSrc = bannerSvg;
 
       const steps = [
         { title: 'Design', description: 'Shape the baseline contract' },
