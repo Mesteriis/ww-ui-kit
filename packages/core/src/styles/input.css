@@ -388,10 +388,20 @@
 .ui-rich-select__selected {
   display: flex;
   align-items: center;
+  align-content: center;
   gap: var(--ui-space-2);
   flex: 1;
   min-inline-size: 0;
   flex-wrap: wrap;
+}
+
+.ui-rich-select__actions {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--ui-space-1);
+  margin-inline-start: auto;
+  padding-inline-start: var(--ui-space-1);
 }
 
 .ui-rich-select__input {
@@ -418,13 +428,26 @@
 }
 
 .ui-rich-select__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  padding: 0;
   border: 0;
+  border-radius: var(--ui-radius-pill);
   background: transparent;
   color: var(--ui-text-muted);
   cursor: pointer;
 }
 
+.ui-rich-select__clear:hover:not(:disabled) {
+  background: var(--ui-surface-sunken);
+  color: var(--ui-text-primary);
+}
+
 .ui-rich-select__caret {
+  flex: 0 0 auto;
   color: var(--ui-text-muted);
 }
 

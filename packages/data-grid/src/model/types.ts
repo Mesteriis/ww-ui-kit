@@ -47,6 +47,7 @@ export interface DataGridSelectFilterDefinition extends DataGridFilterBase {
 export interface DataGridMultiSelectFilterDefinition extends DataGridFilterBase {
   type: 'multi-select';
   options: readonly DataGridFilterOption[];
+  placeholder?: string;
 }
 
 export interface DataGridBooleanFilterDefinition extends DataGridFilterBase {

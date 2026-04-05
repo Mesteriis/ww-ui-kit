@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiSelectSimple } from '@ww/core';
+import { UiSelect, UiSelectSimple } from '@ww/core';
 
 import type { DataGridFilterDefinition, DataGridFilterValue } from '../model/types';
 
@@ -56,16 +56,8 @@ const toMultiSelectValue = (value: DataGridFilterValue | undefined): string[] =>
   return Array.isArray(value) ? Array.from(value as readonly string[]) : [];
 };
 
-const onMultiSelect = (definitionId: string, event: Event) => {
-  if (!(event.target instanceof HTMLSelectElement)) {
-    return;
-  }
-
-  emit(
-    'updateFilter',
-    definitionId,
-    Array.from(event.target.selectedOptions, (option) => option.value)
-  );
+const onMultiSelectValue = (definitionId: string, value: string[] | null) => {
+  emit('updateFilter', definitionId, value && value.length > 0 ? value : undefined);
 };
 
 const onSelect = (definition: DataGridFilterDefinition, value: string) => {
@@ -117,22 +109,17 @@ const onTextInput = (definitionId: string, event: Event) => {
         @update:model-value="onSelect(definition, $event)"
       />
 
-      <select
+      <UiSelect
         v-else
-        class="ui-input ui-data-grid-filters__control ui-data-grid-filters__control--multi"
         multiple
+        clearable
+        class="ui-data-grid-filters__control ui-data-grid-filters__control--multi"
+        :model-value="toMultiSelectValue(props.filters[definition.id])"
+        :options="toSelectOptions(definition)"
+        :placeholder="definition.placeholder ?? 'Any'"
         :disabled="props.disabled"
-        @change="onMultiSelect(definition.id, $event)"
-      >
-        <option
-          v-for="option in toSelectOptions(definition)"
-          :key="option.value"
-          :value="option.value"
-          :selected="toMultiSelectValue(props.filters[definition.id]).includes(option.value)"
-        >
-          {{ option.label }}
-        </option>
-      </select>
+        @update:model-value="onMultiSelectValue(definition.id, $event as string[] | null)"
+      />
     </label>
   </div>
 </template>

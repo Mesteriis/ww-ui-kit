@@ -224,6 +224,7 @@ export default defineComponent({
           <div
             style="
               display: grid;
+              align-items: start;
               gap: var(--ui-space-4);
               grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
             "

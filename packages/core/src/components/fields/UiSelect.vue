@@ -485,17 +485,19 @@ const displayInputValue = computed(() => {
         </span>
       </div>
 
-      <button
-        v-if="props.clearable && selectedOptions.length > 0"
-        type="button"
-        class="ui-rich-select__clear"
-        aria-label="Clear selection"
-        data-ui-motion="ring-focus-soft"
-        @click.stop="clearSelection"
-      >
-        ×
-      </button>
-      <span class="ui-rich-select__caret" aria-hidden="true">▾</span>
+      <span class="ui-rich-select__actions">
+        <button
+          v-if="props.clearable && selectedOptions.length > 0"
+          type="button"
+          class="ui-rich-select__clear"
+          aria-label="Clear selection"
+          data-ui-motion="ring-focus-soft"
+          @click.stop="clearSelection"
+        >
+          ×
+        </button>
+        <UiIcon class="ui-rich-select__caret" name="chevronDown" decorative />
+      </span>
     </div>
 
     <PrimitivePortal :to="portalTarget">

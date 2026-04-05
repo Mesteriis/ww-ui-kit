@@ -320,7 +320,7 @@ describe('UiDataGrid package', () => {
     await inputs[0].setValue('hello');
     expect(filtersWrapper.emitted('updateFilter')?.[0]).toEqual(['query', 'hello']);
     const filtersSetupState = filtersWrapper.vm.$.setupState as {
-      onMultiSelect: (definitionId: string, event: Event) => void;
+      onMultiSelectValue: (definitionId: string, value: string[] | null) => void;
       onSelect: (definition: DataGridFilterDefinition, value: string) => void;
       onTextInput: (definitionId: string, event: Event) => void;
       toSelectOptions: (
@@ -360,17 +360,30 @@ describe('UiDataGrid package', () => {
         .emitted('updateFilter')
         ?.some((event) => event[0] === 'active' && event[1] === true)
     ).toBe(true);
-    const multiSelect = filtersWrapper.find('select[multiple]');
-    const multiElement = multiSelect.element as HTMLSelectElement;
-    multiElement.options[0].selected = true;
-    multiElement.options[1].selected = true;
-    await multiSelect.trigger('change');
-    expect(filtersWrapper.emitted('updateFilter')?.some((event) => event[0] === 'tags')).toBe(true);
-    const emittedCountBeforeInvalidMulti = filtersWrapper.emitted('updateFilter')?.length ?? 0;
-    filtersSetupState.onMultiSelect('tags', {
-      target: document.createElement('div'),
-    } as unknown as Event);
-    expect(filtersWrapper.emitted('updateFilter')).toHaveLength(emittedCountBeforeInvalidMulti);
+    filtersSetupState.onMultiSelectValue('tags', ['ops', 'ui']);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some(
+          (event) =>
+            event[0] === 'tags' &&
+            Array.isArray(event[1]) &&
+            event[1][0] === 'ops' &&
+            event[1][1] === 'ui'
+        )
+    ).toBe(true);
+    filtersSetupState.onMultiSelectValue('tags', []);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'tags' && event[1] === undefined)
+    ).toBe(true);
+    filtersSetupState.onMultiSelectValue('tags', null);
+    expect(
+      filtersWrapper
+        .emitted('updateFilter')
+        ?.some((event) => event[0] === 'tags' && event[1] === undefined)
+    ).toBe(true);
     filtersSetupState.onTextInput('query', {
       target: document.createElement('div'),
     } as unknown as Event);
