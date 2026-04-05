@@ -39,3 +39,4 @@
 | ADR-0035 | accepted   | Interaction Guidance And Virtualization Surfaces      | 2026-04-04 | Adds tour and virtualization runtimes to `@ww/interaction` so dense scrolling stays out of `@ww/core`.                         |
 | ADR-0036 | accepted   | Core Splitter And Alert Dialog Surfaces               | 2026-04-04 | Adds `UiSplitter`, `UiAlertDialog`, and promise-based imperative confirm as governed core structural and overlay surfaces.      |
 | ADR-0037 | accepted   | Core Media Preview Watermark And Icon Surfaces        | 2026-04-04 | Adds `UiImagePreview`, `UiImagePreviewGroup`, `UiWatermark`, and `UiIcon` as governed core display extensions.                 |
+| ADR-0038 | accepted   | Source First App Package Resolution                   | 2026-04-05 | Makes Storybook and playground consume workspace package source so governed app proof never depends on stale `dist/` output.   |
