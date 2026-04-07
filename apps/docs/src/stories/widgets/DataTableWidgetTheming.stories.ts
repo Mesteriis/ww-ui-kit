@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge } from '@ww/core';
 
 import { DataTableWidgetStoryHarness } from './data-table-widget-fixtures';
 
 const meta = {
-  title: 'Widgets/Data Table Widget/Theming',
+  title: 'Widgets/Scenarios/Data Table Widget/Theming',
   component: DataTableWidgetStoryHarness,
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof DataTableWidgetStoryHarness>;
 
 export default meta;

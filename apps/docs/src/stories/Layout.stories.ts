@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 
 import {
@@ -16,8 +16,9 @@ import {
 } from '@ww/core';
 
 const meta = {
-  title: 'Core/Layout',
+  title: 'Core/Scenarios/Layout',
   component: UiGrid,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiGrid>;
 
 export default meta;

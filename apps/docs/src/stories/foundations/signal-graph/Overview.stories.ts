@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiSignalGraph } from '@ww/signal-graph';
 
@@ -11,7 +11,7 @@ import {
 
 const meta = {
   title: 'Foundations/Signal Graph/Overview',
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiSignalGraph>;
 
 export default meta;

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge, UiCard } from '@ww/core';
 import { PAGE_TEMPLATE_LAYER_RULES, RESERVED_PAGE_TEMPLATE_NAMESPACES } from '@ww/page-templates';

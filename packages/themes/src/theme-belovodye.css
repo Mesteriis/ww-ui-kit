@@ -251,6 +251,8 @@
   --ui-button-neutral-soft-bg-active: rgba(132, 170, 188, 0.24);
   --ui-button-neutral-accent-start: var(--ui-neutral-300);
   --ui-button-neutral-accent-end: var(--ui-neutral-50);
+  --ui-button-outline-accent-start: var(--ui-success-400);
+  --ui-button-outline-accent-end: color-mix(in srgb, var(--ui-danger-200) 70%, var(--ui-brand-100));
   --ui-button-brand-solid-bg: var(--ui-brand-400);
   --ui-button-brand-solid-fg: var(--ui-neutral-950);
   --ui-button-brand-solid-border: var(--ui-brand-400);

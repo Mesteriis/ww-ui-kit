@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, ref } from 'vue';
 
 import {
@@ -12,8 +12,9 @@ import {
 } from '@ww/core';
 
 const meta = {
-  title: 'Core/Navigation',
+  title: 'Core/Scenarios/Navigation',
   component: UiPagination,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiPagination>;
 
 export default meta;

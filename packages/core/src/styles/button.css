@@ -1,6 +1,9 @@
 .ui-button {
   --ui-button-layer-effect: 0;
   --ui-button-layer-content: 1;
+  --ui-button-effect-border-flow-width: calc(var(--ui-button-effect-border-width) * 3);
+  --ui-button-effect-active-start: var(--ui-button-effect-start);
+  --ui-button-effect-active-end: var(--ui-button-effect-end);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +71,16 @@
 
 .ui-button-group--attached.ui-button-group--vertical > .ui-button:not(:first-child) {
   margin-block-start: calc(var(--ui-button-effect-border-width) * -1);
+}
+
+.ui-button-group--attached.ui-button-group--horizontal
+  > .ui-button.ui-button--effect-border-flow:not(:first-child) {
+  margin-inline-start: calc(var(--ui-button-effect-border-flow-width) * -1);
+}
+
+.ui-button-group--attached.ui-button-group--vertical
+  > .ui-button.ui-button--effect-border-flow:not(:first-child) {
+  margin-block-start: calc(var(--ui-button-effect-border-flow-width) * -1);
 }
 
 .ui-button-group--attached.ui-button-group--horizontal > .ui-button:first-child {
@@ -312,29 +325,35 @@
   border-color: transparent;
 }
 
-.ui-button--effect-border-flow::before {
-  inset: 0;
-  padding: var(--ui-button-effect-border-width);
-  background: linear-gradient(
-    120deg,
-    var(--ui-button-effect-start),
-    var(--ui-button-effect-end),
+.ui-button--appearance-outline.ui-button--effect-border-flow {
+  --ui-button-effect-active-start: var(
+    --ui-button-outline-accent-start,
     var(--ui-button-effect-start)
   );
-  background-size: 200% 100%;
+  --ui-button-effect-active-end: var(--ui-button-outline-accent-end, var(--ui-button-effect-end));
+}
+
+.ui-button--effect-border-flow::before {
+  inset: 0;
+  padding: var(--ui-button-effect-border-flow-width);
+  background: linear-gradient(
+    120deg,
+    var(--ui-button-effect-active-start) 0%,
+    var(--ui-button-effect-active-end) 50%,
+    var(--ui-button-effect-active-start) 100%
+  );
+  background-size: 220% 100%;
   -webkit-mask:
     linear-gradient(white 0 0) content-box,
     linear-gradient(white 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 1;
-  animation: ui-button-border-flow 2.4s linear infinite;
+  animation: ui-button-border-flow 2.4s var(--ui-motion-easing-emphasized) infinite alternate;
 }
 
 .ui-button--effect-border-flow:hover:not(:disabled) {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--ui-button-effect-start) 48%, transparent),
-    0 0 0 4px color-mix(in srgb, var(--ui-button-effect-end) 18%, transparent);
+  box-shadow: none;
 }
 
 .ui-button--effect-color-shift::after {

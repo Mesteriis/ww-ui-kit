@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiCard } from '@ww/core';
 import { UiApexChart } from '@ww/charts-apex';
@@ -15,7 +15,7 @@ import {
 
 const meta = {
   title: 'Foundations/Charts/Theming',
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 
 import { UiBadge, UiCard } from '@ww/core';
@@ -8,7 +8,7 @@ import { lineSeries, monthCategories } from './chart-fixtures';
 
 const meta = {
   title: 'Foundations/Charts/Interactions',
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiApexChart>;
 
 export default meta;

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge, UiButton, UiCard } from '@ww/core';
 import {
@@ -15,8 +15,8 @@ import {
 import { UiWidgetShell } from '@ww/widgets';
 
 const meta = {
-  title: 'Page Templates/Shell',
-  tags: ['autodocs'],
+  title: 'Page Templates/Scenarios/Shell',
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiLayout>;
 
 export default meta;

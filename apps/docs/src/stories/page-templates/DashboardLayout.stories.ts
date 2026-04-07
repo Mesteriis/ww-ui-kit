@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge, UiButton, UiCard, UiDropdown } from '@ww/core';
 import { UiDashboardLayout } from '@ww/page-templates';
@@ -71,8 +71,8 @@ const dashboardActivityLog = [
 ] as const;
 
 const meta = {
-  title: 'Page Templates/Dashboard Layout',
-  tags: ['autodocs'],
+  title: 'Page Templates/Scenarios/Dashboard Layout',
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiDashboardLayout>;
 
 export default meta;

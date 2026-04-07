@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { DataGridStoryHarness } from './data-grid-fixtures';
 
 const meta = {
-  title: 'Systems/Data Grid/Column Visibility',
+  title: 'Systems/Scenarios/Data Grid/Column Visibility',
   component: DataGridStoryHarness,
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;

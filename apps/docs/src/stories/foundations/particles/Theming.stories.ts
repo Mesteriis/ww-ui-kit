@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge, UiCard } from '@ww/core';
 import { UiTsParticlesBackdrop } from '@ww/tsparticles';
@@ -7,7 +7,7 @@ import { overviewParticlesOptions } from './particles-fixtures';
 
 const meta = {
   title: 'Foundations/Particles/Theming',
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiTsParticlesBackdrop>;
 
 export default meta;

@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge } from '@ww/core';
 
 import { DataGridStoryHarness } from './data-grid-fixtures';
 
 const meta = {
-  title: 'Systems/Data Grid/Theming',
+  title: 'Systems/Scenarios/Data Grid/Theming',
   component: DataGridStoryHarness,
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;

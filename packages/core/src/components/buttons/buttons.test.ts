@@ -56,6 +56,22 @@ describe('buttons', () => {
     expect(wrapper.attributes('data-ui-button-tone')).toBe('warning');
   });
 
+  it('keeps outline recipes static when effect is omitted', () => {
+    const wrapper = mount(UiButton, {
+      props: {
+        variant: 'secondary',
+      },
+      slots: {
+        default: 'Review',
+      },
+    });
+
+    expect(wrapper.classes()).toContain('ui-button--appearance-outline');
+    expect(wrapper.classes()).toContain('ui-button--effect-none');
+    expect(wrapper.classes()).not.toContain('ui-button--effect-border-flow');
+    expect(wrapper.attributes('data-ui-button-effect')).toBe('none');
+  });
+
   it('announces icon button loading state through aria-label', () => {
     const wrapper = mount(UiIconButton, {
       props: {
@@ -66,6 +82,23 @@ describe('buttons', () => {
 
     expect(wrapper.attributes('aria-busy')).toBe('true');
     expect(wrapper.attributes('aria-label')).toBe('Refresh, loading');
+  });
+
+  it('keeps outline icon buttons static when effect is omitted', () => {
+    const wrapper = mount(UiIconButton, {
+      props: {
+        ariaLabel: 'Open tools',
+        variant: 'secondary',
+      },
+      slots: {
+        default: '☰',
+      },
+    });
+
+    expect(wrapper.classes()).toContain('ui-button--appearance-outline');
+    expect(wrapper.classes()).toContain('ui-button--effect-none');
+    expect(wrapper.classes()).not.toContain('ui-button--effect-border-flow');
+    expect(wrapper.attributes('data-ui-button-effect')).toBe('none');
   });
 
   it('renders icon slots, block mode, and explicit button type', () => {

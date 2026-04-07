@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { DataGridStoryHarness } from './data-grid-fixtures';
 
 const meta = {
-  title: 'Systems/Data Grid/Bulk Actions',
+  title: 'Systems/Scenarios/Data Grid/Bulk Actions',
   component: DataGridStoryHarness,
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof DataGridStoryHarness>;
 
 export default meta;

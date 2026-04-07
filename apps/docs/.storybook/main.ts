@@ -3,16 +3,27 @@ import { mergeConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import { workspaceAliases } from '../../../vite.aliases';
-import { STORYBOOK_CHUNK_WARNING_LIMIT, resolveStorybookManualChunk } from '../../../vite.chunking';
+import { workspaceAliases } from '../../../vite.aliases.ts';
+import {
+  STORYBOOK_CHUNK_WARNING_LIMIT,
+  resolveStorybookManualChunk,
+} from '../../../vite.chunking.ts';
 
 const config: StorybookConfig = {
-  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-docs',
+    '@storybook/addon-links',
+    '@storybook/addon-vitest',
+  ],
+
   framework: {
     name: '@storybook/vue3-vite',
     options: {},
   },
-  stories: ['../src/**/*.stories.ts'],
+
+  stories: ['../src/stories/**/*.stories.ts'],
+
   viteFinal: (baseConfig) => {
     const basePlugins = (baseConfig.plugins ?? []).filter(
       (plugin) =>
@@ -40,6 +51,10 @@ const config: StorybookConfig = {
       ...mergedConfig,
       plugins: [tsconfigPaths(), vue(), ...basePlugins],
     };
+  },
+
+  core: {
+    disableWhatsNewNotifications: true,
   },
 };
 

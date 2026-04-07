@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 
 import { UiTabsList, UiTabsPanel, UiTabsRoot, UiTabsTrigger } from '@ww/core';
 
 const meta = {
-  title: 'Core/Tabs',
+  title: 'Core/Scenarios/Tabs',
   component: UiTabsRoot,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiTabsRoot>;
 
 export default meta;

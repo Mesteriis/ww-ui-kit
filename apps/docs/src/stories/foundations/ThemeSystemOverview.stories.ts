@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, ref, watch } from 'vue';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 import { UiBadge, UiButton, UiCard, UiDialog, UiDrawer } from '@ww/core';
 import {
@@ -18,12 +19,23 @@ import {
 
 const meta = {
   title: 'Foundations/Theme System Overview',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'test'],
 } satisfies Meta;
 
 export default meta;
 
 export const Overview: StoryObj = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.selectOptions(canvas.getByLabelText('Density'), 'compact');
+    await expect(canvas.getByText('Density: compact', { exact: true })).toBeVisible();
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open scoped dialog' }));
+    await waitFor(() =>
+      expect(screen.getByRole('dialog', { name: 'Scoped dialog' })).toBeVisible()
+    );
+  },
   render: (_args, context) => ({
     components: { UiBadge, UiButton, UiCard, UiDialog, UiDrawer },
     setup() {

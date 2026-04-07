@@ -1,20 +1,20 @@
+import path from 'node:path';
+
 import { defineConfig } from 'vitest/config';
 
+import { unitVitestProjects } from './vitest.project-paths';
+import { storybookConfigDir, storybookVitestProject } from './vitest.storybook.project';
+
+const requestedStorybookConfigDir = process.env.STORYBOOK_CONFIG_DIR;
+const shouldIncludeStorybookProject =
+  typeof requestedStorybookConfigDir === 'string' &&
+  path.normalize(requestedStorybookConfigDir) === path.normalize(storybookConfigDir);
+
+// Includes @storybook/addon-vitest project when Storybook starts Vitest from the repo root.
 export default defineConfig({
   test: {
-    projects: [
-      'packages/themes/vitest.config.ts',
-      'packages/primitives/vitest.config.ts',
-      'packages/third-party/charts-apex/vitest.config.ts',
-      'packages/third-party/tsparticles/vitest.config.ts',
-      'packages/signal-graph/vitest.config.ts',
-      'packages/data-grid/vitest.config.ts',
-      'packages/interaction/vitest.config.ts',
-      'packages/widgets/vitest.config.ts',
-      'packages/page-templates/vitest.config.ts',
-      'packages/core/vitest.config.ts',
-      'apps/playground/vitest.config.ts',
-      'tests/meta/vitest.config.ts',
-    ],
+    projects: shouldIncludeStorybookProject
+      ? [...unitVitestProjects, storybookVitestProject]
+      : unitVitestProjects,
   },
 });

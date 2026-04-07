@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, ref } from 'vue';
 
 import {
@@ -19,8 +19,9 @@ import {
 } from '@ww/core';
 
 const meta = {
-  title: 'Core/Fields',
+  title: 'Core/Scenarios/Fields',
   component: UiField,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiField>;
 
 export default meta;

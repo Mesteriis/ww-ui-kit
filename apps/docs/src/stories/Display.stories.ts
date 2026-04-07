@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 
 import bannerSvg from '../../../assets/img/banner.svg';
@@ -25,8 +25,9 @@ import {
 const displayImageSrc = bannerSvg;
 
 const meta = {
-  title: 'Core/Display',
+  title: 'Core/Scenarios/Display',
   component: UiCard,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiCard>;
 
 export default meta;

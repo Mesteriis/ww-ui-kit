@@ -20,11 +20,13 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.vue",
     ".storybook/**/*.ts",
     "../../packages/**/*.ts",
     "../../packages/**/*.vue",
-    "../../vite.aliases.ts"
+    "../../vite.aliases.ts",
+    "../../vite.chunking.ts"
   ],
   "exclude": ["../../packages/**/*.test.ts"]
 }

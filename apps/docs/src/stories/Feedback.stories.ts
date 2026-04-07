@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiAlert, UiButton, UiCollapse, UiCollapsePanel, UiEmptyState, UiResult } from '@ww/core';
 
 const meta = {
-  title: 'Core/Feedback',
+  title: 'Core/Scenarios/Feedback',
   component: UiEmptyState,
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiEmptyState>;
 
 export default meta;

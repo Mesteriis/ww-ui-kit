@@ -310,6 +310,8 @@
   --ui-button-neutral-soft-bg-active: var(--ui-neutral-100);
   --ui-button-neutral-accent-start: var(--ui-neutral-300);
   --ui-button-neutral-accent-end: var(--ui-neutral-700);
+  --ui-button-outline-accent-start: var(--ui-success-400);
+  --ui-button-outline-accent-end: var(--ui-brand-500);
   --ui-button-brand-solid-bg: var(--ui-brand-600);
   --ui-button-brand-solid-fg: var(--ui-neutral-0);
   --ui-button-brand-solid-border: var(--ui-brand-600);

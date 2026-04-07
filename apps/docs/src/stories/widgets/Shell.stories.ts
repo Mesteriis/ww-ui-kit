@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { UiBadge, UiButton, UiCard } from '@ww/core';
 import { UiWidgetBody, UiWidgetFooter, UiWidgetHeader, UiWidgetShell } from '@ww/widgets';
 
 const meta = {
-  title: 'Widgets/Shell',
-  tags: ['autodocs'],
+  title: 'Widgets/Scenarios/Shell',
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof UiWidgetShell>;
 
 export default meta;

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, ref } from 'vue';
 
 import bannerSvg from '../../../assets/img/banner.svg';
@@ -71,8 +71,8 @@ import {
 } from '@ww/core';
 
 const meta = {
-  title: 'Core/System Showcase',
-  tags: ['autodocs'],
+  title: 'Core/Scenarios/System Showcase',
+  tags: ['autodocs', '!dev'],
 } satisfies Meta;
 
 export default meta;

@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import CoreAdvancedStoryHarness from './core-advanced/CoreAdvancedStoryHarness';
 
 const meta = {
-  title: 'Core/Advanced Surfaces',
+  title: 'Core/Scenarios/Advanced Surfaces',
   component: CoreAdvancedStoryHarness,
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta<typeof CoreAdvancedStoryHarness>;
 
 export default meta;

@@ -1,4 +1,4 @@
-import { defineComponent, ref, toRef } from 'vue';
+import { defineComponent, ref, toRef, type Component } from 'vue';
 import bannerSvg from '../../../../assets/img/banner.svg';
 
 import {
@@ -22,27 +22,29 @@ import {
   confirmAlertDialog,
 } from '@ww/core';
 
+const harnessComponents: Record<string, Component> = {
+  UiAlertDialog: UiAlertDialog as Component,
+  UiButton: UiButton as Component,
+  UiCalendar: UiCalendar as Component,
+  UiCard: UiCard as Component,
+  UiColorPicker: UiColorPicker as Component,
+  UiDatePicker: UiDatePicker as Component,
+  UiDateRangePicker: UiDateRangePicker as Component,
+  UiField: UiField as Component,
+  UiFilePicker: UiFilePicker as Component,
+  UiIcon: UiIcon as Component,
+  UiImage: UiImage as Component,
+  UiImagePreview: UiImagePreview as Component,
+  UiImagePreviewGroup: UiImagePreviewGroup as Component,
+  UiMention: UiMention as Component,
+  UiSplitter: UiSplitter as Component,
+  UiTimePicker: UiTimePicker as Component,
+  UiWatermark: UiWatermark as Component,
+};
+
 export default defineComponent({
   name: 'CoreAdvancedStoryHarness',
-  components: {
-    UiAlertDialog,
-    UiButton,
-    UiCalendar,
-    UiCard,
-    UiColorPicker,
-    UiDatePicker,
-    UiDateRangePicker,
-    UiField,
-    UiFilePicker,
-    UiIcon,
-    UiImage,
-    UiImagePreview,
-    UiImagePreviewGroup,
-    UiMention,
-    UiSplitter,
-    UiTimePicker,
-    UiWatermark,
-  },
+  components: harnessComponents,
   props: {
     mode: {
       type: String,

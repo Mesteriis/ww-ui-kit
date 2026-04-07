@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { onMounted, ref } from 'vue';
 
 import { UiBadge, UiButton, UiCard } from '@ww/core';
@@ -6,7 +6,7 @@ import { PrimitiveFocusTrap, PrimitivePortal, PrimitiveVisuallyHidden } from '@w
 
 const meta = {
   title: 'Foundations/Primitives/Overview',
-  tags: ['autodocs'],
+  tags: ['autodocs', '!dev'],
 } satisfies Meta;
 
 export default meta;
